@@ -1,27 +1,32 @@
 'use client';
 
-import * as React from 'react';
+import { FC, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
 
-import { NavDropdown, sidebarNavs } from '@/lib/sidebar/sidebar';
-import { ShoppingCart, User, Document, Money4 } from 'iconsax-react'
-import { PRERENDER_MANIFEST } from 'next/dist/shared/lib/constants';
-import { PRINT } from '@/components/print';
+import { NavDropdown, NavItem, sidebarNavs } from '@/lib/sidebar/sidebar';
+import { ShoppingCart } from 'iconsax-react'
+import { usePathname } from 'next/navigation';
 
-export const Dropdown: React.FC<{ nav: NavDropdown }> = ({ nav }) => {
-    if (!nav.children) {
-        return null;
-    }
+export const Dropdown: FC<{ nav: NavDropdown }> = ({ nav }) => {
+    const [isOpen, setIsOpen] = useState(false);
 
-    const [isOpen, setIsOpen] = React.useState(false);
+    const pathName = usePathname();
+    const pathNameList = pathName.split('/');
+    const navPath = nav.path.split('/');
+    const active = pathNameList[1].toLowerCase() === navPath[1].toLowerCase()
+
+    useEffect(() => {
+        if (active) {
+            setIsOpen(true);
+        };
+    })
 
     return (
         <li>
             <button
-                type="button"
-                className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 font-medium"
-                onClick={() => { setIsOpen(!isOpen) }}
+                type="button" onClick={() => { setIsOpen(!isOpen) }}
+                className={["flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 font-medium",
+                    active ? "bg-gray-100" : ""].join(" ")}
             >
                 {
                     nav.icon ||
@@ -42,11 +47,14 @@ export const Dropdown: React.FC<{ nav: NavDropdown }> = ({ nav }) => {
                 isOpen &&
                 <ul id="dropdown-example" className="py-2 space-y-2">
                     {
-                        nav.children.map((childNav, childIdx) => (
+                        nav.children?.map((childNav, childIdx) => (
                             <li key={childIdx}>
                                 <a
-                                    href={`${nav.prefix + childNav.path}`}
-                                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 capitalize"
+                                    href={`${nav.path + childNav.path}`}
+                                    className={[
+                                        "flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 capitalize",
+                                        pathName === (nav.path + childNav.path) ? "bg-gray-100" : ""
+                                    ].join(" ")}
                                 >
                                     {childNav.name}
                                 </a>
@@ -59,10 +67,10 @@ export const Dropdown: React.FC<{ nav: NavDropdown }> = ({ nav }) => {
     );
 };
 
-const NavItem: React.FC<{ nav: NavDropdown }> = ({ nav }) => {
+const NavItem: React.FC<{ nav: NavItem }> = ({ nav }) => {
     return (
         <li>
-            <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
+            <a href={nav.path} className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
                 {
                     nav.icon ||
                     <ShoppingCart className="w-5 h-5 text-gray-500" />
@@ -79,7 +87,7 @@ export const AsystSidebar = () => {
             <h5 id="drawer-navigation-label" className="text-base font-semibold text-gray-500 uppercase">
                 Menu
             </h5>
-            <button type="button" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation" id="drawer-closer" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 inline-flex items-center justify-center">
+            <button type="button" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation" id="drawer-closer" className="lg:hidden text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 inline-flex items-center justify-center">
                 <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                 </svg>
@@ -102,11 +110,10 @@ export const AsystSidebar = () => {
 
 const drawerWidth = 240;
 
-interface Props {
-}
+interface Props { }
 
 export default function Sidebar(props: Props) {
-    const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [mobileOpen, setMobileOpen] = useState(false);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -116,7 +123,6 @@ export default function Sidebar(props: Props) {
         <Box
             component="nav"
             sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 }, display: { xs: 'none', md: 'block' } }}
-            aria-label="mailbox folders"
         >
             <AsystSidebar />
         </Box>

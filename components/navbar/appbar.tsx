@@ -14,9 +14,7 @@ export default function MenuAppBar() {
             <AppBar position="static">
                 <Toolbar>
                     <Logo />
-                    <AuthProvider>
-                        <AccountMenu />
-                    </AuthProvider>
+                    <AccountMenu />
                 </Toolbar>
             </AppBar>
         </Box>

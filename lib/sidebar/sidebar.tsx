@@ -1,4 +1,4 @@
-import { Document, Money, Profile2User, Shop, ShoppingCart, User } from "iconsax-react";
+import { Document, Money, Profile2User, ShieldSecurity, Shop, ShoppingCart, User } from "iconsax-react";
 
 export type NavLink = {
     name: string;
@@ -8,21 +8,17 @@ export type NavLink = {
 
 export type NavItem = {
     title: string;
-    prefix?: string;
     icon?: JSX.Element;
-    path?: string;
+    path: string;
 }
 
-export type NavDropdown = {
-    title: string;
-    prefix?: string;
-    icon?: JSX.Element;
+export interface NavDropdown extends NavItem {
     children?: NavLink[];
 }
 
 export const sales: NavDropdown = {
     title: 'sales',
-    prefix: '/sales',
+    path: '/sales',
     icon: <Shop className="w-5 h-5 text-gray-500" />,
     children: [
         {
@@ -42,61 +38,65 @@ export const sales: NavDropdown = {
 
 export const report: NavDropdown = {
     title: 'report',
+    path: '/report',
     icon: <Document className="w-5 h-5 text-gray-500" />,
     children: [
         {
             name: "sales report",
-            path: "/report/sales"
+            path: "/sales"
         },
         {
             name: "loss profit report",
-            path: "/report/loss-profit"
+            path: "/loss-profit"
         },
     ],
 };
 
 export const stackEntry: NavDropdown = {
-    title: 'stack entry',
+    title: 'stock',
+    path: "/stock",
     icon: <ShoppingCart className="w-5 h-5 text-gray-500" />,
-};
-
-export const customer: NavDropdown = {
-    title: 'customer',
-    icon: <Profile2User className="w-5 h-5 text-gray-500" />,
-};
-
-export const user: NavDropdown = {
-    title: 'user',
-    icon: <User className="w-5 h-5 text-gray-500" />
-};
-
-export const expenses: NavDropdown = {
-    title: 'expenses',
-    icon: <Money className="w-5 h-5 text-gray-500" />
-};
-
-export const outlet: NavDropdown = {
-    title: 'sales',
     children: [
         {
-            name: "Vai Vai store 1",
-            path: ""
+            name: "stock entry",
+            path: "/entry"
         },
         {
-            name: "Vai Vai store 2",
-            path: ""
-        },
-        {
-            name: "SR",
-            path: ""
+            name: "stock table",
+            path: "/table"
         },
     ],
 };
 
-export const sidebarNavs: (NavDropdown)[] = [
+export const warranty: NavItem = {
+    title: 'warranty',
+    path: "/warranty",
+    icon: <ShieldSecurity className="w-5 h-5 text-gray-500" />,
+};
+
+export const customer: NavItem = {
+    title: 'customer',
+    path: "/customer",
+    icon: <Profile2User className="w-5 h-5 text-gray-500" />,
+};
+
+export const user: NavItem = {
+    title: 'user',
+    path: "/user",
+    icon: <User className="w-5 h-5 text-gray-500" />
+};
+
+export const expenses: NavItem = {
+    title: 'expenses',
+    path: "/expenses",
+    icon: <Money className="w-5 h-5 text-gray-500" />
+};
+
+export const sidebarNavs: NavDropdown[] = [
     sales,
     report,
     stackEntry,
+    warranty,
     customer,
     user,
     expenses

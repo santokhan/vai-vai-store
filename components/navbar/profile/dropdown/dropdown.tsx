@@ -17,6 +17,7 @@ import { AccountCircle } from '@mui/icons-material';
 import { AuthContext } from '@/context/FirebaseContext';
 import { Router } from 'next/router';
 import { useRouter } from 'next/navigation';
+import { signOut } from 'next-auth/react';
 
 export default function AccountMenu() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -28,8 +29,12 @@ export default function AccountMenu() {
         setAnchorEl(null);
     };
 
-    const value = React.useContext(AuthContext);
-    const router = useRouter();
+    // const value = React.useContext(AuthContext);
+    // const router = useRouter();
+
+    async function handleSignOut() {
+        await signOut();
+    }
 
     return (
         <React.Fragment>
@@ -93,11 +98,7 @@ export default function AccountMenu() {
                     </ListItemIcon>
                     Settings
                 </MenuItem>
-                <MenuItem onClick={() => {
-                    value.signOut();
-                    handleClose();
-                    router.push("/auth/signin")
-                }}>
+                <MenuItem onClick={handleSignOut}>
                     <ListItemIcon>
                         <Logout fontSize="small" />
                     </ListItemIcon>
