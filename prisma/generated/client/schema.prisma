@@ -1,0 +1,84 @@
+generator client {
+    provider = "prisma-client-js"
+    output   = "./generated/client"
+}
+
+datasource db {
+    provider = "mongodb"
+    // url      = "mongodb+srv://santokhan:726865426@cluster0.eau2v.mongodb.net/mobile-store?retryWrites=true&w=majority"
+    url      = env("MONGODB_URL")
+}
+
+model ProductType {
+    id    String  @id @default(auto()) @map("_id") @db.ObjectId
+    type  String
+    Brand Brand[]
+}
+
+model Brand {
+    id            String      @id @default(auto()) @map("_id") @db.ObjectId
+    brandName     String
+    productType   ProductType @relation(fields: [productTypeId], references: [id])
+    productTypeId String      @db.ObjectId
+    Model         Model[]
+}
+
+model Model {
+    id             String           @id @default(auto()) @map("_id") @db.ObjectId
+    model          String
+    brand          Brand            @relation(fields: [brandId], references: [id])
+    brandId        String           @db.ObjectId
+    Specifications Specifications[]
+    InStock        InStock[]
+    SalesEntry     SalesEntry[]
+    Customer       Customer[]
+}
+
+model Specifications {
+    id         String       @id @default(auto()) @map("_id") @db.ObjectId
+    color      String
+    storage    String
+    phoneType  String
+    model      Model        @relation(fields: [modelId], references: [id])
+    modelId    String       @db.ObjectId
+    InStock    InStock[]
+    SalesEntry SalesEntry[]
+    Customer   Customer[]
+}
+
+// We will input IMEI when adding product to stock
+model InStock {
+    id               String         @id @default(auto()) @map("_id") @db.ObjectId
+    price            String
+    quantity         String
+    IMEI             String         @unique
+    model            Model          @relation(fields: [modelId], references: [id])
+    modelId          String         @db.ObjectId
+    specifications   Specifications @relation(fields: [specificationsId], references: [id])
+    specificationsId String         @db.ObjectId
+}
+
+// Part of SalesEntry
+model Customer {
+    id               String          @id @default(auto()) @map("_id") @db.ObjectId
+    name             String
+    email            String
+    phone            String
+    Model            Model?          @relation(fields: [modelId], references: [id])
+    modelId          String?         @db.ObjectId
+    Specifications   Specifications? @relation(fields: [specificationsId], references: [id])
+    specificationsId String?         @db.ObjectId
+    SalesEntry       SalesEntry[]
+}
+
+model SalesEntry {
+    id               String          @id @default(auto()) @map("_id") @db.ObjectId
+    IMEI             String          @unique
+    price            String
+    model            Model           @relation(fields: [modelId], references: [id])
+    modelId          String          @db.ObjectId
+    customer         Customer        @relation(fields: [customerId], references: [id])
+    customerId       String          @db.ObjectId
+    Specifications   Specifications? @relation(fields: [specificationsId], references: [id])
+    specificationsId String?         @db.ObjectId
+}
