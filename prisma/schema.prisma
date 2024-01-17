@@ -37,8 +37,6 @@ model Model {
 model Specifications {
     id         String       @id @default(auto()) @map("_id") @db.ObjectId
     color      String
-    storage    String
-    phoneType  String
     model      Model        @relation(fields: [modelId], references: [id])
     modelId    String       @db.ObjectId
     InStock    InStock[]
@@ -50,7 +48,6 @@ model Specifications {
 model InStock {
     id               String         @id @default(auto()) @map("_id") @db.ObjectId
     price            String
-    quantity         String
     IMEI             String         @unique
     model            Model          @relation(fields: [modelId], references: [id])
     modelId          String         @db.ObjectId

@@ -15,11 +15,13 @@ export const Dropdown: FC<{ nav: NavDropdown }> = ({ nav }) => {
     const navPath = nav.path.split('/');
     const active = pathNameList[1].toLowerCase() === navPath[1].toLowerCase()
 
+    // set isOpen to true when page load.
+    // use [] dependency to prevent infinite loop
     useEffect(() => {
         if (active) {
             setIsOpen(true);
         };
-    })
+    }, [])
 
     return (
         <li>

@@ -10,6 +10,7 @@ const SalesEntryForm: React.FC = () => {
                     <div className="flex flex-wrap lg:flex-nowrap gap-4">
                         <SelectOption
                             labelName='Product Type'
+                            name="productType"
                             options={[
                                 'samsung',
                                 'oppo',
@@ -17,6 +18,7 @@ const SalesEntryForm: React.FC = () => {
                             ]}
                             onChange={() => { }}
                             defaultOptionName='Choose category'
+                            value=''
                         />
                     </div>
                 </div>
@@ -29,6 +31,7 @@ const SalesEntryForm: React.FC = () => {
                             <div className="flex flex-wrap lg:flex-nowrap gap-4">
                                 <SelectOption
                                     labelName='Choose brand'
+                                    name="brand"
                                     options={[
                                         'samsung',
                                         'oppo',
@@ -36,9 +39,11 @@ const SalesEntryForm: React.FC = () => {
                                     ]}
                                     onChange={() => { }}
                                     defaultOptionName='Search by Brand Name'
+                                    value=''
                                 />
                                 <SelectOption
                                     labelName='Model'
+                                    name="model"
                                     options={[
                                         'samsung',
                                         'oppo',
@@ -46,6 +51,7 @@ const SalesEntryForm: React.FC = () => {
                                     ]}
                                     onChange={() => { }}
                                     defaultOptionName='Model'
+                                    value=''
                                 />
                             </div>
                         </div>
@@ -87,6 +93,7 @@ const SalesEntryForm: React.FC = () => {
                     <div className="flex flex-wrap lg:flex-nowrap gap-4">
                         <SelectOption
                             labelName='Seller'
+                            name="seller"
                             options={[
                                 'samsung',
                                 'oppo',
@@ -94,16 +101,19 @@ const SalesEntryForm: React.FC = () => {
                             ]}
                             onChange={() => { }}
                             defaultOptionName='Choose seller'
+                            value=''
                         />
 
                         <SelectOption
                             labelName='outlet'
+                            name="outlet"
                             options={[
                                 'galaxy j5',
                                 'galaxy a32',
                             ]}
                             onChange={() => { }}
                             defaultOptionName='Choose seller'
+                            value=''
                         />
                     </div>
                 </div>

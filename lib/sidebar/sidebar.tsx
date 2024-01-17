@@ -36,6 +36,30 @@ export const sales: NavDropdown = {
     ],
 };
 
+export const product: NavDropdown = {
+    title: 'product',
+    path: '/product',
+    icon: <Shop className="w-5 h-5 text-gray-500" />,
+    children: [
+        {
+            name: "type",
+            path: "/type",
+        },
+        {
+            name: "brand",
+            path: "/brand",
+        },
+        {
+            name: "model",
+            path: "/model",
+        },
+        {
+            name: "seller",
+            path: "/seller",
+        },
+    ],
+};
+
 export const report: NavDropdown = {
     title: 'report',
     path: '/report',
@@ -93,11 +117,12 @@ export const expenses: NavItem = {
 };
 
 export const sidebarNavs: NavDropdown[] = [
-    sales,
-    report,
-    stackEntry,
-    warranty,
     customer,
+    expenses,
+    product,
+    report,
+    sales,
+    stackEntry,
     user,
-    expenses
+    warranty,
 ];

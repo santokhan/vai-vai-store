@@ -1,9 +1,6 @@
-import { ReactNode } from "react";
 
-export default async function Home({ children }: { children: ReactNode }) {
+export default function Dashboard() {
     return (
-        <div>
-            {children}
-        </div>
+        <div></div>
     )
 }

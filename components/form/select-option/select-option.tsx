@@ -1,22 +1,24 @@
-import { FC } from 'react';
+import { ChangeEvent, FC } from 'react';
 
 export interface SellerSelectProps {
     labelName: string;
+    name: string;
     defaultOptionName: string;
-    onChange: (value: string) => void;
+    onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
     options: string[];
+    required?: boolean;
+    value: string;
 }
 
-const SelectOption: FC<SellerSelectProps> = ({ onChange, defaultOptionName, labelName, options }) => {
+const SelectOption: FC<SellerSelectProps> = ({ onChange, defaultOptionName, labelName, options, required, value }) => {
     return (
         <div className='w-full'>
             <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 capitalize">{labelName || 'label'}</label>
             <select
-                id="category"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5"
-                onChange={(e) => onChange(e.target.value)}
+                id="category" onChange={onChange} required={required} value={value}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 capitalize"
             >
-                <option> {defaultOptionName || 'Choose'} </option>
+                <option value="" disabled>{defaultOptionName} </option>
                 {options.map((option, idx) => (
                     <option className='capitalize' value={option} key={idx}>{option}</option>
                 ))}

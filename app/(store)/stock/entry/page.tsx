@@ -1,14 +1,12 @@
 'use client'
 
-import CustomerForm from "@/components/form/customer/customer";
-import SalesEntryForm from "@/components/form/sales/entry";
+import StockEntryForm from "@/block/form/stock/entry";
 import { ReactNode } from "react";
 
-export default async function Home({ children }: { children: ReactNode }) {
+export default function Home() {
     return (
         <div className="space-y-4 max-w-3xl mx-auto">
-            <SalesEntryForm />
-            <CustomerForm />
+            <StockEntryForm />
         </div>
     )
 }

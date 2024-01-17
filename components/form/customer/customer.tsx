@@ -1,4 +1,5 @@
 import React from 'react';
+import SubmitButton from '../submit';
 
 const CustomerForm: React.FC = () => {
     return (
@@ -71,16 +72,10 @@ const CustomerForm: React.FC = () => {
                             placeholder="Write your thoughts here..."
                         ></textarea>
                     </div>
-
                 </div>
             </div>
             <div className="flex justify-end w-full mt-8">
-                <button
-                    type="submit"
-                    className="text-white bg-indigo-500 hover:brightness-90 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-                >
-                    Submit
-                </button>
+                <SubmitButton />
             </div>
         </>
     );
