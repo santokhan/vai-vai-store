@@ -19,3 +19,5 @@ NEXT_PUBLIC_FIREBASE_CONFIG={"apiKey":"AIzaSyAtCw3QISO_Gg2g9xvaP-mHLQkOIOSIv5Q",
 # Current domain + /api
 NEXT_PUBLIC_API_URL=http://localhost:3000/api
 ```
+
+## Setup Vercel Organization Integration into MONGODB https://vercel.com/santokhan/~/integrations
