@@ -14,6 +14,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model User
+ * 
+ */
+export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
  * Model ProductType
  * 
  */
@@ -56,8 +61,8 @@ export type SalesEntry = $Result.DefaultSelection<Prisma.$SalesEntryPayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more ProductTypes
- * const productTypes = await prisma.productType.findMany()
+ * // Fetch zero or more Users
+ * const users = await prisma.user.findMany()
  * ```
  *
  * 
@@ -77,8 +82,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more ProductTypes
-   * const productTypes = await prisma.productType.findMany()
+   * // Fetch zero or more Users
+   * const users = await prisma.user.findMany()
    * ```
    *
    * 
@@ -140,6 +145,16 @@ export class PrismaClient<
   $extends: $Extensions.ExtendsHook<'extends', Prisma.TypeMapCb, ExtArgs>
 
       /**
+   * `prisma.user`: Exposes CRUD operations for the **User** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Users
+    * const users = await prisma.user.findMany()
+    * ```
+    */
+  get user(): Prisma.UserDelegate<ExtArgs>;
+
+  /**
    * `prisma.productType`: Exposes CRUD operations for the **ProductType** model.
     * Example usage:
     * ```ts
@@ -678,6 +693,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    User: 'User',
     ProductType: 'ProductType',
     Brand: 'Brand',
     Model: 'Model',
@@ -701,10 +717,84 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'productType' | 'brand' | 'model' | 'specifications' | 'inStock' | 'customer' | 'salesEntry'
+      modelProps: 'user' | 'productType' | 'brand' | 'model' | 'specifications' | 'inStock' | 'customer' | 'salesEntry'
       txIsolationLevel: never
     },
     model: {
+      User: {
+        payload: Prisma.$UserPayload<ExtArgs>
+        fields: Prisma.UserFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          findFirst: {
+            args: Prisma.UserFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          findMany: {
+            args: Prisma.UserFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+          }
+          create: {
+            args: Prisma.UserCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          createMany: {
+            args: Prisma.UserCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.UserDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          update: {
+            args: Prisma.UserUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.UserUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          aggregate: {
+            args: Prisma.UserAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateUser>
+          }
+          groupBy: {
+            args: Prisma.UserGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<UserGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.UserFindRawArgs<ExtArgs>,
+            result: Prisma.JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.UserAggregateRawArgs<ExtArgs>,
+            result: Prisma.JsonObject
+          }
+          count: {
+            args: Prisma.UserCountArgs<ExtArgs>,
+            result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
       ProductType: {
         payload: Prisma.$ProductTypePayload<ExtArgs>
         fields: Prisma.ProductTypeFieldRefs
@@ -1578,6 +1668,910 @@ export namespace Prisma {
   /**
    * Models
    */
+
+  /**
+   * Model User
+   */
+
+  export type AggregateUser = {
+    _count: UserCountAggregateOutputType | null
+    _min: UserMinAggregateOutputType | null
+    _max: UserMaxAggregateOutputType | null
+  }
+
+  export type UserMinAggregateOutputType = {
+    id: string | null
+    email: string | null
+    role: string | null
+  }
+
+  export type UserMaxAggregateOutputType = {
+    id: string | null
+    email: string | null
+    role: string | null
+  }
+
+  export type UserCountAggregateOutputType = {
+    id: number
+    email: number
+    role: number
+    _all: number
+  }
+
+
+  export type UserMinAggregateInputType = {
+    id?: true
+    email?: true
+    role?: true
+  }
+
+  export type UserMaxAggregateInputType = {
+    id?: true
+    email?: true
+    role?: true
+  }
+
+  export type UserCountAggregateInputType = {
+    id?: true
+    email?: true
+    role?: true
+    _all?: true
+  }
+
+  export type UserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which User to aggregate.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Users
+    **/
+    _count?: true | UserCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserMaxAggregateInputType
+  }
+
+  export type GetUserAggregateType<T extends UserAggregateArgs> = {
+        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUser[P]>
+      : GetScalarType<T[P], AggregateUser[P]>
+  }
+
+
+
+
+  export type UserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithAggregationInput | UserOrderByWithAggregationInput[]
+    by: UserScalarFieldEnum[] | UserScalarFieldEnum
+    having?: UserScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserCountAggregateInputType | true
+    _min?: UserMinAggregateInputType
+    _max?: UserMaxAggregateInputType
+  }
+
+  export type UserGroupByOutputType = {
+    id: string
+    email: string
+    role: string
+    _count: UserCountAggregateOutputType | null
+    _min: UserMinAggregateOutputType | null
+    _max: UserMaxAggregateOutputType | null
+  }
+
+  type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserGroupByOutputType[P]>
+            : GetScalarType<T[P], UserGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    role?: boolean
+  }, ExtArgs["result"]["user"]>
+
+  export type UserSelectScalar = {
+    id?: boolean
+    email?: boolean
+    role?: boolean
+  }
+
+
+  export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "User"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      email: string
+      role: string
+    }, ExtArgs["result"]["user"]>
+    composites: {}
+  }
+
+
+  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
+
+  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct' > & {
+      select?: UserCountAggregateInputType | true
+    }
+
+  export interface UserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
+    /**
+     * Find zero or one User that matches the filter.
+     * @param {UserFindUniqueArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends UserFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one User that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first User that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindFirstArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends UserFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first User that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends UserFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Users that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Users
+     * const users = await prisma.user.findMany()
+     * 
+     * // Get first 10 Users
+     * const users = await prisma.user.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends UserFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a User.
+     * @param {UserCreateArgs} args - Arguments to create a User.
+     * @example
+     * // Create one User
+     * const User = await prisma.user.create({
+     *   data: {
+     *     // ... data to create a User
+     *   }
+     * })
+     * 
+    **/
+    create<T extends UserCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, UserCreateArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Users.
+     *     @param {UserCreateManyArgs} args - Arguments to create many Users.
+     *     @example
+     *     // Create many Users
+     *     const user = await prisma.user.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends UserCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a User.
+     * @param {UserDeleteArgs} args - Arguments to delete one User.
+     * @example
+     * // Delete one User
+     * const User = await prisma.user.delete({
+     *   where: {
+     *     // ... filter to delete one User
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends UserDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, UserDeleteArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one User.
+     * @param {UserUpdateArgs} args - Arguments to update one User.
+     * @example
+     * // Update one User
+     * const user = await prisma.user.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends UserUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, UserUpdateArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Users.
+     * @param {UserDeleteManyArgs} args - Arguments to filter Users to delete.
+     * @example
+     * // Delete a few Users
+     * const { count } = await prisma.user.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends UserDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Users
+     * const user = await prisma.user.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends UserUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one User.
+     * @param {UserUpsertArgs} args - Arguments to update or create a User.
+     * @example
+     * // Update or create a User
+     * const user = await prisma.user.upsert({
+     *   create: {
+     *     // ... data to create a User
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the User we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends UserUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, UserUpsertArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Users that matches the filter.
+     * @param {UserFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const user = await prisma.user.findRaw({
+     *   filter: { age: { $gt: 25 } } 
+     * })
+    **/
+    findRaw(
+      args?: UserFindRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a User.
+     * @param {UserAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const user = await prisma.user.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+    **/
+    aggregateRaw(
+      args?: UserAggregateRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Count the number of Users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserCountArgs} args - Arguments to filter Users to count.
+     * @example
+     * // Count the number of Users
+     * const count = await prisma.user.count({
+     *   where: {
+     *     // ... the filter for the Users we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserCountArgs>(
+      args?: Subset<T, UserCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a User.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Prisma.PrismaPromise<GetUserAggregateType<T>>
+
+    /**
+     * Group by User.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserGroupByArgs['orderBy'] }
+        : { orderBy?: UserGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the User model
+   */
+  readonly fields: UserFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for User.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the User model
+   */ 
+  interface UserFieldRefs {
+    readonly id: FieldRef<"User", 'String'>
+    readonly email: FieldRef<"User", 'String'>
+    readonly role: FieldRef<"User", 'String'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * User findUnique
+   */
+  export type UserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where: UserWhereUniqueInput
+  }
+
+
+  /**
+   * User findUniqueOrThrow
+   */
+  export type UserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where: UserWhereUniqueInput
+  }
+
+
+  /**
+   * User findFirst
+   */
+  export type UserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Users.
+     */
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+
+  /**
+   * User findFirstOrThrow
+   */
+  export type UserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Users.
+     */
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+
+  /**
+   * User findMany
+   */
+  export type UserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Filter, which Users to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+
+  /**
+   * User create
+   */
+  export type UserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * The data needed to create a User.
+     */
+    data: XOR<UserCreateInput, UserUncheckedCreateInput>
+  }
+
+
+  /**
+   * User createMany
+   */
+  export type UserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Users.
+     */
+    data: UserCreateManyInput | UserCreateManyInput[]
+  }
+
+
+  /**
+   * User update
+   */
+  export type UserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * The data needed to update a User.
+     */
+    data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+    /**
+     * Choose, which User to update.
+     */
+    where: UserWhereUniqueInput
+  }
+
+
+  /**
+   * User updateMany
+   */
+  export type UserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Users.
+     */
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    /**
+     * Filter which Users to update
+     */
+    where?: UserWhereInput
+  }
+
+
+  /**
+   * User upsert
+   */
+  export type UserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * The filter to search for the User to update in case it exists.
+     */
+    where: UserWhereUniqueInput
+    /**
+     * In case the User found by the `where` argument doesn't exist, create a new User with this data.
+     */
+    create: XOR<UserCreateInput, UserUncheckedCreateInput>
+    /**
+     * In case the User was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+  }
+
+
+  /**
+   * User delete
+   */
+  export type UserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Filter which User to delete.
+     */
+    where: UserWhereUniqueInput
+  }
+
+
+  /**
+   * User deleteMany
+   */
+  export type UserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Users to delete
+     */
+    where?: UserWhereInput
+  }
+
+
+  /**
+   * User findRaw
+   */
+  export type UserFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * User aggregateRaw
+   */
+  export type UserAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * User without action
+   */
+  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+  }
+
+
 
   /**
    * Model ProductType
@@ -2557,18 +3551,21 @@ export namespace Prisma {
     id: string | null
     brandName: string | null
     productTypeId: string | null
+    userId: string | null
   }
 
   export type BrandMaxAggregateOutputType = {
     id: string | null
     brandName: string | null
     productTypeId: string | null
+    userId: string | null
   }
 
   export type BrandCountAggregateOutputType = {
     id: number
     brandName: number
     productTypeId: number
+    userId: number
     _all: number
   }
 
@@ -2577,18 +3574,21 @@ export namespace Prisma {
     id?: true
     brandName?: true
     productTypeId?: true
+    userId?: true
   }
 
   export type BrandMaxAggregateInputType = {
     id?: true
     brandName?: true
     productTypeId?: true
+    userId?: true
   }
 
   export type BrandCountAggregateInputType = {
     id?: true
     brandName?: true
     productTypeId?: true
+    userId?: true
     _all?: true
   }
 
@@ -2668,6 +3668,7 @@ export namespace Prisma {
     id: string
     brandName: string
     productTypeId: string
+    userId: string | null
     _count: BrandCountAggregateOutputType | null
     _min: BrandMinAggregateOutputType | null
     _max: BrandMaxAggregateOutputType | null
@@ -2691,6 +3692,7 @@ export namespace Prisma {
     id?: boolean
     brandName?: boolean
     productTypeId?: boolean
+    userId?: boolean
     productType?: boolean | ProductTypeDefaultArgs<ExtArgs>
     Model?: boolean | Brand$ModelArgs<ExtArgs>
     _count?: boolean | BrandCountOutputTypeDefaultArgs<ExtArgs>
@@ -2700,6 +3702,7 @@ export namespace Prisma {
     id?: boolean
     brandName?: boolean
     productTypeId?: boolean
+    userId?: boolean
   }
 
   export type BrandInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2719,6 +3722,7 @@ export namespace Prisma {
       id: string
       brandName: string
       productTypeId: string
+      userId: string | null
     }, ExtArgs["result"]["brand"]>
     composites: {}
   }
@@ -3146,6 +4150,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Brand", 'String'>
     readonly brandName: FieldRef<"Brand", 'String'>
     readonly productTypeId: FieldRef<"Brand", 'String'>
+    readonly userId: FieldRef<"Brand", 'String'>
   }
     
 
@@ -4594,24 +5599,18 @@ export namespace Prisma {
   export type SpecificationsMinAggregateOutputType = {
     id: string | null
     color: string | null
-    storage: string | null
-    phoneType: string | null
     modelId: string | null
   }
 
   export type SpecificationsMaxAggregateOutputType = {
     id: string | null
     color: string | null
-    storage: string | null
-    phoneType: string | null
     modelId: string | null
   }
 
   export type SpecificationsCountAggregateOutputType = {
     id: number
     color: number
-    storage: number
-    phoneType: number
     modelId: number
     _all: number
   }
@@ -4620,24 +5619,18 @@ export namespace Prisma {
   export type SpecificationsMinAggregateInputType = {
     id?: true
     color?: true
-    storage?: true
-    phoneType?: true
     modelId?: true
   }
 
   export type SpecificationsMaxAggregateInputType = {
     id?: true
     color?: true
-    storage?: true
-    phoneType?: true
     modelId?: true
   }
 
   export type SpecificationsCountAggregateInputType = {
     id?: true
     color?: true
-    storage?: true
-    phoneType?: true
     modelId?: true
     _all?: true
   }
@@ -4717,8 +5710,6 @@ export namespace Prisma {
   export type SpecificationsGroupByOutputType = {
     id: string
     color: string
-    storage: string
-    phoneType: string
     modelId: string
     _count: SpecificationsCountAggregateOutputType | null
     _min: SpecificationsMinAggregateOutputType | null
@@ -4742,8 +5733,6 @@ export namespace Prisma {
   export type SpecificationsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     color?: boolean
-    storage?: boolean
-    phoneType?: boolean
     modelId?: boolean
     model?: boolean | ModelDefaultArgs<ExtArgs>
     InStock?: boolean | Specifications$InStockArgs<ExtArgs>
@@ -4755,8 +5744,6 @@ export namespace Prisma {
   export type SpecificationsSelectScalar = {
     id?: boolean
     color?: boolean
-    storage?: boolean
-    phoneType?: boolean
     modelId?: boolean
   }
 
@@ -4780,8 +5767,6 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       color: string
-      storage: string
-      phoneType: string
       modelId: string
     }, ExtArgs["result"]["specifications"]>
     composites: {}
@@ -5213,8 +6198,6 @@ export namespace Prisma {
   interface SpecificationsFieldRefs {
     readonly id: FieldRef<"Specifications", 'String'>
     readonly color: FieldRef<"Specifications", 'String'>
-    readonly storage: FieldRef<"Specifications", 'String'>
-    readonly phoneType: FieldRef<"Specifications", 'String'>
     readonly modelId: FieldRef<"Specifications", 'String'>
   }
     
@@ -5648,7 +6631,6 @@ export namespace Prisma {
   export type InStockMinAggregateOutputType = {
     id: string | null
     price: string | null
-    quantity: string | null
     IMEI: string | null
     modelId: string | null
     specificationsId: string | null
@@ -5657,7 +6639,6 @@ export namespace Prisma {
   export type InStockMaxAggregateOutputType = {
     id: string | null
     price: string | null
-    quantity: string | null
     IMEI: string | null
     modelId: string | null
     specificationsId: string | null
@@ -5666,7 +6647,6 @@ export namespace Prisma {
   export type InStockCountAggregateOutputType = {
     id: number
     price: number
-    quantity: number
     IMEI: number
     modelId: number
     specificationsId: number
@@ -5677,7 +6657,6 @@ export namespace Prisma {
   export type InStockMinAggregateInputType = {
     id?: true
     price?: true
-    quantity?: true
     IMEI?: true
     modelId?: true
     specificationsId?: true
@@ -5686,7 +6665,6 @@ export namespace Prisma {
   export type InStockMaxAggregateInputType = {
     id?: true
     price?: true
-    quantity?: true
     IMEI?: true
     modelId?: true
     specificationsId?: true
@@ -5695,7 +6673,6 @@ export namespace Prisma {
   export type InStockCountAggregateInputType = {
     id?: true
     price?: true
-    quantity?: true
     IMEI?: true
     modelId?: true
     specificationsId?: true
@@ -5777,7 +6754,6 @@ export namespace Prisma {
   export type InStockGroupByOutputType = {
     id: string
     price: string
-    quantity: string
     IMEI: string
     modelId: string
     specificationsId: string
@@ -5803,7 +6779,6 @@ export namespace Prisma {
   export type InStockSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     price?: boolean
-    quantity?: boolean
     IMEI?: boolean
     modelId?: boolean
     specificationsId?: boolean
@@ -5814,7 +6789,6 @@ export namespace Prisma {
   export type InStockSelectScalar = {
     id?: boolean
     price?: boolean
-    quantity?: boolean
     IMEI?: boolean
     modelId?: boolean
     specificationsId?: boolean
@@ -5835,7 +6809,6 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       price: string
-      quantity: string
       IMEI: string
       modelId: string
       specificationsId: string
@@ -6265,7 +7238,6 @@ export namespace Prisma {
   interface InStockFieldRefs {
     readonly id: FieldRef<"InStock", 'String'>
     readonly price: FieldRef<"InStock", 'String'>
-    readonly quantity: FieldRef<"InStock", 'String'>
     readonly IMEI: FieldRef<"InStock", 'String'>
     readonly modelId: FieldRef<"InStock", 'String'>
     readonly specificationsId: FieldRef<"InStock", 'String'>
@@ -8690,6 +9662,15 @@ export namespace Prisma {
    * Enums
    */
 
+  export const UserScalarFieldEnum: {
+    id: 'id',
+    email: 'email',
+    role: 'role'
+  };
+
+  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
   export const ProductTypeScalarFieldEnum: {
     id: 'id',
     type: 'type'
@@ -8701,7 +9682,8 @@ export namespace Prisma {
   export const BrandScalarFieldEnum: {
     id: 'id',
     brandName: 'brandName',
-    productTypeId: 'productTypeId'
+    productTypeId: 'productTypeId',
+    userId: 'userId'
   };
 
   export type BrandScalarFieldEnum = (typeof BrandScalarFieldEnum)[keyof typeof BrandScalarFieldEnum]
@@ -8719,8 +9701,6 @@ export namespace Prisma {
   export const SpecificationsScalarFieldEnum: {
     id: 'id',
     color: 'color',
-    storage: 'storage',
-    phoneType: 'phoneType',
     modelId: 'modelId'
   };
 
@@ -8730,7 +9710,6 @@ export namespace Prisma {
   export const InStockScalarFieldEnum: {
     id: 'id',
     price: 'price',
-    quantity: 'quantity',
     IMEI: 'IMEI',
     modelId: 'modelId',
     specificationsId: 'specificationsId'
@@ -8815,6 +9794,48 @@ export namespace Prisma {
    */
 
 
+  export type UserWhereInput = {
+    AND?: UserWhereInput | UserWhereInput[]
+    OR?: UserWhereInput[]
+    NOT?: UserWhereInput | UserWhereInput[]
+    id?: StringFilter<"User"> | string
+    email?: StringFilter<"User"> | string
+    role?: StringFilter<"User"> | string
+  }
+
+  export type UserOrderByWithRelationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    role?: SortOrder
+  }
+
+  export type UserWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: UserWhereInput | UserWhereInput[]
+    OR?: UserWhereInput[]
+    NOT?: UserWhereInput | UserWhereInput[]
+    email?: StringFilter<"User"> | string
+    role?: StringFilter<"User"> | string
+  }, "id">
+
+  export type UserOrderByWithAggregationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    role?: SortOrder
+    _count?: UserCountOrderByAggregateInput
+    _max?: UserMaxOrderByAggregateInput
+    _min?: UserMinOrderByAggregateInput
+  }
+
+  export type UserScalarWhereWithAggregatesInput = {
+    AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    OR?: UserScalarWhereWithAggregatesInput[]
+    NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"User"> | string
+    email?: StringWithAggregatesFilter<"User"> | string
+    role?: StringWithAggregatesFilter<"User"> | string
+  }
+
   export type ProductTypeWhereInput = {
     AND?: ProductTypeWhereInput | ProductTypeWhereInput[]
     OR?: ProductTypeWhereInput[]
@@ -8862,6 +9883,7 @@ export namespace Prisma {
     id?: StringFilter<"Brand"> | string
     brandName?: StringFilter<"Brand"> | string
     productTypeId?: StringFilter<"Brand"> | string
+    userId?: StringNullableFilter<"Brand"> | string | null
     productType?: XOR<ProductTypeRelationFilter, ProductTypeWhereInput>
     Model?: ModelListRelationFilter
   }
@@ -8870,6 +9892,7 @@ export namespace Prisma {
     id?: SortOrder
     brandName?: SortOrder
     productTypeId?: SortOrder
+    userId?: SortOrder
     productType?: ProductTypeOrderByWithRelationInput
     Model?: ModelOrderByRelationAggregateInput
   }
@@ -8881,6 +9904,7 @@ export namespace Prisma {
     NOT?: BrandWhereInput | BrandWhereInput[]
     brandName?: StringFilter<"Brand"> | string
     productTypeId?: StringFilter<"Brand"> | string
+    userId?: StringNullableFilter<"Brand"> | string | null
     productType?: XOR<ProductTypeRelationFilter, ProductTypeWhereInput>
     Model?: ModelListRelationFilter
   }, "id">
@@ -8889,6 +9913,7 @@ export namespace Prisma {
     id?: SortOrder
     brandName?: SortOrder
     productTypeId?: SortOrder
+    userId?: SortOrder
     _count?: BrandCountOrderByAggregateInput
     _max?: BrandMaxOrderByAggregateInput
     _min?: BrandMinOrderByAggregateInput
@@ -8901,6 +9926,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Brand"> | string
     brandName?: StringWithAggregatesFilter<"Brand"> | string
     productTypeId?: StringWithAggregatesFilter<"Brand"> | string
+    userId?: StringNullableWithAggregatesFilter<"Brand"> | string | null
   }
 
   export type ModelWhereInput = {
@@ -8966,8 +9992,6 @@ export namespace Prisma {
     NOT?: SpecificationsWhereInput | SpecificationsWhereInput[]
     id?: StringFilter<"Specifications"> | string
     color?: StringFilter<"Specifications"> | string
-    storage?: StringFilter<"Specifications"> | string
-    phoneType?: StringFilter<"Specifications"> | string
     modelId?: StringFilter<"Specifications"> | string
     model?: XOR<ModelRelationFilter, ModelWhereInput>
     InStock?: InStockListRelationFilter
@@ -8978,8 +10002,6 @@ export namespace Prisma {
   export type SpecificationsOrderByWithRelationInput = {
     id?: SortOrder
     color?: SortOrder
-    storage?: SortOrder
-    phoneType?: SortOrder
     modelId?: SortOrder
     model?: ModelOrderByWithRelationInput
     InStock?: InStockOrderByRelationAggregateInput
@@ -8993,8 +10015,6 @@ export namespace Prisma {
     OR?: SpecificationsWhereInput[]
     NOT?: SpecificationsWhereInput | SpecificationsWhereInput[]
     color?: StringFilter<"Specifications"> | string
-    storage?: StringFilter<"Specifications"> | string
-    phoneType?: StringFilter<"Specifications"> | string
     modelId?: StringFilter<"Specifications"> | string
     model?: XOR<ModelRelationFilter, ModelWhereInput>
     InStock?: InStockListRelationFilter
@@ -9005,8 +10025,6 @@ export namespace Prisma {
   export type SpecificationsOrderByWithAggregationInput = {
     id?: SortOrder
     color?: SortOrder
-    storage?: SortOrder
-    phoneType?: SortOrder
     modelId?: SortOrder
     _count?: SpecificationsCountOrderByAggregateInput
     _max?: SpecificationsMaxOrderByAggregateInput
@@ -9019,8 +10037,6 @@ export namespace Prisma {
     NOT?: SpecificationsScalarWhereWithAggregatesInput | SpecificationsScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Specifications"> | string
     color?: StringWithAggregatesFilter<"Specifications"> | string
-    storage?: StringWithAggregatesFilter<"Specifications"> | string
-    phoneType?: StringWithAggregatesFilter<"Specifications"> | string
     modelId?: StringWithAggregatesFilter<"Specifications"> | string
   }
 
@@ -9030,7 +10046,6 @@ export namespace Prisma {
     NOT?: InStockWhereInput | InStockWhereInput[]
     id?: StringFilter<"InStock"> | string
     price?: StringFilter<"InStock"> | string
-    quantity?: StringFilter<"InStock"> | string
     IMEI?: StringFilter<"InStock"> | string
     modelId?: StringFilter<"InStock"> | string
     specificationsId?: StringFilter<"InStock"> | string
@@ -9041,7 +10056,6 @@ export namespace Prisma {
   export type InStockOrderByWithRelationInput = {
     id?: SortOrder
     price?: SortOrder
-    quantity?: SortOrder
     IMEI?: SortOrder
     modelId?: SortOrder
     specificationsId?: SortOrder
@@ -9056,7 +10070,6 @@ export namespace Prisma {
     OR?: InStockWhereInput[]
     NOT?: InStockWhereInput | InStockWhereInput[]
     price?: StringFilter<"InStock"> | string
-    quantity?: StringFilter<"InStock"> | string
     modelId?: StringFilter<"InStock"> | string
     specificationsId?: StringFilter<"InStock"> | string
     model?: XOR<ModelRelationFilter, ModelWhereInput>
@@ -9066,7 +10079,6 @@ export namespace Prisma {
   export type InStockOrderByWithAggregationInput = {
     id?: SortOrder
     price?: SortOrder
-    quantity?: SortOrder
     IMEI?: SortOrder
     modelId?: SortOrder
     specificationsId?: SortOrder
@@ -9081,7 +10093,6 @@ export namespace Prisma {
     NOT?: InStockScalarWhereWithAggregatesInput | InStockScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"InStock"> | string
     price?: StringWithAggregatesFilter<"InStock"> | string
-    quantity?: StringWithAggregatesFilter<"InStock"> | string
     IMEI?: StringWithAggregatesFilter<"InStock"> | string
     modelId?: StringWithAggregatesFilter<"InStock"> | string
     specificationsId?: StringWithAggregatesFilter<"InStock"> | string
@@ -9219,6 +10230,44 @@ export namespace Prisma {
     specificationsId?: StringNullableWithAggregatesFilter<"SalesEntry"> | string | null
   }
 
+  export type UserCreateInput = {
+    id?: string
+    email: string
+    role: string
+  }
+
+  export type UserUncheckedCreateInput = {
+    id?: string
+    email: string
+    role: string
+  }
+
+  export type UserUpdateInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserUncheckedUpdateInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserCreateManyInput = {
+    id?: string
+    email: string
+    role: string
+  }
+
+  export type UserUpdateManyMutationInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserUncheckedUpdateManyInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+  }
+
   export type ProductTypeCreateInput = {
     id?: string
     type: string
@@ -9257,6 +10306,7 @@ export namespace Prisma {
   export type BrandCreateInput = {
     id?: string
     brandName: string
+    userId?: string | null
     productType: ProductTypeCreateNestedOneWithoutBrandInput
     Model?: ModelCreateNestedManyWithoutBrandInput
   }
@@ -9265,11 +10315,13 @@ export namespace Prisma {
     id?: string
     brandName: string
     productTypeId: string
+    userId?: string | null
     Model?: ModelUncheckedCreateNestedManyWithoutBrandInput
   }
 
   export type BrandUpdateInput = {
     brandName?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     productType?: ProductTypeUpdateOneRequiredWithoutBrandNestedInput
     Model?: ModelUpdateManyWithoutBrandNestedInput
   }
@@ -9277,6 +10329,7 @@ export namespace Prisma {
   export type BrandUncheckedUpdateInput = {
     brandName?: StringFieldUpdateOperationsInput | string
     productTypeId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     Model?: ModelUncheckedUpdateManyWithoutBrandNestedInput
   }
 
@@ -9284,15 +10337,18 @@ export namespace Prisma {
     id?: string
     brandName: string
     productTypeId: string
+    userId?: string | null
   }
 
   export type BrandUpdateManyMutationInput = {
     brandName?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BrandUncheckedUpdateManyInput = {
     brandName?: StringFieldUpdateOperationsInput | string
     productTypeId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ModelCreateInput = {
@@ -9351,8 +10407,6 @@ export namespace Prisma {
   export type SpecificationsCreateInput = {
     id?: string
     color: string
-    storage: string
-    phoneType: string
     model: ModelCreateNestedOneWithoutSpecificationsInput
     InStock?: InStockCreateNestedManyWithoutSpecificationsInput
     SalesEntry?: SalesEntryCreateNestedManyWithoutSpecificationsInput
@@ -9362,8 +10416,6 @@ export namespace Prisma {
   export type SpecificationsUncheckedCreateInput = {
     id?: string
     color: string
-    storage: string
-    phoneType: string
     modelId: string
     InStock?: InStockUncheckedCreateNestedManyWithoutSpecificationsInput
     SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutSpecificationsInput
@@ -9372,8 +10424,6 @@ export namespace Prisma {
 
   export type SpecificationsUpdateInput = {
     color?: StringFieldUpdateOperationsInput | string
-    storage?: StringFieldUpdateOperationsInput | string
-    phoneType?: StringFieldUpdateOperationsInput | string
     model?: ModelUpdateOneRequiredWithoutSpecificationsNestedInput
     InStock?: InStockUpdateManyWithoutSpecificationsNestedInput
     SalesEntry?: SalesEntryUpdateManyWithoutSpecificationsNestedInput
@@ -9382,8 +10432,6 @@ export namespace Prisma {
 
   export type SpecificationsUncheckedUpdateInput = {
     color?: StringFieldUpdateOperationsInput | string
-    storage?: StringFieldUpdateOperationsInput | string
-    phoneType?: StringFieldUpdateOperationsInput | string
     modelId?: StringFieldUpdateOperationsInput | string
     InStock?: InStockUncheckedUpdateManyWithoutSpecificationsNestedInput
     SalesEntry?: SalesEntryUncheckedUpdateManyWithoutSpecificationsNestedInput
@@ -9393,28 +10441,21 @@ export namespace Prisma {
   export type SpecificationsCreateManyInput = {
     id?: string
     color: string
-    storage: string
-    phoneType: string
     modelId: string
   }
 
   export type SpecificationsUpdateManyMutationInput = {
     color?: StringFieldUpdateOperationsInput | string
-    storage?: StringFieldUpdateOperationsInput | string
-    phoneType?: StringFieldUpdateOperationsInput | string
   }
 
   export type SpecificationsUncheckedUpdateManyInput = {
     color?: StringFieldUpdateOperationsInput | string
-    storage?: StringFieldUpdateOperationsInput | string
-    phoneType?: StringFieldUpdateOperationsInput | string
     modelId?: StringFieldUpdateOperationsInput | string
   }
 
   export type InStockCreateInput = {
     id?: string
     price: string
-    quantity: string
     IMEI: string
     model: ModelCreateNestedOneWithoutInStockInput
     specifications: SpecificationsCreateNestedOneWithoutInStockInput
@@ -9423,7 +10464,6 @@ export namespace Prisma {
   export type InStockUncheckedCreateInput = {
     id?: string
     price: string
-    quantity: string
     IMEI: string
     modelId: string
     specificationsId: string
@@ -9431,7 +10471,6 @@ export namespace Prisma {
 
   export type InStockUpdateInput = {
     price?: StringFieldUpdateOperationsInput | string
-    quantity?: StringFieldUpdateOperationsInput | string
     IMEI?: StringFieldUpdateOperationsInput | string
     model?: ModelUpdateOneRequiredWithoutInStockNestedInput
     specifications?: SpecificationsUpdateOneRequiredWithoutInStockNestedInput
@@ -9439,7 +10478,6 @@ export namespace Prisma {
 
   export type InStockUncheckedUpdateInput = {
     price?: StringFieldUpdateOperationsInput | string
-    quantity?: StringFieldUpdateOperationsInput | string
     IMEI?: StringFieldUpdateOperationsInput | string
     modelId?: StringFieldUpdateOperationsInput | string
     specificationsId?: StringFieldUpdateOperationsInput | string
@@ -9448,7 +10486,6 @@ export namespace Prisma {
   export type InStockCreateManyInput = {
     id?: string
     price: string
-    quantity: string
     IMEI: string
     modelId: string
     specificationsId: string
@@ -9456,13 +10493,11 @@ export namespace Prisma {
 
   export type InStockUpdateManyMutationInput = {
     price?: StringFieldUpdateOperationsInput | string
-    quantity?: StringFieldUpdateOperationsInput | string
     IMEI?: StringFieldUpdateOperationsInput | string
   }
 
   export type InStockUncheckedUpdateManyInput = {
     price?: StringFieldUpdateOperationsInput | string
-    quantity?: StringFieldUpdateOperationsInput | string
     IMEI?: StringFieldUpdateOperationsInput | string
     modelId?: StringFieldUpdateOperationsInput | string
     specificationsId?: StringFieldUpdateOperationsInput | string
@@ -9600,6 +10635,42 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type UserCountOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    role?: SortOrder
+  }
+
+  export type UserMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    role?: SortOrder
+  }
+
+  export type UserMinOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    role?: SortOrder
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
   export type BrandListRelationFilter = {
     every?: BrandWhereInput
     some?: BrandWhereInput
@@ -9625,10 +10696,10 @@ export namespace Prisma {
     type?: SortOrder
   }
 
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -9637,10 +10708,8 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+    isSet?: boolean
   }
 
   export type ProductTypeRelationFilter = {
@@ -9662,18 +10731,40 @@ export namespace Prisma {
     id?: SortOrder
     brandName?: SortOrder
     productTypeId?: SortOrder
+    userId?: SortOrder
   }
 
   export type BrandMaxOrderByAggregateInput = {
     id?: SortOrder
     brandName?: SortOrder
     productTypeId?: SortOrder
+    userId?: SortOrder
   }
 
   export type BrandMinOrderByAggregateInput = {
     id?: SortOrder
     brandName?: SortOrder
     productTypeId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+    isSet?: boolean
   }
 
   export type BrandRelationFilter = {
@@ -9747,24 +10838,18 @@ export namespace Prisma {
   export type SpecificationsCountOrderByAggregateInput = {
     id?: SortOrder
     color?: SortOrder
-    storage?: SortOrder
-    phoneType?: SortOrder
     modelId?: SortOrder
   }
 
   export type SpecificationsMaxOrderByAggregateInput = {
     id?: SortOrder
     color?: SortOrder
-    storage?: SortOrder
-    phoneType?: SortOrder
     modelId?: SortOrder
   }
 
   export type SpecificationsMinOrderByAggregateInput = {
     id?: SortOrder
     color?: SortOrder
-    storage?: SortOrder
-    phoneType?: SortOrder
     modelId?: SortOrder
   }
 
@@ -9776,7 +10861,6 @@ export namespace Prisma {
   export type InStockCountOrderByAggregateInput = {
     id?: SortOrder
     price?: SortOrder
-    quantity?: SortOrder
     IMEI?: SortOrder
     modelId?: SortOrder
     specificationsId?: SortOrder
@@ -9785,7 +10869,6 @@ export namespace Prisma {
   export type InStockMaxOrderByAggregateInput = {
     id?: SortOrder
     price?: SortOrder
-    quantity?: SortOrder
     IMEI?: SortOrder
     modelId?: SortOrder
     specificationsId?: SortOrder
@@ -9794,26 +10877,9 @@ export namespace Prisma {
   export type InStockMinOrderByAggregateInput = {
     id?: SortOrder
     price?: SortOrder
-    quantity?: SortOrder
     IMEI?: SortOrder
     modelId?: SortOrder
     specificationsId?: SortOrder
-  }
-
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-    isSet?: boolean
   }
 
   export type ModelNullableRelationFilter = {
@@ -9853,25 +10919,6 @@ export namespace Prisma {
     specificationsId?: SortOrder
   }
 
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-    isSet?: boolean
-  }
-
   export type CustomerRelationFilter = {
     is?: CustomerWhereInput
     isNot?: CustomerWhereInput
@@ -9904,6 +10951,10 @@ export namespace Prisma {
     specificationsId?: SortOrder
   }
 
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
   export type BrandCreateNestedManyWithoutProductTypeInput = {
     create?: XOR<BrandCreateWithoutProductTypeInput, BrandUncheckedCreateWithoutProductTypeInput> | BrandCreateWithoutProductTypeInput[] | BrandUncheckedCreateWithoutProductTypeInput[]
     connectOrCreate?: BrandCreateOrConnectWithoutProductTypeInput | BrandCreateOrConnectWithoutProductTypeInput[]
@@ -9916,10 +10967,6 @@ export namespace Prisma {
     connectOrCreate?: BrandCreateOrConnectWithoutProductTypeInput | BrandCreateOrConnectWithoutProductTypeInput[]
     createMany?: BrandCreateManyProductTypeInputEnvelope
     connect?: BrandWhereUniqueInput | BrandWhereUniqueInput[]
-  }
-
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
   }
 
   export type BrandUpdateManyWithoutProductTypeNestedInput = {
@@ -9968,6 +11015,11 @@ export namespace Prisma {
     connectOrCreate?: ModelCreateOrConnectWithoutBrandInput | ModelCreateOrConnectWithoutBrandInput[]
     createMany?: ModelCreateManyBrandInputEnvelope
     connect?: ModelWhereUniqueInput | ModelWhereUniqueInput[]
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+    unset?: boolean
   }
 
   export type ProductTypeUpdateOneRequiredWithoutBrandNestedInput = {
@@ -10416,11 +11468,6 @@ export namespace Prisma {
     deleteMany?: SalesEntryScalarWhereInput | SalesEntryScalarWhereInput[]
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-    unset?: boolean
-  }
-
   export type SalesEntryUncheckedUpdateManyWithoutCustomerNestedInput = {
     create?: XOR<SalesEntryCreateWithoutCustomerInput, SalesEntryUncheckedCreateWithoutCustomerInput> | SalesEntryCreateWithoutCustomerInput[] | SalesEntryUncheckedCreateWithoutCustomerInput[]
     connectOrCreate?: SalesEntryCreateOrConnectWithoutCustomerInput | SalesEntryCreateOrConnectWithoutCustomerInput[]
@@ -10569,12 +11616,14 @@ export namespace Prisma {
   export type BrandCreateWithoutProductTypeInput = {
     id?: string
     brandName: string
+    userId?: string | null
     Model?: ModelCreateNestedManyWithoutBrandInput
   }
 
   export type BrandUncheckedCreateWithoutProductTypeInput = {
     id?: string
     brandName: string
+    userId?: string | null
     Model?: ModelUncheckedCreateNestedManyWithoutBrandInput
   }
 
@@ -10610,6 +11659,7 @@ export namespace Prisma {
     id?: StringFilter<"Brand"> | string
     brandName?: StringFilter<"Brand"> | string
     productTypeId?: StringFilter<"Brand"> | string
+    userId?: StringNullableFilter<"Brand"> | string | null
   }
 
   export type ProductTypeCreateWithoutBrandInput = {
@@ -10701,6 +11751,7 @@ export namespace Prisma {
   export type BrandCreateWithoutModelInput = {
     id?: string
     brandName: string
+    userId?: string | null
     productType: ProductTypeCreateNestedOneWithoutBrandInput
   }
 
@@ -10708,6 +11759,7 @@ export namespace Prisma {
     id?: string
     brandName: string
     productTypeId: string
+    userId?: string | null
   }
 
   export type BrandCreateOrConnectWithoutModelInput = {
@@ -10718,8 +11770,6 @@ export namespace Prisma {
   export type SpecificationsCreateWithoutModelInput = {
     id?: string
     color: string
-    storage: string
-    phoneType: string
     InStock?: InStockCreateNestedManyWithoutSpecificationsInput
     SalesEntry?: SalesEntryCreateNestedManyWithoutSpecificationsInput
     Customer?: CustomerCreateNestedManyWithoutSpecificationsInput
@@ -10728,8 +11778,6 @@ export namespace Prisma {
   export type SpecificationsUncheckedCreateWithoutModelInput = {
     id?: string
     color: string
-    storage: string
-    phoneType: string
     InStock?: InStockUncheckedCreateNestedManyWithoutSpecificationsInput
     SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutSpecificationsInput
     Customer?: CustomerUncheckedCreateNestedManyWithoutSpecificationsInput
@@ -10747,7 +11795,6 @@ export namespace Prisma {
   export type InStockCreateWithoutModelInput = {
     id?: string
     price: string
-    quantity: string
     IMEI: string
     specifications: SpecificationsCreateNestedOneWithoutInStockInput
   }
@@ -10755,7 +11802,6 @@ export namespace Prisma {
   export type InStockUncheckedCreateWithoutModelInput = {
     id?: string
     price: string
-    quantity: string
     IMEI: string
     specificationsId: string
   }
@@ -10834,12 +11880,14 @@ export namespace Prisma {
 
   export type BrandUpdateWithoutModelInput = {
     brandName?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     productType?: ProductTypeUpdateOneRequiredWithoutBrandNestedInput
   }
 
   export type BrandUncheckedUpdateWithoutModelInput = {
     brandName?: StringFieldUpdateOperationsInput | string
     productTypeId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SpecificationsUpsertWithWhereUniqueWithoutModelInput = {
@@ -10864,8 +11912,6 @@ export namespace Prisma {
     NOT?: SpecificationsScalarWhereInput | SpecificationsScalarWhereInput[]
     id?: StringFilter<"Specifications"> | string
     color?: StringFilter<"Specifications"> | string
-    storage?: StringFilter<"Specifications"> | string
-    phoneType?: StringFilter<"Specifications"> | string
     modelId?: StringFilter<"Specifications"> | string
   }
 
@@ -10891,7 +11937,6 @@ export namespace Prisma {
     NOT?: InStockScalarWhereInput | InStockScalarWhereInput[]
     id?: StringFilter<"InStock"> | string
     price?: StringFilter<"InStock"> | string
-    quantity?: StringFilter<"InStock"> | string
     IMEI?: StringFilter<"InStock"> | string
     modelId?: StringFilter<"InStock"> | string
     specificationsId?: StringFilter<"InStock"> | string
@@ -10979,7 +12024,6 @@ export namespace Prisma {
   export type InStockCreateWithoutSpecificationsInput = {
     id?: string
     price: string
-    quantity: string
     IMEI: string
     model: ModelCreateNestedOneWithoutInStockInput
   }
@@ -10987,7 +12031,6 @@ export namespace Prisma {
   export type InStockUncheckedCreateWithoutSpecificationsInput = {
     id?: string
     price: string
-    quantity: string
     IMEI: string
     modelId: string
   }
@@ -11154,8 +12197,6 @@ export namespace Prisma {
   export type SpecificationsCreateWithoutInStockInput = {
     id?: string
     color: string
-    storage: string
-    phoneType: string
     model: ModelCreateNestedOneWithoutSpecificationsInput
     SalesEntry?: SalesEntryCreateNestedManyWithoutSpecificationsInput
     Customer?: CustomerCreateNestedManyWithoutSpecificationsInput
@@ -11164,8 +12205,6 @@ export namespace Prisma {
   export type SpecificationsUncheckedCreateWithoutInStockInput = {
     id?: string
     color: string
-    storage: string
-    phoneType: string
     modelId: string
     SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutSpecificationsInput
     Customer?: CustomerUncheckedCreateNestedManyWithoutSpecificationsInput
@@ -11216,8 +12255,6 @@ export namespace Prisma {
 
   export type SpecificationsUpdateWithoutInStockInput = {
     color?: StringFieldUpdateOperationsInput | string
-    storage?: StringFieldUpdateOperationsInput | string
-    phoneType?: StringFieldUpdateOperationsInput | string
     model?: ModelUpdateOneRequiredWithoutSpecificationsNestedInput
     SalesEntry?: SalesEntryUpdateManyWithoutSpecificationsNestedInput
     Customer?: CustomerUpdateManyWithoutSpecificationsNestedInput
@@ -11225,8 +12262,6 @@ export namespace Prisma {
 
   export type SpecificationsUncheckedUpdateWithoutInStockInput = {
     color?: StringFieldUpdateOperationsInput | string
-    storage?: StringFieldUpdateOperationsInput | string
-    phoneType?: StringFieldUpdateOperationsInput | string
     modelId?: StringFieldUpdateOperationsInput | string
     SalesEntry?: SalesEntryUncheckedUpdateManyWithoutSpecificationsNestedInput
     Customer?: CustomerUncheckedUpdateManyWithoutSpecificationsNestedInput
@@ -11258,8 +12293,6 @@ export namespace Prisma {
   export type SpecificationsCreateWithoutCustomerInput = {
     id?: string
     color: string
-    storage: string
-    phoneType: string
     model: ModelCreateNestedOneWithoutSpecificationsInput
     InStock?: InStockCreateNestedManyWithoutSpecificationsInput
     SalesEntry?: SalesEntryCreateNestedManyWithoutSpecificationsInput
@@ -11268,8 +12301,6 @@ export namespace Prisma {
   export type SpecificationsUncheckedCreateWithoutCustomerInput = {
     id?: string
     color: string
-    storage: string
-    phoneType: string
     modelId: string
     InStock?: InStockUncheckedCreateNestedManyWithoutSpecificationsInput
     SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutSpecificationsInput
@@ -11345,8 +12376,6 @@ export namespace Prisma {
 
   export type SpecificationsUpdateWithoutCustomerInput = {
     color?: StringFieldUpdateOperationsInput | string
-    storage?: StringFieldUpdateOperationsInput | string
-    phoneType?: StringFieldUpdateOperationsInput | string
     model?: ModelUpdateOneRequiredWithoutSpecificationsNestedInput
     InStock?: InStockUpdateManyWithoutSpecificationsNestedInput
     SalesEntry?: SalesEntryUpdateManyWithoutSpecificationsNestedInput
@@ -11354,8 +12383,6 @@ export namespace Prisma {
 
   export type SpecificationsUncheckedUpdateWithoutCustomerInput = {
     color?: StringFieldUpdateOperationsInput | string
-    storage?: StringFieldUpdateOperationsInput | string
-    phoneType?: StringFieldUpdateOperationsInput | string
     modelId?: StringFieldUpdateOperationsInput | string
     InStock?: InStockUncheckedUpdateManyWithoutSpecificationsNestedInput
     SalesEntry?: SalesEntryUncheckedUpdateManyWithoutSpecificationsNestedInput
@@ -11426,8 +12453,6 @@ export namespace Prisma {
   export type SpecificationsCreateWithoutSalesEntryInput = {
     id?: string
     color: string
-    storage: string
-    phoneType: string
     model: ModelCreateNestedOneWithoutSpecificationsInput
     InStock?: InStockCreateNestedManyWithoutSpecificationsInput
     Customer?: CustomerCreateNestedManyWithoutSpecificationsInput
@@ -11436,8 +12461,6 @@ export namespace Prisma {
   export type SpecificationsUncheckedCreateWithoutSalesEntryInput = {
     id?: string
     color: string
-    storage: string
-    phoneType: string
     modelId: string
     InStock?: InStockUncheckedCreateNestedManyWithoutSpecificationsInput
     Customer?: CustomerUncheckedCreateNestedManyWithoutSpecificationsInput
@@ -11515,8 +12538,6 @@ export namespace Prisma {
 
   export type SpecificationsUpdateWithoutSalesEntryInput = {
     color?: StringFieldUpdateOperationsInput | string
-    storage?: StringFieldUpdateOperationsInput | string
-    phoneType?: StringFieldUpdateOperationsInput | string
     model?: ModelUpdateOneRequiredWithoutSpecificationsNestedInput
     InStock?: InStockUpdateManyWithoutSpecificationsNestedInput
     Customer?: CustomerUpdateManyWithoutSpecificationsNestedInput
@@ -11524,8 +12545,6 @@ export namespace Prisma {
 
   export type SpecificationsUncheckedUpdateWithoutSalesEntryInput = {
     color?: StringFieldUpdateOperationsInput | string
-    storage?: StringFieldUpdateOperationsInput | string
-    phoneType?: StringFieldUpdateOperationsInput | string
     modelId?: StringFieldUpdateOperationsInput | string
     InStock?: InStockUncheckedUpdateManyWithoutSpecificationsNestedInput
     Customer?: CustomerUncheckedUpdateManyWithoutSpecificationsNestedInput
@@ -11534,20 +12553,24 @@ export namespace Prisma {
   export type BrandCreateManyProductTypeInput = {
     id?: string
     brandName: string
+    userId?: string | null
   }
 
   export type BrandUpdateWithoutProductTypeInput = {
     brandName?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     Model?: ModelUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandUncheckedUpdateWithoutProductTypeInput = {
     brandName?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     Model?: ModelUncheckedUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandUncheckedUpdateManyWithoutProductTypeInput = {
     brandName?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ModelCreateManyBrandInput = {
@@ -11578,14 +12601,11 @@ export namespace Prisma {
   export type SpecificationsCreateManyModelInput = {
     id?: string
     color: string
-    storage: string
-    phoneType: string
   }
 
   export type InStockCreateManyModelInput = {
     id?: string
     price: string
-    quantity: string
     IMEI: string
     specificationsId: string
   }
@@ -11608,8 +12628,6 @@ export namespace Prisma {
 
   export type SpecificationsUpdateWithoutModelInput = {
     color?: StringFieldUpdateOperationsInput | string
-    storage?: StringFieldUpdateOperationsInput | string
-    phoneType?: StringFieldUpdateOperationsInput | string
     InStock?: InStockUpdateManyWithoutSpecificationsNestedInput
     SalesEntry?: SalesEntryUpdateManyWithoutSpecificationsNestedInput
     Customer?: CustomerUpdateManyWithoutSpecificationsNestedInput
@@ -11617,8 +12635,6 @@ export namespace Prisma {
 
   export type SpecificationsUncheckedUpdateWithoutModelInput = {
     color?: StringFieldUpdateOperationsInput | string
-    storage?: StringFieldUpdateOperationsInput | string
-    phoneType?: StringFieldUpdateOperationsInput | string
     InStock?: InStockUncheckedUpdateManyWithoutSpecificationsNestedInput
     SalesEntry?: SalesEntryUncheckedUpdateManyWithoutSpecificationsNestedInput
     Customer?: CustomerUncheckedUpdateManyWithoutSpecificationsNestedInput
@@ -11626,27 +12642,22 @@ export namespace Prisma {
 
   export type SpecificationsUncheckedUpdateManyWithoutModelInput = {
     color?: StringFieldUpdateOperationsInput | string
-    storage?: StringFieldUpdateOperationsInput | string
-    phoneType?: StringFieldUpdateOperationsInput | string
   }
 
   export type InStockUpdateWithoutModelInput = {
     price?: StringFieldUpdateOperationsInput | string
-    quantity?: StringFieldUpdateOperationsInput | string
     IMEI?: StringFieldUpdateOperationsInput | string
     specifications?: SpecificationsUpdateOneRequiredWithoutInStockNestedInput
   }
 
   export type InStockUncheckedUpdateWithoutModelInput = {
     price?: StringFieldUpdateOperationsInput | string
-    quantity?: StringFieldUpdateOperationsInput | string
     IMEI?: StringFieldUpdateOperationsInput | string
     specificationsId?: StringFieldUpdateOperationsInput | string
   }
 
   export type InStockUncheckedUpdateManyWithoutModelInput = {
     price?: StringFieldUpdateOperationsInput | string
-    quantity?: StringFieldUpdateOperationsInput | string
     IMEI?: StringFieldUpdateOperationsInput | string
     specificationsId?: StringFieldUpdateOperationsInput | string
   }
@@ -11698,7 +12709,6 @@ export namespace Prisma {
   export type InStockCreateManySpecificationsInput = {
     id?: string
     price: string
-    quantity: string
     IMEI: string
     modelId: string
   }
@@ -11721,21 +12731,18 @@ export namespace Prisma {
 
   export type InStockUpdateWithoutSpecificationsInput = {
     price?: StringFieldUpdateOperationsInput | string
-    quantity?: StringFieldUpdateOperationsInput | string
     IMEI?: StringFieldUpdateOperationsInput | string
     model?: ModelUpdateOneRequiredWithoutInStockNestedInput
   }
 
   export type InStockUncheckedUpdateWithoutSpecificationsInput = {
     price?: StringFieldUpdateOperationsInput | string
-    quantity?: StringFieldUpdateOperationsInput | string
     IMEI?: StringFieldUpdateOperationsInput | string
     modelId?: StringFieldUpdateOperationsInput | string
   }
 
   export type InStockUncheckedUpdateManyWithoutSpecificationsInput = {
     price?: StringFieldUpdateOperationsInput | string
-    quantity?: StringFieldUpdateOperationsInput | string
     IMEI?: StringFieldUpdateOperationsInput | string
     modelId?: StringFieldUpdateOperationsInput | string
   }
@@ -11838,6 +12845,10 @@ export namespace Prisma {
      * @deprecated Use CustomerCountOutputTypeDefaultArgs instead
      */
     export type CustomerCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CustomerCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use UserDefaultArgs instead
+     */
+    export type UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserDefaultArgs<ExtArgs>
     /**
      * @deprecated Use ProductTypeDefaultArgs instead
      */

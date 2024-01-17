@@ -100,6 +100,12 @@ Prisma.NullTypes = {
  * Enums
  */
 
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  role: 'role'
+};
+
 exports.Prisma.ProductTypeScalarFieldEnum = {
   id: 'id',
   type: 'type'
@@ -108,7 +114,8 @@ exports.Prisma.ProductTypeScalarFieldEnum = {
 exports.Prisma.BrandScalarFieldEnum = {
   id: 'id',
   brandName: 'brandName',
-  productTypeId: 'productTypeId'
+  productTypeId: 'productTypeId',
+  userId: 'userId'
 };
 
 exports.Prisma.ModelScalarFieldEnum = {
@@ -120,15 +127,12 @@ exports.Prisma.ModelScalarFieldEnum = {
 exports.Prisma.SpecificationsScalarFieldEnum = {
   id: 'id',
   color: 'color',
-  storage: 'storage',
-  phoneType: 'phoneType',
   modelId: 'modelId'
 };
 
 exports.Prisma.InStockScalarFieldEnum = {
   id: 'id',
   price: 'price',
-  quantity: 'quantity',
   IMEI: 'IMEI',
   modelId: 'modelId',
   specificationsId: 'specificationsId'
@@ -164,6 +168,7 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
+  User: 'User',
   ProductType: 'ProductType',
   Brand: 'Brand',
   Model: 'Model',
