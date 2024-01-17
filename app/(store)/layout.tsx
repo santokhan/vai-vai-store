@@ -11,7 +11,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
     if (!session) {
         return redirect("/auth/signin?redirect=/dashboard");
     } else {
-        const url = `${process.env.NEXT_PUBLIC_API_URL}/user/role/?email=${session.user?.email}`
+        const url = `${process.env.NEXT_PUBLIC_API_URL}/api/user/role/?email=${session.user?.email}`
         const response = await fetch(url);
         const role = await response.json();
 
