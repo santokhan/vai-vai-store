@@ -13,10 +13,10 @@ async function getRole(email: string): Promise<string | undefined> {
                 email: email
             },
         });
-        console.log('New user created:', createdUser);
+        console.log('Reading user role:', createdUser);
         return createdUser?.role;
     } catch (error) {
-        console.error('Error creating user:', error);
+        console.error('Error can not get user:', error);
     } finally {
         // Close the Prisma Client connection
         await prisma.$disconnect();
