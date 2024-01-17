@@ -16,6 +16,7 @@ export interface NavDropdown extends NavItem {
     children?: NavLink[];
 }
 
+
 export const sales: NavDropdown = {
     title: 'sales',
     path: '/sales',
@@ -92,6 +93,12 @@ export const stackEntry: NavDropdown = {
     ],
 };
 
+export const dashboard: NavItem = {
+    title: 'dashboard',
+    path: "/dashboard",
+    icon: <ShieldSecurity className="w-5 h-5 text-gray-500" />,
+};
+
 export const warranty: NavItem = {
     title: 'warranty',
     path: "/warranty",
@@ -118,6 +125,7 @@ export const expenses: NavItem = {
 
 export const sidebarNavs: NavDropdown[] = [
     customer,
+    dashboard,
     expenses,
     product,
     report,
