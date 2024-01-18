@@ -1,37 +1,28 @@
 'use client'
 
-import SubmitButton from "@/components/form/submit";
+import { SellerTable } from "@/components/table/seller-table";
+import { Seller } from "@/prisma/generated/client";
+import { ORIGIN } from "@/utils/origin";
 import { trim_input } from "@/utils/trim-input";
 import { FormEvent, useEffect, useState } from "react";
-import { ORIGIN } from "@/utils/origin";
-import { ProductType } from "@/prisma/generated/client";
-import { TypeTable } from "@/components/table/product-type-table";
+import { useQuery } from "react-query";
 
-export default function TypePage() {
-    const [types, setTypes] = useState<ProductType[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+export default function SellerFormWithTable() {
     const [adding, setadding] = useState<boolean>(false);
 
-    async function getAllProductTypes() {
-        const response = await fetch(`${ORIGIN}/api/add/type/`);
-        const data = await response.json();
-        setTypes(data);
-        setLoading(false);
-    }
+    const sellerQuery = useQuery('getAllSellers', () =>
+        fetch(`${ORIGIN}/api/add/seller/`).then(res => res.json()).then((data: Seller[]) => data)
+    )
 
-    useEffect(() => {
-        getAllProductTypes();
-    }, []);
-
-    async function postType(type: string) {
-        if (!type) {
+    async function postSeller(name: string) {
+        if (!name) {
             console.log("Can not read undeifined type")
             return;
         }
-        const response = await fetch(`${ORIGIN}/api/add/type/`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/add/seller`, {
             method: 'POST',
             body: JSON.stringify({
-                type: type
+                name: name
             })
         });
         const data = await response.json();
@@ -43,39 +34,40 @@ export default function TypePage() {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         // <input name="type"/>
-        const type = formData.get('type');
-        if (typeof type == 'string') {
-            // adding data to server;
+        const seller = formData.get('seller');
+        if (typeof seller == 'string') {
             setadding(true);
-
-            await postType(trim_input(type));
-            await getAllProductTypes();
+            await postSeller(seller.trim().toLowerCase());
+            await sellerQuery.refetch();
         }
     }
 
     return (
-        !loading &&
+        !sellerQuery.isLoading &&
         <div className="">
             <div className="max-w-xl mx-auto space-y-6">
                 <form className="bg-white p-6 rounded-xl space-y-6" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap lg:flex-nowrap">
                         <div className="w-full">
-                            <label htmlFor="type" className="default">Add Product Type or Category</label>
+                            <label htmlFor="seller" className="default">Seller or Outlet</label>
                             <input
                                 type="text"
-                                id="type"
-                                name="type"
+                                id="seller"
+                                name="seller"
                                 className="default"
-                                placeholder="Samsung"
+                                placeholder="Store 1"
                                 required
                             />
                         </div>
                     </div>
                     <button className="default" disabled={adding}>{adding ? "..." : "add"}</button>
                 </form>
-                <div className="">
-                    <TypeTable types={types} />
-                </div>
+                {
+                    sellerQuery.data &&
+                    <div className="">
+                        <SellerTable types={sellerQuery.data} />
+                    </div>
+                }
             </div>
         </div>
     )

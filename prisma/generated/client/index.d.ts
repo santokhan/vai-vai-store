@@ -4639,21 +4639,18 @@ export namespace Prisma {
     id: string | null
     brandName: string | null
     productTypeId: string | null
-    userId: string | null
   }
 
   export type BrandMaxAggregateOutputType = {
     id: string | null
     brandName: string | null
     productTypeId: string | null
-    userId: string | null
   }
 
   export type BrandCountAggregateOutputType = {
     id: number
     brandName: number
     productTypeId: number
-    userId: number
     _all: number
   }
 
@@ -4662,21 +4659,18 @@ export namespace Prisma {
     id?: true
     brandName?: true
     productTypeId?: true
-    userId?: true
   }
 
   export type BrandMaxAggregateInputType = {
     id?: true
     brandName?: true
     productTypeId?: true
-    userId?: true
   }
 
   export type BrandCountAggregateInputType = {
     id?: true
     brandName?: true
     productTypeId?: true
-    userId?: true
     _all?: true
   }
 
@@ -4756,7 +4750,6 @@ export namespace Prisma {
     id: string
     brandName: string
     productTypeId: string
-    userId: string | null
     _count: BrandCountAggregateOutputType | null
     _min: BrandMinAggregateOutputType | null
     _max: BrandMaxAggregateOutputType | null
@@ -4780,7 +4773,6 @@ export namespace Prisma {
     id?: boolean
     brandName?: boolean
     productTypeId?: boolean
-    userId?: boolean
     productType?: boolean | ProductTypeDefaultArgs<ExtArgs>
     Model?: boolean | Brand$ModelArgs<ExtArgs>
     _count?: boolean | BrandCountOutputTypeDefaultArgs<ExtArgs>
@@ -4790,7 +4782,6 @@ export namespace Prisma {
     id?: boolean
     brandName?: boolean
     productTypeId?: boolean
-    userId?: boolean
   }
 
   export type BrandInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4810,7 +4801,6 @@ export namespace Prisma {
       id: string
       brandName: string
       productTypeId: string
-      userId: string | null
     }, ExtArgs["result"]["brand"]>
     composites: {}
   }
@@ -5238,7 +5228,6 @@ export namespace Prisma {
     readonly id: FieldRef<"Brand", 'String'>
     readonly brandName: FieldRef<"Brand", 'String'>
     readonly productTypeId: FieldRef<"Brand", 'String'>
-    readonly userId: FieldRef<"Brand", 'String'>
   }
     
 
@@ -10810,8 +10799,7 @@ export namespace Prisma {
   export const BrandScalarFieldEnum: {
     id: 'id',
     brandName: 'brandName',
-    productTypeId: 'productTypeId',
-    userId: 'userId'
+    productTypeId: 'productTypeId'
   };
 
   export type BrandScalarFieldEnum = (typeof BrandScalarFieldEnum)[keyof typeof BrandScalarFieldEnum]
@@ -11052,7 +11040,6 @@ export namespace Prisma {
     id?: StringFilter<"Brand"> | string
     brandName?: StringFilter<"Brand"> | string
     productTypeId?: StringFilter<"Brand"> | string
-    userId?: StringNullableFilter<"Brand"> | string | null
     productType?: XOR<ProductTypeRelationFilter, ProductTypeWhereInput>
     Model?: ModelListRelationFilter
   }
@@ -11061,7 +11048,6 @@ export namespace Prisma {
     id?: SortOrder
     brandName?: SortOrder
     productTypeId?: SortOrder
-    userId?: SortOrder
     productType?: ProductTypeOrderByWithRelationInput
     Model?: ModelOrderByRelationAggregateInput
   }
@@ -11073,7 +11059,6 @@ export namespace Prisma {
     NOT?: BrandWhereInput | BrandWhereInput[]
     brandName?: StringFilter<"Brand"> | string
     productTypeId?: StringFilter<"Brand"> | string
-    userId?: StringNullableFilter<"Brand"> | string | null
     productType?: XOR<ProductTypeRelationFilter, ProductTypeWhereInput>
     Model?: ModelListRelationFilter
   }, "id">
@@ -11082,7 +11067,6 @@ export namespace Prisma {
     id?: SortOrder
     brandName?: SortOrder
     productTypeId?: SortOrder
-    userId?: SortOrder
     _count?: BrandCountOrderByAggregateInput
     _max?: BrandMaxOrderByAggregateInput
     _min?: BrandMinOrderByAggregateInput
@@ -11095,7 +11079,6 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Brand"> | string
     brandName?: StringWithAggregatesFilter<"Brand"> | string
     productTypeId?: StringWithAggregatesFilter<"Brand"> | string
-    userId?: StringNullableWithAggregatesFilter<"Brand"> | string | null
   }
 
   export type ModelWhereInput = {
@@ -11518,7 +11501,6 @@ export namespace Prisma {
   export type BrandCreateInput = {
     id?: string
     brandName: string
-    userId?: string | null
     productType: ProductTypeCreateNestedOneWithoutBrandInput
     Model?: ModelCreateNestedManyWithoutBrandInput
   }
@@ -11527,13 +11509,11 @@ export namespace Prisma {
     id?: string
     brandName: string
     productTypeId: string
-    userId?: string | null
     Model?: ModelUncheckedCreateNestedManyWithoutBrandInput
   }
 
   export type BrandUpdateInput = {
     brandName?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
     productType?: ProductTypeUpdateOneRequiredWithoutBrandNestedInput
     Model?: ModelUpdateManyWithoutBrandNestedInput
   }
@@ -11541,7 +11521,6 @@ export namespace Prisma {
   export type BrandUncheckedUpdateInput = {
     brandName?: StringFieldUpdateOperationsInput | string
     productTypeId?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
     Model?: ModelUncheckedUpdateManyWithoutBrandNestedInput
   }
 
@@ -11549,18 +11528,15 @@ export namespace Prisma {
     id?: string
     brandName: string
     productTypeId: string
-    userId?: string | null
   }
 
   export type BrandUpdateManyMutationInput = {
     brandName?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BrandUncheckedUpdateManyInput = {
     brandName?: StringFieldUpdateOperationsInput | string
     productTypeId?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ModelCreateInput = {
@@ -11939,22 +11915,6 @@ export namespace Prisma {
     name?: SortOrder
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-    isSet?: boolean
-  }
-
   export type ProductTypeRelationFilter = {
     is?: ProductTypeWhereInput
     isNot?: ProductTypeWhereInput
@@ -11974,40 +11934,18 @@ export namespace Prisma {
     id?: SortOrder
     brandName?: SortOrder
     productTypeId?: SortOrder
-    userId?: SortOrder
   }
 
   export type BrandMaxOrderByAggregateInput = {
     id?: SortOrder
     brandName?: SortOrder
     productTypeId?: SortOrder
-    userId?: SortOrder
   }
 
   export type BrandMinOrderByAggregateInput = {
     id?: SortOrder
     brandName?: SortOrder
     productTypeId?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-    isSet?: boolean
   }
 
   export type BrandRelationFilter = {
@@ -12115,6 +12053,22 @@ export namespace Prisma {
     specificationsId?: SortOrder
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+    isSet?: boolean
+  }
+
   export type ModelNullableRelationFilter = {
     is?: ModelWhereInput | null
     isNot?: ModelWhereInput | null
@@ -12150,6 +12104,25 @@ export namespace Prisma {
     phone?: SortOrder
     modelId?: SortOrder
     specificationsId?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+    isSet?: boolean
   }
 
   export type CustomerRelationFilter = {
@@ -12298,11 +12271,6 @@ export namespace Prisma {
     connectOrCreate?: ModelCreateOrConnectWithoutBrandInput | ModelCreateOrConnectWithoutBrandInput[]
     createMany?: ModelCreateManyBrandInputEnvelope
     connect?: ModelWhereUniqueInput | ModelWhereUniqueInput[]
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-    unset?: boolean
   }
 
   export type ProductTypeUpdateOneRequiredWithoutBrandNestedInput = {
@@ -12751,6 +12719,11 @@ export namespace Prisma {
     deleteMany?: SalesEntryScalarWhereInput | SalesEntryScalarWhereInput[]
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+    unset?: boolean
+  }
+
   export type SalesEntryUncheckedUpdateManyWithoutCustomerNestedInput = {
     create?: XOR<SalesEntryCreateWithoutCustomerInput, SalesEntryUncheckedCreateWithoutCustomerInput> | SalesEntryCreateWithoutCustomerInput[] | SalesEntryUncheckedCreateWithoutCustomerInput[]
     connectOrCreate?: SalesEntryCreateOrConnectWithoutCustomerInput | SalesEntryCreateOrConnectWithoutCustomerInput[]
@@ -12915,14 +12888,12 @@ export namespace Prisma {
   export type BrandCreateWithoutProductTypeInput = {
     id?: string
     brandName: string
-    userId?: string | null
     Model?: ModelCreateNestedManyWithoutBrandInput
   }
 
   export type BrandUncheckedCreateWithoutProductTypeInput = {
     id?: string
     brandName: string
-    userId?: string | null
     Model?: ModelUncheckedCreateNestedManyWithoutBrandInput
   }
 
@@ -12958,7 +12929,6 @@ export namespace Prisma {
     id?: StringFilter<"Brand"> | string
     brandName?: StringFilter<"Brand"> | string
     productTypeId?: StringFilter<"Brand"> | string
-    userId?: StringNullableFilter<"Brand"> | string | null
   }
 
   export type SalesEntryCreateWithoutSellerInput = {
@@ -13106,7 +13076,6 @@ export namespace Prisma {
   export type BrandCreateWithoutModelInput = {
     id?: string
     brandName: string
-    userId?: string | null
     productType: ProductTypeCreateNestedOneWithoutBrandInput
   }
 
@@ -13114,7 +13083,6 @@ export namespace Prisma {
     id?: string
     brandName: string
     productTypeId: string
-    userId?: string | null
   }
 
   export type BrandCreateOrConnectWithoutModelInput = {
@@ -13237,14 +13205,12 @@ export namespace Prisma {
 
   export type BrandUpdateWithoutModelInput = {
     brandName?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
     productType?: ProductTypeUpdateOneRequiredWithoutBrandNestedInput
   }
 
   export type BrandUncheckedUpdateWithoutModelInput = {
     brandName?: StringFieldUpdateOperationsInput | string
     productTypeId?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SpecificationsUpsertWithWhereUniqueWithoutModelInput = {
@@ -13936,24 +13902,20 @@ export namespace Prisma {
   export type BrandCreateManyProductTypeInput = {
     id?: string
     brandName: string
-    userId?: string | null
   }
 
   export type BrandUpdateWithoutProductTypeInput = {
     brandName?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
     Model?: ModelUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandUncheckedUpdateWithoutProductTypeInput = {
     brandName?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
     Model?: ModelUncheckedUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandUncheckedUpdateManyWithoutProductTypeInput = {
     brandName?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SalesEntryCreateManySellerInput = {

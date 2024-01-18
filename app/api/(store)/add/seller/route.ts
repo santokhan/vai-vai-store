@@ -6,7 +6,6 @@ import { ProductType, Seller } from '@/prisma/generated/client';
 async function getSeller() {
     try {
         const sellers: Seller[] = await prisma.seller.findMany();
-        console.log('New user created:', sellers);
         return sellers;
     } catch (error) {
         console.error('Error creating user:', error);
@@ -28,7 +27,6 @@ async function addSeller(name: string): Promise<Seller | undefined> {
                 name: name
             }
         });
-        console.log('New user created:', createdSeller);
         return createdSeller;
     } catch (error) {
         console.error('Error creating user:', error);
@@ -56,9 +54,9 @@ export async function GET(request: Request): Promise<Response> {
 }
 
 /**
- * POST Brand
+ * POST Seller
  * 
- * http://localhost:3000/api/add/brand
+ * http://localhost:3000/api/add/seller
  * 
  * @param req 
  * @returns 

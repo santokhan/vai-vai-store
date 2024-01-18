@@ -119,8 +119,7 @@ exports.Prisma.SellerScalarFieldEnum = {
 exports.Prisma.BrandScalarFieldEnum = {
   id: 'id',
   brandName: 'brandName',
-  productTypeId: 'productTypeId',
-  userId: 'userId'
+  productTypeId: 'productTypeId'
 };
 
 exports.Prisma.ModelScalarFieldEnum = {

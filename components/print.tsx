@@ -1,4 +1,4 @@
-export function PRINT(data: any) {
+export function PRINT({ data }: { data: any }) {
     if (!data) {
         return null;
     }

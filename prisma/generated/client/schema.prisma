@@ -33,7 +33,6 @@ model Brand {
     productType   ProductType @relation(fields: [productTypeId], references: [id])
     productTypeId String      @db.ObjectId
     Model         Model[]
-    userId        String?     @db.ObjectId
 }
 
 model Model {

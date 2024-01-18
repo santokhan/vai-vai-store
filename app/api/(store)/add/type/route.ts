@@ -6,7 +6,6 @@ import { ProductType } from '@/prisma/generated/client';
 async function getType() {
     try {
         const productType: ProductType[] = await prisma.productType.findMany();
-        console.log('New user created:', productType);
         return productType;
     } catch (error) {
         console.error('Error creating user:', error);
@@ -28,7 +27,6 @@ async function addType(type: string): Promise<ProductType | undefined> {
                 type: type
             }
         });
-        console.log('New user created:', createdType);
         return createdType;
     } catch (error) {
         console.error('Error creating user:', error);

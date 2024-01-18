@@ -5,7 +5,7 @@ export interface SellerSelectProps {
     name: string;
     defaultOptionName: string;
     onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
-    options: string[];
+    options: any[];
     required?: boolean;
     value: string;
 }
