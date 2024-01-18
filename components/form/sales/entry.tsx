@@ -4,8 +4,8 @@ import SelectOption from '../select-option/select-option';
 
 const SalesEntryForm: React.FC = () => {
     return (
-        <>
-            <div className="max-w-3xl flex flex-wrap lg:flex-nowrap rounded-xl bg-white w-full p-6">
+        <div className='space-y-6'>
+            <div className="flex flex-wrap lg:flex-nowrap">
                 <div className='w-full'>
                     <div className="flex flex-wrap lg:flex-nowrap gap-4">
                         <SelectOption
@@ -25,8 +25,8 @@ const SalesEntryForm: React.FC = () => {
             </div>
 
             <FormTab InitialObject={{
-                "Search by Brand": <>
-                    <div className="max-w-3xl flex flex-wrap lg:flex-nowrap rounded-xl bg-white w-full p-6">
+                "Search by Brand": () => (
+                    <div className="flex flex-wrap lg:flex-nowrap">
                         <div className='w-full'>
                             <div className="flex flex-wrap lg:flex-nowrap gap-4">
                                 <SelectOption
@@ -56,9 +56,9 @@ const SalesEntryForm: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                </>,
-                "Search by IMEI": <>
-                    <div className="max-w-3xl flex flex-wrap lg:flex-nowrap rounded-xl bg-white w-full p-6">
+                ),
+                "Search by IMEI": () => (
+                    <div className="flex flex-wrap lg:flex-nowrap">
                         <div className='w-full'>
                             <div className="flex flex-wrap lg:flex-nowrap gap-4">
                                 <div className="w-full">
@@ -79,14 +79,14 @@ const SalesEntryForm: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                </>
+                )
             }} />
 
-            <div className="max-w-3xl flex flex-wrap lg:flex-nowrap rounded-xl bg-white w-full p-6">
+            <div className="flex flex-wrap lg:flex-nowrap">
                 <div className="">Product Section</div>
             </div>
 
-            <div className="max-w-3xl flex flex-wrap lg:flex-nowrap rounded-xl bg-white w-full p-6">
+            <div className="flex flex-wrap lg:flex-nowrap">
                 <div className='w-full'>
                     <div className="">Seller Info</div>
                     <hr className='my-4' />
@@ -118,7 +118,7 @@ const SalesEntryForm: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

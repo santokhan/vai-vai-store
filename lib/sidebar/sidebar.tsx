@@ -16,22 +16,21 @@ export interface NavDropdown extends NavItem {
     children?: NavLink[];
 }
 
-
 export const sales: NavDropdown = {
     title: 'sales',
     path: '/sales',
     icon: <Shop className="w-5 h-5 text-gray-500" />,
     children: [
         {
-            name: "sales entry",
+            name: "entry",
             path: "/entry",
         },
         {
-            name: "sales table",
+            name: "table",
             path: "/table",
         },
         {
-            name: "sales return",
+            name: "return",
             path: "/return",
         },
     ],
@@ -67,28 +66,48 @@ export const report: NavDropdown = {
     icon: <Document className="w-5 h-5 text-gray-500" />,
     children: [
         {
-            name: "sales report",
+            name: "sales",
             path: "/sales"
         },
         {
-            name: "loss profit report",
+            name: "loss profit",
             path: "/loss-profit"
         },
     ],
 };
 
-export const stackEntry: NavDropdown = {
+export const stock: NavDropdown = {
     title: 'stock',
     path: "/stock",
     icon: <ShoppingCart className="w-5 h-5 text-gray-500" />,
     children: [
         {
-            name: "stock entry",
+            name: "entry",
             path: "/entry"
         },
         {
-            name: "stock table",
+            name: "table",
             path: "/table"
+        },
+    ],
+};
+
+export const expenses: NavDropdown = {
+    title: 'expenses',
+    path: "/expenses",
+    icon: <Money className="w-5 h-5 text-gray-500" />,
+    children: [
+        {
+            name: "rent",
+            path: "/rent",
+        },
+        {
+            name: "installment",
+            path: "/installment",
+        },
+        {
+            name: "other",
+            path: "/other",
         },
     ],
 };
@@ -117,20 +136,14 @@ export const user: NavItem = {
     icon: <User className="w-5 h-5 text-gray-500" />
 };
 
-export const expenses: NavItem = {
-    title: 'expenses',
-    path: "/expenses",
-    icon: <Money className="w-5 h-5 text-gray-500" />
-};
-
 export const sidebarNavs: NavDropdown[] = [
-    customer,
     dashboard,
-    expenses,
     add,
-    report,
+    stock,
     sales,
-    stackEntry,
+    customer,
+    report,
     user,
     warranty,
+    expenses,
 ];

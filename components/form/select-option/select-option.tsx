@@ -10,14 +10,11 @@ export interface SellerSelectProps {
     value: string;
 }
 
-const SelectOption: FC<SellerSelectProps> = ({ onChange, defaultOptionName, labelName, options, required, value }) => {
+const SelectOption: FC<SellerSelectProps> = ({ onChange, defaultOptionName, labelName, options, required, value, name }) => {
     return (
         <div className='w-full'>
             <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 capitalize">{labelName || 'label'}</label>
-            <select
-                id="category" onChange={onChange} required={required} value={value}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 capitalize"
-            >
+            <select id="category" name={name} onChange={onChange} required={required} value={value} className="default">
                 <option value="" disabled>{defaultOptionName} </option>
                 {options.map((option, idx) => (
                     <option className='capitalize' value={option} key={idx}>{option}</option>

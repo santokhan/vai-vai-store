@@ -13,7 +13,7 @@ async function getRole(email: string): Promise<string | undefined> {
                 email: email
             },
         });
-        console.log('Reading user role:', createdUser);
+        // console.log('Reading user role:', createdUser);
         return createdUser?.role;
     } catch (error) {
         console.error('Error can not get user:', error);

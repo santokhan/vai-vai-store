@@ -8,20 +8,20 @@ function classNames(...classes: string[]) {
 }
 
 export type InitialObject = {
-    [key: string]: JSX.Element
+    [key: string]: () => JSX.Element
 }
 
 export function FormTab({ InitialObject }: { InitialObject: InitialObject }) {
     let [categories] = useState<InitialObject>(InitialObject || {
-        Brand: <></>,
-        IMEI: <></>,
+        Brand: () => <></>,
+        IMEI: () => <></>
     })
 
     return (
-        <div className="w-full max-w-3xl">
+        <div className="w-full">
             <Tab.Group>
                 <div className="mb-2">
-                    <Tab.List className="flex space-x-1 rounded-xl border p-1">
+                    <Tab.List className="flex space-x-1 rounded-xl border p-2 bg-gray-100">
                         {Object.keys(categories).map((category) => (
                             <Tab
                                 key={category}

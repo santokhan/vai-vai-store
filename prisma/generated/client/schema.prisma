@@ -6,7 +6,6 @@ generator client {
 
 datasource db {
     provider = "mongodb"
-    // url      = "mongodb+srv://santokhan:726865426@cluster0.eau2v.mongodb.net/mobile-store?retryWrites=true&w=majority"
     url      = env("MONGODB_URL")
 }
 
@@ -20,6 +19,12 @@ model ProductType {
     id    String  @id @default(auto()) @map("_id") @db.ObjectId
     type  String
     Brand Brand[]
+}
+
+model Seller {
+    id         String       @id @default(auto()) @map("_id") @db.ObjectId
+    name       String
+    SalesEntry SalesEntry[]
 }
 
 model Brand {
@@ -86,4 +91,6 @@ model SalesEntry {
     customerId       String          @db.ObjectId
     Specifications   Specifications? @relation(fields: [specificationsId], references: [id])
     specificationsId String?         @db.ObjectId
+    Seller           Seller?         @relation(fields: [sellerId], references: [id])
+    sellerId         String?         @db.ObjectId
 }

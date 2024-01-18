@@ -3,13 +3,12 @@ import SubmitButton from '../submit';
 
 const CustomerForm: React.FC = () => {
     return (
-        <>
-            <div className="max-w-3xl flex flex-wrap lg:flex-nowrap rounded-xl bg-white w-full p-6">
-                <div className='w-full'>
-                    <div className="">Customer Information</div>
-                    <hr className='my-4' />
+        <div>
+            <div className="">
+                <div className="py-2 mb-3 border-b">Customer Information</div>
+                <div className='w-full space-y-6'>
                     <div className="flex flex-wrap lg:flex-nowrap gap-4">
-                        <div className="w-full mb-8">
+                        <div className="w-full">
                             <label
                                 htmlFor="firstName"
                                 className="block mb-2 text-sm font-medium text-textgray"
@@ -26,7 +25,7 @@ const CustomerForm: React.FC = () => {
                         </div>
                     </div>
                     <div className="flex flex-wrap lg:flex-nowrap gap-4">
-                        <div className="w-full mb-8">
+                        <div className="w-full">
                             <label
                                 htmlFor="email"
                                 className="block mb-2 text-sm font-medium text-textgray"
@@ -42,7 +41,7 @@ const CustomerForm: React.FC = () => {
                             />
                         </div>
 
-                        <div className="w-full mb-8">
+                        <div className="w-full">
                             <label
                                 htmlFor="phone"
                                 className="block mb-2 text-sm font-medium text-textgray"
@@ -77,7 +76,7 @@ const CustomerForm: React.FC = () => {
             <div className="flex justify-end w-full mt-8">
                 <SubmitButton />
             </div>
-        </>
+        </div>
     );
 };
 
