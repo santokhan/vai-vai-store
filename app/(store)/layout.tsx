@@ -1,6 +1,9 @@
+'use client';
+
 import AppBarDashboard from "@/components/navbar/appbar-dashboard";
 import Sidebar from "@/components/sidebar/sidebar";
 import { authOptions } from "@/lib/auth/auth";
+import { ORIGIN } from "@/utils/origin";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
@@ -11,7 +14,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
     if (!session) {
         return redirect("/auth/signin?redirect=/dashboard");
     } else {
-        const url = `${process.env.NEXT_PUBLIC_API_URL}/api/user/role/?email=${session.user?.email}`
+        const url = `${ORIGIN}/api/user/role/?email=${session.user?.email}`
         const response = await fetch(url);
         const role = await response.json();
 
@@ -34,4 +37,16 @@ export default async function DashboardLayout({ children }: { children: ReactNod
             </div>
         )
     }
+
+    // return (
+    //     <>
+    //         <AppBarDashboard />
+    //         <main className="flex">
+    //             <Sidebar />
+    //             <div className="flex-grow p-6 space-y-4">
+    //                 {children}
+    //             </div>
+    //         </main>
+    //     </>
+    // )
 }
