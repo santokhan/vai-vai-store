@@ -13,8 +13,8 @@ export type InitialObject = {
 
 export function FormTab({ InitialObject }: { InitialObject: InitialObject }) {
     let [categories] = useState<InitialObject>(InitialObject || {
-        Brand: () => <></>,
-        IMEI: () => <></>
+        SearchbyBrand: () => <></>,
+        SearchbyIMEI: () => <></>
     })
 
     return (

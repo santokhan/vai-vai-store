@@ -25,7 +25,7 @@ const SalesReturnForm: React.FC = () => {
             </div>
 
             <FormTab InitialObject={{
-                "Search by Brand": <>
+                SearchbyBrand: () => <>
                     <div className="max-w-3xl flex flex-wrap lg:flex-nowrap rounded-xl bg-white w-full p-6">
                         <div className='w-full'>
                             <div className="flex flex-wrap lg:flex-nowrap gap-4">
@@ -57,7 +57,7 @@ const SalesReturnForm: React.FC = () => {
                         </div>
                     </div>
                 </>,
-                "Search by IMEI": <>
+                SearchbyIMEI: () => <>
                     <div className="max-w-3xl flex flex-wrap lg:flex-nowrap rounded-xl bg-white w-full p-6">
                         <div className='w-full'>
                             <div className="flex flex-wrap lg:flex-nowrap gap-4">
