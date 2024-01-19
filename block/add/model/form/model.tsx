@@ -80,7 +80,7 @@ export default function ModelFormWithTable() {
     return (
         <>
             {!typeQuery.isLoading && !brandQuery.isLoading &&
-                <div className="max-w-5xl mx-auto space-y-6">
+                <div className="max-w-6xl mx-auto space-y-6">
                     <form className="bg-white p-6 rounded-xl space-y-6" onSubmit={handleSubmit}>
                         <div className="flex flex-wrap gap-6 lg:flex-nowrap">
                             <SelectOption
@@ -122,9 +122,7 @@ export default function ModelFormWithTable() {
                     </form>
                     {
                         brandQuery.data && typeQuery.data && modelQuery.data &&
-                        <div className="">
-                            <ModelDataTable brands={brandQuery.data} types={typeQuery.data} models={modelQuery.data} />
-                        </div>
+                        <ModelDataTable brands={brandQuery.data} types={typeQuery.data} models={modelQuery.data} />
                     }
 
                 </div>
