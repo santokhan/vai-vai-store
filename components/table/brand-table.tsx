@@ -23,7 +23,7 @@ export function BrandTable({ brands, types }: { brands: any, types: any }) {
                                 </Table.Cell>
                             </Table.Row>
                             {brands.filter((brand: Brand) => brand.productTypeId === type.id).map((brand: Brand) => (
-                                <Table.Row className="">
+                                <Table.Row className="" key={brand.id}>
                                     <Table.Cell className="whitespace-nowrap font-medium text-gray-900 capitalize"></Table.Cell>
                                     <Table.Cell className="whitespace-nowrap font-medium text-gray-900 capitalize">
                                         {brand.brandName}
