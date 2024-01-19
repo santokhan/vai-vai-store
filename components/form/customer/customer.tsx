@@ -74,7 +74,7 @@ const CustomerForm: React.FC = () => {
                 </div>
             </div>
             <div className="flex justify-end w-full mt-8">
-                <SubmitButton />
+                {/* <SubmitButton /> */}
             </div>
         </div>
     );
