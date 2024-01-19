@@ -1,3 +1,4 @@
+import { ORIGIN } from '@/utils/origin';
 import React from 'react';
 
 export type User = {
@@ -37,7 +38,7 @@ export const Table: React.FC<TableProps> = ({ data }) => {
 };
 
 const Page: React.FC = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/`);
+    const response = await fetch(`${ORIGIN}/api/user/`);
     const data = await response.json();
 
     // const tableData = [

@@ -19,7 +19,7 @@ export default function SellerFormWithTable() {
             console.log("Can not read undeifined type")
             return;
         }
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/add/seller`, {
+        const response = await fetch(`${ORIGIN}/api/add/seller`, {
             method: 'POST',
             body: JSON.stringify({
                 name: name
