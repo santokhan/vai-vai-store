@@ -92,12 +92,12 @@ export default function AccountMenu() {
                     <Avatar /> Profile
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={handleClose}>
+                {/* <MenuItem onClick={handleClose}>
                     <ListItemIcon>
                         <Settings fontSize="small" />
                     </ListItemIcon>
                     Settings
-                </MenuItem>
+                </MenuItem> */}
                 <MenuItem onClick={handleSignOut}>
                     <ListItemIcon>
                         <Logout fontSize="small" />

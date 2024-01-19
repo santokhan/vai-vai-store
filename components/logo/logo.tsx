@@ -9,7 +9,7 @@ export default function Logo() {
         <div className="w-full">
             <Link href="/">
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    Vai Vai Store
+                    ভাই ভাই টেলিকম
                 </Typography>
             </Link>
         </div>
