@@ -1,13 +1,16 @@
 'use client'
 
 import StockEntryForm from "@/block/form/stock/entry";
+import ReactQueryContext from "@/context/react-query-context";
 import { ReactNode } from "react";
 
-export default function Home() {
+export default function StockEntryPage() {
     return (
-        <div className="space-y-4 max-w-3xl mx-auto">
-            <StockEntryForm />
-        </div>
+        <ReactQueryContext>
+            <div className="space-y-4 mx-auto">
+                <StockEntryForm />
+            </div>
+        </ReactQueryContext>
     )
 }
 

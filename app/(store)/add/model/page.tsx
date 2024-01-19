@@ -11,6 +11,9 @@ import ReactQueryContext from "@/context/react-query-context";
 export default function AddModelPage() {
     return (
         <ReactQueryContext>
+            {/* Tab Header */}
+
+            {/* Tab Content */}
             <ModelFormWithTable />
         </ReactQueryContext>
     )

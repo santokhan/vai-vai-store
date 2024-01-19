@@ -124,7 +124,6 @@ export default function ModelFormWithTable() {
                         brandQuery.data && typeQuery.data && modelQuery.data &&
                         <ModelDataTable brands={brandQuery.data} types={typeQuery.data} models={modelQuery.data} />
                     }
-
                 </div>
             }
         </>
