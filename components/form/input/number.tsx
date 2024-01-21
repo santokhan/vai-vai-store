@@ -7,7 +7,7 @@ interface NumberInputProps {
     onChange: (e: ChangeEvent<HTMLInputElement>) => void;
     required?: boolean;
     name: string;
-    value: string;
+    value: number;
 }
 
 const NumberInput: FC<NumberInputProps> = ({ label, name, id, onChange, required, value }) => {

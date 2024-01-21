@@ -17,8 +17,10 @@ export const InitialState = {
     model: '',
     color: '',
     IMEI: '',
+    purchasePrice: 0,
     price: 0,
-    discount: 0,
+    ram: 4,
+    rom: 64,
 }
 
 export type StockEntryType = typeof InitialState;
@@ -154,6 +156,20 @@ const StockEntryForm: React.FC = () => {
                                 value={state.IMEI}
                             />
                         </div>
+                        <NumberInput
+                            label='Purchase Price'
+                            name="purchasePrice"
+                            id='purchasePrice'
+                            onChange={() => { }}
+                            value={state.purchasePrice}
+                        />
+                        <NumberInput
+                            label='Price'
+                            name="price"
+                            id='price'
+                            onChange={() => { }}
+                            value={state.price}
+                        />
                         <SelectOption
                             labelName='Choose Color'
                             name="color"
@@ -165,18 +181,24 @@ const StockEntryForm: React.FC = () => {
                             defaultOptionName='Search by color name'
                             value={state.color}
                         />
-                        <NumberInput
-                            label='Price'
-                            name="price"
-                            id='price'
-                            onChange={() => { }}
+                        <SelectOption
+                            labelName='RAM'
+                            name="ram"
+                            options={[2, 3, 4, 6, 8, 12]}
+                            onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                                setstate({ ...state, color: e.target.value })
+                            }}
+                            defaultOptionName='Default'
                             value={state.color}
                         />
-                        <NumberInput
-                            label='Discount'
-                            name="discount"
-                            id='discount'
-                            onChange={() => { }}
+                        <SelectOption
+                            labelName='ROM'
+                            name="rom"
+                            options={[16, 32, 64, 128, 256, 512]}
+                            onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                                setstate({ ...state, color: e.target.value })
+                            }}
+                            defaultOptionName='Default'
                             value={state.color}
                         />
                     </div>
