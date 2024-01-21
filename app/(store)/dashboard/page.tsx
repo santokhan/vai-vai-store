@@ -1,10 +1,13 @@
-import DashboardImage from '@/assets/images/overview-2.png'
-import Image from 'next/image'
+import { AreaChart } from '@/block/chart/area-chart'
+import { BarChart } from '@/block/chart/bar-chart'
 
 export default function Dashboard() {
     return (
         <div>
-            <Image src={DashboardImage} alt="Dashboard" className="w-full" />
+            <div className="w-full space-y-16 p-4">
+                <AreaChart />
+                <BarChart />
+            </div>
         </div>
     )
 }
