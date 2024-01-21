@@ -1,5 +1,3 @@
-'use client';
-
 import AppBarDashboard from "@/components/navbar/appbar-dashboard";
 import Sidebar from "@/components/sidebar/sidebar";
 import { authOptions } from "@/lib/auth/auth";
