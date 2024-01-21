@@ -32,9 +32,13 @@ export function ModelDataTable({ brands, types, models }: { brands: Brand[], typ
                                     <Table.Cell className="min-w-[260px]"></Table.Cell>
                                     <Table.Cell className="min-w-[260px] font-medium text-gray-900 capitalize text-ellipsis">{brand.brandName}</Table.Cell>
                                     <Table.Cell className="min-w-[260px] font-medium text-gray-900 capitalize text-ellipsis">
-                                        {getModelsByBrandId(brand.id).map((model: Model) => (
-                                            <span key={model.id} id={model.id}>{model.model}, </span>
-                                        ))}
+                                        <ol className='list-decimal list-inside+ pl-4'>
+                                            {getModelsByBrandId(brand.id).map((model: Model) => (
+                                                <li key={model.id} id={model.id}>
+                                                    <span className='pl-1'>{model.model}</span>
+                                                </li>
+                                            ))}
+                                        </ol>
                                     </Table.Cell>
                                     {/* <Table.Cell className="min-w-[260px]">
                                         <button type='button' className="font-medium hover:text-blue-500"><Edit className="w-5 h-5 text-gray-500" /></button>
