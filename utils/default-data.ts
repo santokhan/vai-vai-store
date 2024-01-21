@@ -23,17 +23,12 @@ export const defaultBrands = [
     'zte',
 ]
 
-export const defaultModels = [
-    'galaxy j5',
-]
-
 export const commonPhoneColors = [
     'black',
     'white',
     'silver',
     'gold',
     'blue',
-    'rose gold',
     'red',
     'green',
     'purple',

@@ -6,7 +6,7 @@ import SubmitButton from '@/components/form/submit';
 import { PRINT } from '@/components/print';
 import { FormContext } from '@/context/form/form-context';
 import { Brand, Model, ProductType } from '@/prisma/generated/client';
-import { commonPhoneColors, defaultBrands, defaultModels, defaultType } from '@/utils/default-data';
+import { commonPhoneColors } from '@/utils/default-data';
 import { ORIGIN } from '@/utils/origin';
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useQuery } from 'react-query';
@@ -15,12 +15,12 @@ export const InitialState = {
     productType: '',
     brand: '',
     model: '',
-    color: '',
     IMEI: '',
     purchasePrice: 0,
     price: 0,
-    ram: 4,
-    rom: 64,
+    color: '',
+    ram: '',
+    rom: '',
 }
 
 export type StockEntryType = typeof InitialState;
@@ -29,26 +29,36 @@ const StockEntryForm: React.FC = () => {
     const [state, setstate] = useState<StockEntryType>(InitialState)
     const [adding, setadding] = useState<boolean>(false);
 
-    function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        const data = {
-            productType: formData.get('productType'),
-            brand: formData.get('brand'),
-            model: formData.get('model'),
-            color: formData.get('color'),
-            IMEI: formData.get('IMEI'),
-            price: formData.get('price'),
-            discount: formData.get('discount'),
-        }
-        console.log({ data });
-
-        // if (typeof productType == 'string' && typeof brand == 'string' && typeof model == 'string') {
-        //     setadding(true)
-        //     await postModel(productType, brand, model.trim().toLowerCase());
-        //     // refresh data
-        //     await modelQuery.refetch();
+        // const formData = new FormData(e.currentTarget);
+        // const data = {
+        //     productType: formData.get('productType'),
+        //     brand: formData.get('brand'),
+        //     model: formData.get('model'),
+        //     IMEI: formData.get('IMEI'),
+        //     price: formData.get('price'),
+        //     purchasePrice: formData.get('purchasePrice'),
+        //     color: formData.get('color'),
+        //     ram: formData.get('ram'),
+        //     rom: formData.get('rom'),
         // }
+
+        const { productType, brand, model, IMEI, price, purchasePrice, color, ram, rom } = state;
+        console.log(state);
+
+        if (productType && brand && model && IMEI && price && purchasePrice && color && ram && rom) {
+            setadding(true);
+            // post data
+            const res = await fetch(`${ORIGIN}/api/add/stock/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(state)
+            });
+            setadding(false);
+        }
     }
 
     const value = {
@@ -92,15 +102,15 @@ const StockEntryForm: React.FC = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                         {typeQuery.data &&
                             <div className='w-full'>
-                                <label htmlFor="type" className="default">Product Type</label>
+                                <label htmlFor="productType" className="default">Product Type</label>
                                 <select
                                     className="default"
-                                    name="type"
-                                    id="type"
+                                    name="productType"
+                                    id="productType"
                                     required={true}
                                     value={state.productType}
                                     onChange={(e: ChangeEvent<HTMLSelectElement>) => { setstate({ ...state, productType: e.target.value }) }}>
-                                    <option value="">Select option</option>
+                                    <option value="" disabled className='capitalize'>default</option>
                                     {typeQuery.data.map((type: ProductType, idx) =>
                                         <option className='capitalize' value={type.id} key={idx}>{type.type}</option>
                                     )}
@@ -117,7 +127,7 @@ const StockEntryForm: React.FC = () => {
                                     value={state.brand}
                                     required={true}
                                     onChange={(e: ChangeEvent<HTMLSelectElement>) => { setstate({ ...state, brand: e.target.value }) }}>
-                                    <option value="">Select option</option>
+                                    <option value="" disabled className='capitalize'>default</option>
                                     {state.productType && brandByType(brandQuery.data, state.productType).map((brand: Brand, idx) =>
                                         <option className='capitalize' value={brand.id} key={idx}>{brand.brandName}</option>
                                     )}
@@ -134,7 +144,7 @@ const StockEntryForm: React.FC = () => {
                                     value={state.model}
                                     required={true}
                                     onChange={(e: ChangeEvent<HTMLSelectElement>) => { setstate({ ...state, model: e.target.value }) }}>
-                                    <option value="">Select option</option>
+                                    <option value="" disabled className='capitalize'>default</option>
                                     {state.productType && state.brand && modelByBrand(modelQuery.data, state.brand).map((model: Model, idx) =>
                                         <option className='capitalize' value={model.id} key={idx}>{model.model}</option>
                                     )}
@@ -160,14 +170,18 @@ const StockEntryForm: React.FC = () => {
                             label='Purchase Price'
                             name="purchasePrice"
                             id='purchasePrice'
-                            onChange={() => { }}
+                            onChange={(e) => {
+                                setstate(prev => ({ ...prev, purchasePrice: Number(e.target.value) }))
+                            }}
                             value={state.purchasePrice}
                         />
                         <NumberInput
                             label='Price'
                             name="price"
                             id='price'
-                            onChange={() => { }}
+                            onChange={(e) => {
+                                setstate(prev => ({ ...prev, price: Number(e.target.value) }))
+                            }}
                             value={state.price}
                         />
                         <SelectOption
@@ -176,9 +190,9 @@ const StockEntryForm: React.FC = () => {
                             className={`text-[${state.color}]`}
                             options={commonPhoneColors}
                             onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                                setstate({ ...state, color: e.target.value })
+                                setstate(prev => ({ ...prev, color: e.target.value }))
                             }}
-                            defaultOptionName='Search by color name'
+                            defaultOptionName='default'
                             value={state.color}
                         />
                         <SelectOption
@@ -186,20 +200,20 @@ const StockEntryForm: React.FC = () => {
                             name="ram"
                             options={[2, 3, 4, 6, 8, 12]}
                             onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                                setstate({ ...state, color: e.target.value })
+                                setstate(prev => ({ ...prev, ram: e.target.value }))
                             }}
                             defaultOptionName='Default'
-                            value={state.color}
+                            value={state.ram}
                         />
                         <SelectOption
                             labelName='ROM'
                             name="rom"
                             options={[16, 32, 64, 128, 256, 512]}
                             onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                                setstate({ ...state, color: e.target.value })
+                                setstate(prev => ({ ...prev, rom: e.target.value }))
                             }}
                             defaultOptionName='Default'
-                            value={state.color}
+                            value={state.rom}
                         />
                     </div>
                 </div>
