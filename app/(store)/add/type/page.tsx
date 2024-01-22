@@ -1,6 +1,5 @@
 'use client'
 
-import SubmitButton from "@/components/form/submit";
 import { trim_input } from "@/utils/trim-input";
 import { FormEvent, useEffect, useState } from "react";
 import { ORIGIN } from "@/utils/origin";
@@ -66,7 +65,7 @@ export default function TypePage() {
                                 id="type"
                                 name="type"
                                 className="default"
-                                placeholder="Samsung"
+                                placeholder="Phone, Laptop, etc"
                                 required
                             />
                         </div>

@@ -2,6 +2,7 @@
 
 import { ProductType } from '@/prisma/generated/client';
 import { Table } from 'flowbite-react';
+import { PRINT } from '../print';
 
 export function TypeTable({ types }: { types: ProductType[] }) {
     return (

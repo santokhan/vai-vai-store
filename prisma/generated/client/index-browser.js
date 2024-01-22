@@ -103,43 +103,61 @@ Prisma.NullTypes = {
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  role: 'role'
-};
-
-exports.Prisma.ProductTypeScalarFieldEnum = {
-  id: 'id',
-  type: 'type'
+  role: 'role',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SellerScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ProductTypeScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.BrandScalarFieldEnum = {
   id: 'id',
   brandName: 'brandName',
-  productTypeId: 'productTypeId'
+  productTypeId: 'productTypeId',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.ModelScalarFieldEnum = {
   id: 'id',
   model: 'model',
-  brandId: 'brandId'
-};
-
-exports.Prisma.SpecificationsScalarFieldEnum = {
-  id: 'id',
-  color: 'color',
-  modelId: 'modelId'
+  brandId: 'brandId',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.InStockScalarFieldEnum = {
   id: 'id',
-  price: 'price',
+  name: 'name',
   IMEI: 'IMEI',
   modelId: 'modelId',
-  specificationsId: 'specificationsId'
+  brandId: 'brandId',
+  productTypeId: 'productTypeId',
+  purchasePrice: 'purchasePrice',
+  price: 'price',
+  sold: 'sold',
+  color: 'color',
+  ram: 'ram',
+  rom: 'rom',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.SalesEntryScalarFieldEnum = {
+  id: 'id',
+  instockId: 'instockId',
+  IMEI: 'IMEI',
+  price: 'price',
+  discount: 'discount',
+  sellerId: 'sellerId',
+  customerId: 'customerId',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.CustomerScalarFieldEnum = {
@@ -147,18 +165,7 @@ exports.Prisma.CustomerScalarFieldEnum = {
   name: 'name',
   email: 'email',
   phone: 'phone',
-  modelId: 'modelId',
-  specificationsId: 'specificationsId'
-};
-
-exports.Prisma.SalesEntryScalarFieldEnum = {
-  id: 'id',
-  IMEI: 'IMEI',
-  price: 'price',
-  modelId: 'modelId',
-  customerId: 'customerId',
-  specificationsId: 'specificationsId',
-  sellerId: 'sellerId'
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -174,14 +181,13 @@ exports.Prisma.QueryMode = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  ProductType: 'ProductType',
   Seller: 'Seller',
+  ProductType: 'ProductType',
   Brand: 'Brand',
   Model: 'Model',
-  Specifications: 'Specifications',
   InStock: 'InStock',
-  Customer: 'Customer',
-  SalesEntry: 'SalesEntry'
+  SalesEntry: 'SalesEntry',
+  Customer: 'Customer'
 };
 
 /**
