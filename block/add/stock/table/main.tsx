@@ -23,12 +23,6 @@ import { useQuery } from 'react-query'
 import { ORIGIN } from '@/utils/origin'
 import { dummyProductData } from '@/utils/default-data'
 
-export type StockIncludes = InStock & {
-    productType?: ProductType;
-    brand?: Brand;
-    model?: Model;
-};
-
 export default function StockTable() {
     const rerender = React.useReducer(() => ({}), {})[1];
 

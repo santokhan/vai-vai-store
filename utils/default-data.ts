@@ -1,4 +1,4 @@
-import { InStock } from "@/prisma/generated/client";
+import { Brand, InStock, Model, ProductType } from "@/prisma/generated/client";
 
 export const defaultType = [
     'android',
@@ -41,7 +41,13 @@ export const commonPhoneColors = [
     'aqua'
 ];
 
-export const dummyProductData: InStock[] = [
+export type StockIncludes = InStock & {
+    productType?: ProductType;
+    brand?: Brand;
+    model?: Model;
+};
+
+export const dummyProductData: StockIncludes[] = [
     {
         "id": "65ae51a9f4f577df43eab3e5",
         "name": "Dummy Product 1",
@@ -55,7 +61,7 @@ export const dummyProductData: InStock[] = [
         "color": "gold",
         "ram": "4",
         "rom": "32",
-        "createdAt": "2024-01-22T11:29:45.753Z",
+        "createdAt": new Date("2024-01-22T11:29:45.753Z"),
         "productType": {
             "id": "65a8c556cd9eb4535ebeb167",
             "type": "android",
