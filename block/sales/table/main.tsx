@@ -17,8 +17,8 @@ import {
     flexRender,
 } from '@tanstack/react-table'
 
-import { makeData, Person } from './makeData'
-import { Brand, InStock, Model, ProductType } from '@/prisma/generated/client'
+import { makeData } from './makeData'
+import { SalesEntry } from '@/prisma/generated/client'
 import { useQuery } from 'react-query'
 import { ORIGIN } from '@/utils/origin'
 import { dummyProductData } from '@/utils/default-data'
@@ -26,14 +26,13 @@ import { dummyProductData } from '@/utils/default-data'
 export default function SalesTable() {
     const rerender = React.useReducer(() => ({}), {})[1];
 
-    const columns = React.useMemo<ColumnDef<InStock>[]>(() => [
+    const columns = React.useMemo<ColumnDef<SalesEntry>[]>(() => [
         {
             header: 'Name',
             footer: props => props.column.id,
             columns: [
                 {
-                    accessorKey: 'name',
-                    cell: info => info.getValue(),
+                    accessorKey: 'customer.name',
                     footer: props => props.column.id,
                 },
             ],
@@ -44,106 +43,46 @@ export default function SalesTable() {
             columns: [
                 {
                     accessorKey: 'IMEI',
-                    header: () => 'IMEI',
                     footer: props => props.column.id,
                 },
             ],
         },
         {
-            header: 'Product Type',
-            footer: props => props.column.id,
-            columns: [
-                {
-                    accessorKey: 'productType.type',
-                    header: () => 'productTypeId',
-                    footer: props => props.column.id,
-                },
-            ],
-        },
-        {
-            header: 'Brand',
-            footer: props => props.column.id,
-            columns: [
-                {
-                    accessorKey: 'brand.brandName',
-                    // header: () => 'IMEI',
-                    footer: props => props.column.id,
-                },
-            ],
-        },
-        {
-            header: 'Model',
-            footer: props => props.column.id,
-            columns: [
-                {
-                    accessorKey: 'model.model',
-                    // header: () => 'IMEI',
-                    footer: props => props.column.id,
-                },
-            ],
-        },
-        {
-            header: 'Purchase Price',
-            footer: props => props.column.id,
-            columns: [
-                {
-                    accessorKey: 'purchasePrice',
-                    // header: () => 'IMEI',
-                    footer: props => props.column.id,
-                },
-            ],
-        },
-        {
-            header: 'Model',
+            header: 'Price',
             footer: props => props.column.id,
             columns: [
                 {
                     accessorKey: 'price',
-                    // header: () => 'IMEI',
                     footer: props => props.column.id,
                 },
             ],
         },
         {
-            header: 'RAM',
+            header: 'Discount',
             footer: props => props.column.id,
             columns: [
                 {
-                    accessorKey: 'ram',
-                    // header: () => 'IMEI',
+                    accessorKey: 'discount',
                     footer: props => props.column.id,
                 },
             ],
         },
         {
-            header: 'ROM',
+            header: 'Due',
             footer: props => props.column.id,
             columns: [
                 {
-                    accessorKey: 'rom',
-                    // header: () => 'IMEI',
+                    accessorKey: 'due',
                     footer: props => props.column.id,
                 },
             ],
         },
         {
-            header: 'Color',
+            header: 'Due Date',
             footer: props => props.column.id,
             columns: [
                 {
-                    accessorKey: 'color',
-                    // header: () => 'IMEI',
-                    footer: props => props.column.id,
-                },
-            ],
-        },
-        {
-            header: 'Sold',
-            footer: props => props.column.id,
-            columns: [
-                {
-                    accessorKey: 'sold',
-                    // header: () => 'IMEI',
+                    accessorKey: 'dueDate',
                     footer: props => props.column.id,
                 },
             ],
@@ -154,13 +93,13 @@ export default function SalesTable() {
     const refreshData = () => setData(() => makeData(100000))
 
     // Santo
-    const modelQuery = useQuery('getAllInStock', () =>
-        fetch(`${ORIGIN}/api/stock/table`).then(res => res.json()).then((data: InStock[]) => data)
+    const salesEntryQuery = useQuery('getAllInStock', () =>
+        fetch(`${ORIGIN}/api/sales/table`).then(res => res.json()).then((data: SalesEntry[]) => data)
     )
 
     return (
         <>
-            {modelQuery.data && <Table data={modelQuery.data} columns={columns} />}
+            {salesEntryQuery.data && <Table data={salesEntryQuery.data} columns={columns} />}
             {/* <hr />
             <div>
                 <button onClick={() => rerender()}>Force Rerender</button>
@@ -173,8 +112,8 @@ export default function SalesTable() {
 }
 
 type TableProps = {
-    data: InStock[]
-    columns: ColumnDef<InStock>[]
+    data: SalesEntry[]
+    columns: ColumnDef<SalesEntry>[]
 }
 
 function Table({ data, columns }: TableProps) {

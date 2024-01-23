@@ -33,7 +33,7 @@ const SearchModelForm: React.FC<{ setSearchStockData: (data: InStock) => void }>
         <div className='space-y-8'>
             <div className="flex flex-wrap lg:flex-nowrap gap-4">
                 <form className="w-full" onSubmit={searchModelByIMEI}>
-                    <label htmlFor="IMEI" className="default">Search Product by IMEI (545615615115615)</label>
+                    <label htmlFor="IMEI" className="default">Search Product by IMEI</label>
                     <div className="flex items-center gap-2">
                         <input
                             type="search"

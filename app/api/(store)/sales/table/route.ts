@@ -1,19 +1,12 @@
 // Import the Prisma Client
 import { prisma } from '@/lib/prisma';
 
-/**
- * Use Prisma Client to insert the new model into the database
- * 
- * @param  
- * @returns 
- */
 async function getModel() {
     try {
-        return await prisma.inStock.findMany({
+        return await prisma.salesEntry.findMany({
             include: {
-                productType: true,
-                brand: true,
-                model: true,
+                InStock: true,
+                customer: true,
             }
         });
     } catch (error) {
@@ -25,32 +18,7 @@ async function getModel() {
 }
 
 /**
- * Use Prisma Client to insert the new model into the database
- * 
- * @param  
- * @returns 
- */
-async function addModel({ brandId, model }: { brandId: string, model: string }) {
-    try {
-        const createdModel = await prisma.model.create({
-            data: {
-                brandId,
-                model
-            }
-        });
-        return createdModel;
-    } catch (error) {
-        console.error('Error creating model:', error);
-    } finally {
-        // Close the Prisma Client connection
-        await prisma.$disconnect();
-    }
-}
-
-/**
- * GET model
- * 
- * http://localhost:3000/api/stock/table
+ * http://localhost:3000/api/sales/table
  * 
  * @param req 
  * @returns 
@@ -60,6 +28,6 @@ export async function GET(): Promise<Response> {
     if (data) {
         return Response.json(data);
     } else {
-        return Response.json({ message: 'No data found in stock' });
+        return Response.json({ message: 'No data found in salesEntry' });
     }
 }
