@@ -1,12 +1,17 @@
 'use client'
 
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, Ref, useState } from 'react';
 import { useQuery } from 'react-query';
 import { ORIGIN } from '@/utils/origin';
 import { Customer, InStock } from '@/prisma/generated/client';
 import { SearchNormal } from 'iconsax-react';
 
-const SearchModelForm: React.FC<{ setSearchStockData: (data: InStock) => void }> = ({ setSearchStockData }) => {
+type Props = {
+    setSearchStockData: (data: InStock) => void;
+    forwardRef: Ref<HTMLInputElement>;
+}
+
+const SearchModelForm: React.FC<Props> = ({ setSearchStockData, forwardRef }) => {
     const [IMEI, setIMEI] = useState<string>('');
     const [isSearching, setisSearching] = useState<boolean>(false);
 
@@ -43,6 +48,7 @@ const SearchModelForm: React.FC<{ setSearchStockData: (data: InStock) => void }>
                             maxLength={15}
                             onChange={handleChange}
                             required={true}
+                            ref={forwardRef}
                         />
                         <button className='border h-11 aspect-square bg-gray-100 rounded-lg grid place-items-center hover:bg-gray-50'>
                             {isSearching ? '...' : <SearchNormal className='w-5 h-5' />}

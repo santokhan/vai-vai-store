@@ -8,7 +8,7 @@ import ReactQueryContext from "@/context/react-query-context";
 import { Customer, InStock, SalesEntry, Seller } from "@/prisma/generated/client";
 import { InitialSalesEntry, dummyStockData, initialCustomer } from "@/utils/default-data";
 import { ORIGIN } from "@/utils/origin";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { useQuery } from "react-query";
 
 export type SalesEntryType = typeof InitialSalesEntry;
@@ -29,6 +29,7 @@ export default function SalesEntryForm() {
     const [foundStockItem, setfoundStockItem] = useState<InStock | null>(null);
     const [addedSales, setaddedSales] = useState<SalesEntry | null>(null);
     const [customer, setcustomer] = useState<CustomerData>(initialCustomer);
+    const searchInputRef = useRef<HTMLInputElement | null>(null);
 
     function setSearchStockData(data: InStock) {
         if (!data) return console.log({ message: "Can not read undefined of data" });
@@ -48,7 +49,10 @@ export default function SalesEntryForm() {
     async function handleSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault();
         const { discount, sellerId } = salesData;
-        if (foundStockItem?.id && customer) {
+        if (!foundStockItem?.id) {
+            alert('Please search product first');
+            searchInputRef.current?.focus()
+        } else if (foundStockItem?.id && customer) {
             setAdding(true);
             // TODO: add sales entry
             const API_URL = `${ORIGIN}/api/sales/entry/`
@@ -87,7 +91,7 @@ export default function SalesEntryForm() {
     return (
         <ReactQueryContext>
             <div className="mx-auto bg-white p-6 rounded-xl space-y-6">
-                <SearchModelForm setSearchStockData={setSearchStockData} />
+                <SearchModelForm setSearchStockData={setSearchStockData} forwardRef={searchInputRef} />
                 <SearchProductCard data={foundStockItem} />
 
                 <form className="space-y-6" onSubmit={handleSubmit}>
