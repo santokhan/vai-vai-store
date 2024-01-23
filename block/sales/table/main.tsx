@@ -1,7 +1,7 @@
 // https://tanstack.com/table/v8/docs/examples/react/pagination
 
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import './index.css'
 
 import {
@@ -96,6 +96,10 @@ export default function SalesTable() {
     const salesEntryQuery = useQuery('getAllInStock', () =>
         fetch(`${ORIGIN}/api/sales/table`).then(res => res.json()).then((data: SalesEntry[]) => data)
     )
+
+    useEffect(() => {
+        salesEntryQuery.refetch();
+    }, [])
 
     return (
         <>

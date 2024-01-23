@@ -1,7 +1,7 @@
 // https://tanstack.com/table/v8/docs/examples/react/pagination
 
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import './index.css'
 
 import {
@@ -154,13 +154,17 @@ export default function StockTable() {
     const refreshData = () => setData(() => makeData(100000))
 
     // Santo
-    const modelQuery = useQuery('getAllInStock', () =>
+    const inStockQuery = useQuery('getAllInStock', () =>
         fetch(`${ORIGIN}/api/stock/table`).then(res => res.json()).then((data: InStock[]) => data)
     )
 
+    useEffect(() => {
+        inStockQuery.refetch();
+    }, [])
+
     return (
         <>
-            {modelQuery.data && <Table data={modelQuery.data} columns={columns} />}
+            {inStockQuery.data && <Table data={inStockQuery.data} columns={columns} />}
             {/* <hr />
             <div>
                 <button onClick={() => rerender()}>Force Rerender</button>
