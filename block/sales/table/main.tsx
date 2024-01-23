@@ -1,7 +1,7 @@
 // https://tanstack.com/table/v8/docs/examples/react/pagination
 
 'use client'
-import React, { useEffect } from 'react'
+import React, { cache, useEffect } from 'react'
 import './index.css'
 
 import {
@@ -94,7 +94,8 @@ export default function SalesTable() {
 
     // Santo
     const salesEntryQuery = useQuery('getAllInStock', () =>
-        fetch(`${ORIGIN}/api/sales/table`).then(res => res.json()).then((data: SalesEntry[]) => data)
+        fetch(`${ORIGIN}/api/sales/table`).then(res => res.json()).then((data: SalesEntry[]) => data),
+        { cacheTime: 0 },
     )
 
     function reFetch() {

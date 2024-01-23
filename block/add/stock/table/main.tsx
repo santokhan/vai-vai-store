@@ -155,7 +155,8 @@ export default function StockTable() {
 
     // Santo
     const inStockQuery = useQuery('getAllInStock', () =>
-        fetch(`${ORIGIN}/api/stock/table`).then(res => res.json()).then((data: InStock[]) => data)
+        fetch(`${ORIGIN}/api/stock/table`).then(res => res.json()).then((data: InStock[]) => data),
+        { cacheTime: 0 }
     )
 
     function reFetch() {
