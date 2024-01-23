@@ -97,13 +97,17 @@ export default function SalesTable() {
         fetch(`${ORIGIN}/api/sales/table`).then(res => res.json()).then((data: SalesEntry[]) => data)
     )
 
+    function reFetch() {
+        salesEntryQuery.refetch();
+    }
+
     useEffect(() => {
         salesEntryQuery.refetch();
     }, [])
 
     return (
         <>
-            {salesEntryQuery.data && <Table data={salesEntryQuery.data} columns={columns} />}
+            {salesEntryQuery.data && <Table data={salesEntryQuery.data} columns={columns} reFetch={reFetch} />}
             {/* <hr />
             <div>
                 <button onClick={() => rerender()}>Force Rerender</button>
@@ -117,10 +121,11 @@ export default function SalesTable() {
 
 type TableProps = {
     data: SalesEntry[]
-    columns: ColumnDef<SalesEntry>[]
+    columns: ColumnDef<SalesEntry>[];
+    reFetch: () => void;
 }
 
-function Table({ data, columns }: TableProps) {
+function Table({ data, columns, reFetch }: TableProps) {
     const table = useReactTable({
         data,
         columns,
@@ -243,7 +248,8 @@ function Table({ data, columns }: TableProps) {
                             </option>
                         ))}
                     </select>
-                    <button type="button" onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                    {/* () => table.setPageIndex(table.getPageCount() - 1) */}
+                    <button type="button" onClick={reFetch}
                         className="border rounded-lg px-2 py-1 grid place-items-center hover:bg-gray-100"
                     >
                         Reload

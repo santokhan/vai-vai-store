@@ -158,13 +158,17 @@ export default function StockTable() {
         fetch(`${ORIGIN}/api/stock/table`).then(res => res.json()).then((data: InStock[]) => data)
     )
 
+    function reFetch() {
+        inStockQuery.refetch();
+    }
+
     useEffect(() => {
         inStockQuery.refetch();
     }, [])
 
     return (
         <>
-            {inStockQuery.data && <Table data={inStockQuery.data} columns={columns} />}
+            {inStockQuery.data && <Table data={inStockQuery.data} columns={columns} reFetch={reFetch} />}
             {/* <hr />
             <div>
                 <button onClick={() => rerender()}>Force Rerender</button>
@@ -178,10 +182,11 @@ export default function StockTable() {
 
 type TableProps = {
     data: InStock[]
-    columns: ColumnDef<InStock>[]
+    columns: ColumnDef<InStock>[];
+    reFetch: () => void;
 }
 
-function Table({ data, columns }: TableProps) {
+function Table({ data, columns, reFetch }: TableProps) {
     const table = useReactTable({
         data,
         columns,
@@ -303,7 +308,8 @@ function Table({ data, columns }: TableProps) {
                         </option>
                     ))}
                 </select>
-                <button type="button" onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                {/* () => table.setPageIndex(table.getPageCount() - 1) */}
+                <button type="button" onClick={reFetch}
                     className="border rounded-lg px-2 py-1 grid place-items-center hover:bg-gray-100"
                 >
                     Reload
