@@ -108,7 +108,6 @@ const StockEntryForm: React.FC = () => {
                                         placeholder="Enter product title"
                                         onChange={(e: ChangeEvent<HTMLInputElement>) => { setstate({ ...state, name: e.target.value }) }}
                                         value={state.name}
-                                        required={true}
                                     />
                                 </div>
                                 {typeQuery.data &&
@@ -272,9 +271,12 @@ const StockEntryForm: React.FC = () => {
                             <Table.Body className="divide-y">
                                 {createdItem.map((item: InStock) => (
                                     <Table.Row className="" key={item.id}>
-                                        <Table.Cell className="whitespace-nowrap font-normal text-gray-900 capitalize">
-                                            {item.name}
-                                        </Table.Cell>
+                                        {
+                                            item.name &&
+                                            <Table.Cell className="whitespace-nowrap font-normal text-gray-900 capitalize">
+                                                {item.name}
+                                            </Table.Cell>
+                                        }
                                         <Table.Cell className="whitespace-nowrap font-normal text-gray-900 capitalize">
                                             {productTypeById(item.productTypeId)}
                                         </Table.Cell>

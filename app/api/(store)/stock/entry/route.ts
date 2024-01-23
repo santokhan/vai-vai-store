@@ -79,7 +79,7 @@ export async function POST(request: Request): Promise<Response> {
     const body = await request.json();
     const { name, IMEI, price, purchasePrice, brandId, modelId, ram, rom, color, productTypeId } = body;
 
-    if (name && IMEI && price && purchasePrice && brandId && modelId && productTypeId) {
+    if (IMEI && price && purchasePrice && brandId && modelId && productTypeId) {
         const existingBrand = await prisma.inStock.findFirst({
             where: {
                 IMEI: IMEI
