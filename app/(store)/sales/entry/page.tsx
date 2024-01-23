@@ -1,16 +1,14 @@
 'use client'
 
-import CustomerForm from "@/components/form/customer/customer";
 import SalesEntryForm from "@/components/form/sales/entry";
+import ReactQueryContext from "@/context/react-query-context";
 
-export default function Home() {
+export default function SalesEntryPage() {
     return (
-        <div className="space-y-4 mx-auto">
-            <div className="bg-white p-6 rounded-xl space-y-6">
-                <SalesEntryForm />
-                <CustomerForm />
-            </div>
-        </div>
+        <ReactQueryContext>
+            <h3 className="text-xl font-semibold">Sales Entry</h3>
+            <SalesEntryForm />
+        </ReactQueryContext>
     )
 }
 

@@ -23,7 +23,7 @@ import { useQuery } from 'react-query'
 import { ORIGIN } from '@/utils/origin'
 import { dummyProductData } from '@/utils/default-data'
 
-export default function StockTable() {
+export default function SalesTable() {
     const rerender = React.useReducer(() => ({}), {})[1];
 
     const columns = React.useMemo<ColumnDef<InStock>[]>(() => [
@@ -190,123 +190,127 @@ function Table({ data, columns }: TableProps) {
     })
 
     return (
-        <div className="rounded-xl bg-white w-full p-6 space-y-6">
-            <div className="w-full overflow-x-auto pb-2">
-                <table className='w-full'>
-                    <thead className='bg-gray-100'>
-                        {table.getHeaderGroups().map(headerGroup => (
-                            <tr key={headerGroup.id}>
-                                {headerGroup.headers.map(header => {
-                                    return (
-                                        <th key={header.id} colSpan={header.colSpan} className='p-2 text-start'>
-                                            {header.isPlaceholder ? null : (
-                                                <div className='font-medium'>
-                                                    {flexRender(
-                                                        header.column.columnDef.header,
-                                                        header.getContext()
-                                                    )}
-                                                    {header.column.getCanFilter() ? (
-                                                        <div>
-                                                            <Filter column={header.column} table={table} />
-                                                        </div>
-                                                    ) : null}
-                                                </div>
-                                            )}
-                                        </th>
-                                    )
-                                })}
-                            </tr>
-                        ))}
-                    </thead>
-                    <tbody>
-                        {table.getRowModel().rows.map(row => {
-                            return (
-                                <tr key={row.id}>
-                                    {row.getVisibleCells().map(cell => {
+        <div className="rounded-xl bg-white w-full p-5 space-y-6">
+            <div className="w-full p-2">
+                <div className="w-full overflow-x-auto pb-2">
+                    <table className='w-full'>
+                        <thead className='bg-gray-100'>
+                            {table.getHeaderGroups().map(headerGroup => (
+                                <tr key={headerGroup.id}>
+                                    {headerGroup.headers.map(header => {
                                         return (
-                                            <td key={cell.id} className='p-2 border whitespace-nowrap'>
-                                                {flexRender(
-                                                    cell.column.columnDef.cell,
-                                                    cell.getContext()
+                                            <th key={header.id} colSpan={header.colSpan} className='p-2 text-start'>
+                                                {header.isPlaceholder ? null : (
+                                                    <div className='font-medium'>
+                                                        {flexRender(
+                                                            header.column.columnDef.header,
+                                                            header.getContext()
+                                                        )}
+                                                        {header.column.getCanFilter() ? (
+                                                            <div>
+                                                                <Filter column={header.column} table={table} />
+                                                            </div>
+                                                        ) : null}
+                                                    </div>
                                                 )}
-                                            </td>
+                                            </th>
                                         )
                                     })}
                                 </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-                <button
-                    className="border rounded-lg px-2 py-1 grid place-items-center hover:bg-gray-100"
-                    onClick={() => table.setPageIndex(0)}
-                    disabled={!table.getCanPreviousPage()}
-                >
-                    {'<<'}
-                </button>
-                <button
-                    className="border rounded-lg px-2 py-1 grid place-items-center hover:bg-gray-100"
-                    onClick={() => table.previousPage()}
-                    disabled={!table.getCanPreviousPage()}
-                >
-                    {'<'}
-                </button>
-                <button
-                    className="border rounded-lg px-2 py-1 grid place-items-center hover:bg-gray-100"
-                    onClick={() => table.nextPage()}
-                    disabled={!table.getCanNextPage()}
-                >
-                    {'>'}
-                </button>
-                <button
-                    className="border rounded-lg px-2 py-1 grid place-items-center hover:bg-gray-100"
-                    onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-                    disabled={!table.getCanNextPage()}
-                >
-                    {'>>'}
-                </button>
-                <span className="flex items-center gap-1 px-2">
-                    <div>Page</div>
-                    <strong>
-                        {table.getState().pagination.pageIndex + 1} of{' '}
-                        {table.getPageCount()}
-                    </strong>
-                </span>
-                <span className="flex items-center gap-2 px-2">
-                    | Go to page:
-                    <input
-                        type="number"
-                        defaultValue={table.getState().pagination.pageIndex + 1}
+                            ))}
+                        </thead>
+                        <tbody>
+                            {table.getRowModel().rows.map(row => {
+                                return (
+                                    <tr key={row.id}>
+                                        {row.getVisibleCells().map(cell => {
+                                            return (
+                                                <td key={cell.id} className='p-2 border whitespace-nowrap'>
+                                                    {flexRender(
+                                                        cell.column.columnDef.cell,
+                                                        cell.getContext()
+                                                    )}
+                                                </td>
+                                            )
+                                        })}
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+                <div className="flex items-center gap-2 py-2">
+                    <button
+                        className="border rounded-lg px-2 py-1 grid place-items-center hover:bg-gray-100"
+                        onClick={() => table.setPageIndex(0)}
+                        disabled={!table.getCanPreviousPage()}
+                    >
+                        {'<<'}
+                    </button>
+                    <button
+                        className="border rounded-lg px-2 py-1 grid place-items-center hover:bg-gray-100"
+                        onClick={() => table.previousPage()}
+                        disabled={!table.getCanPreviousPage()}
+                    >
+                        {'<'}
+                    </button>
+                    <button
+                        className="border rounded-lg px-2 py-1 grid place-items-center hover:bg-gray-100"
+                        onClick={() => table.nextPage()}
+                        disabled={!table.getCanNextPage()}
+                    >
+                        {'>'}
+                    </button>
+                    <button
+                        className="border rounded-lg px-2 py-1 grid place-items-center hover:bg-gray-100"
+                        onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                        disabled={!table.getCanNextPage()}
+                    >
+                        {'>>'}
+                    </button>
+                    <span className="flex items-center gap-1 px-2">
+                        <div>Page</div>
+                        <strong>
+                            {table.getState().pagination.pageIndex + 1} of{' '}
+                            {table.getPageCount()}
+                        </strong>
+                    </span>
+                    <span className="flex items-center gap-2 px-2">
+                        | Go to page:
+                        <input
+                            type="number"
+                            defaultValue={table.getState().pagination.pageIndex + 1}
+                            onChange={e => {
+                                const page = e.target.value ? Number(e.target.value) - 1 : 0
+                                table.setPageIndex(page)
+                            }}
+                            className="default !h-9 !w-16 !py-0"
+                        />
+                    </span>
+                    <select
+                        value={table.getState().pagination.pageSize}
                         onChange={e => {
-                            const page = e.target.value ? Number(e.target.value) - 1 : 0
-                            table.setPageIndex(page)
+                            table.setPageSize(Number(e.target.value))
                         }}
-                        className="default !h-9 !w-16 !py-0"
-                    />
-                </span>
-                <select
-                    value={table.getState().pagination.pageSize}
-                    onChange={e => {
-                        table.setPageSize(Number(e.target.value))
-                    }}
-                    className='default !h-9 !w-32 !py-0'
-                >
-                    {[10, 20, 30, 40, 50].map((pageSize, idx) => (
-                        <option key={idx} value={pageSize}>
-                            Show {pageSize}
-                        </option>
-                    ))}
-                </select>
-                <button type="button" onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-                    className="border rounded-lg px-2 py-1 grid place-items-center hover:bg-gray-100"
-                >
-                    Reload
-                </button>
+                        className='default !h-9 !w-32 !py-0'
+                    >
+                        {[10, 20, 30, 40, 50].map((pageSize, idx) => (
+                            <option key={idx} value={pageSize}>
+                                Show {pageSize}
+                            </option>
+                        ))}
+                    </select>
+                    <button type="button" onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                        className="border rounded-lg px-2 py-1 grid place-items-center hover:bg-gray-100"
+                    >
+                        Reload
+                    </button>
+                </div>
+                <div className='py-2'>{table.getRowModel().rows.length} Rows</div>
+                {/* <div className="py-2">
+                <pre>{JSON.stringify(table.getState().pagination, null, 2)}</pre>
+            </div> */}
             </div>
-            <div className='py-2'>{table.getRowModel().rows.length} Rows</div>
-            {/* <div className="py-2"><pre>{JSON.stringify(table.getState().pagination, null, 2)}</pre></div> */}
         </div>
     )
 }

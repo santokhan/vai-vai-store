@@ -7725,11 +7725,13 @@ export namespace Prisma {
   export type SalesEntryAvgAggregateOutputType = {
     price: number | null
     discount: number | null
+    due: number | null
   }
 
   export type SalesEntrySumAggregateOutputType = {
     price: number | null
     discount: number | null
+    due: number | null
   }
 
   export type SalesEntryMinAggregateOutputType = {
@@ -7738,6 +7740,8 @@ export namespace Prisma {
     IMEI: string | null
     price: number | null
     discount: number | null
+    due: number | null
+    dueDate: Date | null
     sellerId: string | null
     customerId: string | null
     createdAt: Date | null
@@ -7749,6 +7753,8 @@ export namespace Prisma {
     IMEI: string | null
     price: number | null
     discount: number | null
+    due: number | null
+    dueDate: Date | null
     sellerId: string | null
     customerId: string | null
     createdAt: Date | null
@@ -7760,6 +7766,8 @@ export namespace Prisma {
     IMEI: number
     price: number
     discount: number
+    due: number
+    dueDate: number
     sellerId: number
     customerId: number
     createdAt: number
@@ -7770,11 +7778,13 @@ export namespace Prisma {
   export type SalesEntryAvgAggregateInputType = {
     price?: true
     discount?: true
+    due?: true
   }
 
   export type SalesEntrySumAggregateInputType = {
     price?: true
     discount?: true
+    due?: true
   }
 
   export type SalesEntryMinAggregateInputType = {
@@ -7783,6 +7793,8 @@ export namespace Prisma {
     IMEI?: true
     price?: true
     discount?: true
+    due?: true
+    dueDate?: true
     sellerId?: true
     customerId?: true
     createdAt?: true
@@ -7794,6 +7806,8 @@ export namespace Prisma {
     IMEI?: true
     price?: true
     discount?: true
+    due?: true
+    dueDate?: true
     sellerId?: true
     customerId?: true
     createdAt?: true
@@ -7805,6 +7819,8 @@ export namespace Prisma {
     IMEI?: true
     price?: true
     discount?: true
+    due?: true
+    dueDate?: true
     sellerId?: true
     customerId?: true
     createdAt?: true
@@ -7903,6 +7919,8 @@ export namespace Prisma {
     IMEI: string
     price: number
     discount: number
+    due: number
+    dueDate: Date | null
     sellerId: string
     customerId: string
     createdAt: Date | null
@@ -7933,10 +7951,12 @@ export namespace Prisma {
     IMEI?: boolean
     price?: boolean
     discount?: boolean
+    due?: boolean
+    dueDate?: boolean
     sellerId?: boolean
     customerId?: boolean
     createdAt?: boolean
-    instock?: boolean | InStockDefaultArgs<ExtArgs>
+    InStock?: boolean | InStockDefaultArgs<ExtArgs>
     Seller?: boolean | SellerDefaultArgs<ExtArgs>
     customer?: boolean | CustomerDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["salesEntry"]>
@@ -7947,13 +7967,15 @@ export namespace Prisma {
     IMEI?: boolean
     price?: boolean
     discount?: boolean
+    due?: boolean
+    dueDate?: boolean
     sellerId?: boolean
     customerId?: boolean
     createdAt?: boolean
   }
 
   export type SalesEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    instock?: boolean | InStockDefaultArgs<ExtArgs>
+    InStock?: boolean | InStockDefaultArgs<ExtArgs>
     Seller?: boolean | SellerDefaultArgs<ExtArgs>
     customer?: boolean | CustomerDefaultArgs<ExtArgs>
   }
@@ -7962,7 +7984,7 @@ export namespace Prisma {
   export type $SalesEntryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "SalesEntry"
     objects: {
-      instock: Prisma.$InStockPayload<ExtArgs>
+      InStock: Prisma.$InStockPayload<ExtArgs>
       Seller: Prisma.$SellerPayload<ExtArgs>
       customer: Prisma.$CustomerPayload<ExtArgs>
     }
@@ -7972,6 +7994,8 @@ export namespace Prisma {
       IMEI: string
       price: number
       discount: number
+      due: number
+      dueDate: Date | null
       sellerId: string
       customerId: string
       createdAt: Date | null
@@ -8367,7 +8391,7 @@ export namespace Prisma {
   export interface Prisma__SalesEntryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    instock<T extends InStockDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InStockDefaultArgs<ExtArgs>>): Prisma__InStockClient<$Result.GetResult<Prisma.$InStockPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    InStock<T extends InStockDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InStockDefaultArgs<ExtArgs>>): Prisma__InStockClient<$Result.GetResult<Prisma.$InStockPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     Seller<T extends SellerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SellerDefaultArgs<ExtArgs>>): Prisma__SellerClient<$Result.GetResult<Prisma.$SellerPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
@@ -8406,6 +8430,8 @@ export namespace Prisma {
     readonly IMEI: FieldRef<"SalesEntry", 'String'>
     readonly price: FieldRef<"SalesEntry", 'Int'>
     readonly discount: FieldRef<"SalesEntry", 'Int'>
+    readonly due: FieldRef<"SalesEntry", 'Int'>
+    readonly dueDate: FieldRef<"SalesEntry", 'DateTime'>
     readonly sellerId: FieldRef<"SalesEntry", 'String'>
     readonly customerId: FieldRef<"SalesEntry", 'String'>
     readonly createdAt: FieldRef<"SalesEntry", 'DateTime'>
@@ -9839,6 +9865,8 @@ export namespace Prisma {
     IMEI: 'IMEI',
     price: 'price',
     discount: 'discount',
+    due: 'due',
+    dueDate: 'dueDate',
     sellerId: 'sellerId',
     customerId: 'customerId',
     createdAt: 'createdAt'
@@ -10309,10 +10337,12 @@ export namespace Prisma {
     IMEI?: StringFilter<"SalesEntry"> | string
     price?: IntFilter<"SalesEntry"> | number
     discount?: IntFilter<"SalesEntry"> | number
+    due?: IntFilter<"SalesEntry"> | number
+    dueDate?: DateTimeNullableFilter<"SalesEntry"> | Date | string | null
     sellerId?: StringFilter<"SalesEntry"> | string
     customerId?: StringFilter<"SalesEntry"> | string
     createdAt?: DateTimeNullableFilter<"SalesEntry"> | Date | string | null
-    instock?: XOR<InStockRelationFilter, InStockWhereInput>
+    InStock?: XOR<InStockRelationFilter, InStockWhereInput>
     Seller?: XOR<SellerRelationFilter, SellerWhereInput>
     customer?: XOR<CustomerRelationFilter, CustomerWhereInput>
   }
@@ -10323,10 +10353,12 @@ export namespace Prisma {
     IMEI?: SortOrder
     price?: SortOrder
     discount?: SortOrder
+    due?: SortOrder
+    dueDate?: SortOrder
     sellerId?: SortOrder
     customerId?: SortOrder
     createdAt?: SortOrder
-    instock?: InStockOrderByWithRelationInput
+    InStock?: InStockOrderByWithRelationInput
     Seller?: SellerOrderByWithRelationInput
     customer?: CustomerOrderByWithRelationInput
   }
@@ -10340,10 +10372,12 @@ export namespace Prisma {
     instockId?: StringFilter<"SalesEntry"> | string
     price?: IntFilter<"SalesEntry"> | number
     discount?: IntFilter<"SalesEntry"> | number
+    due?: IntFilter<"SalesEntry"> | number
+    dueDate?: DateTimeNullableFilter<"SalesEntry"> | Date | string | null
     sellerId?: StringFilter<"SalesEntry"> | string
     customerId?: StringFilter<"SalesEntry"> | string
     createdAt?: DateTimeNullableFilter<"SalesEntry"> | Date | string | null
-    instock?: XOR<InStockRelationFilter, InStockWhereInput>
+    InStock?: XOR<InStockRelationFilter, InStockWhereInput>
     Seller?: XOR<SellerRelationFilter, SellerWhereInput>
     customer?: XOR<CustomerRelationFilter, CustomerWhereInput>
   }, "id" | "IMEI">
@@ -10354,6 +10388,8 @@ export namespace Prisma {
     IMEI?: SortOrder
     price?: SortOrder
     discount?: SortOrder
+    due?: SortOrder
+    dueDate?: SortOrder
     sellerId?: SortOrder
     customerId?: SortOrder
     createdAt?: SortOrder
@@ -10373,6 +10409,8 @@ export namespace Prisma {
     IMEI?: StringWithAggregatesFilter<"SalesEntry"> | string
     price?: IntWithAggregatesFilter<"SalesEntry"> | number
     discount?: IntWithAggregatesFilter<"SalesEntry"> | number
+    due?: IntWithAggregatesFilter<"SalesEntry"> | number
+    dueDate?: DateTimeNullableWithAggregatesFilter<"SalesEntry"> | Date | string | null
     sellerId?: StringWithAggregatesFilter<"SalesEntry"> | string
     customerId?: StringWithAggregatesFilter<"SalesEntry"> | string
     createdAt?: DateTimeNullableWithAggregatesFilter<"SalesEntry"> | Date | string | null
@@ -10680,7 +10718,7 @@ export namespace Prisma {
     model: ModelCreateNestedOneWithoutInStockInput
     brand: BrandCreateNestedOneWithoutInStockInput
     productType: ProductTypeCreateNestedOneWithoutInStockInput
-    SalesEntry?: SalesEntryCreateNestedManyWithoutInstockInput
+    SalesEntry?: SalesEntryCreateNestedManyWithoutInStockInput
   }
 
   export type InStockUncheckedCreateInput = {
@@ -10697,7 +10735,7 @@ export namespace Prisma {
     ram?: string | null
     rom?: string | null
     createdAt?: Date | string | null
-    SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutInstockInput
+    SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutInStockInput
   }
 
   export type InStockUpdateInput = {
@@ -10713,7 +10751,7 @@ export namespace Prisma {
     model?: ModelUpdateOneRequiredWithoutInStockNestedInput
     brand?: BrandUpdateOneRequiredWithoutInStockNestedInput
     productType?: ProductTypeUpdateOneRequiredWithoutInStockNestedInput
-    SalesEntry?: SalesEntryUpdateManyWithoutInstockNestedInput
+    SalesEntry?: SalesEntryUpdateManyWithoutInStockNestedInput
   }
 
   export type InStockUncheckedUpdateInput = {
@@ -10729,7 +10767,7 @@ export namespace Prisma {
     ram?: NullableStringFieldUpdateOperationsInput | string | null
     rom?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    SalesEntry?: SalesEntryUncheckedUpdateManyWithoutInstockNestedInput
+    SalesEntry?: SalesEntryUncheckedUpdateManyWithoutInStockNestedInput
   }
 
   export type InStockCreateManyInput = {
@@ -10780,8 +10818,10 @@ export namespace Prisma {
     IMEI: string
     price: number
     discount: number
+    due: number
+    dueDate?: Date | string | null
     createdAt?: Date | string | null
-    instock: InStockCreateNestedOneWithoutSalesEntryInput
+    InStock: InStockCreateNestedOneWithoutSalesEntryInput
     Seller: SellerCreateNestedOneWithoutSalesEntryInput
     customer: CustomerCreateNestedOneWithoutSalesEntryInput
   }
@@ -10792,6 +10832,8 @@ export namespace Prisma {
     IMEI: string
     price: number
     discount: number
+    due: number
+    dueDate?: Date | string | null
     sellerId: string
     customerId: string
     createdAt?: Date | string | null
@@ -10801,8 +10843,10 @@ export namespace Prisma {
     IMEI?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    instock?: InStockUpdateOneRequiredWithoutSalesEntryNestedInput
+    InStock?: InStockUpdateOneRequiredWithoutSalesEntryNestedInput
     Seller?: SellerUpdateOneRequiredWithoutSalesEntryNestedInput
     customer?: CustomerUpdateOneRequiredWithoutSalesEntryNestedInput
   }
@@ -10812,6 +10856,8 @@ export namespace Prisma {
     IMEI?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sellerId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10823,6 +10869,8 @@ export namespace Prisma {
     IMEI: string
     price: number
     discount: number
+    due: number
+    dueDate?: Date | string | null
     sellerId: string
     customerId: string
     createdAt?: Date | string | null
@@ -10832,6 +10880,8 @@ export namespace Prisma {
     IMEI?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
@@ -10840,6 +10890,8 @@ export namespace Prisma {
     IMEI?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sellerId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -11269,6 +11321,8 @@ export namespace Prisma {
     IMEI?: SortOrder
     price?: SortOrder
     discount?: SortOrder
+    due?: SortOrder
+    dueDate?: SortOrder
     sellerId?: SortOrder
     customerId?: SortOrder
     createdAt?: SortOrder
@@ -11277,6 +11331,7 @@ export namespace Prisma {
   export type SalesEntryAvgOrderByAggregateInput = {
     price?: SortOrder
     discount?: SortOrder
+    due?: SortOrder
   }
 
   export type SalesEntryMaxOrderByAggregateInput = {
@@ -11285,6 +11340,8 @@ export namespace Prisma {
     IMEI?: SortOrder
     price?: SortOrder
     discount?: SortOrder
+    due?: SortOrder
+    dueDate?: SortOrder
     sellerId?: SortOrder
     customerId?: SortOrder
     createdAt?: SortOrder
@@ -11296,6 +11353,8 @@ export namespace Prisma {
     IMEI?: SortOrder
     price?: SortOrder
     discount?: SortOrder
+    due?: SortOrder
+    dueDate?: SortOrder
     sellerId?: SortOrder
     customerId?: SortOrder
     createdAt?: SortOrder
@@ -11304,6 +11363,7 @@ export namespace Prisma {
   export type SalesEntrySumOrderByAggregateInput = {
     price?: SortOrder
     discount?: SortOrder
+    due?: SortOrder
   }
 
   export type CustomerCountOrderByAggregateInput = {
@@ -11637,17 +11697,17 @@ export namespace Prisma {
     connect?: ProductTypeWhereUniqueInput
   }
 
-  export type SalesEntryCreateNestedManyWithoutInstockInput = {
-    create?: XOR<SalesEntryCreateWithoutInstockInput, SalesEntryUncheckedCreateWithoutInstockInput> | SalesEntryCreateWithoutInstockInput[] | SalesEntryUncheckedCreateWithoutInstockInput[]
-    connectOrCreate?: SalesEntryCreateOrConnectWithoutInstockInput | SalesEntryCreateOrConnectWithoutInstockInput[]
-    createMany?: SalesEntryCreateManyInstockInputEnvelope
+  export type SalesEntryCreateNestedManyWithoutInStockInput = {
+    create?: XOR<SalesEntryCreateWithoutInStockInput, SalesEntryUncheckedCreateWithoutInStockInput> | SalesEntryCreateWithoutInStockInput[] | SalesEntryUncheckedCreateWithoutInStockInput[]
+    connectOrCreate?: SalesEntryCreateOrConnectWithoutInStockInput | SalesEntryCreateOrConnectWithoutInStockInput[]
+    createMany?: SalesEntryCreateManyInStockInputEnvelope
     connect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
   }
 
-  export type SalesEntryUncheckedCreateNestedManyWithoutInstockInput = {
-    create?: XOR<SalesEntryCreateWithoutInstockInput, SalesEntryUncheckedCreateWithoutInstockInput> | SalesEntryCreateWithoutInstockInput[] | SalesEntryUncheckedCreateWithoutInstockInput[]
-    connectOrCreate?: SalesEntryCreateOrConnectWithoutInstockInput | SalesEntryCreateOrConnectWithoutInstockInput[]
-    createMany?: SalesEntryCreateManyInstockInputEnvelope
+  export type SalesEntryUncheckedCreateNestedManyWithoutInStockInput = {
+    create?: XOR<SalesEntryCreateWithoutInStockInput, SalesEntryUncheckedCreateWithoutInStockInput> | SalesEntryCreateWithoutInStockInput[] | SalesEntryUncheckedCreateWithoutInStockInput[]
+    connectOrCreate?: SalesEntryCreateOrConnectWithoutInStockInput | SalesEntryCreateOrConnectWithoutInStockInput[]
+    createMany?: SalesEntryCreateManyInStockInputEnvelope
     connect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
   }
 
@@ -11692,31 +11752,31 @@ export namespace Prisma {
     update?: XOR<XOR<ProductTypeUpdateToOneWithWhereWithoutInStockInput, ProductTypeUpdateWithoutInStockInput>, ProductTypeUncheckedUpdateWithoutInStockInput>
   }
 
-  export type SalesEntryUpdateManyWithoutInstockNestedInput = {
-    create?: XOR<SalesEntryCreateWithoutInstockInput, SalesEntryUncheckedCreateWithoutInstockInput> | SalesEntryCreateWithoutInstockInput[] | SalesEntryUncheckedCreateWithoutInstockInput[]
-    connectOrCreate?: SalesEntryCreateOrConnectWithoutInstockInput | SalesEntryCreateOrConnectWithoutInstockInput[]
-    upsert?: SalesEntryUpsertWithWhereUniqueWithoutInstockInput | SalesEntryUpsertWithWhereUniqueWithoutInstockInput[]
-    createMany?: SalesEntryCreateManyInstockInputEnvelope
+  export type SalesEntryUpdateManyWithoutInStockNestedInput = {
+    create?: XOR<SalesEntryCreateWithoutInStockInput, SalesEntryUncheckedCreateWithoutInStockInput> | SalesEntryCreateWithoutInStockInput[] | SalesEntryUncheckedCreateWithoutInStockInput[]
+    connectOrCreate?: SalesEntryCreateOrConnectWithoutInStockInput | SalesEntryCreateOrConnectWithoutInStockInput[]
+    upsert?: SalesEntryUpsertWithWhereUniqueWithoutInStockInput | SalesEntryUpsertWithWhereUniqueWithoutInStockInput[]
+    createMany?: SalesEntryCreateManyInStockInputEnvelope
     set?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
     disconnect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
     delete?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
     connect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
-    update?: SalesEntryUpdateWithWhereUniqueWithoutInstockInput | SalesEntryUpdateWithWhereUniqueWithoutInstockInput[]
-    updateMany?: SalesEntryUpdateManyWithWhereWithoutInstockInput | SalesEntryUpdateManyWithWhereWithoutInstockInput[]
+    update?: SalesEntryUpdateWithWhereUniqueWithoutInStockInput | SalesEntryUpdateWithWhereUniqueWithoutInStockInput[]
+    updateMany?: SalesEntryUpdateManyWithWhereWithoutInStockInput | SalesEntryUpdateManyWithWhereWithoutInStockInput[]
     deleteMany?: SalesEntryScalarWhereInput | SalesEntryScalarWhereInput[]
   }
 
-  export type SalesEntryUncheckedUpdateManyWithoutInstockNestedInput = {
-    create?: XOR<SalesEntryCreateWithoutInstockInput, SalesEntryUncheckedCreateWithoutInstockInput> | SalesEntryCreateWithoutInstockInput[] | SalesEntryUncheckedCreateWithoutInstockInput[]
-    connectOrCreate?: SalesEntryCreateOrConnectWithoutInstockInput | SalesEntryCreateOrConnectWithoutInstockInput[]
-    upsert?: SalesEntryUpsertWithWhereUniqueWithoutInstockInput | SalesEntryUpsertWithWhereUniqueWithoutInstockInput[]
-    createMany?: SalesEntryCreateManyInstockInputEnvelope
+  export type SalesEntryUncheckedUpdateManyWithoutInStockNestedInput = {
+    create?: XOR<SalesEntryCreateWithoutInStockInput, SalesEntryUncheckedCreateWithoutInStockInput> | SalesEntryCreateWithoutInStockInput[] | SalesEntryUncheckedCreateWithoutInStockInput[]
+    connectOrCreate?: SalesEntryCreateOrConnectWithoutInStockInput | SalesEntryCreateOrConnectWithoutInStockInput[]
+    upsert?: SalesEntryUpsertWithWhereUniqueWithoutInStockInput | SalesEntryUpsertWithWhereUniqueWithoutInStockInput[]
+    createMany?: SalesEntryCreateManyInStockInputEnvelope
     set?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
     disconnect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
     delete?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
     connect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
-    update?: SalesEntryUpdateWithWhereUniqueWithoutInstockInput | SalesEntryUpdateWithWhereUniqueWithoutInstockInput[]
-    updateMany?: SalesEntryUpdateManyWithWhereWithoutInstockInput | SalesEntryUpdateManyWithWhereWithoutInstockInput[]
+    update?: SalesEntryUpdateWithWhereUniqueWithoutInStockInput | SalesEntryUpdateWithWhereUniqueWithoutInStockInput[]
+    updateMany?: SalesEntryUpdateManyWithWhereWithoutInStockInput | SalesEntryUpdateManyWithWhereWithoutInStockInput[]
     deleteMany?: SalesEntryScalarWhereInput | SalesEntryScalarWhereInput[]
   }
 
@@ -11963,8 +12023,10 @@ export namespace Prisma {
     IMEI: string
     price: number
     discount: number
+    due: number
+    dueDate?: Date | string | null
     createdAt?: Date | string | null
-    instock: InStockCreateNestedOneWithoutSalesEntryInput
+    InStock: InStockCreateNestedOneWithoutSalesEntryInput
     customer: CustomerCreateNestedOneWithoutSalesEntryInput
   }
 
@@ -11974,6 +12036,8 @@ export namespace Prisma {
     IMEI: string
     price: number
     discount: number
+    due: number
+    dueDate?: Date | string | null
     customerId: string
     createdAt?: Date | string | null
   }
@@ -12012,6 +12076,8 @@ export namespace Prisma {
     IMEI?: StringFilter<"SalesEntry"> | string
     price?: IntFilter<"SalesEntry"> | number
     discount?: IntFilter<"SalesEntry"> | number
+    due?: IntFilter<"SalesEntry"> | number
+    dueDate?: DateTimeNullableFilter<"SalesEntry"> | Date | string | null
     sellerId?: StringFilter<"SalesEntry"> | string
     customerId?: StringFilter<"SalesEntry"> | string
     createdAt?: DateTimeNullableFilter<"SalesEntry"> | Date | string | null
@@ -12055,7 +12121,7 @@ export namespace Prisma {
     createdAt?: Date | string | null
     model: ModelCreateNestedOneWithoutInStockInput
     brand: BrandCreateNestedOneWithoutInStockInput
-    SalesEntry?: SalesEntryCreateNestedManyWithoutInstockInput
+    SalesEntry?: SalesEntryCreateNestedManyWithoutInStockInput
   }
 
   export type InStockUncheckedCreateWithoutProductTypeInput = {
@@ -12071,7 +12137,7 @@ export namespace Prisma {
     ram?: string | null
     rom?: string | null
     createdAt?: Date | string | null
-    SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutInstockInput
+    SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutInStockInput
   }
 
   export type InStockCreateOrConnectWithoutProductTypeInput = {
@@ -12199,7 +12265,7 @@ export namespace Prisma {
     createdAt?: Date | string | null
     model: ModelCreateNestedOneWithoutInStockInput
     productType: ProductTypeCreateNestedOneWithoutInStockInput
-    SalesEntry?: SalesEntryCreateNestedManyWithoutInstockInput
+    SalesEntry?: SalesEntryCreateNestedManyWithoutInStockInput
   }
 
   export type InStockUncheckedCreateWithoutBrandInput = {
@@ -12215,7 +12281,7 @@ export namespace Prisma {
     ram?: string | null
     rom?: string | null
     createdAt?: Date | string | null
-    SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutInstockInput
+    SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutInStockInput
   }
 
   export type InStockCreateOrConnectWithoutBrandInput = {
@@ -12326,7 +12392,7 @@ export namespace Prisma {
     createdAt?: Date | string | null
     brand: BrandCreateNestedOneWithoutInStockInput
     productType: ProductTypeCreateNestedOneWithoutInStockInput
-    SalesEntry?: SalesEntryCreateNestedManyWithoutInstockInput
+    SalesEntry?: SalesEntryCreateNestedManyWithoutInStockInput
   }
 
   export type InStockUncheckedCreateWithoutModelInput = {
@@ -12342,7 +12408,7 @@ export namespace Prisma {
     ram?: string | null
     rom?: string | null
     createdAt?: Date | string | null
-    SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutInstockInput
+    SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutInStockInput
   }
 
   export type InStockCreateOrConnectWithoutModelInput = {
@@ -12454,33 +12520,37 @@ export namespace Prisma {
     create: XOR<ProductTypeCreateWithoutInStockInput, ProductTypeUncheckedCreateWithoutInStockInput>
   }
 
-  export type SalesEntryCreateWithoutInstockInput = {
+  export type SalesEntryCreateWithoutInStockInput = {
     id?: string
     IMEI: string
     price: number
     discount: number
+    due: number
+    dueDate?: Date | string | null
     createdAt?: Date | string | null
     Seller: SellerCreateNestedOneWithoutSalesEntryInput
     customer: CustomerCreateNestedOneWithoutSalesEntryInput
   }
 
-  export type SalesEntryUncheckedCreateWithoutInstockInput = {
+  export type SalesEntryUncheckedCreateWithoutInStockInput = {
     id?: string
     IMEI: string
     price: number
     discount: number
+    due: number
+    dueDate?: Date | string | null
     sellerId: string
     customerId: string
     createdAt?: Date | string | null
   }
 
-  export type SalesEntryCreateOrConnectWithoutInstockInput = {
+  export type SalesEntryCreateOrConnectWithoutInStockInput = {
     where: SalesEntryWhereUniqueInput
-    create: XOR<SalesEntryCreateWithoutInstockInput, SalesEntryUncheckedCreateWithoutInstockInput>
+    create: XOR<SalesEntryCreateWithoutInStockInput, SalesEntryUncheckedCreateWithoutInStockInput>
   }
 
-  export type SalesEntryCreateManyInstockInputEnvelope = {
-    data: SalesEntryCreateManyInstockInput | SalesEntryCreateManyInstockInput[]
+  export type SalesEntryCreateManyInStockInputEnvelope = {
+    data: SalesEntryCreateManyInStockInput | SalesEntryCreateManyInStockInput[]
   }
 
   export type ModelUpsertWithoutInStockInput = {
@@ -12554,20 +12624,20 @@ export namespace Prisma {
     Brand?: BrandUncheckedUpdateManyWithoutProductTypeNestedInput
   }
 
-  export type SalesEntryUpsertWithWhereUniqueWithoutInstockInput = {
+  export type SalesEntryUpsertWithWhereUniqueWithoutInStockInput = {
     where: SalesEntryWhereUniqueInput
-    update: XOR<SalesEntryUpdateWithoutInstockInput, SalesEntryUncheckedUpdateWithoutInstockInput>
-    create: XOR<SalesEntryCreateWithoutInstockInput, SalesEntryUncheckedCreateWithoutInstockInput>
+    update: XOR<SalesEntryUpdateWithoutInStockInput, SalesEntryUncheckedUpdateWithoutInStockInput>
+    create: XOR<SalesEntryCreateWithoutInStockInput, SalesEntryUncheckedCreateWithoutInStockInput>
   }
 
-  export type SalesEntryUpdateWithWhereUniqueWithoutInstockInput = {
+  export type SalesEntryUpdateWithWhereUniqueWithoutInStockInput = {
     where: SalesEntryWhereUniqueInput
-    data: XOR<SalesEntryUpdateWithoutInstockInput, SalesEntryUncheckedUpdateWithoutInstockInput>
+    data: XOR<SalesEntryUpdateWithoutInStockInput, SalesEntryUncheckedUpdateWithoutInStockInput>
   }
 
-  export type SalesEntryUpdateManyWithWhereWithoutInstockInput = {
+  export type SalesEntryUpdateManyWithWhereWithoutInStockInput = {
     where: SalesEntryScalarWhereInput
-    data: XOR<SalesEntryUpdateManyMutationInput, SalesEntryUncheckedUpdateManyWithoutInstockInput>
+    data: XOR<SalesEntryUpdateManyMutationInput, SalesEntryUncheckedUpdateManyWithoutInStockInput>
   }
 
   export type InStockCreateWithoutSalesEntryInput = {
@@ -12737,8 +12807,10 @@ export namespace Prisma {
     IMEI: string
     price: number
     discount: number
+    due: number
+    dueDate?: Date | string | null
     createdAt?: Date | string | null
-    instock: InStockCreateNestedOneWithoutSalesEntryInput
+    InStock: InStockCreateNestedOneWithoutSalesEntryInput
     Seller: SellerCreateNestedOneWithoutSalesEntryInput
   }
 
@@ -12748,6 +12820,8 @@ export namespace Prisma {
     IMEI: string
     price: number
     discount: number
+    due: number
+    dueDate?: Date | string | null
     sellerId: string
     createdAt?: Date | string | null
   }
@@ -12783,6 +12857,8 @@ export namespace Prisma {
     IMEI: string
     price: number
     discount: number
+    due: number
+    dueDate?: Date | string | null
     customerId: string
     createdAt?: Date | string | null
   }
@@ -12791,8 +12867,10 @@ export namespace Prisma {
     IMEI?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    instock?: InStockUpdateOneRequiredWithoutSalesEntryNestedInput
+    InStock?: InStockUpdateOneRequiredWithoutSalesEntryNestedInput
     customer?: CustomerUpdateOneRequiredWithoutSalesEntryNestedInput
   }
 
@@ -12801,6 +12879,8 @@ export namespace Prisma {
     IMEI?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     customerId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -12810,6 +12890,8 @@ export namespace Prisma {
     IMEI?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     customerId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -12866,7 +12948,7 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     model?: ModelUpdateOneRequiredWithoutInStockNestedInput
     brand?: BrandUpdateOneRequiredWithoutInStockNestedInput
-    SalesEntry?: SalesEntryUpdateManyWithoutInstockNestedInput
+    SalesEntry?: SalesEntryUpdateManyWithoutInStockNestedInput
   }
 
   export type InStockUncheckedUpdateWithoutProductTypeInput = {
@@ -12881,7 +12963,7 @@ export namespace Prisma {
     ram?: NullableStringFieldUpdateOperationsInput | string | null
     rom?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    SalesEntry?: SalesEntryUncheckedUpdateManyWithoutInstockNestedInput
+    SalesEntry?: SalesEntryUncheckedUpdateManyWithoutInStockNestedInput
   }
 
   export type InStockUncheckedUpdateManyWithoutProductTypeInput = {
@@ -12948,7 +13030,7 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     model?: ModelUpdateOneRequiredWithoutInStockNestedInput
     productType?: ProductTypeUpdateOneRequiredWithoutInStockNestedInput
-    SalesEntry?: SalesEntryUpdateManyWithoutInstockNestedInput
+    SalesEntry?: SalesEntryUpdateManyWithoutInStockNestedInput
   }
 
   export type InStockUncheckedUpdateWithoutBrandInput = {
@@ -12963,7 +13045,7 @@ export namespace Prisma {
     ram?: NullableStringFieldUpdateOperationsInput | string | null
     rom?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    SalesEntry?: SalesEntryUncheckedUpdateManyWithoutInstockNestedInput
+    SalesEntry?: SalesEntryUncheckedUpdateManyWithoutInStockNestedInput
   }
 
   export type InStockUncheckedUpdateManyWithoutBrandInput = {
@@ -13007,7 +13089,7 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     brand?: BrandUpdateOneRequiredWithoutInStockNestedInput
     productType?: ProductTypeUpdateOneRequiredWithoutInStockNestedInput
-    SalesEntry?: SalesEntryUpdateManyWithoutInstockNestedInput
+    SalesEntry?: SalesEntryUpdateManyWithoutInStockNestedInput
   }
 
   export type InStockUncheckedUpdateWithoutModelInput = {
@@ -13022,7 +13104,7 @@ export namespace Prisma {
     ram?: NullableStringFieldUpdateOperationsInput | string | null
     rom?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    SalesEntry?: SalesEntryUncheckedUpdateManyWithoutInstockNestedInput
+    SalesEntry?: SalesEntryUncheckedUpdateManyWithoutInStockNestedInput
   }
 
   export type InStockUncheckedUpdateManyWithoutModelInput = {
@@ -13039,38 +13121,46 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type SalesEntryCreateManyInstockInput = {
+  export type SalesEntryCreateManyInStockInput = {
     id?: string
     IMEI: string
     price: number
     discount: number
+    due: number
+    dueDate?: Date | string | null
     sellerId: string
     customerId: string
     createdAt?: Date | string | null
   }
 
-  export type SalesEntryUpdateWithoutInstockInput = {
+  export type SalesEntryUpdateWithoutInStockInput = {
     IMEI?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Seller?: SellerUpdateOneRequiredWithoutSalesEntryNestedInput
     customer?: CustomerUpdateOneRequiredWithoutSalesEntryNestedInput
   }
 
-  export type SalesEntryUncheckedUpdateWithoutInstockInput = {
+  export type SalesEntryUncheckedUpdateWithoutInStockInput = {
     IMEI?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sellerId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type SalesEntryUncheckedUpdateManyWithoutInstockInput = {
+  export type SalesEntryUncheckedUpdateManyWithoutInStockInput = {
     IMEI?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sellerId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -13082,6 +13172,8 @@ export namespace Prisma {
     IMEI: string
     price: number
     discount: number
+    due: number
+    dueDate?: Date | string | null
     sellerId: string
     createdAt?: Date | string | null
   }
@@ -13090,8 +13182,10 @@ export namespace Prisma {
     IMEI?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    instock?: InStockUpdateOneRequiredWithoutSalesEntryNestedInput
+    InStock?: InStockUpdateOneRequiredWithoutSalesEntryNestedInput
     Seller?: SellerUpdateOneRequiredWithoutSalesEntryNestedInput
   }
 
@@ -13100,6 +13194,8 @@ export namespace Prisma {
     IMEI?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sellerId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -13109,6 +13205,8 @@ export namespace Prisma {
     IMEI?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sellerId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }

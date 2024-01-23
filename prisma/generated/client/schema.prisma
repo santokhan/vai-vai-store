@@ -75,11 +75,13 @@ model InStock {
 // Part of SalesEntry
 model SalesEntry {
     id         String    @id @default(auto()) @map("_id") @db.ObjectId
-    instock    InStock   @relation(fields: [instockId], references: [id])
+    InStock    InStock   @relation(fields: [instockId], references: [id])
     instockId  String    @db.ObjectId
     IMEI       String    @unique
     price      Int
     discount   Int
+    due        Int
+    dueDate    DateTime? @default(now())
     Seller     Seller    @relation(fields: [sellerId], references: [id])
     sellerId   String    @db.ObjectId
     customer   Customer  @relation(fields: [customerId], references: [id])

@@ -3,14 +3,16 @@
 @layer base {
 
   label.default {
-    @apply block mb-2 text-sm font-medium
+    @apply block mb-2 text-sm font-medium capitalize
   }
 
   select.default {
-    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 capitalize focus:outline-none focus:border-gray-300 focus:ring-1 focus:ring-gray-800
+    @apply capitalize
   }
 
-  input.default {
+  input.default,
+  select.default,
+  textarea.default {
     @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 focus:outline-none focus:border-gray-300 focus:ring-1 focus:ring-gray-800
   }
 

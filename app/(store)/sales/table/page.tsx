@@ -1,8 +1,12 @@
 'use client';
 
-export default function Home() {
+import SalesTable from "@/block/sales/table/main";
+import ReactQueryContext from "@/context/react-query-context";
+
+export default function SalesTablePage() {
     return (
-        <div className="max-w-3xl mx-auto">
-        </div>
+        <ReactQueryContext>
+            <SalesTable />
+        </ReactQueryContext>
     )
 }

@@ -155,6 +155,8 @@ exports.Prisma.SalesEntryScalarFieldEnum = {
   IMEI: 'IMEI',
   price: 'price',
   discount: 'discount',
+  due: 'due',
+  dueDate: 'dueDate',
   sellerId: 'sellerId',
   customerId: 'customerId',
   createdAt: 'createdAt'

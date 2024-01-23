@@ -81,3 +81,43 @@ export const dummyProductData: StockIncludes[] = [
         }
     },
 ];
+
+export type SearchProductCardType = InStock & { model: Model };
+
+export const dummyStockData: SearchProductCardType = {
+    "id": "65aeb95e8f2407fbbc85ff3e",
+    "name": "Rifat Santo",
+    "IMEI": "545615615115615",
+    "modelId": "65a9abe7150c3b84a92459f4",
+    "brandId": "65a91d6763b1f46b14f99d1f",
+    "productTypeId": "65a8c556cd9eb4535ebeb167",
+    "purchasePrice": 19,
+    "price": 39,
+    "sold": false,
+    "color": "white",
+    "ram": "4",
+    "rom": "64",
+    "createdAt": new Date("2024-01-22T18:52:14.381Z"),
+    "model": {
+        "id": "65a9abe7150c3b84a92459f4",
+        "model": "galaxy j7",
+        "brandId": "65a91d6763b1f46b14f99d1f",
+        "createdAt": null
+    }
+}
+
+export const initialCustomer = {
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+}
+
+export const InitialSalesEntry = {
+    instockId: "",
+    IMEI: "",
+    price: 0,
+    discount: 0,
+    sellerId: "",
+    due: 0
+}

@@ -1,125 +1,148 @@
-import { FormTab } from '@/block/form/sales/entry';
-import React from 'react';
-import SelectOption from '../select-option/select-option';
+'use client'
 
-const SalesEntryForm: React.FC = () => {
-    return (
-        <div className='space-y-6'>
-            <div className="flex flex-wrap lg:flex-nowrap">
-                <div className='w-full'>
-                    <div className="flex flex-wrap lg:flex-nowrap gap-4">
-                        <SelectOption
-                            labelName='Product Type'
-                            name="productType"
-                            options={[
-                                'samsung',
-                                'oppo',
-                                'vivo',
-                            ]}
-                            onChange={() => { }}
-                            defaultOptionName='Choose category'
-                            value=''
-                        />
-                    </div>
-                </div>
-            </div>
+import SearchProductCard from "@/components/card/search-product-card";
+import CustomerForm from "@/components/form/customer/customer";
+import SearchModelForm from "@/components/form/search/product-search";
+import { PRINT } from "@/components/print";
+import ReactQueryContext from "@/context/react-query-context";
+import { Customer, InStock, SalesEntry, Seller } from "@/prisma/generated/client";
+import { InitialSalesEntry, dummyStockData, initialCustomer } from "@/utils/default-data";
+import { ORIGIN } from "@/utils/origin";
+import { ChangeEvent, useState } from "react";
+import { useQuery } from "react-query";
 
-            <FormTab InitialObject={{
-                "Search by Brand": () => (
-                    <div className="flex flex-wrap lg:flex-nowrap">
-                        <div className='w-full'>
-                            <div className="flex flex-wrap lg:flex-nowrap gap-4">
-                                <SelectOption
-                                    labelName='Choose brand'
-                                    name="brand"
-                                    options={[
-                                        'samsung',
-                                        'oppo',
-                                        'vivo',
-                                    ]}
-                                    onChange={() => { }}
-                                    defaultOptionName='Search by Brand Name'
-                                    value=''
-                                />
-                                <SelectOption
-                                    labelName='Model'
-                                    name="model"
-                                    options={[
-                                        'samsung',
-                                        'oppo',
-                                        'vivo',
-                                    ]}
-                                    onChange={() => { }}
-                                    defaultOptionName='Model'
-                                    value=''
-                                />
-                            </div>
-                        </div>
-                    </div>
-                ),
-                "Search by IMEI": () => (
-                    <div className="flex flex-wrap lg:flex-nowrap">
-                        <div className='w-full'>
-                            <div className="flex flex-wrap lg:flex-nowrap gap-4">
-                                <div className="w-full">
-                                    <label
-                                        htmlFor="email"
-                                        className="block mb-2 text-sm font-medium text-textgray"
-                                    >
-                                        Search by IMEI
-                                    </label>
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                        placeholder="46 456464 554655 4"
-                                        required
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                )
-            }} />
-
-            <div className="flex flex-wrap lg:flex-nowrap">
-                <div className="">Product Section</div>
-            </div>
-
-            <div className="flex flex-wrap lg:flex-nowrap">
-                <div className='w-full'>
-                    <div className="">Seller Info</div>
-                    <hr className='my-4' />
-                    <div className="flex flex-wrap lg:flex-nowrap gap-4">
-                        <SelectOption
-                            labelName='Seller'
-                            name="seller"
-                            options={[
-                                'samsung',
-                                'oppo',
-                                'vivo',
-                            ]}
-                            onChange={() => { }}
-                            defaultOptionName='Choose seller'
-                            value=''
-                        />
-
-                        <SelectOption
-                            labelName='outlet'
-                            name="outlet"
-                            options={[
-                                'galaxy j5',
-                                'galaxy a32',
-                            ]}
-                            onChange={() => { }}
-                            defaultOptionName='Choose seller'
-                            value=''
-                        />
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+export type SalesEntryType = typeof InitialSalesEntry;
+export type CustomerData = typeof initialCustomer;
+export type PostSalesData = {
+    customer: CustomerData
+    discount: number,
+    due: number,
+    IMEI: string,
+    instockId: string,
+    price: number,
+    sellerId: string,
 };
 
-export default SalesEntryForm;
+export default function SalesEntryForm() {
+    const [adding, setAdding] = useState(false);
+    const [salesData, setsalesData] = useState<SalesEntryType>(InitialSalesEntry);
+    const [foundStockItem, setfoundStockItem] = useState<InStock | null>(null);
+    const [addedSales, setaddedSales] = useState<SalesEntry | null>(null);
+    const [customer, setcustomer] = useState<CustomerData>(initialCustomer);
+
+    function setSearchStockData(data: InStock) {
+        if (!data) return console.log({ message: "Can not read undefined of data" });
+        setfoundStockItem(data)
+    }
+
+    /**
+     * setState({ ...state, [key]: value})
+     * 
+     * @param key 
+     * @param value 
+     */
+    function setCustomerData(key: string, value: string) {
+        setcustomer({ ...customer, [key]: value })
+    }
+
+    async function handleSubmit(e: ChangeEvent<HTMLFormElement>) {
+        e.preventDefault();
+        const { discount, sellerId } = salesData;
+        if (foundStockItem?.id && customer) {
+            setAdding(true);
+            // TODO: add sales entry
+            const API_URL = `${ORIGIN}/api/sales/entry/`
+
+            /**
+             * Required data to add sales entrys
+             */
+            const body: PostSalesData = {
+                discount,
+                sellerId,
+                IMEI: foundStockItem.IMEI,
+                instockId: foundStockItem.id,
+                price: foundStockItem.price,
+                due: salesData.due,
+                customer,
+            }
+
+            await fetch(API_URL, {
+                headers: { 'Content-Type': 'application/json' },
+                method: 'POST',
+                body: JSON.stringify(body)
+            }).then(res => res.json()).then((data: SalesEntry) => {
+                setAdding(false);
+                setaddedSales(data);
+            }).catch(err => {
+                console.error(err);
+            })
+            setAdding(false);
+        }
+    }
+
+    const sellerQuery = useQuery('getAllCustomer', () =>
+        fetch(`${ORIGIN}/api/add/seller/`).then(res => res.json()).then((data: Customer[]) => data)
+    )
+
+    return (
+        <ReactQueryContext>
+            <div className="mx-auto bg-white p-6 rounded-xl space-y-6">
+                <SearchModelForm setSearchStockData={setSearchStockData} />
+                <SearchProductCard data={foundStockItem} />
+
+                <form className="space-y-6" onSubmit={handleSubmit}>
+                    <div className="flex flex-wrap lg:flex-nowrap gap-4">
+                        <div className='w-full'>
+                            <label htmlFor="seller" className="default">Seller</label>
+                            <select
+                                className="default"
+                                name="seller"
+                                id="seller"
+                                required={true}
+                                value={salesData.sellerId}
+                                onChange={(e: ChangeEvent<HTMLSelectElement>) => { setsalesData({ ...salesData, sellerId: e.target.value }) }}>
+                                <option value="" disabled className='capitalize'>default</option>
+                                {sellerQuery.data?.map((type: Seller, idx) =>
+                                    <option className='capitalize' value={type.id} key={idx}>{type.name}</option>
+                                )}
+                            </select>
+                        </div>
+                        <div className='w-full'>
+                            <label htmlFor="discount" className="default">discount</label>
+                            <input
+                                type='number'
+                                className="default"
+                                name="discount"
+                                id="discount"
+                                value={salesData.discount}
+                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                    setsalesData({ ...salesData, discount: Number(e.target.value) })
+                                }}>
+                            </input>
+                        </div>
+                        <div className='w-full'>
+                            <label htmlFor="due" className="default">due</label>
+                            <input
+                                type='number'
+                                className="default"
+                                name="due"
+                                id="due"
+                                value={salesData.due}
+                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                    setsalesData({ ...salesData, due: Number(e.target.value) })
+                                }}>
+                            </input>
+                        </div>
+                    </div>
+
+                    <CustomerForm setCustomerData={setCustomerData} />
+                    <div className="flex justify-end+">
+                        <button className="default" disabled={adding}>{adding ? "..." : "add"}</button>
+                    </div>
+                </form>
+                {/* <PRINT data={salesData} /> */}
+            </div>
+        </ReactQueryContext >
+    )
+}
+
