@@ -55,7 +55,7 @@ async function addModel({ brandId, model }: { brandId: string, model: string }) 
  * @param req 
  * @returns 
  */
-export async function GET(): Promise<Response> {
+export async function GET(req: Request, res: Response): Promise<Response> {
     const data = await getModel();
 
     if (data) {

@@ -38,6 +38,10 @@ async function addSales({ instockId, customerId, IMEI, price, discount, sellerId
         if (existingInstock) {
             return Response.json({ message: 'Sales data already exists' });
         } else {
+            /**
+             * 1. set instock sold
+             */
+
             const createdModel = await prisma.salesEntry.create({
                 data: {
                     instockId,

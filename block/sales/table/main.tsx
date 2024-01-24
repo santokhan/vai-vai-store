@@ -98,6 +98,8 @@ export default function SalesTable() {
         { cacheTime: 0 },
     )
 
+    
+
     function reFetch() {
         salesEntryQuery.refetch();
     }
