@@ -58,7 +58,12 @@ async function addModel({ brandId, model }: { brandId: string, model: string }) 
 export async function GET(): Promise<Response> {
     const data = await getModel();
     if (data) {
-        return Response.json(data);
+        return Response.json(data, {
+            headers: {
+                'Cache-Control': 'no-store',
+                'Content-Type': 'application/json'
+            }
+        });
     } else {
         return Response.json({ message: 'No data found in stock' });
     }
