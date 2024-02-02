@@ -3,7 +3,9 @@ import { ORIGIN } from '@/utils/origin';
 import React from 'react';
 
 const Page: React.FC = async () => {
-    const response = await fetch(`${ORIGIN}/api/user/`);
+    const response = await fetch(`${ORIGIN}/api/user/`, {
+        cache: 'no-store'
+    });
     const data = await response.json();
 
     function filterSanto(data: User[]) {

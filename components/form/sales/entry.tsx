@@ -85,7 +85,9 @@ export default function SalesEntryForm() {
     }
 
     const sellerQuery = useQuery('getAllCustomer', () =>
-        fetch(`${ORIGIN}/api/add/seller/`).then(res => res.json()).then((data: Customer[]) => data)
+        fetch(`${ORIGIN}/api/add/seller/`, {
+            cache: 'no-store'
+        }).then(res => res.json()).then((data: Customer[]) => data)
     )
 
     return (

@@ -27,7 +27,9 @@ const SearchModelForm: React.FC<Props> = ({ setSearchStockData, forwardRef }) =>
 
         const API_URL = `${ORIGIN}/api/sales/entry/imei?imei=${IMEI}`
 
-        fetch(API_URL).then(res => res.json()).then((data: InStock[]) => {
+        fetch(API_URL, {
+            cache: 'no-store'
+        }).then(res => res.json()).then((data: InStock[]) => {
             if (!data) return console.log({ message: "Can not get model by IMEI" });
             setSearchStockData(data[0])
             setisSearching(false);

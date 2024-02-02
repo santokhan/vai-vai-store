@@ -11,7 +11,9 @@ const StockEntryForm: React.FC = () => {
     const [state, setstate] = useState<productType | null>();
 
     const typeQuery = useQuery('getAllTypes', () =>
-        fetch(`${ORIGIN}/api/add/type/`).then(res => res.json()).then((data: ProductType[]) => data)
+        fetch(`${ORIGIN}/api/add/type/`, {
+            cache: 'no-store'
+        }).then(res => res.json()).then((data: ProductType[]) => data)
     )
     const productTypeById = (typeId: string) => typeQuery.data?.find(e => e.id === typeId)?.type;
 

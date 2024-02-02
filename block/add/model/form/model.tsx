@@ -14,15 +14,21 @@ export default function ModelFormWithTable() {
     const [brandId, setbrandId] = useState<string>("");
 
     const typeQuery = useQuery('getAllTypes', () =>
-        fetch(`${ORIGIN}/api/add/type/`).then(res => res.json()).then((data: ProductType[]) => data)
+        fetch(`${ORIGIN}/api/add/type/`, {
+            cache: 'no-store'
+        }).then(res => res.json()).then((data: ProductType[]) => data)
     )
 
     const brandQuery = useQuery('getAllBrands', () =>
-        fetch(`${ORIGIN}/api/add/brand/`).then(res => res.json()).then((data: Brand[]) => data)
+        fetch(`${ORIGIN}/api/add/brand/`, {
+            cache: 'no-store'
+        }).then(res => res.json()).then((data: Brand[]) => data)
     )
 
     const modelQuery = useQuery('getAllmodels', () =>
-        fetch(`${ORIGIN}/api/add/model/`).then(res => res.json()).then((data: Model[]) => data)
+        fetch(`${ORIGIN}/api/add/model/`, {
+            cache: 'no-store'
+        }).then(res => res.json()).then((data: Model[]) => data)
     )
 
     /**

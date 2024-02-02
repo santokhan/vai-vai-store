@@ -13,7 +13,9 @@ export default async function DashboardLayout({ children }: { children: ReactNod
         return redirect("/auth/signin?redirect=/dashboard");
     } else {
         const url = `${ORIGIN}/api/user/role/?email=${session.user?.email}`
-        const response = await fetch(url);
+        const response = await fetch(url, {
+            cache: 'no-store'
+        });
         const role = await response.json();
 
         if (role.role === "admin" || role.role === "super-admin") {

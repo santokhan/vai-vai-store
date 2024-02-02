@@ -11,7 +11,9 @@ export default function SellerFormWithTable() {
     const [adding, setadding] = useState<boolean>(false);
 
     const sellerQuery = useQuery('getAllSellers', () =>
-        fetch(`${ORIGIN}/api/add/seller/`).then(res => res.json()).then((data: Seller[]) => data)
+        fetch(`${ORIGIN}/api/add/seller/`, {
+            cache: 'no-store'
+        }).then(res => res.json()).then((data: Seller[]) => data)
     )
 
     async function postSeller(name: string) {

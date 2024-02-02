@@ -94,19 +94,15 @@ export default function SalesTable() {
 
     // Santo
     const salesEntryQuery = useQuery('getAllInStock', () =>
-        fetch(`${ORIGIN}/api/sales/table`).then(res => res.json()).then((data: SalesEntry[]) => data),
+        fetch(`${ORIGIN}/api/sales/table`, {
+            cache: 'no-store'
+        }).then(res => res.json()).then((data: SalesEntry[]) => data),
         { cacheTime: 0 },
     )
-
-    
 
     function reFetch() {
         salesEntryQuery.refetch();
     }
-
-    useEffect(() => {
-        salesEntryQuery.refetch();
-    }, [])
 
     return (
         <>

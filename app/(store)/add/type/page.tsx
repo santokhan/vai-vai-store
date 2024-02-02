@@ -12,7 +12,9 @@ export default function TypePage() {
     const [adding, setadding] = useState<boolean>(false);
 
     async function getAllProductTypes() {
-        const response = await fetch(`${ORIGIN}/api/add/type/`);
+        const response = await fetch(`${ORIGIN}/api/add/type/`, {
+            cache: 'no-store'
+        });
         const data = await response.json();
         setTypes(data);
         setLoading(false);

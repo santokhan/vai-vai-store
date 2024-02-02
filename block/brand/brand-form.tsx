@@ -13,10 +13,14 @@ export default function BrandFormWithTable() {
     const [selectedType, setselectedType] = useState<string>("");
     const [adding, setadding] = useState<boolean>(false);
     const brandQuery = useQuery('getAllBrands', () =>
-        fetch(`${ORIGIN}/api/add/brand/`).then(res => res.json()).then((data: Brand[]) => data)
+        fetch(`${ORIGIN}/api/add/brand/`, {
+            cache: 'no-store'
+        }).then(res => res.json()).then((data: Brand[]) => data)
     )
     const typeQuery = useQuery('getAllTypes', () =>
-        fetch(`${ORIGIN}/api/add/type/`).then(res => res.json()).then((data: ProductType[]) => data)
+        fetch(`${ORIGIN}/api/add/type/`, {
+            cache: 'no-store'
+        }).then(res => res.json()).then((data: ProductType[]) => data)
     )
 
     async function postBrand(brand: { brandName: string, productTypeId: string }) {
