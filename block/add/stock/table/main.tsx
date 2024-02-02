@@ -22,7 +22,6 @@ import { Brand, InStock, Model, ProductType } from '@/prisma/generated/client'
 import { useQuery } from 'react-query'
 import { ORIGIN } from '@/utils/origin'
 import { dummyProductData } from '@/utils/default-data'
-import { PRINT } from '@/components/print'
 
 export default function StockTable() {
     const rerender = React.useReducer(() => ({}), {})[1];
@@ -166,21 +165,8 @@ export default function StockTable() {
         inStockQuery.refetch();
     }
 
-    useEffect(() => {
-        async function readData() {
-            fetch(`${ORIGIN}/api/stock/table`, {
-                cache: 'no-store'
-            }).then(res => res.json()).then((data: InStock[]) => {
-                console.log(data);
-            })
-        }
-
-        readData();
-    }, [])
-
     return (
         <>
-            {/* <PRINT data={inStockQuery.data} /> */}
             {inStockQuery.data && <Table data={inStockQuery.data} columns={columns} reFetch={reFetch} />}
             {/* <hr />
             <div>
