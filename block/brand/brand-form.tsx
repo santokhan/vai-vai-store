@@ -20,8 +20,7 @@ export default function BrandFormWithTable() {
     const typeQuery = useQuery('getAllTypes', () =>
         fetch(`${ORIGIN}/api/add/type/`, {
             cache: 'no-store'
-        }).then(res => res.json()).then((data: ProductType[]) => data)
-    )
+        }).then(res => res.json()).then((data: ProductType[]) => data))
 
     async function postBrand(brand: { brandName: string, productTypeId: string }) {
         if (!brand.productTypeId && !brand.brandName) {
@@ -71,41 +70,37 @@ export default function BrandFormWithTable() {
     return (
         <>
             {!typeQuery.isLoading &&
-                <div className="">
-                    <div className="max-w-3xl mx-auto space-y-6">
-                        <form className="bg-white p-6 rounded-xl space-y-6" onSubmit={handleSubmit}>
-                            <div className="flex flex-wrap gap-6 lg:flex-nowrap">
-                                <SelectOption
-                                    labelName='Product Type'
-                                    name="productType"
-                                    options={typeQuery.data?.map((item: ProductType) => item.type) || defaultType}
-                                    onChange={(e) => { setselectedType(e.target.value) }}
-                                    defaultOptionName='Choose category'
-                                    value={selectedType}
-                                    required={true}
+                <div className="max-w-3xl+ space-y-6">
+                    <form className="bg-white p-6 rounded-xl space-y-6" onSubmit={handleSubmit}>
+                        <div className="flex flex-wrap gap-6 lg:flex-nowrap">
+                            <SelectOption
+                                labelName='Product Type'
+                                name="productType"
+                                options={typeQuery.data?.map((item: ProductType) => item.type) || defaultType}
+                                onChange={(e) => { setselectedType(e.target.value) }}
+                                defaultOptionName='Choose category'
+                                value={selectedType}
+                                required={true}
+                            />
+                            <div className="w-full">
+                                <label htmlFor="type" className="default">New Brand Name</label>
+                                <input
+                                    type="text"
+                                    id="type"
+                                    name="brand"
+                                    className="default"
+                                    placeholder="Samsung"
+                                    required
                                 />
-                                <div className="w-full">
-                                    <label htmlFor="type" className="default">New Brand Name</label>
-                                    <input
-                                        type="text"
-                                        id="type"
-                                        name="brand"
-                                        className="default"
-                                        placeholder="Samsung"
-                                        required
-                                    />
-                                </div>
                             </div>
-                            <button className="default" disabled={adding}>{adding ? "..." : "add"}</button>
-                        </form>
-                        {
-                            !brandQuery.isLoading && !typeQuery.isLoading &&
-                            <div className="">
-                                <BrandTable brands={brandQuery.data} types={typeQuery.data} />
-                            </div>
-                        }
-                    </div>
+                        </div>
+                        <button className="default" disabled={adding}>{adding ? "..." : "add"}</button>
+                    </form>
                 </div>
+            }
+            {
+                !brandQuery.isLoading && !typeQuery.isLoading &&
+                <BrandTable brands={brandQuery.data} types={typeQuery.data} />
             }
         </>
     )

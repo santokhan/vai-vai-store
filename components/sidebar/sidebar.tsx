@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import { NavDropdown, NavItem, sidebarNavs } from '@/lib/sidebar/sidebar';
 import { ShoppingCart } from 'iconsax-react'
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 export const Dropdown: FC<{ nav: NavDropdown }> = ({ nav }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -51,7 +52,7 @@ export const Dropdown: FC<{ nav: NavDropdown }> = ({ nav }) => {
                     {
                         nav.children?.map((childNav, childIdx) => (
                             <li key={childIdx}>
-                                <a
+                                <Link
                                     href={`${nav.path + childNav.path}`}
                                     className={[
                                         "flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 capitalize",
@@ -59,7 +60,7 @@ export const Dropdown: FC<{ nav: NavDropdown }> = ({ nav }) => {
                                     ].join(" ")}
                                 >
                                     {childNav.name}
-                                </a>
+                                </Link>
                             </li>
                         ))
                     }
@@ -83,7 +84,7 @@ const NavItem: React.FC<{ nav: NavItem }> = ({ nav }) => {
     );
 };
 
-export const AsystSidebar = () => {
+export const AsystSidebar: FC = () => {
     return (
         <div id="drawer-navigation" className="p-4 transition-transform translate-x-0 -translate-x-full+ bg-white w-full relative" tabIndex={-1} aria-labelledby="drawer-navigation-label">
             <h5 id="drawer-navigation-label" className="text-base font-semibold text-gray-500 uppercase">

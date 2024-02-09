@@ -91,7 +91,7 @@ export default function ModelFormWithTable() {
     return (
         <>
             {!typeQuery.isLoading && !brandQuery.isLoading &&
-                <div className="max-w-6xl mx-auto space-y-6">
+                <div className="space-y-6">
                     <form className="bg-white p-6 rounded-xl space-y-6" onSubmit={handleSubmit}>
                         <div className="flex flex-wrap gap-6 lg:flex-nowrap">
                             {

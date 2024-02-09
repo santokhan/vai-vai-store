@@ -1,20 +1,43 @@
 'use client'
-
-import SalesEntryForm from "@/components/form/sales/entry";
-import ReactQueryContext from "@/context/react-query-context";
+import AndroidSalesEntryForm from "@/components/form/sales/android-entry";
+import OrderProvider, { OrderContext, OrderEntry } from "@/context/order-context";
+import SalesRow from "@/components/sales-row/sales-row";
+import FormTitle from "@/components/form/title";
+import { useState } from "react";
+import { CloseCircle, ShoppingCart } from "iconsax-react";
+import CustomerForm from "@/components/form/customer/customer";
+import Button from "@/components/button/button";
 
 export default function SalesEntryPage() {
+    const [isOpenForm, setIsOpenForm] = useState(false);
+
     return (
-        <ReactQueryContext>
-            <div className="">
-                <h3 className="text-xl font-semibold">Sales Entry</h3>
-                <SalesEntryForm />
-                <SalesEntryForm />
+        <OrderProvider>
+            <div className="space-y-6">
+                <div className="space-y-2">
+                    <FormTitle>Order Table</FormTitle>
+                    <SalesRow onOpenForm={() => setIsOpenForm(true)} />
+                </div>
+                {
+                    isOpenForm &&
+                    <div className="space-y-2">
+                        <div className="flex justify-between">
+                            <FormTitle>Android Entry</FormTitle>
+                            <button type="button" className="text-gray-700 hover:text-gray-500" onClick={() => setIsOpenForm(false)}><CloseCircle className="w-5 h-5" /></button>
+                        </div>
+                        <AndroidSalesEntryForm onCloseForm={() => setIsOpenForm(false)} />
+                    </div>
+                }
+                <CustomerForm setCustomerData={() => { }} />
+                <OrderContext.Consumer>
+                    {(value) => (
+                        value && value.orderEntry.length > 0 &&
+                        <Button variant="primary">
+                            <ShoppingCart className="w-5 h-5" />Checkout
+                        </Button>
+                    )}
+                </OrderContext.Consumer>
             </div>
-            <div className="">
-                <h3 className="text-xl font-semibold">Sales Invoice</h3>
-            </div>
-        </ReactQueryContext>
+        </OrderProvider>
     )
 }
-

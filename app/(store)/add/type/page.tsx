@@ -57,7 +57,7 @@ export default function TypePage() {
     return (
         !loading &&
         <div className="">
-            <div className="max-w-xl mx-auto space-y-6">
+            <div className="space-y-6">
                 <form className="bg-white p-6 rounded-xl space-y-6" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap lg:flex-nowrap">
                         <div className="w-full">
