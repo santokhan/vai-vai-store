@@ -1,7 +1,6 @@
 // Import the Prisma Client
 import { prisma } from '@/lib/prisma';
 import { StockAccessoriesPOST } from '../post-data-type';
-import { StockAccessories } from '@/prisma/generated/client';
 
 async function getStockButton() {
     try {
