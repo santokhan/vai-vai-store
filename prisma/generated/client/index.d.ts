@@ -3,7 +3,7 @@
  * Client
 **/
 
-import * as runtime from './runtime/library';
+import * as runtime from './runtime/library.js';
 import $Types = runtime.Types // general types
 import $Public = runtime.Types.Public
 import $Utils = runtime.Types.Utils
@@ -43,6 +43,21 @@ export type Model = $Result.DefaultSelection<Prisma.$ModelPayload>
  * 
  */
 export type InStock = $Result.DefaultSelection<Prisma.$InStockPayload>
+/**
+ * Model StockAndroid
+ * 
+ */
+export type StockAndroid = $Result.DefaultSelection<Prisma.$StockAndroidPayload>
+/**
+ * Model StockButton
+ * 
+ */
+export type StockButton = $Result.DefaultSelection<Prisma.$StockButtonPayload>
+/**
+ * Model StockAccessories
+ * 
+ */
+export type StockAccessories = $Result.DefaultSelection<Prisma.$StockAccessoriesPayload>
 /**
  * Model SalesEntry
  * 
@@ -205,6 +220,36 @@ export class PrismaClient<
   get inStock(): Prisma.InStockDelegate<ExtArgs>;
 
   /**
+   * `prisma.stockAndroid`: Exposes CRUD operations for the **StockAndroid** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StockAndroids
+    * const stockAndroids = await prisma.stockAndroid.findMany()
+    * ```
+    */
+  get stockAndroid(): Prisma.StockAndroidDelegate<ExtArgs>;
+
+  /**
+   * `prisma.stockButton`: Exposes CRUD operations for the **StockButton** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StockButtons
+    * const stockButtons = await prisma.stockButton.findMany()
+    * ```
+    */
+  get stockButton(): Prisma.StockButtonDelegate<ExtArgs>;
+
+  /**
+   * `prisma.stockAccessories`: Exposes CRUD operations for the **StockAccessories** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StockAccessories
+    * const stockAccessories = await prisma.stockAccessories.findMany()
+    * ```
+    */
+  get stockAccessories(): Prisma.StockAccessoriesDelegate<ExtArgs>;
+
+  /**
    * `prisma.salesEntry`: Exposes CRUD operations for the **SalesEntry** model.
     * Example usage:
     * ```ts
@@ -280,8 +325,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 5.7.1
-   * Query Engine version: 0ca5ccbcfa6bdc81c003cf549abe4269f59c41e5
+   * Prisma Client JS version: 5.9.1
+   * Query Engine version: 23fdc5965b1e05fc54e5f26ed3de66776b93de64
    */
   export type PrismaVersion = {
     client: string
@@ -699,6 +744,9 @@ export namespace Prisma {
     Brand: 'Brand',
     Model: 'Model',
     InStock: 'InStock',
+    StockAndroid: 'StockAndroid',
+    StockButton: 'StockButton',
+    StockAccessories: 'StockAccessories',
     SalesEntry: 'SalesEntry',
     Customer: 'Customer'
   };
@@ -717,7 +765,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'user' | 'seller' | 'productType' | 'brand' | 'model' | 'inStock' | 'salesEntry' | 'customer'
+      modelProps: 'user' | 'seller' | 'productType' | 'brand' | 'model' | 'inStock' | 'stockAndroid' | 'stockButton' | 'stockAccessories' | 'salesEntry' | 'customer'
       txIsolationLevel: never
     },
     model: {
@@ -1165,6 +1213,228 @@ export namespace Prisma {
           }
         }
       }
+      StockAndroid: {
+        payload: Prisma.$StockAndroidPayload<ExtArgs>
+        fields: Prisma.StockAndroidFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StockAndroidFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockAndroidPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StockAndroidFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockAndroidPayload>
+          }
+          findFirst: {
+            args: Prisma.StockAndroidFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockAndroidPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StockAndroidFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockAndroidPayload>
+          }
+          findMany: {
+            args: Prisma.StockAndroidFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockAndroidPayload>[]
+          }
+          create: {
+            args: Prisma.StockAndroidCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockAndroidPayload>
+          }
+          createMany: {
+            args: Prisma.StockAndroidCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.StockAndroidDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockAndroidPayload>
+          }
+          update: {
+            args: Prisma.StockAndroidUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockAndroidPayload>
+          }
+          deleteMany: {
+            args: Prisma.StockAndroidDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StockAndroidUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.StockAndroidUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockAndroidPayload>
+          }
+          aggregate: {
+            args: Prisma.StockAndroidAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateStockAndroid>
+          }
+          groupBy: {
+            args: Prisma.StockAndroidGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<StockAndroidGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.StockAndroidFindRawArgs<ExtArgs>,
+            result: Prisma.JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.StockAndroidAggregateRawArgs<ExtArgs>,
+            result: Prisma.JsonObject
+          }
+          count: {
+            args: Prisma.StockAndroidCountArgs<ExtArgs>,
+            result: $Utils.Optional<StockAndroidCountAggregateOutputType> | number
+          }
+        }
+      }
+      StockButton: {
+        payload: Prisma.$StockButtonPayload<ExtArgs>
+        fields: Prisma.StockButtonFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StockButtonFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockButtonPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StockButtonFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockButtonPayload>
+          }
+          findFirst: {
+            args: Prisma.StockButtonFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockButtonPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StockButtonFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockButtonPayload>
+          }
+          findMany: {
+            args: Prisma.StockButtonFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockButtonPayload>[]
+          }
+          create: {
+            args: Prisma.StockButtonCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockButtonPayload>
+          }
+          createMany: {
+            args: Prisma.StockButtonCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.StockButtonDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockButtonPayload>
+          }
+          update: {
+            args: Prisma.StockButtonUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockButtonPayload>
+          }
+          deleteMany: {
+            args: Prisma.StockButtonDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StockButtonUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.StockButtonUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockButtonPayload>
+          }
+          aggregate: {
+            args: Prisma.StockButtonAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateStockButton>
+          }
+          groupBy: {
+            args: Prisma.StockButtonGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<StockButtonGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.StockButtonFindRawArgs<ExtArgs>,
+            result: Prisma.JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.StockButtonAggregateRawArgs<ExtArgs>,
+            result: Prisma.JsonObject
+          }
+          count: {
+            args: Prisma.StockButtonCountArgs<ExtArgs>,
+            result: $Utils.Optional<StockButtonCountAggregateOutputType> | number
+          }
+        }
+      }
+      StockAccessories: {
+        payload: Prisma.$StockAccessoriesPayload<ExtArgs>
+        fields: Prisma.StockAccessoriesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StockAccessoriesFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockAccessoriesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StockAccessoriesFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockAccessoriesPayload>
+          }
+          findFirst: {
+            args: Prisma.StockAccessoriesFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockAccessoriesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StockAccessoriesFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockAccessoriesPayload>
+          }
+          findMany: {
+            args: Prisma.StockAccessoriesFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockAccessoriesPayload>[]
+          }
+          create: {
+            args: Prisma.StockAccessoriesCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockAccessoriesPayload>
+          }
+          createMany: {
+            args: Prisma.StockAccessoriesCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.StockAccessoriesDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockAccessoriesPayload>
+          }
+          update: {
+            args: Prisma.StockAccessoriesUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockAccessoriesPayload>
+          }
+          deleteMany: {
+            args: Prisma.StockAccessoriesDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StockAccessoriesUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.StockAccessoriesUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StockAccessoriesPayload>
+          }
+          aggregate: {
+            args: Prisma.StockAccessoriesAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateStockAccessories>
+          }
+          groupBy: {
+            args: Prisma.StockAccessoriesGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<StockAccessoriesGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.StockAccessoriesFindRawArgs<ExtArgs>,
+            result: Prisma.JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.StockAccessoriesAggregateRawArgs<ExtArgs>,
+            result: Prisma.JsonObject
+          }
+          count: {
+            args: Prisma.StockAccessoriesCountArgs<ExtArgs>,
+            result: $Utils.Optional<StockAccessoriesCountAggregateOutputType> | number
+          }
+        }
+      }
       SalesEntry: {
         payload: Prisma.$SalesEntryPayload<ExtArgs>
         fields: Prisma.SalesEntryFieldRefs
@@ -1486,11 +1756,17 @@ export namespace Prisma {
   export type ProductTypeCountOutputType = {
     Brand: number
     InStock: number
+    StockAndroid: number
+    StockButton: number
+    StockAccessories: number
   }
 
   export type ProductTypeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Brand?: boolean | ProductTypeCountOutputTypeCountBrandArgs
     InStock?: boolean | ProductTypeCountOutputTypeCountInStockArgs
+    StockAndroid?: boolean | ProductTypeCountOutputTypeCountStockAndroidArgs
+    StockButton?: boolean | ProductTypeCountOutputTypeCountStockButtonArgs
+    StockAccessories?: boolean | ProductTypeCountOutputTypeCountStockAccessoriesArgs
   }
 
   // Custom InputTypes
@@ -1522,6 +1798,30 @@ export namespace Prisma {
   }
 
 
+  /**
+   * ProductTypeCountOutputType without action
+   */
+  export type ProductTypeCountOutputTypeCountStockAndroidArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StockAndroidWhereInput
+  }
+
+
+  /**
+   * ProductTypeCountOutputType without action
+   */
+  export type ProductTypeCountOutputTypeCountStockButtonArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StockButtonWhereInput
+  }
+
+
+  /**
+   * ProductTypeCountOutputType without action
+   */
+  export type ProductTypeCountOutputTypeCountStockAccessoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StockAccessoriesWhereInput
+  }
+
+
 
   /**
    * Count Type BrandCountOutputType
@@ -1530,11 +1830,17 @@ export namespace Prisma {
   export type BrandCountOutputType = {
     Model: number
     InStock: number
+    StockAndroid: number
+    StockButton: number
+    StockAccessories: number
   }
 
   export type BrandCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Model?: boolean | BrandCountOutputTypeCountModelArgs
     InStock?: boolean | BrandCountOutputTypeCountInStockArgs
+    StockAndroid?: boolean | BrandCountOutputTypeCountStockAndroidArgs
+    StockButton?: boolean | BrandCountOutputTypeCountStockButtonArgs
+    StockAccessories?: boolean | BrandCountOutputTypeCountStockAccessoriesArgs
   }
 
   // Custom InputTypes
@@ -1566,6 +1872,30 @@ export namespace Prisma {
   }
 
 
+  /**
+   * BrandCountOutputType without action
+   */
+  export type BrandCountOutputTypeCountStockAndroidArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StockAndroidWhereInput
+  }
+
+
+  /**
+   * BrandCountOutputType without action
+   */
+  export type BrandCountOutputTypeCountStockButtonArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StockButtonWhereInput
+  }
+
+
+  /**
+   * BrandCountOutputType without action
+   */
+  export type BrandCountOutputTypeCountStockAccessoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StockAccessoriesWhereInput
+  }
+
+
 
   /**
    * Count Type ModelCountOutputType
@@ -1573,10 +1903,16 @@ export namespace Prisma {
 
   export type ModelCountOutputType = {
     InStock: number
+    StrockAndroid: number
+    StrockButton: number
+    StrockAccessories: number
   }
 
   export type ModelCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     InStock?: boolean | ModelCountOutputTypeCountInStockArgs
+    StrockAndroid?: boolean | ModelCountOutputTypeCountStrockAndroidArgs
+    StrockButton?: boolean | ModelCountOutputTypeCountStrockButtonArgs
+    StrockAccessories?: boolean | ModelCountOutputTypeCountStrockAccessoriesArgs
   }
 
   // Custom InputTypes
@@ -1597,6 +1933,30 @@ export namespace Prisma {
    */
   export type ModelCountOutputTypeCountInStockArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: InStockWhereInput
+  }
+
+
+  /**
+   * ModelCountOutputType without action
+   */
+  export type ModelCountOutputTypeCountStrockAndroidArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StockAndroidWhereInput
+  }
+
+
+  /**
+   * ModelCountOutputType without action
+   */
+  export type ModelCountOutputTypeCountStrockButtonArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StockButtonWhereInput
+  }
+
+
+  /**
+   * ModelCountOutputType without action
+   */
+  export type ModelCountOutputTypeCountStrockAccessoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StockAccessoriesWhereInput
   }
 
 
@@ -1630,6 +1990,108 @@ export namespace Prisma {
    * InStockCountOutputType without action
    */
   export type InStockCountOutputTypeCountSalesEntryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SalesEntryWhereInput
+  }
+
+
+
+  /**
+   * Count Type StockAndroidCountOutputType
+   */
+
+  export type StockAndroidCountOutputType = {
+    SalesEntry: number
+  }
+
+  export type StockAndroidCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    SalesEntry?: boolean | StockAndroidCountOutputTypeCountSalesEntryArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * StockAndroidCountOutputType without action
+   */
+  export type StockAndroidCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAndroidCountOutputType
+     */
+    select?: StockAndroidCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * StockAndroidCountOutputType without action
+   */
+  export type StockAndroidCountOutputTypeCountSalesEntryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SalesEntryWhereInput
+  }
+
+
+
+  /**
+   * Count Type StockButtonCountOutputType
+   */
+
+  export type StockButtonCountOutputType = {
+    SalesEntry: number
+  }
+
+  export type StockButtonCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    SalesEntry?: boolean | StockButtonCountOutputTypeCountSalesEntryArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * StockButtonCountOutputType without action
+   */
+  export type StockButtonCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockButtonCountOutputType
+     */
+    select?: StockButtonCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * StockButtonCountOutputType without action
+   */
+  export type StockButtonCountOutputTypeCountSalesEntryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SalesEntryWhereInput
+  }
+
+
+
+  /**
+   * Count Type StockAccessoriesCountOutputType
+   */
+
+  export type StockAccessoriesCountOutputType = {
+    SalesEntry: number
+  }
+
+  export type StockAccessoriesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    SalesEntry?: boolean | StockAccessoriesCountOutputTypeCountSalesEntryArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * StockAccessoriesCountOutputType without action
+   */
+  export type StockAccessoriesCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAccessoriesCountOutputType
+     */
+    select?: StockAccessoriesCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * StockAccessoriesCountOutputType without action
+   */
+  export type StockAccessoriesCountOutputTypeCountSalesEntryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SalesEntryWhereInput
   }
 
@@ -1855,7 +2317,7 @@ export namespace Prisma {
   type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
 
   type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct' > & {
+    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: UserCountAggregateInputType | true
     }
 
@@ -2769,7 +3231,7 @@ export namespace Prisma {
   type SellerGetPayload<S extends boolean | null | undefined | SellerDefaultArgs> = $Result.GetResult<Prisma.$SellerPayload, S>
 
   type SellerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<SellerFindManyArgs, 'select' | 'include' | 'distinct' > & {
+    Omit<SellerFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: SellerCountAggregateInputType | true
     }
 
@@ -3713,6 +4175,9 @@ export namespace Prisma {
     createdAt?: boolean
     Brand?: boolean | ProductType$BrandArgs<ExtArgs>
     InStock?: boolean | ProductType$InStockArgs<ExtArgs>
+    StockAndroid?: boolean | ProductType$StockAndroidArgs<ExtArgs>
+    StockButton?: boolean | ProductType$StockButtonArgs<ExtArgs>
+    StockAccessories?: boolean | ProductType$StockAccessoriesArgs<ExtArgs>
     _count?: boolean | ProductTypeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["productType"]>
 
@@ -3725,6 +4190,9 @@ export namespace Prisma {
   export type ProductTypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Brand?: boolean | ProductType$BrandArgs<ExtArgs>
     InStock?: boolean | ProductType$InStockArgs<ExtArgs>
+    StockAndroid?: boolean | ProductType$StockAndroidArgs<ExtArgs>
+    StockButton?: boolean | ProductType$StockButtonArgs<ExtArgs>
+    StockAccessories?: boolean | ProductType$StockAccessoriesArgs<ExtArgs>
     _count?: boolean | ProductTypeCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -3734,6 +4202,9 @@ export namespace Prisma {
     objects: {
       Brand: Prisma.$BrandPayload<ExtArgs>[]
       InStock: Prisma.$InStockPayload<ExtArgs>[]
+      StockAndroid: Prisma.$StockAndroidPayload<ExtArgs>[]
+      StockButton: Prisma.$StockButtonPayload<ExtArgs>[]
+      StockAccessories: Prisma.$StockAccessoriesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3747,7 +4218,7 @@ export namespace Prisma {
   type ProductTypeGetPayload<S extends boolean | null | undefined | ProductTypeDefaultArgs> = $Result.GetResult<Prisma.$ProductTypePayload, S>
 
   type ProductTypeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<ProductTypeFindManyArgs, 'select' | 'include' | 'distinct' > & {
+    Omit<ProductTypeFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: ProductTypeCountAggregateInputType | true
     }
 
@@ -4134,6 +4605,12 @@ export namespace Prisma {
     Brand<T extends ProductType$BrandArgs<ExtArgs> = {}>(args?: Subset<T, ProductType$BrandArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     InStock<T extends ProductType$InStockArgs<ExtArgs> = {}>(args?: Subset<T, ProductType$InStockArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InStockPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    StockAndroid<T extends ProductType$StockAndroidArgs<ExtArgs> = {}>(args?: Subset<T, ProductType$StockAndroidArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockAndroidPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    StockButton<T extends ProductType$StockButtonArgs<ExtArgs> = {}>(args?: Subset<T, ProductType$StockButtonArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockButtonPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    StockAccessories<T extends ProductType$StockAccessoriesArgs<ExtArgs> = {}>(args?: Subset<T, ProductType$StockAccessoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockAccessoriesPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4549,6 +5026,69 @@ export namespace Prisma {
 
 
   /**
+   * ProductType.StockAndroid
+   */
+  export type ProductType$StockAndroidArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAndroid
+     */
+    select?: StockAndroidSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAndroidInclude<ExtArgs> | null
+    where?: StockAndroidWhereInput
+    orderBy?: StockAndroidOrderByWithRelationInput | StockAndroidOrderByWithRelationInput[]
+    cursor?: StockAndroidWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StockAndroidScalarFieldEnum | StockAndroidScalarFieldEnum[]
+  }
+
+
+  /**
+   * ProductType.StockButton
+   */
+  export type ProductType$StockButtonArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockButton
+     */
+    select?: StockButtonSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockButtonInclude<ExtArgs> | null
+    where?: StockButtonWhereInput
+    orderBy?: StockButtonOrderByWithRelationInput | StockButtonOrderByWithRelationInput[]
+    cursor?: StockButtonWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StockButtonScalarFieldEnum | StockButtonScalarFieldEnum[]
+  }
+
+
+  /**
+   * ProductType.StockAccessories
+   */
+  export type ProductType$StockAccessoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAccessories
+     */
+    select?: StockAccessoriesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAccessoriesInclude<ExtArgs> | null
+    where?: StockAccessoriesWhereInput
+    orderBy?: StockAccessoriesOrderByWithRelationInput | StockAccessoriesOrderByWithRelationInput[]
+    cursor?: StockAccessoriesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StockAccessoriesScalarFieldEnum | StockAccessoriesScalarFieldEnum[]
+  }
+
+
+  /**
    * ProductType without action
    */
   export type ProductTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4723,6 +5263,9 @@ export namespace Prisma {
     productType?: boolean | ProductTypeDefaultArgs<ExtArgs>
     Model?: boolean | Brand$ModelArgs<ExtArgs>
     InStock?: boolean | Brand$InStockArgs<ExtArgs>
+    StockAndroid?: boolean | Brand$StockAndroidArgs<ExtArgs>
+    StockButton?: boolean | Brand$StockButtonArgs<ExtArgs>
+    StockAccessories?: boolean | Brand$StockAccessoriesArgs<ExtArgs>
     _count?: boolean | BrandCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["brand"]>
 
@@ -4737,6 +5280,9 @@ export namespace Prisma {
     productType?: boolean | ProductTypeDefaultArgs<ExtArgs>
     Model?: boolean | Brand$ModelArgs<ExtArgs>
     InStock?: boolean | Brand$InStockArgs<ExtArgs>
+    StockAndroid?: boolean | Brand$StockAndroidArgs<ExtArgs>
+    StockButton?: boolean | Brand$StockButtonArgs<ExtArgs>
+    StockAccessories?: boolean | Brand$StockAccessoriesArgs<ExtArgs>
     _count?: boolean | BrandCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -4747,6 +5293,9 @@ export namespace Prisma {
       productType: Prisma.$ProductTypePayload<ExtArgs>
       Model: Prisma.$ModelPayload<ExtArgs>[]
       InStock: Prisma.$InStockPayload<ExtArgs>[]
+      StockAndroid: Prisma.$StockAndroidPayload<ExtArgs>[]
+      StockButton: Prisma.$StockButtonPayload<ExtArgs>[]
+      StockAccessories: Prisma.$StockAccessoriesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4761,7 +5310,7 @@ export namespace Prisma {
   type BrandGetPayload<S extends boolean | null | undefined | BrandDefaultArgs> = $Result.GetResult<Prisma.$BrandPayload, S>
 
   type BrandCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<BrandFindManyArgs, 'select' | 'include' | 'distinct' > & {
+    Omit<BrandFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: BrandCountAggregateInputType | true
     }
 
@@ -5150,6 +5699,12 @@ export namespace Prisma {
     Model<T extends Brand$ModelArgs<ExtArgs> = {}>(args?: Subset<T, Brand$ModelArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModelPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     InStock<T extends Brand$InStockArgs<ExtArgs> = {}>(args?: Subset<T, Brand$InStockArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InStockPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    StockAndroid<T extends Brand$StockAndroidArgs<ExtArgs> = {}>(args?: Subset<T, Brand$StockAndroidArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockAndroidPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    StockButton<T extends Brand$StockButtonArgs<ExtArgs> = {}>(args?: Subset<T, Brand$StockButtonArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockButtonPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    StockAccessories<T extends Brand$StockAccessoriesArgs<ExtArgs> = {}>(args?: Subset<T, Brand$StockAccessoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockAccessoriesPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5566,6 +6121,69 @@ export namespace Prisma {
 
 
   /**
+   * Brand.StockAndroid
+   */
+  export type Brand$StockAndroidArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAndroid
+     */
+    select?: StockAndroidSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAndroidInclude<ExtArgs> | null
+    where?: StockAndroidWhereInput
+    orderBy?: StockAndroidOrderByWithRelationInput | StockAndroidOrderByWithRelationInput[]
+    cursor?: StockAndroidWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StockAndroidScalarFieldEnum | StockAndroidScalarFieldEnum[]
+  }
+
+
+  /**
+   * Brand.StockButton
+   */
+  export type Brand$StockButtonArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockButton
+     */
+    select?: StockButtonSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockButtonInclude<ExtArgs> | null
+    where?: StockButtonWhereInput
+    orderBy?: StockButtonOrderByWithRelationInput | StockButtonOrderByWithRelationInput[]
+    cursor?: StockButtonWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StockButtonScalarFieldEnum | StockButtonScalarFieldEnum[]
+  }
+
+
+  /**
+   * Brand.StockAccessories
+   */
+  export type Brand$StockAccessoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAccessories
+     */
+    select?: StockAccessoriesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAccessoriesInclude<ExtArgs> | null
+    where?: StockAccessoriesWhereInput
+    orderBy?: StockAccessoriesOrderByWithRelationInput | StockAccessoriesOrderByWithRelationInput[]
+    cursor?: StockAccessoriesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StockAccessoriesScalarFieldEnum | StockAccessoriesScalarFieldEnum[]
+  }
+
+
+  /**
    * Brand without action
    */
   export type BrandDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5739,6 +6357,9 @@ export namespace Prisma {
     createdAt?: boolean
     brand?: boolean | BrandDefaultArgs<ExtArgs>
     InStock?: boolean | Model$InStockArgs<ExtArgs>
+    StrockAndroid?: boolean | Model$StrockAndroidArgs<ExtArgs>
+    StrockButton?: boolean | Model$StrockButtonArgs<ExtArgs>
+    StrockAccessories?: boolean | Model$StrockAccessoriesArgs<ExtArgs>
     _count?: boolean | ModelCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["model"]>
 
@@ -5752,6 +6373,9 @@ export namespace Prisma {
   export type ModelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     brand?: boolean | BrandDefaultArgs<ExtArgs>
     InStock?: boolean | Model$InStockArgs<ExtArgs>
+    StrockAndroid?: boolean | Model$StrockAndroidArgs<ExtArgs>
+    StrockButton?: boolean | Model$StrockButtonArgs<ExtArgs>
+    StrockAccessories?: boolean | Model$StrockAccessoriesArgs<ExtArgs>
     _count?: boolean | ModelCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -5761,6 +6385,9 @@ export namespace Prisma {
     objects: {
       brand: Prisma.$BrandPayload<ExtArgs>
       InStock: Prisma.$InStockPayload<ExtArgs>[]
+      StrockAndroid: Prisma.$StockAndroidPayload<ExtArgs>[]
+      StrockButton: Prisma.$StockButtonPayload<ExtArgs>[]
+      StrockAccessories: Prisma.$StockAccessoriesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5775,7 +6402,7 @@ export namespace Prisma {
   type ModelGetPayload<S extends boolean | null | undefined | ModelDefaultArgs> = $Result.GetResult<Prisma.$ModelPayload, S>
 
   type ModelCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<ModelFindManyArgs, 'select' | 'include' | 'distinct' > & {
+    Omit<ModelFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: ModelCountAggregateInputType | true
     }
 
@@ -6162,6 +6789,12 @@ export namespace Prisma {
     brand<T extends BrandDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BrandDefaultArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     InStock<T extends Model$InStockArgs<ExtArgs> = {}>(args?: Subset<T, Model$InStockArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InStockPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    StrockAndroid<T extends Model$StrockAndroidArgs<ExtArgs> = {}>(args?: Subset<T, Model$StrockAndroidArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockAndroidPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    StrockButton<T extends Model$StrockButtonArgs<ExtArgs> = {}>(args?: Subset<T, Model$StrockButtonArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockButtonPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    StrockAccessories<T extends Model$StrockAccessoriesArgs<ExtArgs> = {}>(args?: Subset<T, Model$StrockAccessoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockAccessoriesPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -6557,6 +7190,69 @@ export namespace Prisma {
 
 
   /**
+   * Model.StrockAndroid
+   */
+  export type Model$StrockAndroidArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAndroid
+     */
+    select?: StockAndroidSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAndroidInclude<ExtArgs> | null
+    where?: StockAndroidWhereInput
+    orderBy?: StockAndroidOrderByWithRelationInput | StockAndroidOrderByWithRelationInput[]
+    cursor?: StockAndroidWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StockAndroidScalarFieldEnum | StockAndroidScalarFieldEnum[]
+  }
+
+
+  /**
+   * Model.StrockButton
+   */
+  export type Model$StrockButtonArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockButton
+     */
+    select?: StockButtonSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockButtonInclude<ExtArgs> | null
+    where?: StockButtonWhereInput
+    orderBy?: StockButtonOrderByWithRelationInput | StockButtonOrderByWithRelationInput[]
+    cursor?: StockButtonWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StockButtonScalarFieldEnum | StockButtonScalarFieldEnum[]
+  }
+
+
+  /**
+   * Model.StrockAccessories
+   */
+  export type Model$StrockAccessoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAccessories
+     */
+    select?: StockAccessoriesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAccessoriesInclude<ExtArgs> | null
+    where?: StockAccessoriesWhereInput
+    orderBy?: StockAccessoriesOrderByWithRelationInput | StockAccessoriesOrderByWithRelationInput[]
+    cursor?: StockAccessoriesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StockAccessoriesScalarFieldEnum | StockAccessoriesScalarFieldEnum[]
+  }
+
+
+  /**
    * Model without action
    */
   export type ModelDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6900,7 +7596,7 @@ export namespace Prisma {
   type InStockGetPayload<S extends boolean | null | undefined | InStockDefaultArgs> = $Result.GetResult<Prisma.$InStockPayload, S>
 
   type InStockCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<InStockFindManyArgs, 'select' | 'include' | 'distinct' > & {
+    Omit<InStockFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: InStockCountAggregateInputType | true
     }
 
@@ -7711,6 +8407,3351 @@ export namespace Prisma {
 
 
   /**
+   * Model StockAndroid
+   */
+
+  export type AggregateStockAndroid = {
+    _count: StockAndroidCountAggregateOutputType | null
+    _avg: StockAndroidAvgAggregateOutputType | null
+    _sum: StockAndroidSumAggregateOutputType | null
+    _min: StockAndroidMinAggregateOutputType | null
+    _max: StockAndroidMaxAggregateOutputType | null
+  }
+
+  export type StockAndroidAvgAggregateOutputType = {
+    purchasePrice: number | null
+    sellingPrice: number | null
+  }
+
+  export type StockAndroidSumAggregateOutputType = {
+    purchasePrice: number | null
+    sellingPrice: number | null
+  }
+
+  export type StockAndroidMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    IMEI: string | null
+    modelId: string | null
+    brandId: string | null
+    productTypeId: string | null
+    purchasePrice: number | null
+    sellingPrice: number | null
+    sold: boolean | null
+    color: string | null
+    ram: string | null
+    rom: string | null
+    createdAt: Date | null
+  }
+
+  export type StockAndroidMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    IMEI: string | null
+    modelId: string | null
+    brandId: string | null
+    productTypeId: string | null
+    purchasePrice: number | null
+    sellingPrice: number | null
+    sold: boolean | null
+    color: string | null
+    ram: string | null
+    rom: string | null
+    createdAt: Date | null
+  }
+
+  export type StockAndroidCountAggregateOutputType = {
+    id: number
+    name: number
+    IMEI: number
+    modelId: number
+    brandId: number
+    productTypeId: number
+    purchasePrice: number
+    sellingPrice: number
+    sold: number
+    color: number
+    ram: number
+    rom: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type StockAndroidAvgAggregateInputType = {
+    purchasePrice?: true
+    sellingPrice?: true
+  }
+
+  export type StockAndroidSumAggregateInputType = {
+    purchasePrice?: true
+    sellingPrice?: true
+  }
+
+  export type StockAndroidMinAggregateInputType = {
+    id?: true
+    name?: true
+    IMEI?: true
+    modelId?: true
+    brandId?: true
+    productTypeId?: true
+    purchasePrice?: true
+    sellingPrice?: true
+    sold?: true
+    color?: true
+    ram?: true
+    rom?: true
+    createdAt?: true
+  }
+
+  export type StockAndroidMaxAggregateInputType = {
+    id?: true
+    name?: true
+    IMEI?: true
+    modelId?: true
+    brandId?: true
+    productTypeId?: true
+    purchasePrice?: true
+    sellingPrice?: true
+    sold?: true
+    color?: true
+    ram?: true
+    rom?: true
+    createdAt?: true
+  }
+
+  export type StockAndroidCountAggregateInputType = {
+    id?: true
+    name?: true
+    IMEI?: true
+    modelId?: true
+    brandId?: true
+    productTypeId?: true
+    purchasePrice?: true
+    sellingPrice?: true
+    sold?: true
+    color?: true
+    ram?: true
+    rom?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type StockAndroidAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StockAndroid to aggregate.
+     */
+    where?: StockAndroidWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StockAndroids to fetch.
+     */
+    orderBy?: StockAndroidOrderByWithRelationInput | StockAndroidOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StockAndroidWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StockAndroids from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StockAndroids.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StockAndroids
+    **/
+    _count?: true | StockAndroidCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: StockAndroidAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StockAndroidSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StockAndroidMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StockAndroidMaxAggregateInputType
+  }
+
+  export type GetStockAndroidAggregateType<T extends StockAndroidAggregateArgs> = {
+        [P in keyof T & keyof AggregateStockAndroid]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStockAndroid[P]>
+      : GetScalarType<T[P], AggregateStockAndroid[P]>
+  }
+
+
+
+
+  export type StockAndroidGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StockAndroidWhereInput
+    orderBy?: StockAndroidOrderByWithAggregationInput | StockAndroidOrderByWithAggregationInput[]
+    by: StockAndroidScalarFieldEnum[] | StockAndroidScalarFieldEnum
+    having?: StockAndroidScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StockAndroidCountAggregateInputType | true
+    _avg?: StockAndroidAvgAggregateInputType
+    _sum?: StockAndroidSumAggregateInputType
+    _min?: StockAndroidMinAggregateInputType
+    _max?: StockAndroidMaxAggregateInputType
+  }
+
+  export type StockAndroidGroupByOutputType = {
+    id: string
+    name: string
+    IMEI: string
+    modelId: string
+    brandId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    sold: boolean
+    color: string
+    ram: string | null
+    rom: string | null
+    createdAt: Date | null
+    _count: StockAndroidCountAggregateOutputType | null
+    _avg: StockAndroidAvgAggregateOutputType | null
+    _sum: StockAndroidSumAggregateOutputType | null
+    _min: StockAndroidMinAggregateOutputType | null
+    _max: StockAndroidMaxAggregateOutputType | null
+  }
+
+  type GetStockAndroidGroupByPayload<T extends StockAndroidGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StockAndroidGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StockAndroidGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StockAndroidGroupByOutputType[P]>
+            : GetScalarType<T[P], StockAndroidGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StockAndroidSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    IMEI?: boolean
+    modelId?: boolean
+    brandId?: boolean
+    productTypeId?: boolean
+    purchasePrice?: boolean
+    sellingPrice?: boolean
+    sold?: boolean
+    color?: boolean
+    ram?: boolean
+    rom?: boolean
+    createdAt?: boolean
+    model?: boolean | ModelDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+    productType?: boolean | ProductTypeDefaultArgs<ExtArgs>
+    SalesEntry?: boolean | StockAndroid$SalesEntryArgs<ExtArgs>
+    _count?: boolean | StockAndroidCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["stockAndroid"]>
+
+  export type StockAndroidSelectScalar = {
+    id?: boolean
+    name?: boolean
+    IMEI?: boolean
+    modelId?: boolean
+    brandId?: boolean
+    productTypeId?: boolean
+    purchasePrice?: boolean
+    sellingPrice?: boolean
+    sold?: boolean
+    color?: boolean
+    ram?: boolean
+    rom?: boolean
+    createdAt?: boolean
+  }
+
+  export type StockAndroidInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    model?: boolean | ModelDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+    productType?: boolean | ProductTypeDefaultArgs<ExtArgs>
+    SalesEntry?: boolean | StockAndroid$SalesEntryArgs<ExtArgs>
+    _count?: boolean | StockAndroidCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $StockAndroidPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StockAndroid"
+    objects: {
+      model: Prisma.$ModelPayload<ExtArgs>
+      brand: Prisma.$BrandPayload<ExtArgs>
+      productType: Prisma.$ProductTypePayload<ExtArgs>
+      SalesEntry: Prisma.$SalesEntryPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      IMEI: string
+      modelId: string
+      brandId: string
+      productTypeId: string
+      purchasePrice: number
+      sellingPrice: number
+      sold: boolean
+      color: string
+      ram: string | null
+      rom: string | null
+      createdAt: Date | null
+    }, ExtArgs["result"]["stockAndroid"]>
+    composites: {}
+  }
+
+
+  type StockAndroidGetPayload<S extends boolean | null | undefined | StockAndroidDefaultArgs> = $Result.GetResult<Prisma.$StockAndroidPayload, S>
+
+  type StockAndroidCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<StockAndroidFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: StockAndroidCountAggregateInputType | true
+    }
+
+  export interface StockAndroidDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StockAndroid'], meta: { name: 'StockAndroid' } }
+    /**
+     * Find zero or one StockAndroid that matches the filter.
+     * @param {StockAndroidFindUniqueArgs} args - Arguments to find a StockAndroid
+     * @example
+     * // Get one StockAndroid
+     * const stockAndroid = await prisma.stockAndroid.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends StockAndroidFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, StockAndroidFindUniqueArgs<ExtArgs>>
+    ): Prisma__StockAndroidClient<$Result.GetResult<Prisma.$StockAndroidPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one StockAndroid that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {StockAndroidFindUniqueOrThrowArgs} args - Arguments to find a StockAndroid
+     * @example
+     * // Get one StockAndroid
+     * const stockAndroid = await prisma.stockAndroid.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends StockAndroidFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, StockAndroidFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__StockAndroidClient<$Result.GetResult<Prisma.$StockAndroidPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first StockAndroid that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockAndroidFindFirstArgs} args - Arguments to find a StockAndroid
+     * @example
+     * // Get one StockAndroid
+     * const stockAndroid = await prisma.stockAndroid.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends StockAndroidFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, StockAndroidFindFirstArgs<ExtArgs>>
+    ): Prisma__StockAndroidClient<$Result.GetResult<Prisma.$StockAndroidPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first StockAndroid that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockAndroidFindFirstOrThrowArgs} args - Arguments to find a StockAndroid
+     * @example
+     * // Get one StockAndroid
+     * const stockAndroid = await prisma.stockAndroid.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends StockAndroidFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, StockAndroidFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__StockAndroidClient<$Result.GetResult<Prisma.$StockAndroidPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more StockAndroids that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockAndroidFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StockAndroids
+     * const stockAndroids = await prisma.stockAndroid.findMany()
+     * 
+     * // Get first 10 StockAndroids
+     * const stockAndroids = await prisma.stockAndroid.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const stockAndroidWithIdOnly = await prisma.stockAndroid.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends StockAndroidFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, StockAndroidFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockAndroidPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a StockAndroid.
+     * @param {StockAndroidCreateArgs} args - Arguments to create a StockAndroid.
+     * @example
+     * // Create one StockAndroid
+     * const StockAndroid = await prisma.stockAndroid.create({
+     *   data: {
+     *     // ... data to create a StockAndroid
+     *   }
+     * })
+     * 
+    **/
+    create<T extends StockAndroidCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, StockAndroidCreateArgs<ExtArgs>>
+    ): Prisma__StockAndroidClient<$Result.GetResult<Prisma.$StockAndroidPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many StockAndroids.
+     *     @param {StockAndroidCreateManyArgs} args - Arguments to create many StockAndroids.
+     *     @example
+     *     // Create many StockAndroids
+     *     const stockAndroid = await prisma.stockAndroid.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends StockAndroidCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, StockAndroidCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a StockAndroid.
+     * @param {StockAndroidDeleteArgs} args - Arguments to delete one StockAndroid.
+     * @example
+     * // Delete one StockAndroid
+     * const StockAndroid = await prisma.stockAndroid.delete({
+     *   where: {
+     *     // ... filter to delete one StockAndroid
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends StockAndroidDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, StockAndroidDeleteArgs<ExtArgs>>
+    ): Prisma__StockAndroidClient<$Result.GetResult<Prisma.$StockAndroidPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one StockAndroid.
+     * @param {StockAndroidUpdateArgs} args - Arguments to update one StockAndroid.
+     * @example
+     * // Update one StockAndroid
+     * const stockAndroid = await prisma.stockAndroid.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends StockAndroidUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, StockAndroidUpdateArgs<ExtArgs>>
+    ): Prisma__StockAndroidClient<$Result.GetResult<Prisma.$StockAndroidPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more StockAndroids.
+     * @param {StockAndroidDeleteManyArgs} args - Arguments to filter StockAndroids to delete.
+     * @example
+     * // Delete a few StockAndroids
+     * const { count } = await prisma.stockAndroid.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends StockAndroidDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, StockAndroidDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StockAndroids.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockAndroidUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StockAndroids
+     * const stockAndroid = await prisma.stockAndroid.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends StockAndroidUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, StockAndroidUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one StockAndroid.
+     * @param {StockAndroidUpsertArgs} args - Arguments to update or create a StockAndroid.
+     * @example
+     * // Update or create a StockAndroid
+     * const stockAndroid = await prisma.stockAndroid.upsert({
+     *   create: {
+     *     // ... data to create a StockAndroid
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StockAndroid we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends StockAndroidUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, StockAndroidUpsertArgs<ExtArgs>>
+    ): Prisma__StockAndroidClient<$Result.GetResult<Prisma.$StockAndroidPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Find zero or more StockAndroids that matches the filter.
+     * @param {StockAndroidFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const stockAndroid = await prisma.stockAndroid.findRaw({
+     *   filter: { age: { $gt: 25 } } 
+     * })
+    **/
+    findRaw(
+      args?: StockAndroidFindRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a StockAndroid.
+     * @param {StockAndroidAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const stockAndroid = await prisma.stockAndroid.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+    **/
+    aggregateRaw(
+      args?: StockAndroidAggregateRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Count the number of StockAndroids.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockAndroidCountArgs} args - Arguments to filter StockAndroids to count.
+     * @example
+     * // Count the number of StockAndroids
+     * const count = await prisma.stockAndroid.count({
+     *   where: {
+     *     // ... the filter for the StockAndroids we want to count
+     *   }
+     * })
+    **/
+    count<T extends StockAndroidCountArgs>(
+      args?: Subset<T, StockAndroidCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StockAndroidCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StockAndroid.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockAndroidAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StockAndroidAggregateArgs>(args: Subset<T, StockAndroidAggregateArgs>): Prisma.PrismaPromise<GetStockAndroidAggregateType<T>>
+
+    /**
+     * Group by StockAndroid.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockAndroidGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StockAndroidGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StockAndroidGroupByArgs['orderBy'] }
+        : { orderBy?: StockAndroidGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StockAndroidGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStockAndroidGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StockAndroid model
+   */
+  readonly fields: StockAndroidFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StockAndroid.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StockAndroidClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    model<T extends ModelDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ModelDefaultArgs<ExtArgs>>): Prisma__ModelClient<$Result.GetResult<Prisma.$ModelPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    brand<T extends BrandDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BrandDefaultArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    productType<T extends ProductTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductTypeDefaultArgs<ExtArgs>>): Prisma__ProductTypeClient<$Result.GetResult<Prisma.$ProductTypePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    SalesEntry<T extends StockAndroid$SalesEntryArgs<ExtArgs> = {}>(args?: Subset<T, StockAndroid$SalesEntryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SalesEntryPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the StockAndroid model
+   */ 
+  interface StockAndroidFieldRefs {
+    readonly id: FieldRef<"StockAndroid", 'String'>
+    readonly name: FieldRef<"StockAndroid", 'String'>
+    readonly IMEI: FieldRef<"StockAndroid", 'String'>
+    readonly modelId: FieldRef<"StockAndroid", 'String'>
+    readonly brandId: FieldRef<"StockAndroid", 'String'>
+    readonly productTypeId: FieldRef<"StockAndroid", 'String'>
+    readonly purchasePrice: FieldRef<"StockAndroid", 'Int'>
+    readonly sellingPrice: FieldRef<"StockAndroid", 'Int'>
+    readonly sold: FieldRef<"StockAndroid", 'Boolean'>
+    readonly color: FieldRef<"StockAndroid", 'String'>
+    readonly ram: FieldRef<"StockAndroid", 'String'>
+    readonly rom: FieldRef<"StockAndroid", 'String'>
+    readonly createdAt: FieldRef<"StockAndroid", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * StockAndroid findUnique
+   */
+  export type StockAndroidFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAndroid
+     */
+    select?: StockAndroidSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAndroidInclude<ExtArgs> | null
+    /**
+     * Filter, which StockAndroid to fetch.
+     */
+    where: StockAndroidWhereUniqueInput
+  }
+
+
+  /**
+   * StockAndroid findUniqueOrThrow
+   */
+  export type StockAndroidFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAndroid
+     */
+    select?: StockAndroidSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAndroidInclude<ExtArgs> | null
+    /**
+     * Filter, which StockAndroid to fetch.
+     */
+    where: StockAndroidWhereUniqueInput
+  }
+
+
+  /**
+   * StockAndroid findFirst
+   */
+  export type StockAndroidFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAndroid
+     */
+    select?: StockAndroidSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAndroidInclude<ExtArgs> | null
+    /**
+     * Filter, which StockAndroid to fetch.
+     */
+    where?: StockAndroidWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StockAndroids to fetch.
+     */
+    orderBy?: StockAndroidOrderByWithRelationInput | StockAndroidOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StockAndroids.
+     */
+    cursor?: StockAndroidWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StockAndroids from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StockAndroids.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StockAndroids.
+     */
+    distinct?: StockAndroidScalarFieldEnum | StockAndroidScalarFieldEnum[]
+  }
+
+
+  /**
+   * StockAndroid findFirstOrThrow
+   */
+  export type StockAndroidFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAndroid
+     */
+    select?: StockAndroidSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAndroidInclude<ExtArgs> | null
+    /**
+     * Filter, which StockAndroid to fetch.
+     */
+    where?: StockAndroidWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StockAndroids to fetch.
+     */
+    orderBy?: StockAndroidOrderByWithRelationInput | StockAndroidOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StockAndroids.
+     */
+    cursor?: StockAndroidWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StockAndroids from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StockAndroids.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StockAndroids.
+     */
+    distinct?: StockAndroidScalarFieldEnum | StockAndroidScalarFieldEnum[]
+  }
+
+
+  /**
+   * StockAndroid findMany
+   */
+  export type StockAndroidFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAndroid
+     */
+    select?: StockAndroidSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAndroidInclude<ExtArgs> | null
+    /**
+     * Filter, which StockAndroids to fetch.
+     */
+    where?: StockAndroidWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StockAndroids to fetch.
+     */
+    orderBy?: StockAndroidOrderByWithRelationInput | StockAndroidOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StockAndroids.
+     */
+    cursor?: StockAndroidWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StockAndroids from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StockAndroids.
+     */
+    skip?: number
+    distinct?: StockAndroidScalarFieldEnum | StockAndroidScalarFieldEnum[]
+  }
+
+
+  /**
+   * StockAndroid create
+   */
+  export type StockAndroidCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAndroid
+     */
+    select?: StockAndroidSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAndroidInclude<ExtArgs> | null
+    /**
+     * The data needed to create a StockAndroid.
+     */
+    data: XOR<StockAndroidCreateInput, StockAndroidUncheckedCreateInput>
+  }
+
+
+  /**
+   * StockAndroid createMany
+   */
+  export type StockAndroidCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StockAndroids.
+     */
+    data: StockAndroidCreateManyInput | StockAndroidCreateManyInput[]
+  }
+
+
+  /**
+   * StockAndroid update
+   */
+  export type StockAndroidUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAndroid
+     */
+    select?: StockAndroidSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAndroidInclude<ExtArgs> | null
+    /**
+     * The data needed to update a StockAndroid.
+     */
+    data: XOR<StockAndroidUpdateInput, StockAndroidUncheckedUpdateInput>
+    /**
+     * Choose, which StockAndroid to update.
+     */
+    where: StockAndroidWhereUniqueInput
+  }
+
+
+  /**
+   * StockAndroid updateMany
+   */
+  export type StockAndroidUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StockAndroids.
+     */
+    data: XOR<StockAndroidUpdateManyMutationInput, StockAndroidUncheckedUpdateManyInput>
+    /**
+     * Filter which StockAndroids to update
+     */
+    where?: StockAndroidWhereInput
+  }
+
+
+  /**
+   * StockAndroid upsert
+   */
+  export type StockAndroidUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAndroid
+     */
+    select?: StockAndroidSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAndroidInclude<ExtArgs> | null
+    /**
+     * The filter to search for the StockAndroid to update in case it exists.
+     */
+    where: StockAndroidWhereUniqueInput
+    /**
+     * In case the StockAndroid found by the `where` argument doesn't exist, create a new StockAndroid with this data.
+     */
+    create: XOR<StockAndroidCreateInput, StockAndroidUncheckedCreateInput>
+    /**
+     * In case the StockAndroid was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StockAndroidUpdateInput, StockAndroidUncheckedUpdateInput>
+  }
+
+
+  /**
+   * StockAndroid delete
+   */
+  export type StockAndroidDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAndroid
+     */
+    select?: StockAndroidSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAndroidInclude<ExtArgs> | null
+    /**
+     * Filter which StockAndroid to delete.
+     */
+    where: StockAndroidWhereUniqueInput
+  }
+
+
+  /**
+   * StockAndroid deleteMany
+   */
+  export type StockAndroidDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StockAndroids to delete
+     */
+    where?: StockAndroidWhereInput
+  }
+
+
+  /**
+   * StockAndroid findRaw
+   */
+  export type StockAndroidFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * StockAndroid aggregateRaw
+   */
+  export type StockAndroidAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * StockAndroid.SalesEntry
+   */
+  export type StockAndroid$SalesEntryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SalesEntry
+     */
+    select?: SalesEntrySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SalesEntryInclude<ExtArgs> | null
+    where?: SalesEntryWhereInput
+    orderBy?: SalesEntryOrderByWithRelationInput | SalesEntryOrderByWithRelationInput[]
+    cursor?: SalesEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SalesEntryScalarFieldEnum | SalesEntryScalarFieldEnum[]
+  }
+
+
+  /**
+   * StockAndroid without action
+   */
+  export type StockAndroidDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAndroid
+     */
+    select?: StockAndroidSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAndroidInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model StockButton
+   */
+
+  export type AggregateStockButton = {
+    _count: StockButtonCountAggregateOutputType | null
+    _avg: StockButtonAvgAggregateOutputType | null
+    _sum: StockButtonSumAggregateOutputType | null
+    _min: StockButtonMinAggregateOutputType | null
+    _max: StockButtonMaxAggregateOutputType | null
+  }
+
+  export type StockButtonAvgAggregateOutputType = {
+    purchasePrice: number | null
+    sellingPrice: number | null
+    quantity: number | null
+  }
+
+  export type StockButtonSumAggregateOutputType = {
+    purchasePrice: number | null
+    sellingPrice: number | null
+    quantity: number | null
+  }
+
+  export type StockButtonMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    modelId: string | null
+    brandId: string | null
+    productTypeId: string | null
+    purchasePrice: number | null
+    sellingPrice: number | null
+    quantity: number | null
+    color: string | null
+    createdAt: Date | null
+  }
+
+  export type StockButtonMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    modelId: string | null
+    brandId: string | null
+    productTypeId: string | null
+    purchasePrice: number | null
+    sellingPrice: number | null
+    quantity: number | null
+    color: string | null
+    createdAt: Date | null
+  }
+
+  export type StockButtonCountAggregateOutputType = {
+    id: number
+    name: number
+    modelId: number
+    brandId: number
+    productTypeId: number
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    color: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type StockButtonAvgAggregateInputType = {
+    purchasePrice?: true
+    sellingPrice?: true
+    quantity?: true
+  }
+
+  export type StockButtonSumAggregateInputType = {
+    purchasePrice?: true
+    sellingPrice?: true
+    quantity?: true
+  }
+
+  export type StockButtonMinAggregateInputType = {
+    id?: true
+    name?: true
+    modelId?: true
+    brandId?: true
+    productTypeId?: true
+    purchasePrice?: true
+    sellingPrice?: true
+    quantity?: true
+    color?: true
+    createdAt?: true
+  }
+
+  export type StockButtonMaxAggregateInputType = {
+    id?: true
+    name?: true
+    modelId?: true
+    brandId?: true
+    productTypeId?: true
+    purchasePrice?: true
+    sellingPrice?: true
+    quantity?: true
+    color?: true
+    createdAt?: true
+  }
+
+  export type StockButtonCountAggregateInputType = {
+    id?: true
+    name?: true
+    modelId?: true
+    brandId?: true
+    productTypeId?: true
+    purchasePrice?: true
+    sellingPrice?: true
+    quantity?: true
+    color?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type StockButtonAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StockButton to aggregate.
+     */
+    where?: StockButtonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StockButtons to fetch.
+     */
+    orderBy?: StockButtonOrderByWithRelationInput | StockButtonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StockButtonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StockButtons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StockButtons.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StockButtons
+    **/
+    _count?: true | StockButtonCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: StockButtonAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StockButtonSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StockButtonMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StockButtonMaxAggregateInputType
+  }
+
+  export type GetStockButtonAggregateType<T extends StockButtonAggregateArgs> = {
+        [P in keyof T & keyof AggregateStockButton]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStockButton[P]>
+      : GetScalarType<T[P], AggregateStockButton[P]>
+  }
+
+
+
+
+  export type StockButtonGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StockButtonWhereInput
+    orderBy?: StockButtonOrderByWithAggregationInput | StockButtonOrderByWithAggregationInput[]
+    by: StockButtonScalarFieldEnum[] | StockButtonScalarFieldEnum
+    having?: StockButtonScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StockButtonCountAggregateInputType | true
+    _avg?: StockButtonAvgAggregateInputType
+    _sum?: StockButtonSumAggregateInputType
+    _min?: StockButtonMinAggregateInputType
+    _max?: StockButtonMaxAggregateInputType
+  }
+
+  export type StockButtonGroupByOutputType = {
+    id: string
+    name: string
+    modelId: string
+    brandId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    color: string
+    createdAt: Date | null
+    _count: StockButtonCountAggregateOutputType | null
+    _avg: StockButtonAvgAggregateOutputType | null
+    _sum: StockButtonSumAggregateOutputType | null
+    _min: StockButtonMinAggregateOutputType | null
+    _max: StockButtonMaxAggregateOutputType | null
+  }
+
+  type GetStockButtonGroupByPayload<T extends StockButtonGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StockButtonGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StockButtonGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StockButtonGroupByOutputType[P]>
+            : GetScalarType<T[P], StockButtonGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StockButtonSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    modelId?: boolean
+    brandId?: boolean
+    productTypeId?: boolean
+    purchasePrice?: boolean
+    sellingPrice?: boolean
+    quantity?: boolean
+    color?: boolean
+    createdAt?: boolean
+    model?: boolean | ModelDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+    productType?: boolean | ProductTypeDefaultArgs<ExtArgs>
+    SalesEntry?: boolean | StockButton$SalesEntryArgs<ExtArgs>
+    _count?: boolean | StockButtonCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["stockButton"]>
+
+  export type StockButtonSelectScalar = {
+    id?: boolean
+    name?: boolean
+    modelId?: boolean
+    brandId?: boolean
+    productTypeId?: boolean
+    purchasePrice?: boolean
+    sellingPrice?: boolean
+    quantity?: boolean
+    color?: boolean
+    createdAt?: boolean
+  }
+
+  export type StockButtonInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    model?: boolean | ModelDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+    productType?: boolean | ProductTypeDefaultArgs<ExtArgs>
+    SalesEntry?: boolean | StockButton$SalesEntryArgs<ExtArgs>
+    _count?: boolean | StockButtonCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $StockButtonPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StockButton"
+    objects: {
+      model: Prisma.$ModelPayload<ExtArgs>
+      brand: Prisma.$BrandPayload<ExtArgs>
+      productType: Prisma.$ProductTypePayload<ExtArgs>
+      SalesEntry: Prisma.$SalesEntryPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      modelId: string
+      brandId: string
+      productTypeId: string
+      purchasePrice: number
+      sellingPrice: number
+      quantity: number
+      color: string
+      createdAt: Date | null
+    }, ExtArgs["result"]["stockButton"]>
+    composites: {}
+  }
+
+
+  type StockButtonGetPayload<S extends boolean | null | undefined | StockButtonDefaultArgs> = $Result.GetResult<Prisma.$StockButtonPayload, S>
+
+  type StockButtonCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<StockButtonFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: StockButtonCountAggregateInputType | true
+    }
+
+  export interface StockButtonDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StockButton'], meta: { name: 'StockButton' } }
+    /**
+     * Find zero or one StockButton that matches the filter.
+     * @param {StockButtonFindUniqueArgs} args - Arguments to find a StockButton
+     * @example
+     * // Get one StockButton
+     * const stockButton = await prisma.stockButton.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends StockButtonFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, StockButtonFindUniqueArgs<ExtArgs>>
+    ): Prisma__StockButtonClient<$Result.GetResult<Prisma.$StockButtonPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one StockButton that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {StockButtonFindUniqueOrThrowArgs} args - Arguments to find a StockButton
+     * @example
+     * // Get one StockButton
+     * const stockButton = await prisma.stockButton.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends StockButtonFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, StockButtonFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__StockButtonClient<$Result.GetResult<Prisma.$StockButtonPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first StockButton that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockButtonFindFirstArgs} args - Arguments to find a StockButton
+     * @example
+     * // Get one StockButton
+     * const stockButton = await prisma.stockButton.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends StockButtonFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, StockButtonFindFirstArgs<ExtArgs>>
+    ): Prisma__StockButtonClient<$Result.GetResult<Prisma.$StockButtonPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first StockButton that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockButtonFindFirstOrThrowArgs} args - Arguments to find a StockButton
+     * @example
+     * // Get one StockButton
+     * const stockButton = await prisma.stockButton.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends StockButtonFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, StockButtonFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__StockButtonClient<$Result.GetResult<Prisma.$StockButtonPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more StockButtons that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockButtonFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StockButtons
+     * const stockButtons = await prisma.stockButton.findMany()
+     * 
+     * // Get first 10 StockButtons
+     * const stockButtons = await prisma.stockButton.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const stockButtonWithIdOnly = await prisma.stockButton.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends StockButtonFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, StockButtonFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockButtonPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a StockButton.
+     * @param {StockButtonCreateArgs} args - Arguments to create a StockButton.
+     * @example
+     * // Create one StockButton
+     * const StockButton = await prisma.stockButton.create({
+     *   data: {
+     *     // ... data to create a StockButton
+     *   }
+     * })
+     * 
+    **/
+    create<T extends StockButtonCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, StockButtonCreateArgs<ExtArgs>>
+    ): Prisma__StockButtonClient<$Result.GetResult<Prisma.$StockButtonPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many StockButtons.
+     *     @param {StockButtonCreateManyArgs} args - Arguments to create many StockButtons.
+     *     @example
+     *     // Create many StockButtons
+     *     const stockButton = await prisma.stockButton.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends StockButtonCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, StockButtonCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a StockButton.
+     * @param {StockButtonDeleteArgs} args - Arguments to delete one StockButton.
+     * @example
+     * // Delete one StockButton
+     * const StockButton = await prisma.stockButton.delete({
+     *   where: {
+     *     // ... filter to delete one StockButton
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends StockButtonDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, StockButtonDeleteArgs<ExtArgs>>
+    ): Prisma__StockButtonClient<$Result.GetResult<Prisma.$StockButtonPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one StockButton.
+     * @param {StockButtonUpdateArgs} args - Arguments to update one StockButton.
+     * @example
+     * // Update one StockButton
+     * const stockButton = await prisma.stockButton.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends StockButtonUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, StockButtonUpdateArgs<ExtArgs>>
+    ): Prisma__StockButtonClient<$Result.GetResult<Prisma.$StockButtonPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more StockButtons.
+     * @param {StockButtonDeleteManyArgs} args - Arguments to filter StockButtons to delete.
+     * @example
+     * // Delete a few StockButtons
+     * const { count } = await prisma.stockButton.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends StockButtonDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, StockButtonDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StockButtons.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockButtonUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StockButtons
+     * const stockButton = await prisma.stockButton.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends StockButtonUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, StockButtonUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one StockButton.
+     * @param {StockButtonUpsertArgs} args - Arguments to update or create a StockButton.
+     * @example
+     * // Update or create a StockButton
+     * const stockButton = await prisma.stockButton.upsert({
+     *   create: {
+     *     // ... data to create a StockButton
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StockButton we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends StockButtonUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, StockButtonUpsertArgs<ExtArgs>>
+    ): Prisma__StockButtonClient<$Result.GetResult<Prisma.$StockButtonPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Find zero or more StockButtons that matches the filter.
+     * @param {StockButtonFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const stockButton = await prisma.stockButton.findRaw({
+     *   filter: { age: { $gt: 25 } } 
+     * })
+    **/
+    findRaw(
+      args?: StockButtonFindRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a StockButton.
+     * @param {StockButtonAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const stockButton = await prisma.stockButton.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+    **/
+    aggregateRaw(
+      args?: StockButtonAggregateRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Count the number of StockButtons.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockButtonCountArgs} args - Arguments to filter StockButtons to count.
+     * @example
+     * // Count the number of StockButtons
+     * const count = await prisma.stockButton.count({
+     *   where: {
+     *     // ... the filter for the StockButtons we want to count
+     *   }
+     * })
+    **/
+    count<T extends StockButtonCountArgs>(
+      args?: Subset<T, StockButtonCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StockButtonCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StockButton.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockButtonAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StockButtonAggregateArgs>(args: Subset<T, StockButtonAggregateArgs>): Prisma.PrismaPromise<GetStockButtonAggregateType<T>>
+
+    /**
+     * Group by StockButton.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockButtonGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StockButtonGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StockButtonGroupByArgs['orderBy'] }
+        : { orderBy?: StockButtonGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StockButtonGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStockButtonGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StockButton model
+   */
+  readonly fields: StockButtonFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StockButton.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StockButtonClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    model<T extends ModelDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ModelDefaultArgs<ExtArgs>>): Prisma__ModelClient<$Result.GetResult<Prisma.$ModelPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    brand<T extends BrandDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BrandDefaultArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    productType<T extends ProductTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductTypeDefaultArgs<ExtArgs>>): Prisma__ProductTypeClient<$Result.GetResult<Prisma.$ProductTypePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    SalesEntry<T extends StockButton$SalesEntryArgs<ExtArgs> = {}>(args?: Subset<T, StockButton$SalesEntryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SalesEntryPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the StockButton model
+   */ 
+  interface StockButtonFieldRefs {
+    readonly id: FieldRef<"StockButton", 'String'>
+    readonly name: FieldRef<"StockButton", 'String'>
+    readonly modelId: FieldRef<"StockButton", 'String'>
+    readonly brandId: FieldRef<"StockButton", 'String'>
+    readonly productTypeId: FieldRef<"StockButton", 'String'>
+    readonly purchasePrice: FieldRef<"StockButton", 'Int'>
+    readonly sellingPrice: FieldRef<"StockButton", 'Int'>
+    readonly quantity: FieldRef<"StockButton", 'Int'>
+    readonly color: FieldRef<"StockButton", 'String'>
+    readonly createdAt: FieldRef<"StockButton", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * StockButton findUnique
+   */
+  export type StockButtonFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockButton
+     */
+    select?: StockButtonSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockButtonInclude<ExtArgs> | null
+    /**
+     * Filter, which StockButton to fetch.
+     */
+    where: StockButtonWhereUniqueInput
+  }
+
+
+  /**
+   * StockButton findUniqueOrThrow
+   */
+  export type StockButtonFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockButton
+     */
+    select?: StockButtonSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockButtonInclude<ExtArgs> | null
+    /**
+     * Filter, which StockButton to fetch.
+     */
+    where: StockButtonWhereUniqueInput
+  }
+
+
+  /**
+   * StockButton findFirst
+   */
+  export type StockButtonFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockButton
+     */
+    select?: StockButtonSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockButtonInclude<ExtArgs> | null
+    /**
+     * Filter, which StockButton to fetch.
+     */
+    where?: StockButtonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StockButtons to fetch.
+     */
+    orderBy?: StockButtonOrderByWithRelationInput | StockButtonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StockButtons.
+     */
+    cursor?: StockButtonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StockButtons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StockButtons.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StockButtons.
+     */
+    distinct?: StockButtonScalarFieldEnum | StockButtonScalarFieldEnum[]
+  }
+
+
+  /**
+   * StockButton findFirstOrThrow
+   */
+  export type StockButtonFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockButton
+     */
+    select?: StockButtonSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockButtonInclude<ExtArgs> | null
+    /**
+     * Filter, which StockButton to fetch.
+     */
+    where?: StockButtonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StockButtons to fetch.
+     */
+    orderBy?: StockButtonOrderByWithRelationInput | StockButtonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StockButtons.
+     */
+    cursor?: StockButtonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StockButtons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StockButtons.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StockButtons.
+     */
+    distinct?: StockButtonScalarFieldEnum | StockButtonScalarFieldEnum[]
+  }
+
+
+  /**
+   * StockButton findMany
+   */
+  export type StockButtonFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockButton
+     */
+    select?: StockButtonSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockButtonInclude<ExtArgs> | null
+    /**
+     * Filter, which StockButtons to fetch.
+     */
+    where?: StockButtonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StockButtons to fetch.
+     */
+    orderBy?: StockButtonOrderByWithRelationInput | StockButtonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StockButtons.
+     */
+    cursor?: StockButtonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StockButtons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StockButtons.
+     */
+    skip?: number
+    distinct?: StockButtonScalarFieldEnum | StockButtonScalarFieldEnum[]
+  }
+
+
+  /**
+   * StockButton create
+   */
+  export type StockButtonCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockButton
+     */
+    select?: StockButtonSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockButtonInclude<ExtArgs> | null
+    /**
+     * The data needed to create a StockButton.
+     */
+    data: XOR<StockButtonCreateInput, StockButtonUncheckedCreateInput>
+  }
+
+
+  /**
+   * StockButton createMany
+   */
+  export type StockButtonCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StockButtons.
+     */
+    data: StockButtonCreateManyInput | StockButtonCreateManyInput[]
+  }
+
+
+  /**
+   * StockButton update
+   */
+  export type StockButtonUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockButton
+     */
+    select?: StockButtonSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockButtonInclude<ExtArgs> | null
+    /**
+     * The data needed to update a StockButton.
+     */
+    data: XOR<StockButtonUpdateInput, StockButtonUncheckedUpdateInput>
+    /**
+     * Choose, which StockButton to update.
+     */
+    where: StockButtonWhereUniqueInput
+  }
+
+
+  /**
+   * StockButton updateMany
+   */
+  export type StockButtonUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StockButtons.
+     */
+    data: XOR<StockButtonUpdateManyMutationInput, StockButtonUncheckedUpdateManyInput>
+    /**
+     * Filter which StockButtons to update
+     */
+    where?: StockButtonWhereInput
+  }
+
+
+  /**
+   * StockButton upsert
+   */
+  export type StockButtonUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockButton
+     */
+    select?: StockButtonSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockButtonInclude<ExtArgs> | null
+    /**
+     * The filter to search for the StockButton to update in case it exists.
+     */
+    where: StockButtonWhereUniqueInput
+    /**
+     * In case the StockButton found by the `where` argument doesn't exist, create a new StockButton with this data.
+     */
+    create: XOR<StockButtonCreateInput, StockButtonUncheckedCreateInput>
+    /**
+     * In case the StockButton was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StockButtonUpdateInput, StockButtonUncheckedUpdateInput>
+  }
+
+
+  /**
+   * StockButton delete
+   */
+  export type StockButtonDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockButton
+     */
+    select?: StockButtonSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockButtonInclude<ExtArgs> | null
+    /**
+     * Filter which StockButton to delete.
+     */
+    where: StockButtonWhereUniqueInput
+  }
+
+
+  /**
+   * StockButton deleteMany
+   */
+  export type StockButtonDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StockButtons to delete
+     */
+    where?: StockButtonWhereInput
+  }
+
+
+  /**
+   * StockButton findRaw
+   */
+  export type StockButtonFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * StockButton aggregateRaw
+   */
+  export type StockButtonAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * StockButton.SalesEntry
+   */
+  export type StockButton$SalesEntryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SalesEntry
+     */
+    select?: SalesEntrySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SalesEntryInclude<ExtArgs> | null
+    where?: SalesEntryWhereInput
+    orderBy?: SalesEntryOrderByWithRelationInput | SalesEntryOrderByWithRelationInput[]
+    cursor?: SalesEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SalesEntryScalarFieldEnum | SalesEntryScalarFieldEnum[]
+  }
+
+
+  /**
+   * StockButton without action
+   */
+  export type StockButtonDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockButton
+     */
+    select?: StockButtonSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockButtonInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model StockAccessories
+   */
+
+  export type AggregateStockAccessories = {
+    _count: StockAccessoriesCountAggregateOutputType | null
+    _avg: StockAccessoriesAvgAggregateOutputType | null
+    _sum: StockAccessoriesSumAggregateOutputType | null
+    _min: StockAccessoriesMinAggregateOutputType | null
+    _max: StockAccessoriesMaxAggregateOutputType | null
+  }
+
+  export type StockAccessoriesAvgAggregateOutputType = {
+    purchasePrice: number | null
+    sellingPrice: number | null
+    quantity: number | null
+  }
+
+  export type StockAccessoriesSumAggregateOutputType = {
+    purchasePrice: number | null
+    sellingPrice: number | null
+    quantity: number | null
+  }
+
+  export type StockAccessoriesMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    modelId: string | null
+    brandId: string | null
+    productTypeId: string | null
+    purchasePrice: number | null
+    sellingPrice: number | null
+    quantity: number | null
+    createdAt: Date | null
+  }
+
+  export type StockAccessoriesMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    modelId: string | null
+    brandId: string | null
+    productTypeId: string | null
+    purchasePrice: number | null
+    sellingPrice: number | null
+    quantity: number | null
+    createdAt: Date | null
+  }
+
+  export type StockAccessoriesCountAggregateOutputType = {
+    id: number
+    name: number
+    modelId: number
+    brandId: number
+    productTypeId: number
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type StockAccessoriesAvgAggregateInputType = {
+    purchasePrice?: true
+    sellingPrice?: true
+    quantity?: true
+  }
+
+  export type StockAccessoriesSumAggregateInputType = {
+    purchasePrice?: true
+    sellingPrice?: true
+    quantity?: true
+  }
+
+  export type StockAccessoriesMinAggregateInputType = {
+    id?: true
+    name?: true
+    modelId?: true
+    brandId?: true
+    productTypeId?: true
+    purchasePrice?: true
+    sellingPrice?: true
+    quantity?: true
+    createdAt?: true
+  }
+
+  export type StockAccessoriesMaxAggregateInputType = {
+    id?: true
+    name?: true
+    modelId?: true
+    brandId?: true
+    productTypeId?: true
+    purchasePrice?: true
+    sellingPrice?: true
+    quantity?: true
+    createdAt?: true
+  }
+
+  export type StockAccessoriesCountAggregateInputType = {
+    id?: true
+    name?: true
+    modelId?: true
+    brandId?: true
+    productTypeId?: true
+    purchasePrice?: true
+    sellingPrice?: true
+    quantity?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type StockAccessoriesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StockAccessories to aggregate.
+     */
+    where?: StockAccessoriesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StockAccessories to fetch.
+     */
+    orderBy?: StockAccessoriesOrderByWithRelationInput | StockAccessoriesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StockAccessoriesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StockAccessories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StockAccessories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StockAccessories
+    **/
+    _count?: true | StockAccessoriesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: StockAccessoriesAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StockAccessoriesSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StockAccessoriesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StockAccessoriesMaxAggregateInputType
+  }
+
+  export type GetStockAccessoriesAggregateType<T extends StockAccessoriesAggregateArgs> = {
+        [P in keyof T & keyof AggregateStockAccessories]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStockAccessories[P]>
+      : GetScalarType<T[P], AggregateStockAccessories[P]>
+  }
+
+
+
+
+  export type StockAccessoriesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StockAccessoriesWhereInput
+    orderBy?: StockAccessoriesOrderByWithAggregationInput | StockAccessoriesOrderByWithAggregationInput[]
+    by: StockAccessoriesScalarFieldEnum[] | StockAccessoriesScalarFieldEnum
+    having?: StockAccessoriesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StockAccessoriesCountAggregateInputType | true
+    _avg?: StockAccessoriesAvgAggregateInputType
+    _sum?: StockAccessoriesSumAggregateInputType
+    _min?: StockAccessoriesMinAggregateInputType
+    _max?: StockAccessoriesMaxAggregateInputType
+  }
+
+  export type StockAccessoriesGroupByOutputType = {
+    id: string
+    name: string
+    modelId: string
+    brandId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    createdAt: Date | null
+    _count: StockAccessoriesCountAggregateOutputType | null
+    _avg: StockAccessoriesAvgAggregateOutputType | null
+    _sum: StockAccessoriesSumAggregateOutputType | null
+    _min: StockAccessoriesMinAggregateOutputType | null
+    _max: StockAccessoriesMaxAggregateOutputType | null
+  }
+
+  type GetStockAccessoriesGroupByPayload<T extends StockAccessoriesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StockAccessoriesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StockAccessoriesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StockAccessoriesGroupByOutputType[P]>
+            : GetScalarType<T[P], StockAccessoriesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StockAccessoriesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    modelId?: boolean
+    brandId?: boolean
+    productTypeId?: boolean
+    purchasePrice?: boolean
+    sellingPrice?: boolean
+    quantity?: boolean
+    createdAt?: boolean
+    model?: boolean | ModelDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+    productType?: boolean | ProductTypeDefaultArgs<ExtArgs>
+    SalesEntry?: boolean | StockAccessories$SalesEntryArgs<ExtArgs>
+    _count?: boolean | StockAccessoriesCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["stockAccessories"]>
+
+  export type StockAccessoriesSelectScalar = {
+    id?: boolean
+    name?: boolean
+    modelId?: boolean
+    brandId?: boolean
+    productTypeId?: boolean
+    purchasePrice?: boolean
+    sellingPrice?: boolean
+    quantity?: boolean
+    createdAt?: boolean
+  }
+
+  export type StockAccessoriesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    model?: boolean | ModelDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+    productType?: boolean | ProductTypeDefaultArgs<ExtArgs>
+    SalesEntry?: boolean | StockAccessories$SalesEntryArgs<ExtArgs>
+    _count?: boolean | StockAccessoriesCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $StockAccessoriesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StockAccessories"
+    objects: {
+      model: Prisma.$ModelPayload<ExtArgs>
+      brand: Prisma.$BrandPayload<ExtArgs>
+      productType: Prisma.$ProductTypePayload<ExtArgs>
+      SalesEntry: Prisma.$SalesEntryPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      modelId: string
+      brandId: string
+      productTypeId: string
+      purchasePrice: number
+      sellingPrice: number
+      quantity: number
+      createdAt: Date | null
+    }, ExtArgs["result"]["stockAccessories"]>
+    composites: {}
+  }
+
+
+  type StockAccessoriesGetPayload<S extends boolean | null | undefined | StockAccessoriesDefaultArgs> = $Result.GetResult<Prisma.$StockAccessoriesPayload, S>
+
+  type StockAccessoriesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<StockAccessoriesFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: StockAccessoriesCountAggregateInputType | true
+    }
+
+  export interface StockAccessoriesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StockAccessories'], meta: { name: 'StockAccessories' } }
+    /**
+     * Find zero or one StockAccessories that matches the filter.
+     * @param {StockAccessoriesFindUniqueArgs} args - Arguments to find a StockAccessories
+     * @example
+     * // Get one StockAccessories
+     * const stockAccessories = await prisma.stockAccessories.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends StockAccessoriesFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, StockAccessoriesFindUniqueArgs<ExtArgs>>
+    ): Prisma__StockAccessoriesClient<$Result.GetResult<Prisma.$StockAccessoriesPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one StockAccessories that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {StockAccessoriesFindUniqueOrThrowArgs} args - Arguments to find a StockAccessories
+     * @example
+     * // Get one StockAccessories
+     * const stockAccessories = await prisma.stockAccessories.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends StockAccessoriesFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, StockAccessoriesFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__StockAccessoriesClient<$Result.GetResult<Prisma.$StockAccessoriesPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first StockAccessories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockAccessoriesFindFirstArgs} args - Arguments to find a StockAccessories
+     * @example
+     * // Get one StockAccessories
+     * const stockAccessories = await prisma.stockAccessories.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends StockAccessoriesFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, StockAccessoriesFindFirstArgs<ExtArgs>>
+    ): Prisma__StockAccessoriesClient<$Result.GetResult<Prisma.$StockAccessoriesPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first StockAccessories that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockAccessoriesFindFirstOrThrowArgs} args - Arguments to find a StockAccessories
+     * @example
+     * // Get one StockAccessories
+     * const stockAccessories = await prisma.stockAccessories.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends StockAccessoriesFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, StockAccessoriesFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__StockAccessoriesClient<$Result.GetResult<Prisma.$StockAccessoriesPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more StockAccessories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockAccessoriesFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StockAccessories
+     * const stockAccessories = await prisma.stockAccessories.findMany()
+     * 
+     * // Get first 10 StockAccessories
+     * const stockAccessories = await prisma.stockAccessories.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const stockAccessoriesWithIdOnly = await prisma.stockAccessories.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends StockAccessoriesFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, StockAccessoriesFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockAccessoriesPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a StockAccessories.
+     * @param {StockAccessoriesCreateArgs} args - Arguments to create a StockAccessories.
+     * @example
+     * // Create one StockAccessories
+     * const StockAccessories = await prisma.stockAccessories.create({
+     *   data: {
+     *     // ... data to create a StockAccessories
+     *   }
+     * })
+     * 
+    **/
+    create<T extends StockAccessoriesCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, StockAccessoriesCreateArgs<ExtArgs>>
+    ): Prisma__StockAccessoriesClient<$Result.GetResult<Prisma.$StockAccessoriesPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many StockAccessories.
+     *     @param {StockAccessoriesCreateManyArgs} args - Arguments to create many StockAccessories.
+     *     @example
+     *     // Create many StockAccessories
+     *     const stockAccessories = await prisma.stockAccessories.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends StockAccessoriesCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, StockAccessoriesCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a StockAccessories.
+     * @param {StockAccessoriesDeleteArgs} args - Arguments to delete one StockAccessories.
+     * @example
+     * // Delete one StockAccessories
+     * const StockAccessories = await prisma.stockAccessories.delete({
+     *   where: {
+     *     // ... filter to delete one StockAccessories
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends StockAccessoriesDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, StockAccessoriesDeleteArgs<ExtArgs>>
+    ): Prisma__StockAccessoriesClient<$Result.GetResult<Prisma.$StockAccessoriesPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one StockAccessories.
+     * @param {StockAccessoriesUpdateArgs} args - Arguments to update one StockAccessories.
+     * @example
+     * // Update one StockAccessories
+     * const stockAccessories = await prisma.stockAccessories.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends StockAccessoriesUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, StockAccessoriesUpdateArgs<ExtArgs>>
+    ): Prisma__StockAccessoriesClient<$Result.GetResult<Prisma.$StockAccessoriesPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more StockAccessories.
+     * @param {StockAccessoriesDeleteManyArgs} args - Arguments to filter StockAccessories to delete.
+     * @example
+     * // Delete a few StockAccessories
+     * const { count } = await prisma.stockAccessories.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends StockAccessoriesDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, StockAccessoriesDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StockAccessories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockAccessoriesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StockAccessories
+     * const stockAccessories = await prisma.stockAccessories.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends StockAccessoriesUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, StockAccessoriesUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one StockAccessories.
+     * @param {StockAccessoriesUpsertArgs} args - Arguments to update or create a StockAccessories.
+     * @example
+     * // Update or create a StockAccessories
+     * const stockAccessories = await prisma.stockAccessories.upsert({
+     *   create: {
+     *     // ... data to create a StockAccessories
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StockAccessories we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends StockAccessoriesUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, StockAccessoriesUpsertArgs<ExtArgs>>
+    ): Prisma__StockAccessoriesClient<$Result.GetResult<Prisma.$StockAccessoriesPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Find zero or more StockAccessories that matches the filter.
+     * @param {StockAccessoriesFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const stockAccessories = await prisma.stockAccessories.findRaw({
+     *   filter: { age: { $gt: 25 } } 
+     * })
+    **/
+    findRaw(
+      args?: StockAccessoriesFindRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a StockAccessories.
+     * @param {StockAccessoriesAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const stockAccessories = await prisma.stockAccessories.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+    **/
+    aggregateRaw(
+      args?: StockAccessoriesAggregateRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Count the number of StockAccessories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockAccessoriesCountArgs} args - Arguments to filter StockAccessories to count.
+     * @example
+     * // Count the number of StockAccessories
+     * const count = await prisma.stockAccessories.count({
+     *   where: {
+     *     // ... the filter for the StockAccessories we want to count
+     *   }
+     * })
+    **/
+    count<T extends StockAccessoriesCountArgs>(
+      args?: Subset<T, StockAccessoriesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StockAccessoriesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StockAccessories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockAccessoriesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StockAccessoriesAggregateArgs>(args: Subset<T, StockAccessoriesAggregateArgs>): Prisma.PrismaPromise<GetStockAccessoriesAggregateType<T>>
+
+    /**
+     * Group by StockAccessories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockAccessoriesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StockAccessoriesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StockAccessoriesGroupByArgs['orderBy'] }
+        : { orderBy?: StockAccessoriesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StockAccessoriesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStockAccessoriesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StockAccessories model
+   */
+  readonly fields: StockAccessoriesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StockAccessories.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StockAccessoriesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    model<T extends ModelDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ModelDefaultArgs<ExtArgs>>): Prisma__ModelClient<$Result.GetResult<Prisma.$ModelPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    brand<T extends BrandDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BrandDefaultArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    productType<T extends ProductTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductTypeDefaultArgs<ExtArgs>>): Prisma__ProductTypeClient<$Result.GetResult<Prisma.$ProductTypePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    SalesEntry<T extends StockAccessories$SalesEntryArgs<ExtArgs> = {}>(args?: Subset<T, StockAccessories$SalesEntryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SalesEntryPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the StockAccessories model
+   */ 
+  interface StockAccessoriesFieldRefs {
+    readonly id: FieldRef<"StockAccessories", 'String'>
+    readonly name: FieldRef<"StockAccessories", 'String'>
+    readonly modelId: FieldRef<"StockAccessories", 'String'>
+    readonly brandId: FieldRef<"StockAccessories", 'String'>
+    readonly productTypeId: FieldRef<"StockAccessories", 'String'>
+    readonly purchasePrice: FieldRef<"StockAccessories", 'Int'>
+    readonly sellingPrice: FieldRef<"StockAccessories", 'Int'>
+    readonly quantity: FieldRef<"StockAccessories", 'Int'>
+    readonly createdAt: FieldRef<"StockAccessories", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * StockAccessories findUnique
+   */
+  export type StockAccessoriesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAccessories
+     */
+    select?: StockAccessoriesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAccessoriesInclude<ExtArgs> | null
+    /**
+     * Filter, which StockAccessories to fetch.
+     */
+    where: StockAccessoriesWhereUniqueInput
+  }
+
+
+  /**
+   * StockAccessories findUniqueOrThrow
+   */
+  export type StockAccessoriesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAccessories
+     */
+    select?: StockAccessoriesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAccessoriesInclude<ExtArgs> | null
+    /**
+     * Filter, which StockAccessories to fetch.
+     */
+    where: StockAccessoriesWhereUniqueInput
+  }
+
+
+  /**
+   * StockAccessories findFirst
+   */
+  export type StockAccessoriesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAccessories
+     */
+    select?: StockAccessoriesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAccessoriesInclude<ExtArgs> | null
+    /**
+     * Filter, which StockAccessories to fetch.
+     */
+    where?: StockAccessoriesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StockAccessories to fetch.
+     */
+    orderBy?: StockAccessoriesOrderByWithRelationInput | StockAccessoriesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StockAccessories.
+     */
+    cursor?: StockAccessoriesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StockAccessories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StockAccessories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StockAccessories.
+     */
+    distinct?: StockAccessoriesScalarFieldEnum | StockAccessoriesScalarFieldEnum[]
+  }
+
+
+  /**
+   * StockAccessories findFirstOrThrow
+   */
+  export type StockAccessoriesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAccessories
+     */
+    select?: StockAccessoriesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAccessoriesInclude<ExtArgs> | null
+    /**
+     * Filter, which StockAccessories to fetch.
+     */
+    where?: StockAccessoriesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StockAccessories to fetch.
+     */
+    orderBy?: StockAccessoriesOrderByWithRelationInput | StockAccessoriesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StockAccessories.
+     */
+    cursor?: StockAccessoriesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StockAccessories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StockAccessories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StockAccessories.
+     */
+    distinct?: StockAccessoriesScalarFieldEnum | StockAccessoriesScalarFieldEnum[]
+  }
+
+
+  /**
+   * StockAccessories findMany
+   */
+  export type StockAccessoriesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAccessories
+     */
+    select?: StockAccessoriesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAccessoriesInclude<ExtArgs> | null
+    /**
+     * Filter, which StockAccessories to fetch.
+     */
+    where?: StockAccessoriesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StockAccessories to fetch.
+     */
+    orderBy?: StockAccessoriesOrderByWithRelationInput | StockAccessoriesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StockAccessories.
+     */
+    cursor?: StockAccessoriesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StockAccessories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StockAccessories.
+     */
+    skip?: number
+    distinct?: StockAccessoriesScalarFieldEnum | StockAccessoriesScalarFieldEnum[]
+  }
+
+
+  /**
+   * StockAccessories create
+   */
+  export type StockAccessoriesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAccessories
+     */
+    select?: StockAccessoriesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAccessoriesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a StockAccessories.
+     */
+    data: XOR<StockAccessoriesCreateInput, StockAccessoriesUncheckedCreateInput>
+  }
+
+
+  /**
+   * StockAccessories createMany
+   */
+  export type StockAccessoriesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StockAccessories.
+     */
+    data: StockAccessoriesCreateManyInput | StockAccessoriesCreateManyInput[]
+  }
+
+
+  /**
+   * StockAccessories update
+   */
+  export type StockAccessoriesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAccessories
+     */
+    select?: StockAccessoriesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAccessoriesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a StockAccessories.
+     */
+    data: XOR<StockAccessoriesUpdateInput, StockAccessoriesUncheckedUpdateInput>
+    /**
+     * Choose, which StockAccessories to update.
+     */
+    where: StockAccessoriesWhereUniqueInput
+  }
+
+
+  /**
+   * StockAccessories updateMany
+   */
+  export type StockAccessoriesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StockAccessories.
+     */
+    data: XOR<StockAccessoriesUpdateManyMutationInput, StockAccessoriesUncheckedUpdateManyInput>
+    /**
+     * Filter which StockAccessories to update
+     */
+    where?: StockAccessoriesWhereInput
+  }
+
+
+  /**
+   * StockAccessories upsert
+   */
+  export type StockAccessoriesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAccessories
+     */
+    select?: StockAccessoriesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAccessoriesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the StockAccessories to update in case it exists.
+     */
+    where: StockAccessoriesWhereUniqueInput
+    /**
+     * In case the StockAccessories found by the `where` argument doesn't exist, create a new StockAccessories with this data.
+     */
+    create: XOR<StockAccessoriesCreateInput, StockAccessoriesUncheckedCreateInput>
+    /**
+     * In case the StockAccessories was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StockAccessoriesUpdateInput, StockAccessoriesUncheckedUpdateInput>
+  }
+
+
+  /**
+   * StockAccessories delete
+   */
+  export type StockAccessoriesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAccessories
+     */
+    select?: StockAccessoriesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAccessoriesInclude<ExtArgs> | null
+    /**
+     * Filter which StockAccessories to delete.
+     */
+    where: StockAccessoriesWhereUniqueInput
+  }
+
+
+  /**
+   * StockAccessories deleteMany
+   */
+  export type StockAccessoriesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StockAccessories to delete
+     */
+    where?: StockAccessoriesWhereInput
+  }
+
+
+  /**
+   * StockAccessories findRaw
+   */
+  export type StockAccessoriesFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * StockAccessories aggregateRaw
+   */
+  export type StockAccessoriesAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * StockAccessories.SalesEntry
+   */
+  export type StockAccessories$SalesEntryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SalesEntry
+     */
+    select?: SalesEntrySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SalesEntryInclude<ExtArgs> | null
+    where?: SalesEntryWhereInput
+    orderBy?: SalesEntryOrderByWithRelationInput | SalesEntryOrderByWithRelationInput[]
+    cursor?: SalesEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SalesEntryScalarFieldEnum | SalesEntryScalarFieldEnum[]
+  }
+
+
+  /**
+   * StockAccessories without action
+   */
+  export type StockAccessoriesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAccessories
+     */
+    select?: StockAccessoriesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAccessoriesInclude<ExtArgs> | null
+  }
+
+
+
+  /**
    * Model SalesEntry
    */
 
@@ -7723,13 +11764,11 @@ export namespace Prisma {
   }
 
   export type SalesEntryAvgAggregateOutputType = {
-    price: number | null
     discount: number | null
     due: number | null
   }
 
   export type SalesEntrySumAggregateOutputType = {
-    price: number | null
     discount: number | null
     due: number | null
   }
@@ -7737,52 +11776,53 @@ export namespace Prisma {
   export type SalesEntryMinAggregateOutputType = {
     id: string | null
     instockId: string | null
-    IMEI: string | null
-    price: number | null
     discount: number | null
     due: number | null
     dueDate: Date | null
     sellerId: string | null
     customerId: string | null
     createdAt: Date | null
+    stockAndroidId: string | null
+    stockButtonId: string | null
+    stockAccessoriesId: string | null
   }
 
   export type SalesEntryMaxAggregateOutputType = {
     id: string | null
     instockId: string | null
-    IMEI: string | null
-    price: number | null
     discount: number | null
     due: number | null
     dueDate: Date | null
     sellerId: string | null
     customerId: string | null
     createdAt: Date | null
+    stockAndroidId: string | null
+    stockButtonId: string | null
+    stockAccessoriesId: string | null
   }
 
   export type SalesEntryCountAggregateOutputType = {
     id: number
     instockId: number
-    IMEI: number
-    price: number
     discount: number
     due: number
     dueDate: number
     sellerId: number
     customerId: number
     createdAt: number
+    stockAndroidId: number
+    stockButtonId: number
+    stockAccessoriesId: number
     _all: number
   }
 
 
   export type SalesEntryAvgAggregateInputType = {
-    price?: true
     discount?: true
     due?: true
   }
 
   export type SalesEntrySumAggregateInputType = {
-    price?: true
     discount?: true
     due?: true
   }
@@ -7790,40 +11830,43 @@ export namespace Prisma {
   export type SalesEntryMinAggregateInputType = {
     id?: true
     instockId?: true
-    IMEI?: true
-    price?: true
     discount?: true
     due?: true
     dueDate?: true
     sellerId?: true
     customerId?: true
     createdAt?: true
+    stockAndroidId?: true
+    stockButtonId?: true
+    stockAccessoriesId?: true
   }
 
   export type SalesEntryMaxAggregateInputType = {
     id?: true
     instockId?: true
-    IMEI?: true
-    price?: true
     discount?: true
     due?: true
     dueDate?: true
     sellerId?: true
     customerId?: true
     createdAt?: true
+    stockAndroidId?: true
+    stockButtonId?: true
+    stockAccessoriesId?: true
   }
 
   export type SalesEntryCountAggregateInputType = {
     id?: true
     instockId?: true
-    IMEI?: true
-    price?: true
     discount?: true
     due?: true
     dueDate?: true
     sellerId?: true
     customerId?: true
     createdAt?: true
+    stockAndroidId?: true
+    stockButtonId?: true
+    stockAccessoriesId?: true
     _all?: true
   }
 
@@ -7916,14 +11959,15 @@ export namespace Prisma {
   export type SalesEntryGroupByOutputType = {
     id: string
     instockId: string
-    IMEI: string
-    price: number
     discount: number
     due: number
     dueDate: Date | null
     sellerId: string
     customerId: string
     createdAt: Date | null
+    stockAndroidId: string | null
+    stockButtonId: string | null
+    stockAccessoriesId: string | null
     _count: SalesEntryCountAggregateOutputType | null
     _avg: SalesEntryAvgAggregateOutputType | null
     _sum: SalesEntrySumAggregateOutputType | null
@@ -7948,36 +11992,44 @@ export namespace Prisma {
   export type SalesEntrySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     instockId?: boolean
-    IMEI?: boolean
-    price?: boolean
     discount?: boolean
     due?: boolean
     dueDate?: boolean
     sellerId?: boolean
     customerId?: boolean
     createdAt?: boolean
+    stockAndroidId?: boolean
+    stockButtonId?: boolean
+    stockAccessoriesId?: boolean
     InStock?: boolean | InStockDefaultArgs<ExtArgs>
     Seller?: boolean | SellerDefaultArgs<ExtArgs>
     customer?: boolean | CustomerDefaultArgs<ExtArgs>
+    StockAndroid?: boolean | SalesEntry$StockAndroidArgs<ExtArgs>
+    StockButton?: boolean | SalesEntry$StockButtonArgs<ExtArgs>
+    StockAccessories?: boolean | SalesEntry$StockAccessoriesArgs<ExtArgs>
   }, ExtArgs["result"]["salesEntry"]>
 
   export type SalesEntrySelectScalar = {
     id?: boolean
     instockId?: boolean
-    IMEI?: boolean
-    price?: boolean
     discount?: boolean
     due?: boolean
     dueDate?: boolean
     sellerId?: boolean
     customerId?: boolean
     createdAt?: boolean
+    stockAndroidId?: boolean
+    stockButtonId?: boolean
+    stockAccessoriesId?: boolean
   }
 
   export type SalesEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     InStock?: boolean | InStockDefaultArgs<ExtArgs>
     Seller?: boolean | SellerDefaultArgs<ExtArgs>
     customer?: boolean | CustomerDefaultArgs<ExtArgs>
+    StockAndroid?: boolean | SalesEntry$StockAndroidArgs<ExtArgs>
+    StockButton?: boolean | SalesEntry$StockButtonArgs<ExtArgs>
+    StockAccessories?: boolean | SalesEntry$StockAccessoriesArgs<ExtArgs>
   }
 
 
@@ -7987,18 +12039,22 @@ export namespace Prisma {
       InStock: Prisma.$InStockPayload<ExtArgs>
       Seller: Prisma.$SellerPayload<ExtArgs>
       customer: Prisma.$CustomerPayload<ExtArgs>
+      StockAndroid: Prisma.$StockAndroidPayload<ExtArgs> | null
+      StockButton: Prisma.$StockButtonPayload<ExtArgs> | null
+      StockAccessories: Prisma.$StockAccessoriesPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       instockId: string
-      IMEI: string
-      price: number
       discount: number
       due: number
       dueDate: Date | null
       sellerId: string
       customerId: string
       createdAt: Date | null
+      stockAndroidId: string | null
+      stockButtonId: string | null
+      stockAccessoriesId: string | null
     }, ExtArgs["result"]["salesEntry"]>
     composites: {}
   }
@@ -8007,7 +12063,7 @@ export namespace Prisma {
   type SalesEntryGetPayload<S extends boolean | null | undefined | SalesEntryDefaultArgs> = $Result.GetResult<Prisma.$SalesEntryPayload, S>
 
   type SalesEntryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<SalesEntryFindManyArgs, 'select' | 'include' | 'distinct' > & {
+    Omit<SalesEntryFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: SalesEntryCountAggregateInputType | true
     }
 
@@ -8397,6 +12453,12 @@ export namespace Prisma {
 
     customer<T extends CustomerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CustomerDefaultArgs<ExtArgs>>): Prisma__CustomerClient<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
+    StockAndroid<T extends SalesEntry$StockAndroidArgs<ExtArgs> = {}>(args?: Subset<T, SalesEntry$StockAndroidArgs<ExtArgs>>): Prisma__StockAndroidClient<$Result.GetResult<Prisma.$StockAndroidPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
+    StockButton<T extends SalesEntry$StockButtonArgs<ExtArgs> = {}>(args?: Subset<T, SalesEntry$StockButtonArgs<ExtArgs>>): Prisma__StockButtonClient<$Result.GetResult<Prisma.$StockButtonPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
+    StockAccessories<T extends SalesEntry$StockAccessoriesArgs<ExtArgs> = {}>(args?: Subset<T, SalesEntry$StockAccessoriesArgs<ExtArgs>>): Prisma__StockAccessoriesClient<$Result.GetResult<Prisma.$StockAccessoriesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8427,14 +12489,15 @@ export namespace Prisma {
   interface SalesEntryFieldRefs {
     readonly id: FieldRef<"SalesEntry", 'String'>
     readonly instockId: FieldRef<"SalesEntry", 'String'>
-    readonly IMEI: FieldRef<"SalesEntry", 'String'>
-    readonly price: FieldRef<"SalesEntry", 'Int'>
     readonly discount: FieldRef<"SalesEntry", 'Int'>
     readonly due: FieldRef<"SalesEntry", 'Int'>
     readonly dueDate: FieldRef<"SalesEntry", 'DateTime'>
     readonly sellerId: FieldRef<"SalesEntry", 'String'>
     readonly customerId: FieldRef<"SalesEntry", 'String'>
     readonly createdAt: FieldRef<"SalesEntry", 'DateTime'>
+    readonly stockAndroidId: FieldRef<"SalesEntry", 'String'>
+    readonly stockButtonId: FieldRef<"SalesEntry", 'String'>
+    readonly stockAccessoriesId: FieldRef<"SalesEntry", 'String'>
   }
     
 
@@ -8776,6 +12839,54 @@ export namespace Prisma {
 
 
   /**
+   * SalesEntry.StockAndroid
+   */
+  export type SalesEntry$StockAndroidArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAndroid
+     */
+    select?: StockAndroidSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAndroidInclude<ExtArgs> | null
+    where?: StockAndroidWhereInput
+  }
+
+
+  /**
+   * SalesEntry.StockButton
+   */
+  export type SalesEntry$StockButtonArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockButton
+     */
+    select?: StockButtonSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockButtonInclude<ExtArgs> | null
+    where?: StockButtonWhereInput
+  }
+
+
+  /**
+   * SalesEntry.StockAccessories
+   */
+  export type SalesEntry$StockAccessoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockAccessories
+     */
+    select?: StockAccessoriesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StockAccessoriesInclude<ExtArgs> | null
+    where?: StockAccessoriesWhereInput
+  }
+
+
+  /**
    * SalesEntry without action
    */
   export type SalesEntryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8992,7 +13103,7 @@ export namespace Prisma {
   type CustomerGetPayload<S extends boolean | null | undefined | CustomerDefaultArgs> = $Result.GetResult<Prisma.$CustomerPayload, S>
 
   type CustomerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<CustomerFindManyArgs, 'select' | 'include' | 'distinct' > & {
+    Omit<CustomerFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: CustomerCountAggregateInputType | true
     }
 
@@ -9859,17 +13970,68 @@ export namespace Prisma {
   export type InStockScalarFieldEnum = (typeof InStockScalarFieldEnum)[keyof typeof InStockScalarFieldEnum]
 
 
+  export const StockAndroidScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    IMEI: 'IMEI',
+    modelId: 'modelId',
+    brandId: 'brandId',
+    productTypeId: 'productTypeId',
+    purchasePrice: 'purchasePrice',
+    sellingPrice: 'sellingPrice',
+    sold: 'sold',
+    color: 'color',
+    ram: 'ram',
+    rom: 'rom',
+    createdAt: 'createdAt'
+  };
+
+  export type StockAndroidScalarFieldEnum = (typeof StockAndroidScalarFieldEnum)[keyof typeof StockAndroidScalarFieldEnum]
+
+
+  export const StockButtonScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    modelId: 'modelId',
+    brandId: 'brandId',
+    productTypeId: 'productTypeId',
+    purchasePrice: 'purchasePrice',
+    sellingPrice: 'sellingPrice',
+    quantity: 'quantity',
+    color: 'color',
+    createdAt: 'createdAt'
+  };
+
+  export type StockButtonScalarFieldEnum = (typeof StockButtonScalarFieldEnum)[keyof typeof StockButtonScalarFieldEnum]
+
+
+  export const StockAccessoriesScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    modelId: 'modelId',
+    brandId: 'brandId',
+    productTypeId: 'productTypeId',
+    purchasePrice: 'purchasePrice',
+    sellingPrice: 'sellingPrice',
+    quantity: 'quantity',
+    createdAt: 'createdAt'
+  };
+
+  export type StockAccessoriesScalarFieldEnum = (typeof StockAccessoriesScalarFieldEnum)[keyof typeof StockAccessoriesScalarFieldEnum]
+
+
   export const SalesEntryScalarFieldEnum: {
     id: 'id',
     instockId: 'instockId',
-    IMEI: 'IMEI',
-    price: 'price',
     discount: 'discount',
     due: 'due',
     dueDate: 'dueDate',
     sellerId: 'sellerId',
     customerId: 'customerId',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    stockAndroidId: 'stockAndroidId',
+    stockButtonId: 'stockButtonId',
+    stockAccessoriesId: 'stockAccessoriesId'
   };
 
   export type SalesEntryScalarFieldEnum = (typeof SalesEntryScalarFieldEnum)[keyof typeof SalesEntryScalarFieldEnum]
@@ -10074,6 +14236,9 @@ export namespace Prisma {
     createdAt?: DateTimeNullableFilter<"ProductType"> | Date | string | null
     Brand?: BrandListRelationFilter
     InStock?: InStockListRelationFilter
+    StockAndroid?: StockAndroidListRelationFilter
+    StockButton?: StockButtonListRelationFilter
+    StockAccessories?: StockAccessoriesListRelationFilter
   }
 
   export type ProductTypeOrderByWithRelationInput = {
@@ -10082,6 +14247,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     Brand?: BrandOrderByRelationAggregateInput
     InStock?: InStockOrderByRelationAggregateInput
+    StockAndroid?: StockAndroidOrderByRelationAggregateInput
+    StockButton?: StockButtonOrderByRelationAggregateInput
+    StockAccessories?: StockAccessoriesOrderByRelationAggregateInput
   }
 
   export type ProductTypeWhereUniqueInput = Prisma.AtLeast<{
@@ -10093,6 +14261,9 @@ export namespace Prisma {
     createdAt?: DateTimeNullableFilter<"ProductType"> | Date | string | null
     Brand?: BrandListRelationFilter
     InStock?: InStockListRelationFilter
+    StockAndroid?: StockAndroidListRelationFilter
+    StockButton?: StockButtonListRelationFilter
+    StockAccessories?: StockAccessoriesListRelationFilter
   }, "id">
 
   export type ProductTypeOrderByWithAggregationInput = {
@@ -10124,6 +14295,9 @@ export namespace Prisma {
     productType?: XOR<ProductTypeRelationFilter, ProductTypeWhereInput>
     Model?: ModelListRelationFilter
     InStock?: InStockListRelationFilter
+    StockAndroid?: StockAndroidListRelationFilter
+    StockButton?: StockButtonListRelationFilter
+    StockAccessories?: StockAccessoriesListRelationFilter
   }
 
   export type BrandOrderByWithRelationInput = {
@@ -10134,6 +14308,9 @@ export namespace Prisma {
     productType?: ProductTypeOrderByWithRelationInput
     Model?: ModelOrderByRelationAggregateInput
     InStock?: InStockOrderByRelationAggregateInput
+    StockAndroid?: StockAndroidOrderByRelationAggregateInput
+    StockButton?: StockButtonOrderByRelationAggregateInput
+    StockAccessories?: StockAccessoriesOrderByRelationAggregateInput
   }
 
   export type BrandWhereUniqueInput = Prisma.AtLeast<{
@@ -10147,6 +14324,9 @@ export namespace Prisma {
     productType?: XOR<ProductTypeRelationFilter, ProductTypeWhereInput>
     Model?: ModelListRelationFilter
     InStock?: InStockListRelationFilter
+    StockAndroid?: StockAndroidListRelationFilter
+    StockButton?: StockButtonListRelationFilter
+    StockAccessories?: StockAccessoriesListRelationFilter
   }, "id">
 
   export type BrandOrderByWithAggregationInput = {
@@ -10179,6 +14359,9 @@ export namespace Prisma {
     createdAt?: DateTimeNullableFilter<"Model"> | Date | string | null
     brand?: XOR<BrandRelationFilter, BrandWhereInput>
     InStock?: InStockListRelationFilter
+    StrockAndroid?: StockAndroidListRelationFilter
+    StrockButton?: StockButtonListRelationFilter
+    StrockAccessories?: StockAccessoriesListRelationFilter
   }
 
   export type ModelOrderByWithRelationInput = {
@@ -10188,6 +14371,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     brand?: BrandOrderByWithRelationInput
     InStock?: InStockOrderByRelationAggregateInput
+    StrockAndroid?: StockAndroidOrderByRelationAggregateInput
+    StrockButton?: StockButtonOrderByRelationAggregateInput
+    StrockAccessories?: StockAccessoriesOrderByRelationAggregateInput
   }
 
   export type ModelWhereUniqueInput = Prisma.AtLeast<{
@@ -10200,6 +14386,9 @@ export namespace Prisma {
     createdAt?: DateTimeNullableFilter<"Model"> | Date | string | null
     brand?: XOR<BrandRelationFilter, BrandWhereInput>
     InStock?: InStockListRelationFilter
+    StrockAndroid?: StockAndroidListRelationFilter
+    StrockButton?: StockButtonListRelationFilter
+    StrockAccessories?: StockAccessoriesListRelationFilter
   }, "id">
 
   export type ModelOrderByWithAggregationInput = {
@@ -10328,71 +14517,367 @@ export namespace Prisma {
     createdAt?: DateTimeNullableWithAggregatesFilter<"InStock"> | Date | string | null
   }
 
+  export type StockAndroidWhereInput = {
+    AND?: StockAndroidWhereInput | StockAndroidWhereInput[]
+    OR?: StockAndroidWhereInput[]
+    NOT?: StockAndroidWhereInput | StockAndroidWhereInput[]
+    id?: StringFilter<"StockAndroid"> | string
+    name?: StringFilter<"StockAndroid"> | string
+    IMEI?: StringFilter<"StockAndroid"> | string
+    modelId?: StringFilter<"StockAndroid"> | string
+    brandId?: StringFilter<"StockAndroid"> | string
+    productTypeId?: StringFilter<"StockAndroid"> | string
+    purchasePrice?: IntFilter<"StockAndroid"> | number
+    sellingPrice?: IntFilter<"StockAndroid"> | number
+    sold?: BoolFilter<"StockAndroid"> | boolean
+    color?: StringFilter<"StockAndroid"> | string
+    ram?: StringNullableFilter<"StockAndroid"> | string | null
+    rom?: StringNullableFilter<"StockAndroid"> | string | null
+    createdAt?: DateTimeNullableFilter<"StockAndroid"> | Date | string | null
+    model?: XOR<ModelRelationFilter, ModelWhereInput>
+    brand?: XOR<BrandRelationFilter, BrandWhereInput>
+    productType?: XOR<ProductTypeRelationFilter, ProductTypeWhereInput>
+    SalesEntry?: SalesEntryListRelationFilter
+  }
+
+  export type StockAndroidOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    IMEI?: SortOrder
+    modelId?: SortOrder
+    brandId?: SortOrder
+    productTypeId?: SortOrder
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+    sold?: SortOrder
+    color?: SortOrder
+    ram?: SortOrder
+    rom?: SortOrder
+    createdAt?: SortOrder
+    model?: ModelOrderByWithRelationInput
+    brand?: BrandOrderByWithRelationInput
+    productType?: ProductTypeOrderByWithRelationInput
+    SalesEntry?: SalesEntryOrderByRelationAggregateInput
+  }
+
+  export type StockAndroidWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    IMEI?: string
+    AND?: StockAndroidWhereInput | StockAndroidWhereInput[]
+    OR?: StockAndroidWhereInput[]
+    NOT?: StockAndroidWhereInput | StockAndroidWhereInput[]
+    name?: StringFilter<"StockAndroid"> | string
+    modelId?: StringFilter<"StockAndroid"> | string
+    brandId?: StringFilter<"StockAndroid"> | string
+    productTypeId?: StringFilter<"StockAndroid"> | string
+    purchasePrice?: IntFilter<"StockAndroid"> | number
+    sellingPrice?: IntFilter<"StockAndroid"> | number
+    sold?: BoolFilter<"StockAndroid"> | boolean
+    color?: StringFilter<"StockAndroid"> | string
+    ram?: StringNullableFilter<"StockAndroid"> | string | null
+    rom?: StringNullableFilter<"StockAndroid"> | string | null
+    createdAt?: DateTimeNullableFilter<"StockAndroid"> | Date | string | null
+    model?: XOR<ModelRelationFilter, ModelWhereInput>
+    brand?: XOR<BrandRelationFilter, BrandWhereInput>
+    productType?: XOR<ProductTypeRelationFilter, ProductTypeWhereInput>
+    SalesEntry?: SalesEntryListRelationFilter
+  }, "id" | "IMEI">
+
+  export type StockAndroidOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    IMEI?: SortOrder
+    modelId?: SortOrder
+    brandId?: SortOrder
+    productTypeId?: SortOrder
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+    sold?: SortOrder
+    color?: SortOrder
+    ram?: SortOrder
+    rom?: SortOrder
+    createdAt?: SortOrder
+    _count?: StockAndroidCountOrderByAggregateInput
+    _avg?: StockAndroidAvgOrderByAggregateInput
+    _max?: StockAndroidMaxOrderByAggregateInput
+    _min?: StockAndroidMinOrderByAggregateInput
+    _sum?: StockAndroidSumOrderByAggregateInput
+  }
+
+  export type StockAndroidScalarWhereWithAggregatesInput = {
+    AND?: StockAndroidScalarWhereWithAggregatesInput | StockAndroidScalarWhereWithAggregatesInput[]
+    OR?: StockAndroidScalarWhereWithAggregatesInput[]
+    NOT?: StockAndroidScalarWhereWithAggregatesInput | StockAndroidScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"StockAndroid"> | string
+    name?: StringWithAggregatesFilter<"StockAndroid"> | string
+    IMEI?: StringWithAggregatesFilter<"StockAndroid"> | string
+    modelId?: StringWithAggregatesFilter<"StockAndroid"> | string
+    brandId?: StringWithAggregatesFilter<"StockAndroid"> | string
+    productTypeId?: StringWithAggregatesFilter<"StockAndroid"> | string
+    purchasePrice?: IntWithAggregatesFilter<"StockAndroid"> | number
+    sellingPrice?: IntWithAggregatesFilter<"StockAndroid"> | number
+    sold?: BoolWithAggregatesFilter<"StockAndroid"> | boolean
+    color?: StringWithAggregatesFilter<"StockAndroid"> | string
+    ram?: StringNullableWithAggregatesFilter<"StockAndroid"> | string | null
+    rom?: StringNullableWithAggregatesFilter<"StockAndroid"> | string | null
+    createdAt?: DateTimeNullableWithAggregatesFilter<"StockAndroid"> | Date | string | null
+  }
+
+  export type StockButtonWhereInput = {
+    AND?: StockButtonWhereInput | StockButtonWhereInput[]
+    OR?: StockButtonWhereInput[]
+    NOT?: StockButtonWhereInput | StockButtonWhereInput[]
+    id?: StringFilter<"StockButton"> | string
+    name?: StringFilter<"StockButton"> | string
+    modelId?: StringFilter<"StockButton"> | string
+    brandId?: StringFilter<"StockButton"> | string
+    productTypeId?: StringFilter<"StockButton"> | string
+    purchasePrice?: IntFilter<"StockButton"> | number
+    sellingPrice?: IntFilter<"StockButton"> | number
+    quantity?: IntFilter<"StockButton"> | number
+    color?: StringFilter<"StockButton"> | string
+    createdAt?: DateTimeNullableFilter<"StockButton"> | Date | string | null
+    model?: XOR<ModelRelationFilter, ModelWhereInput>
+    brand?: XOR<BrandRelationFilter, BrandWhereInput>
+    productType?: XOR<ProductTypeRelationFilter, ProductTypeWhereInput>
+    SalesEntry?: SalesEntryListRelationFilter
+  }
+
+  export type StockButtonOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    modelId?: SortOrder
+    brandId?: SortOrder
+    productTypeId?: SortOrder
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+    quantity?: SortOrder
+    color?: SortOrder
+    createdAt?: SortOrder
+    model?: ModelOrderByWithRelationInput
+    brand?: BrandOrderByWithRelationInput
+    productType?: ProductTypeOrderByWithRelationInput
+    SalesEntry?: SalesEntryOrderByRelationAggregateInput
+  }
+
+  export type StockButtonWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: StockButtonWhereInput | StockButtonWhereInput[]
+    OR?: StockButtonWhereInput[]
+    NOT?: StockButtonWhereInput | StockButtonWhereInput[]
+    name?: StringFilter<"StockButton"> | string
+    modelId?: StringFilter<"StockButton"> | string
+    brandId?: StringFilter<"StockButton"> | string
+    productTypeId?: StringFilter<"StockButton"> | string
+    purchasePrice?: IntFilter<"StockButton"> | number
+    sellingPrice?: IntFilter<"StockButton"> | number
+    quantity?: IntFilter<"StockButton"> | number
+    color?: StringFilter<"StockButton"> | string
+    createdAt?: DateTimeNullableFilter<"StockButton"> | Date | string | null
+    model?: XOR<ModelRelationFilter, ModelWhereInput>
+    brand?: XOR<BrandRelationFilter, BrandWhereInput>
+    productType?: XOR<ProductTypeRelationFilter, ProductTypeWhereInput>
+    SalesEntry?: SalesEntryListRelationFilter
+  }, "id">
+
+  export type StockButtonOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    modelId?: SortOrder
+    brandId?: SortOrder
+    productTypeId?: SortOrder
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+    quantity?: SortOrder
+    color?: SortOrder
+    createdAt?: SortOrder
+    _count?: StockButtonCountOrderByAggregateInput
+    _avg?: StockButtonAvgOrderByAggregateInput
+    _max?: StockButtonMaxOrderByAggregateInput
+    _min?: StockButtonMinOrderByAggregateInput
+    _sum?: StockButtonSumOrderByAggregateInput
+  }
+
+  export type StockButtonScalarWhereWithAggregatesInput = {
+    AND?: StockButtonScalarWhereWithAggregatesInput | StockButtonScalarWhereWithAggregatesInput[]
+    OR?: StockButtonScalarWhereWithAggregatesInput[]
+    NOT?: StockButtonScalarWhereWithAggregatesInput | StockButtonScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"StockButton"> | string
+    name?: StringWithAggregatesFilter<"StockButton"> | string
+    modelId?: StringWithAggregatesFilter<"StockButton"> | string
+    brandId?: StringWithAggregatesFilter<"StockButton"> | string
+    productTypeId?: StringWithAggregatesFilter<"StockButton"> | string
+    purchasePrice?: IntWithAggregatesFilter<"StockButton"> | number
+    sellingPrice?: IntWithAggregatesFilter<"StockButton"> | number
+    quantity?: IntWithAggregatesFilter<"StockButton"> | number
+    color?: StringWithAggregatesFilter<"StockButton"> | string
+    createdAt?: DateTimeNullableWithAggregatesFilter<"StockButton"> | Date | string | null
+  }
+
+  export type StockAccessoriesWhereInput = {
+    AND?: StockAccessoriesWhereInput | StockAccessoriesWhereInput[]
+    OR?: StockAccessoriesWhereInput[]
+    NOT?: StockAccessoriesWhereInput | StockAccessoriesWhereInput[]
+    id?: StringFilter<"StockAccessories"> | string
+    name?: StringFilter<"StockAccessories"> | string
+    modelId?: StringFilter<"StockAccessories"> | string
+    brandId?: StringFilter<"StockAccessories"> | string
+    productTypeId?: StringFilter<"StockAccessories"> | string
+    purchasePrice?: IntFilter<"StockAccessories"> | number
+    sellingPrice?: IntFilter<"StockAccessories"> | number
+    quantity?: IntFilter<"StockAccessories"> | number
+    createdAt?: DateTimeNullableFilter<"StockAccessories"> | Date | string | null
+    model?: XOR<ModelRelationFilter, ModelWhereInput>
+    brand?: XOR<BrandRelationFilter, BrandWhereInput>
+    productType?: XOR<ProductTypeRelationFilter, ProductTypeWhereInput>
+    SalesEntry?: SalesEntryListRelationFilter
+  }
+
+  export type StockAccessoriesOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    modelId?: SortOrder
+    brandId?: SortOrder
+    productTypeId?: SortOrder
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+    quantity?: SortOrder
+    createdAt?: SortOrder
+    model?: ModelOrderByWithRelationInput
+    brand?: BrandOrderByWithRelationInput
+    productType?: ProductTypeOrderByWithRelationInput
+    SalesEntry?: SalesEntryOrderByRelationAggregateInput
+  }
+
+  export type StockAccessoriesWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: StockAccessoriesWhereInput | StockAccessoriesWhereInput[]
+    OR?: StockAccessoriesWhereInput[]
+    NOT?: StockAccessoriesWhereInput | StockAccessoriesWhereInput[]
+    name?: StringFilter<"StockAccessories"> | string
+    modelId?: StringFilter<"StockAccessories"> | string
+    brandId?: StringFilter<"StockAccessories"> | string
+    productTypeId?: StringFilter<"StockAccessories"> | string
+    purchasePrice?: IntFilter<"StockAccessories"> | number
+    sellingPrice?: IntFilter<"StockAccessories"> | number
+    quantity?: IntFilter<"StockAccessories"> | number
+    createdAt?: DateTimeNullableFilter<"StockAccessories"> | Date | string | null
+    model?: XOR<ModelRelationFilter, ModelWhereInput>
+    brand?: XOR<BrandRelationFilter, BrandWhereInput>
+    productType?: XOR<ProductTypeRelationFilter, ProductTypeWhereInput>
+    SalesEntry?: SalesEntryListRelationFilter
+  }, "id">
+
+  export type StockAccessoriesOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    modelId?: SortOrder
+    brandId?: SortOrder
+    productTypeId?: SortOrder
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+    quantity?: SortOrder
+    createdAt?: SortOrder
+    _count?: StockAccessoriesCountOrderByAggregateInput
+    _avg?: StockAccessoriesAvgOrderByAggregateInput
+    _max?: StockAccessoriesMaxOrderByAggregateInput
+    _min?: StockAccessoriesMinOrderByAggregateInput
+    _sum?: StockAccessoriesSumOrderByAggregateInput
+  }
+
+  export type StockAccessoriesScalarWhereWithAggregatesInput = {
+    AND?: StockAccessoriesScalarWhereWithAggregatesInput | StockAccessoriesScalarWhereWithAggregatesInput[]
+    OR?: StockAccessoriesScalarWhereWithAggregatesInput[]
+    NOT?: StockAccessoriesScalarWhereWithAggregatesInput | StockAccessoriesScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"StockAccessories"> | string
+    name?: StringWithAggregatesFilter<"StockAccessories"> | string
+    modelId?: StringWithAggregatesFilter<"StockAccessories"> | string
+    brandId?: StringWithAggregatesFilter<"StockAccessories"> | string
+    productTypeId?: StringWithAggregatesFilter<"StockAccessories"> | string
+    purchasePrice?: IntWithAggregatesFilter<"StockAccessories"> | number
+    sellingPrice?: IntWithAggregatesFilter<"StockAccessories"> | number
+    quantity?: IntWithAggregatesFilter<"StockAccessories"> | number
+    createdAt?: DateTimeNullableWithAggregatesFilter<"StockAccessories"> | Date | string | null
+  }
+
   export type SalesEntryWhereInput = {
     AND?: SalesEntryWhereInput | SalesEntryWhereInput[]
     OR?: SalesEntryWhereInput[]
     NOT?: SalesEntryWhereInput | SalesEntryWhereInput[]
     id?: StringFilter<"SalesEntry"> | string
     instockId?: StringFilter<"SalesEntry"> | string
-    IMEI?: StringFilter<"SalesEntry"> | string
-    price?: IntFilter<"SalesEntry"> | number
     discount?: IntFilter<"SalesEntry"> | number
     due?: IntFilter<"SalesEntry"> | number
     dueDate?: DateTimeNullableFilter<"SalesEntry"> | Date | string | null
     sellerId?: StringFilter<"SalesEntry"> | string
     customerId?: StringFilter<"SalesEntry"> | string
     createdAt?: DateTimeNullableFilter<"SalesEntry"> | Date | string | null
+    stockAndroidId?: StringNullableFilter<"SalesEntry"> | string | null
+    stockButtonId?: StringNullableFilter<"SalesEntry"> | string | null
+    stockAccessoriesId?: StringNullableFilter<"SalesEntry"> | string | null
     InStock?: XOR<InStockRelationFilter, InStockWhereInput>
     Seller?: XOR<SellerRelationFilter, SellerWhereInput>
     customer?: XOR<CustomerRelationFilter, CustomerWhereInput>
+    StockAndroid?: XOR<StockAndroidNullableRelationFilter, StockAndroidWhereInput> | null
+    StockButton?: XOR<StockButtonNullableRelationFilter, StockButtonWhereInput> | null
+    StockAccessories?: XOR<StockAccessoriesNullableRelationFilter, StockAccessoriesWhereInput> | null
   }
 
   export type SalesEntryOrderByWithRelationInput = {
     id?: SortOrder
     instockId?: SortOrder
-    IMEI?: SortOrder
-    price?: SortOrder
     discount?: SortOrder
     due?: SortOrder
     dueDate?: SortOrder
     sellerId?: SortOrder
     customerId?: SortOrder
     createdAt?: SortOrder
+    stockAndroidId?: SortOrder
+    stockButtonId?: SortOrder
+    stockAccessoriesId?: SortOrder
     InStock?: InStockOrderByWithRelationInput
     Seller?: SellerOrderByWithRelationInput
     customer?: CustomerOrderByWithRelationInput
+    StockAndroid?: StockAndroidOrderByWithRelationInput
+    StockButton?: StockButtonOrderByWithRelationInput
+    StockAccessories?: StockAccessoriesOrderByWithRelationInput
   }
 
   export type SalesEntryWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    IMEI?: string
     AND?: SalesEntryWhereInput | SalesEntryWhereInput[]
     OR?: SalesEntryWhereInput[]
     NOT?: SalesEntryWhereInput | SalesEntryWhereInput[]
     instockId?: StringFilter<"SalesEntry"> | string
-    price?: IntFilter<"SalesEntry"> | number
     discount?: IntFilter<"SalesEntry"> | number
     due?: IntFilter<"SalesEntry"> | number
     dueDate?: DateTimeNullableFilter<"SalesEntry"> | Date | string | null
     sellerId?: StringFilter<"SalesEntry"> | string
     customerId?: StringFilter<"SalesEntry"> | string
     createdAt?: DateTimeNullableFilter<"SalesEntry"> | Date | string | null
+    stockAndroidId?: StringNullableFilter<"SalesEntry"> | string | null
+    stockButtonId?: StringNullableFilter<"SalesEntry"> | string | null
+    stockAccessoriesId?: StringNullableFilter<"SalesEntry"> | string | null
     InStock?: XOR<InStockRelationFilter, InStockWhereInput>
     Seller?: XOR<SellerRelationFilter, SellerWhereInput>
     customer?: XOR<CustomerRelationFilter, CustomerWhereInput>
-  }, "id" | "IMEI">
+    StockAndroid?: XOR<StockAndroidNullableRelationFilter, StockAndroidWhereInput> | null
+    StockButton?: XOR<StockButtonNullableRelationFilter, StockButtonWhereInput> | null
+    StockAccessories?: XOR<StockAccessoriesNullableRelationFilter, StockAccessoriesWhereInput> | null
+  }, "id">
 
   export type SalesEntryOrderByWithAggregationInput = {
     id?: SortOrder
     instockId?: SortOrder
-    IMEI?: SortOrder
-    price?: SortOrder
     discount?: SortOrder
     due?: SortOrder
     dueDate?: SortOrder
     sellerId?: SortOrder
     customerId?: SortOrder
     createdAt?: SortOrder
+    stockAndroidId?: SortOrder
+    stockButtonId?: SortOrder
+    stockAccessoriesId?: SortOrder
     _count?: SalesEntryCountOrderByAggregateInput
     _avg?: SalesEntryAvgOrderByAggregateInput
     _max?: SalesEntryMaxOrderByAggregateInput
@@ -10406,14 +14891,15 @@ export namespace Prisma {
     NOT?: SalesEntryScalarWhereWithAggregatesInput | SalesEntryScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"SalesEntry"> | string
     instockId?: StringWithAggregatesFilter<"SalesEntry"> | string
-    IMEI?: StringWithAggregatesFilter<"SalesEntry"> | string
-    price?: IntWithAggregatesFilter<"SalesEntry"> | number
     discount?: IntWithAggregatesFilter<"SalesEntry"> | number
     due?: IntWithAggregatesFilter<"SalesEntry"> | number
     dueDate?: DateTimeNullableWithAggregatesFilter<"SalesEntry"> | Date | string | null
     sellerId?: StringWithAggregatesFilter<"SalesEntry"> | string
     customerId?: StringWithAggregatesFilter<"SalesEntry"> | string
     createdAt?: DateTimeNullableWithAggregatesFilter<"SalesEntry"> | Date | string | null
+    stockAndroidId?: StringNullableWithAggregatesFilter<"SalesEntry"> | string | null
+    stockButtonId?: StringNullableWithAggregatesFilter<"SalesEntry"> | string | null
+    stockAccessoriesId?: StringNullableWithAggregatesFilter<"SalesEntry"> | string | null
   }
 
   export type CustomerWhereInput = {
@@ -10564,6 +15050,9 @@ export namespace Prisma {
     createdAt?: Date | string | null
     Brand?: BrandCreateNestedManyWithoutProductTypeInput
     InStock?: InStockCreateNestedManyWithoutProductTypeInput
+    StockAndroid?: StockAndroidCreateNestedManyWithoutProductTypeInput
+    StockButton?: StockButtonCreateNestedManyWithoutProductTypeInput
+    StockAccessories?: StockAccessoriesCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeUncheckedCreateInput = {
@@ -10572,6 +15061,9 @@ export namespace Prisma {
     createdAt?: Date | string | null
     Brand?: BrandUncheckedCreateNestedManyWithoutProductTypeInput
     InStock?: InStockUncheckedCreateNestedManyWithoutProductTypeInput
+    StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutProductTypeInput
+    StockButton?: StockButtonUncheckedCreateNestedManyWithoutProductTypeInput
+    StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeUpdateInput = {
@@ -10579,6 +15071,9 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Brand?: BrandUpdateManyWithoutProductTypeNestedInput
     InStock?: InStockUpdateManyWithoutProductTypeNestedInput
+    StockAndroid?: StockAndroidUpdateManyWithoutProductTypeNestedInput
+    StockButton?: StockButtonUpdateManyWithoutProductTypeNestedInput
+    StockAccessories?: StockAccessoriesUpdateManyWithoutProductTypeNestedInput
   }
 
   export type ProductTypeUncheckedUpdateInput = {
@@ -10586,6 +15081,9 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Brand?: BrandUncheckedUpdateManyWithoutProductTypeNestedInput
     InStock?: InStockUncheckedUpdateManyWithoutProductTypeNestedInput
+    StockAndroid?: StockAndroidUncheckedUpdateManyWithoutProductTypeNestedInput
+    StockButton?: StockButtonUncheckedUpdateManyWithoutProductTypeNestedInput
+    StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutProductTypeNestedInput
   }
 
   export type ProductTypeCreateManyInput = {
@@ -10611,6 +15109,9 @@ export namespace Prisma {
     productType: ProductTypeCreateNestedOneWithoutBrandInput
     Model?: ModelCreateNestedManyWithoutBrandInput
     InStock?: InStockCreateNestedManyWithoutBrandInput
+    StockAndroid?: StockAndroidCreateNestedManyWithoutBrandInput
+    StockButton?: StockButtonCreateNestedManyWithoutBrandInput
+    StockAccessories?: StockAccessoriesCreateNestedManyWithoutBrandInput
   }
 
   export type BrandUncheckedCreateInput = {
@@ -10620,6 +15121,9 @@ export namespace Prisma {
     createdAt?: Date | string | null
     Model?: ModelUncheckedCreateNestedManyWithoutBrandInput
     InStock?: InStockUncheckedCreateNestedManyWithoutBrandInput
+    StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutBrandInput
+    StockButton?: StockButtonUncheckedCreateNestedManyWithoutBrandInput
+    StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutBrandInput
   }
 
   export type BrandUpdateInput = {
@@ -10628,6 +15132,9 @@ export namespace Prisma {
     productType?: ProductTypeUpdateOneRequiredWithoutBrandNestedInput
     Model?: ModelUpdateManyWithoutBrandNestedInput
     InStock?: InStockUpdateManyWithoutBrandNestedInput
+    StockAndroid?: StockAndroidUpdateManyWithoutBrandNestedInput
+    StockButton?: StockButtonUpdateManyWithoutBrandNestedInput
+    StockAccessories?: StockAccessoriesUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandUncheckedUpdateInput = {
@@ -10636,6 +15143,9 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Model?: ModelUncheckedUpdateManyWithoutBrandNestedInput
     InStock?: InStockUncheckedUpdateManyWithoutBrandNestedInput
+    StockAndroid?: StockAndroidUncheckedUpdateManyWithoutBrandNestedInput
+    StockButton?: StockButtonUncheckedUpdateManyWithoutBrandNestedInput
+    StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandCreateManyInput = {
@@ -10662,6 +15172,9 @@ export namespace Prisma {
     createdAt?: Date | string | null
     brand: BrandCreateNestedOneWithoutModelInput
     InStock?: InStockCreateNestedManyWithoutModelInput
+    StrockAndroid?: StockAndroidCreateNestedManyWithoutModelInput
+    StrockButton?: StockButtonCreateNestedManyWithoutModelInput
+    StrockAccessories?: StockAccessoriesCreateNestedManyWithoutModelInput
   }
 
   export type ModelUncheckedCreateInput = {
@@ -10670,6 +15183,9 @@ export namespace Prisma {
     brandId: string
     createdAt?: Date | string | null
     InStock?: InStockUncheckedCreateNestedManyWithoutModelInput
+    StrockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutModelInput
+    StrockButton?: StockButtonUncheckedCreateNestedManyWithoutModelInput
+    StrockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutModelInput
   }
 
   export type ModelUpdateInput = {
@@ -10677,6 +15193,9 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     brand?: BrandUpdateOneRequiredWithoutModelNestedInput
     InStock?: InStockUpdateManyWithoutModelNestedInput
+    StrockAndroid?: StockAndroidUpdateManyWithoutModelNestedInput
+    StrockButton?: StockButtonUpdateManyWithoutModelNestedInput
+    StrockAccessories?: StockAccessoriesUpdateManyWithoutModelNestedInput
   }
 
   export type ModelUncheckedUpdateInput = {
@@ -10684,6 +15203,9 @@ export namespace Prisma {
     brandId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     InStock?: InStockUncheckedUpdateManyWithoutModelNestedInput
+    StrockAndroid?: StockAndroidUncheckedUpdateManyWithoutModelNestedInput
+    StrockButton?: StockButtonUncheckedUpdateManyWithoutModelNestedInput
+    StrockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutModelNestedInput
   }
 
   export type ModelCreateManyInput = {
@@ -10813,10 +15335,286 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type StockAndroidCreateInput = {
+    id?: string
+    name: string
+    IMEI: string
+    purchasePrice: number
+    sellingPrice: number
+    sold?: boolean
+    color: string
+    ram?: string | null
+    rom?: string | null
+    createdAt?: Date | string | null
+    model: ModelCreateNestedOneWithoutStrockAndroidInput
+    brand: BrandCreateNestedOneWithoutStockAndroidInput
+    productType: ProductTypeCreateNestedOneWithoutStockAndroidInput
+    SalesEntry?: SalesEntryCreateNestedManyWithoutStockAndroidInput
+  }
+
+  export type StockAndroidUncheckedCreateInput = {
+    id?: string
+    name: string
+    IMEI: string
+    modelId: string
+    brandId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    sold?: boolean
+    color: string
+    ram?: string | null
+    rom?: string | null
+    createdAt?: Date | string | null
+    SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutStockAndroidInput
+  }
+
+  export type StockAndroidUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    IMEI?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    sold?: BoolFieldUpdateOperationsInput | boolean
+    color?: StringFieldUpdateOperationsInput | string
+    ram?: NullableStringFieldUpdateOperationsInput | string | null
+    rom?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    model?: ModelUpdateOneRequiredWithoutStrockAndroidNestedInput
+    brand?: BrandUpdateOneRequiredWithoutStockAndroidNestedInput
+    productType?: ProductTypeUpdateOneRequiredWithoutStockAndroidNestedInput
+    SalesEntry?: SalesEntryUpdateManyWithoutStockAndroidNestedInput
+  }
+
+  export type StockAndroidUncheckedUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    IMEI?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    sold?: BoolFieldUpdateOperationsInput | boolean
+    color?: StringFieldUpdateOperationsInput | string
+    ram?: NullableStringFieldUpdateOperationsInput | string | null
+    rom?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    SalesEntry?: SalesEntryUncheckedUpdateManyWithoutStockAndroidNestedInput
+  }
+
+  export type StockAndroidCreateManyInput = {
+    id?: string
+    name: string
+    IMEI: string
+    modelId: string
+    brandId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    sold?: boolean
+    color: string
+    ram?: string | null
+    rom?: string | null
+    createdAt?: Date | string | null
+  }
+
+  export type StockAndroidUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    IMEI?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    sold?: BoolFieldUpdateOperationsInput | boolean
+    color?: StringFieldUpdateOperationsInput | string
+    ram?: NullableStringFieldUpdateOperationsInput | string | null
+    rom?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StockAndroidUncheckedUpdateManyInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    IMEI?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    sold?: BoolFieldUpdateOperationsInput | boolean
+    color?: StringFieldUpdateOperationsInput | string
+    ram?: NullableStringFieldUpdateOperationsInput | string | null
+    rom?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StockButtonCreateInput = {
+    id?: string
+    name: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    color: string
+    createdAt?: Date | string | null
+    model: ModelCreateNestedOneWithoutStrockButtonInput
+    brand: BrandCreateNestedOneWithoutStockButtonInput
+    productType: ProductTypeCreateNestedOneWithoutStockButtonInput
+    SalesEntry?: SalesEntryCreateNestedManyWithoutStockButtonInput
+  }
+
+  export type StockButtonUncheckedCreateInput = {
+    id?: string
+    name: string
+    modelId: string
+    brandId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    color: string
+    createdAt?: Date | string | null
+    SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutStockButtonInput
+  }
+
+  export type StockButtonUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    color?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    model?: ModelUpdateOneRequiredWithoutStrockButtonNestedInput
+    brand?: BrandUpdateOneRequiredWithoutStockButtonNestedInput
+    productType?: ProductTypeUpdateOneRequiredWithoutStockButtonNestedInput
+    SalesEntry?: SalesEntryUpdateManyWithoutStockButtonNestedInput
+  }
+
+  export type StockButtonUncheckedUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    color?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    SalesEntry?: SalesEntryUncheckedUpdateManyWithoutStockButtonNestedInput
+  }
+
+  export type StockButtonCreateManyInput = {
+    id?: string
+    name: string
+    modelId: string
+    brandId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    color: string
+    createdAt?: Date | string | null
+  }
+
+  export type StockButtonUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    color?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StockButtonUncheckedUpdateManyInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    color?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StockAccessoriesCreateInput = {
+    id?: string
+    name: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    createdAt?: Date | string | null
+    model: ModelCreateNestedOneWithoutStrockAccessoriesInput
+    brand: BrandCreateNestedOneWithoutStockAccessoriesInput
+    productType: ProductTypeCreateNestedOneWithoutStockAccessoriesInput
+    SalesEntry?: SalesEntryCreateNestedManyWithoutStockAccessoriesInput
+  }
+
+  export type StockAccessoriesUncheckedCreateInput = {
+    id?: string
+    name: string
+    modelId: string
+    brandId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    createdAt?: Date | string | null
+    SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutStockAccessoriesInput
+  }
+
+  export type StockAccessoriesUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    model?: ModelUpdateOneRequiredWithoutStrockAccessoriesNestedInput
+    brand?: BrandUpdateOneRequiredWithoutStockAccessoriesNestedInput
+    productType?: ProductTypeUpdateOneRequiredWithoutStockAccessoriesNestedInput
+    SalesEntry?: SalesEntryUpdateManyWithoutStockAccessoriesNestedInput
+  }
+
+  export type StockAccessoriesUncheckedUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    SalesEntry?: SalesEntryUncheckedUpdateManyWithoutStockAccessoriesNestedInput
+  }
+
+  export type StockAccessoriesCreateManyInput = {
+    id?: string
+    name: string
+    modelId: string
+    brandId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    createdAt?: Date | string | null
+  }
+
+  export type StockAccessoriesUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StockAccessoriesUncheckedUpdateManyInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type SalesEntryCreateInput = {
     id?: string
-    IMEI: string
-    price: number
     discount: number
     due: number
     dueDate?: Date | string | null
@@ -10824,24 +15622,26 @@ export namespace Prisma {
     InStock: InStockCreateNestedOneWithoutSalesEntryInput
     Seller: SellerCreateNestedOneWithoutSalesEntryInput
     customer: CustomerCreateNestedOneWithoutSalesEntryInput
+    StockAndroid?: StockAndroidCreateNestedOneWithoutSalesEntryInput
+    StockButton?: StockButtonCreateNestedOneWithoutSalesEntryInput
+    StockAccessories?: StockAccessoriesCreateNestedOneWithoutSalesEntryInput
   }
 
   export type SalesEntryUncheckedCreateInput = {
     id?: string
     instockId: string
-    IMEI: string
-    price: number
     discount: number
     due: number
     dueDate?: Date | string | null
     sellerId: string
     customerId: string
     createdAt?: Date | string | null
+    stockAndroidId?: string | null
+    stockButtonId?: string | null
+    stockAccessoriesId?: string | null
   }
 
   export type SalesEntryUpdateInput = {
-    IMEI?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10849,36 +15649,39 @@ export namespace Prisma {
     InStock?: InStockUpdateOneRequiredWithoutSalesEntryNestedInput
     Seller?: SellerUpdateOneRequiredWithoutSalesEntryNestedInput
     customer?: CustomerUpdateOneRequiredWithoutSalesEntryNestedInput
+    StockAndroid?: StockAndroidUpdateOneWithoutSalesEntryNestedInput
+    StockButton?: StockButtonUpdateOneWithoutSalesEntryNestedInput
+    StockAccessories?: StockAccessoriesUpdateOneWithoutSalesEntryNestedInput
   }
 
   export type SalesEntryUncheckedUpdateInput = {
     instockId?: StringFieldUpdateOperationsInput | string
-    IMEI?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sellerId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    stockAndroidId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockButtonId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockAccessoriesId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SalesEntryCreateManyInput = {
     id?: string
     instockId: string
-    IMEI: string
-    price: number
     discount: number
     due: number
     dueDate?: Date | string | null
     sellerId: string
     customerId: string
     createdAt?: Date | string | null
+    stockAndroidId?: string | null
+    stockButtonId?: string | null
+    stockAccessoriesId?: string | null
   }
 
   export type SalesEntryUpdateManyMutationInput = {
-    IMEI?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10887,14 +15690,15 @@ export namespace Prisma {
 
   export type SalesEntryUncheckedUpdateManyInput = {
     instockId?: StringFieldUpdateOperationsInput | string
-    IMEI?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sellerId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    stockAndroidId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockButtonId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockAccessoriesId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CustomerCreateInput = {
@@ -11074,11 +15878,41 @@ export namespace Prisma {
     none?: InStockWhereInput
   }
 
+  export type StockAndroidListRelationFilter = {
+    every?: StockAndroidWhereInput
+    some?: StockAndroidWhereInput
+    none?: StockAndroidWhereInput
+  }
+
+  export type StockButtonListRelationFilter = {
+    every?: StockButtonWhereInput
+    some?: StockButtonWhereInput
+    none?: StockButtonWhereInput
+  }
+
+  export type StockAccessoriesListRelationFilter = {
+    every?: StockAccessoriesWhereInput
+    some?: StockAccessoriesWhereInput
+    none?: StockAccessoriesWhereInput
+  }
+
   export type BrandOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type InStockOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type StockAndroidOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type StockButtonOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type StockAccessoriesOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11300,6 +16134,163 @@ export namespace Prisma {
     isSet?: boolean
   }
 
+  export type StockAndroidCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    IMEI?: SortOrder
+    modelId?: SortOrder
+    brandId?: SortOrder
+    productTypeId?: SortOrder
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+    sold?: SortOrder
+    color?: SortOrder
+    ram?: SortOrder
+    rom?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StockAndroidAvgOrderByAggregateInput = {
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+  }
+
+  export type StockAndroidMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    IMEI?: SortOrder
+    modelId?: SortOrder
+    brandId?: SortOrder
+    productTypeId?: SortOrder
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+    sold?: SortOrder
+    color?: SortOrder
+    ram?: SortOrder
+    rom?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StockAndroidMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    IMEI?: SortOrder
+    modelId?: SortOrder
+    brandId?: SortOrder
+    productTypeId?: SortOrder
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+    sold?: SortOrder
+    color?: SortOrder
+    ram?: SortOrder
+    rom?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StockAndroidSumOrderByAggregateInput = {
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+  }
+
+  export type StockButtonCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    modelId?: SortOrder
+    brandId?: SortOrder
+    productTypeId?: SortOrder
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+    quantity?: SortOrder
+    color?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StockButtonAvgOrderByAggregateInput = {
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+    quantity?: SortOrder
+  }
+
+  export type StockButtonMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    modelId?: SortOrder
+    brandId?: SortOrder
+    productTypeId?: SortOrder
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+    quantity?: SortOrder
+    color?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StockButtonMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    modelId?: SortOrder
+    brandId?: SortOrder
+    productTypeId?: SortOrder
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+    quantity?: SortOrder
+    color?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StockButtonSumOrderByAggregateInput = {
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+    quantity?: SortOrder
+  }
+
+  export type StockAccessoriesCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    modelId?: SortOrder
+    brandId?: SortOrder
+    productTypeId?: SortOrder
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+    quantity?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StockAccessoriesAvgOrderByAggregateInput = {
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+    quantity?: SortOrder
+  }
+
+  export type StockAccessoriesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    modelId?: SortOrder
+    brandId?: SortOrder
+    productTypeId?: SortOrder
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+    quantity?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StockAccessoriesMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    modelId?: SortOrder
+    brandId?: SortOrder
+    productTypeId?: SortOrder
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+    quantity?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StockAccessoriesSumOrderByAggregateInput = {
+    purchasePrice?: SortOrder
+    sellingPrice?: SortOrder
+    quantity?: SortOrder
+  }
+
   export type InStockRelationFilter = {
     is?: InStockWhereInput
     isNot?: InStockWhereInput
@@ -11315,21 +16306,36 @@ export namespace Prisma {
     isNot?: CustomerWhereInput
   }
 
+  export type StockAndroidNullableRelationFilter = {
+    is?: StockAndroidWhereInput | null
+    isNot?: StockAndroidWhereInput | null
+  }
+
+  export type StockButtonNullableRelationFilter = {
+    is?: StockButtonWhereInput | null
+    isNot?: StockButtonWhereInput | null
+  }
+
+  export type StockAccessoriesNullableRelationFilter = {
+    is?: StockAccessoriesWhereInput | null
+    isNot?: StockAccessoriesWhereInput | null
+  }
+
   export type SalesEntryCountOrderByAggregateInput = {
     id?: SortOrder
     instockId?: SortOrder
-    IMEI?: SortOrder
-    price?: SortOrder
     discount?: SortOrder
     due?: SortOrder
     dueDate?: SortOrder
     sellerId?: SortOrder
     customerId?: SortOrder
     createdAt?: SortOrder
+    stockAndroidId?: SortOrder
+    stockButtonId?: SortOrder
+    stockAccessoriesId?: SortOrder
   }
 
   export type SalesEntryAvgOrderByAggregateInput = {
-    price?: SortOrder
     discount?: SortOrder
     due?: SortOrder
   }
@@ -11337,31 +16343,32 @@ export namespace Prisma {
   export type SalesEntryMaxOrderByAggregateInput = {
     id?: SortOrder
     instockId?: SortOrder
-    IMEI?: SortOrder
-    price?: SortOrder
     discount?: SortOrder
     due?: SortOrder
     dueDate?: SortOrder
     sellerId?: SortOrder
     customerId?: SortOrder
     createdAt?: SortOrder
+    stockAndroidId?: SortOrder
+    stockButtonId?: SortOrder
+    stockAccessoriesId?: SortOrder
   }
 
   export type SalesEntryMinOrderByAggregateInput = {
     id?: SortOrder
     instockId?: SortOrder
-    IMEI?: SortOrder
-    price?: SortOrder
     discount?: SortOrder
     due?: SortOrder
     dueDate?: SortOrder
     sellerId?: SortOrder
     customerId?: SortOrder
     createdAt?: SortOrder
+    stockAndroidId?: SortOrder
+    stockButtonId?: SortOrder
+    stockAccessoriesId?: SortOrder
   }
 
   export type SalesEntrySumOrderByAggregateInput = {
-    price?: SortOrder
     discount?: SortOrder
     due?: SortOrder
   }
@@ -11455,6 +16462,27 @@ export namespace Prisma {
     connect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
   }
 
+  export type StockAndroidCreateNestedManyWithoutProductTypeInput = {
+    create?: XOR<StockAndroidCreateWithoutProductTypeInput, StockAndroidUncheckedCreateWithoutProductTypeInput> | StockAndroidCreateWithoutProductTypeInput[] | StockAndroidUncheckedCreateWithoutProductTypeInput[]
+    connectOrCreate?: StockAndroidCreateOrConnectWithoutProductTypeInput | StockAndroidCreateOrConnectWithoutProductTypeInput[]
+    createMany?: StockAndroidCreateManyProductTypeInputEnvelope
+    connect?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+  }
+
+  export type StockButtonCreateNestedManyWithoutProductTypeInput = {
+    create?: XOR<StockButtonCreateWithoutProductTypeInput, StockButtonUncheckedCreateWithoutProductTypeInput> | StockButtonCreateWithoutProductTypeInput[] | StockButtonUncheckedCreateWithoutProductTypeInput[]
+    connectOrCreate?: StockButtonCreateOrConnectWithoutProductTypeInput | StockButtonCreateOrConnectWithoutProductTypeInput[]
+    createMany?: StockButtonCreateManyProductTypeInputEnvelope
+    connect?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+  }
+
+  export type StockAccessoriesCreateNestedManyWithoutProductTypeInput = {
+    create?: XOR<StockAccessoriesCreateWithoutProductTypeInput, StockAccessoriesUncheckedCreateWithoutProductTypeInput> | StockAccessoriesCreateWithoutProductTypeInput[] | StockAccessoriesUncheckedCreateWithoutProductTypeInput[]
+    connectOrCreate?: StockAccessoriesCreateOrConnectWithoutProductTypeInput | StockAccessoriesCreateOrConnectWithoutProductTypeInput[]
+    createMany?: StockAccessoriesCreateManyProductTypeInputEnvelope
+    connect?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+  }
+
   export type BrandUncheckedCreateNestedManyWithoutProductTypeInput = {
     create?: XOR<BrandCreateWithoutProductTypeInput, BrandUncheckedCreateWithoutProductTypeInput> | BrandCreateWithoutProductTypeInput[] | BrandUncheckedCreateWithoutProductTypeInput[]
     connectOrCreate?: BrandCreateOrConnectWithoutProductTypeInput | BrandCreateOrConnectWithoutProductTypeInput[]
@@ -11467,6 +16495,27 @@ export namespace Prisma {
     connectOrCreate?: InStockCreateOrConnectWithoutProductTypeInput | InStockCreateOrConnectWithoutProductTypeInput[]
     createMany?: InStockCreateManyProductTypeInputEnvelope
     connect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
+  }
+
+  export type StockAndroidUncheckedCreateNestedManyWithoutProductTypeInput = {
+    create?: XOR<StockAndroidCreateWithoutProductTypeInput, StockAndroidUncheckedCreateWithoutProductTypeInput> | StockAndroidCreateWithoutProductTypeInput[] | StockAndroidUncheckedCreateWithoutProductTypeInput[]
+    connectOrCreate?: StockAndroidCreateOrConnectWithoutProductTypeInput | StockAndroidCreateOrConnectWithoutProductTypeInput[]
+    createMany?: StockAndroidCreateManyProductTypeInputEnvelope
+    connect?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+  }
+
+  export type StockButtonUncheckedCreateNestedManyWithoutProductTypeInput = {
+    create?: XOR<StockButtonCreateWithoutProductTypeInput, StockButtonUncheckedCreateWithoutProductTypeInput> | StockButtonCreateWithoutProductTypeInput[] | StockButtonUncheckedCreateWithoutProductTypeInput[]
+    connectOrCreate?: StockButtonCreateOrConnectWithoutProductTypeInput | StockButtonCreateOrConnectWithoutProductTypeInput[]
+    createMany?: StockButtonCreateManyProductTypeInputEnvelope
+    connect?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+  }
+
+  export type StockAccessoriesUncheckedCreateNestedManyWithoutProductTypeInput = {
+    create?: XOR<StockAccessoriesCreateWithoutProductTypeInput, StockAccessoriesUncheckedCreateWithoutProductTypeInput> | StockAccessoriesCreateWithoutProductTypeInput[] | StockAccessoriesUncheckedCreateWithoutProductTypeInput[]
+    connectOrCreate?: StockAccessoriesCreateOrConnectWithoutProductTypeInput | StockAccessoriesCreateOrConnectWithoutProductTypeInput[]
+    createMany?: StockAccessoriesCreateManyProductTypeInputEnvelope
+    connect?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
   }
 
   export type BrandUpdateManyWithoutProductTypeNestedInput = {
@@ -11497,6 +16546,48 @@ export namespace Prisma {
     deleteMany?: InStockScalarWhereInput | InStockScalarWhereInput[]
   }
 
+  export type StockAndroidUpdateManyWithoutProductTypeNestedInput = {
+    create?: XOR<StockAndroidCreateWithoutProductTypeInput, StockAndroidUncheckedCreateWithoutProductTypeInput> | StockAndroidCreateWithoutProductTypeInput[] | StockAndroidUncheckedCreateWithoutProductTypeInput[]
+    connectOrCreate?: StockAndroidCreateOrConnectWithoutProductTypeInput | StockAndroidCreateOrConnectWithoutProductTypeInput[]
+    upsert?: StockAndroidUpsertWithWhereUniqueWithoutProductTypeInput | StockAndroidUpsertWithWhereUniqueWithoutProductTypeInput[]
+    createMany?: StockAndroidCreateManyProductTypeInputEnvelope
+    set?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    disconnect?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    delete?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    connect?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    update?: StockAndroidUpdateWithWhereUniqueWithoutProductTypeInput | StockAndroidUpdateWithWhereUniqueWithoutProductTypeInput[]
+    updateMany?: StockAndroidUpdateManyWithWhereWithoutProductTypeInput | StockAndroidUpdateManyWithWhereWithoutProductTypeInput[]
+    deleteMany?: StockAndroidScalarWhereInput | StockAndroidScalarWhereInput[]
+  }
+
+  export type StockButtonUpdateManyWithoutProductTypeNestedInput = {
+    create?: XOR<StockButtonCreateWithoutProductTypeInput, StockButtonUncheckedCreateWithoutProductTypeInput> | StockButtonCreateWithoutProductTypeInput[] | StockButtonUncheckedCreateWithoutProductTypeInput[]
+    connectOrCreate?: StockButtonCreateOrConnectWithoutProductTypeInput | StockButtonCreateOrConnectWithoutProductTypeInput[]
+    upsert?: StockButtonUpsertWithWhereUniqueWithoutProductTypeInput | StockButtonUpsertWithWhereUniqueWithoutProductTypeInput[]
+    createMany?: StockButtonCreateManyProductTypeInputEnvelope
+    set?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    disconnect?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    delete?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    connect?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    update?: StockButtonUpdateWithWhereUniqueWithoutProductTypeInput | StockButtonUpdateWithWhereUniqueWithoutProductTypeInput[]
+    updateMany?: StockButtonUpdateManyWithWhereWithoutProductTypeInput | StockButtonUpdateManyWithWhereWithoutProductTypeInput[]
+    deleteMany?: StockButtonScalarWhereInput | StockButtonScalarWhereInput[]
+  }
+
+  export type StockAccessoriesUpdateManyWithoutProductTypeNestedInput = {
+    create?: XOR<StockAccessoriesCreateWithoutProductTypeInput, StockAccessoriesUncheckedCreateWithoutProductTypeInput> | StockAccessoriesCreateWithoutProductTypeInput[] | StockAccessoriesUncheckedCreateWithoutProductTypeInput[]
+    connectOrCreate?: StockAccessoriesCreateOrConnectWithoutProductTypeInput | StockAccessoriesCreateOrConnectWithoutProductTypeInput[]
+    upsert?: StockAccessoriesUpsertWithWhereUniqueWithoutProductTypeInput | StockAccessoriesUpsertWithWhereUniqueWithoutProductTypeInput[]
+    createMany?: StockAccessoriesCreateManyProductTypeInputEnvelope
+    set?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    disconnect?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    delete?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    connect?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    update?: StockAccessoriesUpdateWithWhereUniqueWithoutProductTypeInput | StockAccessoriesUpdateWithWhereUniqueWithoutProductTypeInput[]
+    updateMany?: StockAccessoriesUpdateManyWithWhereWithoutProductTypeInput | StockAccessoriesUpdateManyWithWhereWithoutProductTypeInput[]
+    deleteMany?: StockAccessoriesScalarWhereInput | StockAccessoriesScalarWhereInput[]
+  }
+
   export type BrandUncheckedUpdateManyWithoutProductTypeNestedInput = {
     create?: XOR<BrandCreateWithoutProductTypeInput, BrandUncheckedCreateWithoutProductTypeInput> | BrandCreateWithoutProductTypeInput[] | BrandUncheckedCreateWithoutProductTypeInput[]
     connectOrCreate?: BrandCreateOrConnectWithoutProductTypeInput | BrandCreateOrConnectWithoutProductTypeInput[]
@@ -11525,6 +16616,48 @@ export namespace Prisma {
     deleteMany?: InStockScalarWhereInput | InStockScalarWhereInput[]
   }
 
+  export type StockAndroidUncheckedUpdateManyWithoutProductTypeNestedInput = {
+    create?: XOR<StockAndroidCreateWithoutProductTypeInput, StockAndroidUncheckedCreateWithoutProductTypeInput> | StockAndroidCreateWithoutProductTypeInput[] | StockAndroidUncheckedCreateWithoutProductTypeInput[]
+    connectOrCreate?: StockAndroidCreateOrConnectWithoutProductTypeInput | StockAndroidCreateOrConnectWithoutProductTypeInput[]
+    upsert?: StockAndroidUpsertWithWhereUniqueWithoutProductTypeInput | StockAndroidUpsertWithWhereUniqueWithoutProductTypeInput[]
+    createMany?: StockAndroidCreateManyProductTypeInputEnvelope
+    set?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    disconnect?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    delete?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    connect?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    update?: StockAndroidUpdateWithWhereUniqueWithoutProductTypeInput | StockAndroidUpdateWithWhereUniqueWithoutProductTypeInput[]
+    updateMany?: StockAndroidUpdateManyWithWhereWithoutProductTypeInput | StockAndroidUpdateManyWithWhereWithoutProductTypeInput[]
+    deleteMany?: StockAndroidScalarWhereInput | StockAndroidScalarWhereInput[]
+  }
+
+  export type StockButtonUncheckedUpdateManyWithoutProductTypeNestedInput = {
+    create?: XOR<StockButtonCreateWithoutProductTypeInput, StockButtonUncheckedCreateWithoutProductTypeInput> | StockButtonCreateWithoutProductTypeInput[] | StockButtonUncheckedCreateWithoutProductTypeInput[]
+    connectOrCreate?: StockButtonCreateOrConnectWithoutProductTypeInput | StockButtonCreateOrConnectWithoutProductTypeInput[]
+    upsert?: StockButtonUpsertWithWhereUniqueWithoutProductTypeInput | StockButtonUpsertWithWhereUniqueWithoutProductTypeInput[]
+    createMany?: StockButtonCreateManyProductTypeInputEnvelope
+    set?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    disconnect?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    delete?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    connect?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    update?: StockButtonUpdateWithWhereUniqueWithoutProductTypeInput | StockButtonUpdateWithWhereUniqueWithoutProductTypeInput[]
+    updateMany?: StockButtonUpdateManyWithWhereWithoutProductTypeInput | StockButtonUpdateManyWithWhereWithoutProductTypeInput[]
+    deleteMany?: StockButtonScalarWhereInput | StockButtonScalarWhereInput[]
+  }
+
+  export type StockAccessoriesUncheckedUpdateManyWithoutProductTypeNestedInput = {
+    create?: XOR<StockAccessoriesCreateWithoutProductTypeInput, StockAccessoriesUncheckedCreateWithoutProductTypeInput> | StockAccessoriesCreateWithoutProductTypeInput[] | StockAccessoriesUncheckedCreateWithoutProductTypeInput[]
+    connectOrCreate?: StockAccessoriesCreateOrConnectWithoutProductTypeInput | StockAccessoriesCreateOrConnectWithoutProductTypeInput[]
+    upsert?: StockAccessoriesUpsertWithWhereUniqueWithoutProductTypeInput | StockAccessoriesUpsertWithWhereUniqueWithoutProductTypeInput[]
+    createMany?: StockAccessoriesCreateManyProductTypeInputEnvelope
+    set?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    disconnect?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    delete?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    connect?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    update?: StockAccessoriesUpdateWithWhereUniqueWithoutProductTypeInput | StockAccessoriesUpdateWithWhereUniqueWithoutProductTypeInput[]
+    updateMany?: StockAccessoriesUpdateManyWithWhereWithoutProductTypeInput | StockAccessoriesUpdateManyWithWhereWithoutProductTypeInput[]
+    deleteMany?: StockAccessoriesScalarWhereInput | StockAccessoriesScalarWhereInput[]
+  }
+
   export type ProductTypeCreateNestedOneWithoutBrandInput = {
     create?: XOR<ProductTypeCreateWithoutBrandInput, ProductTypeUncheckedCreateWithoutBrandInput>
     connectOrCreate?: ProductTypeCreateOrConnectWithoutBrandInput
@@ -11545,6 +16678,27 @@ export namespace Prisma {
     connect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
   }
 
+  export type StockAndroidCreateNestedManyWithoutBrandInput = {
+    create?: XOR<StockAndroidCreateWithoutBrandInput, StockAndroidUncheckedCreateWithoutBrandInput> | StockAndroidCreateWithoutBrandInput[] | StockAndroidUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: StockAndroidCreateOrConnectWithoutBrandInput | StockAndroidCreateOrConnectWithoutBrandInput[]
+    createMany?: StockAndroidCreateManyBrandInputEnvelope
+    connect?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+  }
+
+  export type StockButtonCreateNestedManyWithoutBrandInput = {
+    create?: XOR<StockButtonCreateWithoutBrandInput, StockButtonUncheckedCreateWithoutBrandInput> | StockButtonCreateWithoutBrandInput[] | StockButtonUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: StockButtonCreateOrConnectWithoutBrandInput | StockButtonCreateOrConnectWithoutBrandInput[]
+    createMany?: StockButtonCreateManyBrandInputEnvelope
+    connect?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+  }
+
+  export type StockAccessoriesCreateNestedManyWithoutBrandInput = {
+    create?: XOR<StockAccessoriesCreateWithoutBrandInput, StockAccessoriesUncheckedCreateWithoutBrandInput> | StockAccessoriesCreateWithoutBrandInput[] | StockAccessoriesUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: StockAccessoriesCreateOrConnectWithoutBrandInput | StockAccessoriesCreateOrConnectWithoutBrandInput[]
+    createMany?: StockAccessoriesCreateManyBrandInputEnvelope
+    connect?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+  }
+
   export type ModelUncheckedCreateNestedManyWithoutBrandInput = {
     create?: XOR<ModelCreateWithoutBrandInput, ModelUncheckedCreateWithoutBrandInput> | ModelCreateWithoutBrandInput[] | ModelUncheckedCreateWithoutBrandInput[]
     connectOrCreate?: ModelCreateOrConnectWithoutBrandInput | ModelCreateOrConnectWithoutBrandInput[]
@@ -11557,6 +16711,27 @@ export namespace Prisma {
     connectOrCreate?: InStockCreateOrConnectWithoutBrandInput | InStockCreateOrConnectWithoutBrandInput[]
     createMany?: InStockCreateManyBrandInputEnvelope
     connect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
+  }
+
+  export type StockAndroidUncheckedCreateNestedManyWithoutBrandInput = {
+    create?: XOR<StockAndroidCreateWithoutBrandInput, StockAndroidUncheckedCreateWithoutBrandInput> | StockAndroidCreateWithoutBrandInput[] | StockAndroidUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: StockAndroidCreateOrConnectWithoutBrandInput | StockAndroidCreateOrConnectWithoutBrandInput[]
+    createMany?: StockAndroidCreateManyBrandInputEnvelope
+    connect?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+  }
+
+  export type StockButtonUncheckedCreateNestedManyWithoutBrandInput = {
+    create?: XOR<StockButtonCreateWithoutBrandInput, StockButtonUncheckedCreateWithoutBrandInput> | StockButtonCreateWithoutBrandInput[] | StockButtonUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: StockButtonCreateOrConnectWithoutBrandInput | StockButtonCreateOrConnectWithoutBrandInput[]
+    createMany?: StockButtonCreateManyBrandInputEnvelope
+    connect?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+  }
+
+  export type StockAccessoriesUncheckedCreateNestedManyWithoutBrandInput = {
+    create?: XOR<StockAccessoriesCreateWithoutBrandInput, StockAccessoriesUncheckedCreateWithoutBrandInput> | StockAccessoriesCreateWithoutBrandInput[] | StockAccessoriesUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: StockAccessoriesCreateOrConnectWithoutBrandInput | StockAccessoriesCreateOrConnectWithoutBrandInput[]
+    createMany?: StockAccessoriesCreateManyBrandInputEnvelope
+    connect?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
   }
 
   export type ProductTypeUpdateOneRequiredWithoutBrandNestedInput = {
@@ -11595,6 +16770,48 @@ export namespace Prisma {
     deleteMany?: InStockScalarWhereInput | InStockScalarWhereInput[]
   }
 
+  export type StockAndroidUpdateManyWithoutBrandNestedInput = {
+    create?: XOR<StockAndroidCreateWithoutBrandInput, StockAndroidUncheckedCreateWithoutBrandInput> | StockAndroidCreateWithoutBrandInput[] | StockAndroidUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: StockAndroidCreateOrConnectWithoutBrandInput | StockAndroidCreateOrConnectWithoutBrandInput[]
+    upsert?: StockAndroidUpsertWithWhereUniqueWithoutBrandInput | StockAndroidUpsertWithWhereUniqueWithoutBrandInput[]
+    createMany?: StockAndroidCreateManyBrandInputEnvelope
+    set?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    disconnect?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    delete?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    connect?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    update?: StockAndroidUpdateWithWhereUniqueWithoutBrandInput | StockAndroidUpdateWithWhereUniqueWithoutBrandInput[]
+    updateMany?: StockAndroidUpdateManyWithWhereWithoutBrandInput | StockAndroidUpdateManyWithWhereWithoutBrandInput[]
+    deleteMany?: StockAndroidScalarWhereInput | StockAndroidScalarWhereInput[]
+  }
+
+  export type StockButtonUpdateManyWithoutBrandNestedInput = {
+    create?: XOR<StockButtonCreateWithoutBrandInput, StockButtonUncheckedCreateWithoutBrandInput> | StockButtonCreateWithoutBrandInput[] | StockButtonUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: StockButtonCreateOrConnectWithoutBrandInput | StockButtonCreateOrConnectWithoutBrandInput[]
+    upsert?: StockButtonUpsertWithWhereUniqueWithoutBrandInput | StockButtonUpsertWithWhereUniqueWithoutBrandInput[]
+    createMany?: StockButtonCreateManyBrandInputEnvelope
+    set?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    disconnect?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    delete?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    connect?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    update?: StockButtonUpdateWithWhereUniqueWithoutBrandInput | StockButtonUpdateWithWhereUniqueWithoutBrandInput[]
+    updateMany?: StockButtonUpdateManyWithWhereWithoutBrandInput | StockButtonUpdateManyWithWhereWithoutBrandInput[]
+    deleteMany?: StockButtonScalarWhereInput | StockButtonScalarWhereInput[]
+  }
+
+  export type StockAccessoriesUpdateManyWithoutBrandNestedInput = {
+    create?: XOR<StockAccessoriesCreateWithoutBrandInput, StockAccessoriesUncheckedCreateWithoutBrandInput> | StockAccessoriesCreateWithoutBrandInput[] | StockAccessoriesUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: StockAccessoriesCreateOrConnectWithoutBrandInput | StockAccessoriesCreateOrConnectWithoutBrandInput[]
+    upsert?: StockAccessoriesUpsertWithWhereUniqueWithoutBrandInput | StockAccessoriesUpsertWithWhereUniqueWithoutBrandInput[]
+    createMany?: StockAccessoriesCreateManyBrandInputEnvelope
+    set?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    disconnect?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    delete?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    connect?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    update?: StockAccessoriesUpdateWithWhereUniqueWithoutBrandInput | StockAccessoriesUpdateWithWhereUniqueWithoutBrandInput[]
+    updateMany?: StockAccessoriesUpdateManyWithWhereWithoutBrandInput | StockAccessoriesUpdateManyWithWhereWithoutBrandInput[]
+    deleteMany?: StockAccessoriesScalarWhereInput | StockAccessoriesScalarWhereInput[]
+  }
+
   export type ModelUncheckedUpdateManyWithoutBrandNestedInput = {
     create?: XOR<ModelCreateWithoutBrandInput, ModelUncheckedCreateWithoutBrandInput> | ModelCreateWithoutBrandInput[] | ModelUncheckedCreateWithoutBrandInput[]
     connectOrCreate?: ModelCreateOrConnectWithoutBrandInput | ModelCreateOrConnectWithoutBrandInput[]
@@ -11623,6 +16840,48 @@ export namespace Prisma {
     deleteMany?: InStockScalarWhereInput | InStockScalarWhereInput[]
   }
 
+  export type StockAndroidUncheckedUpdateManyWithoutBrandNestedInput = {
+    create?: XOR<StockAndroidCreateWithoutBrandInput, StockAndroidUncheckedCreateWithoutBrandInput> | StockAndroidCreateWithoutBrandInput[] | StockAndroidUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: StockAndroidCreateOrConnectWithoutBrandInput | StockAndroidCreateOrConnectWithoutBrandInput[]
+    upsert?: StockAndroidUpsertWithWhereUniqueWithoutBrandInput | StockAndroidUpsertWithWhereUniqueWithoutBrandInput[]
+    createMany?: StockAndroidCreateManyBrandInputEnvelope
+    set?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    disconnect?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    delete?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    connect?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    update?: StockAndroidUpdateWithWhereUniqueWithoutBrandInput | StockAndroidUpdateWithWhereUniqueWithoutBrandInput[]
+    updateMany?: StockAndroidUpdateManyWithWhereWithoutBrandInput | StockAndroidUpdateManyWithWhereWithoutBrandInput[]
+    deleteMany?: StockAndroidScalarWhereInput | StockAndroidScalarWhereInput[]
+  }
+
+  export type StockButtonUncheckedUpdateManyWithoutBrandNestedInput = {
+    create?: XOR<StockButtonCreateWithoutBrandInput, StockButtonUncheckedCreateWithoutBrandInput> | StockButtonCreateWithoutBrandInput[] | StockButtonUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: StockButtonCreateOrConnectWithoutBrandInput | StockButtonCreateOrConnectWithoutBrandInput[]
+    upsert?: StockButtonUpsertWithWhereUniqueWithoutBrandInput | StockButtonUpsertWithWhereUniqueWithoutBrandInput[]
+    createMany?: StockButtonCreateManyBrandInputEnvelope
+    set?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    disconnect?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    delete?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    connect?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    update?: StockButtonUpdateWithWhereUniqueWithoutBrandInput | StockButtonUpdateWithWhereUniqueWithoutBrandInput[]
+    updateMany?: StockButtonUpdateManyWithWhereWithoutBrandInput | StockButtonUpdateManyWithWhereWithoutBrandInput[]
+    deleteMany?: StockButtonScalarWhereInput | StockButtonScalarWhereInput[]
+  }
+
+  export type StockAccessoriesUncheckedUpdateManyWithoutBrandNestedInput = {
+    create?: XOR<StockAccessoriesCreateWithoutBrandInput, StockAccessoriesUncheckedCreateWithoutBrandInput> | StockAccessoriesCreateWithoutBrandInput[] | StockAccessoriesUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: StockAccessoriesCreateOrConnectWithoutBrandInput | StockAccessoriesCreateOrConnectWithoutBrandInput[]
+    upsert?: StockAccessoriesUpsertWithWhereUniqueWithoutBrandInput | StockAccessoriesUpsertWithWhereUniqueWithoutBrandInput[]
+    createMany?: StockAccessoriesCreateManyBrandInputEnvelope
+    set?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    disconnect?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    delete?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    connect?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    update?: StockAccessoriesUpdateWithWhereUniqueWithoutBrandInput | StockAccessoriesUpdateWithWhereUniqueWithoutBrandInput[]
+    updateMany?: StockAccessoriesUpdateManyWithWhereWithoutBrandInput | StockAccessoriesUpdateManyWithWhereWithoutBrandInput[]
+    deleteMany?: StockAccessoriesScalarWhereInput | StockAccessoriesScalarWhereInput[]
+  }
+
   export type BrandCreateNestedOneWithoutModelInput = {
     create?: XOR<BrandCreateWithoutModelInput, BrandUncheckedCreateWithoutModelInput>
     connectOrCreate?: BrandCreateOrConnectWithoutModelInput
@@ -11636,11 +16895,53 @@ export namespace Prisma {
     connect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
   }
 
+  export type StockAndroidCreateNestedManyWithoutModelInput = {
+    create?: XOR<StockAndroidCreateWithoutModelInput, StockAndroidUncheckedCreateWithoutModelInput> | StockAndroidCreateWithoutModelInput[] | StockAndroidUncheckedCreateWithoutModelInput[]
+    connectOrCreate?: StockAndroidCreateOrConnectWithoutModelInput | StockAndroidCreateOrConnectWithoutModelInput[]
+    createMany?: StockAndroidCreateManyModelInputEnvelope
+    connect?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+  }
+
+  export type StockButtonCreateNestedManyWithoutModelInput = {
+    create?: XOR<StockButtonCreateWithoutModelInput, StockButtonUncheckedCreateWithoutModelInput> | StockButtonCreateWithoutModelInput[] | StockButtonUncheckedCreateWithoutModelInput[]
+    connectOrCreate?: StockButtonCreateOrConnectWithoutModelInput | StockButtonCreateOrConnectWithoutModelInput[]
+    createMany?: StockButtonCreateManyModelInputEnvelope
+    connect?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+  }
+
+  export type StockAccessoriesCreateNestedManyWithoutModelInput = {
+    create?: XOR<StockAccessoriesCreateWithoutModelInput, StockAccessoriesUncheckedCreateWithoutModelInput> | StockAccessoriesCreateWithoutModelInput[] | StockAccessoriesUncheckedCreateWithoutModelInput[]
+    connectOrCreate?: StockAccessoriesCreateOrConnectWithoutModelInput | StockAccessoriesCreateOrConnectWithoutModelInput[]
+    createMany?: StockAccessoriesCreateManyModelInputEnvelope
+    connect?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+  }
+
   export type InStockUncheckedCreateNestedManyWithoutModelInput = {
     create?: XOR<InStockCreateWithoutModelInput, InStockUncheckedCreateWithoutModelInput> | InStockCreateWithoutModelInput[] | InStockUncheckedCreateWithoutModelInput[]
     connectOrCreate?: InStockCreateOrConnectWithoutModelInput | InStockCreateOrConnectWithoutModelInput[]
     createMany?: InStockCreateManyModelInputEnvelope
     connect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
+  }
+
+  export type StockAndroidUncheckedCreateNestedManyWithoutModelInput = {
+    create?: XOR<StockAndroidCreateWithoutModelInput, StockAndroidUncheckedCreateWithoutModelInput> | StockAndroidCreateWithoutModelInput[] | StockAndroidUncheckedCreateWithoutModelInput[]
+    connectOrCreate?: StockAndroidCreateOrConnectWithoutModelInput | StockAndroidCreateOrConnectWithoutModelInput[]
+    createMany?: StockAndroidCreateManyModelInputEnvelope
+    connect?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+  }
+
+  export type StockButtonUncheckedCreateNestedManyWithoutModelInput = {
+    create?: XOR<StockButtonCreateWithoutModelInput, StockButtonUncheckedCreateWithoutModelInput> | StockButtonCreateWithoutModelInput[] | StockButtonUncheckedCreateWithoutModelInput[]
+    connectOrCreate?: StockButtonCreateOrConnectWithoutModelInput | StockButtonCreateOrConnectWithoutModelInput[]
+    createMany?: StockButtonCreateManyModelInputEnvelope
+    connect?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+  }
+
+  export type StockAccessoriesUncheckedCreateNestedManyWithoutModelInput = {
+    create?: XOR<StockAccessoriesCreateWithoutModelInput, StockAccessoriesUncheckedCreateWithoutModelInput> | StockAccessoriesCreateWithoutModelInput[] | StockAccessoriesUncheckedCreateWithoutModelInput[]
+    connectOrCreate?: StockAccessoriesCreateOrConnectWithoutModelInput | StockAccessoriesCreateOrConnectWithoutModelInput[]
+    createMany?: StockAccessoriesCreateManyModelInputEnvelope
+    connect?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
   }
 
   export type BrandUpdateOneRequiredWithoutModelNestedInput = {
@@ -11665,6 +16966,48 @@ export namespace Prisma {
     deleteMany?: InStockScalarWhereInput | InStockScalarWhereInput[]
   }
 
+  export type StockAndroidUpdateManyWithoutModelNestedInput = {
+    create?: XOR<StockAndroidCreateWithoutModelInput, StockAndroidUncheckedCreateWithoutModelInput> | StockAndroidCreateWithoutModelInput[] | StockAndroidUncheckedCreateWithoutModelInput[]
+    connectOrCreate?: StockAndroidCreateOrConnectWithoutModelInput | StockAndroidCreateOrConnectWithoutModelInput[]
+    upsert?: StockAndroidUpsertWithWhereUniqueWithoutModelInput | StockAndroidUpsertWithWhereUniqueWithoutModelInput[]
+    createMany?: StockAndroidCreateManyModelInputEnvelope
+    set?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    disconnect?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    delete?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    connect?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    update?: StockAndroidUpdateWithWhereUniqueWithoutModelInput | StockAndroidUpdateWithWhereUniqueWithoutModelInput[]
+    updateMany?: StockAndroidUpdateManyWithWhereWithoutModelInput | StockAndroidUpdateManyWithWhereWithoutModelInput[]
+    deleteMany?: StockAndroidScalarWhereInput | StockAndroidScalarWhereInput[]
+  }
+
+  export type StockButtonUpdateManyWithoutModelNestedInput = {
+    create?: XOR<StockButtonCreateWithoutModelInput, StockButtonUncheckedCreateWithoutModelInput> | StockButtonCreateWithoutModelInput[] | StockButtonUncheckedCreateWithoutModelInput[]
+    connectOrCreate?: StockButtonCreateOrConnectWithoutModelInput | StockButtonCreateOrConnectWithoutModelInput[]
+    upsert?: StockButtonUpsertWithWhereUniqueWithoutModelInput | StockButtonUpsertWithWhereUniqueWithoutModelInput[]
+    createMany?: StockButtonCreateManyModelInputEnvelope
+    set?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    disconnect?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    delete?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    connect?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    update?: StockButtonUpdateWithWhereUniqueWithoutModelInput | StockButtonUpdateWithWhereUniqueWithoutModelInput[]
+    updateMany?: StockButtonUpdateManyWithWhereWithoutModelInput | StockButtonUpdateManyWithWhereWithoutModelInput[]
+    deleteMany?: StockButtonScalarWhereInput | StockButtonScalarWhereInput[]
+  }
+
+  export type StockAccessoriesUpdateManyWithoutModelNestedInput = {
+    create?: XOR<StockAccessoriesCreateWithoutModelInput, StockAccessoriesUncheckedCreateWithoutModelInput> | StockAccessoriesCreateWithoutModelInput[] | StockAccessoriesUncheckedCreateWithoutModelInput[]
+    connectOrCreate?: StockAccessoriesCreateOrConnectWithoutModelInput | StockAccessoriesCreateOrConnectWithoutModelInput[]
+    upsert?: StockAccessoriesUpsertWithWhereUniqueWithoutModelInput | StockAccessoriesUpsertWithWhereUniqueWithoutModelInput[]
+    createMany?: StockAccessoriesCreateManyModelInputEnvelope
+    set?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    disconnect?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    delete?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    connect?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    update?: StockAccessoriesUpdateWithWhereUniqueWithoutModelInput | StockAccessoriesUpdateWithWhereUniqueWithoutModelInput[]
+    updateMany?: StockAccessoriesUpdateManyWithWhereWithoutModelInput | StockAccessoriesUpdateManyWithWhereWithoutModelInput[]
+    deleteMany?: StockAccessoriesScalarWhereInput | StockAccessoriesScalarWhereInput[]
+  }
+
   export type InStockUncheckedUpdateManyWithoutModelNestedInput = {
     create?: XOR<InStockCreateWithoutModelInput, InStockUncheckedCreateWithoutModelInput> | InStockCreateWithoutModelInput[] | InStockUncheckedCreateWithoutModelInput[]
     connectOrCreate?: InStockCreateOrConnectWithoutModelInput | InStockCreateOrConnectWithoutModelInput[]
@@ -11677,6 +17020,48 @@ export namespace Prisma {
     update?: InStockUpdateWithWhereUniqueWithoutModelInput | InStockUpdateWithWhereUniqueWithoutModelInput[]
     updateMany?: InStockUpdateManyWithWhereWithoutModelInput | InStockUpdateManyWithWhereWithoutModelInput[]
     deleteMany?: InStockScalarWhereInput | InStockScalarWhereInput[]
+  }
+
+  export type StockAndroidUncheckedUpdateManyWithoutModelNestedInput = {
+    create?: XOR<StockAndroidCreateWithoutModelInput, StockAndroidUncheckedCreateWithoutModelInput> | StockAndroidCreateWithoutModelInput[] | StockAndroidUncheckedCreateWithoutModelInput[]
+    connectOrCreate?: StockAndroidCreateOrConnectWithoutModelInput | StockAndroidCreateOrConnectWithoutModelInput[]
+    upsert?: StockAndroidUpsertWithWhereUniqueWithoutModelInput | StockAndroidUpsertWithWhereUniqueWithoutModelInput[]
+    createMany?: StockAndroidCreateManyModelInputEnvelope
+    set?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    disconnect?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    delete?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    connect?: StockAndroidWhereUniqueInput | StockAndroidWhereUniqueInput[]
+    update?: StockAndroidUpdateWithWhereUniqueWithoutModelInput | StockAndroidUpdateWithWhereUniqueWithoutModelInput[]
+    updateMany?: StockAndroidUpdateManyWithWhereWithoutModelInput | StockAndroidUpdateManyWithWhereWithoutModelInput[]
+    deleteMany?: StockAndroidScalarWhereInput | StockAndroidScalarWhereInput[]
+  }
+
+  export type StockButtonUncheckedUpdateManyWithoutModelNestedInput = {
+    create?: XOR<StockButtonCreateWithoutModelInput, StockButtonUncheckedCreateWithoutModelInput> | StockButtonCreateWithoutModelInput[] | StockButtonUncheckedCreateWithoutModelInput[]
+    connectOrCreate?: StockButtonCreateOrConnectWithoutModelInput | StockButtonCreateOrConnectWithoutModelInput[]
+    upsert?: StockButtonUpsertWithWhereUniqueWithoutModelInput | StockButtonUpsertWithWhereUniqueWithoutModelInput[]
+    createMany?: StockButtonCreateManyModelInputEnvelope
+    set?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    disconnect?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    delete?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    connect?: StockButtonWhereUniqueInput | StockButtonWhereUniqueInput[]
+    update?: StockButtonUpdateWithWhereUniqueWithoutModelInput | StockButtonUpdateWithWhereUniqueWithoutModelInput[]
+    updateMany?: StockButtonUpdateManyWithWhereWithoutModelInput | StockButtonUpdateManyWithWhereWithoutModelInput[]
+    deleteMany?: StockButtonScalarWhereInput | StockButtonScalarWhereInput[]
+  }
+
+  export type StockAccessoriesUncheckedUpdateManyWithoutModelNestedInput = {
+    create?: XOR<StockAccessoriesCreateWithoutModelInput, StockAccessoriesUncheckedCreateWithoutModelInput> | StockAccessoriesCreateWithoutModelInput[] | StockAccessoriesUncheckedCreateWithoutModelInput[]
+    connectOrCreate?: StockAccessoriesCreateOrConnectWithoutModelInput | StockAccessoriesCreateOrConnectWithoutModelInput[]
+    upsert?: StockAccessoriesUpsertWithWhereUniqueWithoutModelInput | StockAccessoriesUpsertWithWhereUniqueWithoutModelInput[]
+    createMany?: StockAccessoriesCreateManyModelInputEnvelope
+    set?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    disconnect?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    delete?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    connect?: StockAccessoriesWhereUniqueInput | StockAccessoriesWhereUniqueInput[]
+    update?: StockAccessoriesUpdateWithWhereUniqueWithoutModelInput | StockAccessoriesUpdateWithWhereUniqueWithoutModelInput[]
+    updateMany?: StockAccessoriesUpdateManyWithWhereWithoutModelInput | StockAccessoriesUpdateManyWithWhereWithoutModelInput[]
+    deleteMany?: StockAccessoriesScalarWhereInput | StockAccessoriesScalarWhereInput[]
   }
 
   export type ModelCreateNestedOneWithoutInStockInput = {
@@ -11780,6 +17165,258 @@ export namespace Prisma {
     deleteMany?: SalesEntryScalarWhereInput | SalesEntryScalarWhereInput[]
   }
 
+  export type ModelCreateNestedOneWithoutStrockAndroidInput = {
+    create?: XOR<ModelCreateWithoutStrockAndroidInput, ModelUncheckedCreateWithoutStrockAndroidInput>
+    connectOrCreate?: ModelCreateOrConnectWithoutStrockAndroidInput
+    connect?: ModelWhereUniqueInput
+  }
+
+  export type BrandCreateNestedOneWithoutStockAndroidInput = {
+    create?: XOR<BrandCreateWithoutStockAndroidInput, BrandUncheckedCreateWithoutStockAndroidInput>
+    connectOrCreate?: BrandCreateOrConnectWithoutStockAndroidInput
+    connect?: BrandWhereUniqueInput
+  }
+
+  export type ProductTypeCreateNestedOneWithoutStockAndroidInput = {
+    create?: XOR<ProductTypeCreateWithoutStockAndroidInput, ProductTypeUncheckedCreateWithoutStockAndroidInput>
+    connectOrCreate?: ProductTypeCreateOrConnectWithoutStockAndroidInput
+    connect?: ProductTypeWhereUniqueInput
+  }
+
+  export type SalesEntryCreateNestedManyWithoutStockAndroidInput = {
+    create?: XOR<SalesEntryCreateWithoutStockAndroidInput, SalesEntryUncheckedCreateWithoutStockAndroidInput> | SalesEntryCreateWithoutStockAndroidInput[] | SalesEntryUncheckedCreateWithoutStockAndroidInput[]
+    connectOrCreate?: SalesEntryCreateOrConnectWithoutStockAndroidInput | SalesEntryCreateOrConnectWithoutStockAndroidInput[]
+    createMany?: SalesEntryCreateManyStockAndroidInputEnvelope
+    connect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+  }
+
+  export type SalesEntryUncheckedCreateNestedManyWithoutStockAndroidInput = {
+    create?: XOR<SalesEntryCreateWithoutStockAndroidInput, SalesEntryUncheckedCreateWithoutStockAndroidInput> | SalesEntryCreateWithoutStockAndroidInput[] | SalesEntryUncheckedCreateWithoutStockAndroidInput[]
+    connectOrCreate?: SalesEntryCreateOrConnectWithoutStockAndroidInput | SalesEntryCreateOrConnectWithoutStockAndroidInput[]
+    createMany?: SalesEntryCreateManyStockAndroidInputEnvelope
+    connect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+  }
+
+  export type ModelUpdateOneRequiredWithoutStrockAndroidNestedInput = {
+    create?: XOR<ModelCreateWithoutStrockAndroidInput, ModelUncheckedCreateWithoutStrockAndroidInput>
+    connectOrCreate?: ModelCreateOrConnectWithoutStrockAndroidInput
+    upsert?: ModelUpsertWithoutStrockAndroidInput
+    connect?: ModelWhereUniqueInput
+    update?: XOR<XOR<ModelUpdateToOneWithWhereWithoutStrockAndroidInput, ModelUpdateWithoutStrockAndroidInput>, ModelUncheckedUpdateWithoutStrockAndroidInput>
+  }
+
+  export type BrandUpdateOneRequiredWithoutStockAndroidNestedInput = {
+    create?: XOR<BrandCreateWithoutStockAndroidInput, BrandUncheckedCreateWithoutStockAndroidInput>
+    connectOrCreate?: BrandCreateOrConnectWithoutStockAndroidInput
+    upsert?: BrandUpsertWithoutStockAndroidInput
+    connect?: BrandWhereUniqueInput
+    update?: XOR<XOR<BrandUpdateToOneWithWhereWithoutStockAndroidInput, BrandUpdateWithoutStockAndroidInput>, BrandUncheckedUpdateWithoutStockAndroidInput>
+  }
+
+  export type ProductTypeUpdateOneRequiredWithoutStockAndroidNestedInput = {
+    create?: XOR<ProductTypeCreateWithoutStockAndroidInput, ProductTypeUncheckedCreateWithoutStockAndroidInput>
+    connectOrCreate?: ProductTypeCreateOrConnectWithoutStockAndroidInput
+    upsert?: ProductTypeUpsertWithoutStockAndroidInput
+    connect?: ProductTypeWhereUniqueInput
+    update?: XOR<XOR<ProductTypeUpdateToOneWithWhereWithoutStockAndroidInput, ProductTypeUpdateWithoutStockAndroidInput>, ProductTypeUncheckedUpdateWithoutStockAndroidInput>
+  }
+
+  export type SalesEntryUpdateManyWithoutStockAndroidNestedInput = {
+    create?: XOR<SalesEntryCreateWithoutStockAndroidInput, SalesEntryUncheckedCreateWithoutStockAndroidInput> | SalesEntryCreateWithoutStockAndroidInput[] | SalesEntryUncheckedCreateWithoutStockAndroidInput[]
+    connectOrCreate?: SalesEntryCreateOrConnectWithoutStockAndroidInput | SalesEntryCreateOrConnectWithoutStockAndroidInput[]
+    upsert?: SalesEntryUpsertWithWhereUniqueWithoutStockAndroidInput | SalesEntryUpsertWithWhereUniqueWithoutStockAndroidInput[]
+    createMany?: SalesEntryCreateManyStockAndroidInputEnvelope
+    set?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    disconnect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    delete?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    connect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    update?: SalesEntryUpdateWithWhereUniqueWithoutStockAndroidInput | SalesEntryUpdateWithWhereUniqueWithoutStockAndroidInput[]
+    updateMany?: SalesEntryUpdateManyWithWhereWithoutStockAndroidInput | SalesEntryUpdateManyWithWhereWithoutStockAndroidInput[]
+    deleteMany?: SalesEntryScalarWhereInput | SalesEntryScalarWhereInput[]
+  }
+
+  export type SalesEntryUncheckedUpdateManyWithoutStockAndroidNestedInput = {
+    create?: XOR<SalesEntryCreateWithoutStockAndroidInput, SalesEntryUncheckedCreateWithoutStockAndroidInput> | SalesEntryCreateWithoutStockAndroidInput[] | SalesEntryUncheckedCreateWithoutStockAndroidInput[]
+    connectOrCreate?: SalesEntryCreateOrConnectWithoutStockAndroidInput | SalesEntryCreateOrConnectWithoutStockAndroidInput[]
+    upsert?: SalesEntryUpsertWithWhereUniqueWithoutStockAndroidInput | SalesEntryUpsertWithWhereUniqueWithoutStockAndroidInput[]
+    createMany?: SalesEntryCreateManyStockAndroidInputEnvelope
+    set?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    disconnect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    delete?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    connect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    update?: SalesEntryUpdateWithWhereUniqueWithoutStockAndroidInput | SalesEntryUpdateWithWhereUniqueWithoutStockAndroidInput[]
+    updateMany?: SalesEntryUpdateManyWithWhereWithoutStockAndroidInput | SalesEntryUpdateManyWithWhereWithoutStockAndroidInput[]
+    deleteMany?: SalesEntryScalarWhereInput | SalesEntryScalarWhereInput[]
+  }
+
+  export type ModelCreateNestedOneWithoutStrockButtonInput = {
+    create?: XOR<ModelCreateWithoutStrockButtonInput, ModelUncheckedCreateWithoutStrockButtonInput>
+    connectOrCreate?: ModelCreateOrConnectWithoutStrockButtonInput
+    connect?: ModelWhereUniqueInput
+  }
+
+  export type BrandCreateNestedOneWithoutStockButtonInput = {
+    create?: XOR<BrandCreateWithoutStockButtonInput, BrandUncheckedCreateWithoutStockButtonInput>
+    connectOrCreate?: BrandCreateOrConnectWithoutStockButtonInput
+    connect?: BrandWhereUniqueInput
+  }
+
+  export type ProductTypeCreateNestedOneWithoutStockButtonInput = {
+    create?: XOR<ProductTypeCreateWithoutStockButtonInput, ProductTypeUncheckedCreateWithoutStockButtonInput>
+    connectOrCreate?: ProductTypeCreateOrConnectWithoutStockButtonInput
+    connect?: ProductTypeWhereUniqueInput
+  }
+
+  export type SalesEntryCreateNestedManyWithoutStockButtonInput = {
+    create?: XOR<SalesEntryCreateWithoutStockButtonInput, SalesEntryUncheckedCreateWithoutStockButtonInput> | SalesEntryCreateWithoutStockButtonInput[] | SalesEntryUncheckedCreateWithoutStockButtonInput[]
+    connectOrCreate?: SalesEntryCreateOrConnectWithoutStockButtonInput | SalesEntryCreateOrConnectWithoutStockButtonInput[]
+    createMany?: SalesEntryCreateManyStockButtonInputEnvelope
+    connect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+  }
+
+  export type SalesEntryUncheckedCreateNestedManyWithoutStockButtonInput = {
+    create?: XOR<SalesEntryCreateWithoutStockButtonInput, SalesEntryUncheckedCreateWithoutStockButtonInput> | SalesEntryCreateWithoutStockButtonInput[] | SalesEntryUncheckedCreateWithoutStockButtonInput[]
+    connectOrCreate?: SalesEntryCreateOrConnectWithoutStockButtonInput | SalesEntryCreateOrConnectWithoutStockButtonInput[]
+    createMany?: SalesEntryCreateManyStockButtonInputEnvelope
+    connect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+  }
+
+  export type ModelUpdateOneRequiredWithoutStrockButtonNestedInput = {
+    create?: XOR<ModelCreateWithoutStrockButtonInput, ModelUncheckedCreateWithoutStrockButtonInput>
+    connectOrCreate?: ModelCreateOrConnectWithoutStrockButtonInput
+    upsert?: ModelUpsertWithoutStrockButtonInput
+    connect?: ModelWhereUniqueInput
+    update?: XOR<XOR<ModelUpdateToOneWithWhereWithoutStrockButtonInput, ModelUpdateWithoutStrockButtonInput>, ModelUncheckedUpdateWithoutStrockButtonInput>
+  }
+
+  export type BrandUpdateOneRequiredWithoutStockButtonNestedInput = {
+    create?: XOR<BrandCreateWithoutStockButtonInput, BrandUncheckedCreateWithoutStockButtonInput>
+    connectOrCreate?: BrandCreateOrConnectWithoutStockButtonInput
+    upsert?: BrandUpsertWithoutStockButtonInput
+    connect?: BrandWhereUniqueInput
+    update?: XOR<XOR<BrandUpdateToOneWithWhereWithoutStockButtonInput, BrandUpdateWithoutStockButtonInput>, BrandUncheckedUpdateWithoutStockButtonInput>
+  }
+
+  export type ProductTypeUpdateOneRequiredWithoutStockButtonNestedInput = {
+    create?: XOR<ProductTypeCreateWithoutStockButtonInput, ProductTypeUncheckedCreateWithoutStockButtonInput>
+    connectOrCreate?: ProductTypeCreateOrConnectWithoutStockButtonInput
+    upsert?: ProductTypeUpsertWithoutStockButtonInput
+    connect?: ProductTypeWhereUniqueInput
+    update?: XOR<XOR<ProductTypeUpdateToOneWithWhereWithoutStockButtonInput, ProductTypeUpdateWithoutStockButtonInput>, ProductTypeUncheckedUpdateWithoutStockButtonInput>
+  }
+
+  export type SalesEntryUpdateManyWithoutStockButtonNestedInput = {
+    create?: XOR<SalesEntryCreateWithoutStockButtonInput, SalesEntryUncheckedCreateWithoutStockButtonInput> | SalesEntryCreateWithoutStockButtonInput[] | SalesEntryUncheckedCreateWithoutStockButtonInput[]
+    connectOrCreate?: SalesEntryCreateOrConnectWithoutStockButtonInput | SalesEntryCreateOrConnectWithoutStockButtonInput[]
+    upsert?: SalesEntryUpsertWithWhereUniqueWithoutStockButtonInput | SalesEntryUpsertWithWhereUniqueWithoutStockButtonInput[]
+    createMany?: SalesEntryCreateManyStockButtonInputEnvelope
+    set?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    disconnect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    delete?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    connect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    update?: SalesEntryUpdateWithWhereUniqueWithoutStockButtonInput | SalesEntryUpdateWithWhereUniqueWithoutStockButtonInput[]
+    updateMany?: SalesEntryUpdateManyWithWhereWithoutStockButtonInput | SalesEntryUpdateManyWithWhereWithoutStockButtonInput[]
+    deleteMany?: SalesEntryScalarWhereInput | SalesEntryScalarWhereInput[]
+  }
+
+  export type SalesEntryUncheckedUpdateManyWithoutStockButtonNestedInput = {
+    create?: XOR<SalesEntryCreateWithoutStockButtonInput, SalesEntryUncheckedCreateWithoutStockButtonInput> | SalesEntryCreateWithoutStockButtonInput[] | SalesEntryUncheckedCreateWithoutStockButtonInput[]
+    connectOrCreate?: SalesEntryCreateOrConnectWithoutStockButtonInput | SalesEntryCreateOrConnectWithoutStockButtonInput[]
+    upsert?: SalesEntryUpsertWithWhereUniqueWithoutStockButtonInput | SalesEntryUpsertWithWhereUniqueWithoutStockButtonInput[]
+    createMany?: SalesEntryCreateManyStockButtonInputEnvelope
+    set?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    disconnect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    delete?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    connect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    update?: SalesEntryUpdateWithWhereUniqueWithoutStockButtonInput | SalesEntryUpdateWithWhereUniqueWithoutStockButtonInput[]
+    updateMany?: SalesEntryUpdateManyWithWhereWithoutStockButtonInput | SalesEntryUpdateManyWithWhereWithoutStockButtonInput[]
+    deleteMany?: SalesEntryScalarWhereInput | SalesEntryScalarWhereInput[]
+  }
+
+  export type ModelCreateNestedOneWithoutStrockAccessoriesInput = {
+    create?: XOR<ModelCreateWithoutStrockAccessoriesInput, ModelUncheckedCreateWithoutStrockAccessoriesInput>
+    connectOrCreate?: ModelCreateOrConnectWithoutStrockAccessoriesInput
+    connect?: ModelWhereUniqueInput
+  }
+
+  export type BrandCreateNestedOneWithoutStockAccessoriesInput = {
+    create?: XOR<BrandCreateWithoutStockAccessoriesInput, BrandUncheckedCreateWithoutStockAccessoriesInput>
+    connectOrCreate?: BrandCreateOrConnectWithoutStockAccessoriesInput
+    connect?: BrandWhereUniqueInput
+  }
+
+  export type ProductTypeCreateNestedOneWithoutStockAccessoriesInput = {
+    create?: XOR<ProductTypeCreateWithoutStockAccessoriesInput, ProductTypeUncheckedCreateWithoutStockAccessoriesInput>
+    connectOrCreate?: ProductTypeCreateOrConnectWithoutStockAccessoriesInput
+    connect?: ProductTypeWhereUniqueInput
+  }
+
+  export type SalesEntryCreateNestedManyWithoutStockAccessoriesInput = {
+    create?: XOR<SalesEntryCreateWithoutStockAccessoriesInput, SalesEntryUncheckedCreateWithoutStockAccessoriesInput> | SalesEntryCreateWithoutStockAccessoriesInput[] | SalesEntryUncheckedCreateWithoutStockAccessoriesInput[]
+    connectOrCreate?: SalesEntryCreateOrConnectWithoutStockAccessoriesInput | SalesEntryCreateOrConnectWithoutStockAccessoriesInput[]
+    createMany?: SalesEntryCreateManyStockAccessoriesInputEnvelope
+    connect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+  }
+
+  export type SalesEntryUncheckedCreateNestedManyWithoutStockAccessoriesInput = {
+    create?: XOR<SalesEntryCreateWithoutStockAccessoriesInput, SalesEntryUncheckedCreateWithoutStockAccessoriesInput> | SalesEntryCreateWithoutStockAccessoriesInput[] | SalesEntryUncheckedCreateWithoutStockAccessoriesInput[]
+    connectOrCreate?: SalesEntryCreateOrConnectWithoutStockAccessoriesInput | SalesEntryCreateOrConnectWithoutStockAccessoriesInput[]
+    createMany?: SalesEntryCreateManyStockAccessoriesInputEnvelope
+    connect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+  }
+
+  export type ModelUpdateOneRequiredWithoutStrockAccessoriesNestedInput = {
+    create?: XOR<ModelCreateWithoutStrockAccessoriesInput, ModelUncheckedCreateWithoutStrockAccessoriesInput>
+    connectOrCreate?: ModelCreateOrConnectWithoutStrockAccessoriesInput
+    upsert?: ModelUpsertWithoutStrockAccessoriesInput
+    connect?: ModelWhereUniqueInput
+    update?: XOR<XOR<ModelUpdateToOneWithWhereWithoutStrockAccessoriesInput, ModelUpdateWithoutStrockAccessoriesInput>, ModelUncheckedUpdateWithoutStrockAccessoriesInput>
+  }
+
+  export type BrandUpdateOneRequiredWithoutStockAccessoriesNestedInput = {
+    create?: XOR<BrandCreateWithoutStockAccessoriesInput, BrandUncheckedCreateWithoutStockAccessoriesInput>
+    connectOrCreate?: BrandCreateOrConnectWithoutStockAccessoriesInput
+    upsert?: BrandUpsertWithoutStockAccessoriesInput
+    connect?: BrandWhereUniqueInput
+    update?: XOR<XOR<BrandUpdateToOneWithWhereWithoutStockAccessoriesInput, BrandUpdateWithoutStockAccessoriesInput>, BrandUncheckedUpdateWithoutStockAccessoriesInput>
+  }
+
+  export type ProductTypeUpdateOneRequiredWithoutStockAccessoriesNestedInput = {
+    create?: XOR<ProductTypeCreateWithoutStockAccessoriesInput, ProductTypeUncheckedCreateWithoutStockAccessoriesInput>
+    connectOrCreate?: ProductTypeCreateOrConnectWithoutStockAccessoriesInput
+    upsert?: ProductTypeUpsertWithoutStockAccessoriesInput
+    connect?: ProductTypeWhereUniqueInput
+    update?: XOR<XOR<ProductTypeUpdateToOneWithWhereWithoutStockAccessoriesInput, ProductTypeUpdateWithoutStockAccessoriesInput>, ProductTypeUncheckedUpdateWithoutStockAccessoriesInput>
+  }
+
+  export type SalesEntryUpdateManyWithoutStockAccessoriesNestedInput = {
+    create?: XOR<SalesEntryCreateWithoutStockAccessoriesInput, SalesEntryUncheckedCreateWithoutStockAccessoriesInput> | SalesEntryCreateWithoutStockAccessoriesInput[] | SalesEntryUncheckedCreateWithoutStockAccessoriesInput[]
+    connectOrCreate?: SalesEntryCreateOrConnectWithoutStockAccessoriesInput | SalesEntryCreateOrConnectWithoutStockAccessoriesInput[]
+    upsert?: SalesEntryUpsertWithWhereUniqueWithoutStockAccessoriesInput | SalesEntryUpsertWithWhereUniqueWithoutStockAccessoriesInput[]
+    createMany?: SalesEntryCreateManyStockAccessoriesInputEnvelope
+    set?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    disconnect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    delete?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    connect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    update?: SalesEntryUpdateWithWhereUniqueWithoutStockAccessoriesInput | SalesEntryUpdateWithWhereUniqueWithoutStockAccessoriesInput[]
+    updateMany?: SalesEntryUpdateManyWithWhereWithoutStockAccessoriesInput | SalesEntryUpdateManyWithWhereWithoutStockAccessoriesInput[]
+    deleteMany?: SalesEntryScalarWhereInput | SalesEntryScalarWhereInput[]
+  }
+
+  export type SalesEntryUncheckedUpdateManyWithoutStockAccessoriesNestedInput = {
+    create?: XOR<SalesEntryCreateWithoutStockAccessoriesInput, SalesEntryUncheckedCreateWithoutStockAccessoriesInput> | SalesEntryCreateWithoutStockAccessoriesInput[] | SalesEntryUncheckedCreateWithoutStockAccessoriesInput[]
+    connectOrCreate?: SalesEntryCreateOrConnectWithoutStockAccessoriesInput | SalesEntryCreateOrConnectWithoutStockAccessoriesInput[]
+    upsert?: SalesEntryUpsertWithWhereUniqueWithoutStockAccessoriesInput | SalesEntryUpsertWithWhereUniqueWithoutStockAccessoriesInput[]
+    createMany?: SalesEntryCreateManyStockAccessoriesInputEnvelope
+    set?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    disconnect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    delete?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    connect?: SalesEntryWhereUniqueInput | SalesEntryWhereUniqueInput[]
+    update?: SalesEntryUpdateWithWhereUniqueWithoutStockAccessoriesInput | SalesEntryUpdateWithWhereUniqueWithoutStockAccessoriesInput[]
+    updateMany?: SalesEntryUpdateManyWithWhereWithoutStockAccessoriesInput | SalesEntryUpdateManyWithWhereWithoutStockAccessoriesInput[]
+    deleteMany?: SalesEntryScalarWhereInput | SalesEntryScalarWhereInput[]
+  }
+
   export type InStockCreateNestedOneWithoutSalesEntryInput = {
     create?: XOR<InStockCreateWithoutSalesEntryInput, InStockUncheckedCreateWithoutSalesEntryInput>
     connectOrCreate?: InStockCreateOrConnectWithoutSalesEntryInput
@@ -11796,6 +17433,24 @@ export namespace Prisma {
     create?: XOR<CustomerCreateWithoutSalesEntryInput, CustomerUncheckedCreateWithoutSalesEntryInput>
     connectOrCreate?: CustomerCreateOrConnectWithoutSalesEntryInput
     connect?: CustomerWhereUniqueInput
+  }
+
+  export type StockAndroidCreateNestedOneWithoutSalesEntryInput = {
+    create?: XOR<StockAndroidCreateWithoutSalesEntryInput, StockAndroidUncheckedCreateWithoutSalesEntryInput>
+    connectOrCreate?: StockAndroidCreateOrConnectWithoutSalesEntryInput
+    connect?: StockAndroidWhereUniqueInput
+  }
+
+  export type StockButtonCreateNestedOneWithoutSalesEntryInput = {
+    create?: XOR<StockButtonCreateWithoutSalesEntryInput, StockButtonUncheckedCreateWithoutSalesEntryInput>
+    connectOrCreate?: StockButtonCreateOrConnectWithoutSalesEntryInput
+    connect?: StockButtonWhereUniqueInput
+  }
+
+  export type StockAccessoriesCreateNestedOneWithoutSalesEntryInput = {
+    create?: XOR<StockAccessoriesCreateWithoutSalesEntryInput, StockAccessoriesUncheckedCreateWithoutSalesEntryInput>
+    connectOrCreate?: StockAccessoriesCreateOrConnectWithoutSalesEntryInput
+    connect?: StockAccessoriesWhereUniqueInput
   }
 
   export type InStockUpdateOneRequiredWithoutSalesEntryNestedInput = {
@@ -11820,6 +17475,36 @@ export namespace Prisma {
     upsert?: CustomerUpsertWithoutSalesEntryInput
     connect?: CustomerWhereUniqueInput
     update?: XOR<XOR<CustomerUpdateToOneWithWhereWithoutSalesEntryInput, CustomerUpdateWithoutSalesEntryInput>, CustomerUncheckedUpdateWithoutSalesEntryInput>
+  }
+
+  export type StockAndroidUpdateOneWithoutSalesEntryNestedInput = {
+    create?: XOR<StockAndroidCreateWithoutSalesEntryInput, StockAndroidUncheckedCreateWithoutSalesEntryInput>
+    connectOrCreate?: StockAndroidCreateOrConnectWithoutSalesEntryInput
+    upsert?: StockAndroidUpsertWithoutSalesEntryInput
+    disconnect?: boolean
+    delete?: StockAndroidWhereInput | boolean
+    connect?: StockAndroidWhereUniqueInput
+    update?: XOR<XOR<StockAndroidUpdateToOneWithWhereWithoutSalesEntryInput, StockAndroidUpdateWithoutSalesEntryInput>, StockAndroidUncheckedUpdateWithoutSalesEntryInput>
+  }
+
+  export type StockButtonUpdateOneWithoutSalesEntryNestedInput = {
+    create?: XOR<StockButtonCreateWithoutSalesEntryInput, StockButtonUncheckedCreateWithoutSalesEntryInput>
+    connectOrCreate?: StockButtonCreateOrConnectWithoutSalesEntryInput
+    upsert?: StockButtonUpsertWithoutSalesEntryInput
+    disconnect?: boolean
+    delete?: StockButtonWhereInput | boolean
+    connect?: StockButtonWhereUniqueInput
+    update?: XOR<XOR<StockButtonUpdateToOneWithWhereWithoutSalesEntryInput, StockButtonUpdateWithoutSalesEntryInput>, StockButtonUncheckedUpdateWithoutSalesEntryInput>
+  }
+
+  export type StockAccessoriesUpdateOneWithoutSalesEntryNestedInput = {
+    create?: XOR<StockAccessoriesCreateWithoutSalesEntryInput, StockAccessoriesUncheckedCreateWithoutSalesEntryInput>
+    connectOrCreate?: StockAccessoriesCreateOrConnectWithoutSalesEntryInput
+    upsert?: StockAccessoriesUpsertWithoutSalesEntryInput
+    disconnect?: boolean
+    delete?: StockAccessoriesWhereInput | boolean
+    connect?: StockAccessoriesWhereUniqueInput
+    update?: XOR<XOR<StockAccessoriesUpdateToOneWithWhereWithoutSalesEntryInput, StockAccessoriesUpdateWithoutSalesEntryInput>, StockAccessoriesUncheckedUpdateWithoutSalesEntryInput>
   }
 
   export type SalesEntryCreateNestedManyWithoutCustomerInput = {
@@ -12020,26 +17705,28 @@ export namespace Prisma {
 
   export type SalesEntryCreateWithoutSellerInput = {
     id?: string
-    IMEI: string
-    price: number
     discount: number
     due: number
     dueDate?: Date | string | null
     createdAt?: Date | string | null
     InStock: InStockCreateNestedOneWithoutSalesEntryInput
     customer: CustomerCreateNestedOneWithoutSalesEntryInput
+    StockAndroid?: StockAndroidCreateNestedOneWithoutSalesEntryInput
+    StockButton?: StockButtonCreateNestedOneWithoutSalesEntryInput
+    StockAccessories?: StockAccessoriesCreateNestedOneWithoutSalesEntryInput
   }
 
   export type SalesEntryUncheckedCreateWithoutSellerInput = {
     id?: string
     instockId: string
-    IMEI: string
-    price: number
     discount: number
     due: number
     dueDate?: Date | string | null
     customerId: string
     createdAt?: Date | string | null
+    stockAndroidId?: string | null
+    stockButtonId?: string | null
+    stockAccessoriesId?: string | null
   }
 
   export type SalesEntryCreateOrConnectWithoutSellerInput = {
@@ -12073,14 +17760,15 @@ export namespace Prisma {
     NOT?: SalesEntryScalarWhereInput | SalesEntryScalarWhereInput[]
     id?: StringFilter<"SalesEntry"> | string
     instockId?: StringFilter<"SalesEntry"> | string
-    IMEI?: StringFilter<"SalesEntry"> | string
-    price?: IntFilter<"SalesEntry"> | number
     discount?: IntFilter<"SalesEntry"> | number
     due?: IntFilter<"SalesEntry"> | number
     dueDate?: DateTimeNullableFilter<"SalesEntry"> | Date | string | null
     sellerId?: StringFilter<"SalesEntry"> | string
     customerId?: StringFilter<"SalesEntry"> | string
     createdAt?: DateTimeNullableFilter<"SalesEntry"> | Date | string | null
+    stockAndroidId?: StringNullableFilter<"SalesEntry"> | string | null
+    stockButtonId?: StringNullableFilter<"SalesEntry"> | string | null
+    stockAccessoriesId?: StringNullableFilter<"SalesEntry"> | string | null
   }
 
   export type BrandCreateWithoutProductTypeInput = {
@@ -12089,6 +17777,9 @@ export namespace Prisma {
     createdAt?: Date | string | null
     Model?: ModelCreateNestedManyWithoutBrandInput
     InStock?: InStockCreateNestedManyWithoutBrandInput
+    StockAndroid?: StockAndroidCreateNestedManyWithoutBrandInput
+    StockButton?: StockButtonCreateNestedManyWithoutBrandInput
+    StockAccessories?: StockAccessoriesCreateNestedManyWithoutBrandInput
   }
 
   export type BrandUncheckedCreateWithoutProductTypeInput = {
@@ -12097,6 +17788,9 @@ export namespace Prisma {
     createdAt?: Date | string | null
     Model?: ModelUncheckedCreateNestedManyWithoutBrandInput
     InStock?: InStockUncheckedCreateNestedManyWithoutBrandInput
+    StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutBrandInput
+    StockButton?: StockButtonUncheckedCreateNestedManyWithoutBrandInput
+    StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutBrandInput
   }
 
   export type BrandCreateOrConnectWithoutProductTypeInput = {
@@ -12147,6 +17841,115 @@ export namespace Prisma {
 
   export type InStockCreateManyProductTypeInputEnvelope = {
     data: InStockCreateManyProductTypeInput | InStockCreateManyProductTypeInput[]
+  }
+
+  export type StockAndroidCreateWithoutProductTypeInput = {
+    id?: string
+    name: string
+    IMEI: string
+    purchasePrice: number
+    sellingPrice: number
+    sold?: boolean
+    color: string
+    ram?: string | null
+    rom?: string | null
+    createdAt?: Date | string | null
+    model: ModelCreateNestedOneWithoutStrockAndroidInput
+    brand: BrandCreateNestedOneWithoutStockAndroidInput
+    SalesEntry?: SalesEntryCreateNestedManyWithoutStockAndroidInput
+  }
+
+  export type StockAndroidUncheckedCreateWithoutProductTypeInput = {
+    id?: string
+    name: string
+    IMEI: string
+    modelId: string
+    brandId: string
+    purchasePrice: number
+    sellingPrice: number
+    sold?: boolean
+    color: string
+    ram?: string | null
+    rom?: string | null
+    createdAt?: Date | string | null
+    SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutStockAndroidInput
+  }
+
+  export type StockAndroidCreateOrConnectWithoutProductTypeInput = {
+    where: StockAndroidWhereUniqueInput
+    create: XOR<StockAndroidCreateWithoutProductTypeInput, StockAndroidUncheckedCreateWithoutProductTypeInput>
+  }
+
+  export type StockAndroidCreateManyProductTypeInputEnvelope = {
+    data: StockAndroidCreateManyProductTypeInput | StockAndroidCreateManyProductTypeInput[]
+  }
+
+  export type StockButtonCreateWithoutProductTypeInput = {
+    id?: string
+    name: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    color: string
+    createdAt?: Date | string | null
+    model: ModelCreateNestedOneWithoutStrockButtonInput
+    brand: BrandCreateNestedOneWithoutStockButtonInput
+    SalesEntry?: SalesEntryCreateNestedManyWithoutStockButtonInput
+  }
+
+  export type StockButtonUncheckedCreateWithoutProductTypeInput = {
+    id?: string
+    name: string
+    modelId: string
+    brandId: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    color: string
+    createdAt?: Date | string | null
+    SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutStockButtonInput
+  }
+
+  export type StockButtonCreateOrConnectWithoutProductTypeInput = {
+    where: StockButtonWhereUniqueInput
+    create: XOR<StockButtonCreateWithoutProductTypeInput, StockButtonUncheckedCreateWithoutProductTypeInput>
+  }
+
+  export type StockButtonCreateManyProductTypeInputEnvelope = {
+    data: StockButtonCreateManyProductTypeInput | StockButtonCreateManyProductTypeInput[]
+  }
+
+  export type StockAccessoriesCreateWithoutProductTypeInput = {
+    id?: string
+    name: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    createdAt?: Date | string | null
+    model: ModelCreateNestedOneWithoutStrockAccessoriesInput
+    brand: BrandCreateNestedOneWithoutStockAccessoriesInput
+    SalesEntry?: SalesEntryCreateNestedManyWithoutStockAccessoriesInput
+  }
+
+  export type StockAccessoriesUncheckedCreateWithoutProductTypeInput = {
+    id?: string
+    name: string
+    modelId: string
+    brandId: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    createdAt?: Date | string | null
+    SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutStockAccessoriesInput
+  }
+
+  export type StockAccessoriesCreateOrConnectWithoutProductTypeInput = {
+    where: StockAccessoriesWhereUniqueInput
+    create: XOR<StockAccessoriesCreateWithoutProductTypeInput, StockAccessoriesUncheckedCreateWithoutProductTypeInput>
+  }
+
+  export type StockAccessoriesCreateManyProductTypeInputEnvelope = {
+    data: StockAccessoriesCreateManyProductTypeInput | StockAccessoriesCreateManyProductTypeInput[]
   }
 
   export type BrandUpsertWithWhereUniqueWithoutProductTypeInput = {
@@ -12210,11 +18013,112 @@ export namespace Prisma {
     createdAt?: DateTimeNullableFilter<"InStock"> | Date | string | null
   }
 
+  export type StockAndroidUpsertWithWhereUniqueWithoutProductTypeInput = {
+    where: StockAndroidWhereUniqueInput
+    update: XOR<StockAndroidUpdateWithoutProductTypeInput, StockAndroidUncheckedUpdateWithoutProductTypeInput>
+    create: XOR<StockAndroidCreateWithoutProductTypeInput, StockAndroidUncheckedCreateWithoutProductTypeInput>
+  }
+
+  export type StockAndroidUpdateWithWhereUniqueWithoutProductTypeInput = {
+    where: StockAndroidWhereUniqueInput
+    data: XOR<StockAndroidUpdateWithoutProductTypeInput, StockAndroidUncheckedUpdateWithoutProductTypeInput>
+  }
+
+  export type StockAndroidUpdateManyWithWhereWithoutProductTypeInput = {
+    where: StockAndroidScalarWhereInput
+    data: XOR<StockAndroidUpdateManyMutationInput, StockAndroidUncheckedUpdateManyWithoutProductTypeInput>
+  }
+
+  export type StockAndroidScalarWhereInput = {
+    AND?: StockAndroidScalarWhereInput | StockAndroidScalarWhereInput[]
+    OR?: StockAndroidScalarWhereInput[]
+    NOT?: StockAndroidScalarWhereInput | StockAndroidScalarWhereInput[]
+    id?: StringFilter<"StockAndroid"> | string
+    name?: StringFilter<"StockAndroid"> | string
+    IMEI?: StringFilter<"StockAndroid"> | string
+    modelId?: StringFilter<"StockAndroid"> | string
+    brandId?: StringFilter<"StockAndroid"> | string
+    productTypeId?: StringFilter<"StockAndroid"> | string
+    purchasePrice?: IntFilter<"StockAndroid"> | number
+    sellingPrice?: IntFilter<"StockAndroid"> | number
+    sold?: BoolFilter<"StockAndroid"> | boolean
+    color?: StringFilter<"StockAndroid"> | string
+    ram?: StringNullableFilter<"StockAndroid"> | string | null
+    rom?: StringNullableFilter<"StockAndroid"> | string | null
+    createdAt?: DateTimeNullableFilter<"StockAndroid"> | Date | string | null
+  }
+
+  export type StockButtonUpsertWithWhereUniqueWithoutProductTypeInput = {
+    where: StockButtonWhereUniqueInput
+    update: XOR<StockButtonUpdateWithoutProductTypeInput, StockButtonUncheckedUpdateWithoutProductTypeInput>
+    create: XOR<StockButtonCreateWithoutProductTypeInput, StockButtonUncheckedCreateWithoutProductTypeInput>
+  }
+
+  export type StockButtonUpdateWithWhereUniqueWithoutProductTypeInput = {
+    where: StockButtonWhereUniqueInput
+    data: XOR<StockButtonUpdateWithoutProductTypeInput, StockButtonUncheckedUpdateWithoutProductTypeInput>
+  }
+
+  export type StockButtonUpdateManyWithWhereWithoutProductTypeInput = {
+    where: StockButtonScalarWhereInput
+    data: XOR<StockButtonUpdateManyMutationInput, StockButtonUncheckedUpdateManyWithoutProductTypeInput>
+  }
+
+  export type StockButtonScalarWhereInput = {
+    AND?: StockButtonScalarWhereInput | StockButtonScalarWhereInput[]
+    OR?: StockButtonScalarWhereInput[]
+    NOT?: StockButtonScalarWhereInput | StockButtonScalarWhereInput[]
+    id?: StringFilter<"StockButton"> | string
+    name?: StringFilter<"StockButton"> | string
+    modelId?: StringFilter<"StockButton"> | string
+    brandId?: StringFilter<"StockButton"> | string
+    productTypeId?: StringFilter<"StockButton"> | string
+    purchasePrice?: IntFilter<"StockButton"> | number
+    sellingPrice?: IntFilter<"StockButton"> | number
+    quantity?: IntFilter<"StockButton"> | number
+    color?: StringFilter<"StockButton"> | string
+    createdAt?: DateTimeNullableFilter<"StockButton"> | Date | string | null
+  }
+
+  export type StockAccessoriesUpsertWithWhereUniqueWithoutProductTypeInput = {
+    where: StockAccessoriesWhereUniqueInput
+    update: XOR<StockAccessoriesUpdateWithoutProductTypeInput, StockAccessoriesUncheckedUpdateWithoutProductTypeInput>
+    create: XOR<StockAccessoriesCreateWithoutProductTypeInput, StockAccessoriesUncheckedCreateWithoutProductTypeInput>
+  }
+
+  export type StockAccessoriesUpdateWithWhereUniqueWithoutProductTypeInput = {
+    where: StockAccessoriesWhereUniqueInput
+    data: XOR<StockAccessoriesUpdateWithoutProductTypeInput, StockAccessoriesUncheckedUpdateWithoutProductTypeInput>
+  }
+
+  export type StockAccessoriesUpdateManyWithWhereWithoutProductTypeInput = {
+    where: StockAccessoriesScalarWhereInput
+    data: XOR<StockAccessoriesUpdateManyMutationInput, StockAccessoriesUncheckedUpdateManyWithoutProductTypeInput>
+  }
+
+  export type StockAccessoriesScalarWhereInput = {
+    AND?: StockAccessoriesScalarWhereInput | StockAccessoriesScalarWhereInput[]
+    OR?: StockAccessoriesScalarWhereInput[]
+    NOT?: StockAccessoriesScalarWhereInput | StockAccessoriesScalarWhereInput[]
+    id?: StringFilter<"StockAccessories"> | string
+    name?: StringFilter<"StockAccessories"> | string
+    modelId?: StringFilter<"StockAccessories"> | string
+    brandId?: StringFilter<"StockAccessories"> | string
+    productTypeId?: StringFilter<"StockAccessories"> | string
+    purchasePrice?: IntFilter<"StockAccessories"> | number
+    sellingPrice?: IntFilter<"StockAccessories"> | number
+    quantity?: IntFilter<"StockAccessories"> | number
+    createdAt?: DateTimeNullableFilter<"StockAccessories"> | Date | string | null
+  }
+
   export type ProductTypeCreateWithoutBrandInput = {
     id?: string
     type: string
     createdAt?: Date | string | null
     InStock?: InStockCreateNestedManyWithoutProductTypeInput
+    StockAndroid?: StockAndroidCreateNestedManyWithoutProductTypeInput
+    StockButton?: StockButtonCreateNestedManyWithoutProductTypeInput
+    StockAccessories?: StockAccessoriesCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeUncheckedCreateWithoutBrandInput = {
@@ -12222,6 +18126,9 @@ export namespace Prisma {
     type: string
     createdAt?: Date | string | null
     InStock?: InStockUncheckedCreateNestedManyWithoutProductTypeInput
+    StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutProductTypeInput
+    StockButton?: StockButtonUncheckedCreateNestedManyWithoutProductTypeInput
+    StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeCreateOrConnectWithoutBrandInput = {
@@ -12234,6 +18141,9 @@ export namespace Prisma {
     model: string
     createdAt?: Date | string | null
     InStock?: InStockCreateNestedManyWithoutModelInput
+    StrockAndroid?: StockAndroidCreateNestedManyWithoutModelInput
+    StrockButton?: StockButtonCreateNestedManyWithoutModelInput
+    StrockAccessories?: StockAccessoriesCreateNestedManyWithoutModelInput
   }
 
   export type ModelUncheckedCreateWithoutBrandInput = {
@@ -12241,6 +18151,9 @@ export namespace Prisma {
     model: string
     createdAt?: Date | string | null
     InStock?: InStockUncheckedCreateNestedManyWithoutModelInput
+    StrockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutModelInput
+    StrockButton?: StockButtonUncheckedCreateNestedManyWithoutModelInput
+    StrockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutModelInput
   }
 
   export type ModelCreateOrConnectWithoutBrandInput = {
@@ -12293,6 +18206,115 @@ export namespace Prisma {
     data: InStockCreateManyBrandInput | InStockCreateManyBrandInput[]
   }
 
+  export type StockAndroidCreateWithoutBrandInput = {
+    id?: string
+    name: string
+    IMEI: string
+    purchasePrice: number
+    sellingPrice: number
+    sold?: boolean
+    color: string
+    ram?: string | null
+    rom?: string | null
+    createdAt?: Date | string | null
+    model: ModelCreateNestedOneWithoutStrockAndroidInput
+    productType: ProductTypeCreateNestedOneWithoutStockAndroidInput
+    SalesEntry?: SalesEntryCreateNestedManyWithoutStockAndroidInput
+  }
+
+  export type StockAndroidUncheckedCreateWithoutBrandInput = {
+    id?: string
+    name: string
+    IMEI: string
+    modelId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    sold?: boolean
+    color: string
+    ram?: string | null
+    rom?: string | null
+    createdAt?: Date | string | null
+    SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutStockAndroidInput
+  }
+
+  export type StockAndroidCreateOrConnectWithoutBrandInput = {
+    where: StockAndroidWhereUniqueInput
+    create: XOR<StockAndroidCreateWithoutBrandInput, StockAndroidUncheckedCreateWithoutBrandInput>
+  }
+
+  export type StockAndroidCreateManyBrandInputEnvelope = {
+    data: StockAndroidCreateManyBrandInput | StockAndroidCreateManyBrandInput[]
+  }
+
+  export type StockButtonCreateWithoutBrandInput = {
+    id?: string
+    name: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    color: string
+    createdAt?: Date | string | null
+    model: ModelCreateNestedOneWithoutStrockButtonInput
+    productType: ProductTypeCreateNestedOneWithoutStockButtonInput
+    SalesEntry?: SalesEntryCreateNestedManyWithoutStockButtonInput
+  }
+
+  export type StockButtonUncheckedCreateWithoutBrandInput = {
+    id?: string
+    name: string
+    modelId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    color: string
+    createdAt?: Date | string | null
+    SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutStockButtonInput
+  }
+
+  export type StockButtonCreateOrConnectWithoutBrandInput = {
+    where: StockButtonWhereUniqueInput
+    create: XOR<StockButtonCreateWithoutBrandInput, StockButtonUncheckedCreateWithoutBrandInput>
+  }
+
+  export type StockButtonCreateManyBrandInputEnvelope = {
+    data: StockButtonCreateManyBrandInput | StockButtonCreateManyBrandInput[]
+  }
+
+  export type StockAccessoriesCreateWithoutBrandInput = {
+    id?: string
+    name: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    createdAt?: Date | string | null
+    model: ModelCreateNestedOneWithoutStrockAccessoriesInput
+    productType: ProductTypeCreateNestedOneWithoutStockAccessoriesInput
+    SalesEntry?: SalesEntryCreateNestedManyWithoutStockAccessoriesInput
+  }
+
+  export type StockAccessoriesUncheckedCreateWithoutBrandInput = {
+    id?: string
+    name: string
+    modelId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    createdAt?: Date | string | null
+    SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutStockAccessoriesInput
+  }
+
+  export type StockAccessoriesCreateOrConnectWithoutBrandInput = {
+    where: StockAccessoriesWhereUniqueInput
+    create: XOR<StockAccessoriesCreateWithoutBrandInput, StockAccessoriesUncheckedCreateWithoutBrandInput>
+  }
+
+  export type StockAccessoriesCreateManyBrandInputEnvelope = {
+    data: StockAccessoriesCreateManyBrandInput | StockAccessoriesCreateManyBrandInput[]
+  }
+
   export type ProductTypeUpsertWithoutBrandInput = {
     update: XOR<ProductTypeUpdateWithoutBrandInput, ProductTypeUncheckedUpdateWithoutBrandInput>
     create: XOR<ProductTypeCreateWithoutBrandInput, ProductTypeUncheckedCreateWithoutBrandInput>
@@ -12308,12 +18330,18 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     InStock?: InStockUpdateManyWithoutProductTypeNestedInput
+    StockAndroid?: StockAndroidUpdateManyWithoutProductTypeNestedInput
+    StockButton?: StockButtonUpdateManyWithoutProductTypeNestedInput
+    StockAccessories?: StockAccessoriesUpdateManyWithoutProductTypeNestedInput
   }
 
   export type ProductTypeUncheckedUpdateWithoutBrandInput = {
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     InStock?: InStockUncheckedUpdateManyWithoutProductTypeNestedInput
+    StockAndroid?: StockAndroidUncheckedUpdateManyWithoutProductTypeNestedInput
+    StockButton?: StockButtonUncheckedUpdateManyWithoutProductTypeNestedInput
+    StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutProductTypeNestedInput
   }
 
   export type ModelUpsertWithWhereUniqueWithoutBrandInput = {
@@ -12358,12 +18386,63 @@ export namespace Prisma {
     data: XOR<InStockUpdateManyMutationInput, InStockUncheckedUpdateManyWithoutBrandInput>
   }
 
+  export type StockAndroidUpsertWithWhereUniqueWithoutBrandInput = {
+    where: StockAndroidWhereUniqueInput
+    update: XOR<StockAndroidUpdateWithoutBrandInput, StockAndroidUncheckedUpdateWithoutBrandInput>
+    create: XOR<StockAndroidCreateWithoutBrandInput, StockAndroidUncheckedCreateWithoutBrandInput>
+  }
+
+  export type StockAndroidUpdateWithWhereUniqueWithoutBrandInput = {
+    where: StockAndroidWhereUniqueInput
+    data: XOR<StockAndroidUpdateWithoutBrandInput, StockAndroidUncheckedUpdateWithoutBrandInput>
+  }
+
+  export type StockAndroidUpdateManyWithWhereWithoutBrandInput = {
+    where: StockAndroidScalarWhereInput
+    data: XOR<StockAndroidUpdateManyMutationInput, StockAndroidUncheckedUpdateManyWithoutBrandInput>
+  }
+
+  export type StockButtonUpsertWithWhereUniqueWithoutBrandInput = {
+    where: StockButtonWhereUniqueInput
+    update: XOR<StockButtonUpdateWithoutBrandInput, StockButtonUncheckedUpdateWithoutBrandInput>
+    create: XOR<StockButtonCreateWithoutBrandInput, StockButtonUncheckedCreateWithoutBrandInput>
+  }
+
+  export type StockButtonUpdateWithWhereUniqueWithoutBrandInput = {
+    where: StockButtonWhereUniqueInput
+    data: XOR<StockButtonUpdateWithoutBrandInput, StockButtonUncheckedUpdateWithoutBrandInput>
+  }
+
+  export type StockButtonUpdateManyWithWhereWithoutBrandInput = {
+    where: StockButtonScalarWhereInput
+    data: XOR<StockButtonUpdateManyMutationInput, StockButtonUncheckedUpdateManyWithoutBrandInput>
+  }
+
+  export type StockAccessoriesUpsertWithWhereUniqueWithoutBrandInput = {
+    where: StockAccessoriesWhereUniqueInput
+    update: XOR<StockAccessoriesUpdateWithoutBrandInput, StockAccessoriesUncheckedUpdateWithoutBrandInput>
+    create: XOR<StockAccessoriesCreateWithoutBrandInput, StockAccessoriesUncheckedCreateWithoutBrandInput>
+  }
+
+  export type StockAccessoriesUpdateWithWhereUniqueWithoutBrandInput = {
+    where: StockAccessoriesWhereUniqueInput
+    data: XOR<StockAccessoriesUpdateWithoutBrandInput, StockAccessoriesUncheckedUpdateWithoutBrandInput>
+  }
+
+  export type StockAccessoriesUpdateManyWithWhereWithoutBrandInput = {
+    where: StockAccessoriesScalarWhereInput
+    data: XOR<StockAccessoriesUpdateManyMutationInput, StockAccessoriesUncheckedUpdateManyWithoutBrandInput>
+  }
+
   export type BrandCreateWithoutModelInput = {
     id?: string
     brandName: string
     createdAt?: Date | string | null
     productType: ProductTypeCreateNestedOneWithoutBrandInput
     InStock?: InStockCreateNestedManyWithoutBrandInput
+    StockAndroid?: StockAndroidCreateNestedManyWithoutBrandInput
+    StockButton?: StockButtonCreateNestedManyWithoutBrandInput
+    StockAccessories?: StockAccessoriesCreateNestedManyWithoutBrandInput
   }
 
   export type BrandUncheckedCreateWithoutModelInput = {
@@ -12372,6 +18451,9 @@ export namespace Prisma {
     productTypeId: string
     createdAt?: Date | string | null
     InStock?: InStockUncheckedCreateNestedManyWithoutBrandInput
+    StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutBrandInput
+    StockButton?: StockButtonUncheckedCreateNestedManyWithoutBrandInput
+    StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutBrandInput
   }
 
   export type BrandCreateOrConnectWithoutModelInput = {
@@ -12420,6 +18502,115 @@ export namespace Prisma {
     data: InStockCreateManyModelInput | InStockCreateManyModelInput[]
   }
 
+  export type StockAndroidCreateWithoutModelInput = {
+    id?: string
+    name: string
+    IMEI: string
+    purchasePrice: number
+    sellingPrice: number
+    sold?: boolean
+    color: string
+    ram?: string | null
+    rom?: string | null
+    createdAt?: Date | string | null
+    brand: BrandCreateNestedOneWithoutStockAndroidInput
+    productType: ProductTypeCreateNestedOneWithoutStockAndroidInput
+    SalesEntry?: SalesEntryCreateNestedManyWithoutStockAndroidInput
+  }
+
+  export type StockAndroidUncheckedCreateWithoutModelInput = {
+    id?: string
+    name: string
+    IMEI: string
+    brandId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    sold?: boolean
+    color: string
+    ram?: string | null
+    rom?: string | null
+    createdAt?: Date | string | null
+    SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutStockAndroidInput
+  }
+
+  export type StockAndroidCreateOrConnectWithoutModelInput = {
+    where: StockAndroidWhereUniqueInput
+    create: XOR<StockAndroidCreateWithoutModelInput, StockAndroidUncheckedCreateWithoutModelInput>
+  }
+
+  export type StockAndroidCreateManyModelInputEnvelope = {
+    data: StockAndroidCreateManyModelInput | StockAndroidCreateManyModelInput[]
+  }
+
+  export type StockButtonCreateWithoutModelInput = {
+    id?: string
+    name: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    color: string
+    createdAt?: Date | string | null
+    brand: BrandCreateNestedOneWithoutStockButtonInput
+    productType: ProductTypeCreateNestedOneWithoutStockButtonInput
+    SalesEntry?: SalesEntryCreateNestedManyWithoutStockButtonInput
+  }
+
+  export type StockButtonUncheckedCreateWithoutModelInput = {
+    id?: string
+    name: string
+    brandId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    color: string
+    createdAt?: Date | string | null
+    SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutStockButtonInput
+  }
+
+  export type StockButtonCreateOrConnectWithoutModelInput = {
+    where: StockButtonWhereUniqueInput
+    create: XOR<StockButtonCreateWithoutModelInput, StockButtonUncheckedCreateWithoutModelInput>
+  }
+
+  export type StockButtonCreateManyModelInputEnvelope = {
+    data: StockButtonCreateManyModelInput | StockButtonCreateManyModelInput[]
+  }
+
+  export type StockAccessoriesCreateWithoutModelInput = {
+    id?: string
+    name: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    createdAt?: Date | string | null
+    brand: BrandCreateNestedOneWithoutStockAccessoriesInput
+    productType: ProductTypeCreateNestedOneWithoutStockAccessoriesInput
+    SalesEntry?: SalesEntryCreateNestedManyWithoutStockAccessoriesInput
+  }
+
+  export type StockAccessoriesUncheckedCreateWithoutModelInput = {
+    id?: string
+    name: string
+    brandId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    createdAt?: Date | string | null
+    SalesEntry?: SalesEntryUncheckedCreateNestedManyWithoutStockAccessoriesInput
+  }
+
+  export type StockAccessoriesCreateOrConnectWithoutModelInput = {
+    where: StockAccessoriesWhereUniqueInput
+    create: XOR<StockAccessoriesCreateWithoutModelInput, StockAccessoriesUncheckedCreateWithoutModelInput>
+  }
+
+  export type StockAccessoriesCreateManyModelInputEnvelope = {
+    data: StockAccessoriesCreateManyModelInput | StockAccessoriesCreateManyModelInput[]
+  }
+
   export type BrandUpsertWithoutModelInput = {
     update: XOR<BrandUpdateWithoutModelInput, BrandUncheckedUpdateWithoutModelInput>
     create: XOR<BrandCreateWithoutModelInput, BrandUncheckedCreateWithoutModelInput>
@@ -12436,6 +18627,9 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     productType?: ProductTypeUpdateOneRequiredWithoutBrandNestedInput
     InStock?: InStockUpdateManyWithoutBrandNestedInput
+    StockAndroid?: StockAndroidUpdateManyWithoutBrandNestedInput
+    StockButton?: StockButtonUpdateManyWithoutBrandNestedInput
+    StockAccessories?: StockAccessoriesUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandUncheckedUpdateWithoutModelInput = {
@@ -12443,6 +18637,9 @@ export namespace Prisma {
     productTypeId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     InStock?: InStockUncheckedUpdateManyWithoutBrandNestedInput
+    StockAndroid?: StockAndroidUncheckedUpdateManyWithoutBrandNestedInput
+    StockButton?: StockButtonUncheckedUpdateManyWithoutBrandNestedInput
+    StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutBrandNestedInput
   }
 
   export type InStockUpsertWithWhereUniqueWithoutModelInput = {
@@ -12461,11 +18658,62 @@ export namespace Prisma {
     data: XOR<InStockUpdateManyMutationInput, InStockUncheckedUpdateManyWithoutModelInput>
   }
 
+  export type StockAndroidUpsertWithWhereUniqueWithoutModelInput = {
+    where: StockAndroidWhereUniqueInput
+    update: XOR<StockAndroidUpdateWithoutModelInput, StockAndroidUncheckedUpdateWithoutModelInput>
+    create: XOR<StockAndroidCreateWithoutModelInput, StockAndroidUncheckedCreateWithoutModelInput>
+  }
+
+  export type StockAndroidUpdateWithWhereUniqueWithoutModelInput = {
+    where: StockAndroidWhereUniqueInput
+    data: XOR<StockAndroidUpdateWithoutModelInput, StockAndroidUncheckedUpdateWithoutModelInput>
+  }
+
+  export type StockAndroidUpdateManyWithWhereWithoutModelInput = {
+    where: StockAndroidScalarWhereInput
+    data: XOR<StockAndroidUpdateManyMutationInput, StockAndroidUncheckedUpdateManyWithoutModelInput>
+  }
+
+  export type StockButtonUpsertWithWhereUniqueWithoutModelInput = {
+    where: StockButtonWhereUniqueInput
+    update: XOR<StockButtonUpdateWithoutModelInput, StockButtonUncheckedUpdateWithoutModelInput>
+    create: XOR<StockButtonCreateWithoutModelInput, StockButtonUncheckedCreateWithoutModelInput>
+  }
+
+  export type StockButtonUpdateWithWhereUniqueWithoutModelInput = {
+    where: StockButtonWhereUniqueInput
+    data: XOR<StockButtonUpdateWithoutModelInput, StockButtonUncheckedUpdateWithoutModelInput>
+  }
+
+  export type StockButtonUpdateManyWithWhereWithoutModelInput = {
+    where: StockButtonScalarWhereInput
+    data: XOR<StockButtonUpdateManyMutationInput, StockButtonUncheckedUpdateManyWithoutModelInput>
+  }
+
+  export type StockAccessoriesUpsertWithWhereUniqueWithoutModelInput = {
+    where: StockAccessoriesWhereUniqueInput
+    update: XOR<StockAccessoriesUpdateWithoutModelInput, StockAccessoriesUncheckedUpdateWithoutModelInput>
+    create: XOR<StockAccessoriesCreateWithoutModelInput, StockAccessoriesUncheckedCreateWithoutModelInput>
+  }
+
+  export type StockAccessoriesUpdateWithWhereUniqueWithoutModelInput = {
+    where: StockAccessoriesWhereUniqueInput
+    data: XOR<StockAccessoriesUpdateWithoutModelInput, StockAccessoriesUncheckedUpdateWithoutModelInput>
+  }
+
+  export type StockAccessoriesUpdateManyWithWhereWithoutModelInput = {
+    where: StockAccessoriesScalarWhereInput
+    data: XOR<StockAccessoriesUpdateManyMutationInput, StockAccessoriesUncheckedUpdateManyWithoutModelInput>
+  }
+
   export type ModelCreateWithoutInStockInput = {
     id?: string
     model: string
     createdAt?: Date | string | null
     brand: BrandCreateNestedOneWithoutModelInput
+    StrockAndroid?: StockAndroidCreateNestedManyWithoutModelInput
+    StrockButton?: StockButtonCreateNestedManyWithoutModelInput
+    StrockAccessories?: StockAccessoriesCreateNestedManyWithoutModelInput
   }
 
   export type ModelUncheckedCreateWithoutInStockInput = {
@@ -12473,6 +18721,9 @@ export namespace Prisma {
     model: string
     brandId: string
     createdAt?: Date | string | null
+    StrockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutModelInput
+    StrockButton?: StockButtonUncheckedCreateNestedManyWithoutModelInput
+    StrockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutModelInput
   }
 
   export type ModelCreateOrConnectWithoutInStockInput = {
@@ -12486,6 +18737,9 @@ export namespace Prisma {
     createdAt?: Date | string | null
     productType: ProductTypeCreateNestedOneWithoutBrandInput
     Model?: ModelCreateNestedManyWithoutBrandInput
+    StockAndroid?: StockAndroidCreateNestedManyWithoutBrandInput
+    StockButton?: StockButtonCreateNestedManyWithoutBrandInput
+    StockAccessories?: StockAccessoriesCreateNestedManyWithoutBrandInput
   }
 
   export type BrandUncheckedCreateWithoutInStockInput = {
@@ -12494,6 +18748,9 @@ export namespace Prisma {
     productTypeId: string
     createdAt?: Date | string | null
     Model?: ModelUncheckedCreateNestedManyWithoutBrandInput
+    StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutBrandInput
+    StockButton?: StockButtonUncheckedCreateNestedManyWithoutBrandInput
+    StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutBrandInput
   }
 
   export type BrandCreateOrConnectWithoutInStockInput = {
@@ -12506,6 +18763,9 @@ export namespace Prisma {
     type: string
     createdAt?: Date | string | null
     Brand?: BrandCreateNestedManyWithoutProductTypeInput
+    StockAndroid?: StockAndroidCreateNestedManyWithoutProductTypeInput
+    StockButton?: StockButtonCreateNestedManyWithoutProductTypeInput
+    StockAccessories?: StockAccessoriesCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeUncheckedCreateWithoutInStockInput = {
@@ -12513,6 +18773,9 @@ export namespace Prisma {
     type: string
     createdAt?: Date | string | null
     Brand?: BrandUncheckedCreateNestedManyWithoutProductTypeInput
+    StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutProductTypeInput
+    StockButton?: StockButtonUncheckedCreateNestedManyWithoutProductTypeInput
+    StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeCreateOrConnectWithoutInStockInput = {
@@ -12522,26 +18785,28 @@ export namespace Prisma {
 
   export type SalesEntryCreateWithoutInStockInput = {
     id?: string
-    IMEI: string
-    price: number
     discount: number
     due: number
     dueDate?: Date | string | null
     createdAt?: Date | string | null
     Seller: SellerCreateNestedOneWithoutSalesEntryInput
     customer: CustomerCreateNestedOneWithoutSalesEntryInput
+    StockAndroid?: StockAndroidCreateNestedOneWithoutSalesEntryInput
+    StockButton?: StockButtonCreateNestedOneWithoutSalesEntryInput
+    StockAccessories?: StockAccessoriesCreateNestedOneWithoutSalesEntryInput
   }
 
   export type SalesEntryUncheckedCreateWithoutInStockInput = {
     id?: string
-    IMEI: string
-    price: number
     discount: number
     due: number
     dueDate?: Date | string | null
     sellerId: string
     customerId: string
     createdAt?: Date | string | null
+    stockAndroidId?: string | null
+    stockButtonId?: string | null
+    stockAccessoriesId?: string | null
   }
 
   export type SalesEntryCreateOrConnectWithoutInStockInput = {
@@ -12568,12 +18833,18 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     brand?: BrandUpdateOneRequiredWithoutModelNestedInput
+    StrockAndroid?: StockAndroidUpdateManyWithoutModelNestedInput
+    StrockButton?: StockButtonUpdateManyWithoutModelNestedInput
+    StrockAccessories?: StockAccessoriesUpdateManyWithoutModelNestedInput
   }
 
   export type ModelUncheckedUpdateWithoutInStockInput = {
     model?: StringFieldUpdateOperationsInput | string
     brandId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    StrockAndroid?: StockAndroidUncheckedUpdateManyWithoutModelNestedInput
+    StrockButton?: StockButtonUncheckedUpdateManyWithoutModelNestedInput
+    StrockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutModelNestedInput
   }
 
   export type BrandUpsertWithoutInStockInput = {
@@ -12592,6 +18863,9 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     productType?: ProductTypeUpdateOneRequiredWithoutBrandNestedInput
     Model?: ModelUpdateManyWithoutBrandNestedInput
+    StockAndroid?: StockAndroidUpdateManyWithoutBrandNestedInput
+    StockButton?: StockButtonUpdateManyWithoutBrandNestedInput
+    StockAccessories?: StockAccessoriesUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandUncheckedUpdateWithoutInStockInput = {
@@ -12599,6 +18873,9 @@ export namespace Prisma {
     productTypeId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Model?: ModelUncheckedUpdateManyWithoutBrandNestedInput
+    StockAndroid?: StockAndroidUncheckedUpdateManyWithoutBrandNestedInput
+    StockButton?: StockButtonUncheckedUpdateManyWithoutBrandNestedInput
+    StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutBrandNestedInput
   }
 
   export type ProductTypeUpsertWithoutInStockInput = {
@@ -12616,12 +18893,18 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Brand?: BrandUpdateManyWithoutProductTypeNestedInput
+    StockAndroid?: StockAndroidUpdateManyWithoutProductTypeNestedInput
+    StockButton?: StockButtonUpdateManyWithoutProductTypeNestedInput
+    StockAccessories?: StockAccessoriesUpdateManyWithoutProductTypeNestedInput
   }
 
   export type ProductTypeUncheckedUpdateWithoutInStockInput = {
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Brand?: BrandUncheckedUpdateManyWithoutProductTypeNestedInput
+    StockAndroid?: StockAndroidUncheckedUpdateManyWithoutProductTypeNestedInput
+    StockButton?: StockButtonUncheckedUpdateManyWithoutProductTypeNestedInput
+    StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutProductTypeNestedInput
   }
 
   export type SalesEntryUpsertWithWhereUniqueWithoutInStockInput = {
@@ -12638,6 +18921,657 @@ export namespace Prisma {
   export type SalesEntryUpdateManyWithWhereWithoutInStockInput = {
     where: SalesEntryScalarWhereInput
     data: XOR<SalesEntryUpdateManyMutationInput, SalesEntryUncheckedUpdateManyWithoutInStockInput>
+  }
+
+  export type ModelCreateWithoutStrockAndroidInput = {
+    id?: string
+    model: string
+    createdAt?: Date | string | null
+    brand: BrandCreateNestedOneWithoutModelInput
+    InStock?: InStockCreateNestedManyWithoutModelInput
+    StrockButton?: StockButtonCreateNestedManyWithoutModelInput
+    StrockAccessories?: StockAccessoriesCreateNestedManyWithoutModelInput
+  }
+
+  export type ModelUncheckedCreateWithoutStrockAndroidInput = {
+    id?: string
+    model: string
+    brandId: string
+    createdAt?: Date | string | null
+    InStock?: InStockUncheckedCreateNestedManyWithoutModelInput
+    StrockButton?: StockButtonUncheckedCreateNestedManyWithoutModelInput
+    StrockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutModelInput
+  }
+
+  export type ModelCreateOrConnectWithoutStrockAndroidInput = {
+    where: ModelWhereUniqueInput
+    create: XOR<ModelCreateWithoutStrockAndroidInput, ModelUncheckedCreateWithoutStrockAndroidInput>
+  }
+
+  export type BrandCreateWithoutStockAndroidInput = {
+    id?: string
+    brandName: string
+    createdAt?: Date | string | null
+    productType: ProductTypeCreateNestedOneWithoutBrandInput
+    Model?: ModelCreateNestedManyWithoutBrandInput
+    InStock?: InStockCreateNestedManyWithoutBrandInput
+    StockButton?: StockButtonCreateNestedManyWithoutBrandInput
+    StockAccessories?: StockAccessoriesCreateNestedManyWithoutBrandInput
+  }
+
+  export type BrandUncheckedCreateWithoutStockAndroidInput = {
+    id?: string
+    brandName: string
+    productTypeId: string
+    createdAt?: Date | string | null
+    Model?: ModelUncheckedCreateNestedManyWithoutBrandInput
+    InStock?: InStockUncheckedCreateNestedManyWithoutBrandInput
+    StockButton?: StockButtonUncheckedCreateNestedManyWithoutBrandInput
+    StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutBrandInput
+  }
+
+  export type BrandCreateOrConnectWithoutStockAndroidInput = {
+    where: BrandWhereUniqueInput
+    create: XOR<BrandCreateWithoutStockAndroidInput, BrandUncheckedCreateWithoutStockAndroidInput>
+  }
+
+  export type ProductTypeCreateWithoutStockAndroidInput = {
+    id?: string
+    type: string
+    createdAt?: Date | string | null
+    Brand?: BrandCreateNestedManyWithoutProductTypeInput
+    InStock?: InStockCreateNestedManyWithoutProductTypeInput
+    StockButton?: StockButtonCreateNestedManyWithoutProductTypeInput
+    StockAccessories?: StockAccessoriesCreateNestedManyWithoutProductTypeInput
+  }
+
+  export type ProductTypeUncheckedCreateWithoutStockAndroidInput = {
+    id?: string
+    type: string
+    createdAt?: Date | string | null
+    Brand?: BrandUncheckedCreateNestedManyWithoutProductTypeInput
+    InStock?: InStockUncheckedCreateNestedManyWithoutProductTypeInput
+    StockButton?: StockButtonUncheckedCreateNestedManyWithoutProductTypeInput
+    StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutProductTypeInput
+  }
+
+  export type ProductTypeCreateOrConnectWithoutStockAndroidInput = {
+    where: ProductTypeWhereUniqueInput
+    create: XOR<ProductTypeCreateWithoutStockAndroidInput, ProductTypeUncheckedCreateWithoutStockAndroidInput>
+  }
+
+  export type SalesEntryCreateWithoutStockAndroidInput = {
+    id?: string
+    discount: number
+    due: number
+    dueDate?: Date | string | null
+    createdAt?: Date | string | null
+    InStock: InStockCreateNestedOneWithoutSalesEntryInput
+    Seller: SellerCreateNestedOneWithoutSalesEntryInput
+    customer: CustomerCreateNestedOneWithoutSalesEntryInput
+    StockButton?: StockButtonCreateNestedOneWithoutSalesEntryInput
+    StockAccessories?: StockAccessoriesCreateNestedOneWithoutSalesEntryInput
+  }
+
+  export type SalesEntryUncheckedCreateWithoutStockAndroidInput = {
+    id?: string
+    instockId: string
+    discount: number
+    due: number
+    dueDate?: Date | string | null
+    sellerId: string
+    customerId: string
+    createdAt?: Date | string | null
+    stockButtonId?: string | null
+    stockAccessoriesId?: string | null
+  }
+
+  export type SalesEntryCreateOrConnectWithoutStockAndroidInput = {
+    where: SalesEntryWhereUniqueInput
+    create: XOR<SalesEntryCreateWithoutStockAndroidInput, SalesEntryUncheckedCreateWithoutStockAndroidInput>
+  }
+
+  export type SalesEntryCreateManyStockAndroidInputEnvelope = {
+    data: SalesEntryCreateManyStockAndroidInput | SalesEntryCreateManyStockAndroidInput[]
+  }
+
+  export type ModelUpsertWithoutStrockAndroidInput = {
+    update: XOR<ModelUpdateWithoutStrockAndroidInput, ModelUncheckedUpdateWithoutStrockAndroidInput>
+    create: XOR<ModelCreateWithoutStrockAndroidInput, ModelUncheckedCreateWithoutStrockAndroidInput>
+    where?: ModelWhereInput
+  }
+
+  export type ModelUpdateToOneWithWhereWithoutStrockAndroidInput = {
+    where?: ModelWhereInput
+    data: XOR<ModelUpdateWithoutStrockAndroidInput, ModelUncheckedUpdateWithoutStrockAndroidInput>
+  }
+
+  export type ModelUpdateWithoutStrockAndroidInput = {
+    model?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    brand?: BrandUpdateOneRequiredWithoutModelNestedInput
+    InStock?: InStockUpdateManyWithoutModelNestedInput
+    StrockButton?: StockButtonUpdateManyWithoutModelNestedInput
+    StrockAccessories?: StockAccessoriesUpdateManyWithoutModelNestedInput
+  }
+
+  export type ModelUncheckedUpdateWithoutStrockAndroidInput = {
+    model?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    InStock?: InStockUncheckedUpdateManyWithoutModelNestedInput
+    StrockButton?: StockButtonUncheckedUpdateManyWithoutModelNestedInput
+    StrockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutModelNestedInput
+  }
+
+  export type BrandUpsertWithoutStockAndroidInput = {
+    update: XOR<BrandUpdateWithoutStockAndroidInput, BrandUncheckedUpdateWithoutStockAndroidInput>
+    create: XOR<BrandCreateWithoutStockAndroidInput, BrandUncheckedCreateWithoutStockAndroidInput>
+    where?: BrandWhereInput
+  }
+
+  export type BrandUpdateToOneWithWhereWithoutStockAndroidInput = {
+    where?: BrandWhereInput
+    data: XOR<BrandUpdateWithoutStockAndroidInput, BrandUncheckedUpdateWithoutStockAndroidInput>
+  }
+
+  export type BrandUpdateWithoutStockAndroidInput = {
+    brandName?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    productType?: ProductTypeUpdateOneRequiredWithoutBrandNestedInput
+    Model?: ModelUpdateManyWithoutBrandNestedInput
+    InStock?: InStockUpdateManyWithoutBrandNestedInput
+    StockButton?: StockButtonUpdateManyWithoutBrandNestedInput
+    StockAccessories?: StockAccessoriesUpdateManyWithoutBrandNestedInput
+  }
+
+  export type BrandUncheckedUpdateWithoutStockAndroidInput = {
+    brandName?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Model?: ModelUncheckedUpdateManyWithoutBrandNestedInput
+    InStock?: InStockUncheckedUpdateManyWithoutBrandNestedInput
+    StockButton?: StockButtonUncheckedUpdateManyWithoutBrandNestedInput
+    StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutBrandNestedInput
+  }
+
+  export type ProductTypeUpsertWithoutStockAndroidInput = {
+    update: XOR<ProductTypeUpdateWithoutStockAndroidInput, ProductTypeUncheckedUpdateWithoutStockAndroidInput>
+    create: XOR<ProductTypeCreateWithoutStockAndroidInput, ProductTypeUncheckedCreateWithoutStockAndroidInput>
+    where?: ProductTypeWhereInput
+  }
+
+  export type ProductTypeUpdateToOneWithWhereWithoutStockAndroidInput = {
+    where?: ProductTypeWhereInput
+    data: XOR<ProductTypeUpdateWithoutStockAndroidInput, ProductTypeUncheckedUpdateWithoutStockAndroidInput>
+  }
+
+  export type ProductTypeUpdateWithoutStockAndroidInput = {
+    type?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Brand?: BrandUpdateManyWithoutProductTypeNestedInput
+    InStock?: InStockUpdateManyWithoutProductTypeNestedInput
+    StockButton?: StockButtonUpdateManyWithoutProductTypeNestedInput
+    StockAccessories?: StockAccessoriesUpdateManyWithoutProductTypeNestedInput
+  }
+
+  export type ProductTypeUncheckedUpdateWithoutStockAndroidInput = {
+    type?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Brand?: BrandUncheckedUpdateManyWithoutProductTypeNestedInput
+    InStock?: InStockUncheckedUpdateManyWithoutProductTypeNestedInput
+    StockButton?: StockButtonUncheckedUpdateManyWithoutProductTypeNestedInput
+    StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutProductTypeNestedInput
+  }
+
+  export type SalesEntryUpsertWithWhereUniqueWithoutStockAndroidInput = {
+    where: SalesEntryWhereUniqueInput
+    update: XOR<SalesEntryUpdateWithoutStockAndroidInput, SalesEntryUncheckedUpdateWithoutStockAndroidInput>
+    create: XOR<SalesEntryCreateWithoutStockAndroidInput, SalesEntryUncheckedCreateWithoutStockAndroidInput>
+  }
+
+  export type SalesEntryUpdateWithWhereUniqueWithoutStockAndroidInput = {
+    where: SalesEntryWhereUniqueInput
+    data: XOR<SalesEntryUpdateWithoutStockAndroidInput, SalesEntryUncheckedUpdateWithoutStockAndroidInput>
+  }
+
+  export type SalesEntryUpdateManyWithWhereWithoutStockAndroidInput = {
+    where: SalesEntryScalarWhereInput
+    data: XOR<SalesEntryUpdateManyMutationInput, SalesEntryUncheckedUpdateManyWithoutStockAndroidInput>
+  }
+
+  export type ModelCreateWithoutStrockButtonInput = {
+    id?: string
+    model: string
+    createdAt?: Date | string | null
+    brand: BrandCreateNestedOneWithoutModelInput
+    InStock?: InStockCreateNestedManyWithoutModelInput
+    StrockAndroid?: StockAndroidCreateNestedManyWithoutModelInput
+    StrockAccessories?: StockAccessoriesCreateNestedManyWithoutModelInput
+  }
+
+  export type ModelUncheckedCreateWithoutStrockButtonInput = {
+    id?: string
+    model: string
+    brandId: string
+    createdAt?: Date | string | null
+    InStock?: InStockUncheckedCreateNestedManyWithoutModelInput
+    StrockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutModelInput
+    StrockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutModelInput
+  }
+
+  export type ModelCreateOrConnectWithoutStrockButtonInput = {
+    where: ModelWhereUniqueInput
+    create: XOR<ModelCreateWithoutStrockButtonInput, ModelUncheckedCreateWithoutStrockButtonInput>
+  }
+
+  export type BrandCreateWithoutStockButtonInput = {
+    id?: string
+    brandName: string
+    createdAt?: Date | string | null
+    productType: ProductTypeCreateNestedOneWithoutBrandInput
+    Model?: ModelCreateNestedManyWithoutBrandInput
+    InStock?: InStockCreateNestedManyWithoutBrandInput
+    StockAndroid?: StockAndroidCreateNestedManyWithoutBrandInput
+    StockAccessories?: StockAccessoriesCreateNestedManyWithoutBrandInput
+  }
+
+  export type BrandUncheckedCreateWithoutStockButtonInput = {
+    id?: string
+    brandName: string
+    productTypeId: string
+    createdAt?: Date | string | null
+    Model?: ModelUncheckedCreateNestedManyWithoutBrandInput
+    InStock?: InStockUncheckedCreateNestedManyWithoutBrandInput
+    StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutBrandInput
+    StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutBrandInput
+  }
+
+  export type BrandCreateOrConnectWithoutStockButtonInput = {
+    where: BrandWhereUniqueInput
+    create: XOR<BrandCreateWithoutStockButtonInput, BrandUncheckedCreateWithoutStockButtonInput>
+  }
+
+  export type ProductTypeCreateWithoutStockButtonInput = {
+    id?: string
+    type: string
+    createdAt?: Date | string | null
+    Brand?: BrandCreateNestedManyWithoutProductTypeInput
+    InStock?: InStockCreateNestedManyWithoutProductTypeInput
+    StockAndroid?: StockAndroidCreateNestedManyWithoutProductTypeInput
+    StockAccessories?: StockAccessoriesCreateNestedManyWithoutProductTypeInput
+  }
+
+  export type ProductTypeUncheckedCreateWithoutStockButtonInput = {
+    id?: string
+    type: string
+    createdAt?: Date | string | null
+    Brand?: BrandUncheckedCreateNestedManyWithoutProductTypeInput
+    InStock?: InStockUncheckedCreateNestedManyWithoutProductTypeInput
+    StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutProductTypeInput
+    StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutProductTypeInput
+  }
+
+  export type ProductTypeCreateOrConnectWithoutStockButtonInput = {
+    where: ProductTypeWhereUniqueInput
+    create: XOR<ProductTypeCreateWithoutStockButtonInput, ProductTypeUncheckedCreateWithoutStockButtonInput>
+  }
+
+  export type SalesEntryCreateWithoutStockButtonInput = {
+    id?: string
+    discount: number
+    due: number
+    dueDate?: Date | string | null
+    createdAt?: Date | string | null
+    InStock: InStockCreateNestedOneWithoutSalesEntryInput
+    Seller: SellerCreateNestedOneWithoutSalesEntryInput
+    customer: CustomerCreateNestedOneWithoutSalesEntryInput
+    StockAndroid?: StockAndroidCreateNestedOneWithoutSalesEntryInput
+    StockAccessories?: StockAccessoriesCreateNestedOneWithoutSalesEntryInput
+  }
+
+  export type SalesEntryUncheckedCreateWithoutStockButtonInput = {
+    id?: string
+    instockId: string
+    discount: number
+    due: number
+    dueDate?: Date | string | null
+    sellerId: string
+    customerId: string
+    createdAt?: Date | string | null
+    stockAndroidId?: string | null
+    stockAccessoriesId?: string | null
+  }
+
+  export type SalesEntryCreateOrConnectWithoutStockButtonInput = {
+    where: SalesEntryWhereUniqueInput
+    create: XOR<SalesEntryCreateWithoutStockButtonInput, SalesEntryUncheckedCreateWithoutStockButtonInput>
+  }
+
+  export type SalesEntryCreateManyStockButtonInputEnvelope = {
+    data: SalesEntryCreateManyStockButtonInput | SalesEntryCreateManyStockButtonInput[]
+  }
+
+  export type ModelUpsertWithoutStrockButtonInput = {
+    update: XOR<ModelUpdateWithoutStrockButtonInput, ModelUncheckedUpdateWithoutStrockButtonInput>
+    create: XOR<ModelCreateWithoutStrockButtonInput, ModelUncheckedCreateWithoutStrockButtonInput>
+    where?: ModelWhereInput
+  }
+
+  export type ModelUpdateToOneWithWhereWithoutStrockButtonInput = {
+    where?: ModelWhereInput
+    data: XOR<ModelUpdateWithoutStrockButtonInput, ModelUncheckedUpdateWithoutStrockButtonInput>
+  }
+
+  export type ModelUpdateWithoutStrockButtonInput = {
+    model?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    brand?: BrandUpdateOneRequiredWithoutModelNestedInput
+    InStock?: InStockUpdateManyWithoutModelNestedInput
+    StrockAndroid?: StockAndroidUpdateManyWithoutModelNestedInput
+    StrockAccessories?: StockAccessoriesUpdateManyWithoutModelNestedInput
+  }
+
+  export type ModelUncheckedUpdateWithoutStrockButtonInput = {
+    model?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    InStock?: InStockUncheckedUpdateManyWithoutModelNestedInput
+    StrockAndroid?: StockAndroidUncheckedUpdateManyWithoutModelNestedInput
+    StrockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutModelNestedInput
+  }
+
+  export type BrandUpsertWithoutStockButtonInput = {
+    update: XOR<BrandUpdateWithoutStockButtonInput, BrandUncheckedUpdateWithoutStockButtonInput>
+    create: XOR<BrandCreateWithoutStockButtonInput, BrandUncheckedCreateWithoutStockButtonInput>
+    where?: BrandWhereInput
+  }
+
+  export type BrandUpdateToOneWithWhereWithoutStockButtonInput = {
+    where?: BrandWhereInput
+    data: XOR<BrandUpdateWithoutStockButtonInput, BrandUncheckedUpdateWithoutStockButtonInput>
+  }
+
+  export type BrandUpdateWithoutStockButtonInput = {
+    brandName?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    productType?: ProductTypeUpdateOneRequiredWithoutBrandNestedInput
+    Model?: ModelUpdateManyWithoutBrandNestedInput
+    InStock?: InStockUpdateManyWithoutBrandNestedInput
+    StockAndroid?: StockAndroidUpdateManyWithoutBrandNestedInput
+    StockAccessories?: StockAccessoriesUpdateManyWithoutBrandNestedInput
+  }
+
+  export type BrandUncheckedUpdateWithoutStockButtonInput = {
+    brandName?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Model?: ModelUncheckedUpdateManyWithoutBrandNestedInput
+    InStock?: InStockUncheckedUpdateManyWithoutBrandNestedInput
+    StockAndroid?: StockAndroidUncheckedUpdateManyWithoutBrandNestedInput
+    StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutBrandNestedInput
+  }
+
+  export type ProductTypeUpsertWithoutStockButtonInput = {
+    update: XOR<ProductTypeUpdateWithoutStockButtonInput, ProductTypeUncheckedUpdateWithoutStockButtonInput>
+    create: XOR<ProductTypeCreateWithoutStockButtonInput, ProductTypeUncheckedCreateWithoutStockButtonInput>
+    where?: ProductTypeWhereInput
+  }
+
+  export type ProductTypeUpdateToOneWithWhereWithoutStockButtonInput = {
+    where?: ProductTypeWhereInput
+    data: XOR<ProductTypeUpdateWithoutStockButtonInput, ProductTypeUncheckedUpdateWithoutStockButtonInput>
+  }
+
+  export type ProductTypeUpdateWithoutStockButtonInput = {
+    type?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Brand?: BrandUpdateManyWithoutProductTypeNestedInput
+    InStock?: InStockUpdateManyWithoutProductTypeNestedInput
+    StockAndroid?: StockAndroidUpdateManyWithoutProductTypeNestedInput
+    StockAccessories?: StockAccessoriesUpdateManyWithoutProductTypeNestedInput
+  }
+
+  export type ProductTypeUncheckedUpdateWithoutStockButtonInput = {
+    type?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Brand?: BrandUncheckedUpdateManyWithoutProductTypeNestedInput
+    InStock?: InStockUncheckedUpdateManyWithoutProductTypeNestedInput
+    StockAndroid?: StockAndroidUncheckedUpdateManyWithoutProductTypeNestedInput
+    StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutProductTypeNestedInput
+  }
+
+  export type SalesEntryUpsertWithWhereUniqueWithoutStockButtonInput = {
+    where: SalesEntryWhereUniqueInput
+    update: XOR<SalesEntryUpdateWithoutStockButtonInput, SalesEntryUncheckedUpdateWithoutStockButtonInput>
+    create: XOR<SalesEntryCreateWithoutStockButtonInput, SalesEntryUncheckedCreateWithoutStockButtonInput>
+  }
+
+  export type SalesEntryUpdateWithWhereUniqueWithoutStockButtonInput = {
+    where: SalesEntryWhereUniqueInput
+    data: XOR<SalesEntryUpdateWithoutStockButtonInput, SalesEntryUncheckedUpdateWithoutStockButtonInput>
+  }
+
+  export type SalesEntryUpdateManyWithWhereWithoutStockButtonInput = {
+    where: SalesEntryScalarWhereInput
+    data: XOR<SalesEntryUpdateManyMutationInput, SalesEntryUncheckedUpdateManyWithoutStockButtonInput>
+  }
+
+  export type ModelCreateWithoutStrockAccessoriesInput = {
+    id?: string
+    model: string
+    createdAt?: Date | string | null
+    brand: BrandCreateNestedOneWithoutModelInput
+    InStock?: InStockCreateNestedManyWithoutModelInput
+    StrockAndroid?: StockAndroidCreateNestedManyWithoutModelInput
+    StrockButton?: StockButtonCreateNestedManyWithoutModelInput
+  }
+
+  export type ModelUncheckedCreateWithoutStrockAccessoriesInput = {
+    id?: string
+    model: string
+    brandId: string
+    createdAt?: Date | string | null
+    InStock?: InStockUncheckedCreateNestedManyWithoutModelInput
+    StrockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutModelInput
+    StrockButton?: StockButtonUncheckedCreateNestedManyWithoutModelInput
+  }
+
+  export type ModelCreateOrConnectWithoutStrockAccessoriesInput = {
+    where: ModelWhereUniqueInput
+    create: XOR<ModelCreateWithoutStrockAccessoriesInput, ModelUncheckedCreateWithoutStrockAccessoriesInput>
+  }
+
+  export type BrandCreateWithoutStockAccessoriesInput = {
+    id?: string
+    brandName: string
+    createdAt?: Date | string | null
+    productType: ProductTypeCreateNestedOneWithoutBrandInput
+    Model?: ModelCreateNestedManyWithoutBrandInput
+    InStock?: InStockCreateNestedManyWithoutBrandInput
+    StockAndroid?: StockAndroidCreateNestedManyWithoutBrandInput
+    StockButton?: StockButtonCreateNestedManyWithoutBrandInput
+  }
+
+  export type BrandUncheckedCreateWithoutStockAccessoriesInput = {
+    id?: string
+    brandName: string
+    productTypeId: string
+    createdAt?: Date | string | null
+    Model?: ModelUncheckedCreateNestedManyWithoutBrandInput
+    InStock?: InStockUncheckedCreateNestedManyWithoutBrandInput
+    StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutBrandInput
+    StockButton?: StockButtonUncheckedCreateNestedManyWithoutBrandInput
+  }
+
+  export type BrandCreateOrConnectWithoutStockAccessoriesInput = {
+    where: BrandWhereUniqueInput
+    create: XOR<BrandCreateWithoutStockAccessoriesInput, BrandUncheckedCreateWithoutStockAccessoriesInput>
+  }
+
+  export type ProductTypeCreateWithoutStockAccessoriesInput = {
+    id?: string
+    type: string
+    createdAt?: Date | string | null
+    Brand?: BrandCreateNestedManyWithoutProductTypeInput
+    InStock?: InStockCreateNestedManyWithoutProductTypeInput
+    StockAndroid?: StockAndroidCreateNestedManyWithoutProductTypeInput
+    StockButton?: StockButtonCreateNestedManyWithoutProductTypeInput
+  }
+
+  export type ProductTypeUncheckedCreateWithoutStockAccessoriesInput = {
+    id?: string
+    type: string
+    createdAt?: Date | string | null
+    Brand?: BrandUncheckedCreateNestedManyWithoutProductTypeInput
+    InStock?: InStockUncheckedCreateNestedManyWithoutProductTypeInput
+    StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutProductTypeInput
+    StockButton?: StockButtonUncheckedCreateNestedManyWithoutProductTypeInput
+  }
+
+  export type ProductTypeCreateOrConnectWithoutStockAccessoriesInput = {
+    where: ProductTypeWhereUniqueInput
+    create: XOR<ProductTypeCreateWithoutStockAccessoriesInput, ProductTypeUncheckedCreateWithoutStockAccessoriesInput>
+  }
+
+  export type SalesEntryCreateWithoutStockAccessoriesInput = {
+    id?: string
+    discount: number
+    due: number
+    dueDate?: Date | string | null
+    createdAt?: Date | string | null
+    InStock: InStockCreateNestedOneWithoutSalesEntryInput
+    Seller: SellerCreateNestedOneWithoutSalesEntryInput
+    customer: CustomerCreateNestedOneWithoutSalesEntryInput
+    StockAndroid?: StockAndroidCreateNestedOneWithoutSalesEntryInput
+    StockButton?: StockButtonCreateNestedOneWithoutSalesEntryInput
+  }
+
+  export type SalesEntryUncheckedCreateWithoutStockAccessoriesInput = {
+    id?: string
+    instockId: string
+    discount: number
+    due: number
+    dueDate?: Date | string | null
+    sellerId: string
+    customerId: string
+    createdAt?: Date | string | null
+    stockAndroidId?: string | null
+    stockButtonId?: string | null
+  }
+
+  export type SalesEntryCreateOrConnectWithoutStockAccessoriesInput = {
+    where: SalesEntryWhereUniqueInput
+    create: XOR<SalesEntryCreateWithoutStockAccessoriesInput, SalesEntryUncheckedCreateWithoutStockAccessoriesInput>
+  }
+
+  export type SalesEntryCreateManyStockAccessoriesInputEnvelope = {
+    data: SalesEntryCreateManyStockAccessoriesInput | SalesEntryCreateManyStockAccessoriesInput[]
+  }
+
+  export type ModelUpsertWithoutStrockAccessoriesInput = {
+    update: XOR<ModelUpdateWithoutStrockAccessoriesInput, ModelUncheckedUpdateWithoutStrockAccessoriesInput>
+    create: XOR<ModelCreateWithoutStrockAccessoriesInput, ModelUncheckedCreateWithoutStrockAccessoriesInput>
+    where?: ModelWhereInput
+  }
+
+  export type ModelUpdateToOneWithWhereWithoutStrockAccessoriesInput = {
+    where?: ModelWhereInput
+    data: XOR<ModelUpdateWithoutStrockAccessoriesInput, ModelUncheckedUpdateWithoutStrockAccessoriesInput>
+  }
+
+  export type ModelUpdateWithoutStrockAccessoriesInput = {
+    model?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    brand?: BrandUpdateOneRequiredWithoutModelNestedInput
+    InStock?: InStockUpdateManyWithoutModelNestedInput
+    StrockAndroid?: StockAndroidUpdateManyWithoutModelNestedInput
+    StrockButton?: StockButtonUpdateManyWithoutModelNestedInput
+  }
+
+  export type ModelUncheckedUpdateWithoutStrockAccessoriesInput = {
+    model?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    InStock?: InStockUncheckedUpdateManyWithoutModelNestedInput
+    StrockAndroid?: StockAndroidUncheckedUpdateManyWithoutModelNestedInput
+    StrockButton?: StockButtonUncheckedUpdateManyWithoutModelNestedInput
+  }
+
+  export type BrandUpsertWithoutStockAccessoriesInput = {
+    update: XOR<BrandUpdateWithoutStockAccessoriesInput, BrandUncheckedUpdateWithoutStockAccessoriesInput>
+    create: XOR<BrandCreateWithoutStockAccessoriesInput, BrandUncheckedCreateWithoutStockAccessoriesInput>
+    where?: BrandWhereInput
+  }
+
+  export type BrandUpdateToOneWithWhereWithoutStockAccessoriesInput = {
+    where?: BrandWhereInput
+    data: XOR<BrandUpdateWithoutStockAccessoriesInput, BrandUncheckedUpdateWithoutStockAccessoriesInput>
+  }
+
+  export type BrandUpdateWithoutStockAccessoriesInput = {
+    brandName?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    productType?: ProductTypeUpdateOneRequiredWithoutBrandNestedInput
+    Model?: ModelUpdateManyWithoutBrandNestedInput
+    InStock?: InStockUpdateManyWithoutBrandNestedInput
+    StockAndroid?: StockAndroidUpdateManyWithoutBrandNestedInput
+    StockButton?: StockButtonUpdateManyWithoutBrandNestedInput
+  }
+
+  export type BrandUncheckedUpdateWithoutStockAccessoriesInput = {
+    brandName?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Model?: ModelUncheckedUpdateManyWithoutBrandNestedInput
+    InStock?: InStockUncheckedUpdateManyWithoutBrandNestedInput
+    StockAndroid?: StockAndroidUncheckedUpdateManyWithoutBrandNestedInput
+    StockButton?: StockButtonUncheckedUpdateManyWithoutBrandNestedInput
+  }
+
+  export type ProductTypeUpsertWithoutStockAccessoriesInput = {
+    update: XOR<ProductTypeUpdateWithoutStockAccessoriesInput, ProductTypeUncheckedUpdateWithoutStockAccessoriesInput>
+    create: XOR<ProductTypeCreateWithoutStockAccessoriesInput, ProductTypeUncheckedCreateWithoutStockAccessoriesInput>
+    where?: ProductTypeWhereInput
+  }
+
+  export type ProductTypeUpdateToOneWithWhereWithoutStockAccessoriesInput = {
+    where?: ProductTypeWhereInput
+    data: XOR<ProductTypeUpdateWithoutStockAccessoriesInput, ProductTypeUncheckedUpdateWithoutStockAccessoriesInput>
+  }
+
+  export type ProductTypeUpdateWithoutStockAccessoriesInput = {
+    type?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Brand?: BrandUpdateManyWithoutProductTypeNestedInput
+    InStock?: InStockUpdateManyWithoutProductTypeNestedInput
+    StockAndroid?: StockAndroidUpdateManyWithoutProductTypeNestedInput
+    StockButton?: StockButtonUpdateManyWithoutProductTypeNestedInput
+  }
+
+  export type ProductTypeUncheckedUpdateWithoutStockAccessoriesInput = {
+    type?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Brand?: BrandUncheckedUpdateManyWithoutProductTypeNestedInput
+    InStock?: InStockUncheckedUpdateManyWithoutProductTypeNestedInput
+    StockAndroid?: StockAndroidUncheckedUpdateManyWithoutProductTypeNestedInput
+    StockButton?: StockButtonUncheckedUpdateManyWithoutProductTypeNestedInput
+  }
+
+  export type SalesEntryUpsertWithWhereUniqueWithoutStockAccessoriesInput = {
+    where: SalesEntryWhereUniqueInput
+    update: XOR<SalesEntryUpdateWithoutStockAccessoriesInput, SalesEntryUncheckedUpdateWithoutStockAccessoriesInput>
+    create: XOR<SalesEntryCreateWithoutStockAccessoriesInput, SalesEntryUncheckedCreateWithoutStockAccessoriesInput>
+  }
+
+  export type SalesEntryUpdateWithWhereUniqueWithoutStockAccessoriesInput = {
+    where: SalesEntryWhereUniqueInput
+    data: XOR<SalesEntryUpdateWithoutStockAccessoriesInput, SalesEntryUncheckedUpdateWithoutStockAccessoriesInput>
+  }
+
+  export type SalesEntryUpdateManyWithWhereWithoutStockAccessoriesInput = {
+    where: SalesEntryScalarWhereInput
+    data: XOR<SalesEntryUpdateManyMutationInput, SalesEntryUncheckedUpdateManyWithoutStockAccessoriesInput>
   }
 
   export type InStockCreateWithoutSalesEntryInput = {
@@ -12713,6 +19647,103 @@ export namespace Prisma {
   export type CustomerCreateOrConnectWithoutSalesEntryInput = {
     where: CustomerWhereUniqueInput
     create: XOR<CustomerCreateWithoutSalesEntryInput, CustomerUncheckedCreateWithoutSalesEntryInput>
+  }
+
+  export type StockAndroidCreateWithoutSalesEntryInput = {
+    id?: string
+    name: string
+    IMEI: string
+    purchasePrice: number
+    sellingPrice: number
+    sold?: boolean
+    color: string
+    ram?: string | null
+    rom?: string | null
+    createdAt?: Date | string | null
+    model: ModelCreateNestedOneWithoutStrockAndroidInput
+    brand: BrandCreateNestedOneWithoutStockAndroidInput
+    productType: ProductTypeCreateNestedOneWithoutStockAndroidInput
+  }
+
+  export type StockAndroidUncheckedCreateWithoutSalesEntryInput = {
+    id?: string
+    name: string
+    IMEI: string
+    modelId: string
+    brandId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    sold?: boolean
+    color: string
+    ram?: string | null
+    rom?: string | null
+    createdAt?: Date | string | null
+  }
+
+  export type StockAndroidCreateOrConnectWithoutSalesEntryInput = {
+    where: StockAndroidWhereUniqueInput
+    create: XOR<StockAndroidCreateWithoutSalesEntryInput, StockAndroidUncheckedCreateWithoutSalesEntryInput>
+  }
+
+  export type StockButtonCreateWithoutSalesEntryInput = {
+    id?: string
+    name: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    color: string
+    createdAt?: Date | string | null
+    model: ModelCreateNestedOneWithoutStrockButtonInput
+    brand: BrandCreateNestedOneWithoutStockButtonInput
+    productType: ProductTypeCreateNestedOneWithoutStockButtonInput
+  }
+
+  export type StockButtonUncheckedCreateWithoutSalesEntryInput = {
+    id?: string
+    name: string
+    modelId: string
+    brandId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    color: string
+    createdAt?: Date | string | null
+  }
+
+  export type StockButtonCreateOrConnectWithoutSalesEntryInput = {
+    where: StockButtonWhereUniqueInput
+    create: XOR<StockButtonCreateWithoutSalesEntryInput, StockButtonUncheckedCreateWithoutSalesEntryInput>
+  }
+
+  export type StockAccessoriesCreateWithoutSalesEntryInput = {
+    id?: string
+    name: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    createdAt?: Date | string | null
+    model: ModelCreateNestedOneWithoutStrockAccessoriesInput
+    brand: BrandCreateNestedOneWithoutStockAccessoriesInput
+    productType: ProductTypeCreateNestedOneWithoutStockAccessoriesInput
+  }
+
+  export type StockAccessoriesUncheckedCreateWithoutSalesEntryInput = {
+    id?: string
+    name: string
+    modelId: string
+    brandId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    createdAt?: Date | string | null
+  }
+
+  export type StockAccessoriesCreateOrConnectWithoutSalesEntryInput = {
+    where: StockAccessoriesWhereUniqueInput
+    create: XOR<StockAccessoriesCreateWithoutSalesEntryInput, StockAccessoriesUncheckedCreateWithoutSalesEntryInput>
   }
 
   export type InStockUpsertWithoutSalesEntryInput = {
@@ -12802,28 +19833,139 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type StockAndroidUpsertWithoutSalesEntryInput = {
+    update: XOR<StockAndroidUpdateWithoutSalesEntryInput, StockAndroidUncheckedUpdateWithoutSalesEntryInput>
+    create: XOR<StockAndroidCreateWithoutSalesEntryInput, StockAndroidUncheckedCreateWithoutSalesEntryInput>
+    where?: StockAndroidWhereInput
+  }
+
+  export type StockAndroidUpdateToOneWithWhereWithoutSalesEntryInput = {
+    where?: StockAndroidWhereInput
+    data: XOR<StockAndroidUpdateWithoutSalesEntryInput, StockAndroidUncheckedUpdateWithoutSalesEntryInput>
+  }
+
+  export type StockAndroidUpdateWithoutSalesEntryInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    IMEI?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    sold?: BoolFieldUpdateOperationsInput | boolean
+    color?: StringFieldUpdateOperationsInput | string
+    ram?: NullableStringFieldUpdateOperationsInput | string | null
+    rom?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    model?: ModelUpdateOneRequiredWithoutStrockAndroidNestedInput
+    brand?: BrandUpdateOneRequiredWithoutStockAndroidNestedInput
+    productType?: ProductTypeUpdateOneRequiredWithoutStockAndroidNestedInput
+  }
+
+  export type StockAndroidUncheckedUpdateWithoutSalesEntryInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    IMEI?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    sold?: BoolFieldUpdateOperationsInput | boolean
+    color?: StringFieldUpdateOperationsInput | string
+    ram?: NullableStringFieldUpdateOperationsInput | string | null
+    rom?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StockButtonUpsertWithoutSalesEntryInput = {
+    update: XOR<StockButtonUpdateWithoutSalesEntryInput, StockButtonUncheckedUpdateWithoutSalesEntryInput>
+    create: XOR<StockButtonCreateWithoutSalesEntryInput, StockButtonUncheckedCreateWithoutSalesEntryInput>
+    where?: StockButtonWhereInput
+  }
+
+  export type StockButtonUpdateToOneWithWhereWithoutSalesEntryInput = {
+    where?: StockButtonWhereInput
+    data: XOR<StockButtonUpdateWithoutSalesEntryInput, StockButtonUncheckedUpdateWithoutSalesEntryInput>
+  }
+
+  export type StockButtonUpdateWithoutSalesEntryInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    color?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    model?: ModelUpdateOneRequiredWithoutStrockButtonNestedInput
+    brand?: BrandUpdateOneRequiredWithoutStockButtonNestedInput
+    productType?: ProductTypeUpdateOneRequiredWithoutStockButtonNestedInput
+  }
+
+  export type StockButtonUncheckedUpdateWithoutSalesEntryInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    color?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StockAccessoriesUpsertWithoutSalesEntryInput = {
+    update: XOR<StockAccessoriesUpdateWithoutSalesEntryInput, StockAccessoriesUncheckedUpdateWithoutSalesEntryInput>
+    create: XOR<StockAccessoriesCreateWithoutSalesEntryInput, StockAccessoriesUncheckedCreateWithoutSalesEntryInput>
+    where?: StockAccessoriesWhereInput
+  }
+
+  export type StockAccessoriesUpdateToOneWithWhereWithoutSalesEntryInput = {
+    where?: StockAccessoriesWhereInput
+    data: XOR<StockAccessoriesUpdateWithoutSalesEntryInput, StockAccessoriesUncheckedUpdateWithoutSalesEntryInput>
+  }
+
+  export type StockAccessoriesUpdateWithoutSalesEntryInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    model?: ModelUpdateOneRequiredWithoutStrockAccessoriesNestedInput
+    brand?: BrandUpdateOneRequiredWithoutStockAccessoriesNestedInput
+    productType?: ProductTypeUpdateOneRequiredWithoutStockAccessoriesNestedInput
+  }
+
+  export type StockAccessoriesUncheckedUpdateWithoutSalesEntryInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type SalesEntryCreateWithoutCustomerInput = {
     id?: string
-    IMEI: string
-    price: number
     discount: number
     due: number
     dueDate?: Date | string | null
     createdAt?: Date | string | null
     InStock: InStockCreateNestedOneWithoutSalesEntryInput
     Seller: SellerCreateNestedOneWithoutSalesEntryInput
+    StockAndroid?: StockAndroidCreateNestedOneWithoutSalesEntryInput
+    StockButton?: StockButtonCreateNestedOneWithoutSalesEntryInput
+    StockAccessories?: StockAccessoriesCreateNestedOneWithoutSalesEntryInput
   }
 
   export type SalesEntryUncheckedCreateWithoutCustomerInput = {
     id?: string
     instockId: string
-    IMEI: string
-    price: number
     discount: number
     due: number
     dueDate?: Date | string | null
     sellerId: string
     createdAt?: Date | string | null
+    stockAndroidId?: string | null
+    stockButtonId?: string | null
+    stockAccessoriesId?: string | null
   }
 
   export type SalesEntryCreateOrConnectWithoutCustomerInput = {
@@ -12854,46 +19996,50 @@ export namespace Prisma {
   export type SalesEntryCreateManySellerInput = {
     id?: string
     instockId: string
-    IMEI: string
-    price: number
     discount: number
     due: number
     dueDate?: Date | string | null
     customerId: string
     createdAt?: Date | string | null
+    stockAndroidId?: string | null
+    stockButtonId?: string | null
+    stockAccessoriesId?: string | null
   }
 
   export type SalesEntryUpdateWithoutSellerInput = {
-    IMEI?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     InStock?: InStockUpdateOneRequiredWithoutSalesEntryNestedInput
     customer?: CustomerUpdateOneRequiredWithoutSalesEntryNestedInput
+    StockAndroid?: StockAndroidUpdateOneWithoutSalesEntryNestedInput
+    StockButton?: StockButtonUpdateOneWithoutSalesEntryNestedInput
+    StockAccessories?: StockAccessoriesUpdateOneWithoutSalesEntryNestedInput
   }
 
   export type SalesEntryUncheckedUpdateWithoutSellerInput = {
     instockId?: StringFieldUpdateOperationsInput | string
-    IMEI?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     customerId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    stockAndroidId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockButtonId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockAccessoriesId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SalesEntryUncheckedUpdateManyWithoutSellerInput = {
     instockId?: StringFieldUpdateOperationsInput | string
-    IMEI?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     customerId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    stockAndroidId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockButtonId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockAccessoriesId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BrandCreateManyProductTypeInput = {
@@ -12917,11 +20063,52 @@ export namespace Prisma {
     createdAt?: Date | string | null
   }
 
+  export type StockAndroidCreateManyProductTypeInput = {
+    id?: string
+    name: string
+    IMEI: string
+    modelId: string
+    brandId: string
+    purchasePrice: number
+    sellingPrice: number
+    sold?: boolean
+    color: string
+    ram?: string | null
+    rom?: string | null
+    createdAt?: Date | string | null
+  }
+
+  export type StockButtonCreateManyProductTypeInput = {
+    id?: string
+    name: string
+    modelId: string
+    brandId: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    color: string
+    createdAt?: Date | string | null
+  }
+
+  export type StockAccessoriesCreateManyProductTypeInput = {
+    id?: string
+    name: string
+    modelId: string
+    brandId: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    createdAt?: Date | string | null
+  }
+
   export type BrandUpdateWithoutProductTypeInput = {
     brandName?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Model?: ModelUpdateManyWithoutBrandNestedInput
     InStock?: InStockUpdateManyWithoutBrandNestedInput
+    StockAndroid?: StockAndroidUpdateManyWithoutBrandNestedInput
+    StockButton?: StockButtonUpdateManyWithoutBrandNestedInput
+    StockAccessories?: StockAccessoriesUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandUncheckedUpdateWithoutProductTypeInput = {
@@ -12929,6 +20116,9 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Model?: ModelUncheckedUpdateManyWithoutBrandNestedInput
     InStock?: InStockUncheckedUpdateManyWithoutBrandNestedInput
+    StockAndroid?: StockAndroidUncheckedUpdateManyWithoutBrandNestedInput
+    StockButton?: StockButtonUncheckedUpdateManyWithoutBrandNestedInput
+    StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandUncheckedUpdateManyWithoutProductTypeInput = {
@@ -12980,6 +20170,117 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type StockAndroidUpdateWithoutProductTypeInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    IMEI?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    sold?: BoolFieldUpdateOperationsInput | boolean
+    color?: StringFieldUpdateOperationsInput | string
+    ram?: NullableStringFieldUpdateOperationsInput | string | null
+    rom?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    model?: ModelUpdateOneRequiredWithoutStrockAndroidNestedInput
+    brand?: BrandUpdateOneRequiredWithoutStockAndroidNestedInput
+    SalesEntry?: SalesEntryUpdateManyWithoutStockAndroidNestedInput
+  }
+
+  export type StockAndroidUncheckedUpdateWithoutProductTypeInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    IMEI?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    sold?: BoolFieldUpdateOperationsInput | boolean
+    color?: StringFieldUpdateOperationsInput | string
+    ram?: NullableStringFieldUpdateOperationsInput | string | null
+    rom?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    SalesEntry?: SalesEntryUncheckedUpdateManyWithoutStockAndroidNestedInput
+  }
+
+  export type StockAndroidUncheckedUpdateManyWithoutProductTypeInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    IMEI?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    sold?: BoolFieldUpdateOperationsInput | boolean
+    color?: StringFieldUpdateOperationsInput | string
+    ram?: NullableStringFieldUpdateOperationsInput | string | null
+    rom?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StockButtonUpdateWithoutProductTypeInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    color?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    model?: ModelUpdateOneRequiredWithoutStrockButtonNestedInput
+    brand?: BrandUpdateOneRequiredWithoutStockButtonNestedInput
+    SalesEntry?: SalesEntryUpdateManyWithoutStockButtonNestedInput
+  }
+
+  export type StockButtonUncheckedUpdateWithoutProductTypeInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    color?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    SalesEntry?: SalesEntryUncheckedUpdateManyWithoutStockButtonNestedInput
+  }
+
+  export type StockButtonUncheckedUpdateManyWithoutProductTypeInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    color?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StockAccessoriesUpdateWithoutProductTypeInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    model?: ModelUpdateOneRequiredWithoutStrockAccessoriesNestedInput
+    brand?: BrandUpdateOneRequiredWithoutStockAccessoriesNestedInput
+    SalesEntry?: SalesEntryUpdateManyWithoutStockAccessoriesNestedInput
+  }
+
+  export type StockAccessoriesUncheckedUpdateWithoutProductTypeInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    SalesEntry?: SalesEntryUncheckedUpdateManyWithoutStockAccessoriesNestedInput
+  }
+
+  export type StockAccessoriesUncheckedUpdateManyWithoutProductTypeInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type ModelCreateManyBrandInput = {
     id?: string
     model: string
@@ -13001,16 +20302,60 @@ export namespace Prisma {
     createdAt?: Date | string | null
   }
 
+  export type StockAndroidCreateManyBrandInput = {
+    id?: string
+    name: string
+    IMEI: string
+    modelId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    sold?: boolean
+    color: string
+    ram?: string | null
+    rom?: string | null
+    createdAt?: Date | string | null
+  }
+
+  export type StockButtonCreateManyBrandInput = {
+    id?: string
+    name: string
+    modelId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    color: string
+    createdAt?: Date | string | null
+  }
+
+  export type StockAccessoriesCreateManyBrandInput = {
+    id?: string
+    name: string
+    modelId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    createdAt?: Date | string | null
+  }
+
   export type ModelUpdateWithoutBrandInput = {
     model?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     InStock?: InStockUpdateManyWithoutModelNestedInput
+    StrockAndroid?: StockAndroidUpdateManyWithoutModelNestedInput
+    StrockButton?: StockButtonUpdateManyWithoutModelNestedInput
+    StrockAccessories?: StockAccessoriesUpdateManyWithoutModelNestedInput
   }
 
   export type ModelUncheckedUpdateWithoutBrandInput = {
     model?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     InStock?: InStockUncheckedUpdateManyWithoutModelNestedInput
+    StrockAndroid?: StockAndroidUncheckedUpdateManyWithoutModelNestedInput
+    StrockButton?: StockButtonUncheckedUpdateManyWithoutModelNestedInput
+    StrockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutModelNestedInput
   }
 
   export type ModelUncheckedUpdateManyWithoutBrandInput = {
@@ -13062,6 +20407,117 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type StockAndroidUpdateWithoutBrandInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    IMEI?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    sold?: BoolFieldUpdateOperationsInput | boolean
+    color?: StringFieldUpdateOperationsInput | string
+    ram?: NullableStringFieldUpdateOperationsInput | string | null
+    rom?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    model?: ModelUpdateOneRequiredWithoutStrockAndroidNestedInput
+    productType?: ProductTypeUpdateOneRequiredWithoutStockAndroidNestedInput
+    SalesEntry?: SalesEntryUpdateManyWithoutStockAndroidNestedInput
+  }
+
+  export type StockAndroidUncheckedUpdateWithoutBrandInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    IMEI?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    sold?: BoolFieldUpdateOperationsInput | boolean
+    color?: StringFieldUpdateOperationsInput | string
+    ram?: NullableStringFieldUpdateOperationsInput | string | null
+    rom?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    SalesEntry?: SalesEntryUncheckedUpdateManyWithoutStockAndroidNestedInput
+  }
+
+  export type StockAndroidUncheckedUpdateManyWithoutBrandInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    IMEI?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    sold?: BoolFieldUpdateOperationsInput | boolean
+    color?: StringFieldUpdateOperationsInput | string
+    ram?: NullableStringFieldUpdateOperationsInput | string | null
+    rom?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StockButtonUpdateWithoutBrandInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    color?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    model?: ModelUpdateOneRequiredWithoutStrockButtonNestedInput
+    productType?: ProductTypeUpdateOneRequiredWithoutStockButtonNestedInput
+    SalesEntry?: SalesEntryUpdateManyWithoutStockButtonNestedInput
+  }
+
+  export type StockButtonUncheckedUpdateWithoutBrandInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    color?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    SalesEntry?: SalesEntryUncheckedUpdateManyWithoutStockButtonNestedInput
+  }
+
+  export type StockButtonUncheckedUpdateManyWithoutBrandInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    color?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StockAccessoriesUpdateWithoutBrandInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    model?: ModelUpdateOneRequiredWithoutStrockAccessoriesNestedInput
+    productType?: ProductTypeUpdateOneRequiredWithoutStockAccessoriesNestedInput
+    SalesEntry?: SalesEntryUpdateManyWithoutStockAccessoriesNestedInput
+  }
+
+  export type StockAccessoriesUncheckedUpdateWithoutBrandInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    SalesEntry?: SalesEntryUncheckedUpdateManyWithoutStockAccessoriesNestedInput
+  }
+
+  export type StockAccessoriesUncheckedUpdateManyWithoutBrandInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type InStockCreateManyModelInput = {
     id?: string
     name: string
@@ -13074,6 +20530,44 @@ export namespace Prisma {
     color: string
     ram?: string | null
     rom?: string | null
+    createdAt?: Date | string | null
+  }
+
+  export type StockAndroidCreateManyModelInput = {
+    id?: string
+    name: string
+    IMEI: string
+    brandId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    sold?: boolean
+    color: string
+    ram?: string | null
+    rom?: string | null
+    createdAt?: Date | string | null
+  }
+
+  export type StockButtonCreateManyModelInput = {
+    id?: string
+    name: string
+    brandId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
+    color: string
+    createdAt?: Date | string | null
+  }
+
+  export type StockAccessoriesCreateManyModelInput = {
+    id?: string
+    name: string
+    brandId: string
+    productTypeId: string
+    purchasePrice: number
+    sellingPrice: number
+    quantity: number
     createdAt?: Date | string | null
   }
 
@@ -13121,94 +20615,360 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type StockAndroidUpdateWithoutModelInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    IMEI?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    sold?: BoolFieldUpdateOperationsInput | boolean
+    color?: StringFieldUpdateOperationsInput | string
+    ram?: NullableStringFieldUpdateOperationsInput | string | null
+    rom?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    brand?: BrandUpdateOneRequiredWithoutStockAndroidNestedInput
+    productType?: ProductTypeUpdateOneRequiredWithoutStockAndroidNestedInput
+    SalesEntry?: SalesEntryUpdateManyWithoutStockAndroidNestedInput
+  }
+
+  export type StockAndroidUncheckedUpdateWithoutModelInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    IMEI?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    sold?: BoolFieldUpdateOperationsInput | boolean
+    color?: StringFieldUpdateOperationsInput | string
+    ram?: NullableStringFieldUpdateOperationsInput | string | null
+    rom?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    SalesEntry?: SalesEntryUncheckedUpdateManyWithoutStockAndroidNestedInput
+  }
+
+  export type StockAndroidUncheckedUpdateManyWithoutModelInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    IMEI?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    sold?: BoolFieldUpdateOperationsInput | boolean
+    color?: StringFieldUpdateOperationsInput | string
+    ram?: NullableStringFieldUpdateOperationsInput | string | null
+    rom?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StockButtonUpdateWithoutModelInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    color?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    brand?: BrandUpdateOneRequiredWithoutStockButtonNestedInput
+    productType?: ProductTypeUpdateOneRequiredWithoutStockButtonNestedInput
+    SalesEntry?: SalesEntryUpdateManyWithoutStockButtonNestedInput
+  }
+
+  export type StockButtonUncheckedUpdateWithoutModelInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    color?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    SalesEntry?: SalesEntryUncheckedUpdateManyWithoutStockButtonNestedInput
+  }
+
+  export type StockButtonUncheckedUpdateManyWithoutModelInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    color?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StockAccessoriesUpdateWithoutModelInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    brand?: BrandUpdateOneRequiredWithoutStockAccessoriesNestedInput
+    productType?: ProductTypeUpdateOneRequiredWithoutStockAccessoriesNestedInput
+    SalesEntry?: SalesEntryUpdateManyWithoutStockAccessoriesNestedInput
+  }
+
+  export type StockAccessoriesUncheckedUpdateWithoutModelInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    SalesEntry?: SalesEntryUncheckedUpdateManyWithoutStockAccessoriesNestedInput
+  }
+
+  export type StockAccessoriesUncheckedUpdateManyWithoutModelInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    purchasePrice?: IntFieldUpdateOperationsInput | number
+    sellingPrice?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type SalesEntryCreateManyInStockInput = {
     id?: string
-    IMEI: string
-    price: number
     discount: number
     due: number
     dueDate?: Date | string | null
     sellerId: string
     customerId: string
     createdAt?: Date | string | null
+    stockAndroidId?: string | null
+    stockButtonId?: string | null
+    stockAccessoriesId?: string | null
   }
 
   export type SalesEntryUpdateWithoutInStockInput = {
-    IMEI?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Seller?: SellerUpdateOneRequiredWithoutSalesEntryNestedInput
     customer?: CustomerUpdateOneRequiredWithoutSalesEntryNestedInput
+    StockAndroid?: StockAndroidUpdateOneWithoutSalesEntryNestedInput
+    StockButton?: StockButtonUpdateOneWithoutSalesEntryNestedInput
+    StockAccessories?: StockAccessoriesUpdateOneWithoutSalesEntryNestedInput
   }
 
   export type SalesEntryUncheckedUpdateWithoutInStockInput = {
-    IMEI?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sellerId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    stockAndroidId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockButtonId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockAccessoriesId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SalesEntryUncheckedUpdateManyWithoutInStockInput = {
-    IMEI?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sellerId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    stockAndroidId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockButtonId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockAccessoriesId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type SalesEntryCreateManyCustomerInput = {
+  export type SalesEntryCreateManyStockAndroidInput = {
     id?: string
     instockId: string
-    IMEI: string
-    price: number
     discount: number
     due: number
     dueDate?: Date | string | null
     sellerId: string
+    customerId: string
     createdAt?: Date | string | null
+    stockButtonId?: string | null
+    stockAccessoriesId?: string | null
   }
 
-  export type SalesEntryUpdateWithoutCustomerInput = {
-    IMEI?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
+  export type SalesEntryUpdateWithoutStockAndroidInput = {
     discount?: IntFieldUpdateOperationsInput | number
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     InStock?: InStockUpdateOneRequiredWithoutSalesEntryNestedInput
     Seller?: SellerUpdateOneRequiredWithoutSalesEntryNestedInput
+    customer?: CustomerUpdateOneRequiredWithoutSalesEntryNestedInput
+    StockButton?: StockButtonUpdateOneWithoutSalesEntryNestedInput
+    StockAccessories?: StockAccessoriesUpdateOneWithoutSalesEntryNestedInput
+  }
+
+  export type SalesEntryUncheckedUpdateWithoutStockAndroidInput = {
+    instockId?: StringFieldUpdateOperationsInput | string
+    discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sellerId?: StringFieldUpdateOperationsInput | string
+    customerId?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    stockButtonId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockAccessoriesId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SalesEntryUncheckedUpdateManyWithoutStockAndroidInput = {
+    instockId?: StringFieldUpdateOperationsInput | string
+    discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sellerId?: StringFieldUpdateOperationsInput | string
+    customerId?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    stockButtonId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockAccessoriesId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SalesEntryCreateManyStockButtonInput = {
+    id?: string
+    instockId: string
+    discount: number
+    due: number
+    dueDate?: Date | string | null
+    sellerId: string
+    customerId: string
+    createdAt?: Date | string | null
+    stockAndroidId?: string | null
+    stockAccessoriesId?: string | null
+  }
+
+  export type SalesEntryUpdateWithoutStockButtonInput = {
+    discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    InStock?: InStockUpdateOneRequiredWithoutSalesEntryNestedInput
+    Seller?: SellerUpdateOneRequiredWithoutSalesEntryNestedInput
+    customer?: CustomerUpdateOneRequiredWithoutSalesEntryNestedInput
+    StockAndroid?: StockAndroidUpdateOneWithoutSalesEntryNestedInput
+    StockAccessories?: StockAccessoriesUpdateOneWithoutSalesEntryNestedInput
+  }
+
+  export type SalesEntryUncheckedUpdateWithoutStockButtonInput = {
+    instockId?: StringFieldUpdateOperationsInput | string
+    discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sellerId?: StringFieldUpdateOperationsInput | string
+    customerId?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    stockAndroidId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockAccessoriesId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SalesEntryUncheckedUpdateManyWithoutStockButtonInput = {
+    instockId?: StringFieldUpdateOperationsInput | string
+    discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sellerId?: StringFieldUpdateOperationsInput | string
+    customerId?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    stockAndroidId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockAccessoriesId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SalesEntryCreateManyStockAccessoriesInput = {
+    id?: string
+    instockId: string
+    discount: number
+    due: number
+    dueDate?: Date | string | null
+    sellerId: string
+    customerId: string
+    createdAt?: Date | string | null
+    stockAndroidId?: string | null
+    stockButtonId?: string | null
+  }
+
+  export type SalesEntryUpdateWithoutStockAccessoriesInput = {
+    discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    InStock?: InStockUpdateOneRequiredWithoutSalesEntryNestedInput
+    Seller?: SellerUpdateOneRequiredWithoutSalesEntryNestedInput
+    customer?: CustomerUpdateOneRequiredWithoutSalesEntryNestedInput
+    StockAndroid?: StockAndroidUpdateOneWithoutSalesEntryNestedInput
+    StockButton?: StockButtonUpdateOneWithoutSalesEntryNestedInput
+  }
+
+  export type SalesEntryUncheckedUpdateWithoutStockAccessoriesInput = {
+    instockId?: StringFieldUpdateOperationsInput | string
+    discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sellerId?: StringFieldUpdateOperationsInput | string
+    customerId?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    stockAndroidId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockButtonId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SalesEntryUncheckedUpdateManyWithoutStockAccessoriesInput = {
+    instockId?: StringFieldUpdateOperationsInput | string
+    discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sellerId?: StringFieldUpdateOperationsInput | string
+    customerId?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    stockAndroidId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockButtonId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SalesEntryCreateManyCustomerInput = {
+    id?: string
+    instockId: string
+    discount: number
+    due: number
+    dueDate?: Date | string | null
+    sellerId: string
+    createdAt?: Date | string | null
+    stockAndroidId?: string | null
+    stockButtonId?: string | null
+    stockAccessoriesId?: string | null
+  }
+
+  export type SalesEntryUpdateWithoutCustomerInput = {
+    discount?: IntFieldUpdateOperationsInput | number
+    due?: IntFieldUpdateOperationsInput | number
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    InStock?: InStockUpdateOneRequiredWithoutSalesEntryNestedInput
+    Seller?: SellerUpdateOneRequiredWithoutSalesEntryNestedInput
+    StockAndroid?: StockAndroidUpdateOneWithoutSalesEntryNestedInput
+    StockButton?: StockButtonUpdateOneWithoutSalesEntryNestedInput
+    StockAccessories?: StockAccessoriesUpdateOneWithoutSalesEntryNestedInput
   }
 
   export type SalesEntryUncheckedUpdateWithoutCustomerInput = {
     instockId?: StringFieldUpdateOperationsInput | string
-    IMEI?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sellerId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    stockAndroidId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockButtonId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockAccessoriesId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SalesEntryUncheckedUpdateManyWithoutCustomerInput = {
     instockId?: StringFieldUpdateOperationsInput | string
-    IMEI?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
     discount?: IntFieldUpdateOperationsInput | number
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sellerId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    stockAndroidId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockButtonId?: NullableStringFieldUpdateOperationsInput | string | null
+    stockAccessoriesId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 
@@ -13237,6 +20997,18 @@ export namespace Prisma {
      */
     export type InStockCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = InStockCountOutputTypeDefaultArgs<ExtArgs>
     /**
+     * @deprecated Use StockAndroidCountOutputTypeDefaultArgs instead
+     */
+    export type StockAndroidCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = StockAndroidCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use StockButtonCountOutputTypeDefaultArgs instead
+     */
+    export type StockButtonCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = StockButtonCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use StockAccessoriesCountOutputTypeDefaultArgs instead
+     */
+    export type StockAccessoriesCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = StockAccessoriesCountOutputTypeDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use CustomerCountOutputTypeDefaultArgs instead
      */
     export type CustomerCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CustomerCountOutputTypeDefaultArgs<ExtArgs>
@@ -13264,6 +21036,18 @@ export namespace Prisma {
      * @deprecated Use InStockDefaultArgs instead
      */
     export type InStockArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = InStockDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use StockAndroidDefaultArgs instead
+     */
+    export type StockAndroidArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = StockAndroidDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use StockButtonDefaultArgs instead
+     */
+    export type StockButtonArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = StockButtonDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use StockAccessoriesDefaultArgs instead
+     */
+    export type StockAccessoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = StockAccessoriesDefaultArgs<ExtArgs>
     /**
      * @deprecated Use SalesEntryDefaultArgs instead
      */
