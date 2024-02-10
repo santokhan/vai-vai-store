@@ -1,0 +1,1 @@
+export const productTypes = ['android', 'button', 'accessories'];
