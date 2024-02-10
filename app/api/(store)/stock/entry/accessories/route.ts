@@ -7,7 +7,7 @@ async function getStockButton() {
     try {
         return await prisma.stockAccessories.findMany();
     } catch (error) {
-        console.error('Error creating model:', error);
+        console.error('Error getting accessories data:', error);
     } finally {
         // Close the Prisma Client connection
         await prisma.$disconnect();
@@ -21,7 +21,7 @@ async function addStockButton(body: StockAccessoriesPOST) {
         });
         return createdModel;
     } catch (error) {
-        console.error('Error creating model:', error);
+        console.error('Error creating accessories data:', error);
     } finally {
         // Close the Prisma Client connection
         await prisma.$disconnect();

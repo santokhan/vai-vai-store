@@ -32,7 +32,7 @@ async function addStockAndroid(body: StockAndroidPOST) {
         });
         return createdModel;
     } catch (error) {
-        console.error('Error creating model:', error);
+        console.error('Error getting android phone data:', error);
     } finally {
         // Close the Prisma Client connection
         await prisma.$disconnect();
@@ -44,7 +44,7 @@ export async function GET(): Promise<Response> {
     if (data) {
         return Response.json(data);
     } else {
-        return Response.json({ message: 'No model found' });
+        return Response.json({ message: 'Can not get android phone data' });
     }
 }
 
@@ -59,7 +59,7 @@ export async function POST(request: Request): Promise<Response> {
             }
         })
         if (existingBrand) {
-            return Response.json({ message: 'Item already exists' });
+            return Response.json({ message: 'Android phone already exists in stock' });
         } else {
             const createdModel = await addStockAndroid(body);
             if (createdModel) {
