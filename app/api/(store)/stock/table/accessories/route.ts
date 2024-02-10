@@ -1,8 +1,9 @@
+// Import the Prisma Client
 import { prisma } from '@/lib/prisma';
 
-async function getAndroid() {
+async function getAccessories() {
     try {
-        return await prisma.stockAndroid.findMany({
+        return await prisma.stockAccessories.findMany({
             include: {
                 productType: true,
                 brand: true,
@@ -18,11 +19,17 @@ async function getAndroid() {
 }
 
 export async function GET(): Promise<Response> {
-    const data = await getAndroid();
+    const data = await getAccessories();
 
     if (data) {
-        return Response.json(data);
+        return Response.json(data, {
+            headers: {
+                'Cache-Control': 'no-store',
+                'Content-Type': 'application/json',
+                'age': '0'
+            }
+        });
     } else {
-        return Response.json({ message: 'No data found in android stock' });
+        return Response.json({ message: 'No data found in stock' });
     }
 }
