@@ -1,17 +1,17 @@
 'use client'
 
 import React, { ChangeEvent, FormEvent, Ref, useState } from 'react';
-import { useQuery } from 'react-query';
 import { ORIGIN } from '@/utils/origin';
-import { Customer, InStock } from '@/prisma/generated/client';
+import { StockAndroid } from '@/prisma/generated/client';
 import { SearchNormal } from 'iconsax-react';
+import InputBox from '../input-box';
 
 type Props = {
-    setSearchStockData: (data: InStock) => void;
+    setSearchStockData: (data: StockAndroid) => void;
     forwardRef: Ref<HTMLInputElement>;
 }
 
-const SearchModelForm: React.FC<Props> = ({ setSearchStockData, forwardRef }) => {
+const AndroidIMEISearch: React.FC<Props> = ({ setSearchStockData, forwardRef }) => {
     const [IMEI, setIMEI] = useState<string>('');
     const [isSearching, setisSearching] = useState<boolean>(false);
 
@@ -21,24 +21,27 @@ const SearchModelForm: React.FC<Props> = ({ setSearchStockData, forwardRef }) =>
 
     function searchModelByIMEI(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-
-        if (!IMEI) return console.log({ message: "IMEI is required" });
         setisSearching(true);
 
-        const API_URL = `${ORIGIN}/api/sales/entry/imei?imei=${IMEI}`
+        const API_URL = `${ORIGIN}/api/stock/search/imei?imei=${IMEI}`
 
-        fetch(API_URL, {
-            cache: 'no-store'
-        }).then(res => res.json()).then((data: InStock[]) => {
-            if (!data) return console.log({ message: "Can not get model by IMEI" });
-            setSearchStockData(data[0])
-            setisSearching(false);
+        fetch(API_URL, { cache: 'no-store' }).then(res => res.json()).then((data) => {
+            if (!data) {
+                alert("Can not item by IMEI");
+            } else {
+                if (data.message) {
+                    alert(data.message)
+                } else {
+                    setSearchStockData(data as StockAndroid)
+                }
+                setisSearching(false);
+            }
         }).catch(err => { console.error(err) })
     }
 
     return (
-        <div className='space-y-8'>
-            <div className="flex flex-wrap lg:flex-nowrap gap-4">
+        <div className="flex flex-wrap lg:flex-nowrap gap-4">
+            <InputBox>
                 <form className="w-full" onSubmit={searchModelByIMEI}>
                     <label htmlFor="IMEI" className="default">Search Product by IMEI</label>
                     <div className="flex items-center gap-2">
@@ -57,10 +60,10 @@ const SearchModelForm: React.FC<Props> = ({ setSearchStockData, forwardRef }) =>
                         </button>
                     </div>
                 </form>
-                <div className="w-full"></div>
-            </div>
+            </InputBox>
+            <InputBox><></></InputBox>
         </div>
     );
 };
 
-export default SearchModelForm;
+export default AndroidIMEISearch;

@@ -10,17 +10,21 @@ import { InitialSalesEntry, dummyStockData, initialCustomer } from "@/utils/defa
 import { ORIGIN } from "@/utils/origin";
 import { ChangeEvent, useRef, useState } from "react";
 import { useQuery } from "react-query";
+import InputBox from "../../input-box";
 
 export type SalesEntryType = typeof InitialSalesEntry;
 export type CustomerData = typeof initialCustomer;
+
+// Copy type from SalesEntry
 export type PostSalesData = {
-    customer: CustomerData
-    discount: number,
-    due: number,
-    IMEI: string,
-    instockId: string,
-    price: number,
-    sellerId: string,
+    discount: number;
+    due: number;
+    sellerId: string;
+    // customerId: string; // added from backend
+    instockId: string;
+    stockAndroidId: string | null;
+    stockButtonId: string | null;
+    stockAccessoriesId: string | null;
 };
 
 export default function SalesEntryForm() {
@@ -59,15 +63,17 @@ export default function SalesEntryForm() {
 
             /**
              * Required data to add sales entrys
+             * 
+             * CustomerId will be added on backend🌟
              */
             const body: PostSalesData = {
                 discount,
                 sellerId,
-                IMEI: foundStockItem.IMEI,
-                instockId: foundStockItem.id,
-                price: foundStockItem.price,
                 due: salesData.due,
-                customer,
+                instockId: foundStockItem.id,
+                stockAndroidId: null,
+                stockButtonId: null,
+                stockAccessoriesId: null
             }
 
             await fetch(API_URL, {
@@ -98,7 +104,7 @@ export default function SalesEntryForm() {
 
                 <form className="space-y-6" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap lg:flex-nowrap gap-4">
-                        <div className='w-full'>
+                        <InputBox>
                             <label htmlFor="seller" className="default">Seller</label>
                             <select
                                 className="default"
@@ -112,8 +118,8 @@ export default function SalesEntryForm() {
                                     <option className='capitalize' value={type.id} key={idx}>{type.name}</option>
                                 )}
                             </select>
-                        </div>
-                        <div className='w-full'>
+                        </InputBox>
+                        <InputBox>
                             <label htmlFor="discount" className="default">discount</label>
                             <input
                                 type='number'
@@ -125,8 +131,8 @@ export default function SalesEntryForm() {
                                     setsalesData({ ...salesData, discount: Number(e.target.value) })
                                 }}>
                             </input>
-                        </div>
-                        <div className='w-full'>
+                        </InputBox>
+                        <InputBox>
                             <label htmlFor="due" className="default">due</label>
                             <input
                                 type='number'
@@ -138,7 +144,7 @@ export default function SalesEntryForm() {
                                     setsalesData({ ...salesData, due: Number(e.target.value) })
                                 }}>
                             </input>
-                        </div>
+                        </InputBox>
                     </div>
 
                     <CustomerForm setCustomerData={setCustomerData} />

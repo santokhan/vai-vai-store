@@ -1,4 +1,5 @@
 import { ChangeEvent, FC } from 'react';
+import InputBox from '../input-box';
 
 export interface SellerSelectProps {
     labelName: string;
@@ -13,7 +14,7 @@ export interface SellerSelectProps {
 
 const SelectOption: FC<SellerSelectProps> = ({ onChange, defaultOptionName, labelName, options, required, value, name, className }) => {
     return (
-        <div className='w-full'>
+        <InputBox>
             <label htmlFor="category" className="default">{labelName}</label >
             <select id="category" name={name} onChange={onChange} required={required} value={value} className={["default", className].join(" ")}>
                 <option value="" disabled>{defaultOptionName}</option>
@@ -21,7 +22,7 @@ const SelectOption: FC<SellerSelectProps> = ({ onChange, defaultOptionName, labe
                     <option className='capitalize' value={option} key={idx}>{option}</option>
                 ))}
             </select>
-        </div>
+        </InputBox>
     );
 };
 

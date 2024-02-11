@@ -1,10 +1,11 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import Link from 'next/link';
+import React, { AnchorHTMLAttributes, ButtonHTMLAttributes } from 'react';
 
 // Define variant types
 type ButtonVariant = 'primary' | 'secondary' | 'danger';
 
 // Define ButtonProps interface extending ButtonHTMLAttributes and adding variant
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
     variant?: ButtonVariant;
 }
 
@@ -16,18 +17,19 @@ const variantClasses: Record<ButtonVariant, string> = {
 };
 
 // Button component
-const Button: React.FC<ButtonProps> = ({ children, variant = 'primary', ...props }) => {
+const Anchor: React.FC<ButtonProps> = ({ children, variant = 'primary', href = "", ...props }) => {
     // Generate className based on variant
     const variantClass = variantClasses[variant] || variantClasses['primary']; // fallback to primary if variant not found
 
     return (
-        <button
-            className={`rounded-lg px-4 py-2.5 font-medium flex items-center gap-1 capitalize text-sm disabled:bg-gray-200 ${variantClass}`}
+        <Link
+            href={href}
+            className={`rounded-lg px-4 py-2.5 font-medium flex items-center gap-1 capitalize text-sm ${variantClass}`}
             {...props}
         >
             {children}
-        </button>
+        </Link>
     );
 };
 
-export default Button;
+export default Anchor;

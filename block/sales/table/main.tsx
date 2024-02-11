@@ -38,16 +38,6 @@ export default function SalesTable() {
             ],
         },
         {
-            header: 'IMEI',
-            footer: props => props.column.id,
-            columns: [
-                {
-                    accessorKey: 'IMEI',
-                    footer: props => props.column.id,
-                },
-            ],
-        },
-        {
             header: 'Price',
             footer: props => props.column.id,
             columns: [

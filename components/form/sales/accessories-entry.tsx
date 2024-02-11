@@ -3,17 +3,14 @@
 import Button from "@/components/button/button";
 import SearchProductCard from "@/components/card/search-product-card";
 import FormContainer from "@/components/form-container";
-import CustomerForm from "@/components/form/customer/customer";
 import ReactQueryContext from "@/context/react-query-context";
-import { Customer, SalesEntry, Seller, StockAndroid } from "@/prisma/generated/client";
+import { Customer, InStock, SalesEntry, Seller } from "@/prisma/generated/client";
 import { InitialSalesEntry, initialCustomer } from "@/utils/default-data";
 import { ORIGIN } from "@/utils/origin";
-// import { Add } from "iconsax-react";
+import { Add } from "iconsax-react";
 import { ChangeEvent, useRef, useState } from "react";
 import { useQuery } from "react-query";
-import AndroidIMEISearch from "../search/android-imei-search";
-import InputBox from "../input-box";
-import { SalesRowEntry, useSalesRowContext } from "@/context/sales-context";
+import SearchByModel from "../search/search-by-model";
 
 export type SalesEntryType = typeof InitialSalesEntry;
 export type CustomerData = typeof initialCustomer;
@@ -27,18 +24,16 @@ export type PostSalesData = {
     sellerId: string,
 };
 
-export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: () => void }) {
+export default function AccessoriesSalesEntryForm({ onCloseForm }: { onCloseForm: () => void }) {
     const [adding, setAdding] = useState(false);
     const [salesData, setsalesData] = useState<SalesEntryType>(InitialSalesEntry);
-    const [foundStockItem, setfoundStockItem] = useState<StockAndroid | null>(null);
-    // const [addedSales, setaddedSales] = useState<SalesEntry | null>(null);
+    const [foundStockItem, setfoundStockItem] = useState<InStock | null>(null);
+    const [addedSales, setaddedSales] = useState<SalesEntry | null>(null);
     const [customer, setcustomer] = useState<CustomerData>(initialCustomer);
     const searchInputRef = useRef<HTMLInputElement | null>(null);
-    const { addToSales } = useSalesRowContext();
 
-    function setSearchStockData(data: StockAndroid) {
-        if (!data) return console.error({ message: "Can not read undefined of data" });
-        console.log({ data });
+    function setSearchStockData(data: InStock) {
+        if (!data) return console.log({ message: "Can not read undefined of data" });
         setfoundStockItem(data)
     }
 
@@ -59,38 +54,36 @@ export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: ()
             alert('Please search product first');
             searchInputRef.current?.focus()
         } else if (foundStockItem?.id && customer) {
-            addToSales({
-                stockId: foundStockItem.id,
-                quantity: 1,
-                discount,
-                due: salesData.due,
-                type: 'android',
-                sellerId: sellerId
-            } as SalesRowEntry);
-            // setAdding(true);
-            // const API_URL = `${ORIGIN}/api/sales/entry/`
-            // const body: PostSalesData = {
-            //     discount,
-            //     sellerId,
-            //     IMEI: foundStockItem.IMEI,
-            //     instockId: foundStockItem.id,
-            //     price: foundStockItem.sellingPrice,
-            //     due: salesData.due,
-            //     customer,
-            // }
+            setAdding(true);
+            // TODO: add sales entry
+            const API_URL = `${ORIGIN}/api/sales/entry/`
 
-            // await fetch(API_URL, {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(body)
-            // }).then(res => res.json()).then((data) => {
-            //     setAdding(false);
-            //     // alert(data.message);
-            // }).catch(err => {
-            //     console.error(err);
-            // })
+            /**
+             * Required data to add sales entrys
+             */
+            const body: PostSalesData = {
+                discount,
+                sellerId,
+                IMEI: foundStockItem.IMEI,
+                instockId: foundStockItem.id,
+                price: foundStockItem.price,
+                due: salesData.due,
+                customer,
+            }
+
+            await fetch(API_URL, {
+                headers: { 'Content-Type': 'application/json' },
+                method: 'POST',
+                body: JSON.stringify(body)
+            }).then(res => res.json()).then((data: SalesEntry) => {
+                setAdding(false);
+                setaddedSales(data);
+            }).catch(err => {
+                console.error(err);
+            })
+            setAdding(false);
         }
-        onCloseForm()
+        // onCloseForm()
     }
 
     const sellerQuery = useQuery('getAllCustomer', () =>
@@ -102,21 +95,12 @@ export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: ()
     return (
         <ReactQueryContext>
             <FormContainer>
-                <AndroidIMEISearch setSearchStockData={setSearchStockData} forwardRef={searchInputRef} />
-                {
-                    foundStockItem?.id &&
-                    <SearchProductCard data={{
-                        name: foundStockItem.name,
-                        sellingPrice: foundStockItem.sellingPrice,
-                        color: foundStockItem.color,
-                        ram: foundStockItem.ram || "",
-                        rom: foundStockItem.rom || ''
-                    }} />
-                }
+                <SearchByModel setSearchStockData={setSearchStockData} forwardRef={searchInputRef} />
+                <SearchProductCard data={foundStockItem} />
 
                 <form className="space-y-6" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap lg:flex-nowrap gap-4">
-                        <InputBox>
+                        <div className='w-full'>
                             <label htmlFor="seller" className="default">Seller</label>
                             <select
                                 className="default"
@@ -130,42 +114,38 @@ export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: ()
                                     <option className='capitalize' value={type.id} key={idx}>{type.name}</option>
                                 )}
                             </select>
-                        </InputBox>
-                        <InputBox>
+                        </div>
+                        <div className='w-full'>
                             <label htmlFor="discount" className="default">discount</label>
                             <input
                                 type='number'
                                 className="default"
                                 name="discount"
                                 id="discount"
+                                value={salesData.discount}
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
                                     setsalesData({ ...salesData, discount: Number(e.target.value) })
-                                }}
-                                placeholder="0"
-                                value={salesData.discount || ''}
-                            >
+                                }}>
                             </input>
-                        </InputBox>
-                        <InputBox>
+                        </div>
+                        <div className='w-full'>
                             <label htmlFor="due" className="default">due</label>
                             <input
                                 type='number'
                                 className="default"
                                 name="due"
                                 id="due"
+                                value={salesData.due}
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
                                     setsalesData({ ...salesData, due: Number(e.target.value) })
-                                }}
-                                placeholder="0"
-                                value={salesData.due || ''}
-                            >
+                                }}>
                             </input>
-                        </InputBox>
+                        </div>
                     </div>
 
                     <div className="flex justify-end+">
                         <Button variant="primary" disabled={adding}>
-                            {adding ? "adding..." : "add"}
+                            <Add />{adding ? "..." : "add"}
                         </Button>
                     </div>
                 </form>

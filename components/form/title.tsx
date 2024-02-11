@@ -7,7 +7,7 @@ interface Props {
 
 const FormTitle: React.FC<Props> = ({ children, tw }) => {
     return (
-        <h4 className={['text-lg font-medium', tw || ""].join(" ")}>{children}</h4>
+        <h4 className={['text-lg font-medium capitalize', tw || ""].join(" ")}>{children}</h4>
     );
 };
 

@@ -1,47 +1,80 @@
-'use client'
-import { useOrderContext } from "@/context/order-context";
-import { Table } from "flowbite-react";
-import Button from "../button/button";
-import { Add, ShoppingCart } from "iconsax-react";
+import React from 'react';
+import { Table } from 'flowbite-react';
+import Button from '../button/button';
+import { Add } from 'iconsax-react';
+import { ProductTypeKeys, productTypes } from '@/utils/product-type';
+import { useSalesRowContext } from '@/context/sales-context';
 
-export const cols = ["Sales ID", "Type", "Quantity", "Price", "Action"];
+interface SalesRowEntry {
+    due: number;
+    discount: number;
+    quantity?: number;
+    stockId: string;
+    type: string;
+}
 
-export default function SalesRow({ onOpenForm }: { onOpenForm: () => void }) {
-    const { orderEntry, deleteEntry } = useOrderContext();
+interface Props {
+    onOpenForm: (formType: ProductTypeKeys) => void;
+}
+
+const SalesRow: React.FC<Props> = ({ onOpenForm }) => {
+    const { salesEntity, removeFromSales } = useSalesRowContext();
+
+    const getCols = (salesEntity: SalesRowEntry[]): string[] => {
+        return salesEntity.length > 0 ? Object.keys(salesEntity[0]) : [];
+    };
 
     return (
         <div className="w-full overflow-x-auto">
             <Table>
-                <Table.Head>
-                    {cols.map((col, index) => <Table.HeadCell key={index}>{col}</Table.HeadCell>)}
+                <Table.Head className="uppercase">
+                    {getCols(salesEntity).map((objKey, i) => (
+                        <Table.HeadCell key={i}>{objKey}</Table.HeadCell>
+                    ))}
+                    <Table.HeadCell>Action</Table.HeadCell>
                 </Table.Head>
                 <Table.Body>
-                    {orderEntry.map((item, index) => (
+                    {salesEntity.map((row, index) => (
                         <Table.Row key={index}>
-                            <Table.Cell>#{item.stockId.slice(0, 6)}</Table.Cell>
-                            <Table.Cell>{item.type}</Table.Cell>
-                            <Table.Cell>{item.quantity}</Table.Cell>
-                            <Table.Cell>{item.price}</Table.Cell>
+                            {getCols(salesEntity).map((colKey, i) => (
+                                <Table.Cell key={i}>{row[colKey as keyof SalesRowEntry]}</Table.Cell>
+                            ))}
                             <Table.Cell>
                                 <button
                                     type="button"
                                     className="hover:text-red-500"
-                                    onClick={() => { deleteEntry(item.stockId) }}
-                                >Delete</button>
+                                    onClick={() => {
+                                        removeFromSales(row.stockId);
+                                    }}
+                                >
+                                    Remove
+                                </button>
                             </Table.Cell>
                         </Table.Row>
                     ))}
                     <Table.Row>
-                        <Table.Cell colSpan={5}>
+                        <Table.Cell colSpan={getCols(salesEntity).length + 1}>
                             <div className="flex gap-2 items-center">
-                                <Button variant="secondary" onClick={onOpenForm}>
-                                    <Add className="w-5 h-5" />Add new item
-                                </Button>
+                                {productTypes.map((type, index) => (
+                                    <Button
+                                        key={index}
+                                        variant="secondary"
+                                        onClick={() => {
+                                            onOpenForm(type);
+                                        }}
+                                        disabled={type !== 'android'}
+                                    >
+                                        <Add className="w-5 h-5" />
+                                        {type}
+                                    </Button>
+                                ))}
                             </div>
                         </Table.Cell>
                     </Table.Row>
                 </Table.Body>
             </Table>
         </div>
-    )
-}
+    );
+};
+
+export default SalesRow;

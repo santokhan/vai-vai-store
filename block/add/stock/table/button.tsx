@@ -2,7 +2,6 @@
 
 'use client'
 import React, { useEffect } from 'react'
-import './index.css'
 
 import {
     Column,
@@ -16,19 +15,16 @@ import {
     OnChangeFn,
     flexRender,
 } from '@tanstack/react-table'
-
-import { makeData, Person } from './makeData'
-import { Brand, InStock, Model, ProductType } from '@/prisma/generated/client'
+import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
+import { makeData } from './makeData'
+import { InStock } from '@/prisma/generated/client'
 import { useQuery } from 'react-query'
 import { ORIGIN } from '@/utils/origin'
-import { dummyProductData } from '@/utils/default-data'
 
 export default function StockTable() {
-    const rerender = React.useReducer(() => ({}), {})[1];
-
     const columns = React.useMemo<ColumnDef<InStock>[]>(() => [
         {
-            header: 'Name',
+            id: 'Name',
             footer: props => props.column.id,
             columns: [
                 {
@@ -39,111 +35,101 @@ export default function StockTable() {
             ],
         },
         {
-            header: 'IMEI',
+            id: 'IMEI',
             footer: props => props.column.id,
             columns: [
                 {
                     accessorKey: 'IMEI',
-                    header: () => 'IMEI',
                     footer: props => props.column.id,
                 },
             ],
         },
         {
-            header: 'Product Type',
+            id: 'Product Type',
             footer: props => props.column.id,
             columns: [
                 {
                     accessorKey: 'productType.type',
-                    header: () => 'productTypeId',
                     footer: props => props.column.id,
                 },
             ],
         },
         {
-            header: 'Brand',
+            id: 'Brand',
             footer: props => props.column.id,
             columns: [
                 {
                     accessorKey: 'brand.brandName',
-                    // header: () => 'IMEI',
                     footer: props => props.column.id,
                 },
             ],
         },
         {
-            header: 'Model',
+            id: 'Model',
             footer: props => props.column.id,
             columns: [
                 {
                     accessorKey: 'model.model',
-                    // header: () => 'IMEI',
                     footer: props => props.column.id,
                 },
             ],
         },
         {
-            header: 'Purchase Price',
+            id: 'Purchase Price',
             footer: props => props.column.id,
             columns: [
                 {
                     accessorKey: 'purchasePrice',
-                    // header: () => 'IMEI',
                     footer: props => props.column.id,
                 },
             ],
         },
         {
-            header: 'Model',
+            id: 'Model',
             footer: props => props.column.id,
             columns: [
                 {
                     accessorKey: 'price',
-                    // header: () => 'IMEI',
                     footer: props => props.column.id,
                 },
             ],
         },
         {
-            header: 'RAM',
+            id: 'RAM',
             footer: props => props.column.id,
             columns: [
                 {
                     accessorKey: 'ram',
-                    // header: () => 'IMEI',
                     footer: props => props.column.id,
                 },
             ],
         },
         {
-            header: 'ROM',
+            id: 'ROM',
             footer: props => props.column.id,
             columns: [
                 {
                     accessorKey: 'rom',
-                    // header: () => 'IMEI',
                     footer: props => props.column.id,
                 },
             ],
         },
         {
-            header: 'Color',
+            id: 'Color',
             footer: props => props.column.id,
             columns: [
                 {
                     accessorKey: 'color',
-                    // header: () => 'IMEI',
                     footer: props => props.column.id,
                 },
             ],
         },
         {
-            header: 'Sold',
+            id: 'Sold',
             footer: props => props.column.id,
             columns: [
                 {
                     accessorKey: 'sold',
-                    // header: () => 'IMEI',
                     footer: props => props.column.id,
                 },
             ],
@@ -151,11 +137,10 @@ export default function StockTable() {
     ], [])
 
     const [data, setData] = React.useState(() => makeData(100000))
-    const refreshData = () => setData(() => makeData(100000))
 
     // Santo
     const inStockQuery = useQuery('getAllInStock', () =>
-        fetch(`${ORIGIN}/api/stock/table`, {
+        fetch(`${ORIGIN}/api/stock/table/button`, {
             cache: 'no-store'
         }).then(res => res.json()).then((data: InStock[]) => data),
         { cacheTime: 0 }
@@ -168,13 +153,6 @@ export default function StockTable() {
     return (
         <>
             {inStockQuery.data && <Table data={inStockQuery.data} columns={columns} reFetch={reFetch} />}
-            {/* <hr />
-            <div>
-                <button onClick={() => rerender()}>Force Rerender</button>
-            </div>
-            <div>
-                <button onClick={() => refreshData()}>Refresh Data</button>
-            </div> */}
         </>
     )
 }
@@ -195,95 +173,73 @@ function Table({ data, columns, reFetch }: TableProps) {
         getPaginationRowModel: getPaginationRowModel(),
         //
         debugTable: true,
-    })
+    });
+    const headerGroups = table.getHeaderGroups();
+    headerGroups.unshift();
+
+    const arrowClasses = "border rounded-lg px-2 py-2 flex items-center hover:bg-gray-100";
 
     return (
         <div className="rounded-xl bg-white w-full p-6 space-y-6">
+            <h4 className="text-xl font-semibold">Button Table</h4>
             <div className="w-full overflow-x-auto pb-2">
                 <table className='w-full'>
                     <thead className='bg-gray-100'>
-                        {table.getHeaderGroups().map(headerGroup => (
-                            <tr key={headerGroup.id}>
-                                {headerGroup.headers.map(header => {
-                                    return (
-                                        <th key={header.id} colSpan={header.colSpan} className='p-2 text-start'>
-                                            {header.isPlaceholder ? null : (
-                                                <div className='font-medium'>
-                                                    {flexRender(
-                                                        header.column.columnDef.header,
-                                                        header.getContext()
-                                                    )}
-                                                    {header.column.getCanFilter() ? (
-                                                        <div>
-                                                            <Filter column={header.column} table={table} />
-                                                        </div>
-                                                    ) : null}
-                                                </div>
-                                            )}
-                                        </th>
-                                    )
-                                })}
-                            </tr>
-                        ))}
+                        <tr>
+                            {headerGroups[1].headers.map(header =>
+                                <th key={header.id} colSpan={header.colSpan} className='p-2 text-start border'>
+                                    {header.isPlaceholder ? null : (
+                                        <div className='font-medium'>
+                                            {flexRender(header.column.columnDef.header, header.getContext())}
+                                            {header.column.getCanFilter() && <Filter column={header.column} table={table} />}
+                                        </div>
+                                    )}
+                                </th>
+                            )}
+                        </tr>
+                        {/* {headerGroups.map(headerGroup =>)} */}
                     </thead>
                     <tbody>
-                        {table.getRowModel().rows.map(row => {
-                            return (
-                                <tr key={row.id}>
-                                    {row.getVisibleCells().map(cell => {
-                                        return (
-                                            <td key={cell.id} className='p-2 border whitespace-nowrap'>
-                                                {flexRender(
-                                                    cell.column.columnDef.cell,
-                                                    cell.getContext()
-                                                )}
-                                            </td>
-                                        )
-                                    })}
-                                </tr>
-                            )
-                        })}
+                        {table.getRowModel().rows.map(row =>
+                            <tr key={row.id}>
+                                {row.getVisibleCells().map(cell => (
+                                    <td key={cell.id} className='p-2 border whitespace-nowrap'>
+                                        {flexRender(
+                                            cell.column.columnDef.cell,
+                                            cell.getContext()
+                                        )}
+                                    </td>
+                                ))}
+                            </tr>
+                        )}
                     </tbody>
                 </table>
             </div>
             <div className="flex items-center gap-2 py-2">
-                <button
-                    className="border rounded-lg px-2 py-1 grid place-items-center hover:bg-gray-100"
+                <button className={arrowClasses}
                     onClick={() => table.setPageIndex(0)}
                     disabled={!table.getCanPreviousPage()}
-                >
-                    {'<<'}
-                </button>
-                <button
-                    className="border rounded-lg px-2 py-1 grid place-items-center hover:bg-gray-100"
+                ><ChevronDoubleLeftIcon className='w-4 h-4' /></button>
+                <button className={arrowClasses}
                     onClick={() => table.previousPage()}
                     disabled={!table.getCanPreviousPage()}
-                >
-                    {'<'}
-                </button>
-                <button
-                    className="border rounded-lg px-2 py-1 grid place-items-center hover:bg-gray-100"
+                ><ChevronLeftIcon className='w-4 h-4' /></button>
+                <button className={arrowClasses}
                     onClick={() => table.nextPage()}
                     disabled={!table.getCanNextPage()}
-                >
-                    {'>'}
-                </button>
-                <button
-                    className="border rounded-lg px-2 py-1 grid place-items-center hover:bg-gray-100"
+                ><ChevronRightIcon className='w-4 h-4' /></button>
+                <button className={arrowClasses}
                     onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                     disabled={!table.getCanNextPage()}
-                >
-                    {'>>'}
-                </button>
+                ><ChevronDoubleRightIcon className='w-4 h-4' /></button>
                 <span className="flex items-center gap-1 px-2">
-                    <div>Page</div>
+                    <span>Page</span>
                     <strong>
                         {table.getState().pagination.pageIndex + 1} of{' '}
                         {table.getPageCount()}
                     </strong>
                 </span>
-                <span className="flex items-center gap-2 px-2">
-                    | Go to page:
+                <span className="flex items-center gap-2 px-2">| Go to page:
                     <input
                         type="number"
                         defaultValue={table.getState().pagination.pageIndex + 1}
@@ -301,18 +257,14 @@ function Table({ data, columns, reFetch }: TableProps) {
                     }}
                     className='default !h-9 !w-32 !py-0'
                 >
-                    {[10, 20, 30, 40, 50].map((pageSize, idx) => (
-                        <option key={idx} value={pageSize}>
-                            Show {pageSize}
-                        </option>
-                    ))}
+                    {[10, 20, 30, 40, 50].map((pageSize, idx) =>
+                        <option key={idx} value={pageSize}>Show {pageSize}</option>
+                    )}
                 </select>
                 {/* () => table.setPageIndex(table.getPageCount() - 1) */}
                 <button type="button" onClick={reFetch}
                     className="border rounded-lg px-2 py-1 grid place-items-center hover:bg-gray-100"
-                >
-                    Reload
-                </button>
+                >Reload</button>
             </div>
             <div className='py-2'>{table.getRowModel().rows.length} Rows</div>
             {/* <div className="py-2"><pre>{JSON.stringify(table.getState().pagination, null, 2)}</pre></div> */}

@@ -1,16 +1,9 @@
 // Import the Prisma Client
 import { prisma } from '@/lib/prisma';
-import { InStock } from '@/prisma/generated/client';
 
-/**
- * Use Prisma Client to insert the new model into the database
- * 
- * @param  
- * @returns 
- */
-async function getModelIdByIMEI(IMEI: string) {
+async function getModel(IMEI: string) {
     try {
-        return await prisma.inStock.findMany({
+        return await prisma.stockAndroid.findMany({
             where: {
                 IMEI
             },
@@ -38,16 +31,14 @@ export async function GET(request: Request): Promise<Response> {
     const url = new URL(request.url);
     const IMEI = url.searchParams.get('imei');
 
-    console.log({ IMEI });
-
     if (!IMEI) {
         return Response.json({ message: 'No IMEI found' });
-    }
-
-    const model = await getModelIdByIMEI(IMEI);
-    if (model) {
-        return Response.json(model);
     } else {
-        return Response.json({ message: 'No model found' });
+        const model = await getModel(IMEI);
+        if (model) {
+            return Response.json(model);
+        } else {
+            return Response.json({ message: 'No model found' });
+        }
     }
 }

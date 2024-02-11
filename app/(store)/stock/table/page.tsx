@@ -1,12 +1,10 @@
-'use client';
-
+'use client'
 import StockTable from "@/block/add/stock/table/main";
-import ReactQueryContext from "@/context/react-query-context";
+import { OnlyChildrenProps } from "@/utils/props-type";
 
-export default function Home() {
+export default function StockTablePage() {
     return (
-        <ReactQueryContext>
-            <StockTable />
-        </ReactQueryContext>
+        <></>
     )
 }
+
