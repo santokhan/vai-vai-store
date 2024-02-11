@@ -180,10 +180,10 @@ function Table({ data, columns, reFetch }: TableProps) {
     const arrowClasses = "border rounded-lg px-2 py-2 flex items-center hover:bg-gray-100";
 
     return (
-        <div className="rounded-xl bg-white w-full p-6 space-y-6">
+        <div className="rounded-xl bg-white p-6 space-y-6 overflow-hidden">
             <h4 className="text-xl font-semibold">Android Table</h4>
-            <div className="w-full overflow-x-auto pb-2">
-                <table className='w-full'>
+            <div className="overflow-x-scroll pb-2">
+                <table>
                     <thead className='bg-gray-100'>
                         <tr>
                             {headerGroups[1].headers.map(header =>

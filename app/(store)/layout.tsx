@@ -24,7 +24,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
                     <AppBarDashboard />
                     <main className="flex">
                         <Sidebar />
-                        <div className="flex-grow p-4 lg:p-6 space-y-4">
+                        <div className="flex-grow p-4 lg:p-6 space-y-4 overflow-hidden">
                             {children}
                         </div>
                     </main>
