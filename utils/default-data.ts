@@ -1,5 +1,12 @@
 import { Brand, InStock, Model, ProductType } from "@/prisma/generated/client";
 
+export type CustomerData = {
+    name: string,
+    email: string,
+    phone: string,
+    message: string,
+}
+
 export const defaultType = [
     'android',
     'button',
@@ -106,7 +113,7 @@ export const dummyStockData: SearchProductCardType = {
     }
 }
 
-export const initialCustomer = {
+export const initialCustomer: CustomerData = {
     name: '',
     email: '',
     phone: '',

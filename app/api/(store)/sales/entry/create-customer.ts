@@ -1,7 +1,13 @@
 import { prisma } from "@/lib/prisma";
 import { Customer } from "@/prisma/generated/client";
 
-export async function addCustomer({ name, email, phone }: Customer) {
+export type APICustomerData = {
+    name: string;
+    email: string;
+    phone: string;
+}
+
+export async function addCustomer({ name, email, phone }: APICustomerData) {
     try {
         const existingCustomer = await prisma.customer.findFirst({
             where: {
@@ -16,7 +22,7 @@ export async function addCustomer({ name, email, phone }: Customer) {
                 data: {
                     name,
                     email,
-                    phone
+                    phone,
                 }
             });
             return createdModel;

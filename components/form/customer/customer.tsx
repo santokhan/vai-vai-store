@@ -2,12 +2,11 @@ import FormContainer from '@/components/form-container';
 import React, { ChangeEvent } from 'react';
 import FormTitle from '../title';
 import InputBox from '../input-box';
+import { useCustomerContext } from '@/context/customer-context';
 
-export type Props = {
-    setCustomerData: (key: string, value: string) => void
-}
+const CustomerForm = () => {
+    const { setCustomerData } = useCustomerContext()
 
-const CustomerForm = ({ setCustomerData }: Props) => {
     return (
         <FormContainer>
             <FormTitle>Customer Information</FormTitle>
@@ -47,7 +46,7 @@ const CustomerForm = ({ setCustomerData }: Props) => {
                         />
                     </InputBox>
                 </div>
-                <div>
+                {/* <div>
                     <label htmlFor="message" className="default">Note</label>
                     <textarea
                         id="message"
@@ -56,7 +55,7 @@ const CustomerForm = ({ setCustomerData }: Props) => {
                         placeholder="Write your thoughts here..."
                         onChange={(e: ChangeEvent<HTMLTextAreaElement>) => { setCustomerData('message', e.target.value) }}
                     ></textarea>
-                </div>
+                </div> */}
             </div>
         </FormContainer>
     );

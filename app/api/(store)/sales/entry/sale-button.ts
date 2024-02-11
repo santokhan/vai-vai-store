@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/prisma";
-import { Body } from "./type";
 
-export default async function subtractStockButton({ stockId, quantity }: Body) {
+export default async function subtractStockButton(stockId: string, quantity: number) {
     try {
         const updatedStockButton = await prisma.stockButton.update({
             where: {

@@ -7,7 +7,7 @@ interface FormContainerProps {
 
 const FormContainer: React.FC<FormContainerProps> = ({ children, className }) => {
     return (
-        <div className={`mx-auto bg-white p-4 lg:p-6 rounded-xl space-y-6 ${className}`}>
+        <div className={`mx-auto bg-white p-4 lg:p-6 rounded-xl space-y-4 ${className}`}>
             {children}
         </div>
     );

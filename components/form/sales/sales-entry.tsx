@@ -11,82 +11,75 @@ import ButtonSalesEntryForm from "@/components/form/sales/button-entry";
 import AccessoriesSalesEntryForm from "@/components/form/sales/accessories-entry";
 import { ProductTypeKeys } from "@/utils/product-type";
 import { ORIGIN } from "@/utils/origin";
-import { SalesRowContext, useSalesRowContext } from "@/context/sales-context";
+import { SalesRowEntry, useSalesRowContext } from "@/context/sales-context";
+import { useCustomerContext } from "@/context/customer-context";
+import { OnlyChildrenProps } from "@/utils/props-type";
+import { CustomerData } from "@/utils/default-data";
+import SellerForm from "../seller-form";
+import { SellerData, useSellerContext } from "@/context/seller-context";
+
+type PostSalesData = {
+    salesEntity: SalesRowEntry[];
+    customer: CustomerData;
+    seller: SellerData
+}
 
 export default function SalesEntryForm() {
     const [isOpenForm, setIsOpenForm] = useState<ProductTypeKeys | ''>('');
-    const { salesEntity } = useSalesRowContext();
     const [adding, setAdding] = useState<boolean>(false);
-
-    const onCloseForm = () => { setIsOpenForm(''); }
+    const { salesEntity } = useSalesRowContext();
+    const { customer } = useCustomerContext();
+    const { seller } = useSellerContext();
 
     function onCheckout() {
-        if (salesEntity.length > 0) {
+        if (confirm('Click OK if you wanna checkout')) {
             setAdding(true);
             fetch(`${ORIGIN}/api/sales/entry/`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(salesEntity)
+                body: JSON.stringify({
+                    salesEntity,
+                    customer,
+                    seller
+                } as PostSalesData)
             }).then(res => res.json()).then((data) => {
                 if (data.message) {
                     alert(data.message);
                 } else {
-                    // 
+                    console.log(data);
+                    // use response to generate invoice
                 }
                 setAdding(false);
-            }).catch(err => { console.error(err) })
-        } else {
-
+            }).catch(err => { console.error(err) });
         }
     }
+
+    const onCloseForm = () => { setIsOpenForm('') };
+    // const FormTitleAndCloser = ({ children }: OnlyChildrenProps) => (
+    //     <div className="flex justify-between mb-2">
+    //         <FormTitle>{children}</FormTitle>
+    //         <CloseForm onClick={onCloseForm} />
+    //     </div>
+    // )
 
     return (
         <div className="space-y-6">
             <div className="space-y-2">
-                <FormTitle>Sales Table</FormTitle>
+                <FormTitle>Sales Entity</FormTitle>
                 <SalesRow onOpenForm={(formType: ProductTypeKeys) => setIsOpenForm(formType)} />
             </div>
-            {
-                isOpenForm === 'android' &&
-                <div className="space-y-2">
-                    <div className="flex justify-between">
-                        <FormTitle>android entry</FormTitle>
-                        <CloseForm onClick={onCloseForm} />
-                    </div>
-                    <AndroidSalesEntryForm onCloseForm={onCloseForm} />
-                </div>
+            {isOpenForm === 'android' && <AndroidSalesEntryForm onCloseForm={onCloseForm} />}
+            {isOpenForm === 'button' && <ButtonSalesEntryForm onCloseForm={onCloseForm} />}
+            {isOpenForm === 'accessories' && <AccessoriesSalesEntryForm onCloseForm={onCloseForm} />}
+            {salesEntity.length > 0 &&
+                <>
+                    <CustomerForm />
+                    <SellerForm />
+                    <Button variant="primary" onClick={onCheckout} disabled={adding}>
+                        <ShoppingCart className="w-5 h-5" />{adding ? "Adding..." : "Checkout"}
+                    </Button>
+                </>
             }
-            {
-                isOpenForm === 'button' &&
-                <div className="space-y-2">
-                    <div className="flex justify-between">
-                        <FormTitle>button entry</FormTitle>
-                        <CloseForm onClick={onCloseForm} />
-                    </div>
-                    <ButtonSalesEntryForm onCloseForm={onCloseForm} />
-                </div>
-            }
-            {
-                isOpenForm === 'accessories' &&
-                <div className="space-y-2">
-                    <div className="flex justify-between">
-                        <FormTitle>accessories entry</FormTitle>
-                        <CloseForm onClick={onCloseForm} />
-                    </div>
-                    <AccessoriesSalesEntryForm onCloseForm={onCloseForm} />
-                </div>
-            }
-            <CustomerForm setCustomerData={() => { }} />
-            <SalesRowContext.Consumer>
-                {(value) => (
-                    value && value.salesEntity.length > 0 &&
-                    <div className="flex">
-                        <Button variant="primary" onClick={onCheckout}>
-                            <ShoppingCart className="w-5 h-5" />{adding ? "Adding..." : "Checkout"}
-                        </Button>
-                    </div>
-                )}
-            </SalesRowContext.Consumer>
         </div>
     )
 }

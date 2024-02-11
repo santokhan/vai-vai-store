@@ -1,53 +1,53 @@
 'use client';
-import { ReactNode, createContext, useContext, useState } from "react";
+import { OnlyChildrenProps } from "@/utils/props-type";
+import { createContext, useContext, useState } from "react";
 
 export type SalesRowEntry = {
     stockId: string;
     quantity?: number;
-    discount: number;
-    due: number;
     type: 'android' | 'button' | 'accessories'
-    sellerId: string
 }
 
-export type SalesRowKeys = keyof SalesRowEntry;
-
-type SalesContextType = {
+export const SalesRowContext = createContext<{
     salesEntity: SalesRowEntry[];
     addToSales: (data: SalesRowEntry) => void;
     removeFromSales: (stockId: string) => void;
-}
+    changeQuantity: (stockId: string, payload: 'plus' | 'minus') => void;
+} | null>(null);
 
-type SalesProviderProps = {
-    children: ReactNode;
-}
-
-export const SalesRowContext = createContext<SalesContextType | null>(null);
-
-export default function SalesRowProvider({ children }: SalesProviderProps) {
+export default function SalesRowProvider({ children }: OnlyChildrenProps) {
     const [salesEntity, setSalesEntity] = useState<SalesRowEntry[]>([]);
-    // const [androidSales, setAndroidSales] = useState<SalesEntry[]>([]);
-    // const [buttonSales, setButtonSales] = useState<SalesEntry[]>([]);
-    // const [accessoriesSales, setAccessoriesSales] = useState<SalesEntry[]>([]);
-
-    const addToSales = (data: SalesRowEntry) => {
-        setSalesEntity(prev => [...prev, data]);
-    };
-
-    const removeFromSales = (stockId: string) => {
-        setSalesEntity(prev => prev.filter((item) => item.stockId !== stockId));
-    };
-
-    const value: SalesContextType = {
-        salesEntity,
-        addToSales,
-        removeFromSales
-    };
 
     return (
-        <SalesRowContext.Provider value={value}>
-            {children}
-        </SalesRowContext.Provider>
+        <SalesRowContext.Provider value={{
+            salesEntity,
+            addToSales(newSalesRow: SalesRowEntry) {
+                // Entry if stockId is not exist in salesEntity
+                if (!salesEntity.some((item) => item.stockId === newSalesRow.stockId)) {
+                    newSalesRow = { ...newSalesRow, quantity: 1 }
+                    setSalesEntity(prev => [...prev, newSalesRow])
+                } else {
+                    alert(`Already added to Sales Entity. stockId:${newSalesRow.stockId}`)
+                    return;
+                }
+            },
+            removeFromSales(stockId: string) {
+                setSalesEntity(prev => prev.filter((item) => item.stockId !== stockId));
+            },
+            changeQuantity(stockId, payload) {
+                setSalesEntity(prev => {
+                    return prev.map((item) => {
+                        if (item.stockId === stockId) {
+                            return {
+                                ...item,
+                                quantity: payload === 'plus' ? item.quantity! + 1 : item.quantity! - 1
+                            }
+                        }
+                        return item
+                    })
+                })
+            }
+        }}>{children}</SalesRowContext.Provider>
     );
 }
 

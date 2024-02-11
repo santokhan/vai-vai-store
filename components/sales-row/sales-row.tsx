@@ -3,15 +3,7 @@ import { Table } from 'flowbite-react';
 import Button from '../button/button';
 import { Add } from 'iconsax-react';
 import { ProductTypeKeys, productTypes } from '@/utils/product-type';
-import { useSalesRowContext } from '@/context/sales-context';
-
-interface SalesRowEntry {
-    due: number;
-    discount: number;
-    quantity?: number;
-    stockId: string;
-    type: string;
-}
+import { SalesRowEntry, useSalesRowContext } from '@/context/sales-context';
 
 interface Props {
     onOpenForm: (formType: ProductTypeKeys) => void;

@@ -1,8 +1,11 @@
-// Import the Prisma Client
 import { prisma } from '@/lib/prisma';
-import { Customer, SalesEntry } from '@/prisma/generated/client';
+import { SalesEntry } from '@/prisma/generated/client';
 import { addCustomer } from './create-customer';
 import getSalesEntry from './read';
+import { APISalesEntity, PostSalesData } from './type';
+import subtractStockAndroid from './sale-android';
+import subtractStockButton from './sale-button';
+import subtractStockAccessories from './sale-accessories';
 
 async function addSales({ instockId, customerId, discount, sellerId, due }: SalesEntry) {
     try {
@@ -48,52 +51,71 @@ export async function GET(): Promise<Response> {
 }
 
 export async function POST(request: Request): Promise<Response> {
-    const body = await request.json();
-    // return Response.json({ body })
-    const { discount, instockId, customer, sellerId, due } = body;
+    const body: PostSalesData = await request.json();
+    const { customer, salesEntity, seller } = body;
 
-    /**
-     * 1. check if customer exists
-     * 2. if not create customer
-     * 3. get customerId
-     * 4. create sales entry includes customerId
-     * 5. return sales entry
-     */
-    if (discount && instockId && customer && sellerId && due) {
-        const createdCustomer = await addCustomer(customer);
-        if (!createdCustomer) {
-            return Response.json({ message: 'Can not create customer' });
-        } else {
-            const customerId = createdCustomer.id;
-            // return Response.json({ customerId });
-
-            if (instockId && customerId) {
-                const existingBrand = await prisma.salesEntry.findFirst({
-                    where: {
-                        instockId: instockId
-                    }
-                })
-                if (existingBrand) {
-                    return Response.json({ message: 'Sales Entry already exists' });
-                } else {
-                    const createdModel = await addSales({
-                        instockId,
-                        discount,
-                        sellerId,
-                        customerId,
-                        due,
-                    } as SalesEntry);
-                    if (createdModel) {
-                        return Response.json(createdModel);
-                    } else {
-                        return Response.json({ message: 'Can not add Sales' });
-                    }
-                }
-            } else {
-                return Response.json({ message: 'Data is missing in validation', postedData: body });
-            }
+    let createdCustomerId: string | undefined;
+    if (customer.phone) {
+        const createdCustomer = await addCustomer({ ...customer });
+        if (createdCustomer) {
+            createdCustomerId = createdCustomer.id
         }
+    }
+
+    if (salesEntity) {
+        const androidIdList = [];
+        const buttonIdList = [];
+        const accessoriesIdList = [];
+
+        salesEntity.forEach(async (salesRow) => {
+            // Process SalesRow data and save it to salesEntry
+            // Send SalesRow data to sale-android
+            // Send SalesRow data to sale-button
+            // Send SalesRow data to sale-accessories
+            const { stockId, type, quantity } = salesRow;
+            switch (type) {
+                case 'android':
+                    androidIdList.push(stockId);
+                    const updateStockAndroid = await subtractStockAndroid(stockId);
+                    if (!updateStockAndroid) {
+                        return Response.json({ message: 'Failed to update stockAndroid.' });
+                    }
+                    break;
+
+                case 'button':
+                    buttonIdList.push(stockId);
+                    const updateStockButton = await subtractStockButton(stockId, quantity);
+                    if (!updateStockButton) {
+                        return Response.json({ message: 'Failed to update stockButton.' });
+                    }
+                    break;
+
+                case 'accessories':
+                    accessoriesIdList.push(stockId);
+                    const updateStockAccessories = await subtractStockAccessories(stockId, quantity);
+                    if (!updateStockAccessories) {
+                        return Response.json({ message: 'Failed to update stockAccessories.' });
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        })
+        return Response.json({ salesEntity });
+        // if (createdModel) {
+        //     const createdModel = await addSales({
+        //         instockId: "",
+        //         discount,
+        //         sellerId,
+        //         customerId,
+        //         due,
+        //     } as SalesEntry);
+        //     return Response.json(createdModel);
+        // } else {
+        //     return Response.json({ message: 'Can not add Sales' });
+        // }
     } else {
-        return Response.json({ message: 'Data is missing in validation', postedData: body });
+        return Response.json({ message: 'POST salesEntity to create new sales', postedData: body });
     }
 }

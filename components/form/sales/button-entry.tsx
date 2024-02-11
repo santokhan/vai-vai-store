@@ -11,6 +11,8 @@ import { ChangeEvent, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import SearchByModel from "../search/search-by-model";
 import { useSalesRowContext } from "@/context/sales-context";
+import FormTitle from "../title";
+import CloseForm from "../close-form";
 
 export type SalesEntryType = typeof InitialSalesEntry;
 export type CustomerData = typeof initialCustomer;
@@ -94,63 +96,19 @@ export default function ButtonSalesEntryForm({ onCloseForm }: { onCloseForm: () 
     )
 
     return (
-        <ReactQueryContext>
-            <FormContainer>
-                <SearchByModel setSearchStockData={setSearchStockData} forwardRef={searchInputRef} />
+        <FormContainer>
+            <div className="flex justify-between mb-2">
+                <FormTitle>android entry</FormTitle>
+                <CloseForm onClick={onCloseForm} />
+            </div>
+            <SearchByModel setSearchStockData={setSearchStockData} forwardRef={searchInputRef} />
 
-                <form className="space-y-6" onSubmit={handleSubmit}>
-                    <div className="flex flex-wrap lg:flex-nowrap gap-4">
-                        <div className='w-full'>
-                            <label htmlFor="seller" className="default">Seller</label>
-                            <select
-                                className="default"
-                                name="seller"
-                                id="seller"
-                                required={true}
-                                value={salesData.sellerId}
-                                onChange={(e: ChangeEvent<HTMLSelectElement>) => { setsalesData({ ...salesData, sellerId: e.target.value }) }}>
-                                <option value="" disabled className='capitalize'>default</option>
-                                {sellerQuery.data?.map((type: Seller, idx) =>
-                                    <option className='capitalize' value={type.id} key={idx}>{type.name}</option>
-                                )}
-                            </select>
-                        </div>
-                        <div className='w-full'>
-                            <label htmlFor="discount" className="default">discount</label>
-                            <input
-                                type='number'
-                                className="default"
-                                name="discount"
-                                id="discount"
-                                value={salesData.discount}
-                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                                    setsalesData({ ...salesData, discount: Number(e.target.value) })
-                                }}>
-                            </input>
-                        </div>
-                        <div className='w-full'>
-                            <label htmlFor="due" className="default">due</label>
-                            <input
-                                type='number'
-                                className="default"
-                                name="due"
-                                id="due"
-                                value={salesData.due}
-                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                                    setsalesData({ ...salesData, due: Number(e.target.value) })
-                                }}>
-                            </input>
-                        </div>
-                    </div>
-
-                    <div className="flex justify-end+">
-                        <Button variant="primary" disabled={adding}>
-                            <Add />{adding ? "..." : "add"}
-                        </Button>
-                    </div>
-                </form>
-            </FormContainer>
-        </ReactQueryContext >
+            <form className="space-y-6" onSubmit={handleSubmit}>
+                <Button variant="primary" disabled={adding}>
+                    <Add />{adding ? "..." : "add"}
+                </Button>
+            </form>
+        </FormContainer>
     )
 }
 
