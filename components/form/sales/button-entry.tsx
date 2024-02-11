@@ -1,7 +1,6 @@
 'use client'
 
 import Button from "@/components/button/button";
-import SearchProductCard from "@/components/card/search-product-card";
 import FormContainer from "@/components/form-container";
 import ReactQueryContext from "@/context/react-query-context";
 import { Customer, InStock, SalesEntry, Seller } from "@/prisma/generated/client";
@@ -32,7 +31,7 @@ export default function ButtonSalesEntryForm({ onCloseForm }: { onCloseForm: () 
     const [addedSales, setaddedSales] = useState<SalesEntry | null>(null);
     const [customer, setcustomer] = useState<CustomerData>(initialCustomer);
     const searchInputRef = useRef<HTMLInputElement | null>(null);
-    const { salesEntity, addToSales } = useSalesRowContext();
+    // const { salesEntity, addToSales } = useSalesRowContext();
 
     function setSearchStockData(data: InStock) {
         if (!data) return console.log({ message: "Can not read undefined of data" });

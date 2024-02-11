@@ -16,13 +16,13 @@ import { SalesRowContext, useSalesRowContext } from "@/context/sales-context";
 export default function SalesEntryForm() {
     const [isOpenForm, setIsOpenForm] = useState<ProductTypeKeys | ''>('');
     const { salesEntity } = useSalesRowContext();
+    const [adding, setAdding] = useState<boolean>(false);
 
     const onCloseForm = () => { setIsOpenForm(''); }
 
     function onCheckout() {
-        // length > 0
-        // POST data to server
         if (salesEntity.length > 0) {
+            setAdding(true);
             fetch(`${ORIGIN}/api/sales/entry/`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -33,7 +33,7 @@ export default function SalesEntryForm() {
                 } else {
                     // 
                 }
-                // setAdding(false);
+                setAdding(false);
             }).catch(err => { console.error(err) })
         } else {
 
@@ -82,7 +82,7 @@ export default function SalesEntryForm() {
                     value && value.salesEntity.length > 0 &&
                     <div className="flex">
                         <Button variant="primary" onClick={onCheckout}>
-                            <ShoppingCart className="w-5 h-5" />Checkout
+                            <ShoppingCart className="w-5 h-5" />{adding ? "Adding..." : "Checkout"}
                         </Button>
                     </div>
                 )}

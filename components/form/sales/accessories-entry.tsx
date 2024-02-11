@@ -96,7 +96,6 @@ export default function AccessoriesSalesEntryForm({ onCloseForm }: { onCloseForm
         <ReactQueryContext>
             <FormContainer>
                 <SearchByModel setSearchStockData={setSearchStockData} forwardRef={searchInputRef} />
-                <SearchProductCard data={foundStockItem} />
 
                 <form className="space-y-6" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap lg:flex-nowrap gap-4">
