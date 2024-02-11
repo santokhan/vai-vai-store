@@ -1,6 +1,7 @@
 import FormContainer from '@/components/form-container';
 import React, { ChangeEvent } from 'react';
 import FormTitle from '../title';
+import InputBox from '../input-box';
 
 export type Props = {
     setCustomerData: (key: string, value: string) => void
@@ -12,7 +13,7 @@ const CustomerForm = ({ setCustomerData }: Props) => {
             <FormTitle>Customer Information</FormTitle>
             <div className='w-full space-y-6'>
                 <div className="flex flex-wrap lg:flex-nowrap gap-4">
-                    <div className="w-full">
+                    <InputBox>
                         <label htmlFor="name" className="default">Name</label>
                         <input
                             type="text"
@@ -21,10 +22,10 @@ const CustomerForm = ({ setCustomerData }: Props) => {
                             placeholder="Santo"
                             onChange={(e: ChangeEvent<HTMLInputElement>) => { setCustomerData('name', e.target.value) }}
                         />
-                    </div>
+                    </InputBox>
                 </div>
                 <div className="flex flex-wrap lg:flex-nowrap gap-4">
-                    <div className="w-full">
+                    <InputBox>
                         <label htmlFor="email" className="default">Email</label>
                         <input
                             type="email"
@@ -33,8 +34,8 @@ const CustomerForm = ({ setCustomerData }: Props) => {
                             placeholder="direct.santo@gmail.com"
                             onChange={(e: ChangeEvent<HTMLInputElement>) => { setCustomerData('email', e.target.value) }}
                         />
-                    </div>
-                    <div className="w-full">
+                    </InputBox>
+                    <InputBox>
                         <label htmlFor="phone" className="default">Phone</label>
                         <input
                             type="text"
@@ -44,7 +45,7 @@ const CustomerForm = ({ setCustomerData }: Props) => {
                             required={true}
                             onChange={(e: ChangeEvent<HTMLInputElement>) => { setCustomerData('phone', e.target.value) }}
                         />
-                    </div>
+                    </InputBox>
                 </div>
                 <div>
                     <label htmlFor="message" className="default">Note</label>
