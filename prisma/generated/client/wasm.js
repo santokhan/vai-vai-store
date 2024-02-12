@@ -190,26 +190,23 @@ exports.Prisma.StockAccessoriesScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
-exports.Prisma.SalesEntryScalarFieldEnum = {
-  id: 'id',
-  instockId: 'instockId',
-  discount: 'discount',
-  due: 'due',
-  dueDate: 'dueDate',
-  sellerId: 'sellerId',
-  customerId: 'customerId',
-  createdAt: 'createdAt',
-  stockAndroidId: 'stockAndroidId',
-  stockButtonId: 'stockButtonId',
-  stockAccessoriesId: 'stockAccessoriesId'
-};
-
 exports.Prisma.CustomerScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
   phone: 'phone',
   createdAt: 'createdAt'
+};
+
+exports.Prisma.SalesEntryScalarFieldEnum = {
+  id: 'id',
+  discount: 'discount',
+  due: 'due',
+  dueDate: 'dueDate',
+  sellerId: 'sellerId',
+  customerId: 'customerId',
+  createdAt: 'createdAt',
+  entity: 'entity'
 };
 
 exports.Prisma.SortOrder = {
@@ -233,8 +230,8 @@ exports.Prisma.ModelName = {
   StockAndroid: 'StockAndroid',
   StockButton: 'StockButton',
   StockAccessories: 'StockAccessories',
-  SalesEntry: 'SalesEntry',
-  Customer: 'Customer'
+  Customer: 'Customer',
+  SalesEntry: 'SalesEntry'
 };
 
 /**

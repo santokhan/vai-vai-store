@@ -16,7 +16,6 @@ model User {
     createdAt DateTime? @default(now())
 }
 
-// outlet
 model Seller {
     id         String       @id @default(auto()) @map("_id") @db.ObjectId
     name       String
@@ -60,102 +59,73 @@ model Model {
     StrockAccessories StockAccessories[]
 }
 
-// We will input IMEI when adding product to stock
 model InStock {
-    id            String       @id @default(auto()) @map("_id") @db.ObjectId
+    id            String      @id @default(auto()) @map("_id") @db.ObjectId
     name          String
-    IMEI          String       @unique
-    model         Model        @relation(fields: [modelId], references: [id])
-    modelId       String       @db.ObjectId
-    brand         Brand        @relation(fields: [brandId], references: [id])
-    brandId       String       @db.ObjectId
-    productType   ProductType  @relation(fields: [productTypeId], references: [id])
-    productTypeId String       @db.ObjectId
+    IMEI          String      @unique
+    model         Model       @relation(fields: [modelId], references: [id])
+    modelId       String      @db.ObjectId
+    brand         Brand       @relation(fields: [brandId], references: [id])
+    brandId       String      @db.ObjectId
+    productType   ProductType @relation(fields: [productTypeId], references: [id])
+    productTypeId String      @db.ObjectId
     purchasePrice Int
     price         Int
-    sold          Boolean      @default(false)
+    sold          Boolean     @default(false)
     color         String
     ram           String?
     rom           String?
-    createdAt     DateTime?    @default(now())
-    SalesEntry    SalesEntry[]
+    createdAt     DateTime?   @default(now())
 }
 
-// We will input IMEI when adding product to stock
 model StockAndroid {
-    id            String       @id @default(auto()) @map("_id") @db.ObjectId
+    id            String      @id @default(auto()) @map("_id") @db.ObjectId
     name          String
-    IMEI          String       @unique
-    model         Model        @relation(fields: [modelId], references: [id])
-    modelId       String       @db.ObjectId
-    brand         Brand        @relation(fields: [brandId], references: [id])
-    brandId       String       @db.ObjectId
-    productType   ProductType  @relation(fields: [productTypeId], references: [id])
-    productTypeId String       @db.ObjectId
+    IMEI          String      @unique
+    model         Model       @relation(fields: [modelId], references: [id])
+    modelId       String      @db.ObjectId
+    brand         Brand       @relation(fields: [brandId], references: [id])
+    brandId       String      @db.ObjectId
+    productType   ProductType @relation(fields: [productTypeId], references: [id])
+    productTypeId String      @db.ObjectId
     purchasePrice Int
     sellingPrice  Int
-    sold          Boolean      @default(false)
+    sold          Boolean     @default(false)
     color         String
     ram           String?
     rom           String?
-    createdAt     DateTime?    @default(now())
-    SalesEntry    SalesEntry[]
+    createdAt     DateTime?   @default(now())
 }
 
-// We will input IMEI when adding product to stock
 model StockButton {
-    id            String       @id @default(auto()) @map("_id") @db.ObjectId
+    id            String      @id @default(auto()) @map("_id") @db.ObjectId
     name          String
-    model         Model        @relation(fields: [modelId], references: [id])
-    modelId       String       @db.ObjectId
-    brand         Brand        @relation(fields: [brandId], references: [id])
-    brandId       String       @db.ObjectId
-    productType   ProductType  @relation(fields: [productTypeId], references: [id])
-    productTypeId String       @db.ObjectId
+    model         Model       @relation(fields: [modelId], references: [id])
+    modelId       String      @db.ObjectId
+    brand         Brand       @relation(fields: [brandId], references: [id])
+    brandId       String      @db.ObjectId
+    productType   ProductType @relation(fields: [productTypeId], references: [id])
+    productTypeId String      @db.ObjectId
     purchasePrice Int
     sellingPrice  Int
     quantity      Int
     color         String
-    createdAt     DateTime?    @default(now())
-    SalesEntry    SalesEntry[]
+    createdAt     DateTime?   @default(now())
 }
 
-// We will input IMEI when adding product to stock
 model StockAccessories {
-    id            String       @id @default(auto()) @map("_id") @db.ObjectId
+    id            String      @id @default(auto()) @map("_id") @db.ObjectId
     name          String
-    model         Model        @relation(fields: [modelId], references: [id])
-    modelId       String       @db.ObjectId
-    brand         Brand        @relation(fields: [brandId], references: [id])
-    brandId       String       @db.ObjectId
-    productType   ProductType  @relation(fields: [productTypeId], references: [id])
-    productTypeId String       @db.ObjectId
+    model         Model       @relation(fields: [modelId], references: [id])
+    modelId       String      @db.ObjectId
+    brand         Brand       @relation(fields: [brandId], references: [id])
+    brandId       String      @db.ObjectId
+    productType   ProductType @relation(fields: [productTypeId], references: [id])
+    productTypeId String      @db.ObjectId
     purchasePrice Int
     sellingPrice  Int
     quantity      Int
-    createdAt     DateTime?    @default(now())
-    SalesEntry    SalesEntry[]
-}
-
-// Part of SalesEntry
-model SalesEntry {
-    id                 String            @id @default(auto()) @map("_id") @db.ObjectId
-    InStock            InStock           @relation(fields: [instockId], references: [id])
-    instockId          String            @db.ObjectId
-    discount           Int
-    due                Int
-    dueDate            DateTime?         @default(now())
-    Seller             Seller            @relation(fields: [sellerId], references: [id])
-    sellerId           String            @db.ObjectId
-    customer           Customer          @relation(fields: [customerId], references: [id])
-    customerId         String            @db.ObjectId
-    createdAt          DateTime?         @default(now())
-    StockAndroid       StockAndroid?     @relation(fields: [stockAndroidId], references: [id])
-    stockAndroidId     String?           @db.ObjectId
-    StockButton        StockButton?      @relation(fields: [stockButtonId], references: [id])
-    stockButtonId      String?           @db.ObjectId
-    StockAccessories   StockAccessories? @relation(fields: [stockAccessoriesId], references: [id])
-    stockAccessoriesId String?           @db.ObjectId
+    createdAt     DateTime?   @default(now())
 }
 
 model Customer {
@@ -165,4 +135,17 @@ model Customer {
     phone      String?
     SalesEntry SalesEntry[]
     createdAt  DateTime?    @default(now())
+}
+
+model SalesEntry {
+    id         String    @id @default(auto()) @map("_id") @db.ObjectId
+    discount   Int
+    due        Int
+    dueDate    DateTime? @default(now())
+    Seller     Seller    @relation(fields: [sellerId], references: [id])
+    sellerId   String    @db.ObjectId
+    customer   Customer  @relation(fields: [customerId], references: [id])
+    customerId String    @db.ObjectId
+    createdAt  DateTime? @default(now())
+    entity     Json
 }
