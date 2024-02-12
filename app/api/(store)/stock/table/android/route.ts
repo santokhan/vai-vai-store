@@ -21,7 +21,13 @@ export async function GET(): Promise<Response> {
     const data = await getAndroid();
 
     if (data) {
-        return Response.json(data);
+        return Response.json(data, {
+            headers: {
+                'Cache-Control': 'no-store',
+                'Content-Type': 'application/json',
+                'age': '0'
+            }
+        });
     } else {
         return Response.json({ message: 'No data found in android stock' });
     }
