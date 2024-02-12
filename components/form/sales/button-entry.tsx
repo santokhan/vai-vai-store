@@ -6,7 +6,6 @@ import { ORIGIN } from "@/utils/origin";
 import { Add } from "iconsax-react";
 import { ChangeEvent, useRef, useState } from "react";
 import { useQuery } from "react-query";
-import SearchByModel from "../search/search-by-model";
 import FormTitle from "../title";
 import CloseForm from "../close-form";
 
@@ -14,7 +13,6 @@ export default function ButtonSalesEntryForm({ onCloseForm }: { onCloseForm: () 
     const [adding, setAdding] = useState(false);
     const [foundStockItem, setfoundStockItem] = useState<InStock | null>(null);
     const searchInputRef = useRef<HTMLInputElement | null>(null);
-    // const { salesEntity, addToSales } = useSalesRowContext();
 
     function setSearchStockData(data: InStock) {
         if (!data) return console.log({ message: "Can not read undefined of data" });
@@ -38,8 +36,6 @@ export default function ButtonSalesEntryForm({ onCloseForm }: { onCloseForm: () 
                 <FormTitle>android entry</FormTitle>
                 <CloseForm onClick={onCloseForm} />
             </div>
-            <SearchByModel setSearchStockData={setSearchStockData} forwardRef={searchInputRef} />
-
             <form className="space-y-6" onSubmit={handleSubmit}>
                 <Button variant="primary" disabled={adding}>
                     <Add />{adding ? "..." : "add"}

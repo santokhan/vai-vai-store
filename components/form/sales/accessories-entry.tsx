@@ -4,7 +4,6 @@ import FormContainer from "@/components/form-container";
 import { InStock } from "@/prisma/generated/client";
 import { Add } from "iconsax-react";
 import { ChangeEvent, useRef, useState } from "react";
-import SearchByModel from "../search/search-by-model";
 import FormTitle from "../title";
 import CloseForm from "../close-form";
 
@@ -30,7 +29,6 @@ export default function AccessoriesSalesEntryForm({ onCloseForm }: { onCloseForm
                 <FormTitle>android entry</FormTitle>
                 <CloseForm onClick={onCloseForm} />
             </div>
-            <SearchByModel setSearchStockData={setSearchStockData} forwardRef={searchInputRef} />
             <form className="space-y-6" onSubmit={handleSubmit}>
                 <Button variant="primary" disabled={adding}>
                     <Add />{adding ? "..." : "add"}
