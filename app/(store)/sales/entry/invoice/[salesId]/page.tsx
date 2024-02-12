@@ -99,6 +99,12 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
                             </div>
                         </div>
                         <p className="mt-5 text-sm text-gray-500">©2022 ভাই ভাই টেলিকম.</p>
+
+                        <div className="mt-20">
+                            <div className="ml-auto w-60 text-center">
+                                <p className='border-t-2'>Signature</p>
+                            </div>
+                        </div>
                     </div>
                 </main>
             </PrintWrapper>
