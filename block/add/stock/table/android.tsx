@@ -141,7 +141,10 @@ export default function StockTable() {
     // Santo
     const inStockQuery = useQuery('getAllInStock', () =>
         fetch(`${ORIGIN}/api/stock/table/android`, {
-            cache: 'no-store'
+            cache: 'no-store',
+            next: {
+                revalidate: 10
+            },
         }).then(res => res.json()).then((data: InStock[]) => data),
         { cacheTime: 0 }
     )
