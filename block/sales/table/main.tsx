@@ -21,7 +21,6 @@ import { makeData } from './makeData'
 import { SalesEntry } from '@/prisma/generated/client'
 import { useQuery } from 'react-query'
 import { ORIGIN } from '@/utils/origin'
-import { dummyProductData } from '@/utils/default-data'
 
 export default function SalesTable() {
     const rerender = React.useReducer(() => ({}), {})[1];
