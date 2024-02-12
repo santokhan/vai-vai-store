@@ -41,7 +41,7 @@ export async function GET(request: Request): Promise<Response> {
             if (foundedAndroidList.sold === false) {
                 return Response.json(foundedAndroidList as StockAndroid);
             } else {
-                return Response.json({ message: 'The phone with this IMEI already sold.' });
+                return Response.json({ message: 'The phone with this IMEI already soldnpm.' });
             }
         } else {
             return Response.json({ message: 'No Android found with this IMEI.' });

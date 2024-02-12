@@ -17,12 +17,10 @@ import {
 } from '@tanstack/react-table'
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { makeData } from './makeData'
-import { InStock } from '@/prisma/generated/client'
-import { useQuery } from 'react-query'
-import { ORIGIN } from '@/utils/origin'
+import { StockAndroid, } from '@/prisma/generated/client'
 
-export default function StockTable() {
-    const columns = React.useMemo<ColumnDef<InStock>[]>(() => [
+export default function StockTable({ stockAndroid }: { stockAndroid: StockAndroid[] }) {
+    const columns = React.useMemo<ColumnDef<StockAndroid>[]>(() => [
         {
             id: 'Name',
             footer: props => props.column.id,
@@ -85,11 +83,11 @@ export default function StockTable() {
             ],
         },
         {
-            id: 'Model',
+            id: 'Price',
             footer: props => props.column.id,
             columns: [
                 {
-                    accessorKey: 'price',
+                    accessorKey: 'sellingPrice',
                     footer: props => props.column.id,
                 },
             ],
@@ -139,30 +137,28 @@ export default function StockTable() {
     const [data, setData] = React.useState(() => makeData(100000))
 
     // Santo
-    const inStockQuery = useQuery('getAllInStock', () =>
-        fetch(`${ORIGIN}/api/stock/table/android`, {
-            cache: 'no-store',
-            next: {
-                revalidate: 10
-            },
-        }).then(res => res.json()).then((data: InStock[]) => data),
-        { cacheTime: 0 }
-    )
+    // const inStockQuery = useQuery('getAllInStock', () =>
+    //     fetch(`${ORIGIN}/api/stock/table/android`, {
+    //         cache: 'no-store',
+    //         next: {
+    //             revalidate: 10
+    //         },
+    //     }).then(res => res.json()).then((data: StockAndroid[]) => data),
+    //     { cacheTime: 0 }
+    // )
 
     function reFetch() {
-        inStockQuery.refetch();
+        // inStockQuery.refetch();
     }
 
     return (
-        <>
-            {inStockQuery.data && <Table data={inStockQuery.data} columns={columns} reFetch={reFetch} />}
-        </>
+        <Table data={stockAndroid} columns={columns} reFetch={reFetch} />
     )
 }
 
 type TableProps = {
-    data: InStock[]
-    columns: ColumnDef<InStock>[];
+    data: StockAndroid[]
+    columns: ColumnDef<StockAndroid>[];
     reFetch: () => void;
 }
 
