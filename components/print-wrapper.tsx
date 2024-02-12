@@ -15,7 +15,7 @@ const PrintWrapper: FC<OnlyChildrenProps> = ({ children }) => {
             <div className="" ref={componentRef}>
                 {children}
             </div>
-            <Button variant={'primary'} onClick={handlePrint}>Print</Button>
+            <Button variant={'primary'} onClick={handlePrint}>Print Invoice</Button>
         </div>
     );
 };

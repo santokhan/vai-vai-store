@@ -1,5 +1,6 @@
 'use server';
 import { getSalesIndividual } from "@/app/api/(store)/sales/route";
+import Logo from "@/components/logo/logo";
 import PrintWrapper from "@/components/print-wrapper";
 
 export default async function InvoicePage({ params }: { params: { salesId: string } }) {
@@ -16,7 +17,7 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
                         <table className="w-full">
                             <thead className="bg-gray-100">
                                 {keys.map((key, i) =>
-                                    <th key={i} className="text-start text-sm font-semibold uppercase p-2 text-gray-700">{key}</th>
+                                    <th key={i} className="text-start text-sm font-semibold uppercase p-3 text-gray-700">{key}</th>
                                 )}
                             </thead>
                             <tbody>
@@ -25,7 +26,7 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
                                     return (
                                         <tr key={rowIdx} className="">
                                             {keys.map((key, i) =>
-                                                <td key={i} className="text-gray-800 p-2 text-sm">{row[key]}</td>
+                                                <td key={i} className="text-gray-800 p-3 text-sm">{row[key]}</td>
                                             )}
                                         </tr>
                                     )
@@ -64,11 +65,13 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
                     {/* <pre>{JSON.stringify(salesEntry, null, 2)}</pre> */}
                     <div className="flex flex-col rounded-xl bg-white p-4 sm:p-10">
                         <div className="flex justify-between">
-                            <h1 className="mt-2 text-lg font-semibold text-blue-600 md:text-xl">ভাই ভাই টেলিকম</h1>
+                            <Logo className="text-sky-500" />
                             <div className="text-end">
                                 <h2 className="text-2xl font-semibold text-gray-800 md:text-3xl">Invoice #</h2>
                                 <span className="mt-1 block text-gray-500">{salesEntry.id}</span>
-                                <address className="mt-4 not-italic text-gray-800">Melandaha Bazar, Jamalpur</address>
+                                <address className="mt-4 not-italic text-gray-800">
+                                    Boro Masjid Road, Melandaha Bazar
+                                </address>
                             </div>
                         </div>
                         <div className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -90,8 +93,9 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
                             <h4 className="text-lg font-semibold text-gray-800">Thank you!</h4>
                             <p className="text-gray-500">If you have any questions concerning this invoice, use the following contact information:</p>
                             <div className="mt-2">
-                                <p className="block text-sm font-medium text-gray-800">direct.santo@gmail.com</p>
-                                <p className="block text-sm font-medium text-gray-800">01307 230 077</p>
+                                <p className="block text-sm font-medium text-gray-800">
+                                    Phone: 01744 683 125, 01922 349 151
+                                </p>
                             </div>
                         </div>
                         <p className="mt-5 text-sm text-gray-500">©2022 ভাই ভাই টেলিকম.</p>
