@@ -1,5 +1,5 @@
 'use server';
-import { getSalesIndividual } from "@/app/api/(store)/sales/route";
+import { getSalesIndividual } from "@/app/api/v1/sales/route";
 import Logo from "@/components/logo/logo";
 import PrintWrapper from "@/components/print-wrapper";
 
