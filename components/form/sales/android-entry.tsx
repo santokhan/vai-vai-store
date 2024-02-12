@@ -3,27 +3,47 @@ import Button from "@/components/button/button";
 import SearchProductCard from "@/components/card/search-product-card";
 import FormContainer from "@/components/form-container";
 import { StockAndroid } from "@/prisma/generated/client";
-import { ChangeEvent, useRef, useState } from "react";
-import AndroidIMEISearch from "../search/android-imei-search";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { SalesRowEntry, useSalesRowContext } from "@/context/sales-context";
 import FormTitle from "../title";
 import CloseForm from "../close-form";
+import InputBox from "../input-box";
+import { ORIGIN } from "@/utils/origin";
+import { SearchNormal } from "iconsax-react";
 
 export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: () => void }) {
     const [foundStockItem, setfoundStockItem] = useState<StockAndroid | null>(null);
+    const [IMEI, setIMEI] = useState<string>('');
+    const [isSearching, setisSearching] = useState<boolean>(false);
     const searchInputRef = useRef<HTMLInputElement | null>(null);
     const { addToSales } = useSalesRowContext();
 
-    function setSearchStockData(data: StockAndroid) {
-        if (!data) {
-            return console.error({ message: "Can not read undefined of data" });
+    function handleChange(e: ChangeEvent<HTMLInputElement>) {
+        setIMEI(e.target.value);
+        setfoundStockItem(null);
+    }
+
+    function searchModelByIMEI(e: FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        if (IMEI.length == 15) {
+            setisSearching(true);
+
+            const API_URL = `${ORIGIN}/api/stock/search/imei?imei=${IMEI}`
+
+            fetch(API_URL, { cache: 'no-store' }).then(res => res.json()).then((data) => {
+                if (data.message) {
+                    alert(data.message)
+                } else {
+                    setfoundStockItem(data as StockAndroid)
+                }
+                setisSearching(false);
+            }).catch(err => { console.error(err) })
         } else {
-            setfoundStockItem(data)
+            alert('Please enter a 15 digit valid IMEI.');
         }
     }
 
-    async function handleSubmit(e: ChangeEvent<HTMLFormElement>) {
-        e.preventDefault();
+    async function addToSalesEntry() {
         if (foundStockItem?.id) {
             addToSales({
                 stockId: foundStockItem.id,
@@ -43,20 +63,31 @@ export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: ()
                 <FormTitle>android entry</FormTitle>
                 <CloseForm onClick={onCloseForm} />
             </div>
-            <AndroidIMEISearch setSearchStockData={setSearchStockData} forwardRef={searchInputRef} />
-            {
-                foundStockItem?.id &&
-                <SearchProductCard data={{
-                    name: foundStockItem.name,
-                    sellingPrice: foundStockItem.sellingPrice,
-                    color: foundStockItem.color,
-                    ram: foundStockItem.ram || '',
-                    rom: foundStockItem.rom || ''
-                }} />
-            }
-            <form className="space-y-6" onSubmit={handleSubmit}>
-                <Button variant="primary">add</Button>
-            </form>
+            <div className="flex flex-wrap lg:flex-nowrap gap-4">
+                <InputBox>
+                    <form className="w-full" onSubmit={searchModelByIMEI}>
+                        <label htmlFor="IMEI" className="default">Search Product by IMEI</label>
+                        <div className="flex items-center gap-2">
+                            <input
+                                type="search"
+                                id="IMEI"
+                                className="default"
+                                placeholder="46 456464 554655 4"
+                                maxLength={15}
+                                onChange={handleChange}
+                                required={true}
+                                ref={searchInputRef}
+                            />
+                            <button className='border h-11 aspect-square bg-gray-100 rounded-lg grid place-items-center hover:bg-gray-50'>
+                                {isSearching ? '...' : <SearchNormal className='w-5 h-5' />}
+                            </button>
+                        </div>
+                    </form>
+                </InputBox>
+                <div className=""></div>
+            </div>
+            {foundStockItem && < SearchProductCard stockAndroid={foundStockItem} />}
+            <Button variant="primary" type="button" onClick={addToSalesEntry}>add</Button>
         </FormContainer>
     )
 }

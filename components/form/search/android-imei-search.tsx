@@ -26,16 +26,12 @@ const AndroidIMEISearch: React.FC<Props> = ({ setSearchStockData, forwardRef }) 
         const API_URL = `${ORIGIN}/api/stock/search/imei?imei=${IMEI}`
 
         fetch(API_URL, { cache: 'no-store' }).then(res => res.json()).then((data) => {
-            if (!data) {
-                alert("Can not item by IMEI");
+            if (data.message) {
+                alert(data.message)
             } else {
-                if (data.message) {
-                    alert(data.message)
-                } else {
-                    setSearchStockData(data as StockAndroid)
-                }
-                setisSearching(false);
+                setSearchStockData(data as StockAndroid)
             }
+            setisSearching(false);
         }).catch(err => { console.error(err) })
     }
 
@@ -61,7 +57,7 @@ const AndroidIMEISearch: React.FC<Props> = ({ setSearchStockData, forwardRef }) 
                     </div>
                 </form>
             </InputBox>
-            <InputBox><></></InputBox>
+            <div className=""></div>
         </div>
     );
 };
