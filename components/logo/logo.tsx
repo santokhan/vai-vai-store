@@ -3,7 +3,8 @@ import Link from 'next/link';
 import LogoImg from '@/assets/images/logo.png'
 import Image from 'next/image';
 
-export default function Logo({ className }: { className: string }) {
+export default function Logo({ className }: { className?: string }) {
+
     return (
         <div className="w-full">
             <Link href="/" className={`flex items-center gap-2 ${className}`}>
