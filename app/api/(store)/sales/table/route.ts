@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/prisma';
 
-async function getModel() {
+async function getSalesMany() {
     try {
         return await prisma.salesEntry.findMany();
     } catch (error) {
@@ -11,14 +11,8 @@ async function getModel() {
     }
 }
 
-/**
- * http://localhost:3000/api/sales/table
- * 
- * @param req 
- * @returns 
- */
 export async function GET(): Promise<Response> {
-    const data = await getModel();
+    const data = await getSalesMany();
     if (data) {
         return Response.json(data);
     } else {

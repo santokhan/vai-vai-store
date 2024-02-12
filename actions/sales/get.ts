@@ -17,3 +17,18 @@ export async function getSalesIndividual(id: string) {
         await prisma.$disconnect();
     }
 }
+
+export async function getSalesMany() {
+    try {
+        return await prisma.salesEntry.findMany({
+            include: {
+                customer: true,
+            }
+        });
+    } catch (error) {
+        console.error('Error creating model:', error);
+    } finally {
+        // Close the Prisma Client connection
+        await prisma.$disconnect();
+    }
+}

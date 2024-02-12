@@ -1,7 +1,5 @@
-// https://tanstack.com/table/v8/docs/examples/react/pagination
-
-'use client'
-import React, { cache, useEffect } from 'react'
+'use client';
+import React, { useMemo, useReducer } from 'react'
 import './index.css'
 
 import {
@@ -22,26 +20,16 @@ import { SalesEntry } from '@/prisma/generated/client'
 import { useQuery } from 'react-query'
 import { ORIGIN } from '@/utils/origin'
 
-export default function SalesTable() {
-    const rerender = React.useReducer(() => ({}), {})[1];
+export default function SalesTable({ salesEntry }: { salesEntry: SalesEntry[] }) {
+    const rerender = useReducer(() => ({}), {})[1];
 
-    const columns = React.useMemo<ColumnDef<SalesEntry>[]>(() => [
+    const columns = useMemo<ColumnDef<SalesEntry>[]>(() => [
         {
-            header: 'Name',
+            header: 'Id',
             footer: props => props.column.id,
             columns: [
                 {
-                    accessorKey: 'customer.name',
-                    footer: props => props.column.id,
-                },
-            ],
-        },
-        {
-            header: 'Price',
-            footer: props => props.column.id,
-            columns: [
-                {
-                    accessorKey: 'price',
+                    accessorKey: 'id',
                     footer: props => props.column.id,
                 },
             ],
@@ -67,11 +55,21 @@ export default function SalesTable() {
             ],
         },
         {
-            header: 'Due Date',
+            header: 'Customer Name',
             footer: props => props.column.id,
             columns: [
                 {
-                    accessorKey: 'dueDate',
+                    accessorKey: 'customer.name',
+                    footer: props => props.column.id,
+                },
+            ],
+        },
+        {
+            header: 'Customer Phone',
+            footer: props => props.column.id,
+            columns: [
+                {
+                    accessorKey: 'customer.phone',
                     footer: props => props.column.id,
                 },
             ],
@@ -82,20 +80,20 @@ export default function SalesTable() {
     const refreshData = () => setData(() => makeData(100000))
 
     // Santo
-    const salesEntryQuery = useQuery('getAllInStock', () =>
-        fetch(`${ORIGIN}/api/sales/table`, {
-            cache: 'no-store'
-        }).then(res => res.json()).then((data: SalesEntry[]) => data),
-        { cacheTime: 0 },
-    )
+    // const salesEntryQuery = useQuery('getAllInStock', () =>
+    //     fetch(`${ORIGIN}/api/sales/table`, {
+    //         cache: 'no-store'
+    //     }).then(res => res.json()).then((data: SalesEntry[]) => data),
+    //     { cacheTime: 0 },
+    // )
 
     function reFetch() {
-        salesEntryQuery.refetch();
+        // salesEntryQuery.refetch();
     }
 
     return (
         <>
-            {salesEntryQuery.data && <Table data={salesEntryQuery.data} columns={columns} reFetch={reFetch} />}
+            <Table data={salesEntry} columns={columns} reFetch={reFetch} />
             {/* <hr />
             <div>
                 <button onClick={() => rerender()}>Force Rerender</button>
