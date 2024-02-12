@@ -50,19 +50,17 @@ export const Dropdown: FC<{ nav: NavDropdown }> = ({ nav }) => {
                 isOpen &&
                 <ul id="dropdown-example" className="py-2 space-y-2">
                     {
-                        nav.children?.map((childNav, childIdx) => (
-                            <li key={childIdx}>
-                                <Link
-                                    href={`${nav.path + childNav.path}`}
-                                    className={[
-                                        "flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 capitalize",
-                                        pathName === (nav.path + childNav.path) ? "bg-gray-100" : ""
-                                    ].join(" ")}
-                                >
-                                    {childNav.name}
-                                </Link>
-                            </li>
-                        ))
+                        nav.children?.map((childNav, childIdx) => {
+                            const activeTw = pathName.includes((nav.path + childNav.path)) ? 'bg-gray-100' : ''
+
+                            return (
+                                <li key={childIdx}>
+                                    <Link href={`${nav.path + childNav.path}`}
+                                        className={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 capitalize ${activeTw}`}
+                                    >{childNav.name}</Link>
+                                </li>
+                            )
+                        })
                     }
                 </ul>
             }
