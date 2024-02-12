@@ -1,9 +1,6 @@
 'use client';
-
-import SelectOption from "@/components/form/select-option/select-option";
 import { ModelDataTable } from "@/components/table/model-table";
 import { Brand, Model, ProductType } from "@/prisma/generated/client";
-import { defaultBrands, defaultType } from "@/utils/default-data";
 import { ORIGIN } from "@/utils/origin";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useQuery } from "react-query";
