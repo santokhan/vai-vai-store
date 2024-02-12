@@ -3,8 +3,8 @@ import Button from "@/components/button/button";
 import SearchProductCard from "@/components/card/search-product-card";
 import FormContainer from "@/components/form-container";
 import { StockAndroid } from "@/prisma/generated/client";
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
-import { SalesRowEntry, useSalesRowContext } from "@/context/sales-context";
+import { ChangeEvent, FormEvent, useRef, useState } from "react";
+import { useSalesRowContext } from "@/context/sales-context";
 import FormTitle from "../title";
 import CloseForm from "../close-form";
 import InputBox from "../input-box";
@@ -48,8 +48,9 @@ export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: ()
             addToSales({
                 stockId: foundStockItem.id,
                 quantity: 1,
+                price: foundStockItem.sellingPrice,
                 type: 'android',
-            } as SalesRowEntry);
+            });
             onCloseForm();
         } else {
             alert('Please search product first');
@@ -84,7 +85,7 @@ export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: ()
                         </div>
                     </form>
                 </InputBox>
-                <div className=""></div>
+                <div className="w-full"></div>
             </div>
             {foundStockItem && < SearchProductCard stockAndroid={foundStockItem} />}
             <Button variant="primary" type="button" onClick={addToSalesEntry}>add</Button>

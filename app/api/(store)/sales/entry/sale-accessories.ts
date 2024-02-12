@@ -1,5 +1,4 @@
 import { prisma } from "@/lib/prisma";
-import { Body } from "./type";
 
 export default async function subtractStockAccessories(stockId: string, quantity: number) {
     try {

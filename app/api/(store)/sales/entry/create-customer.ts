@@ -1,5 +1,4 @@
 import { prisma } from "@/lib/prisma";
-import { Customer } from "@/prisma/generated/client";
 
 export type APICustomerData = {
     name: string;

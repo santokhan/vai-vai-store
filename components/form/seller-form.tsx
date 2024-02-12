@@ -1,11 +1,8 @@
-'use client'
-
+'use client';
 import FormContainer from "@/components/form-container";
 import { Customer, Seller } from "@/prisma/generated/client";
-import { InitialSalesEntry } from "@/utils/default-data";
 import { ORIGIN } from "@/utils/origin";
-// import { Add } from "iconsax-react";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent } from "react";
 import { useQuery } from "react-query";
 import InputBox from "./input-box";
 import { useSellerContext } from "@/context/seller-context";

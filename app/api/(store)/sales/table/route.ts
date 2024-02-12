@@ -1,14 +1,8 @@
-// Import the Prisma Client
 import { prisma } from '@/lib/prisma';
 
 async function getModel() {
     try {
-        return await prisma.salesEntry.findMany({
-            include: {
-                InStock: true,
-                customer: true,
-            }
-        });
+        return await prisma.salesEntry.findMany();
     } catch (error) {
         console.error('Error creating model:', error);
     } finally {

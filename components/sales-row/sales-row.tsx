@@ -1,19 +1,20 @@
-import React from 'react';
+import { FC } from 'react';
 import { Table } from 'flowbite-react';
 import Button from '../button/button';
 import { Add } from 'iconsax-react';
 import { ProductTypeKeys, productTypes } from '@/utils/product-type';
-import { SalesRowEntry, useSalesRowContext } from '@/context/sales-context';
+import { useSalesRowContext } from '@/context/sales-context';
 import FormTitle from '../form/title';
+import { APISalesEntity } from '@/app/api/(store)/sales/entry/type';
 
 interface Props {
     onOpenForm: (formType: ProductTypeKeys) => void;
 }
 
-const SalesRow: React.FC<Props> = ({ onOpenForm }) => {
+const SalesRow: FC<Props> = ({ onOpenForm }) => {
     const { salesEntity, removeFromSales } = useSalesRowContext();
 
-    const getCols = (salesEntity: SalesRowEntry[]): string[] => {
+    const getCols = (salesEntity: APISalesEntity[]): string[] => {
         return salesEntity.length > 0 ? Object.keys(salesEntity[0]) : [];
     };
 
@@ -31,7 +32,7 @@ const SalesRow: React.FC<Props> = ({ onOpenForm }) => {
                     {salesEntity.map((row, index) => (
                         <Table.Row key={index}>
                             {getCols(salesEntity).map((colKey, i) => (
-                                <Table.Cell key={i}>{row[colKey as keyof SalesRowEntry]}</Table.Cell>
+                                <Table.Cell key={i}>{row[colKey as keyof APISalesEntity]}</Table.Cell>
                             ))}
                             <Table.Cell>
                                 <button

@@ -1,27 +1,22 @@
 'use client';
+import { APISalesEntity } from "@/app/api/(store)/sales/entry/type";
 import { OnlyChildrenProps } from "@/utils/props-type";
 import { createContext, useContext, useState } from "react";
 
-export type SalesRowEntry = {
-    stockId: string;
-    quantity?: number;
-    type: 'android' | 'button' | 'accessories'
-}
-
 export const SalesRowContext = createContext<{
-    salesEntity: SalesRowEntry[];
-    addToSales: (data: SalesRowEntry) => void;
+    salesEntity: APISalesEntity[];
+    addToSales: (newSalesRow: APISalesEntity) => void;
     removeFromSales: (stockId: string) => void;
     changeQuantity: (stockId: string, payload: 'plus' | 'minus') => void;
 } | null>(null);
 
 export default function SalesRowProvider({ children }: OnlyChildrenProps) {
-    const [salesEntity, setSalesEntity] = useState<SalesRowEntry[]>([]);
+    const [salesEntity, setSalesEntity] = useState<APISalesEntity[]>([]);
 
     return (
         <SalesRowContext.Provider value={{
             salesEntity,
-            addToSales(newSalesRow: SalesRowEntry) {
+            addToSales(newSalesRow: APISalesEntity) {
                 // Entry if stockId is not exist in salesEntity
                 if (!salesEntity.some((item) => item.stockId === newSalesRow.stockId)) {
                     newSalesRow = { ...newSalesRow, quantity: 1 }
