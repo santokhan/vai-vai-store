@@ -4,6 +4,7 @@ import Button from '../button/button';
 import { Add } from 'iconsax-react';
 import { ProductTypeKeys, productTypes } from '@/utils/product-type';
 import { SalesRowEntry, useSalesRowContext } from '@/context/sales-context';
+import FormTitle from '../form/title';
 
 interface Props {
     onOpenForm: (formType: ProductTypeKeys) => void;
@@ -17,7 +18,8 @@ const SalesRow: React.FC<Props> = ({ onOpenForm }) => {
     };
 
     return (
-        <div className="w-full overflow-x-auto">
+        <div className="w-full overflow-x-auto space-y-2">
+            <FormTitle>Sales Entity</FormTitle>
             <Table>
                 <Table.Head className="uppercase">
                     {getCols(salesEntity).map((objKey, i) => (
