@@ -24,9 +24,8 @@ export async function GET(): Promise<Response> {
     if (data) {
         return Response.json(data, {
             headers: {
-                'Cache-Control': 'no-store',
+                'Cache-Control': 'no-store, max-age=0',
                 'Content-Type': 'application/json',
-                'age': '0'
             }
         });
     } else {

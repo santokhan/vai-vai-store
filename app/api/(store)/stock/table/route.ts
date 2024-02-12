@@ -1,6 +1,8 @@
 // Import the Prisma Client
 import { prisma } from '@/lib/prisma';
 
+export const revalidate = 60
+
 /**
  * Use Prisma Client to insert the new model into the database
  * 
@@ -61,9 +63,8 @@ export async function GET(req: Request, res: Response): Promise<Response> {
     if (data) {
         return Response.json(data, {
             headers: {
-                'Cache-Control': 'no-store',
+                'Cache-Control': 'no-store, max-age=0',
                 'Content-Type': 'application/json',
-                'age': '0'
             } as HeadersInit
         });
     } else {
