@@ -1,6 +1,7 @@
 import { StockAndroid } from "@/prisma/generated/client";
 import productCardImg from '@/assets/images/product-card.png';
 import Image from "next/image";
+import { Fragment } from "react";
 
 type Props = {
     stockAndroid: StockAndroid | null;
@@ -21,11 +22,16 @@ const SearchProductCard: React.FC<Props> = ({ stockAndroid }: Props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {keys.map((key, i) => (
-                        <tr key={i}>
-                            <td className="whitespace-nowrap px-3 py-2 capitalize">{key}</td>
-                            <td className="whitespace-nowrap px-3 py-2 capitalize">{(stockAndroid as Record<keyof StockAndroid, any>)[key]}</td>
-                        </tr>
+                    {keys.map((key: keyof StockAndroid, i) => (
+                        <Fragment key={i}>
+                            {
+                                stockAndroid[key] &&
+                                <tr>
+                                    <td className="whitespace-nowrap px-3 py-2 capitalize">{key}</td>
+                                    <td className="whitespace-nowrap px-3 py-2 capitalize">{(stockAndroid as Record<keyof StockAndroid, any>)[key]}</td>
+                                </tr>
+                            }
+                        </Fragment>
                     ))}
                 </tbody>
             </table>
