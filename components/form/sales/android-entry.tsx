@@ -32,7 +32,6 @@ export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: ()
                 if (data.message) {
                     alert(data.message)
                 } else {
-                    console.log(data);
                     setfoundStockItem(data);
                 }
                 setisSearching(false);
