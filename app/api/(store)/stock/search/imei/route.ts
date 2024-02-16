@@ -10,6 +10,7 @@ async function getModelIdByIMEI(IMEI: string) {
             },
             include: {
                 model: true,
+                brand: true,
             }
         });
         return foundedAndroidList[0];
