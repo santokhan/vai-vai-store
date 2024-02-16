@@ -39,7 +39,9 @@ export default function SalesEntryForm() {
                         }),
                         customer,
                         seller
-                    }
+                    };
+                    console.log(postData);
+                    return;
                     fetch(`${ORIGIN}/api/sales/entry/`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },

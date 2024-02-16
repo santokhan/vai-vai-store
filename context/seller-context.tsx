@@ -10,7 +10,7 @@ export type SellerData = {
 
 export const SellerContext = createContext<{
     seller: SellerData;
-    setSellerData: (key: keyof SellerData, value: string) => void;
+    setSellerData: (key: keyof SellerData, value: string | number) => void;
 } | null>(null);
 
 export default function SellerProvider({ children }: OnlyChildrenProps) {
@@ -23,7 +23,7 @@ export default function SellerProvider({ children }: OnlyChildrenProps) {
     return (
         <SellerContext.Provider value={{
             seller,
-            setSellerData(key: string, value: string) {
+            setSellerData(key, value) {
                 setSeller({ ...seller, [key]: value })
             }
         }}>{children}</SellerContext.Provider>

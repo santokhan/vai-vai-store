@@ -46,7 +46,7 @@ export default function SellerForm() {
                         name="discount"
                         id="discount"
                         onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                            setSellerData('discount', e.target.value)
+                            setSellerData('discount', Number(e.target.value))
                         }}
                         placeholder="0"
                         value={seller.discount || ''}
@@ -60,7 +60,7 @@ export default function SellerForm() {
                         name="due"
                         id="due"
                         onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                            setSellerData('due', e.target.value)
+                            setSellerData('due', Number(e.target.value))
                         }}
                         placeholder="0"
                         value={seller.due || ''}
