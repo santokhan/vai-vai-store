@@ -24,6 +24,7 @@ const SalesRow: FC<Props> = ({ onOpenForm }) => {
     return (
         <div className="w-full overflow-x-auto space-y-2">
             <FormTitle>Sales Entity</FormTitle>
+            {/* Same as Invoice table you can re-use this table */}
             <Table>
                 <Table.Head className="uppercase">
                     <Table.HeadCell>Type</Table.HeadCell>
