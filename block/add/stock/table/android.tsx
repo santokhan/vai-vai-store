@@ -1,170 +1,131 @@
 // https://tanstack.com/table/v8/docs/examples/react/pagination
 
-'use client'
-import React, { useEffect } from 'react'
+'use client';
+import React from 'react';
 
 import {
     Column,
     Table as ReactTable,
-    PaginationState,
     useReactTable,
     getCoreRowModel,
     getFilteredRowModel,
     getPaginationRowModel,
     ColumnDef,
-    OnChangeFn,
     flexRender,
 } from '@tanstack/react-table'
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
-import { makeData } from './makeData'
 import { StockAndroid, } from '@/prisma/generated/client'
+import { useRouter } from 'next/navigation'
 
 export const tableArrowClasses = "border rounded-lg px-2 py-2 flex items-center hover:bg-gray-100";
 
-export default function StockTable({ stockAndroid }: { stockAndroid: StockAndroid[] }) {
+interface ServerProps {
+    stockAndroid: StockAndroid[],
+}
+
+export default function StockTable({ stockAndroid }: ServerProps) {
     const columns = React.useMemo<ColumnDef<StockAndroid>[]>(() => [
         {
-            id: 'Name',
-            footer: props => props.column.id,
+            id: 'name',
             columns: [
                 {
                     accessorKey: 'name',
-                    cell: info => info.getValue(),
-                    footer: props => props.column.id,
                 },
             ],
         },
         {
             id: 'IMEI',
-            footer: props => props.column.id,
             columns: [
                 {
                     accessorKey: 'IMEI',
-                    footer: props => props.column.id,
                 },
             ],
         },
         {
-            id: 'Product Type',
-            footer: props => props.column.id,
+            id: 'type',
             columns: [
                 {
                     accessorKey: 'productType.type',
-                    footer: props => props.column.id,
                 },
             ],
         },
         {
-            id: 'Brand',
-            footer: props => props.column.id,
+            id: 'brand',
             columns: [
                 {
                     accessorKey: 'brand.brandName',
-                    footer: props => props.column.id,
                 },
             ],
         },
         {
-            id: 'Model',
-            footer: props => props.column.id,
+            id: 'model',
             columns: [
                 {
                     accessorKey: 'model.model',
-                    footer: props => props.column.id,
                 },
             ],
         },
         {
-            id: 'Purchase Price',
-            footer: props => props.column.id,
+            id: 'purchase price',
             columns: [
                 {
                     accessorKey: 'purchasePrice',
-                    footer: props => props.column.id,
                 },
             ],
         },
         {
-            id: 'Price',
-            footer: props => props.column.id,
+            id: 'selling price',
             columns: [
                 {
                     accessorKey: 'sellingPrice',
-                    footer: props => props.column.id,
                 },
             ],
         },
         {
-            id: 'RAM',
-            footer: props => props.column.id,
+            id: 'ram',
             columns: [
                 {
                     accessorKey: 'ram',
-                    footer: props => props.column.id,
                 },
             ],
         },
         {
-            id: 'ROM',
-            footer: props => props.column.id,
+            id: 'rom',
             columns: [
                 {
                     accessorKey: 'rom',
-                    footer: props => props.column.id,
                 },
             ],
         },
         {
-            id: 'Color',
-            footer: props => props.column.id,
+            id: 'color',
             columns: [
                 {
                     accessorKey: 'color',
-                    footer: props => props.column.id,
                 },
             ],
         },
         {
-            id: 'Sold',
-            footer: props => props.column.id,
+            id: 'sold',
             columns: [
                 {
                     accessorKey: 'sold',
-                    footer: props => props.column.id,
                 },
             ],
         },
     ], [])
 
-    const [data, setData] = React.useState(() => makeData(100000))
-
-    // Santo
-    // const inStockQuery = useQuery('getAllInStock', () =>
-    //     fetch(`${ORIGIN}/api/stock/table/android`, {
-    //         cache: 'no-store',
-    //         next: {
-    //             revalidate: 10
-    //         },
-    //     }).then(res => res.json()).then((data: StockAndroid[]) => data),
-    //     { cacheTime: 0 }
-    // )
-
-    function reFetch() {
-        // inStockQuery.refetch();
-    }
-
     return (
-        <Table data={stockAndroid} columns={columns} reFetch={reFetch} />
+        <Table data={stockAndroid} columns={columns} />
     )
 }
 
 type TableProps = {
     data: StockAndroid[]
     columns: ColumnDef<StockAndroid>[];
-    reFetch: () => void;
 }
 
-function Table({ data, columns, reFetch }: TableProps) {
+function Table({ data, columns }: TableProps) {
     const table = useReactTable({
         data,
         columns,
@@ -175,37 +136,31 @@ function Table({ data, columns, reFetch }: TableProps) {
         //
         debugTable: true,
     });
-    const headerGroups = table.getHeaderGroups();
-    headerGroups.unshift();
+
+    const headers = table.getHeaderGroups()[1].headers;
+    const router = useRouter();
 
     return (
         <div className="rounded-xl bg-white p-6 space-y-6 overflow-hidden">
             <h4 className="text-xl font-semibold">Android Table</h4>
-            <div className="overflow-x-scroll pb-2">
+            <div className="overflow-x-scroll">
                 <table>
                     <thead className='bg-gray-100'>
-                        <tr>
-                            {headerGroups[1].headers.map(header =>
-                                <th key={header.id} colSpan={header.colSpan} className='p-2 text-start border'>
-                                    {header.isPlaceholder ? null : (
-                                        <div className='font-medium'>
-                                            {flexRender(header.column.columnDef.header, header.getContext())}
-                                            {header.column.getCanFilter() && <Filter column={header.column} table={table} />}
-                                        </div>
-                                    )}
-                                </th>
-                            )}
-                        </tr>
+                        {headers.map(header =>
+                            <th key={header.id} colSpan={header.colSpan} className='p-2 text-start border font-medium uppercase text-sm'>
+                                <>
+                                    {header.column.parent?.id}
+                                    {header.column.getCanFilter() && <Filter column={header.column} table={table} />}
+                                </>
+                            </th>
+                        )}
                     </thead>
                     <tbody>
                         {table.getRowModel().rows.map(row =>
                             <tr key={row.id}>
                                 {row.getVisibleCells().map(cell => (
                                     <td key={cell.id} className='p-2 border whitespace-nowrap'>
-                                        {flexRender(
-                                            cell.column.columnDef.cell,
-                                            cell.getContext()
-                                        )}
+                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </td>
                                 ))}
                             </tr>
@@ -215,27 +170,33 @@ function Table({ data, columns, reFetch }: TableProps) {
             </div>
             <div className="flex items-center gap-2 py-2">
                 <button className={tableArrowClasses}
-                    onClick={() => table.setPageIndex(0)}
+                    onClick={() => {
+                        table.setPageIndex(1)
+                    }}
                     disabled={!table.getCanPreviousPage()}
                 ><ChevronDoubleLeftIcon className='w-4 h-4' /></button>
                 <button className={tableArrowClasses}
-                    onClick={() => table.previousPage()}
+                    onClick={() => {
+                        table.previousPage()
+                    }}
                     disabled={!table.getCanPreviousPage()}
                 ><ChevronLeftIcon className='w-4 h-4' /></button>
                 <button className={tableArrowClasses}
-                    onClick={() => table.nextPage()}
+                    onClick={() => {
+                        table.nextPage();
+                    }}
                     disabled={!table.getCanNextPage()}
                 ><ChevronRightIcon className='w-4 h-4' /></button>
                 <button className={tableArrowClasses}
-                    onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                    onClick={() => {
+                        table.setPageIndex(table.getPageCount() - 1)
+                    }}
                     disabled={!table.getCanNextPage()}
                 ><ChevronDoubleRightIcon className='w-4 h-4' /></button>
                 <span className="flex items-center gap-1 px-2">
                     <span>Page</span>
-                    <strong>
-                        {table.getState().pagination.pageIndex + 1} of{' '}
-                        {table.getPageCount()}
-                    </strong>
+                    <strong>{table.getState().pagination.pageIndex + 1}</strong> out of
+                    <strong>{table.getPageCount()}</strong>
                 </span>
                 <span className="flex items-center gap-2 px-2">| Go to page:
                     <input
@@ -259,13 +220,8 @@ function Table({ data, columns, reFetch }: TableProps) {
                         <option key={idx} value={pageSize}>Show {pageSize}</option>
                     )}
                 </select>
-                {/* () => table.setPageIndex(table.getPageCount() - 1) */}
-                <button type="button" onClick={reFetch}
-                    className="border rounded-lg px-2 py-1 grid place-items-center hover:bg-gray-100"
-                >Reload</button>
             </div>
             <div className='py-2'>{table.getRowModel().rows.length} Rows</div>
-            {/* <div className="py-2"><pre>{JSON.stringify(table.getState().pagination, null, 2)}</pre></div> */}
         </div>
     )
 }
@@ -311,7 +267,7 @@ function Filter({ column, table, }: FilterProps) {
             type="text"
             value={(columnFilterValue ?? '') as string}
             onChange={e => column.setFilterValue(e.target.value)}
-            placeholder={`Search...`}
+            placeholder="Search..."
             className="h-9 default font-normal"
         />
     )
