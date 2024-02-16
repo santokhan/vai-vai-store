@@ -1,13 +1,12 @@
-'use client'
-
+'use client';
 import React, { ChangeEvent, FormEvent, Ref, useState } from 'react';
 import { ORIGIN } from '@/utils/origin';
-import { StockAndroid } from '@/prisma/generated/client';
 import { SearchNormal } from 'iconsax-react';
 import InputBox from '../input-box';
+import { StockAndroidIncludes } from '@/app/api/(store)/stock/search/imei/route';
 
 type Props = {
-    setSearchStockData: (data: StockAndroid) => void;
+    setSearchStockData: (data: StockAndroidIncludes) => void;
     forwardRef: Ref<HTMLInputElement>;
 }
 
@@ -29,7 +28,7 @@ const AndroidIMEISearch: React.FC<Props> = ({ setSearchStockData, forwardRef }) 
             if (data.message) {
                 alert(data.message)
             } else {
-                setSearchStockData(data as StockAndroid)
+                setSearchStockData(data);
             }
             setisSearching(false);
         }).catch(err => { console.error(err) })
