@@ -3,20 +3,26 @@ import { APISalesEntity } from "@/app/api/(store)/sales/entry/type";
 import { OnlyChildrenProps } from "@/utils/props-type";
 import { createContext, useContext, useState } from "react";
 
+/** APISalesEntity is required for server */
+export interface SalesRowIncludeBrandModel extends APISalesEntity {
+    brand: string;
+    model: string
+}
+
 export const SalesRowContext = createContext<{
-    salesEntity: APISalesEntity[];
-    addToSales: (newSalesRow: APISalesEntity) => void;
+    salesEntity: SalesRowIncludeBrandModel[];
+    addToSales: (newSalesRow: SalesRowIncludeBrandModel) => void;
     removeFromSales: (stockId: string) => void;
     changeQuantity: (stockId: string, payload: 'plus' | 'minus') => void;
 } | null>(null);
 
 export default function SalesRowProvider({ children }: OnlyChildrenProps) {
-    const [salesEntity, setSalesEntity] = useState<APISalesEntity[]>([]);
+    const [salesEntity, setSalesEntity] = useState<SalesRowIncludeBrandModel[]>([]);
 
     return (
         <SalesRowContext.Provider value={{
             salesEntity,
-            addToSales(newSalesRow: APISalesEntity) {
+            addToSales(newSalesRow: SalesRowIncludeBrandModel) {
                 // Entry if stockId is not exist in salesEntity
                 if (!salesEntity.some((item) => item.stockId === newSalesRow.stockId)) {
                     newSalesRow = { ...newSalesRow, quantity: 1 }
