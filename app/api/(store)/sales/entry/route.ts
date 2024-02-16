@@ -91,8 +91,8 @@ export async function POST(request: Request): Promise<Response> {
                 })
 
                 const createdSales = await addSales({
-                    discount: 0,
-                    due: 0,
+                    discount: seller.discount,
+                    due: seller.due,
                     customerId: createdCustomerId,
                     sellerId: seller.sellerId,
                     salesEntity
