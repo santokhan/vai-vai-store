@@ -8,15 +8,9 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { AccountCircle } from '@mui/icons-material';
-import { AuthContext } from '@/context/FirebaseContext';
-import { Router } from 'next/router';
-import { useRouter } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 
 export default function AccountMenu() {
@@ -28,9 +22,6 @@ export default function AccountMenu() {
     const handleClose = () => {
         setAnchorEl(null);
     };
-
-    // const value = React.useContext(AuthContext);
-    // const router = useRouter();
 
     async function handleSignOut() {
         await signOut();
@@ -92,12 +83,6 @@ export default function AccountMenu() {
                     <Avatar /> Profile
                 </MenuItem>
                 <Divider />
-                {/* <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                        <Settings fontSize="small" />
-                    </ListItemIcon>
-                    Settings
-                </MenuItem> */}
                 <MenuItem onClick={handleSignOut}>
                     <ListItemIcon>
                         <Logout fontSize="small" />
