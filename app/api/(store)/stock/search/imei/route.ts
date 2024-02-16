@@ -1,8 +1,12 @@
-// Import the Prisma Client
 import { prisma } from '@/lib/prisma';
-import { StockAndroid } from '@/prisma/generated/client';
+import { Brand, Model, StockAndroid } from '@/prisma/generated/client';
 
-async function getModelIdByIMEI(IMEI: string) {
+export interface StockAndroidIncludes extends StockAndroid {
+    brand: Brand;
+    model: Model;
+}
+
+async function getModelIdByIMEI(IMEI: string): Promise<StockAndroidIncludes | undefined> {
     try {
         const foundedAndroidList = await prisma.stockAndroid.findMany({
             where: {
@@ -40,7 +44,7 @@ export async function GET(request: Request): Promise<Response> {
         const foundedAndroidList = await getModelIdByIMEI(IMEI);
         if (foundedAndroidList) {
             if (foundedAndroidList.sold === false) {
-                return Response.json(foundedAndroidList as StockAndroid);
+                return Response.json(foundedAndroidList as StockAndroidIncludes);
             } else {
                 return Response.json({ message: 'The phone with this IMEI already sold.' });
             }
