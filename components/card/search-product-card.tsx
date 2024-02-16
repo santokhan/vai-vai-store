@@ -1,12 +1,7 @@
-import { Brand, Model, StockAndroid } from "@/prisma/generated/client";
-
-interface ExtendStockAndroid extends StockAndroid {
-    brand?: Brand,
-    model?: Model
-}
+import { StockAndroidIncludes } from "@/app/api/(store)/stock/search/imei/route";
 
 interface Props {
-    stockAndroid: ExtendStockAndroid | null;
+    stockAndroid: StockAndroidIncludes | null;
 };
 
 const SearchProductCard: React.FC<Props> = ({ stockAndroid }: Props) => {
