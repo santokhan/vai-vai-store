@@ -5,7 +5,6 @@ import { Add } from 'iconsax-react';
 import { ProductTypeKeys, productTypes } from '@/utils/product-type';
 import { SalesRowIncludeBrandModel, useSalesRowContext } from '@/context/sales-context';
 import FormTitle from '../form/title';
-import { APISalesEntity } from '@/app/api/(store)/sales/entry/type';
 
 interface Props {
     onOpenForm: (formType: ProductTypeKeys) => void;
