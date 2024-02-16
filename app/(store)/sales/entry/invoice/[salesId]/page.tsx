@@ -43,35 +43,69 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
                                     } else { return null; }
 
                                 })}
+                                <tr>
+                                    <td className="py-2 px-3 font-semibold text-sm"></td>
+                                    <td className="py-2 px-3 font-semibold text-sm"></td>
+                                    <td className="py-2 px-3 font-semibold text-sm"></td>
+                                    <td className="py-2 px-3 font-semibold text-sm"></td>
+                                    <td className="py-2 px-3 font-semibold text-sm"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td className="py-2 px-3 font-semibold text-sm">Total</td>
+                                    <td className="py-2 px-3 font-semibold text-sm">{totalPrice}</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td className="py-2 px-3 font-semibold text-sm">Due</td>
+                                    <td className="py-2 px-3 font-semibold text-sm">{due}</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td className="py-2 px-3 font-semibold text-sm">Discount</td>
+                                    <td className="py-2 px-3 font-semibold text-sm">{salesEntry?.discount || 0}</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td className="py-2 px-3 font-semibold text-sm">Amount Paid</td>
+                                    <td className="py-2 px-3 font-semibold text-sm">{totalPrice - due - (salesEntry?.discount || 0)}</td>
+                                </tr>
                             </tbody>
                         </table>
-                    </div>
-                </div>
-                <div className="mt-8 flex sm:justify-end">
-                    <div className="w-full max-w-2xl space-y-2 sm:text-end">
-                        <div className="grid grid-cols-2 gap-3 sm:grid-cols-1 sm:gap-2">
-                            <dl className="grid gap-x-3 sm:grid-cols-5">
-                                <dt className="col-span-3 font-semibold text-gray-800">Total:</dt>
-                                <dd className="col-span-2 text-gray-500">{totalPrice}</dd>
-                            </dl>
-                            <dl className="grid gap-x-3 sm:grid-cols-5">
-                                <dt className="col-span-3 font-semibold text-gray-800">Due balance:</dt>
-                                <dd className="col-span-2 text-gray-500">{due}</dd>
-                            </dl>
-                            <dl className="grid gap-x-3 sm:grid-cols-5">
-                                <dt className="col-span-3 font-semibold text-gray-800">Discount:</dt>
-                                <dd className="col-span-2 text-gray-500">{salesEntry?.discount}</dd>
-                            </dl>
-                            <dl className="grid gap-x-3 sm:grid-cols-5">
-                                <dt className="col-span-3 font-semibold text-gray-800">Amount paid:</dt>
-                                <dd className="col-span-2 text-gray-500">{totalPrice - due - (salesEntry?.discount || 0)}</dd>
-                            </dl>
-                        </div>
                     </div>
                 </div>
             </>
         )
     }
+
+    const InvoiceFooter = () => (
+        <>
+            <div className="mt-8 sm:mt-12">
+                <h4 className="text-lg font-semibold text-gray-800">Thank you!</h4>
+                <p className="text-gray-500">If you have any questions concerning this invoice, use the following contact information:</p>
+                <div className="mt-2">
+                    <p className="block text-sm font-medium text-gray-800">
+                        Phone: 01744 683 125, 01922 349 151
+                    </p>
+                </div>
+            </div>
+            <p className="mt-5 text-sm text-gray-500">©2022 ভাই ভাই টেলিকম.</p>
+
+            <div className="mt-20">
+                <div className="ml-auto w-60 text-center">
+                    <p className='border-t-2 text-sm'>Signature</p>
+                </div>
+            </div>
+        </>
+    )
 
     if (salesEntry?.id && salesEntry.entity) {
         const entity: any = salesEntry.entity;
@@ -85,10 +119,8 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
                             <Logo className="text-sky-500" />
                             <div className="text-end">
                                 <h2 className="text-2xl font-semibold text-gray-800 md:text-3xl">Invoice #</h2>
-                                <span className="mt-1 block text-gray-500">{salesEntry.id}</span>
-                                <address className="mt-4 not-italic text-gray-800">
-                                    Boro Masjid Road, Melandaha Bazar
-                                </address>
+                                <p className="mt-1 block text-gray-500">{salesEntry.id}</p>
+                                <address className="mt-4 not-italic text-gray-800">Boro Masjid Road, Melandaha Bazar</address>
                             </div>
                         </div>
                         <div className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -106,22 +138,7 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
                             </div>
                         </div>
                         {entity.length > 0 && <SummaryTable entity={entity} due={salesEntry.due} />}
-                        <div className="mt-8 sm:mt-12">
-                            <h4 className="text-lg font-semibold text-gray-800">Thank you!</h4>
-                            <p className="text-gray-500">If you have any questions concerning this invoice, use the following contact information:</p>
-                            <div className="mt-2">
-                                <p className="block text-sm font-medium text-gray-800">
-                                    Phone: 01744 683 125, 01922 349 151
-                                </p>
-                            </div>
-                        </div>
-                        <p className="mt-5 text-sm text-gray-500">©2022 ভাই ভাই টেলিকম.</p>
-
-                        <div className="mt-20">
-                            <div className="ml-auto w-60 text-center">
-                                <p className='border-t-2'>Signature</p>
-                            </div>
-                        </div>
+                        <InvoiceFooter />
                     </div>
                 </main>
             </PrintWrapper>
