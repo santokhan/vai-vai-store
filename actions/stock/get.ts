@@ -1,14 +1,45 @@
 import { prisma } from '@/lib/prisma';
+import { Brand, Model, StockAndroid } from '@/prisma/generated/client';
 
-export async function getStockAndroidMany() {
+export async function getStockAndroidMany(): Promise<StockAndroid[] | undefined> {
     try {
-        return await prisma.stockAndroid.findMany({
+        const stockAndroid = await prisma.stockAndroid.findMany({
             include: {
                 productType: true,
                 brand: true,
                 model: true,
             }
         });
+        if (stockAndroid) {
+            return stockAndroid;
+        }
+    } catch (error) {
+        console.error('Error creating model:', error);
+    } finally {
+        // Close the Prisma Client connection
+        await prisma.$disconnect();
+    }
+}
+
+export interface StockAndroidInclude extends StockAndroid {
+    brand: Brand;
+    model: Model;
+}
+
+export async function getStockSingle(stockId: string): Promise<StockAndroidInclude | undefined> {
+    try {
+        const stockAndroid = await prisma.stockAndroid.findFirst({
+            where: {
+                id: stockId
+            },
+            include: {
+                brand: true,
+                model: true,
+            }
+        });
+        if (stockAndroid) {
+            return stockAndroid;
+        }
     } catch (error) {
         console.error('Error creating model:', error);
     } finally {
