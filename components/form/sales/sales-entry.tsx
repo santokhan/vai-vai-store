@@ -40,8 +40,6 @@ export default function SalesEntryForm() {
                         customer,
                         seller
                     };
-                    console.log(postData);
-                    return;
                     fetch(`${ORIGIN}/api/sales/entry/`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -50,8 +48,6 @@ export default function SalesEntryForm() {
                         if (data.message) {
                             alert(data.message);
                         } else {
-                            // use response to generate invoice
-                            // alert('Checkout success!. Press ok to get invoice.');
                             router.push(`/sales/entry/invoice/${data.id}`);
                         }
                         setAdding(false);
