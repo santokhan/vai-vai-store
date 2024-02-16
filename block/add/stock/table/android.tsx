@@ -1,21 +1,13 @@
 // https://tanstack.com/table/v8/docs/examples/react/pagination
-
 'use client';
 import React from 'react';
-
-import {
-    Column,
-    Table as ReactTable,
-    useReactTable,
-    getCoreRowModel,
-    getFilteredRowModel,
-    getPaginationRowModel,
-    ColumnDef,
-    flexRender,
-} from '@tanstack/react-table'
-import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
-import { StockAndroid, } from '@/prisma/generated/client'
-import { useRouter } from 'next/navigation'
+import { Column, Table as ReactTable, useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, flexRender } from '@tanstack/react-table';
+import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import { StockAndroid } from '@/prisma/generated/client';
+import { useRouter } from 'next/navigation';
+import { Trash } from 'iconsax-react';
+import { ORIGIN } from '@/utils/origin';
+import PageOutOf from './page-number-out-of';
 
 export const tableArrowClasses = "border rounded-lg px-2 py-2 flex items-center hover:bg-gray-100";
 
@@ -23,101 +15,39 @@ interface ServerProps {
     stockAndroid: StockAndroid[],
 }
 
+const DeleteButton = ({ row }: any) => {
+    return (
+        <div className="flex items-center justify-center gap-2">
+            <button onClick={() => {
+                fetch(`${ORIGIN}/api/stock/table/android/delete?id=${row.original.id}`, {
+                    method: "DELETE"
+                }).then(res => res.json()).then((data) => {
+                    window.location.reload();
+                })
+            }} className='hover:text-red-600' >
+                <Trash className='w-4 h-4' />
+            </button>
+        </div>
+    )
+};
+
 export default function StockTable({ stockAndroid }: ServerProps) {
     const columns = React.useMemo<ColumnDef<StockAndroid>[]>(() => [
-        {
-            id: 'name',
-            columns: [
-                {
-                    accessorKey: 'name',
-                },
-            ],
-        },
-        {
-            id: 'IMEI',
-            columns: [
-                {
-                    accessorKey: 'IMEI',
-                },
-            ],
-        },
-        {
-            id: 'type',
-            columns: [
-                {
-                    accessorKey: 'productType.type',
-                },
-            ],
-        },
-        {
-            id: 'brand',
-            columns: [
-                {
-                    accessorKey: 'brand.brandName',
-                },
-            ],
-        },
-        {
-            id: 'model',
-            columns: [
-                {
-                    accessorKey: 'model.model',
-                },
-            ],
-        },
-        {
-            id: 'purchase price',
-            columns: [
-                {
-                    accessorKey: 'purchasePrice',
-                },
-            ],
-        },
-        {
-            id: 'selling price',
-            columns: [
-                {
-                    accessorKey: 'sellingPrice',
-                },
-            ],
-        },
-        {
-            id: 'ram',
-            columns: [
-                {
-                    accessorKey: 'ram',
-                },
-            ],
-        },
-        {
-            id: 'rom',
-            columns: [
-                {
-                    accessorKey: 'rom',
-                },
-            ],
-        },
-        {
-            id: 'color',
-            columns: [
-                {
-                    accessorKey: 'color',
-                },
-            ],
-        },
-        {
-            id: 'sold',
-            columns: [
-                {
-                    accessorKey: 'sold',
-                },
-            ],
-        },
-    ], [])
+        { id: 'name', columns: [{ accessorKey: 'name' }] },
+        { id: 'IMEI', columns: [{ accessorKey: 'IMEI' }] },
+        { id: 'type', columns: [{ accessorKey: 'productType.type' }] },
+        { id: 'brand', columns: [{ accessorKey: 'brand.brandName' }] },
+        { id: 'model', columns: [{ accessorKey: 'model.model' }] },
+        { id: 'purchase price', columns: [{ accessorKey: 'purchasePrice' }] },
+        { id: 'selling price', columns: [{ accessorKey: 'sellingPrice' }] },
+        { id: 'ram', columns: [{ accessorKey: 'ram' }] },
+        { id: 'rom', columns: [{ accessorKey: 'rom' }] },
+        { id: 'color', columns: [{ accessorKey: 'color' }] },
+        { id: 'sold', columns: [{ accessorKey: 'sold' }] },
+        { id: 'action', columns: [{ id: 'action', cell: DeleteButton }] }
+    ], []);
 
-    return (
-        <Table data={stockAndroid} columns={columns} />
-    )
+    return <Table data={stockAndroid} columns={columns} />
 }
 
 type TableProps = {
@@ -129,16 +59,13 @@ function Table({ data, columns }: TableProps) {
     const table = useReactTable({
         data,
         columns,
-        // Pipeline
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
-        //
         debugTable: true,
     });
 
     const headers = table.getHeaderGroups()[1].headers;
-    const router = useRouter();
 
     return (
         <div className="rounded-xl bg-white p-6 space-y-6 overflow-hidden">
@@ -156,7 +83,7 @@ function Table({ data, columns }: TableProps) {
                         )}
                     </thead>
                     <tbody>
-                        {table.getRowModel().rows.map(row =>
+                        {table.getRowModel().rows.map(row => (
                             <tr key={row.id}>
                                 {row.getVisibleCells().map(cell => (
                                     <td key={cell.id} className='p-2 border whitespace-nowrap'>
@@ -164,40 +91,16 @@ function Table({ data, columns }: TableProps) {
                                     </td>
                                 ))}
                             </tr>
-                        )}
+                        ))}
                     </tbody>
                 </table>
             </div>
             <div className="flex items-center gap-2 py-2">
-                <button className={tableArrowClasses}
-                    onClick={() => {
-                        table.setPageIndex(1)
-                    }}
-                    disabled={!table.getCanPreviousPage()}
-                ><ChevronDoubleLeftIcon className='w-4 h-4' /></button>
-                <button className={tableArrowClasses}
-                    onClick={() => {
-                        table.previousPage()
-                    }}
-                    disabled={!table.getCanPreviousPage()}
-                ><ChevronLeftIcon className='w-4 h-4' /></button>
-                <button className={tableArrowClasses}
-                    onClick={() => {
-                        table.nextPage();
-                    }}
-                    disabled={!table.getCanNextPage()}
-                ><ChevronRightIcon className='w-4 h-4' /></button>
-                <button className={tableArrowClasses}
-                    onClick={() => {
-                        table.setPageIndex(table.getPageCount() - 1)
-                    }}
-                    disabled={!table.getCanNextPage()}
-                ><ChevronDoubleRightIcon className='w-4 h-4' /></button>
-                <span className="flex items-center gap-1 px-2">
-                    <span>Page</span>
-                    <strong>{table.getState().pagination.pageIndex + 1}</strong> out of
-                    <strong>{table.getPageCount()}</strong>
-                </span>
+                <button className={tableArrowClasses} onClick={() => { table.setPageIndex(1) }} disabled={!table.getCanPreviousPage()}><ChevronDoubleLeftIcon className='w-4 h-4' /></button>
+                <button className={tableArrowClasses} onClick={() => { table.previousPage() }} disabled={!table.getCanPreviousPage()}><ChevronLeftIcon className='w-4 h-4' /></button>
+                <button className={tableArrowClasses} onClick={() => { table.nextPage() }} disabled={!table.getCanNextPage()}><ChevronRightIcon className='w-4 h-4' /></button>
+                <button className={tableArrowClasses} onClick={() => { table.setPageIndex(table.getPageCount() - 1) }} disabled={!table.getCanNextPage()}><ChevronDoubleRightIcon className='w-4 h-4' /></button>
+                <PageOutOf pageNumber={table.getState().pagination.pageIndex + 1} totalPageCount={table.getPageCount()} />
                 <span className="flex items-center gap-2 px-2">| Go to page:
                     <input
                         type="number"
@@ -211,9 +114,7 @@ function Table({ data, columns }: TableProps) {
                 </span>
                 <select
                     value={table.getState().pagination.pageSize}
-                    onChange={e => {
-                        table.setPageSize(Number(e.target.value))
-                    }}
+                    onChange={e => { table.setPageSize(Number(e.target.value)) }}
                     className='default !h-9 !w-32 !py-0'
                 >
                     {[10, 20, 30, 40, 50].map((pageSize, idx) =>
