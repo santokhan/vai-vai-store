@@ -2,17 +2,17 @@
 import Button from "@/components/button/button";
 import SearchProductCard from "@/components/card/search-product-card";
 import FormContainer from "@/components/form-container";
-import { StockAndroid } from "@/prisma/generated/client";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { useSalesRowContext } from "@/context/sales-context";
 import FormTitle from "../title";
 import CloseForm from "../close-form";
 import InputBox from "../input-box";
-import { ORIGIN } from "@/utils/origin";
 import { SearchNormal } from "iconsax-react";
+import { ORIGIN } from "@/utils/origin";
+import { StockAndroidIncludes } from "@/app/api/(store)/stock/search/imei/route";
 
 export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: () => void }) {
-    const [foundStockItem, setfoundStockItem] = useState<StockAndroid | null>(null);
+    const [foundStockItem, setfoundStockItem] = useState<StockAndroidIncludes | null>(null);
     const [IMEI, setIMEI] = useState<string>('');
     const [isSearching, setisSearching] = useState<boolean>(false);
     const searchInputRef = useRef<HTMLInputElement | null>(null);
@@ -23,18 +23,17 @@ export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: ()
         setfoundStockItem(null);
     }
 
-    function searchModelByIMEI(e: FormEvent<HTMLFormElement>) {
+    async function searchModelByIMEI(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         if (IMEI.length == 15) {
             setisSearching(true);
-
             const API_URL = `${ORIGIN}/api/stock/search/imei?imei=${IMEI}`
-
             fetch(API_URL, { cache: 'no-store' }).then(res => res.json()).then((data) => {
                 if (data.message) {
                     alert(data.message)
                 } else {
-                    setfoundStockItem(data as StockAndroid)
+                    console.log(data);
+                    setfoundStockItem(data);
                 }
                 setisSearching(false);
             }).catch(err => { console.error(err) })
@@ -87,8 +86,12 @@ export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: ()
                 </InputBox>
                 <div className="w-full"></div>
             </div>
-            {foundStockItem && < SearchProductCard stockAndroid={foundStockItem} />}
-            <Button variant="primary" type="button" onClick={addToSalesEntry}>add</Button>
+            {foundStockItem &&
+                <>
+                    <SearchProductCard stockAndroid={foundStockItem} />
+                    <Button variant="primary" type="button" onClick={addToSalesEntry}>add</Button>
+                </>
+            }
         </FormContainer>
     )
 }
