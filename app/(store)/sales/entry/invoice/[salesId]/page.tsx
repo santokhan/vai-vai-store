@@ -1,35 +1,47 @@
 'use server';
 import { getSalesIndividual } from "@/actions/sales/get";
+import { getStockSingle } from "@/actions/stock/get";
 import Logo from "@/components/logo/logo";
+import { PRINT } from "@/components/print";
 import PrintWrapper from "@/components/print-wrapper";
+
+const getStockData = async (stockId: string) => {
+    return await getStockSingle(stockId)
+}
 
 export default async function InvoicePage({ params }: { params: { salesId: string } }) {
     const salesEntry = await getSalesIndividual(params.salesId);
     let totalPrice = 0;
 
     const SummaryTable = ({ entity, due }: { entity: any[]; due: number }) => {
-        const keys = Object.keys(entity[0]);
-
         return (
             <>
                 <div className="mt-6">
                     <div className="rounded-lg overflow-hidden">
                         <table className="w-full">
                             <thead className="bg-gray-100">
-                                {keys.map((key, i) =>
-                                    <th key={i} className="text-start text-sm font-semibold uppercase p-3 text-gray-700">{key}</th>
-                                )}
+                                <th className="text-start text-sm font-semibold uppercase p-3 text-gray-700">Type</th>
+                                <th className="text-start text-sm font-semibold uppercase p-3 text-gray-700">Brand</th>
+                                <th className="text-start text-sm font-semibold uppercase p-3 text-gray-700">Model</th>
+                                <th className="text-start text-sm font-semibold uppercase p-3 text-gray-700">Quantity</th>
+                                <th className="text-start text-sm font-semibold uppercase p-3 text-gray-700">Price</th>
                             </thead>
                             <tbody>
-                                {entity.map((row: any, rowIdx: number) => {
+                                {entity.map(async (row: any, i: number) => {
                                     totalPrice += row.price;
-                                    return (
-                                        <tr key={rowIdx} className="">
-                                            {keys.map((key, i) =>
-                                                <td key={i} className="text-gray-800 p-3 text-sm">{row[key]}</td>
-                                            )}
-                                        </tr>
-                                    )
+                                    const stockData = await getStockData(row.stockId);
+                                    if (stockData) {
+                                        return (
+                                            <tr key={i}>
+                                                <td className="text-gray-800 p-3 text-sm capitalize">{row.type}</td>
+                                                <td className="text-gray-800 p-3 text-sm capitalize">{stockData?.brand.brandName}</td>
+                                                <td className="text-gray-800 p-3 text-sm capitalize">{stockData?.model.model}</td>
+                                                <td className="text-gray-800 p-3 text-sm">{row.quantity}</td>
+                                                <td className="text-gray-800 p-3 text-sm">{row.price}</td>
+                                            </tr>
+                                        )
+                                    } else { return null; }
+
                                 })}
                             </tbody>
                         </table>
@@ -47,8 +59,12 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
                                 <dd className="col-span-2 text-gray-500">{due}</dd>
                             </dl>
                             <dl className="grid gap-x-3 sm:grid-cols-5">
+                                <dt className="col-span-3 font-semibold text-gray-800">Discount:</dt>
+                                <dd className="col-span-2 text-gray-500">{salesEntry?.discount}</dd>
+                            </dl>
+                            <dl className="grid gap-x-3 sm:grid-cols-5">
                                 <dt className="col-span-3 font-semibold text-gray-800">Amount paid:</dt>
-                                <dd className="col-span-2 text-gray-500">{totalPrice - due}</dd>
+                                <dd className="col-span-2 text-gray-500">{totalPrice - due - (salesEntry?.discount || 0)}</dd>
                             </dl>
                         </div>
                     </div>
@@ -61,6 +77,7 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
         const entity: any = salesEntry.entity;
         return (
             <PrintWrapper>
+                {/* <PRINT data={salesEntry} /> */}
                 <main className="space-y-6">
                     {/* <pre>{JSON.stringify(salesEntry, null, 2)}</pre> */}
                     <div className="flex flex-col rounded-xl bg-white p-4 sm:p-10">
