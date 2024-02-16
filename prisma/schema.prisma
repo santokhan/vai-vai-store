@@ -142,7 +142,7 @@ model SalesEntry {
     discount   Int
     due        Int
     dueDate    DateTime? @default(now())
-    Seller     Seller    @relation(fields: [sellerId], references: [id])
+    seller     Seller    @relation(fields: [sellerId], references: [id])
     sellerId   String    @db.ObjectId
     customer   Customer  @relation(fields: [customerId], references: [id])
     customerId String    @db.ObjectId

@@ -19,6 +19,8 @@ import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, Chevron
 import { makeData } from './makeData'
 import { StockAndroid, } from '@/prisma/generated/client'
 
+export const tableArrowClasses = "border rounded-lg px-2 py-2 flex items-center hover:bg-gray-100";
+
 export default function StockTable({ stockAndroid }: { stockAndroid: StockAndroid[] }) {
     const columns = React.useMemo<ColumnDef<StockAndroid>[]>(() => [
         {
@@ -176,8 +178,6 @@ function Table({ data, columns, reFetch }: TableProps) {
     const headerGroups = table.getHeaderGroups();
     headerGroups.unshift();
 
-    const arrowClasses = "border rounded-lg px-2 py-2 flex items-center hover:bg-gray-100";
-
     return (
         <div className="rounded-xl bg-white p-6 space-y-6 overflow-hidden">
             <h4 className="text-xl font-semibold">Android Table</h4>
@@ -196,7 +196,6 @@ function Table({ data, columns, reFetch }: TableProps) {
                                 </th>
                             )}
                         </tr>
-                        {/* {headerGroups.map(headerGroup =>)} */}
                     </thead>
                     <tbody>
                         {table.getRowModel().rows.map(row =>
@@ -215,19 +214,19 @@ function Table({ data, columns, reFetch }: TableProps) {
                 </table>
             </div>
             <div className="flex items-center gap-2 py-2">
-                <button className={arrowClasses}
+                <button className={tableArrowClasses}
                     onClick={() => table.setPageIndex(0)}
                     disabled={!table.getCanPreviousPage()}
                 ><ChevronDoubleLeftIcon className='w-4 h-4' /></button>
-                <button className={arrowClasses}
+                <button className={tableArrowClasses}
                     onClick={() => table.previousPage()}
                     disabled={!table.getCanPreviousPage()}
                 ><ChevronLeftIcon className='w-4 h-4' /></button>
-                <button className={arrowClasses}
+                <button className={tableArrowClasses}
                     onClick={() => table.nextPage()}
                     disabled={!table.getCanNextPage()}
                 ><ChevronRightIcon className='w-4 h-4' /></button>
-                <button className={arrowClasses}
+                <button className={tableArrowClasses}
                     onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                     disabled={!table.getCanNextPage()}
                 ><ChevronDoubleRightIcon className='w-4 h-4' /></button>

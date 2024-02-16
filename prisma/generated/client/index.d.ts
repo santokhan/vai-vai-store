@@ -12722,7 +12722,7 @@ export namespace Prisma {
     customerId?: boolean
     createdAt?: boolean
     entity?: boolean
-    Seller?: boolean | SellerDefaultArgs<ExtArgs>
+    seller?: boolean | SellerDefaultArgs<ExtArgs>
     customer?: boolean | CustomerDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["salesEntry"]>
 
@@ -12738,7 +12738,7 @@ export namespace Prisma {
   }
 
   export type SalesEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Seller?: boolean | SellerDefaultArgs<ExtArgs>
+    seller?: boolean | SellerDefaultArgs<ExtArgs>
     customer?: boolean | CustomerDefaultArgs<ExtArgs>
   }
 
@@ -12746,7 +12746,7 @@ export namespace Prisma {
   export type $SalesEntryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "SalesEntry"
     objects: {
-      Seller: Prisma.$SellerPayload<ExtArgs>
+      seller: Prisma.$SellerPayload<ExtArgs>
       customer: Prisma.$CustomerPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -13150,7 +13150,7 @@ export namespace Prisma {
   export interface Prisma__SalesEntryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    Seller<T extends SellerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SellerDefaultArgs<ExtArgs>>): Prisma__SellerClient<$Result.GetResult<Prisma.$SellerPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    seller<T extends SellerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SellerDefaultArgs<ExtArgs>>): Prisma__SellerClient<$Result.GetResult<Prisma.$SellerPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     customer<T extends CustomerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CustomerDefaultArgs<ExtArgs>>): Prisma__CustomerClient<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
@@ -14506,7 +14506,7 @@ export namespace Prisma {
     customerId?: StringFilter<"SalesEntry"> | string
     createdAt?: DateTimeNullableFilter<"SalesEntry"> | Date | string | null
     entity?: JsonFilter<"SalesEntry">
-    Seller?: XOR<SellerRelationFilter, SellerWhereInput>
+    seller?: XOR<SellerRelationFilter, SellerWhereInput>
     customer?: XOR<CustomerRelationFilter, CustomerWhereInput>
   }
 
@@ -14519,7 +14519,7 @@ export namespace Prisma {
     customerId?: SortOrder
     createdAt?: SortOrder
     entity?: SortOrder
-    Seller?: SellerOrderByWithRelationInput
+    seller?: SellerOrderByWithRelationInput
     customer?: CustomerOrderByWithRelationInput
   }
 
@@ -14535,7 +14535,7 @@ export namespace Prisma {
     customerId?: StringFilter<"SalesEntry"> | string
     createdAt?: DateTimeNullableFilter<"SalesEntry"> | Date | string | null
     entity?: JsonFilter<"SalesEntry">
-    Seller?: XOR<SellerRelationFilter, SellerWhereInput>
+    seller?: XOR<SellerRelationFilter, SellerWhereInput>
     customer?: XOR<CustomerRelationFilter, CustomerWhereInput>
   }, "id">
 
@@ -15272,7 +15272,7 @@ export namespace Prisma {
     dueDate?: Date | string | null
     createdAt?: Date | string | null
     entity: InputJsonValue
-    Seller: SellerCreateNestedOneWithoutSalesEntryInput
+    seller: SellerCreateNestedOneWithoutSalesEntryInput
     customer: CustomerCreateNestedOneWithoutSalesEntryInput
   }
 
@@ -15293,7 +15293,7 @@ export namespace Prisma {
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     entity?: InputJsonValue | InputJsonValue
-    Seller?: SellerUpdateOneRequiredWithoutSalesEntryNestedInput
+    seller?: SellerUpdateOneRequiredWithoutSalesEntryNestedInput
     customer?: CustomerUpdateOneRequiredWithoutSalesEntryNestedInput
   }
 
@@ -18698,7 +18698,7 @@ export namespace Prisma {
     dueDate?: Date | string | null
     createdAt?: Date | string | null
     entity: InputJsonValue
-    Seller: SellerCreateNestedOneWithoutSalesEntryInput
+    seller: SellerCreateNestedOneWithoutSalesEntryInput
   }
 
   export type SalesEntryUncheckedCreateWithoutCustomerInput = {
@@ -19533,7 +19533,7 @@ export namespace Prisma {
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     entity?: InputJsonValue | InputJsonValue
-    Seller?: SellerUpdateOneRequiredWithoutSalesEntryNestedInput
+    seller?: SellerUpdateOneRequiredWithoutSalesEntryNestedInput
   }
 
   export type SalesEntryUncheckedUpdateWithoutCustomerInput = {

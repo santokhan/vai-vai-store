@@ -7,7 +7,8 @@ export async function getSalesIndividual(id: string) {
                 id
             },
             include: {
-                customer: true
+                customer: true,
+                seller: true
             }
         });
     } catch (error) {
@@ -23,6 +24,7 @@ export async function getSalesMany() {
         return await prisma.salesEntry.findMany({
             include: {
                 customer: true,
+                seller: true
             }
         });
     } catch (error) {
