@@ -1,4 +1,3 @@
-'use client'
 import SalesEntryForm from "@/components/form/sales/sales-entry";
 import CustomerProvider from "@/context/customer-context";
 import SalesRowProvider from "@/context/sales-context";
