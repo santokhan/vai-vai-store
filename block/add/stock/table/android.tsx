@@ -4,10 +4,10 @@ import React from 'react';
 import { Column, Table as ReactTable, useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, flexRender } from '@tanstack/react-table';
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { StockAndroid } from '@/prisma/generated/client';
-import { useRouter } from 'next/navigation';
 import { Trash } from 'iconsax-react';
 import { ORIGIN } from '@/utils/origin';
 import PageOutOf from './page-number-out-of';
+import Actions, { ActionDelete } from '@/components/table/action';
 
 export const tableArrowClasses = "border rounded-lg px-2 py-2 flex items-center hover:bg-gray-100";
 
@@ -17,7 +17,7 @@ interface ServerProps {
 
 const DeleteButton = ({ row }: any) => {
     return (
-        <div className="flex items-center justify-center gap-2">
+        <Actions>
             <button onClick={() => {
                 fetch(`${ORIGIN}/api/stock/table/android/delete?id=${row.original.id}`, {
                     method: "DELETE"
@@ -27,7 +27,7 @@ const DeleteButton = ({ row }: any) => {
             }} className='hover:text-red-600' >
                 <Trash className='w-4 h-4' />
             </button>
-        </div>
+        </Actions>
     )
 };
 
@@ -44,7 +44,22 @@ export default function StockTable({ stockAndroid }: ServerProps) {
         { id: 'rom', columns: [{ accessorKey: 'rom' }] },
         { id: 'color', columns: [{ accessorKey: 'color' }] },
         { id: 'sold', columns: [{ accessorKey: 'sold' }] },
-        { id: 'action', columns: [{ id: 'action', cell: DeleteButton }] }
+        {
+            id: 'action', columns: [{
+                id: 'action',
+                cell: ({ row }) => (
+                    <Actions>
+                        <ActionDelete handleClick={() => {
+                            fetch(`${ORIGIN}/api/stock/table/android/delete?id=${row.original.id}`, {
+                                method: "DELETE"
+                            }).then(res => res.json()).then((data) => {
+                                window.location.reload();
+                            })
+                        }} />
+                    </Actions>
+                )
+            }]
+        }
     ], []);
 
     return <Table data={stockAndroid} columns={columns} />
@@ -122,7 +137,7 @@ function Table({ data, columns }: TableProps) {
                     )}
                 </select>
             </div>
-            <div className='py-2'>{table.getRowModel().rows.length} Rows</div>
+            <div>{table.getRowModel().rows.length} Rows</div>
         </div>
     )
 }

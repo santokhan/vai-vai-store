@@ -5,15 +5,15 @@ export async function DELETE(request: Request) {
     const id = searchParams.get('id')
 
     if (id) {
-        const deletedAndroid = await prisma.stockAndroid.delete({
+        const deletedAndroid = await prisma.salesEntry.delete({
             where: { id }
         });
         if (deletedAndroid) {
-            return Response.json({ message: 'Android deleted successfully' });
+            return Response.json({ message: 'Sales deleted successfully' });
         } else {
-            return Response.json({ message: 'Failed to delete android' });
+            return Response.json({ message: 'Failed to delete sales' });
         }
     } else {
-        return Response.json({ message: 'Failed to delete android' });
+        return Response.json({ message: 'Failed to delete sales' });
     }
 }
