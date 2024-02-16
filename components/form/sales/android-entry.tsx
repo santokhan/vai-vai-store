@@ -49,6 +49,8 @@ export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: ()
                 quantity: 1,
                 price: foundStockItem.sellingPrice,
                 type: 'android',
+                brand: foundStockItem.brand.brandName,
+                model: foundStockItem.model.model
             });
             onCloseForm();
         } else {

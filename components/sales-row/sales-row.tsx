@@ -3,7 +3,7 @@ import { Table } from 'flowbite-react';
 import Button from '../button/button';
 import { Add } from 'iconsax-react';
 import { ProductTypeKeys, productTypes } from '@/utils/product-type';
-import { useSalesRowContext } from '@/context/sales-context';
+import { SalesRowIncludeBrandModel, useSalesRowContext } from '@/context/sales-context';
 import FormTitle from '../form/title';
 import { APISalesEntity } from '@/app/api/(store)/sales/entry/type';
 
@@ -14,8 +14,12 @@ interface Props {
 const SalesRow: FC<Props> = ({ onOpenForm }) => {
     const { salesEntity, removeFromSales } = useSalesRowContext();
 
-    const getCols = (salesEntity: APISalesEntity[]): string[] => {
-        return salesEntity.length > 0 ? Object.keys(salesEntity[0]) : [];
+    const getCols = (salesEntity: SalesRowIncludeBrandModel[]): string[] => {
+        if (salesEntity.length > 0) {
+            return Object.keys(salesEntity[0]).filter((key) => key !== 'stockId');
+        } else {
+            return [];
+        }
     };
 
     return (
@@ -23,17 +27,23 @@ const SalesRow: FC<Props> = ({ onOpenForm }) => {
             <FormTitle>Sales Entity</FormTitle>
             <Table>
                 <Table.Head className="uppercase">
-                    {getCols(salesEntity).map((objKey, i) => (
-                        <Table.HeadCell key={i}>{objKey}</Table.HeadCell>
-                    ))}
+                    <Table.HeadCell>Type</Table.HeadCell>
+                    <Table.HeadCell>Brand</Table.HeadCell>
+                    <Table.HeadCell>Model</Table.HeadCell>
+                    <Table.HeadCell>Quantity</Table.HeadCell>
+                    <Table.HeadCell>Price</Table.HeadCell>
+
                     <Table.HeadCell>Action</Table.HeadCell>
                 </Table.Head>
                 <Table.Body>
                     {salesEntity.map((row, index) => (
                         <Table.Row key={index}>
-                            {getCols(salesEntity).map((colKey, i) => (
-                                <Table.Cell key={i}>{row[colKey as keyof APISalesEntity]}</Table.Cell>
-                            ))}
+                            <Table.Cell className='capitalize'>{row.type}</Table.Cell>
+                            <Table.Cell className='capitalize'>{row.brand}</Table.Cell>
+                            <Table.Cell className='capitalize'>{row.model}</Table.Cell>
+                            <Table.Cell>{row.quantity}</Table.Cell>
+                            <Table.Cell>{row.price}</Table.Cell>
+
                             <Table.Cell>
                                 <button
                                     type="button"

@@ -31,14 +31,19 @@ export default function SalesEntryForm() {
             if (seller.sellerId) {
                 if (confirm('Click OK if you wanna checkout')) {
                     setAdding(true);
+                    const postData: APISalesEntry = {
+                        salesEntity: salesEntity.map(entity => {
+                            // I need only below keys for APISalesEntry
+                            const { stockId, quantity, price, type } = entity;
+                            return { stockId, quantity, price, type };
+                        }),
+                        customer,
+                        seller
+                    }
                     fetch(`${ORIGIN}/api/sales/entry/`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            salesEntity,
-                            customer,
-                            seller
-                        } as APISalesEntry)
+                        body: JSON.stringify(postData)
                     }).then(res => res.json()).then((data) => {
                         if (data.message) {
                             alert(data.message);
