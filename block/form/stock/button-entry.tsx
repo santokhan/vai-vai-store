@@ -94,7 +94,7 @@ const StockButtonEntryForm: React.FC = () => {
 
     return (
         <FormContext.Provider value={value}>
-            <section className='space-y-2'>
+            <section className='space-y-2 hidden'>
                 <FormTitle>Add Button</FormTitle>
                 <form onSubmit={handleSubmit} className='block space-y-4'>
                     <FormContainer>

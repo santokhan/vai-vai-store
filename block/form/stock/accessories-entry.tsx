@@ -89,7 +89,7 @@ const StockAccessoriesEntryForm: React.FC = () => {
 
     return (
         <FormContext.Provider value={value}>
-            <div className="w-full space-y-12">
+            <div className="w-full space-y-12 hidden">
                 <section className='space-y-2'>
                     <FormTitle>Add Accessories</FormTitle>
                     <form onSubmit={handleSubmit} className='block space-y-4'>
