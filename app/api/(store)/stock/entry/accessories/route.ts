@@ -1,8 +1,21 @@
-// Import the Prisma Client
 import { prisma } from '@/lib/prisma';
 import { StockAccessoriesPOST } from '../post-data-type';
 
-async function getStockButton() {
+async function getAccessoriesSingle(modelId: string) {
+    try {
+        return await prisma.stockAccessories.findFirst({
+            where: {
+                modelId
+            }
+        });
+    } catch (error) {
+        console.error('Error getting accessories data:', error);
+    } finally {
+        await prisma.$disconnect();
+    }
+}
+
+async function getAccessoriesMany() {
     try {
         return await prisma.stockAccessories.findMany();
     } catch (error) {
@@ -13,7 +26,7 @@ async function getStockButton() {
     }
 }
 
-async function addStockButton(body: StockAccessoriesPOST) {
+async function addAccessories(body: StockAccessoriesPOST) {
     try {
         const createdModel = await prisma.stockAccessories.create({
             data: body
@@ -22,13 +35,30 @@ async function addStockButton(body: StockAccessoriesPOST) {
     } catch (error) {
         console.error('Error creating accessories data:', error);
     } finally {
-        // Close the Prisma Client connection
+        await prisma.$disconnect();
+    }
+}
+
+async function updateAccessories(id: string, quantity: number) {
+    try {
+        const createdModel = await prisma.stockAccessories.update({
+            where: {
+                id
+            },
+            data: {
+                quantity
+            }
+        });
+        return createdModel;
+    } catch (error) {
+        console.error('Error creating accessories data:', error);
+    } finally {
         await prisma.$disconnect();
     }
 }
 
 export async function GET(): Promise<Response> {
-    const data = await getStockButton();
+    const data = await getAccessoriesMany();
     if (data) {
         return Response.json(data);
     } else {
@@ -38,21 +68,23 @@ export async function GET(): Promise<Response> {
 
 export async function POST(request: Request): Promise<Response> {
     const body: StockAccessoriesPOST = await request.json();
-    const { sellingPrice, modelId, quantity } = body;
-    if (sellingPrice && modelId && quantity) {
-        const existingBrand = await prisma.stockAccessories.findFirst({
-            where: {
-                modelId
-            }
-        })
-        if (existingBrand) {
-            return Response.json({ message: 'This button phone already exists in stock.' });
-        } else {
-            const createdModel = await addStockButton(body);
-            if (createdModel) {
-                return Response.json({ message: `Button phone data created with model id: ${createdModel.modelId}` });
+    const { modelId, quantity, } = body;
+    if (modelId && quantity) {
+        const exist = await getAccessoriesSingle(modelId);
+
+        if (exist) {
+            const updatedAStock = await updateAccessories(exist.id, quantity);
+            if (updatedAStock) {
+                return Response.json({ message: `The updated quantity is ${updatedAStock.quantity}` });
             } else {
-                return Response.json({ message: 'Failed to add accessories data.' });
+                return Response.json({ message: 'Can not update quantity.' });
+            }
+        } else {
+            const createdModel = await addAccessories(body);
+            if (createdModel) {
+                return Response.json({ message: `Data created with model id: ${createdModel.modelId}` });
+            } else {
+                return Response.json({ message: 'Failed to add data.' });
             }
         }
     } else {
