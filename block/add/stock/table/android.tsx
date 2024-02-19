@@ -83,25 +83,27 @@ function Table({ data, columns }: TableProps) {
     const headers = table.getHeaderGroups()[1].headers;
 
     return (
-        <div className="rounded-xl bg-white p-6 space-y-6 overflow-hidden">
+        <div className="rounded-xl bg-white p-4 lg:p-6 space-y-4 overflow-hidden">
             <h4 className="text-xl font-semibold">Android Table</h4>
             <div className="overflow-x-scroll">
                 <table>
-                    <thead className='bg-gray-100'>
-                        {headers.map(header =>
-                            <th key={header.id} colSpan={header.colSpan} className='p-2 text-start border font-medium uppercase text-sm'>
-                                <>
-                                    {header.column.parent?.id}
-                                    {header.column.getCanFilter() && <Filter column={header.column} table={table} />}
-                                </>
-                            </th>
-                        )}
+                    <thead className='bg-gray-100 rounded-lg'>
+                        <tr>
+                            {headers.map(header =>
+                                <th key={header.id} colSpan={header.colSpan} className='p-2 text-start font-medium uppercase text-sm min-w-[3rem]'>
+                                    <div className="flex flex-col gap-2">
+                                        <span className='whitespace-nowrap'>{header.column.parent?.id}</span>
+                                        {header.column.getCanFilter() && <Filter column={header.column} table={table} />}
+                                    </div>
+                                </th>
+                            )}
+                        </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='divide-y'>
                         {table.getRowModel().rows.map(row => (
                             <tr key={row.id}>
                                 {row.getVisibleCells().map(cell => (
-                                    <td key={cell.id} className='p-2 border whitespace-nowrap'>
+                                    <td key={cell.id} className='p-2 whitespace-nowrap'>
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </td>
                                 ))}
@@ -109,35 +111,37 @@ function Table({ data, columns }: TableProps) {
                         ))}
                     </tbody>
                 </table>
+                <div className="py-4 space-y-4">
+                    <div className="flex items-center gap-2 py-2">
+                        <button className={tableArrowClasses} onClick={() => { table.setPageIndex(1) }} disabled={!table.getCanPreviousPage()}><ChevronDoubleLeftIcon className='w-4 h-4' /></button>
+                        <button className={tableArrowClasses} onClick={() => { table.previousPage() }} disabled={!table.getCanPreviousPage()}><ChevronLeftIcon className='w-4 h-4' /></button>
+                        <button className={tableArrowClasses} onClick={() => { table.nextPage() }} disabled={!table.getCanNextPage()}><ChevronRightIcon className='w-4 h-4' /></button>
+                        <button className={tableArrowClasses} onClick={() => { table.setPageIndex(table.getPageCount() - 1) }} disabled={!table.getCanNextPage()}><ChevronDoubleRightIcon className='w-4 h-4' /></button>
+                        <PageOutOf pageNumber={table.getState().pagination.pageIndex + 1} totalPageCount={table.getPageCount()} />
+                        <span className="flex items-center gap-2 px-2 whitespace-nowrap">| Go to page:
+                            <input
+                                type="number"
+                                defaultValue={table.getState().pagination.pageIndex + 1}
+                                onChange={e => {
+                                    const page = e.target.value ? Number(e.target.value) - 1 : 0
+                                    table.setPageIndex(page)
+                                }}
+                                className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-800 h-9 w-28'
+                            />
+                        </span>
+                        <select
+                            value={table.getState().pagination.pageSize}
+                            onChange={e => { table.setPageSize(Number(e.target.value)) }}
+                            className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-800 h-9 w-28'
+                        >
+                            {[10, 20, 30, 40, 50].map((pageSize, idx) =>
+                                <option key={idx} value={pageSize}>Show {pageSize}</option>
+                            )}
+                        </select>
+                    </div>
+                    <div>{table.getRowModel().rows.length} Rows</div>
+                </div>
             </div>
-            <div className="flex items-center gap-2 py-2">
-                <button className={tableArrowClasses} onClick={() => { table.setPageIndex(1) }} disabled={!table.getCanPreviousPage()}><ChevronDoubleLeftIcon className='w-4 h-4' /></button>
-                <button className={tableArrowClasses} onClick={() => { table.previousPage() }} disabled={!table.getCanPreviousPage()}><ChevronLeftIcon className='w-4 h-4' /></button>
-                <button className={tableArrowClasses} onClick={() => { table.nextPage() }} disabled={!table.getCanNextPage()}><ChevronRightIcon className='w-4 h-4' /></button>
-                <button className={tableArrowClasses} onClick={() => { table.setPageIndex(table.getPageCount() - 1) }} disabled={!table.getCanNextPage()}><ChevronDoubleRightIcon className='w-4 h-4' /></button>
-                <PageOutOf pageNumber={table.getState().pagination.pageIndex + 1} totalPageCount={table.getPageCount()} />
-                <span className="flex items-center gap-2 px-2">| Go to page:
-                    <input
-                        type="number"
-                        defaultValue={table.getState().pagination.pageIndex + 1}
-                        onChange={e => {
-                            const page = e.target.value ? Number(e.target.value) - 1 : 0
-                            table.setPageIndex(page)
-                        }}
-                        className="default !h-9 !w-16 !py-0"
-                    />
-                </span>
-                <select
-                    value={table.getState().pagination.pageSize}
-                    onChange={e => { table.setPageSize(Number(e.target.value)) }}
-                    className='default !h-9 !w-32 !py-0'
-                >
-                    {[10, 20, 30, 40, 50].map((pageSize, idx) =>
-                        <option key={idx} value={pageSize}>Show {pageSize}</option>
-                    )}
-                </select>
-            </div>
-            <div>{table.getRowModel().rows.length} Rows</div>
         </div>
     )
 }

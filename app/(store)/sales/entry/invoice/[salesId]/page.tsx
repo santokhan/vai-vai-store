@@ -2,7 +2,6 @@
 import { getSalesIndividual } from "@/actions/sales/get";
 import { getStockSingle } from "@/actions/stock/get";
 import Logo from "@/components/logo/logo";
-import { PRINT } from "@/components/print";
 import PrintWrapper from "@/components/print-wrapper";
 
 const getStockData = async (stockId: string) => {
@@ -20,11 +19,13 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
                     <div className="rounded-lg overflow-hidden">
                         <table className="w-full">
                             <thead className="bg-gray-100">
-                                <th className="text-start text-sm font-semibold uppercase p-3 text-gray-700">Type</th>
-                                <th className="text-start text-sm font-semibold uppercase p-3 text-gray-700">Brand</th>
-                                <th className="text-start text-sm font-semibold uppercase p-3 text-gray-700">Model</th>
-                                <th className="text-start text-sm font-semibold uppercase p-3 text-gray-700">Quantity</th>
-                                <th className="text-start text-sm font-semibold uppercase p-3 text-gray-700">Price</th>
+                                <tr>
+                                    <th className="text-start text-sm font-semibold uppercase p-3 text-gray-700">Type</th>
+                                    <th className="text-start text-sm font-semibold uppercase p-3 text-gray-700">Brand</th>
+                                    <th className="text-start text-sm font-semibold uppercase p-3 text-gray-700">Model</th>
+                                    <th className="text-start text-sm font-semibold uppercase p-3 text-gray-700">Quantity</th>
+                                    <th className="text-start text-sm font-semibold uppercase p-3 text-gray-700">Price</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 {entity.map(async (row: any, i: number) => {
