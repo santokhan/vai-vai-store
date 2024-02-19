@@ -1,6 +1,6 @@
 'use client';
-import { FC, Fragment } from 'react';
-import { sidebarNavs } from '@/lib/sidebar/sidebar';
+import { FC } from 'react';
+import { dashboard, expenses, stock, sales, add, warranty, report, user, customer } from '@/lib/sidebar/sidebar';
 import { NavLink } from './nav-link';
 import SidebarProvider from '@/context/sidebar-context';
 import { NavIncludeDropdown } from './nav-include-dropdown';
@@ -12,15 +12,15 @@ export const AsystSidebar: FC = () => (
         <h5 className="text-base font-semibold text-gray-400 uppercase">Menu</h5>
         <SidebarProvider>
             <nav className="space-y-2 py-4">
-                {sidebarNavs.map((nav, index) =>
-                    <Fragment key={index}>
-                        {nav.children ? <NavIncludeDropdown nav={{
-                            title: nav.title,
-                            path: nav.path,
-                            children: nav.children
-                        }} /> : <NavLink nav={nav} />}
-                    </Fragment>
-                )}
+                <NavLink nav={dashboard} />
+                <NavIncludeDropdown nav={add} />
+                <NavIncludeDropdown nav={stock} />
+                <NavIncludeDropdown nav={sales} />
+                <NavIncludeDropdown nav={customer} />
+                <NavIncludeDropdown nav={report} />
+                <NavIncludeDropdown nav={user} />
+                <NavIncludeDropdown nav={warranty} />
+                <NavIncludeDropdown nav={expenses} />
             </nav>
         </SidebarProvider>
     </div>
