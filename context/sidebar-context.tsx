@@ -17,7 +17,6 @@ export default function SidebarProvider({ children }: OnlyChildrenProps) {
         <SidebarContext.Provider value={{
             activeNavTitle,
             handleExpand(newTitle: string) {
-                alert(newTitle);
                 if (activeNavTitle == newTitle) {
                     setactiveNavTitle('');
                 } else {
