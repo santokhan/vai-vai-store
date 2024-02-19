@@ -12,6 +12,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
     if (!session) {
         return redirect("/auth/signin?redirect=/dashboard");
     } else {
+        // in server component we can call server action directly to read user role
         const url = `${ORIGIN}/api/user/role/?email=${session.user?.email}`
         const response = await fetch(url, {
             cache: 'no-store'
