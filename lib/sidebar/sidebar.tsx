@@ -12,14 +12,14 @@ export type NavItem = {
     path: string;
 }
 
-export interface NavDropdown extends NavItem {
+export interface NavIncludeDropdown extends NavItem {
     children?: NavLink[];
 }
 
-export const sales: NavDropdown = {
+export const sales: NavIncludeDropdown = {
     title: 'sales',
     path: '/sales',
-    icon: <Shop className="w-5 h-5 text-gray-500" />,
+    icon: <Shop className="w-5 h-5" />,
     children: [
         {
             name: "entry",
@@ -36,10 +36,10 @@ export const sales: NavDropdown = {
     ],
 };
 
-export const add: NavDropdown = {
+export const add: NavIncludeDropdown = {
     title: 'add',
     path: '/add',
-    icon: <Shop className="w-5 h-5 text-gray-500" />,
+    icon: <Shop className="w-5 h-5" />,
     children: [
         {
             name: "type",
@@ -60,10 +60,10 @@ export const add: NavDropdown = {
     ],
 };
 
-export const report: NavDropdown = {
+export const report: NavIncludeDropdown = {
     title: 'report',
     path: '/report',
-    icon: <Document className="w-5 h-5 text-gray-500" />,
+    icon: <Document className="w-5 h-5" />,
     children: [
         {
             name: "sales",
@@ -76,10 +76,10 @@ export const report: NavDropdown = {
     ],
 };
 
-export const stock: NavDropdown = {
+export const stock: NavIncludeDropdown = {
     title: 'stock',
     path: "/stock",
-    icon: <ShoppingCart className="w-5 h-5 text-gray-500" />,
+    icon: <ShoppingCart className="w-5 h-5" />,
     children: [
         {
             name: "entry",
@@ -92,10 +92,10 @@ export const stock: NavDropdown = {
     ],
 };
 
-export const expenses: NavDropdown = {
+export const expenses: NavIncludeDropdown = {
     title: 'expenses',
     path: "/expenses",
-    icon: <Money className="w-5 h-5 text-gray-500" />,
+    icon: <Money className="w-5 h-5" />,
     children: [
         {
             name: "rent",
@@ -115,28 +115,28 @@ export const expenses: NavDropdown = {
 export const dashboard: NavItem = {
     title: 'dashboard',
     path: "/dashboard",
-    icon: <ShieldSecurity className="w-5 h-5 text-gray-500" />,
+    icon: <ShieldSecurity className="w-5 h-5" />,
 };
 
 export const warranty: NavItem = {
     title: 'warranty',
     path: "/warranty",
-    icon: <ShieldSecurity className="w-5 h-5 text-gray-500" />,
+    icon: <ShieldSecurity className="w-5 h-5" />,
 };
 
 export const customer: NavItem = {
     title: 'customer',
     path: "/customer",
-    icon: <Profile2User className="w-5 h-5 text-gray-500" />,
+    icon: <Profile2User className="w-5 h-5" />,
 };
 
 export const user: NavItem = {
     title: 'user',
     path: "/user",
-    icon: <User className="w-5 h-5 text-gray-500" />
+    icon: <User className="w-5 h-5" />
 };
 
-export const sidebarNavs: NavDropdown[] = [
+export const sidebarNavs: NavIncludeDropdown[] = [
     dashboard,
     add,
     stock,
