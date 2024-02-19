@@ -18,12 +18,6 @@ export default function SidebarDrawer() {
         setState({ ...state, [anchor]: open });
     };
 
-    const NavList = () => (
-        <div className="w-[250px]">
-            <AsystSidebar />
-        </div>
-    );
-
     return (['left'] as const).map((anchor) => (
         <Fragment key={anchor}>
             <IconButton
@@ -41,7 +35,7 @@ export default function SidebarDrawer() {
                 open={state[anchor]}
                 onClose={toggleDrawer(anchor, false)}
             >
-                <NavList />
+                <AsystSidebar />
             </Drawer>
         </Fragment>
     ));
