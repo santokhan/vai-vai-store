@@ -10,6 +10,7 @@ import Actions, { ActionDelete } from '@/components/table/action';
 import { GoToPage, TableFooterContainer, TableFooterRow } from '@/components/table/tanstack/table-footer';
 import THeadFilter from '@/components/table/tanstack/table-filter';
 import { inputClasses } from '@/components/table/tanstack/tw-classes';
+import { TableTitle } from '@/components/table/table-header';
 
 export const tableArrowClasses = "border rounded-lg px-2 py-2 flex items-center hover:bg-gray-100";
 
@@ -41,7 +42,8 @@ export default function StockTable({ stockAndroid }: { stockAndroid: StockAndroi
             }]
         },
         {
-            id: 'action', columns: [{
+            id: 'action',
+            columns: [{
                 id: 'action',
                 cell: ({ row }) => (
                     <Actions>
@@ -80,7 +82,7 @@ function Table({ data, columns }: TableProps) {
 
     return (
         <div className="rounded-xl bg-white p-4 lg:p-6 space-y-4">
-            <h4 className="text-xl font-semibold">Android Table</h4>
+            <TableTitle>Android Table</TableTitle>
             <div className="overflow-x-auto">
                 <table className='w-full text-sm'>
                     <thead className='bg-gray-100'>

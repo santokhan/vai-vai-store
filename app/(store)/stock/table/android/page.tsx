@@ -1,16 +1,15 @@
 'use server';
+
 import { getStockAndroidMany } from "@/actions/stock/get";
 import StockTable from "@/block/add/stock/table/android";
+import { StockAndroid } from "@/prisma/generated/client";
 
 export default async function StockAndroidTablePage() {
-    const stockAndroid = await getStockAndroidMany();
+    const stockAndroid: StockAndroid[] | undefined = await getStockAndroidMany();
 
-    if (stockAndroid && stockAndroid.length > 0) {
-        return (
-            <StockTable stockAndroid={stockAndroid} />
-        )
-    } else {
-        return null;
-    }
+    return (
+        Array.isArray(stockAndroid) && <StockTable stockAndroid={stockAndroid} />
+    )
 }
+
 

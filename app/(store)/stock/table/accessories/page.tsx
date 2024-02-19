@@ -1,11 +1,14 @@
-'use client'
-import StockTable from "@/block/add/stock/table/accessories";
+'use server';
 
-export default function StockButtonTablePage() {
+import { getAccessoriesMany } from "@/actions/stock/accessories/get";
+import StockTableAccessories from "@/block/add/stock/table/accessories";
+import { StockAccessories } from "@/prisma/generated/client";
+
+export default async function StockButtonTablePage() {
+    const stockAccessories: StockAccessories[] | undefined = await getAccessoriesMany();
+
     return (
-        <>
-            <StockTable />
-        </>
+        Array.isArray(stockAccessories) && <StockTableAccessories stockAccessories={stockAccessories} />
     )
 }
 
