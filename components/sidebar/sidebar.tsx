@@ -17,7 +17,7 @@ export const Dropdown: FC<{ nav: NavDropdown }> = ({ nav }) => {
         <Fragment>
             <button
                 type="button" onClick={() => { setIsOpen(!isOpen) }}
-                className={["flex items-center gap-3 w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 font-medium",
+                className={["flex items-center gap-3 w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 font-medium overflow-hidden",
                     active ? "bg-gray-100" : ""].join(" ")}
             >
                 {nav.icon || <ShoppingCart className="w-5 h-5 text-gray-500" />}
