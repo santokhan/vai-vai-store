@@ -1,6 +1,7 @@
+'use server';
 import { prisma } from '@/lib/prisma';
 
-async function getRole(email: string) {
+export async function getRole(email: string) {
     try {
         const createdUser = await prisma.user.findFirst({
             where: {
@@ -23,7 +24,7 @@ async function getRole(email: string) {
     }
 }
 
-async function insertNewUser(email: string, role: string) {
+export async function insertNewUser(email: string, role: string) {
     try {
         const createdUser = await prisma.user.create({
             data: {
