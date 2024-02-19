@@ -14,7 +14,7 @@ export default function SidebarDrawer() {
 
     return (['left'] as const).map((anchor) => (
         <Fragment key={anchor}>
-            <button onClick={toggleDrawer} className='block md:none mr-3'>
+            <button onClick={toggleDrawer} className='block md:hidden mr-3'>
                 <MenuIcon />
             </button>
             <Drawer

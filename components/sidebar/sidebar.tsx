@@ -4,6 +4,7 @@ import { NavDropdown, NavItem as NI, sidebarNavs } from '@/lib/sidebar/sidebar';
 import { ShoppingCart } from 'iconsax-react'
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { NavLink } from './nav-link';
 
 interface DropdownProps {
     nav: NavDropdown;
@@ -57,20 +58,8 @@ export const Dropdown: FC<DropdownProps> = ({ nav, handleExpand, expanded }) => 
     );
 };
 
-const NavItem: React.FC<{ nav: NI }> = ({ nav }) => {
-    const pathName = usePathname();
-    const activeNav = (path: string) => activeInactive(pathName.includes(path));
-
-    return (
-        <Link href={nav.path} className={`flex items-center gap-2 p-2 text-gray-900 rounded-lg capitalize whitespace-nowrap font-medium ${activeNav(nav.path)}`}>
-            {nav.icon || <ShoppingCart className="w-5 h-5" />}
-            {nav.title}
-        </Link>
-    );
-};
-
 export const AsystSidebar: FC = () => {
-    const [expandIdx, setExpandIdx] = useState<number | undefined>(undefined);
+    const [expandNav, setExpandNav] = useState<string>('');
 
     return (
         <div className="w-[250px] p-4 bg-white relative">
@@ -78,11 +67,12 @@ export const AsystSidebar: FC = () => {
             <nav className="space-y-2 py-4">
                 {
                     sidebarNavs.map((nav, index) =>
-                        <Fragment key={index}>
-                            {nav.children ? <Dropdown nav={nav} handleExpand={() => {
-                                setExpandIdx(expandIdx == index ? undefined : index);
-                            }} expanded={index == expandIdx} /> : <NavItem nav={nav} />}
-                        </Fragment>
+                        nav.children ?
+                            <Dropdown key={index} nav={nav} expanded={expandNav == nav.title} handleExpand={() => {
+                                setExpandNav(expandNav == nav.title ? '' : nav.title);
+                            }} />
+                            :
+                            <NavLink nav={nav} key={index} />
                     )
                 }
             </nav>
@@ -97,5 +87,3 @@ export default function Sidebar() {
         </div>
     );
 }
-
-
