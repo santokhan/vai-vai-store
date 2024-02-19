@@ -12,11 +12,11 @@ export type NavItem = {
     path: string;
 }
 
-export interface NavDropdown extends NavItem {
+export interface NavIncludeDropdown extends NavItem {
     children?: NavLink[];
 }
 
-export const sales: NavDropdown = {
+export const sales: NavIncludeDropdown = {
     title: 'sales',
     path: '/sales',
     icon: <Shop className="w-5 h-5" />,
@@ -36,7 +36,7 @@ export const sales: NavDropdown = {
     ],
 };
 
-export const add: NavDropdown = {
+export const add: NavIncludeDropdown = {
     title: 'add',
     path: '/add',
     icon: <Shop className="w-5 h-5" />,
@@ -60,7 +60,7 @@ export const add: NavDropdown = {
     ],
 };
 
-export const report: NavDropdown = {
+export const report: NavIncludeDropdown = {
     title: 'report',
     path: '/report',
     icon: <Document className="w-5 h-5" />,
@@ -76,7 +76,7 @@ export const report: NavDropdown = {
     ],
 };
 
-export const stock: NavDropdown = {
+export const stock: NavIncludeDropdown = {
     title: 'stock',
     path: "/stock",
     icon: <ShoppingCart className="w-5 h-5" />,
@@ -92,7 +92,7 @@ export const stock: NavDropdown = {
     ],
 };
 
-export const expenses: NavDropdown = {
+export const expenses: NavIncludeDropdown = {
     title: 'expenses',
     path: "/expenses",
     icon: <Money className="w-5 h-5" />,
@@ -136,7 +136,7 @@ export const user: NavItem = {
     icon: <User className="w-5 h-5" />
 };
 
-export const sidebarNavs: NavDropdown[] = [
+export const sidebarNavs: NavIncludeDropdown[] = [
     dashboard,
     add,
     stock,
