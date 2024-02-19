@@ -17,12 +17,6 @@ export default function SidebarDrawer() {
             <button onClick={toggleDrawer} className='block md:hidden mr-3'>
                 <MenuIcon />
             </button>
-            {
-                state &&
-                <div className="absolute top-full bg-white z-10">
-                    <AsystSidebar />
-                </div>
-            }
             <Drawer
                 open={state}
                 onClose={toggleDrawer}
