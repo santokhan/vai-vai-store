@@ -86,11 +86,11 @@ function Table({ data, columns }: TableProps) {
         <div className="rounded-xl bg-white p-4 lg:p-6 space-y-4 overflow-hidden">
             <h4 className="text-xl font-semibold">Android Table</h4>
             <div className="overflow-x-scroll">
-                <table>
+                <table className='text-sm'>
                     <thead className='bg-gray-100 rounded-lg'>
                         <tr>
                             {headers.map(header =>
-                                <th key={header.id} colSpan={header.colSpan} className='p-2 text-start font-medium uppercase text-sm min-w-[3rem]'>
+                                <th key={header.id} colSpan={header.colSpan} className='p-2 text-start font-medium uppercase min-w-[3rem]'>
                                     <div className="flex flex-col gap-2">
                                         <span className='whitespace-nowrap'>{header.column.parent?.id}</span>
                                         {header.column.getCanFilter() && <Filter column={header.column} table={table} />}
