@@ -1,13 +1,16 @@
 // https://tanstack.com/table/v8/docs/examples/react/pagination
 'use client';
 import React, { useMemo } from 'react';
-import { Column, Table as ReactTable, PaginationState, useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, OnChangeFn, flexRender, } from '@tanstack/react-table';
+import { useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, flexRender, } from '@tanstack/react-table';
 import { SalesEntry } from '@/prisma/generated/client'
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { tableArrowClasses } from '@/block/add/stock/table/android';
 import PageOutOf from '@/block/add/stock/table/page-number-out-of';
 import Actions, { ActionDelete } from '@/components/table/action';
 import { ORIGIN } from '@/utils/origin';
+import { GoToPage, TableFooterContainer, TableFooterRow } from '@/components/table/tanstack/table-footer';
+import { inputClasses } from '@/components/table/tanstack/tw-classes';
+import THeadFilter from '@/components/table/tanstack/table-filter';
 
 export default function SalesTable({ salesEntry }: { salesEntry: SalesEntry[] }) {
     const columns = useMemo<ColumnDef<SalesEntry>[]>(() => [
@@ -59,17 +62,17 @@ function Table({ data, columns }: TableProps) {
             <h5 className="font-semibold">Sales Table</h5>
             <div className="w-full overflow-x-auto">
                 <table className='w-full text-sm'>
-                    <thead className='bg-gray-100 rounded-lg'>
+                    <thead className='bg-gray-100'>
                         <tr>
                             {headers.map(header =>
-                                <th key={header.id} colSpan={header.colSpan} className='p-2 text-start uppercase font-medium'>
-                                    {flexRender(header.column.parent?.id, header.getContext())}
-                                    {header.column.getCanFilter() && <Filter column={header.column} table={table} />}
+                                <th key={header.id} colSpan={header.colSpan} className='p-2 space-y-1 text-start uppercase font-medium'>
+                                    <div className="whitespace-nowrap">{flexRender(header.column.parent?.id, header.getContext())}</div>
+                                    {header.column.getCanFilter() && <THeadFilter column={header.column} table={table} />}
                                 </th>
                             )}
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='divide-y'>
                         {table.getRowModel().rows.map(row =>
                             <tr key={row.id}>
                                 {row.getVisibleCells().map(cell =>
@@ -83,95 +86,37 @@ function Table({ data, columns }: TableProps) {
                             </tr>
                         )}
                     </tbody>
-                    <tfoot className='space-y-6 mt-6'>
-                        <div className="flex items-center gap-2">
-                            <button className={tableArrowClasses} onClick={() => table.setPageIndex(0)} disabled={!table.getCanPreviousPage()}>
-                                <ChevronDoubleLeftIcon className='w-4 h-4' />
-                            </button>
-                            <button className={tableArrowClasses} onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-                                <ChevronLeftIcon className='w-4 h-4' />
-                            </button>
-                            <button className={tableArrowClasses} onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-                                <ChevronRightIcon className='w-4 h-4' />
-                            </button>
-                            <button className={tableArrowClasses} onClick={() => table.setPageIndex(table.getPageCount() - 1)} disabled={!table.getCanNextPage()}>
-                                <ChevronDoubleRightIcon className='w-4 h-4' />
-                            </button>
-                            <PageOutOf pageNumber={table.getState().pagination.pageIndex + 1} totalPageCount={table.getPageCount()} />
-                            <span className="flex items-center gap-2 px-2">| Go to page:
-                                <input
-                                    type="number"
-                                    defaultValue={table.getState().pagination.pageIndex + 1}
-                                    onChange={e => {
-                                        const page = e.target.value ? Number(e.target.value) - 1 : 0
-                                        table.setPageIndex(page)
-                                    }}
-                                    className="default !h-9 !w-16 !py-0"
-                                />
-                            </span>
-                            <select
-                                value={table.getState().pagination.pageSize}
-                                onChange={e => {
-                                    table.setPageSize(Number(e.target.value))
-                                }}
-                                className='default !h-9 !w-32 !py-0'
-                            >
-                                {[10, 20, 30, 40, 50].map((pageSize, idx) =>
-                                    <option key={idx} value={pageSize}>Show {pageSize}</option>
-                                )}
-                            </select>
-                        </div>
-                        <div>{table.getRowModel().rows.length} Rows</div>
-                    </tfoot>
                 </table>
+                <TableFooterContainer>
+                    <TableFooterRow>
+                        <button className={tableArrowClasses} onClick={() => { table.setPageIndex(1) }} disabled={!table.getCanPreviousPage()}><ChevronDoubleLeftIcon className='w-4 h-4' /></button>
+                        <button className={tableArrowClasses} onClick={() => { table.previousPage() }} disabled={!table.getCanPreviousPage()}><ChevronLeftIcon className='w-4 h-4' /></button>
+                        <button className={tableArrowClasses} onClick={() => { table.nextPage() }} disabled={!table.getCanNextPage()}><ChevronRightIcon className='w-4 h-4' /></button>
+                        <button className={tableArrowClasses} onClick={() => { table.setPageIndex(table.getPageCount() - 1) }} disabled={!table.getCanNextPage()}><ChevronDoubleRightIcon className='w-4 h-4' /></button>
+                        <PageOutOf pageNumber={table.getState().pagination.pageIndex + 1} totalPageCount={table.getPageCount()} />
+                        <GoToPage />
+                        <input
+                            type="number"
+                            defaultValue={table.getState().pagination.pageIndex + 1}
+                            onChange={e => {
+                                const page = e.target.value ? Number(e.target.value) - 1 : 0
+                                table.setPageIndex(page)
+                            }}
+                            className={`w-16 ${inputClasses}`}
+                        />
+                        <select
+                            value={table.getState().pagination.pageSize}
+                            onChange={e => { table.setPageSize(Number(e.target.value)) }}
+                            className={`w-32 ${inputClasses}`}
+                        >
+                            {[10, 20, 30, 40, 50].map((pageSize, idx) =>
+                                <option key={idx} value={pageSize}>Show {pageSize}</option>
+                            )}
+                        </select>
+                    </TableFooterRow>
+                    <TableFooterRow>{table.getRowModel().rows.length} Rows</TableFooterRow>
+                </TableFooterContainer>
             </div>
         </div>
-    )
-}
-
-export type FilterProps = {
-    column: Column<any, any>
-    table: ReactTable<any>
-}
-
-function Filter({ column, table, }: FilterProps) {
-    const firstValue = table.getPreFilteredRowModel().flatRows[0]?.getValue(column.id)
-    const columnFilterValue = column.getFilterValue()
-
-    return typeof firstValue === 'number' ? (
-        <div className="flex space-x-2">
-            <input
-                type="number"
-                value={(columnFilterValue as [number, number])?.[0] ?? ''}
-                onChange={e =>
-                    column.setFilterValue((old: [number, number]) => [
-                        e.target.value,
-                        old?.[1],
-                    ])
-                }
-                placeholder={`Min`}
-                className="h-9 default font-normal"
-            />
-            <input
-                type="number"
-                value={(columnFilterValue as [number, number])?.[1] ?? ''}
-                onChange={e =>
-                    column.setFilterValue((old: [number, number]) => [
-                        old?.[0],
-                        e.target.value,
-                    ])
-                }
-                placeholder={`Max`}
-                className="h-9 default font-normal"
-            />
-        </div>
-    ) : (
-        <input
-            type="text"
-            value={(columnFilterValue ?? '') as string}
-            onChange={e => column.setFilterValue(e.target.value)}
-            placeholder={`Search...`}
-            className="h-9 default font-normal"
-        />
     )
 }

@@ -1,13 +1,13 @@
 // https://tanstack.com/table/v8/docs/examples/react/pagination
 'use client';
 import React from 'react';
-import { Column, Table as ReactTable, useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, flexRender } from '@tanstack/react-table';
+import { useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, flexRender } from '@tanstack/react-table';
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { StockAndroid } from '@/prisma/generated/client';
 import { ORIGIN } from '@/utils/origin';
 import PageOutOf from './page-number-out-of';
 import Actions, { ActionDelete } from '@/components/table/action';
-import { TableFooterContainer, TableFooterRow } from '@/components/table/tanstack/table-footer';
+import { GoToPage, TableFooterContainer, TableFooterRow } from '@/components/table/tanstack/table-footer';
 import THeadFilter from '@/components/table/tanstack/table-filter';
 import { inputClasses } from '@/components/table/tanstack/tw-classes';
 
@@ -82,7 +82,7 @@ function Table({ data, columns }: TableProps) {
         <div className="rounded-xl bg-white p-4 lg:p-6 space-y-4">
             <h4 className="text-xl font-semibold">Android Table</h4>
             <div className="overflow-x-auto">
-                <table className='text-sm'>
+                <table className='w-full text-sm'>
                     <thead className='bg-gray-100'>
                         <tr>
                             {headers.map(header =>
@@ -114,17 +114,16 @@ function Table({ data, columns }: TableProps) {
                         <button className={tableArrowClasses} onClick={() => { table.nextPage() }} disabled={!table.getCanNextPage()}><ChevronRightIcon className='w-4 h-4' /></button>
                         <button className={tableArrowClasses} onClick={() => { table.setPageIndex(table.getPageCount() - 1) }} disabled={!table.getCanNextPage()}><ChevronDoubleRightIcon className='w-4 h-4' /></button>
                         <PageOutOf pageNumber={table.getState().pagination.pageIndex + 1} totalPageCount={table.getPageCount()} />
-                        <span className="flex items-center gap-2 px-2 whitespace-nowrap">| Go to page:
-                            <input
-                                type="number"
-                                defaultValue={table.getState().pagination.pageIndex + 1}
-                                onChange={e => {
-                                    const page = e.target.value ? Number(e.target.value) - 1 : 0
-                                    table.setPageIndex(page)
-                                }}
-                                className={`w-16 ${inputClasses}`}
-                            />
-                        </span>
+                        <GoToPage />
+                        <input
+                            type="number"
+                            defaultValue={table.getState().pagination.pageIndex + 1}
+                            onChange={e => {
+                                const page = e.target.value ? Number(e.target.value) - 1 : 0
+                                table.setPageIndex(page)
+                            }}
+                            className={`w-16 ${inputClasses}`}
+                        />
                         <select
                             value={table.getState().pagination.pageSize}
                             onChange={e => { table.setPageSize(Number(e.target.value)) }}
