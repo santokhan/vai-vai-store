@@ -1,6 +1,7 @@
 import Footer from "@/block/footer/footer";
 import MenuAppBar from "@/components/navbar/appbar";
 import NextAuthProvider from "@/context/AuthProvider";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
@@ -24,7 +25,7 @@ export default function Home() {
                             </a> */}
                         </div>
                         <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                            <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" alt="mockup" />
+                            <Image src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" alt="mockup" />
                         </div>
                     </div>
                 </section>

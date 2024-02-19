@@ -135,3 +135,15 @@ export const user: NavItem = {
     path: "/user",
     icon: <User className="w-5 h-5" />
 };
+
+export const sidebarNavs: NavIncludeChild[] = [
+    dashboard,
+    add,
+    stock,
+    sales,
+    customer,
+    report,
+    user,
+    warranty,
+    expenses,
+];

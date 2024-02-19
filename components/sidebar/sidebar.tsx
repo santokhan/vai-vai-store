@@ -16,10 +16,10 @@ export const AsystSidebar: FC = () => (
                 <NavIncludeDropdown nav={add} />
                 <NavIncludeDropdown nav={stock} />
                 <NavIncludeDropdown nav={sales} />
-                <NavIncludeDropdown nav={customer} />
+                <NavLink nav={customer} />
                 <NavIncludeDropdown nav={report} />
-                <NavIncludeDropdown nav={user} />
-                <NavIncludeDropdown nav={warranty} />
+                <NavLink nav={user} />
+                <NavLink nav={warranty} />
                 <NavIncludeDropdown nav={expenses} />
             </nav>
         </SidebarProvider>
