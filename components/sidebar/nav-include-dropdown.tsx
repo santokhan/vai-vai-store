@@ -16,12 +16,12 @@ export const NavIncludeDropdown: FC<DropdownProps> = ({ nav }) => {
     const { activeNavTitle, handleExpand } = useSidebarContext();
 
     return (
-        <div className='space-y-1'>
+        <div className='space-y-1 overflow-hidden'>
             <button
                 type="button" onClick={() => { handleExpand(nav.title) }}
-                className={`flex items-center gap-3 w-full p-2 text-base transition duration-75 rounded-lg ${activeNav(nav.path)}`}
+                className={`flex items-center gap-3 w-full p-2 text-base transition duration-75 rounded-lg overflow-hidden ${activeNav(nav.path)}`}
             >
-                <span>{nav.icon || <ShoppingCart className="w-5 h-5" />}</span>
+                <div className="w-5 h-5 overflow-hidden">{nav.icon || <ShoppingCart className="w-full h-full" />}</div>
                 <span className="flex-1 text-left capitalize whitespace-nowrap font-medium">{nav.title}</span>
                 <span className="w-5 h-5 overflow-hidden grid place-items-center">
                     <svg
