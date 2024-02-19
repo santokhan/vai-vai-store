@@ -1,8 +1,8 @@
 'use client';
-import { FC, Fragment, useEffect, useState } from 'react';
+import { FC, Fragment, useState } from 'react';
 import Box from '@mui/material/Box';
 import { NavDropdown, NavItem, sidebarNavs } from '@/lib/sidebar/sidebar';
-import { Add, ShoppingCart } from 'iconsax-react'
+import { ArrowDown2, ShoppingCart } from 'iconsax-react'
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
@@ -13,6 +13,7 @@ export const Dropdown: FC<{ nav: NavDropdown }> = ({ nav }) => {
     const active = pathNameList[1].toLowerCase() === navPath[1].toLowerCase();
 
     const [isOpen, setIsOpen] = useState(pathNameList[1].toLowerCase() === navPath[1].toLowerCase());
+    const arrowClasses = isOpen ? '-rotate-180' : '';
 
     return (
         <li>
@@ -21,20 +22,9 @@ export const Dropdown: FC<{ nav: NavDropdown }> = ({ nav }) => {
                 className={["flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 font-medium",
                     active ? "bg-gray-100" : ""].join(" ")}
             >
-                {
-                    nav.icon ||
-                    <ShoppingCart className="w-5 h-5 text-gray-500" />
-                }
+                {nav.icon || <ShoppingCart className="w-5 h-5 text-gray-500" />}
                 <span className="flex-1 ml-3 text-left whitespace-nowrap capitalize">{nav.title}</span>
-                <svg
-                    className={["w-3 h-3", isOpen ? 'transform rotate-180' : ''].join(" ")}
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 10 6"
-                >
-                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m1 1 4 4 4-4" />
-                </svg>
+                <ArrowDown2 className={["w-4 h-4 transition-transform linear", arrowClasses].join(" ")} />
             </button>
             {
                 isOpen &&
