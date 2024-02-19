@@ -6,7 +6,7 @@ import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 
 export default function SidebarDrawer() {
-    const [state, setState] = useState<boolean>(true);
+    const [state, setState] = useState<boolean>(false);
 
     const toggleDrawer = () => {
         setState((prevState) => !prevState)
