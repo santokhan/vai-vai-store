@@ -19,12 +19,14 @@ export const Dropdown: FC<{ nav: NavDropdown }> = ({ nav }) => {
         <li>
             <button
                 type="button" onClick={() => { setIsOpen(!isOpen) }}
-                className={["flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 font-medium",
+                className={["flex items-center gap-3 w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 font-medium",
                     active ? "bg-gray-100" : ""].join(" ")}
             >
                 {nav.icon || <ShoppingCart className="w-5 h-5 text-gray-500" />}
-                <span className="flex-1 ml-3 text-left whitespace-nowrap capitalize">{nav.title}</span>
-                <ArrowDown2 className={["w-4 h-4 transition-transform linear", arrowClasses].join(" ")} />
+                <span className="flex-1 text-left whitespace-nowrap capitalize">{nav.title}</span>
+                <span className='max-w-[1rem] max-h-[1rem] overflow-hidden'>
+                    <ArrowDown2 className={`w-[1rem] h-[1rem] transition-transform linear ${arrowClasses}`} />
+                </span>
             </button>
             {
                 isOpen &&
