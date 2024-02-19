@@ -4,17 +4,13 @@ import { StockAndroidPOST } from '@/app/api/(store)/stock/entry/post-data-type';
 import Button from '@/components/button/button';
 import FormContainer from '@/components/form-container';
 import InputBox from '@/components/form/input-box';
-import NumberInput from '@/components/form/input/number';
 import SelectOption from '@/components/form/select-option/select-option';
-import FormTitle from '@/components/form/title';
-import { PRINT } from '@/components/print';
+import { TableTitle } from '@/components/table/table-header';
 import { FormContext } from '@/context/form/form-context';
-import { Brand, InStock, Model, ProductType } from '@/prisma/generated/client';
+import { Brand, Model, ProductType } from '@/prisma/generated/client';
 import { commonPhoneColors } from '@/utils/default-data';
 import { ORIGIN } from '@/utils/origin';
-import { Table } from 'flowbite-react';
-import { Add } from 'iconsax-react';
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useQuery } from 'react-query';
 
 export const initialState: StockAndroidPOST = {
@@ -106,7 +102,7 @@ const StockAndroidEntryForm: React.FC = () => {
         <FormContext.Provider value={value}>
             <div className="w-full space-y-12">
                 <section className='space-y-2'>
-                    <FormTitle>Add Android</FormTitle>
+                    <TableTitle>Add Android</TableTitle>
                     <form onSubmit={handleSubmit} className='block space-y-4'>
                         <FormContainer>
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
