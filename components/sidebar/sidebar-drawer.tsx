@@ -1,74 +1,48 @@
-'use client'
-
-import * as React from 'react';
-import Box from '@mui/material/Box';
+'use client';
+import { useState, KeyboardEvent, MouseEvent, Fragment } from 'react';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import { IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AsystSidebar } from './sidebar';
 
-type Anchor = 'top' | 'left' | 'bottom' | 'right';
+type Anchor = 'left';
 
 export default function SidebarDrawer() {
-    const [state, setState] = React.useState({ left: false });
+    const [state, setState] = useState({ left: false });
 
-    const toggleDrawer =
-        (anchor: Anchor, open: boolean) =>
-            (event: React.KeyboardEvent | React.MouseEvent) => {
-                if (
-                    event.type === 'keydown' &&
-                    ((event as React.KeyboardEvent).key === 'Tab' ||
-                        (event as React.KeyboardEvent).key === 'Shift')
-                ) {
-                    return;
-                }
+    const toggleDrawer = (anchor: Anchor, open: boolean) => (event: KeyboardEvent | MouseEvent) => {
+        if (event.type === 'keydown' && ((event as KeyboardEvent).key === 'Tab' || (event as KeyboardEvent).key === 'Shift')) {
+            return;
+        }
 
-                setState({ ...state, [anchor]: open });
-            };
+        setState({ ...state, [anchor]: open });
+    };
 
-    const list = (anchor: Anchor) => (
-        <Box
-            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-            role="presentation"
-            onClick={toggleDrawer(anchor, false)}
-            onKeyDown={toggleDrawer(anchor, false)}
-        >
-              <AsystSidebar />
-        </Box>
-    );
-
-    return (
-        <div>
-            {(['left'] as const).map((anchor) => (
-                <React.Fragment key={anchor}>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2, display: { xs: 'block', md: 'none' } }}
-                        onClick={toggleDrawer(anchor, true)}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Drawer
-                        anchor={anchor}
-                        open={state[anchor]}
-                        onClose={toggleDrawer(anchor, false)}
-                    >
-                        {list(anchor)}
-                    </Drawer>
-                </React.Fragment>
-            ))}
+    const NavList = () => (
+        <div className="w-[250px]">
+            <AsystSidebar />
         </div>
     );
+
+    return (['left'] as const).map((anchor) => (
+        <Fragment key={anchor}>
+            <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ display: { xs: 'block', md: 'none' } }}
+                onClick={toggleDrawer(anchor, true)}
+            >
+                <MenuIcon />
+            </IconButton>
+            <Drawer
+                anchor={anchor}
+                open={state[anchor]}
+                onClose={toggleDrawer(anchor, false)}
+            >
+                <NavList />
+            </Drawer>
+        </Fragment>
+    ));
 }
