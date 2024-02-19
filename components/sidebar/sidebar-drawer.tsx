@@ -1,40 +1,36 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useState, Fragment } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AsystSidebar } from './sidebar';
+import Drawer from 'react-modern-drawer';
+import 'react-modern-drawer/dist/index.css';
 
 export default function SidebarDrawer() {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-    const sidebarWrapper = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (sidebarWrapper.current && !sidebarWrapper.current.contains(event.target as Node)) {
-                setIsOpen(false);
-            }
-        };
-
-        document.addEventListener('click', handleClickOutside);
-
-        return () => {
-            document.removeEventListener('click', handleClickOutside);
-        };
-    }, [isOpen]);
+    const [state, setState] = useState<boolean>(false);
 
     const toggleDrawer = () => {
-        setIsOpen(prev => !prev);
-    };
+        setState((prevState) => !prevState)
+    }
 
-    return (
-        <div ref={sidebarWrapper}>
+    return (['left'] as const).map((anchor) => (
+        <Fragment key={anchor}>
             <button onClick={toggleDrawer} className='block md:hidden mr-3'>
                 <MenuIcon />
             </button>
-            {isOpen && (
-                <div className={`absolute top-full z-10 right-0 left-0 w-[250px]`}>
+            {
+                state &&
+                <div className="absolute top-full bg-white z-10">
                     <AsystSidebar />
                 </div>
-            )}
-        </div>
-    );
+            }
+            <Drawer
+                open={state}
+                onClose={toggleDrawer}
+                direction='left'
+                className='absolute left-0 w-1/2 h-full bg-white z-10'
+            >
+                <AsystSidebar />
+            </Drawer>
+        </Fragment>
+    ));
 }

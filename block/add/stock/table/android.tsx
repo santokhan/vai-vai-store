@@ -4,32 +4,16 @@ import React from 'react';
 import { Column, Table as ReactTable, useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, flexRender } from '@tanstack/react-table';
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { StockAndroid } from '@/prisma/generated/client';
-import { Trash } from 'iconsax-react';
 import { ORIGIN } from '@/utils/origin';
 import PageOutOf from './page-number-out-of';
 import Actions, { ActionDelete } from '@/components/table/action';
+import { TableFooterContainer, TableFooterRow } from '@/components/table/tanstack/table-footer';
 
 export const tableArrowClasses = "border rounded-lg px-2 py-2 flex items-center hover:bg-gray-100";
 
 interface ServerProps {
     stockAndroid: StockAndroid[],
 }
-
-const DeleteButton = ({ row }: any) => {
-    return (
-        <Actions>
-            <button onClick={() => {
-                fetch(`${ORIGIN}/api/stock/table/android/delete?id=${row.original.id}`, {
-                    method: "DELETE"
-                }).then(res => res.json()).then((data) => {
-                    window.location.reload();
-                })
-            }} className='hover:text-red-600' >
-                <Trash className='w-4 h-4' />
-            </button>
-        </Actions>
-    )
-};
 
 export default function StockTable({ stockAndroid }: ServerProps) {
     const columns = React.useMemo<ColumnDef<StockAndroid>[]>(() => [
@@ -111,8 +95,8 @@ function Table({ data, columns }: TableProps) {
                         ))}
                     </tbody>
                 </table>
-                <div className="py-4 space-y-4">
-                    <div className="flex items-center gap-2 py-2">
+                <TableFooterContainer>
+                    <TableFooterRow>
                         <button className={tableArrowClasses} onClick={() => { table.setPageIndex(1) }} disabled={!table.getCanPreviousPage()}><ChevronDoubleLeftIcon className='w-4 h-4' /></button>
                         <button className={tableArrowClasses} onClick={() => { table.previousPage() }} disabled={!table.getCanPreviousPage()}><ChevronLeftIcon className='w-4 h-4' /></button>
                         <button className={tableArrowClasses} onClick={() => { table.nextPage() }} disabled={!table.getCanNextPage()}><ChevronRightIcon className='w-4 h-4' /></button>
@@ -138,9 +122,11 @@ function Table({ data, columns }: TableProps) {
                                 <option key={idx} value={pageSize}>Show {pageSize}</option>
                             )}
                         </select>
-                    </div>
-                    <div>{table.getRowModel().rows.length} Rows</div>
-                </div>
+                    </TableFooterRow>
+                    <TableFooterRow>
+                        {table.getRowModel().rows.length} Rows
+                    </TableFooterRow>
+                </TableFooterContainer>
             </div>
         </div>
     )
