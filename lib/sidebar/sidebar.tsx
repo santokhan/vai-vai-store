@@ -12,7 +12,7 @@ export type NavItem = {
     path: string;
 }
 
-interface NavIncludeChild extends NavItem {
+export interface NavIncludeChild extends NavItem {
     children?: NavLink[];
 }
 

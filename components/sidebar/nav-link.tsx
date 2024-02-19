@@ -1,10 +1,10 @@
-import { NavIncludeDropdown } from '@/lib/sidebar/sidebar';
+import { NavIncludeChild } from '@/lib/sidebar/sidebar';
 import { ShoppingCart } from 'iconsax-react'
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { activeInactive } from './sidebar';
 
-export const NavLink: React.FC<{ nav: NavIncludeDropdown }> = ({ nav }) => {
+export const NavLink: React.FC<{ nav: NavIncludeChild }> = ({ nav }) => {
     const pathName = usePathname();
     const activeNav = (path: string) => activeInactive(pathName.includes(path));
 

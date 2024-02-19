@@ -3,11 +3,11 @@ import { ShoppingCart } from "iconsax-react";
 import { activeInactive } from "./sidebar";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { type NavIncludeDropdown as NID } from "@/lib/sidebar/sidebar";
+import { NavIncludeChild } from "@/lib/sidebar/sidebar";
 import { FC } from "react";
 
 interface DropdownProps {
-    nav: NID;
+    nav: NavIncludeChild;
 }
 
 export const NavIncludeDropdown: FC<DropdownProps> = ({ nav }) => {
