@@ -1,4 +1,3 @@
-// Import the Prisma Client
 import { prisma } from '@/lib/prisma';
 import { StockButtonPOST } from '../post-data-type';
 
@@ -13,12 +12,23 @@ async function getStockButton() {
     }
 }
 
-async function addStockButton(body: StockButtonPOST) {
+async function addStockButton(modelId: string, quantity: number, sellingPrice: number) {
     try {
-        const createdModel = await prisma.stockButton.create({
-            data: body
-        });
-        return createdModel;
+        // const upsertedStockButton = await prisma.stockButton.upsert({
+        //     where: {
+        //         modelId
+        //     },
+        //     update: {
+        //         quantity
+        //     },
+        //     create: {
+        //         modelId,
+        //         quantity,
+        //         sellingPrice,
+        //     }
+        // })
+        // return upsertedStockButton;
+        return null;
     } catch (error) {
         console.error('Error creating button phone data:', error);
     } finally {
@@ -41,20 +51,11 @@ export async function POST(request: Request): Promise<Response> {
     const { sellingPrice, modelId, quantity } = body;
 
     if (sellingPrice && modelId && quantity) {
-        const existingBrand = await prisma.stockButton.findFirst({
-            where: {
-                modelId
-            }
-        })
-        if (existingBrand) {
-            return Response.json({ message: 'This button phone already exists in stock' });
+        const createdModel = await addStockButton(modelId, quantity, sellingPrice);
+        if (createdModel) {
+            return Response.json({ message: `Button phone data created with model id: ${createdModel}` });
         } else {
-            const createdModel = await addStockButton(body);
-            if (createdModel) {
-                return Response.json({ message: `Button phone data created with model id: ${createdModel.modelId}` });
-            } else {
-                return Response.json({ message: 'Failed to add button phone data' });
-            }
+            return Response.json({ message: 'Failed to add button phone data' });
         }
     } else {
         return Response.json({ message: 'Data is missing. Required schema: ', body });
