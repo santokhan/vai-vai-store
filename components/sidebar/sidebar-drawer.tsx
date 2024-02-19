@@ -1,36 +1,27 @@
 'use client';
-import { useState, KeyboardEvent, MouseEvent, Fragment } from 'react';
-import Drawer from '@mui/material/Drawer';
-import { IconButton } from '@mui/material';
+import { useState, Fragment } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AsystSidebar } from './sidebar';
+import Drawer from 'react-modern-drawer';
+import 'react-modern-drawer/dist/index.css';
 
 export default function SidebarDrawer() {
-    const [state, setState] = useState<boolean>(false);
+    const [state, setState] = useState<boolean>(true);
 
-    // const toggleDrawer = (anchor: Anchor, open: boolean) => (event: KeyboardEvent | MouseEvent) => {
-    //     if (event.type === 'keydown' && ((event as KeyboardEvent).key === 'Tab' || (event as KeyboardEvent).key === 'Shift')) {
-    //         return;
-    //     }
-    //     setState({ ...state, [anchor]: open });
-    // };
+    const toggleDrawer = () => {
+        setState((prevState) => !prevState)
+    }
 
     return (['left'] as const).map((anchor) => (
         <Fragment key={anchor}>
-            <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                sx={{ display: { xs: 'block', md: 'none' } }}
-                onClick={() => { setState(!state) }}
-            >
+            <button onClick={toggleDrawer} className='block md:none mr-3'>
                 <MenuIcon />
-            </IconButton>
+            </button>
             <Drawer
-                anchor={'left'}
                 open={state}
-                onClose={() => { setState(false) }}
+                onClose={toggleDrawer}
+                direction='left'
+                className='absolute left-0 w-1/2 h-full bg-white z-10'
             >
                 <AsystSidebar />
             </Drawer>
