@@ -13,7 +13,6 @@ export const Dropdown: FC<{ nav: NavDropdown }> = ({ nav }) => {
     const active = pathNameList[1].toLowerCase() === navPath[1].toLowerCase();
 
     const [isOpen, setIsOpen] = useState(pathNameList[1].toLowerCase() === navPath[1].toLowerCase());
-    const arrowClasses = isOpen ? '-rotate-180' : '';
 
     return (
         <li>
@@ -24,9 +23,15 @@ export const Dropdown: FC<{ nav: NavDropdown }> = ({ nav }) => {
             >
                 {nav.icon || <ShoppingCart className="w-5 h-5 text-gray-500" />}
                 <span className="flex-1 text-left whitespace-nowrap capitalize">{nav.title}</span>
-                <span className='max-w-[1rem] max-h-[1rem] overflow-hidden'>
-                    <ArrowDown2 className={`w-[1rem] h-[1rem] transition-transform linear ${arrowClasses}`} />
-                </span>
+                <svg
+                    className={["w-3 h-3", isOpen ? 'transform rotate-180' : ''].join(" ")}
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 10 6"
+                >
+                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m1 1 4 4 4-4" />
+                </svg>
             </button>
             {
                 isOpen &&
