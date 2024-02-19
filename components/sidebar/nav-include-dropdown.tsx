@@ -22,7 +22,7 @@ export const NavIncludeDropdown: FC<DropdownProps> = ({ nav }) => {
                 className={`flex items-center gap-3 w-full p-2 text-base transition duration-75 rounded-lg ${activeNav(nav.path)}`}
             >
                 <span>{nav.icon || <ShoppingCart className="w-5 h-5" />}</span>
-                <span className="flex-1 text-left capitalize whitespace-nowrap font-medium">{nav.title} {activeNavTitle}</span>
+                <span className="flex-1 text-left capitalize whitespace-nowrap font-medium">{nav.title}</span>
                 <span className="w-5 h-5 overflow-hidden grid place-items-center">
                     <svg
                         className={["w-3 h-3 transition-transform", activeNavTitle == nav.title ? '-rotate-180' : ''].join(" ")}
