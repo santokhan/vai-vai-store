@@ -1,5 +1,5 @@
 import { useSidebarContext } from "@/context/sidebar-context";
-import { ShoppingCart } from "iconsax-react";
+import { ArrowDown2, ShoppingCart } from "iconsax-react";
 import { activeInactive } from "./sidebar";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -24,15 +24,7 @@ export const NavIncludeDropdown: FC<DropdownProps> = ({ nav }) => {
                 <div className="w-5 h-5 overflow-hidden">{nav.icon || <ShoppingCart className="w-full h-full" />}</div>
                 <span className="flex-1 text-left capitalize whitespace-nowrap font-medium">{nav.title}</span>
                 <span className="w-5 h-5 overflow-hidden grid place-items-center">
-                    <svg
-                        className={["w-3 h-3 transition-transform", activeNavTitle == nav.title ? '-rotate-180' : ''].join(" ")}
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 10 6"
-                    >
-                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m1 1 4 4 4-4" />
-                    </svg>
+                    <ArrowDown2 className={["w-3 h-3 transition-transform", activeNavTitle == nav.title ? '-rotate-180' : ''].join(" ")} />
                 </span>
             </button>
             {
