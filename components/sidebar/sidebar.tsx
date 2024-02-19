@@ -65,9 +65,9 @@ const NavItem: React.FC<{ nav: NavItem }> = ({ nav }) => {
 
 export const AsystSidebar: FC = () => {
     return (
-        <div className="w-[250px] p-4 transition-transform bg-white relative">
+        <div className="w-[250px] p-4 bg-white relative">
             <h5 className="text-base font-semibold text-gray-500 uppercase">Menu</h5>
-            <nav className="space-y-1 font-medium py-4 overflow-y-auto">
+            <nav className="space-y-1 font-medium py-4">
                 {
                     sidebarNavs.map((nav, index) =>
                         <Fragment key={index}>
