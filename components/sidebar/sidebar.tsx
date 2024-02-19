@@ -14,7 +14,7 @@ export const Dropdown: FC<{ nav: NavDropdown }> = ({ nav }) => {
     const [isOpen, setIsOpen] = useState(pathNameList[1].toLowerCase() === navPath[1].toLowerCase());
 
     return (
-        <Fragment>
+        <div>
             <button
                 type="button" onClick={() => { setIsOpen(!isOpen) }}
                 className={["flex items-center gap-3 w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 font-medium overflow-hidden",
@@ -50,7 +50,7 @@ export const Dropdown: FC<{ nav: NavDropdown }> = ({ nav }) => {
                     }
                 </nav>
             }
-        </Fragment>
+        </div>
     );
 };
 
