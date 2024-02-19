@@ -3,8 +3,6 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { twMerge } from 'tailwind-merge'
 import { ReactNode } from 'react'
-import AuthProvider from '@/context/FirebaseContext'
-import MenuAppBar from '@/components/navbar/appbar'
 
 const inter = Inter({ subsets: ['latin'] })
 

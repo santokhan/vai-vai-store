@@ -4,7 +4,6 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import { getCurrentUser } from '@/context/FirebaseContext';
 import SidebarDrawer from '../sidebar/sidebar-drawer';
 import Logo from '../logo/logo';
 import AccountMenu from './profile/dropdown/dropdown';

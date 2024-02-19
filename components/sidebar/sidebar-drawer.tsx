@@ -31,7 +31,7 @@ export default function SidebarDrawer() {
                 <MenuIcon />
             </button>
             {isOpen && (
-                <div className={`absolute top-full z-10 right-0 left-0`}>
+                <div className={`absolute top-full z-10 right-0 left-0 w-[250px]`}>
                     <AsystSidebar />
                 </div>
             )}
