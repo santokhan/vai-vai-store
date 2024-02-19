@@ -10,23 +10,21 @@ import { FormContext } from '@/context/form/form-context';
 import { Brand, Model, ProductType } from '@/prisma/generated/client';
 import { commonPhoneColors } from '@/utils/default-data';
 import { ORIGIN } from '@/utils/origin';
-import { Table } from 'flowbite-react';
-import { Add } from 'iconsax-react';
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useQuery } from 'react-query';
 
-export const InitialState = {
-    name: '',
-    productTypeId: '',
-    brandId: '',
-    modelId: '',
-    purchasePrice: 0,
-    sellingPrice: 0,
-    quantity: 0,
-    color: '',
-}
-
 const StockEntryPage: React.FC = () => {
+    const InitialState = {
+        name: '',
+        productTypeId: '',
+        brandId: '',
+        modelId: '',
+        purchasePrice: 0,
+        sellingPrice: 0,
+        quantity: 0,
+        color: '',
+    }
+
     const [state, setstate] = useState<StockButtonPOST>(InitialState)
     const [adding, setadding] = useState<boolean>(false);
 
