@@ -13,8 +13,9 @@ export default async function StockEntryPage() {
     if (!productType || !brand || !model) {
         return null;
     } else {
+        const filtered = productType.filter(product => product.type === 'button');
         return (
-            <StockButtonEntryForm productType={productType} brand={brand} model={model} />
+            <StockButtonEntryForm productType={filtered} brand={brand} model={model} />
         )
     }
 }

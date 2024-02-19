@@ -6,12 +6,10 @@ import FormContainer from '@/components/form-container';
 import InputBox from '@/components/form/input-box';
 import SelectOption from '@/components/form/select-option/select-option';
 import FormTitle from '@/components/form/title';
-import { FormContext } from '@/context/form/form-context';
 import { Brand, Model, ProductType } from '@/prisma/generated/client';
 import { commonPhoneColors } from '@/utils/default-data';
-import { ORIGIN } from '@/utils/origin';
-import { Add } from 'iconsax-react';
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
+import { ServerProps } from './type';
 
 export const InitialState = {
     name: '',
@@ -24,17 +22,9 @@ export const InitialState = {
     color: '',
 }
 
-interface ServerProps {
-    productType: ProductType[];
-    brand: Brand[];
-    model: Model[];
-}
-
 const StockButtonEntryForm: FC<ServerProps> = ({ productType, brand, model }) => {
     const [formData, setFormData] = useState<StockButtonPOST>(InitialState)
     const [adding, setadding] = useState<boolean>(false);
-
-    console.log(formData);
 
     function brandByType(brands: Brand[], productTypeId: string): Brand[] {
         if (brands && productTypeId) {
@@ -102,7 +92,7 @@ const StockButtonEntryForm: FC<ServerProps> = ({ productType, brand, model }) =>
                                 value={formData.productTypeId}
                                 onChange={(e: ChangeEvent<HTMLSelectElement>) => { setFormData({ ...formData, productTypeId: e.target.value }) }}>
                                 <option value='' disabled>Default</option>
-                                {productType.filter(e => e.type === 'button').map((type: ProductType, idx) =>
+                                {productType.map((type: ProductType, idx) =>
                                     <option className='capitalize' value={type.id} key={idx}>{type.type}</option>
                                 )}
                             </select>
