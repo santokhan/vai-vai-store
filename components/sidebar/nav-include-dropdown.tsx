@@ -21,9 +21,9 @@ export const NavIncludeDropdown: FC<DropdownProps> = ({ nav }) => {
                 type="button" onClick={() => { handleExpand(nav.title) }}
                 className={`flex items-center gap-3 w-full p-2 text-base transition duration-75 rounded-lg overflow-hidden ${activeNav(nav.path)}`}
             >
-                <div className="w-5 h-5 overflow-hidden">{nav.icon || <ShoppingCart className="w-full h-full" />}</div>
+                {/* <div className="w-5 h-5 overflow-hidden">{nav.icon || <ShoppingCart className="w-full h-full" />}</div> */}
                 <span className="flex-1 text-left capitalize whitespace-nowrap font-medium">{nav.title}</span>
-                {activeNavTitle == nav.title ? <ArrowDown2 className="w-4 h-4" /> : <ArrowUp2 className="w-4 h-4" />}
+                {activeNavTitle == nav.title ? <ArrowUp2 className="w-4 h-4" /> : <ArrowDown2 className="w-4 h-4" />}
             </button>
             {
                 activeNavTitle == nav.title &&

@@ -10,7 +10,7 @@ export const NavLink: React.FC<{ nav: NavIncludeChild }> = ({ nav }) => {
 
     return (
         <Link href={nav.path} className={`flex items-center gap-2 p-2 text-gray-900 rounded-lg capitalize whitespace-nowrap font-medium ${activeNav(nav.path)}`}>
-            {nav.icon || <ShoppingCart className="w-5 h-5" />}
+            {/* {nav.icon || <ShoppingCart className="w-5 h-5" />} */}
             {nav.title}
         </Link>
     );
