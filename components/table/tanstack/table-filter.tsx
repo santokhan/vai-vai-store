@@ -1,13 +1,14 @@
 import { Column, Table } from "@tanstack/react-table"
+import { inputClasses } from "./tw-classes";
 
 export type FilterProps = {
     column: Column<any, any>
     table: Table<any>
 }
 
-function Filter({ column, table, }: FilterProps) {
-    const firstValue = table.getPreFilteredRowModel().flatRows[0]?.getValue(column.id)
-    const columnFilterValue = column.getFilterValue()
+export default function THeadFilter({ column, table, }: FilterProps) {
+    const firstValue = table.getPreFilteredRowModel().flatRows[0]?.getValue(column.id);
+    const columnFilterValue = column.getFilterValue();
 
     return typeof firstValue === 'number' ? (
         <div className="flex space-x-2">
@@ -21,7 +22,7 @@ function Filter({ column, table, }: FilterProps) {
                     ])
                 }
                 placeholder={`Min`}
-                className="h-9 default font-normal"
+                className={`w-20 ${inputClasses}`}
             />
             <input
                 type="number"
@@ -33,7 +34,7 @@ function Filter({ column, table, }: FilterProps) {
                     ])
                 }
                 placeholder={`Max`}
-                className="h-9 default font-normal"
+                className={`w-20 ${inputClasses}`}
             />
         </div>
     ) : (
@@ -42,7 +43,7 @@ function Filter({ column, table, }: FilterProps) {
             value={(columnFilterValue ?? '') as string}
             onChange={e => column.setFilterValue(e.target.value)}
             placeholder="Search..."
-            className="h-9 default font-normal"
+            className={`w-32 ${inputClasses}`}
         />
     )
 }

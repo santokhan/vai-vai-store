@@ -8,26 +8,38 @@ import { ORIGIN } from '@/utils/origin';
 import PageOutOf from './page-number-out-of';
 import Actions, { ActionDelete } from '@/components/table/action';
 import { TableFooterContainer, TableFooterRow } from '@/components/table/tanstack/table-footer';
+import THeadFilter from '@/components/table/tanstack/table-filter';
+import { inputClasses } from '@/components/table/tanstack/tw-classes';
 
 export const tableArrowClasses = "border rounded-lg px-2 py-2 flex items-center hover:bg-gray-100";
 
-interface ServerProps {
-    stockAndroid: StockAndroid[],
-}
-
-export default function StockTable({ stockAndroid }: ServerProps) {
+export default function StockTable({ stockAndroid }: { stockAndroid: StockAndroid[] }) {
     const columns = React.useMemo<ColumnDef<StockAndroid>[]>(() => [
-        { id: 'name', columns: [{ accessorKey: 'name' }] },
-        { id: 'IMEI', columns: [{ accessorKey: 'IMEI' }] },
-        { id: 'type', columns: [{ accessorKey: 'productType.type' }] },
         { id: 'brand', columns: [{ accessorKey: 'brand.brandName' }] },
         { id: 'model', columns: [{ accessorKey: 'model.model' }] },
+        { id: 'IMEI', columns: [{ accessorKey: 'IMEI' }] },
         { id: 'purchase price', columns: [{ accessorKey: 'purchasePrice' }] },
         { id: 'selling price', columns: [{ accessorKey: 'sellingPrice' }] },
-        { id: 'ram', columns: [{ accessorKey: 'ram' }] },
-        { id: 'rom', columns: [{ accessorKey: 'rom' }] },
+        { id: 'ram/rom', columns: [{ accessorFn: row => `${row.ram} / ${row.rom}`, id: 'ram/rom' }] },
         { id: 'color', columns: [{ accessorKey: 'color' }] },
-        { id: 'sold', columns: [{ accessorKey: 'sold' }] },
+        {
+            id: 'sold',
+            columns: [{
+                accessorFn: row => `${row.sold}`,
+                id: 'sold',
+                // filterFn: (row, columnId, filterValue) => {
+                //     const status = row.getValue(columnId as string);
+
+                //     if (typeof status == 'string') {
+                //         const a = status.trim().toLowerCase();
+                //         const b = filterValue.trim().toLowerCase();
+                //         return a.includes(b);
+                //     } else {
+                //         return true;
+                //     }
+                // }
+            }]
+        },
         {
             id: 'action', columns: [{
                 id: 'action',
@@ -67,17 +79,17 @@ function Table({ data, columns }: TableProps) {
     const headers = table.getHeaderGroups()[1].headers;
 
     return (
-        <div className="rounded-xl bg-white p-4 lg:p-6 space-y-4 overflow-hidden">
+        <div className="rounded-xl bg-white p-4 lg:p-6 space-y-4">
             <h4 className="text-xl font-semibold">Android Table</h4>
-            <div className="overflow-x-scroll">
+            <div className="overflow-x-auto">
                 <table className='text-sm'>
-                    <thead className='bg-gray-100 rounded-lg'>
+                    <thead className='bg-gray-100'>
                         <tr>
                             {headers.map(header =>
                                 <th key={header.id} colSpan={header.colSpan} className='p-2 text-start font-medium uppercase min-w-[3rem]'>
                                     <div className="flex flex-col gap-2">
                                         <span className='whitespace-nowrap'>{header.column.parent?.id}</span>
-                                        {header.column.getCanFilter() && <Filter column={header.column} table={table} />}
+                                        {header.column.getCanFilter() && <THeadFilter column={header.column} table={table} />}
                                     </div>
                                 </th>
                             )}
@@ -87,7 +99,7 @@ function Table({ data, columns }: TableProps) {
                         {table.getRowModel().rows.map(row => (
                             <tr key={row.id}>
                                 {row.getVisibleCells().map(cell => (
-                                    <td key={cell.id} className='p-2 whitespace-nowrap'>
+                                    <td key={cell.id} className='p-2 whitespace-nowrap capitalize'>
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </td>
                                 ))}
@@ -110,13 +122,13 @@ function Table({ data, columns }: TableProps) {
                                     const page = e.target.value ? Number(e.target.value) - 1 : 0
                                     table.setPageIndex(page)
                                 }}
-                                className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-800 h-9 w-28'
+                                className={`w-16 ${inputClasses}`}
                             />
                         </span>
                         <select
                             value={table.getState().pagination.pageSize}
                             onChange={e => { table.setPageSize(Number(e.target.value)) }}
-                            className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-800 h-9 w-28'
+                            className={`w-32 ${inputClasses}`}
                         >
                             {[10, 20, 30, 40, 50].map((pageSize, idx) =>
                                 <option key={idx} value={pageSize}>Show {pageSize}</option>
@@ -129,52 +141,5 @@ function Table({ data, columns }: TableProps) {
                 </TableFooterContainer>
             </div>
         </div>
-    )
-}
-
-export type FilterProps = {
-    column: Column<any, any>
-    table: ReactTable<any>
-}
-
-function Filter({ column, table, }: FilterProps) {
-    const firstValue = table.getPreFilteredRowModel().flatRows[0]?.getValue(column.id)
-    const columnFilterValue = column.getFilterValue()
-
-    return typeof firstValue === 'number' ? (
-        <div className="flex space-x-2">
-            <input
-                type="number"
-                value={(columnFilterValue as [number, number])?.[0] ?? ''}
-                onChange={e =>
-                    column.setFilterValue((old: [number, number]) => [
-                        e.target.value,
-                        old?.[1],
-                    ])
-                }
-                placeholder={`Min`}
-                className="h-9 default font-normal"
-            />
-            <input
-                type="number"
-                value={(columnFilterValue as [number, number])?.[1] ?? ''}
-                onChange={e =>
-                    column.setFilterValue((old: [number, number]) => [
-                        old?.[0],
-                        e.target.value,
-                    ])
-                }
-                placeholder={`Max`}
-                className="h-9 default font-normal"
-            />
-        </div>
-    ) : (
-        <input
-            type="text"
-            value={(columnFilterValue ?? '') as string}
-            onChange={e => column.setFilterValue(e.target.value)}
-            placeholder="Search..."
-            className="h-9 default font-normal"
-        />
     )
 }
