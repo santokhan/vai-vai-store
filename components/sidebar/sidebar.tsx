@@ -34,14 +34,14 @@ export const Dropdown: FC<{ nav: NavDropdown }> = ({ nav }) => {
             </button>
             {
                 isOpen &&
-                <nav className="py-2 space-y-2">
+                <nav className="space-y-2 pl-7">
                     {
                         nav.children?.map((childNav, childIdx) => {
                             const activeTw = pathName.includes((nav.path + childNav.path)) ? 'bg-gray-100' : ''
 
                             return (
                                 <Link href={`${nav.path + childNav.path}`} key={childIdx}
-                                    className={`flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 capitalize ${activeTw}`}
+                                    className={`flex items-center w-full py-2 px-3 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 capitalize ${activeTw}`}
                                 >{childNav.name}</Link>
                             )
                         })
@@ -65,7 +65,7 @@ export const AsystSidebar: FC = () => {
     return (
         <div className="w-[250px] p-4 transition-transform bg-white relative">
             <h5 className="text-base font-semibold text-gray-500 uppercase">Menu</h5>
-            <nav className="space-y-2 font-medium py-4 overflow-y-auto">
+            <nav className="space-y-1 font-medium py-4 overflow-y-auto">
                 {
                     sidebarNavs.map((nav, index) =>
                         <Fragment key={index}>
