@@ -1,7 +1,6 @@
 // https://tanstack.com/table/v8/docs/examples/react/pagination
 'use client';
 import React, { useMemo } from 'react';
-import './index.css';
 import { Column, Table as ReactTable, PaginationState, useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, OnChangeFn, flexRender, } from '@tanstack/react-table';
 import { SalesEntry } from '@/prisma/generated/client'
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
