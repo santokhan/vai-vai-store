@@ -20,7 +20,8 @@ const initialState = {
     productTypeId: '',
     brandId: '',
     modelId: '',
-    color: ''
+    color: '',
+    quantity: 1,
 }
 
 interface Props extends ServerProps {
@@ -41,7 +42,7 @@ export default function AccessoriesSalesEntryForm({ onCloseForm, productType, br
                 brand: founded.brand.brandName,
                 model: founded.model.model,
                 stockId: founded.id,
-                quantity: founded.quantity,
+                quantity: formData.quantity,
                 price: founded.sellingPrice,
             }
             addToSales(entity);
@@ -114,6 +115,22 @@ export default function AccessoriesSalesEntryForm({ onCloseForm, productType, br
                         defaultOptionName='default'
                         value={formData.color}
                     />
+                    <InputBox>
+                        <label htmlFor="quantity" className="default">quantity</label>
+                        <input
+                            type="number"
+                            id="quantity"
+                            name="quantity"
+                            min={1}
+                            onChange={(e) => {
+                                setFormData(prev => ({ ...prev, quantity: Number(e.target.value) }))
+                            }}
+                            className="default"
+                            placeholder="0"
+                            required={true}
+                            value={formData.quantity || ''}
+                        />
+                    </InputBox>
                 </div>
 
                 {founded &&

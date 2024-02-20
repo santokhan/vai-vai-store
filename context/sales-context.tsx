@@ -25,7 +25,7 @@ export default function SalesRowProvider({ children }: OnlyChildrenProps) {
             addToSales(newSalesRow: SalesRowIncludeBrandModel) {
                 // Entry if stockId is not exist in salesEntity
                 if (!salesEntity.some((item) => item.stockId === newSalesRow.stockId)) {
-                    newSalesRow = { ...newSalesRow, quantity: 1 }
+                    newSalesRow = { ...newSalesRow, quantity: newSalesRow.quantity || 1 };
                     setSalesEntity(prev => [...prev, newSalesRow])
                 } else {
                     alert(`Already added to Sales Entity. stockId:${newSalesRow.stockId}`)
