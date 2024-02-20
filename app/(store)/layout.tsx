@@ -5,6 +5,7 @@ import { authOptions } from "@/lib/auth/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
+import { ToastContainer } from "react-toastify";
 
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
     const session = await getServerSession(authOptions);
@@ -24,6 +25,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
                                 {children}
                             </div>
                         </main>
+                        <ToastContainer />
                     </>
                 )
             } else {
