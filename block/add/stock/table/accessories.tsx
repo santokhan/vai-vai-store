@@ -5,10 +5,8 @@
 import { useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, flexRender } from '@tanstack/react-table'
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { StockAccessories } from '@/prisma/generated/client'
-import { ORIGIN } from '@/utils/origin'
-import { GoToPage, TableFooterContainer, TableFooterRow } from '@/components/table/tanstack/table-footer'
+import { GoToPage, TableFooterContainer, TableFooterRow, tableArrowClasses } from '@/components/table/tanstack/table-footer'
 import PageOutOf from './page-number-out-of'
-import { tableArrowClasses } from './android'
 import { TableTitle } from '@/components/table/table-header'
 import THeadFilter from '@/components/table/tanstack/table-filter'
 import { inputClasses } from '@/components/table/tanstack/tw-classes'
@@ -64,7 +62,7 @@ export default function StockTableAccessories({ stockAccessories }: { stockAcces
                 cell: ({ row }) => (
                     <Actions>
                         <ActionDelete handleClick={() => {
-                            fetch(`${ORIGIN}/api/stock/table/accessories/delete?id=${row.original.id}`, {
+                            fetch(`/api/stock/table/accessories/delete?id=${row.original.id}`, {
                                 method: "DELETE"
                             }).then(res => res.json()).then((data) => {
                                 window.location.reload();

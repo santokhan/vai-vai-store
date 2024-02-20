@@ -6,16 +6,14 @@ import { useMemo } from 'react'
 import { useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, flexRender } from '@tanstack/react-table'
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { StockButton } from '@/prisma/generated/client'
-import { ORIGIN } from '@/utils/origin'
 import { GoToPage, TableFooterContainer, TableFooterRow } from '@/components/table/tanstack/table-footer'
 import PageOutOf from './page-number-out-of'
-import { tableArrowClasses } from './android'
 import { TableTitle } from '@/components/table/table-header'
 import THeadFilter from '@/components/table/tanstack/table-filter'
 import { inputClasses } from '@/components/table/tanstack/tw-classes'
 import Actions, { ActionDelete } from '@/components/table/action'
 
-export default function StockTableButton({ stockButton }: { stockButton: StockButton[] }) {
+export default function StockButtonTable({ stockButton }: { stockButton: StockButton[] }) {
     const columns = useMemo<ColumnDef<StockButton>[]>(() => [
         {
             id: 'Brand',
@@ -64,7 +62,7 @@ export default function StockTableButton({ stockButton }: { stockButton: StockBu
                 cell: ({ row }) => (
                     <Actions>
                         <ActionDelete handleClick={() => {
-                            fetch(`${ORIGIN}/api/stock/table/button/delete?id=${row.original.id}`, {
+                            fetch(`/api/stock/table/button/delete?id=${row.original.id}`, {
                                 method: "DELETE"
                             }).then(res => res.json()).then((data) => {
                                 window.location.reload();

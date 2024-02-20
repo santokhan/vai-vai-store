@@ -1,6 +1,7 @@
 // https://tanstack.com/table/v8/docs/examples/react/pagination
+
 'use client';
-import React from 'react';
+
 import { Table } from '@tanstack/react-table';
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import PageOutOf from '@/block/add/stock/table/page-number-out-of';
