@@ -1,11 +1,12 @@
 import { prisma } from '@/lib/prisma';
 import { StockAccessoriesPOST } from '../post-data-type';
 
-async function getAccessoriesSingle(modelId: string) {
+async function getAccessoriesSingle(modelId: string, brandId: string) {
     try {
         return await prisma.stockAccessories.findFirst({
             where: {
-                modelId
+                modelId,
+                brandId
             }
         });
     } catch (error) {
@@ -68,12 +69,12 @@ export async function GET(): Promise<Response> {
 
 export async function POST(request: Request): Promise<Response> {
     const body: StockAccessoriesPOST = await request.json();
-    const { modelId, quantity, } = body;
-    if (modelId && quantity) {
-        const exist = await getAccessoriesSingle(modelId);
+    const { modelId, quantity, brandId } = body;
+    if (modelId && quantity && brandId) {
+        const exist = await getAccessoriesSingle(modelId, brandId);
 
         if (exist) {
-            const newQuantity = exist.quantity + quantity
+            const newQuantity = exist.quantity + quantity;
             const updated = await updateAccessories(exist.id, newQuantity);
             return Response.json({
                 message: updated ? `The updated quantity is ${updated.quantity}` : 'Failed to update quantity.'

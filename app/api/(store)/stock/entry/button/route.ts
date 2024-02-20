@@ -1,11 +1,13 @@
 import { prisma } from '@/lib/prisma';
 import { StockButtonPOST } from '../post-data-type';
 
-async function getButtonSingle(modelId: string) {
+async function getButtonSingle(modelId: string, brandId: string, color: string) {
     try {
         return await prisma.stockButton.findFirst({
             where: {
-                modelId
+                modelId,
+                brandId,
+                color
             }
         });
     } catch (error) {
@@ -71,13 +73,13 @@ export async function GET(): Promise<Response> {
 
 export async function POST(request: Request): Promise<Response> {
     const body: StockButtonPOST = await request.json();
-    const { modelId, quantity } = body;
+    const { modelId, quantity, brandId, color } = body;
 
-    if (modelId && quantity) {
-        const exist = await getButtonSingle(modelId);
+    if (modelId && quantity && brandId && color) {
+        const exist = await getButtonSingle(modelId, brandId, color);
 
         if (exist) {
-            const newQuantity = exist.quantity + quantity
+            const newQuantity = exist.quantity + quantity;
             const updated = await updateButton(exist.id, newQuantity);
             return Response.json({
                 message: updated ? `The updated quantity is ${updated.quantity}` : 'Failed to update quantity.'
