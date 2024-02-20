@@ -13,9 +13,6 @@ GOOGLE_SECRET=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
 # Generated hash by https://www.npmjs.com/package/crypto-js
 NEXTAUTH_SECRET=68965d686e77544da3e5a6e614d97db5ef86d4c38f0a92c447dd766d33d087b5
 
-# We are using Google auth not using Firebase ⬆
-NEXT_PUBLIC_FIREBASE_CONFIG={"apiKey":"AIzaSyAtCw3QISO_Gg2g9xvaP-mHLQkOIOSIv5Q","authDomain":"mobile-store-2010.firebaseapp.com","projectId":"mobile-store-2010","storageBucket":"mobile-store-2010.appspot.com","messagingSenderId":"13910539129","appId":"1:13910539129:web:bcc84e665a51c987c0cda8","measurementId":"G-Z9BHRFSLTJ"}
-
 # Current domain + /api
 NEXT_PUBLIC_API_URL=http://localhost:3000/api
 ```

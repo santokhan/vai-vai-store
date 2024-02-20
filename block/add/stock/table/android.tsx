@@ -49,8 +49,10 @@ export default function StockAndroidTable({ stockAndroid }: { stockAndroid: Stoc
                         <ActionDelete handleClick={() => {
                             fetch(`/api/stock/table/android/delete?id=${row.original.id}`, {
                                 method: "DELETE"
-                            }).then(res => res.json()).then((data) => {
+                            }).then(() => {
                                 window.location.reload();
+                            }).catch(error => {
+                                console.error(error)
                             })
                         }} />
                     </Actions>
@@ -87,7 +89,7 @@ function Table({ data, columns }: TableProps) {
                     <thead className='bg-gray-100'>
                         <tr>
                             {headers.map(header =>
-                                <th key={header.id} colSpan={header.colSpan} className='p-2 text-start font-medium uppercase min-w-[3rem]'>
+                                <th key={header.id} colSpan={header.colSpan} className='p-2 text-start font-medium uppercase'>
                                     <div className="flex flex-col gap-2">
                                         <span className='whitespace-nowrap'>{header.column.parent?.id}</span>
                                         {header.column.getCanFilter() && <THeadFilter column={header.column} table={table} />}

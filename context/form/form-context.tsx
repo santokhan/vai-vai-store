@@ -1,4 +1,6 @@
-import { Context, createContext, useContext } from "react";
+'use client';
+
+import { createContext, useContext } from "react";
 
 export const FormContext = createContext({});
 

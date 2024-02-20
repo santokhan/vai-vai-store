@@ -64,8 +64,10 @@ export default function StockTableAccessories({ stockAccessories }: { stockAcces
                         <ActionDelete handleClick={() => {
                             fetch(`/api/stock/table/accessories/delete?id=${row.original.id}`, {
                                 method: "DELETE"
-                            }).then(res => res.json()).then((data) => {
+                            }).then(() => {
                                 window.location.reload();
+                            }).catch(error => {
+                                console.error(error)
                             })
                         }} />
                     </Actions>
@@ -105,7 +107,7 @@ function Table({ data, columns }: TableProps) {
                     <thead className='bg-gray-100'>
                         <tr>
                             {headers.map(header =>
-                                <th key={header.id} colSpan={header.colSpan} className='p-2 text-start'>
+                                <th key={header.id} colSpan={header.colSpan} className='p-2 text-start font-medium uppercase'>
                                     <div className='whitespace-nowrap capitalize'>
                                         {flexRender(header.column.columnDef.header, header.getContext())}
                                     </div>

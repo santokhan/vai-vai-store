@@ -1,8 +1,10 @@
+'use server';
+
 import { prisma } from '@/lib/prisma';
 
 export async function getAccessoriesMany() {
     try {
-        return await prisma.stockButton.findMany({
+        return await prisma.stockAccessories.findMany({
             include: {
                 productType: true,
                 brand: true,
@@ -10,7 +12,7 @@ export async function getAccessoriesMany() {
             }
         });
     } catch (error) {
-        console.error('Error creating model:', error);
+        console.error('Data does not exist ', error);
     } finally {
         await prisma.$disconnect();
     }

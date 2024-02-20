@@ -6,12 +6,13 @@ import { useMemo } from 'react'
 import { useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, flexRender } from '@tanstack/react-table'
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { StockButton } from '@/prisma/generated/client'
-import { GoToPage, TableFooterContainer, TableFooterRow } from '@/components/table/tanstack/table-footer'
+import { GoToPage, TableFooterContainer, TableFooterRow, tableArrowClasses } from '@/components/table/tanstack/table-footer'
 import PageOutOf from './page-number-out-of'
 import { TableTitle } from '@/components/table/table-header'
 import THeadFilter from '@/components/table/tanstack/table-filter'
 import { inputClasses } from '@/components/table/tanstack/tw-classes'
 import Actions, { ActionDelete } from '@/components/table/action'
+import { deleteStockButton } from '@/actions/stock/button/delete';
 
 export default function StockButtonTable({ stockButton }: { stockButton: StockButton[] }) {
     const columns = useMemo<ColumnDef<StockButton>[]>(() => [
@@ -61,12 +62,10 @@ export default function StockButtonTable({ stockButton }: { stockButton: StockBu
                 id: 'action',
                 cell: ({ row }) => (
                     <Actions>
-                        <ActionDelete handleClick={() => {
-                            fetch(`/api/stock/table/button/delete?id=${row.original.id}`, {
-                                method: "DELETE"
-                            }).then(res => res.json()).then((data) => {
-                                window.location.reload();
-                            })
+                        <ActionDelete handleClick={async () => {
+                            if (row.original.id) {
+                                const response = await deleteStockButton(row.original.id);
+                            }
                         }} />
                     </Actions>
                 )
@@ -106,7 +105,7 @@ function Table({ data, columns }: TableProps) {
                     <thead className='bg-gray-100'>
                         <tr>
                             {headers.map(header =>
-                                <th key={header.id} colSpan={header.colSpan} className='p-2 text-start'>
+                                <th key={header.id} colSpan={header.colSpan} className='p-2 text-start font-medium uppercase'>
                                     <div className='whitespace-nowrap capitalize'>
                                         {flexRender(header.column.columnDef.header, header.getContext())}
                                     </div>

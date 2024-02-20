@@ -1,6 +1,6 @@
 'use server';
 
-import { getButtonMany } from "@/actions/stock/button/button";
+import { getButtonMany } from "@/actions/stock/button/get";
 import StockButtonTable from "@/block/add/stock/table/button";
 import { StockButton } from "@/prisma/generated/client";
 
