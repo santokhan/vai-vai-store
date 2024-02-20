@@ -1,26 +1,11 @@
 import { APICustomerData } from "@/app/api/(store)/sales/entry/create-customer";
 import { Brand, InStock, Model, ProductType } from "@/prisma/generated/client";
+export { commonPhoneColors } from "./pre-defined-form-data";
 
 export const defaultType = [
     'android',
     'button',
     'accessories',
-];
-
-export const commonPhoneColors = [
-    'black',
-    'white',
-    'silver',
-    'gold',
-    'blue',
-    'red',
-    'green',
-    'purple',
-    'orange',
-    'yellow',
-    'copper',
-    'pink',
-    'aqua'
 ];
 
 type StockIncludes = InStock & {

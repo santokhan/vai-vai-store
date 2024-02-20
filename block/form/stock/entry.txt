@@ -1,5 +1,6 @@
 'use client';
 
+import Button from '@/components/button/button';
 import NumberInput from '@/components/form/input/number';
 import SelectOption from '@/components/form/select-option/select-option';
 import { PRINT } from '@/components/print';
@@ -7,6 +8,7 @@ import { FormContext } from '@/context/form/form-context';
 import { Brand, InStock, Model, ProductType } from '@/prisma/generated/client';
 import { commonPhoneColors } from '@/utils/default-data';
 import { ORIGIN } from '@/utils/origin';
+import { RAM, ROM } from '@/utils/pre-defined-form-data';
 import { Table } from 'flowbite-react';
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
@@ -89,8 +91,6 @@ const StockEntryForm: React.FC = () => {
         }
         return models;
     }
-
-    const isAndroid = typeQuery.data?.find(e => e.id === state.productTypeId)?.type === 'android';
 
     const productTypeById = (typeId: string) => typeQuery.data?.find(e => e.id === typeId)?.type;
     const brandById = (brandId: string) => brandQuery.data?.find(e => e.id === brandId)?.brandName;
@@ -224,92 +224,38 @@ const StockEntryForm: React.FC = () => {
                                     defaultOptionName='default'
                                     value={state.color}
                                 />
-                                {
-                                    isAndroid &&
-                                    <>
-                                        <SelectOption
-                                            labelName='RAM'
-                                            name="ram"
-                                            options={[2, 3, 4, 6, 8, 12]}
-                                            onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                                                setstate(prev => ({ ...prev, ram: e.target.value }))
-                                            }}
-                                            defaultOptionName='Default'
-                                            value={state.ram}
-                                            required={true}
-                                        />
-                                        <SelectOption
-                                            labelName='ROM'
-                                            name="rom"
-                                            options={[16, 32, 64, 128, 256, 512]}
-                                            onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                                                setstate(prev => ({ ...prev, rom: e.target.value }))
-                                            }}
-                                            defaultOptionName='Default'
-                                            value={state.rom}
-                                            required={true}
-                                        />
-                                    </>
-                                }
+                                <SelectOption
+                                    labelName='RAM'
+                                    name="ram"
+                                    options={RAM}
+                                    onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                                        setstate(prev => ({ ...prev, ram: e.target.value }))
+                                    }}
+                                    defaultOptionName='Default'
+                                    value={state.ram}
+                                    required={true}
+                                />
+                                <SelectOption
+                                    labelName='ROM'
+                                    name="rom"
+                                    options={ROM}
+                                    onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                                        setstate(prev => ({ ...prev, rom: e.target.value }))
+                                    }}
+                                    defaultOptionName='Default'
+                                    value={state.rom}
+                                    required={true}
+                                />
                             </div>
                         </div>
 
-                        <div className="flex justify-end+">
-                            <button className="default" disabled={adding}>{adding ? "..." : "add"}</button>
+                        <div>
+                            <Button variant='primary' disabled={adding}>
+                                {adding ? "..." : "add"}
+                            </Button>
                         </div>
                     </form>
                 </section>
-                {createdItem && createdItem.length > 0 &&
-                    <section className="w-full max-w-[90vw] overflow-x-auto space-y-2">
-                        {/* <PRINT data={state} /> */}
-                        <h2 className='text-xl font-semibold'>Add product to stock</h2>
-                        <Table>
-                            <Table.Head>
-                                <Table.HeadCell>Name</Table.HeadCell>
-                                <Table.HeadCell>IMEI</Table.HeadCell>
-                                <Table.HeadCell>Color</Table.HeadCell>
-                                <Table.HeadCell>RAM</Table.HeadCell>
-                                <Table.HeadCell>ROM</Table.HeadCell>
-                                <Table.HeadCell title="Purchase Price">Purchase</Table.HeadCell>
-                                <Table.HeadCell>Price</Table.HeadCell>
-                                <Table.HeadCell>Sold</Table.HeadCell>
-                            </Table.Head>
-                            <Table.Body className="divide-y">
-                                {createdItem.map((item: InStock) => (
-                                    <Table.Row className="" key={item.id}>
-                                        {
-                                            item.name &&
-                                            <Table.Cell className="whitespace-nowrap font-normal text-gray-900 capitalize">
-                                                {item.name}
-                                            </Table.Cell>
-                                        }
-                                        <Table.Cell className="whitespace-nowrap font-normal text-gray-900 capitalize">
-                                            {productTypeById(item.productTypeId)}
-                                        </Table.Cell>
-                                        <Table.Cell className="whitespace-nowrap font-normal text-gray-900 capitalize">
-                                            {brandById(item.brandId)}
-                                        </Table.Cell>
-                                        <Table.Cell className="whitespace-nowrap font-normal text-gray-900 capitalize">
-                                            {modelById(item.modelId)}
-                                        </Table.Cell>
-                                        <Table.Cell className="whitespace-nowrap font-normal text-gray-900 capitalize">
-                                            {item.color}
-                                        </Table.Cell>
-                                        <Table.Cell className="whitespace-nowrap font-normal text-gray-900 capitalize">
-                                            {item.ram}
-                                        </Table.Cell>
-                                        <Table.Cell className="whitespace-nowrap font-normal text-gray-900 capitalize">
-                                            {item.rom}
-                                        </Table.Cell>
-                                        <Table.Cell className="whitespace-nowrap font-normal text-gray-900 capitalize">
-                                            {item.sold ? 'yes' : 'no'}
-                                        </Table.Cell>
-                                    </Table.Row>
-                                ))}
-                            </Table.Body>
-                        </Table>
-                    </section>
-                }
             </div>
         </FormContext.Provider >
     );

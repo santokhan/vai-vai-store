@@ -11,6 +11,7 @@ import { commonPhoneColors } from '@/utils/default-data';
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { toast } from 'react-toastify';
 import { ServerProps } from './type';
+import { RAM, ROM } from '@/utils/pre-defined-form-data';
 
 export const initialState: StockAndroidPOST = {
     name: '',
@@ -163,7 +164,7 @@ const StockAndroidEntryForm: FC<ServerProps> = ({ productType, brand, model }) =
                         <SelectOption
                             labelName='RAM'
                             name="ram"
-                            options={[2, 3, 4, 6, 8, 12]}
+                            options={RAM}
                             onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                                 setstate(prev => ({ ...prev, ram: e.target.value }))
                             }}
@@ -174,7 +175,7 @@ const StockAndroidEntryForm: FC<ServerProps> = ({ productType, brand, model }) =
                         <SelectOption
                             labelName='ROM'
                             name="rom"
-                            options={[16, 32, 64, 128, 256, 512]}
+                            options={ROM}
                             onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                                 setstate(prev => ({ ...prev, rom: e.target.value }))
                             }}
