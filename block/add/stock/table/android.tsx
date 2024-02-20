@@ -1,6 +1,7 @@
 // https://tanstack.com/table/v8/docs/examples/react/pagination
 'use client';
-import React from 'react';
+
+import { useMemo } from 'react';
 import { useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, flexRender } from '@tanstack/react-table';
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { StockAndroid } from '@/prisma/generated/client';
@@ -15,7 +16,7 @@ import { TableTitle } from '@/components/table/table-header';
 export const tableArrowClasses = "border rounded-lg px-2 py-2 flex items-center hover:bg-gray-100";
 
 export default function StockTable({ stockAndroid }: { stockAndroid: StockAndroid[] }) {
-    const columns = React.useMemo<ColumnDef<StockAndroid>[]>(() => [
+    const columns = useMemo<ColumnDef<StockAndroid>[]>(() => [
         { id: 'brand', columns: [{ accessorKey: 'brand.brandName' }] },
         { id: 'model', columns: [{ accessorKey: 'model.model' }] },
         { id: 'IMEI', columns: [{ accessorKey: 'IMEI' }] },

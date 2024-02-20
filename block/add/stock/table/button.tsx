@@ -2,7 +2,7 @@
 
 'use client';
 
-import React from 'react'
+import { useMemo } from 'react'
 import { useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, flexRender } from '@tanstack/react-table'
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { StockButton } from '@/prisma/generated/client'
@@ -16,120 +16,50 @@ import { inputClasses } from '@/components/table/tanstack/tw-classes'
 import Actions, { ActionDelete } from '@/components/table/action'
 
 export default function StockTableButton({ stockButton }: { stockButton: StockButton[] }) {
-    const columns = React.useMemo<ColumnDef<StockButton>[]>(() => [
-        {
-            id: 'Name',
-            footer: props => props.column.id,
-            columns: [
-                {
-                    accessorKey: 'name',
-                    cell: info => info.getValue(),
-                    footer: props => props.column.id,
-                },
-            ],
-        },
-        {
-            id: 'IMEI',
-            footer: props => props.column.id,
-            columns: [
-                {
-                    accessorKey: 'IMEI',
-                    footer: props => props.column.id,
-                },
-            ],
-        },
-        {
-            id: 'Product Type',
-            footer: props => props.column.id,
-            columns: [
-                {
-                    accessorKey: 'productType.type',
-                    footer: props => props.column.id,
-                },
-            ],
-        },
+    const columns = useMemo<ColumnDef<StockButton>[]>(() => [
         {
             id: 'Brand',
-            footer: props => props.column.id,
             columns: [
                 {
                     accessorKey: 'brand.brandName',
-                    footer: props => props.column.id,
                 },
             ],
         },
         {
             id: 'Model',
-            footer: props => props.column.id,
             columns: [
                 {
                     accessorKey: 'model.model',
-                    footer: props => props.column.id,
                 },
             ],
         },
         {
             id: 'Purchase Price',
-            footer: props => props.column.id,
             columns: [
                 {
                     accessorKey: 'purchasePrice',
-                    footer: props => props.column.id,
-                },
-            ],
-        },
-        {
-            id: 'Model',
-            footer: props => props.column.id,
-            columns: [
-                {
-                    accessorKey: 'price',
-                    footer: props => props.column.id,
-                },
-            ],
-        },
-        {
-            id: 'RAM',
-            footer: props => props.column.id,
-            columns: [
-                {
-                    accessorKey: 'ram',
-                    footer: props => props.column.id,
-                },
-            ],
-        },
-        {
-            id: 'ROM',
-            footer: props => props.column.id,
-            columns: [
-                {
-                    accessorKey: 'rom',
-                    footer: props => props.column.id,
                 },
             ],
         },
         {
             id: 'Color',
-            footer: props => props.column.id,
             columns: [
                 {
                     accessorKey: 'color',
-                    footer: props => props.column.id,
                 },
             ],
         },
         {
-            id: 'Sold',
-            footer: props => props.column.id,
+            id: 'quantity',
             columns: [
                 {
-                    accessorKey: 'sold',
-                    footer: props => props.column.id,
+                    accessorKey: 'quantity',
                 },
             ],
         },
         {
-            id: 'action', columns: [{
+            id: 'action',
+            columns: [{
                 id: 'action',
                 cell: ({ row }) => (
                     <Actions>
@@ -168,8 +98,7 @@ function Table({ data, columns }: TableProps) {
         getPaginationRowModel: getPaginationRowModel(),
         debugTable: true,
     });
-    const headerGroups = table.getHeaderGroups();
-    headerGroups.unshift();
+    const headers = table.getHeaderGroups()[1].headers;
 
     return (
         <div className="rounded-xl bg-white p-4 lg:p-6 space-y-4">
@@ -178,7 +107,7 @@ function Table({ data, columns }: TableProps) {
                 <table className='w-full text-sm'>
                     <thead className='bg-gray-100'>
                         <tr>
-                            {headerGroups[1].headers.map(header =>
+                            {headers.map(header =>
                                 <th key={header.id} colSpan={header.colSpan} className='p-2 text-start'>
                                     <div className='whitespace-nowrap capitalize'>
                                         {flexRender(header.column.columnDef.header, header.getContext())}
