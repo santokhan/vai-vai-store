@@ -1,4 +1,5 @@
 'use client';
+
 import AndroidSalesEntryForm from "@/components/form/sales/android-entry";
 import SalesRow from "@/components/sales-row/sales-row";
 import { useState } from "react";
@@ -15,8 +16,9 @@ import SellerForm from "../seller-form";
 import { useSellerContext } from "@/context/seller-context";
 import { useRouter } from "next/navigation";
 import { APISalesEntry } from "@/app/api/(store)/sales/entry/type";
+import { ServerProps } from "@/block/form/stock/type";
 
-export default function SalesEntryForm() {
+export default function SalesEntryForm({ productType, brand, model }: ServerProps) {
     const [isOpenForm, setIsOpenForm] = useState<ProductTypeKeys | ''>('');
     const [adding, setAdding] = useState<boolean>(false);
     const { salesEntity } = useSalesRowContext();
@@ -71,8 +73,8 @@ export default function SalesEntryForm() {
         <div className="space-y-6">
             <SalesRow onOpenForm={(formType: ProductTypeKeys) => setIsOpenForm(formType)} />
             {isOpenForm === 'android' && <AndroidSalesEntryForm onCloseForm={onCloseForm} />}
-            {isOpenForm === 'button' && <ButtonSalesEntryForm onCloseForm={onCloseForm} />}
-            {isOpenForm === 'accessories' && <AccessoriesSalesEntryForm onCloseForm={onCloseForm} />}
+            {isOpenForm === 'button' && <ButtonSalesEntryForm onCloseForm={onCloseForm} productType={productType.filter(p => p.type === 'button')} brand={brand} model={model} />}
+            {isOpenForm === 'accessories' && <AccessoriesSalesEntryForm onCloseForm={onCloseForm} productType={productType.filter(p => p.type === 'accessories')} brand={brand} model={model} />}
             {salesEntity.length > 0 &&
                 <>
                     <CustomerForm />

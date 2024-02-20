@@ -67,7 +67,7 @@ const SalesRow: FC<Props> = ({ onOpenForm }) => {
                                         onClick={() => {
                                             onOpenForm(type);
                                         }}
-                                        disabled={type !== 'android'}
+                                        disabled={false}
                                     >
                                         <Add className="w-5 h-5" />
                                         {type}

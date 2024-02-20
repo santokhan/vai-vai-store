@@ -1,4 +1,5 @@
 import { StockAndroidIncludes } from "@/app/api/(store)/stock/search/imei/route";
+import { TableTitle } from "../table/table-header";
 
 interface Props {
     stockAndroid: StockAndroidIncludes | null;
@@ -50,5 +51,46 @@ const SearchProductCard: React.FC<Props> = ({ stockAndroid }: Props) => {
         </div>
     );
 };
+
+export const FoundedProductTable: React.FC<{ obj: object | null }> = ({ obj }) => {
+    if (!obj) return null;
+
+    const validTypes = ['string', 'number', 'boolean']
+
+    const objToArray = Object.entries(obj).filter(([key, value]) => {
+        // if (validTypes.includes(typeof value)) {
+        //     return value !== '';
+        // } else {
+        //     return false;
+        // }
+        return true;
+    });
+
+    return (
+        <div className="overflow-x-auto space-y-2">
+            <TableTitle>Specifications</TableTitle>
+            <table className="text-sm">
+                <thead>
+                    <tr>
+                        <th className='px-3 py-2 text-start bg-gray-100 min-w-40 rounded-l-lg'>Key</th>
+                        <th className='px-3 py-2 text-start bg-gray-100 min-w-40 rounded-r-lg'>Value</th>
+                    </tr>
+                </thead>
+                <tbody className="divide-y">
+                    {objToArray.map((arr, index) => (
+                        <tr key={index}>
+                            {arr.map((e, i) =>
+                                <td key={i} className="whitespace-nowrap px-3 py-2 capitalize">
+                                    {typeof e === 'string' ? e : <pre>{JSON.stringify(e, null, 2)}</pre>}
+                                </td>
+                            )}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div >
+    );
+};
+
 
 export default SearchProductCard;

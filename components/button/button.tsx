@@ -22,7 +22,7 @@ const Button: React.FC<ButtonProps> = ({ children, variant = 'primary', ...props
 
     return (
         <button
-            className={`rounded-lg px-4 py-2.5 font-medium flex items-center gap-1 capitalize text-sm disabled:bg-gray-200 ${variantClass}`}
+            className={`rounded-lg px-4 py-2.5 font-medium inline-flex items-center gap-1 capitalize text-sm disabled:bg-gray-200 ${variantClass}`}
             {...props}
         >
             {children}
