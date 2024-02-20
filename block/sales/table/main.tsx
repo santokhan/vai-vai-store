@@ -1,16 +1,18 @@
 // https://tanstack.com/table/v8/docs/examples/react/pagination
+
 'use client';
+
 import React, { useMemo } from 'react';
 import { useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, flexRender, } from '@tanstack/react-table';
 import { SalesEntry } from '@/prisma/generated/client'
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import { tableArrowClasses } from '@/block/add/stock/table/android';
 import PageOutOf from '@/block/add/stock/table/page-number-out-of';
 import Actions, { ActionDelete } from '@/components/table/action';
 import { ORIGIN } from '@/utils/origin';
-import { GoToPage, TableFooterContainer, TableFooterRow } from '@/components/table/tanstack/table-footer';
+import { GoToPage, TableFooterContainer, TableFooterRow, tableArrowClasses } from '@/components/table/tanstack/table-footer';
 import { inputClasses } from '@/components/table/tanstack/tw-classes';
 import THeadFilter from '@/components/table/tanstack/table-filter';
+import { TableTitle } from '@/components/table/table-header';
 
 export default function SalesTable({ salesEntry }: { salesEntry: SalesEntry[] }) {
     const columns = useMemo<ColumnDef<SalesEntry>[]>(() => [
@@ -59,7 +61,7 @@ function Table({ data, columns }: TableProps) {
 
     return (
         <div className="rounded-xl bg-white w-full p-6 space-y-6">
-            <h5 className="font-semibold">Sales Table</h5>
+            <TableTitle>Sales Table</TableTitle>
             <div className="w-full overflow-x-auto">
                 <table className='w-full text-sm'>
                     <thead className='bg-gray-100'>
