@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
     const session = await getServerSession(authOptions);

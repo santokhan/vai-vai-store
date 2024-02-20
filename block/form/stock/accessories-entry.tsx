@@ -5,9 +5,10 @@ import Button from '@/components/button/button';
 import FormContainer from '@/components/form-container';
 import InputBox from '@/components/form/input-box';
 import FormTitle from '@/components/form/title';
-import { Brand, Model, ProductType } from '@/prisma/generated/client';
+import { Brand, Model } from '@/prisma/generated/client';
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { ServerProps } from './type';
+import { toast } from 'react-toastify';
 
 export const initialState: StockAccessoriesPOST = {
     name: '',
@@ -20,13 +21,14 @@ export const initialState: StockAccessoriesPOST = {
 }
 
 const StockAccessoriesEntryForm: FC<ServerProps> = ({ productType, brand, model }) => {
-    const [formData, setFormData] = useState<StockAccessoriesPOST>(initialState)
+    const [formData, setFormData] = useState<StockAccessoriesPOST>({ ...initialState, productTypeId: productType[0].id })
     const [adding, setadding] = useState<boolean>(false);
 
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        const { productTypeId, brandId, modelId, sellingPrice, purchasePrice, name, quantity } = formData;
-        if (productTypeId && brandId && modelId && sellingPrice && purchasePrice && name && quantity) {
+        const { productTypeId, brandId, modelId, sellingPrice, purchasePrice, quantity } = formData;
+
+        if (productTypeId && brandId && modelId && sellingPrice && purchasePrice && quantity) {
             setadding(true);
             try {
                 const res = await fetch(`/api/stock/entry/accessories`, {
@@ -35,7 +37,7 @@ const StockAccessoriesEntryForm: FC<ServerProps> = ({ productType, brand, model 
                 });
                 const data = await res.json();
                 if (data) {
-                    alert(data.message);
+                    toast(data.message);
                     setadding(false);
                 }
             } catch (error) {
@@ -62,37 +64,10 @@ const StockAccessoriesEntryForm: FC<ServerProps> = ({ productType, brand, model 
 
     return (
         <section className='space-y-2'>
-            <FormTitle>Add Button</FormTitle>
+            <FormTitle>Add Accessories</FormTitle>
             <form onSubmit={handleSubmit} className='block space-y-4'>
                 <FormContainer>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                        <InputBox>
-                            <label htmlFor="name" className="default">Product title</label>
-                            <input
-                                type="name"
-                                id="name"
-                                name="name"
-                                className="default"
-                                placeholder="Enter product title"
-                                onChange={(e: ChangeEvent<HTMLInputElement>) => { setFormData({ ...formData, name: e.target.value }) }}
-                                value={formData.name}
-                            />
-                        </InputBox>
-                        <InputBox>
-                            <label htmlFor="productType" className="default">Product Type</label>
-                            <select
-                                className="default"
-                                name="productType"
-                                id="productType"
-                                required={true}
-                                value={formData.productTypeId}
-                                onChange={(e: ChangeEvent<HTMLSelectElement>) => { setFormData({ ...formData, productTypeId: e.target.value }) }}>
-                                <option value='' disabled>Default</option>
-                                {productType.map((type: ProductType, idx) =>
-                                    <option className='capitalize' value={type.id} key={idx}>{type.type}</option>
-                                )}
-                            </select>
-                        </InputBox>
                         <InputBox>
                             <label htmlFor="brand" className="default">Choose brand</label>
                             <select

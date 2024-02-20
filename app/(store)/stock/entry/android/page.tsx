@@ -1,17 +1,22 @@
-'use client'
+'use server'
 
-import StockAccessoriesEntryForm from "@/block/form/stock/accessories-entry";
+import { getBrand } from "@/actions/brand";
+import { getModel } from "@/actions/model";
+import { getType } from "@/actions/product-type";
 import StockAndroidEntryForm from "@/block/form/stock/android-entry";
-import StockButtonEntryForm from "@/block/form/stock/button-entry";
-import FormTitle from "@/components/form/title";
-import ReactQueryContext from "@/context/react-query-context";
-import { productTypes } from "@/utils/product-type";
-import { Tab } from '@headlessui/react'
-import Link from "next/link";
 
-export default function StockEntryPage() {
-    return (
-        <StockAndroidEntryForm />
-    )
+export default async function StockAndroidEntryPage() {
+    const productType = await getType();
+    const brand = await getBrand();
+    const model = await getModel();
+
+    if (!productType || !brand || !model) {
+        return null;
+    } else {
+        const filtered = productType.filter(product => product.type === 'accessories');
+        return (
+            <StockAndroidEntryForm productType={filtered} brand={brand} model={model} />
+        )
+    }
 }
 
