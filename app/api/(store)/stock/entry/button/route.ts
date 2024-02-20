@@ -78,19 +78,15 @@ export async function POST(request: Request): Promise<Response> {
 
         if (exist) {
             const newQuantity = exist.quantity + quantity
-            const updatedAStock = await updateButton(exist.id, newQuantity);
-            if (updatedAStock) {
-                return Response.json({ message: `The updated quantity is ${updatedAStock.quantity}` });
-            } else {
-                return Response.json({ message: 'Can not update quantity.' });
-            }
+            const updated = await updateButton(exist.id, newQuantity);
+            return Response.json({
+                message: updated ? `The updated quantity is ${updated.quantity}` : 'Failed to update quantity.'
+            });
         } else {
-            const createdModel = await addButton(body);
-            if (createdModel) {
-                return Response.json({ message: `Data created with model id: ${createdModel.modelId}` });
-            } else {
-                return Response.json({ message: 'Failed to add data.' });
-            }
+            const created = await addButton(body);
+            return Response.json({
+                message: created ? `Data added with quantity: ${created.quantity}` : 'Failed to add data.'
+            });
         }
     } else {
         return Response.json({ message: 'Data is missing. Required schema: ', body });
