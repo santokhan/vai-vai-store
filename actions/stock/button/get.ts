@@ -43,3 +43,22 @@ export async function getStockButtonByModel(modelId: string, color: string): Pro
         await prisma.$disconnect();
     }
 }
+
+export async function getStockButtonById(id: string): Promise<StockButtonIncludeBrandModel | undefined> {
+    try {
+        const founded = await prisma.stockButton.findFirst({
+            where: {
+                id
+            },
+            include: {
+                brand: true,
+                model: true,
+            }
+        });
+        return founded || undefined;
+    } catch (error) {
+        console.error('Failed to read data ', error);
+    } finally {
+        await prisma.$disconnect();
+    }
+}

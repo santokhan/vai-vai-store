@@ -44,3 +44,24 @@ export async function getAccessoriesByModel(modelId: string): Promise<S_A_Includ
         await prisma.$disconnect();
     }
 }
+
+export async function getAccessoriesById(id: string): Promise<S_A_Include_B_M | undefined> {
+    try {
+        const founded = await prisma.stockAccessories.findFirst({
+            where: {
+                id
+            },
+            include: {
+                brand: true,
+                model: true,
+            }
+        });
+        if (founded) {
+            return founded;
+        }
+    } catch (error) {
+        console.error('Data does not exist ', error);
+    } finally {
+        await prisma.$disconnect();
+    }
+}

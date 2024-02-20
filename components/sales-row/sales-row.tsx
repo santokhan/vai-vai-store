@@ -42,7 +42,7 @@ const SalesRow: FC<Props> = ({ onOpenForm }) => {
                             <Table.Cell className='capitalize'>{row.brand}</Table.Cell>
                             <Table.Cell className='capitalize'>{row.model}</Table.Cell>
                             <Table.Cell>{row.quantity}</Table.Cell>
-                            <Table.Cell>{row.price}</Table.Cell>
+                            <Table.Cell>{row.price * row.quantity}</Table.Cell>
 
                             <Table.Cell>
                                 <button
