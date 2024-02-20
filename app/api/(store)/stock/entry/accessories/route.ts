@@ -73,7 +73,8 @@ export async function POST(request: Request): Promise<Response> {
         const exist = await getAccessoriesSingle(modelId);
 
         if (exist) {
-            const updatedAStock = await updateAccessories(exist.id, quantity);
+            const newQuantity = exist.quantity + quantity
+            const updatedAStock = await updateAccessories(exist.id, newQuantity);
             if (updatedAStock) {
                 return Response.json({ message: `The updated quantity is ${updatedAStock.quantity}` });
             } else {

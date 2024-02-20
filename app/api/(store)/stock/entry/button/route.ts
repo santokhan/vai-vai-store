@@ -77,7 +77,8 @@ export async function POST(request: Request): Promise<Response> {
         const exist = await getButtonSingle(modelId);
 
         if (exist) {
-            const updatedAStock = await updateButton(exist.id, quantity);
+            const newQuantity = exist.quantity + quantity
+            const updatedAStock = await updateButton(exist.id, newQuantity);
             if (updatedAStock) {
                 return Response.json({ message: `The updated quantity is ${updatedAStock.quantity}` });
             } else {

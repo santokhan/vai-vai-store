@@ -180,7 +180,7 @@ function Table({ data, columns }: TableProps) {
                         <tr>
                             {headerGroups[1].headers.map(header =>
                                 <th key={header.id} colSpan={header.colSpan} className='p-2 text-start'>
-                                    <div className='font-medium whitespace-nowrap capitalize'>
+                                    <div className='whitespace-nowrap capitalize'>
                                         {flexRender(header.column.columnDef.header, header.getContext())}
                                     </div>
                                     {header.column.getCanFilter() && <THeadFilter column={header.column} table={table} />}
