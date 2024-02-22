@@ -1,17 +1,34 @@
 import { FC } from 'react';
 import { Table } from 'flowbite-react';
 import Button from '../button/button';
-import { Add } from 'iconsax-react';
+import { Add, Minus } from 'iconsax-react';
 import { ProductTypeKeys, productTypes } from '@/utils/product-type';
 import { SalesRowIncludeBrandModel, useSalesRowContext } from '@/context/sales-context';
 import FormTitle from '../form/title';
 
+const ControlQuantity: FC<{ stockId: string; quantity: number }> = ({ stockId, quantity }) => {
+    const { changeQuantity } = useSalesRowContext();
+
+    return (
+        <div className='inline-flex w-auto max-w-[6rem] items-center'>
+            <button type="button" onClick={() => { changeQuantity(stockId, 'minus') }}
+                className="grid h-8 w-8 place-items-center hover:bg-gray-100 focus:outline-none">
+                <Minus className="w-4 h-4" />
+            </button>
+            <span className='p-2'>{quantity}</span>
+            <button type="button" onClick={() => { changeQuantity(stockId, 'plus') }}
+                className="grid h-8 w-8 place-items-center hover:bg-gray-100 focus:outline-none">
+                <Add className="w-4 h-4" />
+            </button>
+        </div>
+    );
+}
 interface Props {
     onOpenForm: (formType: ProductTypeKeys) => void;
 }
 
 const SalesRow: FC<Props> = ({ onOpenForm }) => {
-    const { salesEntity, removeFromSales } = useSalesRowContext();
+    const { salesEntity, removeFromSales, changeQuantity } = useSalesRowContext();
 
     const getCols = (salesEntity: SalesRowIncludeBrandModel[]): string[] => {
         if (salesEntity.length > 0) {
@@ -41,7 +58,14 @@ const SalesRow: FC<Props> = ({ onOpenForm }) => {
                             <Table.Cell className='capitalize'>{row.type}</Table.Cell>
                             <Table.Cell className='capitalize'>{row.brand}</Table.Cell>
                             <Table.Cell className='capitalize'>{row.model}</Table.Cell>
-                            <Table.Cell>{row.quantity}</Table.Cell>
+                            <Table.Cell>
+                                {
+                                    row.type == 'android' ?
+                                        row.quantity
+                                        :
+                                        <ControlQuantity stockId={row.stockId} quantity={row.quantity} />
+                                }
+                            </Table.Cell>
                             <Table.Cell>{row.price * row.quantity}</Table.Cell>
 
                             <Table.Cell>
