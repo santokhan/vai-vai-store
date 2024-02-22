@@ -7,7 +7,7 @@ import { useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowMo
 import { SalesEntry } from '@/prisma/generated/client'
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import PageOutOf from '@/block/add/stock/table/page-number-out-of';
-import Actions, { ActionDelete } from '@/components/table/action';
+import Actions, { ActionDelete, ActionViewInvoice } from '@/components/table/action';
 import { ORIGIN } from '@/utils/origin';
 import { GoToPage, TableFooterContainer, TableFooterRow, tableArrowClasses } from '@/components/table/tanstack/table-footer';
 import { inputClasses } from '@/components/table/tanstack/tw-classes';
@@ -26,6 +26,7 @@ export default function SalesTable({ salesEntry }: { salesEntry: SalesEntry[] })
                 id: 'action',
                 cell: ({ row }) => (
                     <Actions>
+                        <ActionViewInvoice invoiceId={row.original.id} />
                         <ActionDelete handleClick={() => {
                             fetch(`${ORIGIN}/api/sales/delete?id=${row.original.id}`, {
                                 method: "DELETE"
