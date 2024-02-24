@@ -34,11 +34,11 @@ export async function TotalSummary() {
     ]
 
     return (
-        <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-4">
             {array.map(({ name, amount }, i) => (
-                <div className="flex flex-col items-center justify-center h-20 md:h-24 min-w-36 md:min-w-40 p-4 rounded-lg border-2 border-dashed bg-white" key={i}>
-                    <div className="text-xl font-semibold whitespace-nowrap">${amount}</div>
-                    <div className="mt-1 font-medium capitalize whitespace-nowrap">{name}</div>
+                <div className="flex flex-col items-center justify-center h-28 min-w-48 p-4 rounded-lg border-2 border-dashed bg-white" key={i}>
+                    <div className="text-2xl font-semibold whitespace-nowrap">${amount}</div>
+                    <div className="mt-1 text-lg font-medium capitalize whitespace-nowrap">{name}</div>
                 </div>
             ))}
         </div>
