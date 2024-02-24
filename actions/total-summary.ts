@@ -37,6 +37,27 @@ async function getTotalPurchase() {
 }
 
 
+async function getTotalSales() {
+    try {
+        // const sales = await prisma.salesEntry.findMany({
+        //     select: {
+        //         entity: true
+        //     }
+        // });
+
+        // const salesIncludeStock = sales.map(async ({ entity }) => {
+        //     if (entity === 'android') {
+
+        //     }
+        // })
+
+        return 0;
+    } catch (error) {
+        throw error;
+    }
+}
+
+
 async function getTotalDue() {
     try {
         const sales = await prisma.salesEntry.aggregate({
@@ -56,7 +77,7 @@ async function getTotalDue() {
 export async function actionTotalSummary(): Promise<Record<'purchase' | 'sales' | 'due', number> | undefined> {
     try {
         const purchase = await getTotalPurchase();
-        const sales = 0;
+        const sales = await getTotalSales();
         const due = await getTotalDue();
 
         return { purchase, sales, due };
