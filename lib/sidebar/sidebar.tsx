@@ -109,6 +109,10 @@ export const expenses: NavIncludeChild = {
             name: "other",
             path: "/other",
         },
+        {
+            name: "table",
+            path: "/table",
+        },
     ],
 };
 

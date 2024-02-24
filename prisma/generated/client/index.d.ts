@@ -68,6 +68,21 @@ export type Customer = $Result.DefaultSelection<Prisma.$CustomerPayload>
  * 
  */
 export type SalesEntry = $Result.DefaultSelection<Prisma.$SalesEntryPayload>
+/**
+ * Model ShopRent
+ * 
+ */
+export type ShopRent = $Result.DefaultSelection<Prisma.$ShopRentPayload>
+/**
+ * Model Installment
+ * 
+ */
+export type Installment = $Result.DefaultSelection<Prisma.$InstallmentPayload>
+/**
+ * Model OtherCost
+ * 
+ */
+export type OtherCost = $Result.DefaultSelection<Prisma.$OtherCostPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -268,6 +283,36 @@ export class PrismaClient<
     * ```
     */
   get salesEntry(): Prisma.SalesEntryDelegate<ExtArgs>;
+
+  /**
+   * `prisma.shopRent`: Exposes CRUD operations for the **ShopRent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ShopRents
+    * const shopRents = await prisma.shopRent.findMany()
+    * ```
+    */
+  get shopRent(): Prisma.ShopRentDelegate<ExtArgs>;
+
+  /**
+   * `prisma.installment`: Exposes CRUD operations for the **Installment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Installments
+    * const installments = await prisma.installment.findMany()
+    * ```
+    */
+  get installment(): Prisma.InstallmentDelegate<ExtArgs>;
+
+  /**
+   * `prisma.otherCost`: Exposes CRUD operations for the **OtherCost** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OtherCosts
+    * const otherCosts = await prisma.otherCost.findMany()
+    * ```
+    */
+  get otherCost(): Prisma.OtherCostDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -748,7 +793,10 @@ export namespace Prisma {
     StockButton: 'StockButton',
     StockAccessories: 'StockAccessories',
     Customer: 'Customer',
-    SalesEntry: 'SalesEntry'
+    SalesEntry: 'SalesEntry',
+    ShopRent: 'ShopRent',
+    Installment: 'Installment',
+    OtherCost: 'OtherCost'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -765,7 +813,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'user' | 'seller' | 'productType' | 'brand' | 'model' | 'inStock' | 'stockAndroid' | 'stockButton' | 'stockAccessories' | 'customer' | 'salesEntry'
+      modelProps: 'user' | 'seller' | 'productType' | 'brand' | 'model' | 'inStock' | 'stockAndroid' | 'stockButton' | 'stockAccessories' | 'customer' | 'salesEntry' | 'shopRent' | 'installment' | 'otherCost'
       txIsolationLevel: never
     },
     model: {
@@ -1580,6 +1628,228 @@ export namespace Prisma {
           count: {
             args: Prisma.SalesEntryCountArgs<ExtArgs>,
             result: $Utils.Optional<SalesEntryCountAggregateOutputType> | number
+          }
+        }
+      }
+      ShopRent: {
+        payload: Prisma.$ShopRentPayload<ExtArgs>
+        fields: Prisma.ShopRentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ShopRentFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ShopRentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ShopRentFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ShopRentPayload>
+          }
+          findFirst: {
+            args: Prisma.ShopRentFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ShopRentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ShopRentFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ShopRentPayload>
+          }
+          findMany: {
+            args: Prisma.ShopRentFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ShopRentPayload>[]
+          }
+          create: {
+            args: Prisma.ShopRentCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ShopRentPayload>
+          }
+          createMany: {
+            args: Prisma.ShopRentCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.ShopRentDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ShopRentPayload>
+          }
+          update: {
+            args: Prisma.ShopRentUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ShopRentPayload>
+          }
+          deleteMany: {
+            args: Prisma.ShopRentDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ShopRentUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.ShopRentUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ShopRentPayload>
+          }
+          aggregate: {
+            args: Prisma.ShopRentAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateShopRent>
+          }
+          groupBy: {
+            args: Prisma.ShopRentGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<ShopRentGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.ShopRentFindRawArgs<ExtArgs>,
+            result: Prisma.JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.ShopRentAggregateRawArgs<ExtArgs>,
+            result: Prisma.JsonObject
+          }
+          count: {
+            args: Prisma.ShopRentCountArgs<ExtArgs>,
+            result: $Utils.Optional<ShopRentCountAggregateOutputType> | number
+          }
+        }
+      }
+      Installment: {
+        payload: Prisma.$InstallmentPayload<ExtArgs>
+        fields: Prisma.InstallmentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InstallmentFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$InstallmentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InstallmentFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$InstallmentPayload>
+          }
+          findFirst: {
+            args: Prisma.InstallmentFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$InstallmentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InstallmentFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$InstallmentPayload>
+          }
+          findMany: {
+            args: Prisma.InstallmentFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$InstallmentPayload>[]
+          }
+          create: {
+            args: Prisma.InstallmentCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$InstallmentPayload>
+          }
+          createMany: {
+            args: Prisma.InstallmentCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.InstallmentDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$InstallmentPayload>
+          }
+          update: {
+            args: Prisma.InstallmentUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$InstallmentPayload>
+          }
+          deleteMany: {
+            args: Prisma.InstallmentDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InstallmentUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.InstallmentUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$InstallmentPayload>
+          }
+          aggregate: {
+            args: Prisma.InstallmentAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateInstallment>
+          }
+          groupBy: {
+            args: Prisma.InstallmentGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<InstallmentGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.InstallmentFindRawArgs<ExtArgs>,
+            result: Prisma.JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.InstallmentAggregateRawArgs<ExtArgs>,
+            result: Prisma.JsonObject
+          }
+          count: {
+            args: Prisma.InstallmentCountArgs<ExtArgs>,
+            result: $Utils.Optional<InstallmentCountAggregateOutputType> | number
+          }
+        }
+      }
+      OtherCost: {
+        payload: Prisma.$OtherCostPayload<ExtArgs>
+        fields: Prisma.OtherCostFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OtherCostFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OtherCostPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OtherCostFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OtherCostPayload>
+          }
+          findFirst: {
+            args: Prisma.OtherCostFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OtherCostPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OtherCostFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OtherCostPayload>
+          }
+          findMany: {
+            args: Prisma.OtherCostFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OtherCostPayload>[]
+          }
+          create: {
+            args: Prisma.OtherCostCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OtherCostPayload>
+          }
+          createMany: {
+            args: Prisma.OtherCostCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.OtherCostDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OtherCostPayload>
+          }
+          update: {
+            args: Prisma.OtherCostUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OtherCostPayload>
+          }
+          deleteMany: {
+            args: Prisma.OtherCostDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OtherCostUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.OtherCostUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OtherCostPayload>
+          }
+          aggregate: {
+            args: Prisma.OtherCostAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateOtherCost>
+          }
+          groupBy: {
+            args: Prisma.OtherCostGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<OtherCostGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.OtherCostFindRawArgs<ExtArgs>,
+            result: Prisma.JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.OtherCostAggregateRawArgs<ExtArgs>,
+            result: Prisma.JsonObject
+          }
+          count: {
+            args: Prisma.OtherCostCountArgs<ExtArgs>,
+            result: $Utils.Optional<OtherCostCountAggregateOutputType> | number
           }
         }
       }
@@ -13547,6 +13817,2853 @@ export namespace Prisma {
 
 
   /**
+   * Model ShopRent
+   */
+
+  export type AggregateShopRent = {
+    _count: ShopRentCountAggregateOutputType | null
+    _avg: ShopRentAvgAggregateOutputType | null
+    _sum: ShopRentSumAggregateOutputType | null
+    _min: ShopRentMinAggregateOutputType | null
+    _max: ShopRentMaxAggregateOutputType | null
+  }
+
+  export type ShopRentAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type ShopRentSumAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type ShopRentMinAggregateOutputType = {
+    id: string | null
+    amount: number | null
+    comment: string | null
+    createdAt: Date | null
+  }
+
+  export type ShopRentMaxAggregateOutputType = {
+    id: string | null
+    amount: number | null
+    comment: string | null
+    createdAt: Date | null
+  }
+
+  export type ShopRentCountAggregateOutputType = {
+    id: number
+    amount: number
+    comment: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ShopRentAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type ShopRentSumAggregateInputType = {
+    amount?: true
+  }
+
+  export type ShopRentMinAggregateInputType = {
+    id?: true
+    amount?: true
+    comment?: true
+    createdAt?: true
+  }
+
+  export type ShopRentMaxAggregateInputType = {
+    id?: true
+    amount?: true
+    comment?: true
+    createdAt?: true
+  }
+
+  export type ShopRentCountAggregateInputType = {
+    id?: true
+    amount?: true
+    comment?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ShopRentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ShopRent to aggregate.
+     */
+    where?: ShopRentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ShopRents to fetch.
+     */
+    orderBy?: ShopRentOrderByWithRelationInput | ShopRentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ShopRentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ShopRents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ShopRents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ShopRents
+    **/
+    _count?: true | ShopRentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ShopRentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ShopRentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ShopRentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ShopRentMaxAggregateInputType
+  }
+
+  export type GetShopRentAggregateType<T extends ShopRentAggregateArgs> = {
+        [P in keyof T & keyof AggregateShopRent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateShopRent[P]>
+      : GetScalarType<T[P], AggregateShopRent[P]>
+  }
+
+
+
+
+  export type ShopRentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ShopRentWhereInput
+    orderBy?: ShopRentOrderByWithAggregationInput | ShopRentOrderByWithAggregationInput[]
+    by: ShopRentScalarFieldEnum[] | ShopRentScalarFieldEnum
+    having?: ShopRentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ShopRentCountAggregateInputType | true
+    _avg?: ShopRentAvgAggregateInputType
+    _sum?: ShopRentSumAggregateInputType
+    _min?: ShopRentMinAggregateInputType
+    _max?: ShopRentMaxAggregateInputType
+  }
+
+  export type ShopRentGroupByOutputType = {
+    id: string
+    amount: number
+    comment: string
+    createdAt: Date
+    _count: ShopRentCountAggregateOutputType | null
+    _avg: ShopRentAvgAggregateOutputType | null
+    _sum: ShopRentSumAggregateOutputType | null
+    _min: ShopRentMinAggregateOutputType | null
+    _max: ShopRentMaxAggregateOutputType | null
+  }
+
+  type GetShopRentGroupByPayload<T extends ShopRentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ShopRentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ShopRentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ShopRentGroupByOutputType[P]>
+            : GetScalarType<T[P], ShopRentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ShopRentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    amount?: boolean
+    comment?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["shopRent"]>
+
+  export type ShopRentSelectScalar = {
+    id?: boolean
+    amount?: boolean
+    comment?: boolean
+    createdAt?: boolean
+  }
+
+
+  export type $ShopRentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ShopRent"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      amount: number
+      comment: string
+      createdAt: Date
+    }, ExtArgs["result"]["shopRent"]>
+    composites: {}
+  }
+
+
+  type ShopRentGetPayload<S extends boolean | null | undefined | ShopRentDefaultArgs> = $Result.GetResult<Prisma.$ShopRentPayload, S>
+
+  type ShopRentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<ShopRentFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ShopRentCountAggregateInputType | true
+    }
+
+  export interface ShopRentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ShopRent'], meta: { name: 'ShopRent' } }
+    /**
+     * Find zero or one ShopRent that matches the filter.
+     * @param {ShopRentFindUniqueArgs} args - Arguments to find a ShopRent
+     * @example
+     * // Get one ShopRent
+     * const shopRent = await prisma.shopRent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends ShopRentFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, ShopRentFindUniqueArgs<ExtArgs>>
+    ): Prisma__ShopRentClient<$Result.GetResult<Prisma.$ShopRentPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one ShopRent that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {ShopRentFindUniqueOrThrowArgs} args - Arguments to find a ShopRent
+     * @example
+     * // Get one ShopRent
+     * const shopRent = await prisma.shopRent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends ShopRentFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ShopRentFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__ShopRentClient<$Result.GetResult<Prisma.$ShopRentPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first ShopRent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ShopRentFindFirstArgs} args - Arguments to find a ShopRent
+     * @example
+     * // Get one ShopRent
+     * const shopRent = await prisma.shopRent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends ShopRentFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, ShopRentFindFirstArgs<ExtArgs>>
+    ): Prisma__ShopRentClient<$Result.GetResult<Prisma.$ShopRentPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first ShopRent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ShopRentFindFirstOrThrowArgs} args - Arguments to find a ShopRent
+     * @example
+     * // Get one ShopRent
+     * const shopRent = await prisma.shopRent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends ShopRentFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ShopRentFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__ShopRentClient<$Result.GetResult<Prisma.$ShopRentPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more ShopRents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ShopRentFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ShopRents
+     * const shopRents = await prisma.shopRent.findMany()
+     * 
+     * // Get first 10 ShopRents
+     * const shopRents = await prisma.shopRent.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const shopRentWithIdOnly = await prisma.shopRent.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends ShopRentFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ShopRentFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ShopRentPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a ShopRent.
+     * @param {ShopRentCreateArgs} args - Arguments to create a ShopRent.
+     * @example
+     * // Create one ShopRent
+     * const ShopRent = await prisma.shopRent.create({
+     *   data: {
+     *     // ... data to create a ShopRent
+     *   }
+     * })
+     * 
+    **/
+    create<T extends ShopRentCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, ShopRentCreateArgs<ExtArgs>>
+    ): Prisma__ShopRentClient<$Result.GetResult<Prisma.$ShopRentPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many ShopRents.
+     *     @param {ShopRentCreateManyArgs} args - Arguments to create many ShopRents.
+     *     @example
+     *     // Create many ShopRents
+     *     const shopRent = await prisma.shopRent.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends ShopRentCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ShopRentCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ShopRent.
+     * @param {ShopRentDeleteArgs} args - Arguments to delete one ShopRent.
+     * @example
+     * // Delete one ShopRent
+     * const ShopRent = await prisma.shopRent.delete({
+     *   where: {
+     *     // ... filter to delete one ShopRent
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends ShopRentDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, ShopRentDeleteArgs<ExtArgs>>
+    ): Prisma__ShopRentClient<$Result.GetResult<Prisma.$ShopRentPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one ShopRent.
+     * @param {ShopRentUpdateArgs} args - Arguments to update one ShopRent.
+     * @example
+     * // Update one ShopRent
+     * const shopRent = await prisma.shopRent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends ShopRentUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, ShopRentUpdateArgs<ExtArgs>>
+    ): Prisma__ShopRentClient<$Result.GetResult<Prisma.$ShopRentPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more ShopRents.
+     * @param {ShopRentDeleteManyArgs} args - Arguments to filter ShopRents to delete.
+     * @example
+     * // Delete a few ShopRents
+     * const { count } = await prisma.shopRent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends ShopRentDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ShopRentDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ShopRents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ShopRentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ShopRents
+     * const shopRent = await prisma.shopRent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends ShopRentUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, ShopRentUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ShopRent.
+     * @param {ShopRentUpsertArgs} args - Arguments to update or create a ShopRent.
+     * @example
+     * // Update or create a ShopRent
+     * const shopRent = await prisma.shopRent.upsert({
+     *   create: {
+     *     // ... data to create a ShopRent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ShopRent we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends ShopRentUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, ShopRentUpsertArgs<ExtArgs>>
+    ): Prisma__ShopRentClient<$Result.GetResult<Prisma.$ShopRentPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Find zero or more ShopRents that matches the filter.
+     * @param {ShopRentFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const shopRent = await prisma.shopRent.findRaw({
+     *   filter: { age: { $gt: 25 } } 
+     * })
+    **/
+    findRaw(
+      args?: ShopRentFindRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a ShopRent.
+     * @param {ShopRentAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const shopRent = await prisma.shopRent.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+    **/
+    aggregateRaw(
+      args?: ShopRentAggregateRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Count the number of ShopRents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ShopRentCountArgs} args - Arguments to filter ShopRents to count.
+     * @example
+     * // Count the number of ShopRents
+     * const count = await prisma.shopRent.count({
+     *   where: {
+     *     // ... the filter for the ShopRents we want to count
+     *   }
+     * })
+    **/
+    count<T extends ShopRentCountArgs>(
+      args?: Subset<T, ShopRentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ShopRentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ShopRent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ShopRentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ShopRentAggregateArgs>(args: Subset<T, ShopRentAggregateArgs>): Prisma.PrismaPromise<GetShopRentAggregateType<T>>
+
+    /**
+     * Group by ShopRent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ShopRentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ShopRentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ShopRentGroupByArgs['orderBy'] }
+        : { orderBy?: ShopRentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ShopRentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetShopRentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ShopRent model
+   */
+  readonly fields: ShopRentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ShopRent.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ShopRentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the ShopRent model
+   */ 
+  interface ShopRentFieldRefs {
+    readonly id: FieldRef<"ShopRent", 'String'>
+    readonly amount: FieldRef<"ShopRent", 'Int'>
+    readonly comment: FieldRef<"ShopRent", 'String'>
+    readonly createdAt: FieldRef<"ShopRent", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * ShopRent findUnique
+   */
+  export type ShopRentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ShopRent
+     */
+    select?: ShopRentSelect<ExtArgs> | null
+    /**
+     * Filter, which ShopRent to fetch.
+     */
+    where: ShopRentWhereUniqueInput
+  }
+
+
+  /**
+   * ShopRent findUniqueOrThrow
+   */
+  export type ShopRentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ShopRent
+     */
+    select?: ShopRentSelect<ExtArgs> | null
+    /**
+     * Filter, which ShopRent to fetch.
+     */
+    where: ShopRentWhereUniqueInput
+  }
+
+
+  /**
+   * ShopRent findFirst
+   */
+  export type ShopRentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ShopRent
+     */
+    select?: ShopRentSelect<ExtArgs> | null
+    /**
+     * Filter, which ShopRent to fetch.
+     */
+    where?: ShopRentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ShopRents to fetch.
+     */
+    orderBy?: ShopRentOrderByWithRelationInput | ShopRentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ShopRents.
+     */
+    cursor?: ShopRentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ShopRents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ShopRents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ShopRents.
+     */
+    distinct?: ShopRentScalarFieldEnum | ShopRentScalarFieldEnum[]
+  }
+
+
+  /**
+   * ShopRent findFirstOrThrow
+   */
+  export type ShopRentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ShopRent
+     */
+    select?: ShopRentSelect<ExtArgs> | null
+    /**
+     * Filter, which ShopRent to fetch.
+     */
+    where?: ShopRentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ShopRents to fetch.
+     */
+    orderBy?: ShopRentOrderByWithRelationInput | ShopRentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ShopRents.
+     */
+    cursor?: ShopRentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ShopRents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ShopRents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ShopRents.
+     */
+    distinct?: ShopRentScalarFieldEnum | ShopRentScalarFieldEnum[]
+  }
+
+
+  /**
+   * ShopRent findMany
+   */
+  export type ShopRentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ShopRent
+     */
+    select?: ShopRentSelect<ExtArgs> | null
+    /**
+     * Filter, which ShopRents to fetch.
+     */
+    where?: ShopRentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ShopRents to fetch.
+     */
+    orderBy?: ShopRentOrderByWithRelationInput | ShopRentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ShopRents.
+     */
+    cursor?: ShopRentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ShopRents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ShopRents.
+     */
+    skip?: number
+    distinct?: ShopRentScalarFieldEnum | ShopRentScalarFieldEnum[]
+  }
+
+
+  /**
+   * ShopRent create
+   */
+  export type ShopRentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ShopRent
+     */
+    select?: ShopRentSelect<ExtArgs> | null
+    /**
+     * The data needed to create a ShopRent.
+     */
+    data: XOR<ShopRentCreateInput, ShopRentUncheckedCreateInput>
+  }
+
+
+  /**
+   * ShopRent createMany
+   */
+  export type ShopRentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ShopRents.
+     */
+    data: ShopRentCreateManyInput | ShopRentCreateManyInput[]
+  }
+
+
+  /**
+   * ShopRent update
+   */
+  export type ShopRentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ShopRent
+     */
+    select?: ShopRentSelect<ExtArgs> | null
+    /**
+     * The data needed to update a ShopRent.
+     */
+    data: XOR<ShopRentUpdateInput, ShopRentUncheckedUpdateInput>
+    /**
+     * Choose, which ShopRent to update.
+     */
+    where: ShopRentWhereUniqueInput
+  }
+
+
+  /**
+   * ShopRent updateMany
+   */
+  export type ShopRentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ShopRents.
+     */
+    data: XOR<ShopRentUpdateManyMutationInput, ShopRentUncheckedUpdateManyInput>
+    /**
+     * Filter which ShopRents to update
+     */
+    where?: ShopRentWhereInput
+  }
+
+
+  /**
+   * ShopRent upsert
+   */
+  export type ShopRentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ShopRent
+     */
+    select?: ShopRentSelect<ExtArgs> | null
+    /**
+     * The filter to search for the ShopRent to update in case it exists.
+     */
+    where: ShopRentWhereUniqueInput
+    /**
+     * In case the ShopRent found by the `where` argument doesn't exist, create a new ShopRent with this data.
+     */
+    create: XOR<ShopRentCreateInput, ShopRentUncheckedCreateInput>
+    /**
+     * In case the ShopRent was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ShopRentUpdateInput, ShopRentUncheckedUpdateInput>
+  }
+
+
+  /**
+   * ShopRent delete
+   */
+  export type ShopRentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ShopRent
+     */
+    select?: ShopRentSelect<ExtArgs> | null
+    /**
+     * Filter which ShopRent to delete.
+     */
+    where: ShopRentWhereUniqueInput
+  }
+
+
+  /**
+   * ShopRent deleteMany
+   */
+  export type ShopRentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ShopRents to delete
+     */
+    where?: ShopRentWhereInput
+  }
+
+
+  /**
+   * ShopRent findRaw
+   */
+  export type ShopRentFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * ShopRent aggregateRaw
+   */
+  export type ShopRentAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * ShopRent without action
+   */
+  export type ShopRentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ShopRent
+     */
+    select?: ShopRentSelect<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model Installment
+   */
+
+  export type AggregateInstallment = {
+    _count: InstallmentCountAggregateOutputType | null
+    _avg: InstallmentAvgAggregateOutputType | null
+    _sum: InstallmentSumAggregateOutputType | null
+    _min: InstallmentMinAggregateOutputType | null
+    _max: InstallmentMaxAggregateOutputType | null
+  }
+
+  export type InstallmentAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type InstallmentSumAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type InstallmentMinAggregateOutputType = {
+    id: string | null
+    amount: number | null
+    comment: string | null
+    createdAt: Date | null
+  }
+
+  export type InstallmentMaxAggregateOutputType = {
+    id: string | null
+    amount: number | null
+    comment: string | null
+    createdAt: Date | null
+  }
+
+  export type InstallmentCountAggregateOutputType = {
+    id: number
+    amount: number
+    comment: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type InstallmentAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type InstallmentSumAggregateInputType = {
+    amount?: true
+  }
+
+  export type InstallmentMinAggregateInputType = {
+    id?: true
+    amount?: true
+    comment?: true
+    createdAt?: true
+  }
+
+  export type InstallmentMaxAggregateInputType = {
+    id?: true
+    amount?: true
+    comment?: true
+    createdAt?: true
+  }
+
+  export type InstallmentCountAggregateInputType = {
+    id?: true
+    amount?: true
+    comment?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type InstallmentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Installment to aggregate.
+     */
+    where?: InstallmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Installments to fetch.
+     */
+    orderBy?: InstallmentOrderByWithRelationInput | InstallmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InstallmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Installments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Installments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Installments
+    **/
+    _count?: true | InstallmentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: InstallmentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: InstallmentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InstallmentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InstallmentMaxAggregateInputType
+  }
+
+  export type GetInstallmentAggregateType<T extends InstallmentAggregateArgs> = {
+        [P in keyof T & keyof AggregateInstallment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInstallment[P]>
+      : GetScalarType<T[P], AggregateInstallment[P]>
+  }
+
+
+
+
+  export type InstallmentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InstallmentWhereInput
+    orderBy?: InstallmentOrderByWithAggregationInput | InstallmentOrderByWithAggregationInput[]
+    by: InstallmentScalarFieldEnum[] | InstallmentScalarFieldEnum
+    having?: InstallmentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InstallmentCountAggregateInputType | true
+    _avg?: InstallmentAvgAggregateInputType
+    _sum?: InstallmentSumAggregateInputType
+    _min?: InstallmentMinAggregateInputType
+    _max?: InstallmentMaxAggregateInputType
+  }
+
+  export type InstallmentGroupByOutputType = {
+    id: string
+    amount: number
+    comment: string
+    createdAt: Date
+    _count: InstallmentCountAggregateOutputType | null
+    _avg: InstallmentAvgAggregateOutputType | null
+    _sum: InstallmentSumAggregateOutputType | null
+    _min: InstallmentMinAggregateOutputType | null
+    _max: InstallmentMaxAggregateOutputType | null
+  }
+
+  type GetInstallmentGroupByPayload<T extends InstallmentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InstallmentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InstallmentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InstallmentGroupByOutputType[P]>
+            : GetScalarType<T[P], InstallmentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InstallmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    amount?: boolean
+    comment?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["installment"]>
+
+  export type InstallmentSelectScalar = {
+    id?: boolean
+    amount?: boolean
+    comment?: boolean
+    createdAt?: boolean
+  }
+
+
+  export type $InstallmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Installment"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      amount: number
+      comment: string
+      createdAt: Date
+    }, ExtArgs["result"]["installment"]>
+    composites: {}
+  }
+
+
+  type InstallmentGetPayload<S extends boolean | null | undefined | InstallmentDefaultArgs> = $Result.GetResult<Prisma.$InstallmentPayload, S>
+
+  type InstallmentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<InstallmentFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: InstallmentCountAggregateInputType | true
+    }
+
+  export interface InstallmentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Installment'], meta: { name: 'Installment' } }
+    /**
+     * Find zero or one Installment that matches the filter.
+     * @param {InstallmentFindUniqueArgs} args - Arguments to find a Installment
+     * @example
+     * // Get one Installment
+     * const installment = await prisma.installment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends InstallmentFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, InstallmentFindUniqueArgs<ExtArgs>>
+    ): Prisma__InstallmentClient<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Installment that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {InstallmentFindUniqueOrThrowArgs} args - Arguments to find a Installment
+     * @example
+     * // Get one Installment
+     * const installment = await prisma.installment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends InstallmentFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, InstallmentFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__InstallmentClient<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Installment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstallmentFindFirstArgs} args - Arguments to find a Installment
+     * @example
+     * // Get one Installment
+     * const installment = await prisma.installment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends InstallmentFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, InstallmentFindFirstArgs<ExtArgs>>
+    ): Prisma__InstallmentClient<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Installment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstallmentFindFirstOrThrowArgs} args - Arguments to find a Installment
+     * @example
+     * // Get one Installment
+     * const installment = await prisma.installment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends InstallmentFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, InstallmentFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__InstallmentClient<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Installments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstallmentFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Installments
+     * const installments = await prisma.installment.findMany()
+     * 
+     * // Get first 10 Installments
+     * const installments = await prisma.installment.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const installmentWithIdOnly = await prisma.installment.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends InstallmentFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, InstallmentFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Installment.
+     * @param {InstallmentCreateArgs} args - Arguments to create a Installment.
+     * @example
+     * // Create one Installment
+     * const Installment = await prisma.installment.create({
+     *   data: {
+     *     // ... data to create a Installment
+     *   }
+     * })
+     * 
+    **/
+    create<T extends InstallmentCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, InstallmentCreateArgs<ExtArgs>>
+    ): Prisma__InstallmentClient<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Installments.
+     *     @param {InstallmentCreateManyArgs} args - Arguments to create many Installments.
+     *     @example
+     *     // Create many Installments
+     *     const installment = await prisma.installment.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends InstallmentCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, InstallmentCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Installment.
+     * @param {InstallmentDeleteArgs} args - Arguments to delete one Installment.
+     * @example
+     * // Delete one Installment
+     * const Installment = await prisma.installment.delete({
+     *   where: {
+     *     // ... filter to delete one Installment
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends InstallmentDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, InstallmentDeleteArgs<ExtArgs>>
+    ): Prisma__InstallmentClient<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Installment.
+     * @param {InstallmentUpdateArgs} args - Arguments to update one Installment.
+     * @example
+     * // Update one Installment
+     * const installment = await prisma.installment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends InstallmentUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, InstallmentUpdateArgs<ExtArgs>>
+    ): Prisma__InstallmentClient<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Installments.
+     * @param {InstallmentDeleteManyArgs} args - Arguments to filter Installments to delete.
+     * @example
+     * // Delete a few Installments
+     * const { count } = await prisma.installment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends InstallmentDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, InstallmentDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Installments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstallmentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Installments
+     * const installment = await prisma.installment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends InstallmentUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, InstallmentUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Installment.
+     * @param {InstallmentUpsertArgs} args - Arguments to update or create a Installment.
+     * @example
+     * // Update or create a Installment
+     * const installment = await prisma.installment.upsert({
+     *   create: {
+     *     // ... data to create a Installment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Installment we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends InstallmentUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, InstallmentUpsertArgs<ExtArgs>>
+    ): Prisma__InstallmentClient<$Result.GetResult<Prisma.$InstallmentPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Installments that matches the filter.
+     * @param {InstallmentFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const installment = await prisma.installment.findRaw({
+     *   filter: { age: { $gt: 25 } } 
+     * })
+    **/
+    findRaw(
+      args?: InstallmentFindRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a Installment.
+     * @param {InstallmentAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const installment = await prisma.installment.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+    **/
+    aggregateRaw(
+      args?: InstallmentAggregateRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Count the number of Installments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstallmentCountArgs} args - Arguments to filter Installments to count.
+     * @example
+     * // Count the number of Installments
+     * const count = await prisma.installment.count({
+     *   where: {
+     *     // ... the filter for the Installments we want to count
+     *   }
+     * })
+    **/
+    count<T extends InstallmentCountArgs>(
+      args?: Subset<T, InstallmentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InstallmentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Installment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstallmentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InstallmentAggregateArgs>(args: Subset<T, InstallmentAggregateArgs>): Prisma.PrismaPromise<GetInstallmentAggregateType<T>>
+
+    /**
+     * Group by Installment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstallmentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InstallmentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InstallmentGroupByArgs['orderBy'] }
+        : { orderBy?: InstallmentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InstallmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInstallmentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Installment model
+   */
+  readonly fields: InstallmentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Installment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InstallmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the Installment model
+   */ 
+  interface InstallmentFieldRefs {
+    readonly id: FieldRef<"Installment", 'String'>
+    readonly amount: FieldRef<"Installment", 'Int'>
+    readonly comment: FieldRef<"Installment", 'String'>
+    readonly createdAt: FieldRef<"Installment", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * Installment findUnique
+   */
+  export type InstallmentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * Filter, which Installment to fetch.
+     */
+    where: InstallmentWhereUniqueInput
+  }
+
+
+  /**
+   * Installment findUniqueOrThrow
+   */
+  export type InstallmentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * Filter, which Installment to fetch.
+     */
+    where: InstallmentWhereUniqueInput
+  }
+
+
+  /**
+   * Installment findFirst
+   */
+  export type InstallmentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * Filter, which Installment to fetch.
+     */
+    where?: InstallmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Installments to fetch.
+     */
+    orderBy?: InstallmentOrderByWithRelationInput | InstallmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Installments.
+     */
+    cursor?: InstallmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Installments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Installments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Installments.
+     */
+    distinct?: InstallmentScalarFieldEnum | InstallmentScalarFieldEnum[]
+  }
+
+
+  /**
+   * Installment findFirstOrThrow
+   */
+  export type InstallmentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * Filter, which Installment to fetch.
+     */
+    where?: InstallmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Installments to fetch.
+     */
+    orderBy?: InstallmentOrderByWithRelationInput | InstallmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Installments.
+     */
+    cursor?: InstallmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Installments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Installments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Installments.
+     */
+    distinct?: InstallmentScalarFieldEnum | InstallmentScalarFieldEnum[]
+  }
+
+
+  /**
+   * Installment findMany
+   */
+  export type InstallmentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * Filter, which Installments to fetch.
+     */
+    where?: InstallmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Installments to fetch.
+     */
+    orderBy?: InstallmentOrderByWithRelationInput | InstallmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Installments.
+     */
+    cursor?: InstallmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Installments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Installments.
+     */
+    skip?: number
+    distinct?: InstallmentScalarFieldEnum | InstallmentScalarFieldEnum[]
+  }
+
+
+  /**
+   * Installment create
+   */
+  export type InstallmentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * The data needed to create a Installment.
+     */
+    data: XOR<InstallmentCreateInput, InstallmentUncheckedCreateInput>
+  }
+
+
+  /**
+   * Installment createMany
+   */
+  export type InstallmentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Installments.
+     */
+    data: InstallmentCreateManyInput | InstallmentCreateManyInput[]
+  }
+
+
+  /**
+   * Installment update
+   */
+  export type InstallmentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * The data needed to update a Installment.
+     */
+    data: XOR<InstallmentUpdateInput, InstallmentUncheckedUpdateInput>
+    /**
+     * Choose, which Installment to update.
+     */
+    where: InstallmentWhereUniqueInput
+  }
+
+
+  /**
+   * Installment updateMany
+   */
+  export type InstallmentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Installments.
+     */
+    data: XOR<InstallmentUpdateManyMutationInput, InstallmentUncheckedUpdateManyInput>
+    /**
+     * Filter which Installments to update
+     */
+    where?: InstallmentWhereInput
+  }
+
+
+  /**
+   * Installment upsert
+   */
+  export type InstallmentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * The filter to search for the Installment to update in case it exists.
+     */
+    where: InstallmentWhereUniqueInput
+    /**
+     * In case the Installment found by the `where` argument doesn't exist, create a new Installment with this data.
+     */
+    create: XOR<InstallmentCreateInput, InstallmentUncheckedCreateInput>
+    /**
+     * In case the Installment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InstallmentUpdateInput, InstallmentUncheckedUpdateInput>
+  }
+
+
+  /**
+   * Installment delete
+   */
+  export type InstallmentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+    /**
+     * Filter which Installment to delete.
+     */
+    where: InstallmentWhereUniqueInput
+  }
+
+
+  /**
+   * Installment deleteMany
+   */
+  export type InstallmentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Installments to delete
+     */
+    where?: InstallmentWhereInput
+  }
+
+
+  /**
+   * Installment findRaw
+   */
+  export type InstallmentFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * Installment aggregateRaw
+   */
+  export type InstallmentAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * Installment without action
+   */
+  export type InstallmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Installment
+     */
+    select?: InstallmentSelect<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model OtherCost
+   */
+
+  export type AggregateOtherCost = {
+    _count: OtherCostCountAggregateOutputType | null
+    _avg: OtherCostAvgAggregateOutputType | null
+    _sum: OtherCostSumAggregateOutputType | null
+    _min: OtherCostMinAggregateOutputType | null
+    _max: OtherCostMaxAggregateOutputType | null
+  }
+
+  export type OtherCostAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type OtherCostSumAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type OtherCostMinAggregateOutputType = {
+    id: string | null
+    amount: number | null
+    comment: string | null
+    createdAt: Date | null
+  }
+
+  export type OtherCostMaxAggregateOutputType = {
+    id: string | null
+    amount: number | null
+    comment: string | null
+    createdAt: Date | null
+  }
+
+  export type OtherCostCountAggregateOutputType = {
+    id: number
+    amount: number
+    comment: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type OtherCostAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type OtherCostSumAggregateInputType = {
+    amount?: true
+  }
+
+  export type OtherCostMinAggregateInputType = {
+    id?: true
+    amount?: true
+    comment?: true
+    createdAt?: true
+  }
+
+  export type OtherCostMaxAggregateInputType = {
+    id?: true
+    amount?: true
+    comment?: true
+    createdAt?: true
+  }
+
+  export type OtherCostCountAggregateInputType = {
+    id?: true
+    amount?: true
+    comment?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type OtherCostAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OtherCost to aggregate.
+     */
+    where?: OtherCostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OtherCosts to fetch.
+     */
+    orderBy?: OtherCostOrderByWithRelationInput | OtherCostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OtherCostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OtherCosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OtherCosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned OtherCosts
+    **/
+    _count?: true | OtherCostCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: OtherCostAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: OtherCostSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OtherCostMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OtherCostMaxAggregateInputType
+  }
+
+  export type GetOtherCostAggregateType<T extends OtherCostAggregateArgs> = {
+        [P in keyof T & keyof AggregateOtherCost]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOtherCost[P]>
+      : GetScalarType<T[P], AggregateOtherCost[P]>
+  }
+
+
+
+
+  export type OtherCostGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OtherCostWhereInput
+    orderBy?: OtherCostOrderByWithAggregationInput | OtherCostOrderByWithAggregationInput[]
+    by: OtherCostScalarFieldEnum[] | OtherCostScalarFieldEnum
+    having?: OtherCostScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OtherCostCountAggregateInputType | true
+    _avg?: OtherCostAvgAggregateInputType
+    _sum?: OtherCostSumAggregateInputType
+    _min?: OtherCostMinAggregateInputType
+    _max?: OtherCostMaxAggregateInputType
+  }
+
+  export type OtherCostGroupByOutputType = {
+    id: string
+    amount: number
+    comment: string
+    createdAt: Date
+    _count: OtherCostCountAggregateOutputType | null
+    _avg: OtherCostAvgAggregateOutputType | null
+    _sum: OtherCostSumAggregateOutputType | null
+    _min: OtherCostMinAggregateOutputType | null
+    _max: OtherCostMaxAggregateOutputType | null
+  }
+
+  type GetOtherCostGroupByPayload<T extends OtherCostGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OtherCostGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OtherCostGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OtherCostGroupByOutputType[P]>
+            : GetScalarType<T[P], OtherCostGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OtherCostSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    amount?: boolean
+    comment?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["otherCost"]>
+
+  export type OtherCostSelectScalar = {
+    id?: boolean
+    amount?: boolean
+    comment?: boolean
+    createdAt?: boolean
+  }
+
+
+  export type $OtherCostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "OtherCost"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      amount: number
+      comment: string
+      createdAt: Date
+    }, ExtArgs["result"]["otherCost"]>
+    composites: {}
+  }
+
+
+  type OtherCostGetPayload<S extends boolean | null | undefined | OtherCostDefaultArgs> = $Result.GetResult<Prisma.$OtherCostPayload, S>
+
+  type OtherCostCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<OtherCostFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: OtherCostCountAggregateInputType | true
+    }
+
+  export interface OtherCostDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OtherCost'], meta: { name: 'OtherCost' } }
+    /**
+     * Find zero or one OtherCost that matches the filter.
+     * @param {OtherCostFindUniqueArgs} args - Arguments to find a OtherCost
+     * @example
+     * // Get one OtherCost
+     * const otherCost = await prisma.otherCost.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends OtherCostFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, OtherCostFindUniqueArgs<ExtArgs>>
+    ): Prisma__OtherCostClient<$Result.GetResult<Prisma.$OtherCostPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one OtherCost that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {OtherCostFindUniqueOrThrowArgs} args - Arguments to find a OtherCost
+     * @example
+     * // Get one OtherCost
+     * const otherCost = await prisma.otherCost.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends OtherCostFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, OtherCostFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__OtherCostClient<$Result.GetResult<Prisma.$OtherCostPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first OtherCost that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtherCostFindFirstArgs} args - Arguments to find a OtherCost
+     * @example
+     * // Get one OtherCost
+     * const otherCost = await prisma.otherCost.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends OtherCostFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, OtherCostFindFirstArgs<ExtArgs>>
+    ): Prisma__OtherCostClient<$Result.GetResult<Prisma.$OtherCostPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first OtherCost that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtherCostFindFirstOrThrowArgs} args - Arguments to find a OtherCost
+     * @example
+     * // Get one OtherCost
+     * const otherCost = await prisma.otherCost.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends OtherCostFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, OtherCostFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__OtherCostClient<$Result.GetResult<Prisma.$OtherCostPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more OtherCosts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtherCostFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all OtherCosts
+     * const otherCosts = await prisma.otherCost.findMany()
+     * 
+     * // Get first 10 OtherCosts
+     * const otherCosts = await prisma.otherCost.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const otherCostWithIdOnly = await prisma.otherCost.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends OtherCostFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, OtherCostFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OtherCostPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a OtherCost.
+     * @param {OtherCostCreateArgs} args - Arguments to create a OtherCost.
+     * @example
+     * // Create one OtherCost
+     * const OtherCost = await prisma.otherCost.create({
+     *   data: {
+     *     // ... data to create a OtherCost
+     *   }
+     * })
+     * 
+    **/
+    create<T extends OtherCostCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, OtherCostCreateArgs<ExtArgs>>
+    ): Prisma__OtherCostClient<$Result.GetResult<Prisma.$OtherCostPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many OtherCosts.
+     *     @param {OtherCostCreateManyArgs} args - Arguments to create many OtherCosts.
+     *     @example
+     *     // Create many OtherCosts
+     *     const otherCost = await prisma.otherCost.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends OtherCostCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, OtherCostCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a OtherCost.
+     * @param {OtherCostDeleteArgs} args - Arguments to delete one OtherCost.
+     * @example
+     * // Delete one OtherCost
+     * const OtherCost = await prisma.otherCost.delete({
+     *   where: {
+     *     // ... filter to delete one OtherCost
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends OtherCostDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, OtherCostDeleteArgs<ExtArgs>>
+    ): Prisma__OtherCostClient<$Result.GetResult<Prisma.$OtherCostPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one OtherCost.
+     * @param {OtherCostUpdateArgs} args - Arguments to update one OtherCost.
+     * @example
+     * // Update one OtherCost
+     * const otherCost = await prisma.otherCost.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends OtherCostUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, OtherCostUpdateArgs<ExtArgs>>
+    ): Prisma__OtherCostClient<$Result.GetResult<Prisma.$OtherCostPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more OtherCosts.
+     * @param {OtherCostDeleteManyArgs} args - Arguments to filter OtherCosts to delete.
+     * @example
+     * // Delete a few OtherCosts
+     * const { count } = await prisma.otherCost.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends OtherCostDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, OtherCostDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OtherCosts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtherCostUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many OtherCosts
+     * const otherCost = await prisma.otherCost.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends OtherCostUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, OtherCostUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one OtherCost.
+     * @param {OtherCostUpsertArgs} args - Arguments to update or create a OtherCost.
+     * @example
+     * // Update or create a OtherCost
+     * const otherCost = await prisma.otherCost.upsert({
+     *   create: {
+     *     // ... data to create a OtherCost
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the OtherCost we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends OtherCostUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, OtherCostUpsertArgs<ExtArgs>>
+    ): Prisma__OtherCostClient<$Result.GetResult<Prisma.$OtherCostPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Find zero or more OtherCosts that matches the filter.
+     * @param {OtherCostFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const otherCost = await prisma.otherCost.findRaw({
+     *   filter: { age: { $gt: 25 } } 
+     * })
+    **/
+    findRaw(
+      args?: OtherCostFindRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a OtherCost.
+     * @param {OtherCostAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const otherCost = await prisma.otherCost.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+    **/
+    aggregateRaw(
+      args?: OtherCostAggregateRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Count the number of OtherCosts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtherCostCountArgs} args - Arguments to filter OtherCosts to count.
+     * @example
+     * // Count the number of OtherCosts
+     * const count = await prisma.otherCost.count({
+     *   where: {
+     *     // ... the filter for the OtherCosts we want to count
+     *   }
+     * })
+    **/
+    count<T extends OtherCostCountArgs>(
+      args?: Subset<T, OtherCostCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OtherCostCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a OtherCost.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtherCostAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OtherCostAggregateArgs>(args: Subset<T, OtherCostAggregateArgs>): Prisma.PrismaPromise<GetOtherCostAggregateType<T>>
+
+    /**
+     * Group by OtherCost.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtherCostGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OtherCostGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OtherCostGroupByArgs['orderBy'] }
+        : { orderBy?: OtherCostGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OtherCostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOtherCostGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the OtherCost model
+   */
+  readonly fields: OtherCostFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for OtherCost.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OtherCostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the OtherCost model
+   */ 
+  interface OtherCostFieldRefs {
+    readonly id: FieldRef<"OtherCost", 'String'>
+    readonly amount: FieldRef<"OtherCost", 'Int'>
+    readonly comment: FieldRef<"OtherCost", 'String'>
+    readonly createdAt: FieldRef<"OtherCost", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * OtherCost findUnique
+   */
+  export type OtherCostFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherCost
+     */
+    select?: OtherCostSelect<ExtArgs> | null
+    /**
+     * Filter, which OtherCost to fetch.
+     */
+    where: OtherCostWhereUniqueInput
+  }
+
+
+  /**
+   * OtherCost findUniqueOrThrow
+   */
+  export type OtherCostFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherCost
+     */
+    select?: OtherCostSelect<ExtArgs> | null
+    /**
+     * Filter, which OtherCost to fetch.
+     */
+    where: OtherCostWhereUniqueInput
+  }
+
+
+  /**
+   * OtherCost findFirst
+   */
+  export type OtherCostFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherCost
+     */
+    select?: OtherCostSelect<ExtArgs> | null
+    /**
+     * Filter, which OtherCost to fetch.
+     */
+    where?: OtherCostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OtherCosts to fetch.
+     */
+    orderBy?: OtherCostOrderByWithRelationInput | OtherCostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OtherCosts.
+     */
+    cursor?: OtherCostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OtherCosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OtherCosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OtherCosts.
+     */
+    distinct?: OtherCostScalarFieldEnum | OtherCostScalarFieldEnum[]
+  }
+
+
+  /**
+   * OtherCost findFirstOrThrow
+   */
+  export type OtherCostFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherCost
+     */
+    select?: OtherCostSelect<ExtArgs> | null
+    /**
+     * Filter, which OtherCost to fetch.
+     */
+    where?: OtherCostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OtherCosts to fetch.
+     */
+    orderBy?: OtherCostOrderByWithRelationInput | OtherCostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OtherCosts.
+     */
+    cursor?: OtherCostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OtherCosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OtherCosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OtherCosts.
+     */
+    distinct?: OtherCostScalarFieldEnum | OtherCostScalarFieldEnum[]
+  }
+
+
+  /**
+   * OtherCost findMany
+   */
+  export type OtherCostFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherCost
+     */
+    select?: OtherCostSelect<ExtArgs> | null
+    /**
+     * Filter, which OtherCosts to fetch.
+     */
+    where?: OtherCostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OtherCosts to fetch.
+     */
+    orderBy?: OtherCostOrderByWithRelationInput | OtherCostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing OtherCosts.
+     */
+    cursor?: OtherCostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OtherCosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OtherCosts.
+     */
+    skip?: number
+    distinct?: OtherCostScalarFieldEnum | OtherCostScalarFieldEnum[]
+  }
+
+
+  /**
+   * OtherCost create
+   */
+  export type OtherCostCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherCost
+     */
+    select?: OtherCostSelect<ExtArgs> | null
+    /**
+     * The data needed to create a OtherCost.
+     */
+    data: XOR<OtherCostCreateInput, OtherCostUncheckedCreateInput>
+  }
+
+
+  /**
+   * OtherCost createMany
+   */
+  export type OtherCostCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many OtherCosts.
+     */
+    data: OtherCostCreateManyInput | OtherCostCreateManyInput[]
+  }
+
+
+  /**
+   * OtherCost update
+   */
+  export type OtherCostUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherCost
+     */
+    select?: OtherCostSelect<ExtArgs> | null
+    /**
+     * The data needed to update a OtherCost.
+     */
+    data: XOR<OtherCostUpdateInput, OtherCostUncheckedUpdateInput>
+    /**
+     * Choose, which OtherCost to update.
+     */
+    where: OtherCostWhereUniqueInput
+  }
+
+
+  /**
+   * OtherCost updateMany
+   */
+  export type OtherCostUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update OtherCosts.
+     */
+    data: XOR<OtherCostUpdateManyMutationInput, OtherCostUncheckedUpdateManyInput>
+    /**
+     * Filter which OtherCosts to update
+     */
+    where?: OtherCostWhereInput
+  }
+
+
+  /**
+   * OtherCost upsert
+   */
+  export type OtherCostUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherCost
+     */
+    select?: OtherCostSelect<ExtArgs> | null
+    /**
+     * The filter to search for the OtherCost to update in case it exists.
+     */
+    where: OtherCostWhereUniqueInput
+    /**
+     * In case the OtherCost found by the `where` argument doesn't exist, create a new OtherCost with this data.
+     */
+    create: XOR<OtherCostCreateInput, OtherCostUncheckedCreateInput>
+    /**
+     * In case the OtherCost was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OtherCostUpdateInput, OtherCostUncheckedUpdateInput>
+  }
+
+
+  /**
+   * OtherCost delete
+   */
+  export type OtherCostDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherCost
+     */
+    select?: OtherCostSelect<ExtArgs> | null
+    /**
+     * Filter which OtherCost to delete.
+     */
+    where: OtherCostWhereUniqueInput
+  }
+
+
+  /**
+   * OtherCost deleteMany
+   */
+  export type OtherCostDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OtherCosts to delete
+     */
+    where?: OtherCostWhereInput
+  }
+
+
+  /**
+   * OtherCost findRaw
+   */
+  export type OtherCostFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * OtherCost aggregateRaw
+   */
+  export type OtherCostAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * OtherCost without action
+   */
+  export type OtherCostDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherCost
+     */
+    select?: OtherCostSelect<ExtArgs> | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -13690,6 +16807,36 @@ export namespace Prisma {
   };
 
   export type SalesEntryScalarFieldEnum = (typeof SalesEntryScalarFieldEnum)[keyof typeof SalesEntryScalarFieldEnum]
+
+
+  export const ShopRentScalarFieldEnum: {
+    id: 'id',
+    amount: 'amount',
+    comment: 'comment',
+    createdAt: 'createdAt'
+  };
+
+  export type ShopRentScalarFieldEnum = (typeof ShopRentScalarFieldEnum)[keyof typeof ShopRentScalarFieldEnum]
+
+
+  export const InstallmentScalarFieldEnum: {
+    id: 'id',
+    amount: 'amount',
+    comment: 'comment',
+    createdAt: 'createdAt'
+  };
+
+  export type InstallmentScalarFieldEnum = (typeof InstallmentScalarFieldEnum)[keyof typeof InstallmentScalarFieldEnum]
+
+
+  export const OtherCostScalarFieldEnum: {
+    id: 'id',
+    amount: 'amount',
+    comment: 'comment',
+    createdAt: 'createdAt'
+  };
+
+  export type OtherCostScalarFieldEnum = (typeof OtherCostScalarFieldEnum)[keyof typeof OtherCostScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -14569,6 +17716,153 @@ export namespace Prisma {
     entity?: JsonWithAggregatesFilter<"SalesEntry">
   }
 
+  export type ShopRentWhereInput = {
+    AND?: ShopRentWhereInput | ShopRentWhereInput[]
+    OR?: ShopRentWhereInput[]
+    NOT?: ShopRentWhereInput | ShopRentWhereInput[]
+    id?: StringFilter<"ShopRent"> | string
+    amount?: IntFilter<"ShopRent"> | number
+    comment?: StringFilter<"ShopRent"> | string
+    createdAt?: DateTimeFilter<"ShopRent"> | Date | string
+  }
+
+  export type ShopRentOrderByWithRelationInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ShopRentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ShopRentWhereInput | ShopRentWhereInput[]
+    OR?: ShopRentWhereInput[]
+    NOT?: ShopRentWhereInput | ShopRentWhereInput[]
+    amount?: IntFilter<"ShopRent"> | number
+    comment?: StringFilter<"ShopRent"> | string
+    createdAt?: DateTimeFilter<"ShopRent"> | Date | string
+  }, "id">
+
+  export type ShopRentOrderByWithAggregationInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+    _count?: ShopRentCountOrderByAggregateInput
+    _avg?: ShopRentAvgOrderByAggregateInput
+    _max?: ShopRentMaxOrderByAggregateInput
+    _min?: ShopRentMinOrderByAggregateInput
+    _sum?: ShopRentSumOrderByAggregateInput
+  }
+
+  export type ShopRentScalarWhereWithAggregatesInput = {
+    AND?: ShopRentScalarWhereWithAggregatesInput | ShopRentScalarWhereWithAggregatesInput[]
+    OR?: ShopRentScalarWhereWithAggregatesInput[]
+    NOT?: ShopRentScalarWhereWithAggregatesInput | ShopRentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ShopRent"> | string
+    amount?: IntWithAggregatesFilter<"ShopRent"> | number
+    comment?: StringWithAggregatesFilter<"ShopRent"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"ShopRent"> | Date | string
+  }
+
+  export type InstallmentWhereInput = {
+    AND?: InstallmentWhereInput | InstallmentWhereInput[]
+    OR?: InstallmentWhereInput[]
+    NOT?: InstallmentWhereInput | InstallmentWhereInput[]
+    id?: StringFilter<"Installment"> | string
+    amount?: IntFilter<"Installment"> | number
+    comment?: StringFilter<"Installment"> | string
+    createdAt?: DateTimeFilter<"Installment"> | Date | string
+  }
+
+  export type InstallmentOrderByWithRelationInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type InstallmentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: InstallmentWhereInput | InstallmentWhereInput[]
+    OR?: InstallmentWhereInput[]
+    NOT?: InstallmentWhereInput | InstallmentWhereInput[]
+    amount?: IntFilter<"Installment"> | number
+    comment?: StringFilter<"Installment"> | string
+    createdAt?: DateTimeFilter<"Installment"> | Date | string
+  }, "id">
+
+  export type InstallmentOrderByWithAggregationInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+    _count?: InstallmentCountOrderByAggregateInput
+    _avg?: InstallmentAvgOrderByAggregateInput
+    _max?: InstallmentMaxOrderByAggregateInput
+    _min?: InstallmentMinOrderByAggregateInput
+    _sum?: InstallmentSumOrderByAggregateInput
+  }
+
+  export type InstallmentScalarWhereWithAggregatesInput = {
+    AND?: InstallmentScalarWhereWithAggregatesInput | InstallmentScalarWhereWithAggregatesInput[]
+    OR?: InstallmentScalarWhereWithAggregatesInput[]
+    NOT?: InstallmentScalarWhereWithAggregatesInput | InstallmentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Installment"> | string
+    amount?: IntWithAggregatesFilter<"Installment"> | number
+    comment?: StringWithAggregatesFilter<"Installment"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Installment"> | Date | string
+  }
+
+  export type OtherCostWhereInput = {
+    AND?: OtherCostWhereInput | OtherCostWhereInput[]
+    OR?: OtherCostWhereInput[]
+    NOT?: OtherCostWhereInput | OtherCostWhereInput[]
+    id?: StringFilter<"OtherCost"> | string
+    amount?: IntFilter<"OtherCost"> | number
+    comment?: StringFilter<"OtherCost"> | string
+    createdAt?: DateTimeFilter<"OtherCost"> | Date | string
+  }
+
+  export type OtherCostOrderByWithRelationInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type OtherCostWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: OtherCostWhereInput | OtherCostWhereInput[]
+    OR?: OtherCostWhereInput[]
+    NOT?: OtherCostWhereInput | OtherCostWhereInput[]
+    amount?: IntFilter<"OtherCost"> | number
+    comment?: StringFilter<"OtherCost"> | string
+    createdAt?: DateTimeFilter<"OtherCost"> | Date | string
+  }, "id">
+
+  export type OtherCostOrderByWithAggregationInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+    _count?: OtherCostCountOrderByAggregateInput
+    _avg?: OtherCostAvgOrderByAggregateInput
+    _max?: OtherCostMaxOrderByAggregateInput
+    _min?: OtherCostMinOrderByAggregateInput
+    _sum?: OtherCostSumOrderByAggregateInput
+  }
+
+  export type OtherCostScalarWhereWithAggregatesInput = {
+    AND?: OtherCostScalarWhereWithAggregatesInput | OtherCostScalarWhereWithAggregatesInput[]
+    OR?: OtherCostScalarWhereWithAggregatesInput[]
+    NOT?: OtherCostScalarWhereWithAggregatesInput | OtherCostScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"OtherCost"> | string
+    amount?: IntWithAggregatesFilter<"OtherCost"> | number
+    comment?: StringWithAggregatesFilter<"OtherCost"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"OtherCost"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -15336,6 +18630,141 @@ export namespace Prisma {
     entity?: InputJsonValue | InputJsonValue
   }
 
+  export type ShopRentCreateInput = {
+    id?: string
+    amount: number
+    comment: string
+    createdAt?: Date | string
+  }
+
+  export type ShopRentUncheckedCreateInput = {
+    id?: string
+    amount: number
+    comment: string
+    createdAt?: Date | string
+  }
+
+  export type ShopRentUpdateInput = {
+    amount?: IntFieldUpdateOperationsInput | number
+    comment?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ShopRentUncheckedUpdateInput = {
+    amount?: IntFieldUpdateOperationsInput | number
+    comment?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ShopRentCreateManyInput = {
+    id?: string
+    amount: number
+    comment: string
+    createdAt?: Date | string
+  }
+
+  export type ShopRentUpdateManyMutationInput = {
+    amount?: IntFieldUpdateOperationsInput | number
+    comment?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ShopRentUncheckedUpdateManyInput = {
+    amount?: IntFieldUpdateOperationsInput | number
+    comment?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstallmentCreateInput = {
+    id?: string
+    amount: number
+    comment: string
+    createdAt?: Date | string
+  }
+
+  export type InstallmentUncheckedCreateInput = {
+    id?: string
+    amount: number
+    comment: string
+    createdAt?: Date | string
+  }
+
+  export type InstallmentUpdateInput = {
+    amount?: IntFieldUpdateOperationsInput | number
+    comment?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstallmentUncheckedUpdateInput = {
+    amount?: IntFieldUpdateOperationsInput | number
+    comment?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstallmentCreateManyInput = {
+    id?: string
+    amount: number
+    comment: string
+    createdAt?: Date | string
+  }
+
+  export type InstallmentUpdateManyMutationInput = {
+    amount?: IntFieldUpdateOperationsInput | number
+    comment?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstallmentUncheckedUpdateManyInput = {
+    amount?: IntFieldUpdateOperationsInput | number
+    comment?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OtherCostCreateInput = {
+    id?: string
+    amount: number
+    comment: string
+    createdAt?: Date | string
+  }
+
+  export type OtherCostUncheckedCreateInput = {
+    id?: string
+    amount: number
+    comment: string
+    createdAt?: Date | string
+  }
+
+  export type OtherCostUpdateInput = {
+    amount?: IntFieldUpdateOperationsInput | number
+    comment?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OtherCostUncheckedUpdateInput = {
+    amount?: IntFieldUpdateOperationsInput | number
+    comment?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OtherCostCreateManyInput = {
+    id?: string
+    amount: number
+    comment: string
+    createdAt?: Date | string
+  }
+
+  export type OtherCostUpdateManyMutationInput = {
+    amount?: IntFieldUpdateOperationsInput | number
+    comment?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OtherCostUncheckedUpdateManyInput = {
+    amount?: IntFieldUpdateOperationsInput | number
+    comment?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -15968,6 +19397,118 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedJsonFilter<$PrismaModel>
     _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type ShopRentCountOrderByAggregateInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ShopRentAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type ShopRentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ShopRentMinOrderByAggregateInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ShopRentSumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type InstallmentCountOrderByAggregateInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type InstallmentAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type InstallmentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type InstallmentMinOrderByAggregateInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type InstallmentSumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type OtherCostCountOrderByAggregateInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type OtherCostAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type OtherCostMaxOrderByAggregateInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type OtherCostMinOrderByAggregateInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type OtherCostSumOrderByAggregateInput = {
+    amount?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -16892,6 +20433,10 @@ export namespace Prisma {
     update?: XOR<XOR<CustomerUpdateToOneWithWhereWithoutSalesEntryInput, CustomerUpdateWithoutSalesEntryInput>, CustomerUncheckedUpdateWithoutSalesEntryInput>
   }
 
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -17055,6 +20600,31 @@ export namespace Prisma {
   export type NestedJsonFilterBase<$PrismaModel = never> = {
     equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type SalesEntryCreateWithoutSellerInput = {
@@ -19623,6 +23193,18 @@ export namespace Prisma {
      * @deprecated Use SalesEntryDefaultArgs instead
      */
     export type SalesEntryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SalesEntryDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ShopRentDefaultArgs instead
+     */
+    export type ShopRentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ShopRentDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use InstallmentDefaultArgs instead
+     */
+    export type InstallmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = InstallmentDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use OtherCostDefaultArgs instead
+     */
+    export type OtherCostArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = OtherCostDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

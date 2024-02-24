@@ -209,6 +209,27 @@ exports.Prisma.SalesEntryScalarFieldEnum = {
   entity: 'entity'
 };
 
+exports.Prisma.ShopRentScalarFieldEnum = {
+  id: 'id',
+  amount: 'amount',
+  comment: 'comment',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.InstallmentScalarFieldEnum = {
+  id: 'id',
+  amount: 'amount',
+  comment: 'comment',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.OtherCostScalarFieldEnum = {
+  id: 'id',
+  amount: 'amount',
+  comment: 'comment',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -231,7 +252,10 @@ exports.Prisma.ModelName = {
   StockButton: 'StockButton',
   StockAccessories: 'StockAccessories',
   Customer: 'Customer',
-  SalesEntry: 'SalesEntry'
+  SalesEntry: 'SalesEntry',
+  ShopRent: 'ShopRent',
+  Installment: 'Installment',
+  OtherCost: 'OtherCost'
 };
 
 /**

@@ -149,3 +149,24 @@ model SalesEntry {
     createdAt  DateTime? @default(now())
     entity     Json
 }
+
+model ShopRent {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    amount    Int
+    comment   String
+    createdAt DateTime @default(now())
+}
+
+model Installment {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    amount    Int
+    comment   String
+    createdAt DateTime @default(now())
+}
+
+model OtherCost {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    amount    Int
+    comment   String
+    createdAt DateTime @default(now())
+}
