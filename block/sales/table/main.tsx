@@ -2,7 +2,7 @@
 
 'use client';
 
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, flexRender, } from '@tanstack/react-table';
 import { SalesEntry } from '@/prisma/generated/client'
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
@@ -13,14 +13,36 @@ import { GoToPage, TableFooterContainer, TableFooterRow, tableArrowClasses } fro
 import { inputClasses } from '@/components/table/tanstack/tw-classes';
 import THeadFilter from '@/components/table/tanstack/table-filter';
 import { TableTitle } from '@/components/table/table-header';
+import { ProductDetails } from './product-details-cols';
 
 export default function SalesTable({ salesEntry }: { salesEntry: SalesEntry[] }) {
     const columns = useMemo<ColumnDef<SalesEntry>[]>(() => [
         { id: 'seller', columns: [{ accessorKey: 'seller.name' }] },
         { id: 'discount', columns: [{ accessorKey: 'discount' }] },
-        { id: 'due', columns: [{ accessorKey: 'due' }] },
-        { id: 'customer name', columns: [{ accessorKey: 'customer.phone' }] },
-        { id: 'customer phone', columns: [{ accessorKey: 'customer.name' }] },
+        {
+            id: 'due',
+            columns: [{
+                id: 'due',
+                accessorFn(row) {
+                    return row.due || '';
+                }
+            }]
+        },
+        { id: 'customer phone', columns: [{ accessorKey: 'customer.phone' }] },
+        { id: 'customer name', columns: [{ accessorKey: 'customer.name' }] },
+        {
+            id: 'products',
+            colSpan: 3,
+            columns: [{
+                id: 'details',
+                cell: ({ row }) => {
+                    return (
+                        row.original.entity &&
+                        <ProductDetails entity={row.original.entity} />
+                    )
+                }
+            }]
+        },
         {
             id: 'action', columns: [{
                 id: 'action',
