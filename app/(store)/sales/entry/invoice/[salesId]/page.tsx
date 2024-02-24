@@ -35,21 +35,20 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
                         {entity.map(async (row: Record<string, any>, i: number) => {
                             totalPrice += row.price * row.quantity;
                             const getFunction = functionObject[row.type as keyof typeof functionObject];
-                            const stockData = await getFunction(row.stockId);
+                            const stockData: any = await getFunction(row.stockId);
 
-                            if (stockData) {
-                                return (
-                                    <tr key={i}>
-                                        <td className="text-gray-800 p-3 text-sm capitalize">{row.type}</td>
-                                        <td className="text-gray-800 p-3 text-sm capitalize">{stockData?.brand.brandName}</td>
-                                        <td className="text-gray-800 p-3 text-sm capitalize">{stockData?.model.model}</td>
-                                        <td className="text-gray-800 p-3 text-sm">{row.quantity}</td>
-                                        <td className="text-gray-800 p-3 text-sm">{totalPrice}</td>
-                                    </tr>
-                                )
-                            } else {
+                            if (!stockData) {
                                 return null;
                             }
+                            return (
+                                <tr key={i}>
+                                    <td className="text-gray-800 p-3 text-sm capitalize">{row.type}</td>
+                                    <td className="text-gray-800 p-3 text-sm capitalize">{stockData.brand.brandName}</td>
+                                    <td className="text-gray-800 p-3 text-sm capitalize">{stockData.model.model}</td>
+                                    <td className="text-gray-800 p-3 text-sm">{row.quantity}</td>
+                                    <td className="text-gray-800 p-3 text-sm">{totalPrice}</td>
+                                </tr>
+                            )
                         })}
                         <tr>
                             <td className="py-2 px-3 font-semibold text-sm"></td>
