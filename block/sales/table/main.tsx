@@ -18,7 +18,15 @@ import { ProductDetails } from './product-details-cols';
 export default function SalesTable({ salesEntry }: { salesEntry: SalesEntry[] }) {
     const columns = useMemo<ColumnDef<SalesEntry>[]>(() => [
         { id: 'seller', columns: [{ accessorKey: 'seller.name' }] },
-        { id: 'discount', columns: [{ accessorKey: 'discount' }] },
+        {
+            id: 'discount',
+            columns: [{
+                id: 'discount',
+                accessorFn(row) {
+                    return row.discount || '';
+                }
+            }]
+        },
         {
             id: 'due',
             columns: [{
@@ -83,7 +91,7 @@ function Table({ data, columns }: TableProps) {
     const headers = table.getHeaderGroups()[1].headers;
 
     return (
-        <div className="rounded-xl bg-white w-full p-6 space-y-6">
+        <div className="rounded-xl bg-white w-full p-6 space-y-4">
             <TableTitle>Sales Table</TableTitle>
             <div className="w-full overflow-x-auto">
                 <table className='w-full text-sm'>
