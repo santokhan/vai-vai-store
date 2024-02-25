@@ -3,6 +3,7 @@
 import { getBrand } from "@/actions/brand";
 import { getModel } from "@/actions/model";
 import { getType } from "@/actions/product-type";
+import StockAccessoriesEntryForm from "@/block/form/stock/accessories-entry";
 import StockButtonEntryForm from "@/block/form/stock/button-entry";
 
 export default async function ButtonStockEntryPage() {
@@ -15,7 +16,7 @@ export default async function ButtonStockEntryPage() {
     } else {
         const filtered = productType.filter(product => product.type === 'accessories');
         return (
-            <StockButtonEntryForm productType={filtered} brand={brand} model={model} />
+            <StockAccessoriesEntryForm productType={filtered} brand={brand} model={model} />
         )
     }
 }
