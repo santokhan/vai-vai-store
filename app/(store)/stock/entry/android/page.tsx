@@ -13,7 +13,7 @@ export default async function StockAndroidEntryPage() {
     if (!productType || !brand || !model) {
         return null;
     } else {
-        const filtered = productType.filter(product => product.type === 'accessories');
+        const filtered = productType.filter(product => product.type === 'android');
         return (
             <StockAndroidEntryForm productType={filtered} brand={brand} model={model} />
         )
