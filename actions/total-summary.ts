@@ -8,26 +8,30 @@ export type Summary = SummaryObj[];
 
 async function getTotalPurchase() {
     try {
+        // does not have quantity
         const android = await prisma.stockAndroid.aggregate({
             _sum: {
                 purchasePrice: true
             }
         });
-        const button = await prisma.stockButton.aggregate({
-            _sum: {
-                purchasePrice: true
+        // multiply with quantity
+        const button = await prisma.stockButton.findMany({
+            select: {
+                purchasePrice: true,
+                quantity: true
             }
         });
-        const accessories = await prisma.stockAccessories.aggregate({
-            _sum: {
-                purchasePrice: true
+        // multiply with quantity
+        const accessories = await prisma.stockAccessories.findMany({
+            select: {
+                purchasePrice: true,
+                quantity: true
             }
         });
-
 
         const x = android._sum.purchasePrice || 0,
-            y = button._sum.purchasePrice || 0,
-            z = accessories._sum.purchasePrice || 0;
+            y = button.map(({ purchasePrice, quantity }) => purchasePrice * quantity).reduce((a, b) => a + b, 0) || 0,
+            z = accessories.map(({ purchasePrice, quantity }) => purchasePrice * quantity).reduce((a, b) => a + b, 0) || 0;
 
 
         return x + y + z;
