@@ -4,7 +4,6 @@ import { getBrand } from "@/actions/brand";
 import { getModel } from "@/actions/model";
 import { getType } from "@/actions/product-type";
 import StockAccessoriesEntryForm from "@/block/form/stock/accessories-entry";
-import StockButtonEntryForm from "@/block/form/stock/button-entry";
 
 export default async function ButtonStockEntryPage() {
     const productType = await getType();
