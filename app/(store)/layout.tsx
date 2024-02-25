@@ -1,3 +1,4 @@
+'use server';
 import { getRole } from "@/actions/user/role";
 import AppBarDashboard from "@/components/navbar/appbar-dashboard";
 import NoAccess from "@/components/no-access";
@@ -5,15 +6,17 @@ import Sidebar from "@/components/sidebar/sidebar";
 import { authOptions } from "@/lib/auth/auth";
 import { OnlyChildrenProps } from "@/utils/props-type";
 import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
+// Toastify is only available in /(store)/
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+
 
 export default async function DashboardLayout({ children }: OnlyChildrenProps) {
     const session = await getServerSession(authOptions);
 
     if (!session) {
-        return redirect("/auth/signin?redirect=/dashboard");
+        return redirect(`/auth/signin?redirect=${'/dashboard'}`);
     } else {
         const email = session.user?.email;
         if (email) {
