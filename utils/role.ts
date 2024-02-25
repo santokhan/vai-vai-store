@@ -1,5 +1,4 @@
-export const role = [
-    "user",
+export const roles = [
     "admin",
     "super-admin"
 ]
