@@ -1,12 +1,12 @@
+'use server';
+
+import { getAllUser } from '@/actions/user/role';
+import AddNewUser from '@/block/user/add-user';
 import { User, UserTable } from '@/block/user/user-table';
-import { ORIGIN } from '@/utils/origin';
 import React from 'react';
 
 const Page: React.FC = async () => {
-    const response = await fetch(`${ORIGIN}/api/user/`, {
-        cache: 'no-store'
-    });
-    const data = await response.json();
+    const users = await getAllUser();
 
     function filterSanto(data: User[]) {
         return data.filter((e: User) => {
@@ -18,9 +18,14 @@ const Page: React.FC = async () => {
         })
     }
 
+    if (!users) {
+        return null;
+    }
+
     return (
-        <div>
-            <UserTable data={filterSanto(data)} />
+        <div className='flex flex-wrap gap-4'>
+            <UserTable data={filterSanto(users)} />
+            <AddNewUser />
         </div>
     );
 };

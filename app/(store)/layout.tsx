@@ -1,21 +1,23 @@
 import { getRole } from "@/actions/user/role";
 import AppBarDashboard from "@/components/navbar/appbar-dashboard";
+import NoAccess from "@/components/no-access";
 import Sidebar from "@/components/sidebar/sidebar";
 import { authOptions } from "@/lib/auth/auth";
+import { OnlyChildrenProps } from "@/utils/props-type";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { ReactNode } from "react";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-export default async function DashboardLayout({ children }: { children: ReactNode }) {
+export default async function DashboardLayout({ children }: OnlyChildrenProps) {
     const session = await getServerSession(authOptions);
 
     if (!session) {
         return redirect("/auth/signin?redirect=/dashboard");
     } else {
-        if (session.user?.email) {
-            const role = await getRole(session.user?.email);
+        const email = session.user?.email;
+        if (email) {
+            const role = await getRole(email);
             if (role === "admin" || role === "super-admin") {
                 return (
                     <>
@@ -30,18 +32,10 @@ export default async function DashboardLayout({ children }: { children: ReactNod
                     </>
                 )
             } else {
-                return (
-                    <div className="min-h-screen grid place-items-center">
-                        <p>You do not have access to this page</p>
-                    </div>
-                )
+                return <NoAccess />;
             }
         } else {
-            return (
-                <div className="min-h-screen grid place-items-center">
-                    <p>You do not have access to this page</p>
-                </div>
-            )
+            return <NoAccess />;
         }
     }
 

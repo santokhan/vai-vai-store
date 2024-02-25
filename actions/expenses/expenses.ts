@@ -53,3 +53,17 @@ export async function submitOtherCostForm(state: any, payload: any) {
     })
     return { message: res ? `Data created successfully.` : `Failed to create data.` };
 }
+
+
+export async function getAllCost() {
+    try {
+        const rent = await prisma.shopRent.findMany();
+        const installment = await prisma.installment.findMany();
+        const other = await prisma.otherCost.findMany();
+
+        const data = [rent, installment, other];
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}

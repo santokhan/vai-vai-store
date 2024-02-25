@@ -9,9 +9,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import Logout from '@mui/icons-material/Logout';
 import { AccountCircle } from '@mui/icons-material';
 import { signOut } from 'next-auth/react';
+import { Logout } from 'iconsax-react';
 
 export default function AccountMenu() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -85,7 +85,8 @@ export default function AccountMenu() {
                 <Divider />
                 <MenuItem onClick={handleSignOut}>
                     <ListItemIcon>
-                        <Logout fontSize="small" />
+                        {/* <Logout fontSize="small" /> */}
+                        <Logout className='w-5 h-5' />
                     </ListItemIcon>
                     Logout
                 </MenuItem>

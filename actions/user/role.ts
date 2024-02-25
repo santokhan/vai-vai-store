@@ -4,13 +4,13 @@ import { prisma } from '@/lib/prisma';
 
 export async function getRole(email: string) {
     try {
-        const createdUser = await prisma.user.findFirst({
+        const founded = await prisma.user.findFirst({
             where: {
                 email
             },
         });
 
-        const role = createdUser?.role;
+        const role = founded?.role;
 
         if (role) {
             return role;
@@ -24,6 +24,7 @@ export async function getRole(email: string) {
         await prisma.$disconnect();
     }
 }
+
 
 export async function insertNewUser(email: string, role: string) {
     try {
@@ -43,6 +44,18 @@ export async function insertNewUser(email: string, role: string) {
         console.error(error);
     } finally {
         // Close the Prisma Client connection
+        await prisma.$disconnect();
+    }
+}
+
+
+export async function getAllUser() {
+    try {
+        const users = await prisma.user.findMany();
+        return users;
+    } catch (error) {
+        console.error(error);
+    } finally {
         await prisma.$disconnect();
     }
 }
