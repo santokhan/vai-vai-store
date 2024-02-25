@@ -1,3 +1,10 @@
+'use client';
+
+import { removeUser } from "@/actions/user/role";
+import Actions, { ActionDelete } from "@/components/table/action";
+import { Table } from "flowbite-react";
+import { toast } from "react-toastify";
+
 export type User = {
     id: string;
     email: string;
@@ -10,25 +17,32 @@ interface TableProps {
 
 export const UserTable: React.FC<TableProps> = ({ data }) => {
     return (
-        <div className="max-w-md rounded-xl bg-white shadow">
-            <h3 className="border-b p-4 text-lg font-semibold">Users</h3>
-            <div className="relative w-full overflow-x-auto px-4 py-6">
-                <table className="w-full text-left text-sm font-medium text-gray-900 rtl:text-right">
-                    <thead>
-                        <tr>
-                            <th className='px-2 py-2'>Email</th>
-                            <th className='px-2 py-2'>Role</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data.map((item, index) => (
-                            <tr key={index} className="">
-                                <td className="whitespace-nowrap px-2 py-2">{item.email}</td>
-                                <td className="px-2 py-2">{item.role}</td>
-                            </tr>
+        <div className="max-w-3xl rounded-xl bg-white shadow">
+            <h3 className="p-4 text-lg font-semibold">Users</h3>
+            <div className="relative w-full overflow-x-auto px-4">
+                <Table>
+                    <Table.Head>
+                        <Table.HeadCell>Email</Table.HeadCell>
+                        <Table.HeadCell>Role</Table.HeadCell>
+                        <Table.HeadCell>Actions</Table.HeadCell>
+                    </Table.Head>
+                    <Table.Body className="divide-y">
+                        {data.map(({ id, email, role }, index) => (
+                            <Table.Row key={index}>
+                                <Table.Cell className="">{email}</Table.Cell>
+                                <Table.Cell className="whitespace-nowrap">{role}</Table.Cell>
+                                <Table.Cell className="">
+                                    <Actions>
+                                        <ActionDelete handleClick={async () => {
+                                            const res = await removeUser(id);
+                                            res && toast(res?.message);
+                                        }} />
+                                    </Actions>
+                                </Table.Cell>
+                            </Table.Row>
                         ))}
-                    </tbody>
-                </table>
+                    </Table.Body>
+                </Table>
             </div>
         </div>
     );

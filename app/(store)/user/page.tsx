@@ -1,11 +1,10 @@
 'use server';
 
 import { getAllUser } from '@/actions/user/role';
-import AddNewUser from '@/block/user/add-user';
 import { User, UserTable } from '@/block/user/user-table';
-import React from 'react';
+import { AddUserServerComp } from './_add-user';
 
-const Page: React.FC = async () => {
+export default async function Page() {
     const users = await getAllUser();
 
     function filterSanto(data: User[]) {
@@ -23,12 +22,11 @@ const Page: React.FC = async () => {
     }
 
     return (
-        <div className='flex flex-wrap gap-4'>
+        <div className='flex flex-wrap gap-4 items-start'>
+            <AddUserServerComp />
             <UserTable data={filterSanto(users)} />
-            <AddNewUser />
         </div>
     );
 };
 
-export default Page;
 

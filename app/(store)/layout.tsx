@@ -6,7 +6,7 @@ import Sidebar from "@/components/sidebar/sidebar";
 import { authOptions } from "@/lib/auth/auth";
 import { OnlyChildrenProps } from "@/utils/props-type";
 import { getServerSession } from "next-auth";
-import { redirect, usePathname } from "next/navigation";
+import { redirect } from "next/navigation";
 // Toastify is only available in /(store)/
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
