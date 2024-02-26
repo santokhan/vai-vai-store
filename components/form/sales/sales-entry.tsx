@@ -9,14 +9,15 @@ import Button from "@/components/button/button";
 import ButtonSalesEntryForm from "@/components/form/sales/button-entry";
 import AccessoriesSalesEntryForm from "@/components/form/sales/accessories-entry";
 import { ProductTypeKeys } from "@/utils/product-type";
-import { ORIGIN } from "@/utils/origin";
 import { useSalesRowContext } from "@/context/sales-context";
 import { useCustomerContext } from "@/context/customer-context";
 import SellerForm from "../seller-form";
 import { useSellerContext } from "@/context/seller-context";
-import { useRouter } from "next/navigation";
 import { APISalesEntry } from "@/app/api/(store)/sales/entry/type";
 import { ServerProps } from "@/block/form/stock/type";
+import { AddSalesEntry } from "@/actions/sales/entry";
+import { toast } from "react-toastify";
+import redirectToInvoice from "@/actions/redirect-to/invoice";
 
 export default function SalesEntryForm({ productType, brand, model }: ServerProps) {
     const [isOpenForm, setIsOpenForm] = useState<ProductTypeKeys | ''>('');
@@ -24,7 +25,6 @@ export default function SalesEntryForm({ productType, brand, model }: ServerProp
     const { salesEntity } = useSalesRowContext();
     const { customer } = useCustomerContext();
     const { seller } = useSellerContext();
-    const router = useRouter()
 
     function onCheckout() {
         if (customer.phone === '') {
@@ -34,26 +34,24 @@ export default function SalesEntryForm({ productType, brand, model }: ServerProp
                 if (confirm('Click OK if you wanna checkout')) {
                     setAdding(true);
                     const postData: APISalesEntry = {
-                        salesEntity: salesEntity.map(entity => {
+                        salesEntity: salesEntity.map(({ stockId, quantity, price, type }) => {
                             // I need only below keys for APISalesEntry
-                            const { stockId, quantity, price, type } = entity;
                             return { stockId, quantity, price, type };
                         }),
                         customer,
                         seller
                     };
-                    fetch(`${ORIGIN}/api/sales/entry/`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(postData)
-                    }).then(res => res.json()).then((data) => {
-                        if (data.message) {
-                            alert(data.message);
+
+                    AddSalesEntry(postData).then(data => {
+                        if (data.id) {
+                            redirectToInvoice(data.id).catch(err => {
+                                console.error(err);
+                            });
                         } else {
-                            router.push(`/sales/entry/invoice/${data.id}`);
+                            toast(data.message);
                         }
                         setAdding(false);
-                    }).catch(err => { console.error(err) });
+                    })
                 }
             } else {
                 alert('Select seller');
