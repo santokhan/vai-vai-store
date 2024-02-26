@@ -45,8 +45,7 @@ const SalesRow: FC<Props> = ({ onOpenForm }) => {
             <Table>
                 <Table.Head className="uppercase">
                     <Table.HeadCell>Type</Table.HeadCell>
-                    <Table.HeadCell>Brand</Table.HeadCell>
-                    <Table.HeadCell>Model</Table.HeadCell>
+                    <Table.HeadCell>Brand & Model</Table.HeadCell>
                     <Table.HeadCell>Quantity</Table.HeadCell>
                     <Table.HeadCell>Price</Table.HeadCell>
 
@@ -56,8 +55,7 @@ const SalesRow: FC<Props> = ({ onOpenForm }) => {
                     {salesEntity.map((row, index) => (
                         <Table.Row key={index}>
                             <Table.Cell className='capitalize'>{row.type}</Table.Cell>
-                            <Table.Cell className='capitalize'>{row.brand}</Table.Cell>
-                            <Table.Cell className='capitalize'>{row.model}</Table.Cell>
+                            <Table.Cell className='capitalize'>{row.brand} {row.model}</Table.Cell>
                             <Table.Cell>
                                 {
                                     row.type == 'android' ?
