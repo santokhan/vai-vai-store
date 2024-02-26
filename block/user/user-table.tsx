@@ -16,6 +16,10 @@ interface TableProps {
 }
 
 export const UserTable: React.FC<TableProps> = ({ data }) => {
+    if (!data.length) {
+        return null;
+    }
+
     return (
         <div className="max-w-3xl rounded-xl bg-white shadow">
             <h3 className="p-4 text-lg font-semibold">Users</h3>
