@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 
 export default async function subtractStockAccessories(stockId: string, quantity: number) {
     try {
-        const updatedStockAccessories = await prisma.stockButton.update({
+        const updatedStockAccessories = await prisma.stockAccessories.update({
             where: {
                 id: stockId
             },
