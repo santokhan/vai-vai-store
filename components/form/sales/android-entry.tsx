@@ -1,6 +1,6 @@
 'use client';
 import Button from "@/components/button/button";
-import SearchProductCard from "@/components/card/search-product-card";
+import { FoundedProductTable } from "@/components/card/search-product-card";
 import FormContainer from "@/components/form-container";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { useSalesRowContext } from "@/context/sales-context";
@@ -89,7 +89,15 @@ export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: ()
             </div>
             {foundStockItem &&
                 <>
-                    <SearchProductCard stockAndroid={foundStockItem} />
+                    <FoundedProductTable obj={{
+                        'brand': foundStockItem.brand.brandName,
+                        'model': foundStockItem.model.model,
+                        'IMEI': foundStockItem.IMEI,
+                        'name': foundStockItem.name,
+                        'selling price': foundStockItem.sellingPrice,
+                        'color': foundStockItem.color,
+                        'Ram/Rom': foundStockItem.ram + '/' + foundStockItem.rom
+                    }} />
                     <Button variant="primary" type="button" onClick={addToSalesEntry}>add</Button>
                 </>
             }

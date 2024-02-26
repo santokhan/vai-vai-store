@@ -133,12 +133,13 @@ export default function AccessoriesSalesEntryForm({ onCloseForm, productType, br
                     </InputBox>
                 </div>
 
-                {founded &&
+                {
+                    founded &&
                     <FoundedProductTable obj={{
                         'brand name': founded.brand.brandName,
                         'model': founded.model.model,
                         'price': founded.sellingPrice,
-                        'quantity': founded.quantity,
+                        'available quantity': founded.quantity,
                         'color': founded.color,
                     }} />
                 }
