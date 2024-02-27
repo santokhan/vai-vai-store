@@ -9,6 +9,7 @@ import { Brand, Model } from '@/prisma/generated/client';
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { ServerProps } from './type';
 import { toast } from 'react-toastify';
+import { addAccessoriesStock } from '@/actions/stock/entry/accessories';
 
 export const initialState: StockAccessoriesPOST = {
     name: '',
@@ -30,21 +31,14 @@ const StockAccessoriesEntryForm: FC<ServerProps> = ({ productType, brand, model 
 
         if (productTypeId && brandId && modelId && sellingPrice && purchasePrice && quantity) {
             setadding(true);
-            try {
-                const res = await fetch(`/api/stock/entry/accessories`, {
-                    method: 'POST',
-                    body: JSON.stringify(formData)
-                });
-                const data = await res.json();
+            addAccessoriesStock(formData).then(data => {
                 if (data) {
                     toast(data.message);
                     setadding(false);
                 }
-            } catch (error) {
-                console.error(error);
-            }
+            }).catch(err => console.error)
         } else {
-            alert(`Can not add data to stock. Please check the form input.`)
+            toast(`POST data is missing`)
         }
     }
 

@@ -24,39 +24,48 @@ model Seller {
 }
 
 model ProductType {
-    id               String             @id @default(auto()) @map("_id") @db.ObjectId
-    type             String
-    Brand            Brand[]
-    createdAt        DateTime?          @default(now())
-    InStock          InStock[]
-    StockAndroid     StockAndroid[]
-    StockButton      StockButton[]
-    StockAccessories StockAccessories[]
+    id                      String                    @id @default(auto()) @map("_id") @db.ObjectId
+    type                    String
+    Brand                   Brand[]
+    createdAt               DateTime?                 @default(now())
+    InStock                 InStock[]
+    StockAndroid            StockAndroid[]
+    StockButton             StockButton[]
+    StockAccessories        StockAccessories[]
+    HistoryAndroidStock     HistoryAndroidStock[]
+    HistoryButtonStock      HistoryButtonStock[]
+    HistoryAccessoriesStock HistoryAccessoriesStock[]
 }
 
 model Brand {
-    id               String             @id @default(auto()) @map("_id") @db.ObjectId
-    brandName        String
-    productType      ProductType        @relation(fields: [productTypeId], references: [id])
-    productTypeId    String             @db.ObjectId
-    Model            Model[]
-    createdAt        DateTime?          @default(now())
-    InStock          InStock[]
-    StockAndroid     StockAndroid[]
-    StockButton      StockButton[]
-    StockAccessories StockAccessories[]
+    id                      String                    @id @default(auto()) @map("_id") @db.ObjectId
+    brandName               String
+    productType             ProductType               @relation(fields: [productTypeId], references: [id])
+    productTypeId           String                    @db.ObjectId
+    Model                   Model[]
+    createdAt               DateTime?                 @default(now())
+    InStock                 InStock[]
+    StockAndroid            StockAndroid[]
+    StockButton             StockButton[]
+    StockAccessories        StockAccessories[]
+    HistoryAndroidStock     HistoryAndroidStock[]
+    HistoryButtonStock      HistoryButtonStock[]
+    HistoryAccessoriesStock HistoryAccessoriesStock[]
 }
 
 model Model {
-    id                String             @id @default(auto()) @map("_id") @db.ObjectId
-    model             String
-    brand             Brand              @relation(fields: [brandId], references: [id])
-    brandId           String             @db.ObjectId
-    InStock           InStock[]
-    createdAt         DateTime?          @default(now())
-    StrockAndroid     StockAndroid[]
-    StrockButton      StockButton[]
-    StrockAccessories StockAccessories[]
+    id                      String                    @id @default(auto()) @map("_id") @db.ObjectId
+    model                   String
+    brand                   Brand                     @relation(fields: [brandId], references: [id])
+    brandId                 String                    @db.ObjectId
+    InStock                 InStock[]
+    StrockAndroid           StockAndroid[]
+    StrockButton            StockButton[]
+    StrockAccessories       StockAccessories[]
+    HistoryAndroidStock     HistoryAndroidStock[]
+    HistoryButtonStock      HistoryButtonStock[]
+    HistoryAccessoriesStock HistoryAccessoriesStock[]
+    createdAt               DateTime?                 @default(now())
 }
 
 model InStock {
@@ -169,4 +178,51 @@ model OtherCost {
     amount    Int
     comment   String
     createdAt DateTime @default(now())
+}
+
+// History Table
+model HistoryAndroidStock {
+    id            String      @id @default(auto()) @map("_id") @db.ObjectId
+    IMEI          String      @unique
+    model         Model       @relation(fields: [modelId], references: [id])
+    modelId       String      @db.ObjectId
+    brand         Brand       @relation(fields: [brandId], references: [id])
+    brandId       String      @db.ObjectId
+    productType   ProductType @relation(fields: [productTypeId], references: [id])
+    productTypeId String      @db.ObjectId
+    purchasePrice Int
+    sellingPrice  Int
+    color         String
+    ram           String
+    rom           String
+    createdAt     DateTime    @default(now())
+}
+
+model HistoryButtonStock {
+    id            String      @id @default(auto()) @map("_id") @db.ObjectId
+    model         Model       @relation(fields: [modelId], references: [id])
+    modelId       String      @db.ObjectId
+    brand         Brand       @relation(fields: [brandId], references: [id])
+    brandId       String      @db.ObjectId
+    productType   ProductType @relation(fields: [productTypeId], references: [id])
+    productTypeId String      @db.ObjectId
+    purchasePrice Int
+    sellingPrice  Int
+    quantity      Int
+    color         String
+    createdAt     DateTime    @default(now())
+}
+
+model HistoryAccessoriesStock {
+    id            String      @id @default(auto()) @map("_id") @db.ObjectId
+    model         Model       @relation(fields: [modelId], references: [id])
+    modelId       String      @db.ObjectId
+    brand         Brand       @relation(fields: [brandId], references: [id])
+    brandId       String      @db.ObjectId
+    productType   ProductType @relation(fields: [productTypeId], references: [id])
+    productTypeId String      @db.ObjectId
+    purchasePrice Int
+    sellingPrice  Int
+    quantity      Int
+    createdAt     DateTime    @default(now())
 }

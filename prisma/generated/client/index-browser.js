@@ -230,6 +230,43 @@ exports.Prisma.OtherCostScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.HistoryAndroidStockScalarFieldEnum = {
+  id: 'id',
+  IMEI: 'IMEI',
+  modelId: 'modelId',
+  brandId: 'brandId',
+  productTypeId: 'productTypeId',
+  purchasePrice: 'purchasePrice',
+  sellingPrice: 'sellingPrice',
+  color: 'color',
+  ram: 'ram',
+  rom: 'rom',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.HistoryButtonStockScalarFieldEnum = {
+  id: 'id',
+  modelId: 'modelId',
+  brandId: 'brandId',
+  productTypeId: 'productTypeId',
+  purchasePrice: 'purchasePrice',
+  sellingPrice: 'sellingPrice',
+  quantity: 'quantity',
+  color: 'color',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.HistoryAccessoriesStockScalarFieldEnum = {
+  id: 'id',
+  modelId: 'modelId',
+  brandId: 'brandId',
+  productTypeId: 'productTypeId',
+  purchasePrice: 'purchasePrice',
+  sellingPrice: 'sellingPrice',
+  quantity: 'quantity',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -255,7 +292,10 @@ exports.Prisma.ModelName = {
   SalesEntry: 'SalesEntry',
   ShopRent: 'ShopRent',
   Installment: 'Installment',
-  OtherCost: 'OtherCost'
+  OtherCost: 'OtherCost',
+  HistoryAndroidStock: 'HistoryAndroidStock',
+  HistoryButtonStock: 'HistoryButtonStock',
+  HistoryAccessoriesStock: 'HistoryAccessoriesStock'
 };
 
 /**

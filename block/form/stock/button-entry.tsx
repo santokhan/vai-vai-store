@@ -11,6 +11,7 @@ import { commonPhoneColors } from '@/utils/default-data';
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { ServerProps } from './type';
 import { toast } from 'react-toastify';
+import { addButtonStock } from '@/actions/stock/entry/button';
 
 export const initialState = {
     name: '',
@@ -47,21 +48,14 @@ const StockButtonEntryForm: FC<ServerProps> = ({ productType, brand, model }) =>
 
         if (productTypeId && brandId && modelId && sellingPrice && purchasePrice && color) {
             setadding(true);
-            try {
-                const res = await fetch(`/api/stock/entry/button`, {
-                    method: 'POST',
-                    body: JSON.stringify(formData as StockButtonPOST)
-                });
-                const data = await res.json();
+            addButtonStock(formData).then(data => {
                 if (data) {
                     toast(data.message)
                     setadding(false);
                 }
-            } catch (error) {
-                console.error(error);
-            }
+            }).catch(err => console.error)
         } else {
-            alert(`Can not add data to stock. Please check the form input.`)
+            toast(`POST data is missing`)
         }
     }
 

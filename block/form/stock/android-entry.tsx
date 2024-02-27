@@ -12,6 +12,7 @@ import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { toast } from 'react-toastify';
 import { ServerProps } from './type';
 import { RAM, ROM } from '@/utils/pre-defined-form-data';
+import { addStockAndroid } from '@/actions/stock/entry/android';
 
 export const initialState: StockAndroidPOST = {
     name: '',
@@ -50,21 +51,14 @@ const StockAndroidEntryForm: FC<ServerProps> = ({ productType, brand, model }) =
 
         if (productTypeId && brandId && modelId && IMEI && sellingPrice && purchasePrice && color && ram && rom) {
             setadding(true);
-            try {
-                const res = await fetch(`/api/stock/entry/android`, {
-                    method: 'POST',
-                    body: JSON.stringify(state)
-                });
-                const data = await res.json();
-                if (data) {
-                    toast(data.message);
+            addStockAndroid(state).then(res => {
+                if (res) {
+                    toast(res.message);
                     setadding(false);
                 }
-            } catch (error) {
-                console.error(error);
-            }
+            }).catch(err => console.error);
         } else {
-            alert(`Can not add data to stock. Please check the form input.`)
+            toast(`POST data is missing`)
         }
     }
 
