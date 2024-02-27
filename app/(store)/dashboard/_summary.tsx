@@ -1,6 +1,6 @@
 'use server';
 
-import { actionTotalSummary } from "@/actions/total-summary";
+import { TotalSummary, actionTotalSummary } from "@/actions/total-summary";
 
 export type SummaryKeys = 'name' | 'amount';
 export interface SummaryObj {
@@ -11,13 +11,13 @@ export type Summary = SummaryObj[];
 
 
 export async function TotalSummary() {
-    const totalSummary = await actionTotalSummary();
+    const totalSummary: TotalSummary | undefined = await actionTotalSummary();
 
     if (!totalSummary) {
         return null;
     }
 
-    const { purchase, sales, due } = totalSummary;
+    const { purchase, sales, due, availablePurchase } = totalSummary;
     const array = [
         {
             name: "total Purchase",
@@ -30,6 +30,10 @@ export async function TotalSummary() {
         {
             name: "total Due",
             amount: due,
+        },
+        {
+            name: "stock available purchase",
+            amount: availablePurchase,
         },
     ]
 

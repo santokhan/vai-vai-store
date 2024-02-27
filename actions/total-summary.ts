@@ -11,18 +11,21 @@ async function getStockTotalPurchase() {
     try {
         // does not have quantity
         const android = await prisma.stockAndroid.aggregate({
+            where: {
+                sold: false
+            },
             _sum: {
                 purchasePrice: true
             }
         });
-        // multiply with quantity
+
         const button = await prisma.stockButton.findMany({
             select: {
                 purchasePrice: true,
                 quantity: true
             }
         });
-        // multiply with quantity
+
         const accessories = await prisma.stockAccessories.findMany({
             select: {
                 purchasePrice: true,
@@ -34,13 +37,11 @@ async function getStockTotalPurchase() {
             y = button.map(({ purchasePrice, quantity }) => purchasePrice * quantity).reduce((a, b) => a + b, 0) || 0,
             z = accessories.map(({ purchasePrice, quantity }) => purchasePrice * quantity).reduce((a, b) => a + b, 0) || 0;
 
-
         return x + y + z;
     } catch (error) {
         throw error;
     }
 }
-
 
 async function getHistoryTotalPurchase() {
     try {
@@ -68,7 +69,6 @@ async function getHistoryTotalPurchase() {
         const x = android._sum.purchasePrice || 0,
             y = button.map(({ purchasePrice, quantity }) => purchasePrice * quantity).reduce((a, b) => a + b, 0) || 0,
             z = accessories.map(({ purchasePrice, quantity }) => purchasePrice * quantity).reduce((a, b) => a + b, 0) || 0;
-
 
         return x + y + z;
     } catch (error) {
@@ -130,14 +130,19 @@ async function getTotalDue() {
     }
 }
 
+export type TotalSummaryKey = 'purchase' | 'sales' | 'due' | 'availablePurchase';
+export type TotalSummary = Record<TotalSummaryKey, number>
 
-export async function actionTotalSummary(): Promise<Record<'purchase' | 'sales' | 'due', number> | undefined> {
+export async function actionTotalSummary(): Promise<TotalSummary | undefined> {
     try {
         const purchase = await getHistoryTotalPurchase();
         const sales = await getTotalSales();
         const due = await getTotalDue();
+        const availablePurchase = await getStockTotalPurchase();
 
-        return { purchase, sales, due };
+        console.log(availablePurchase);
+
+        return { purchase, sales, due, availablePurchase };
     } catch (error) {
         throw error;
     }
