@@ -37,6 +37,8 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
                             const getFunction = functionObject[row.type as keyof typeof functionObject];
                             const stockData: any = await getFunction(row.stockId);
 
+                            console.log(stockData);
+                            return null;
                             if (!stockData) {
                                 return null;
                             }
@@ -51,39 +53,39 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
                             )
                         })}
                         <tr>
-                            <td className="py-2 px-3 font-semibold text-sm"></td>
-                            <td className="py-2 px-3 font-semibold text-sm"></td>
-                            <td className="py-2 px-3 font-semibold text-sm"></td>
-                            <td className="py-2 px-3 font-semibold text-sm"></td>
-                            <td className="py-2 px-3 font-semibold text-sm"></td>
+                            <td className="py-1.5"></td>
+                            <td className="py-1.5"></td>
+                            <td className="py-1.5"></td>
+                            <td className="py-1.5"></td>
+                            <td className="py-1.5"></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td className="py-2 px-3 font-semibold text-sm">Total</td>
-                            <td className="py-2 px-3 font-semibold text-sm">{totalPrice}</td>
+                            <td className="py-1.5 px-3 font-semibold text-sm">Total</td>
+                            <td className="py-1.5 px-3 font-semibold text-sm">{totalPrice}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td className="py-2 px-3 font-semibold text-sm">Due</td>
-                            <td className="py-2 px-3 font-semibold text-sm">{due}</td>
+                            <td className="py-1.5 px-3 font-semibold text-sm">Due</td>
+                            <td className="py-1.5 px-3 font-semibold text-sm">{due}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td className="py-2 px-3 font-semibold text-sm">Discount</td>
-                            <td className="py-2 px-3 font-semibold text-sm">{salesEntry?.discount || 0}</td>
+                            <td className="py-1.5 px-3 font-semibold text-sm">Discount</td>
+                            <td className="py-1.5 px-3 font-semibold text-sm">{salesEntry?.discount || 0}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td className="py-2 px-3 font-semibold text-sm">Amount Paid</td>
-                            <td className="py-2 px-3 font-semibold text-sm">{totalPrice - due - (salesEntry?.discount || 0)}</td>
+                            <td className="py-1.5 px-3 font-semibold text-sm">Amount Paid</td>
+                            <td className="py-1.5 px-3 font-semibold text-sm">{totalPrice - due - (salesEntry?.discount || 0)}</td>
                         </tr>
                     </tbody>
                 </table>
