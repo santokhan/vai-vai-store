@@ -2,12 +2,13 @@
 
 import { StockButtonPOST } from '@/app/api/(store)/stock/entry/post-data-type';
 import { prisma } from '@/lib/prisma';
+import { messageHistoryTable } from './shared';
 
 
 async function addButtonHistory(data: StockButtonPOST) {
     try {
         const created = await prisma.historyButtonStock.create({ data });
-        return { message: created ? "History created" : "Falied to create history" };
+        messageHistoryTable(created, 'Button');
     } catch (error) {
         console.error('Error getting button phone data:', error);
     } finally {

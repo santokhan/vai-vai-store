@@ -2,12 +2,22 @@
 
 import { StockAccessoriesPOST } from '@/app/api/(store)/stock/entry/post-data-type';
 import { prisma } from '@/lib/prisma';
+import { messageHistoryTable } from './shared';
 
 
 async function addAccessoriesHistory(data: StockAccessoriesPOST) {
     try {
-        const created = await prisma.historyAccessoriesStock.create({ data });
-        return { message: created ? "History created" : "Falied to create history" };
+        const created = await prisma.historyAccessoriesStock.create({
+            data: {
+                productTypeId: data.productTypeId,
+                brandId: data.brandId,
+                modelId: data.modelId,
+                quantity: data.quantity,
+                purchasePrice: data.purchasePrice,
+                sellingPrice: data.sellingPrice,
+            }
+        });
+        messageHistoryTable(created, 'Accessories');
     } catch (error) {
         console.error('Error getting button phone data:', error);
     } finally {

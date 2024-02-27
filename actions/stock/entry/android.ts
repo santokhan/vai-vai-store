@@ -2,6 +2,7 @@
 
 import { StockAndroidPOST } from '@/app/api/(store)/stock/entry/post-data-type';
 import { prisma } from '@/lib/prisma';
+import { messageHistoryTable } from './shared';
 
 
 async function addToAndroidHistory(data: StockAndroidPOST) {
@@ -19,7 +20,7 @@ async function addToAndroidHistory(data: StockAndroidPOST) {
                 productTypeId: data.productTypeId,
             }
         });
-        return { message: created ? "History created" : "Falied to create history" };
+        messageHistoryTable(created, 'Android');
     } catch (error) {
         console.error('Error getting button phone data:', error);
     } finally {
