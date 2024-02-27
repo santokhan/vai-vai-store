@@ -4,6 +4,30 @@ import { StockAndroidPOST } from '@/app/api/(store)/stock/entry/post-data-type';
 import { prisma } from '@/lib/prisma';
 
 
+async function addToAndroidHistory(data: StockAndroidPOST) {
+    try {
+        const created = await prisma.historyAndroidStock.create({
+            data: {
+                brandId: data.brandId,
+                modelId: data.modelId,
+                IMEI: data.IMEI,
+                color: data.color,
+                sellingPrice: data.sellingPrice,
+                purchasePrice: data.purchasePrice,
+                ram: parseInt(data.ram || ""),
+                rom: parseInt(data.rom || ""),
+                productTypeId: data.productTypeId,
+            }
+        });
+        return { message: created ? "History created" : "Falied to create history" };
+    } catch (error) {
+        console.error('Error getting button phone data:', error);
+    } finally {
+        await prisma.$disconnect();
+    }
+}
+
+
 async function addAndroid(data: StockAndroidPOST) {
     try {
         const createdModel = await prisma.stockAndroid.create({
@@ -30,6 +54,7 @@ export async function addStockAndroid({ name, IMEI, modelId, brandId, productTyp
             return { message: "Android already exist" };
         } else {
             const createdModel = await addAndroid({ name, IMEI, modelId, brandId, productTypeId, purchasePrice, sellingPrice, color, ram, rom });
+            await addToAndroidHistory({ name, IMEI, modelId, brandId, productTypeId, purchasePrice, sellingPrice, color, ram, rom });
             if (createdModel) {
                 return { message: `Android phone data created` };
             } else {

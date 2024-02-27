@@ -246,6 +246,7 @@ exports.Prisma.HistoryAndroidStockScalarFieldEnum = {
 
 exports.Prisma.HistoryButtonStockScalarFieldEnum = {
   id: 'id',
+  name: 'name',
   modelId: 'modelId',
   brandId: 'brandId',
   productTypeId: 'productTypeId',

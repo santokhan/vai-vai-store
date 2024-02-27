@@ -17272,11 +17272,15 @@ export namespace Prisma {
   export type HistoryAndroidStockAvgAggregateOutputType = {
     purchasePrice: number | null
     sellingPrice: number | null
+    ram: number | null
+    rom: number | null
   }
 
   export type HistoryAndroidStockSumAggregateOutputType = {
     purchasePrice: number | null
     sellingPrice: number | null
+    ram: number | null
+    rom: number | null
   }
 
   export type HistoryAndroidStockMinAggregateOutputType = {
@@ -17288,8 +17292,8 @@ export namespace Prisma {
     purchasePrice: number | null
     sellingPrice: number | null
     color: string | null
-    ram: string | null
-    rom: string | null
+    ram: number | null
+    rom: number | null
     createdAt: Date | null
   }
 
@@ -17302,8 +17306,8 @@ export namespace Prisma {
     purchasePrice: number | null
     sellingPrice: number | null
     color: string | null
-    ram: string | null
-    rom: string | null
+    ram: number | null
+    rom: number | null
     createdAt: Date | null
   }
 
@@ -17326,11 +17330,15 @@ export namespace Prisma {
   export type HistoryAndroidStockAvgAggregateInputType = {
     purchasePrice?: true
     sellingPrice?: true
+    ram?: true
+    rom?: true
   }
 
   export type HistoryAndroidStockSumAggregateInputType = {
     purchasePrice?: true
     sellingPrice?: true
+    ram?: true
+    rom?: true
   }
 
   export type HistoryAndroidStockMinAggregateInputType = {
@@ -17471,8 +17479,8 @@ export namespace Prisma {
     purchasePrice: number
     sellingPrice: number
     color: string
-    ram: string
-    rom: string
+    ram: number
+    rom: number
     createdAt: Date
     _count: HistoryAndroidStockCountAggregateOutputType | null
     _avg: HistoryAndroidStockAvgAggregateOutputType | null
@@ -17549,8 +17557,8 @@ export namespace Prisma {
       purchasePrice: number
       sellingPrice: number
       color: string
-      ram: string
-      rom: string
+      ram: number
+      rom: number
       createdAt: Date
     }, ExtArgs["result"]["historyAndroidStock"]>
     composites: {}
@@ -17986,8 +17994,8 @@ export namespace Prisma {
     readonly purchasePrice: FieldRef<"HistoryAndroidStock", 'Int'>
     readonly sellingPrice: FieldRef<"HistoryAndroidStock", 'Int'>
     readonly color: FieldRef<"HistoryAndroidStock", 'String'>
-    readonly ram: FieldRef<"HistoryAndroidStock", 'String'>
-    readonly rom: FieldRef<"HistoryAndroidStock", 'String'>
+    readonly ram: FieldRef<"HistoryAndroidStock", 'Int'>
+    readonly rom: FieldRef<"HistoryAndroidStock", 'Int'>
     readonly createdAt: FieldRef<"HistoryAndroidStock", 'DateTime'>
   }
     
@@ -18371,6 +18379,7 @@ export namespace Prisma {
 
   export type HistoryButtonStockMinAggregateOutputType = {
     id: string | null
+    name: string | null
     modelId: string | null
     brandId: string | null
     productTypeId: string | null
@@ -18383,6 +18392,7 @@ export namespace Prisma {
 
   export type HistoryButtonStockMaxAggregateOutputType = {
     id: string | null
+    name: string | null
     modelId: string | null
     brandId: string | null
     productTypeId: string | null
@@ -18395,6 +18405,7 @@ export namespace Prisma {
 
   export type HistoryButtonStockCountAggregateOutputType = {
     id: number
+    name: number
     modelId: number
     brandId: number
     productTypeId: number
@@ -18421,6 +18432,7 @@ export namespace Prisma {
 
   export type HistoryButtonStockMinAggregateInputType = {
     id?: true
+    name?: true
     modelId?: true
     brandId?: true
     productTypeId?: true
@@ -18433,6 +18445,7 @@ export namespace Prisma {
 
   export type HistoryButtonStockMaxAggregateInputType = {
     id?: true
+    name?: true
     modelId?: true
     brandId?: true
     productTypeId?: true
@@ -18445,6 +18458,7 @@ export namespace Prisma {
 
   export type HistoryButtonStockCountAggregateInputType = {
     id?: true
+    name?: true
     modelId?: true
     brandId?: true
     productTypeId?: true
@@ -18544,6 +18558,7 @@ export namespace Prisma {
 
   export type HistoryButtonStockGroupByOutputType = {
     id: string
+    name: string
     modelId: string
     brandId: string
     productTypeId: string
@@ -18551,7 +18566,7 @@ export namespace Prisma {
     sellingPrice: number
     quantity: number
     color: string
-    createdAt: Date
+    createdAt: Date | null
     _count: HistoryButtonStockCountAggregateOutputType | null
     _avg: HistoryButtonStockAvgAggregateOutputType | null
     _sum: HistoryButtonStockSumAggregateOutputType | null
@@ -18575,6 +18590,7 @@ export namespace Prisma {
 
   export type HistoryButtonStockSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    name?: boolean
     modelId?: boolean
     brandId?: boolean
     productTypeId?: boolean
@@ -18590,6 +18606,7 @@ export namespace Prisma {
 
   export type HistoryButtonStockSelectScalar = {
     id?: boolean
+    name?: boolean
     modelId?: boolean
     brandId?: boolean
     productTypeId?: boolean
@@ -18616,6 +18633,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      name: string
       modelId: string
       brandId: string
       productTypeId: string
@@ -18623,7 +18641,7 @@ export namespace Prisma {
       sellingPrice: number
       quantity: number
       color: string
-      createdAt: Date
+      createdAt: Date | null
     }, ExtArgs["result"]["historyButtonStock"]>
     composites: {}
   }
@@ -19051,6 +19069,7 @@ export namespace Prisma {
    */ 
   interface HistoryButtonStockFieldRefs {
     readonly id: FieldRef<"HistoryButtonStock", 'String'>
+    readonly name: FieldRef<"HistoryButtonStock", 'String'>
     readonly modelId: FieldRef<"HistoryButtonStock", 'String'>
     readonly brandId: FieldRef<"HistoryButtonStock", 'String'>
     readonly productTypeId: FieldRef<"HistoryButtonStock", 'String'>
@@ -20669,6 +20688,7 @@ export namespace Prisma {
 
   export const HistoryButtonStockScalarFieldEnum: {
     id: 'id',
+    name: 'name',
     modelId: 'modelId',
     brandId: 'brandId',
     productTypeId: 'productTypeId',
@@ -21759,8 +21779,8 @@ export namespace Prisma {
     purchasePrice?: IntFilter<"HistoryAndroidStock"> | number
     sellingPrice?: IntFilter<"HistoryAndroidStock"> | number
     color?: StringFilter<"HistoryAndroidStock"> | string
-    ram?: StringFilter<"HistoryAndroidStock"> | string
-    rom?: StringFilter<"HistoryAndroidStock"> | string
+    ram?: IntFilter<"HistoryAndroidStock"> | number
+    rom?: IntFilter<"HistoryAndroidStock"> | number
     createdAt?: DateTimeFilter<"HistoryAndroidStock"> | Date | string
     model?: XOR<ModelRelationFilter, ModelWhereInput>
     brand?: XOR<BrandRelationFilter, BrandWhereInput>
@@ -21796,8 +21816,8 @@ export namespace Prisma {
     purchasePrice?: IntFilter<"HistoryAndroidStock"> | number
     sellingPrice?: IntFilter<"HistoryAndroidStock"> | number
     color?: StringFilter<"HistoryAndroidStock"> | string
-    ram?: StringFilter<"HistoryAndroidStock"> | string
-    rom?: StringFilter<"HistoryAndroidStock"> | string
+    ram?: IntFilter<"HistoryAndroidStock"> | number
+    rom?: IntFilter<"HistoryAndroidStock"> | number
     createdAt?: DateTimeFilter<"HistoryAndroidStock"> | Date | string
     model?: XOR<ModelRelationFilter, ModelWhereInput>
     brand?: XOR<BrandRelationFilter, BrandWhereInput>
@@ -21835,8 +21855,8 @@ export namespace Prisma {
     purchasePrice?: IntWithAggregatesFilter<"HistoryAndroidStock"> | number
     sellingPrice?: IntWithAggregatesFilter<"HistoryAndroidStock"> | number
     color?: StringWithAggregatesFilter<"HistoryAndroidStock"> | string
-    ram?: StringWithAggregatesFilter<"HistoryAndroidStock"> | string
-    rom?: StringWithAggregatesFilter<"HistoryAndroidStock"> | string
+    ram?: IntWithAggregatesFilter<"HistoryAndroidStock"> | number
+    rom?: IntWithAggregatesFilter<"HistoryAndroidStock"> | number
     createdAt?: DateTimeWithAggregatesFilter<"HistoryAndroidStock"> | Date | string
   }
 
@@ -21845,6 +21865,7 @@ export namespace Prisma {
     OR?: HistoryButtonStockWhereInput[]
     NOT?: HistoryButtonStockWhereInput | HistoryButtonStockWhereInput[]
     id?: StringFilter<"HistoryButtonStock"> | string
+    name?: StringFilter<"HistoryButtonStock"> | string
     modelId?: StringFilter<"HistoryButtonStock"> | string
     brandId?: StringFilter<"HistoryButtonStock"> | string
     productTypeId?: StringFilter<"HistoryButtonStock"> | string
@@ -21852,7 +21873,7 @@ export namespace Prisma {
     sellingPrice?: IntFilter<"HistoryButtonStock"> | number
     quantity?: IntFilter<"HistoryButtonStock"> | number
     color?: StringFilter<"HistoryButtonStock"> | string
-    createdAt?: DateTimeFilter<"HistoryButtonStock"> | Date | string
+    createdAt?: DateTimeNullableFilter<"HistoryButtonStock"> | Date | string | null
     model?: XOR<ModelRelationFilter, ModelWhereInput>
     brand?: XOR<BrandRelationFilter, BrandWhereInput>
     productType?: XOR<ProductTypeRelationFilter, ProductTypeWhereInput>
@@ -21860,6 +21881,7 @@ export namespace Prisma {
 
   export type HistoryButtonStockOrderByWithRelationInput = {
     id?: SortOrder
+    name?: SortOrder
     modelId?: SortOrder
     brandId?: SortOrder
     productTypeId?: SortOrder
@@ -21878,6 +21900,7 @@ export namespace Prisma {
     AND?: HistoryButtonStockWhereInput | HistoryButtonStockWhereInput[]
     OR?: HistoryButtonStockWhereInput[]
     NOT?: HistoryButtonStockWhereInput | HistoryButtonStockWhereInput[]
+    name?: StringFilter<"HistoryButtonStock"> | string
     modelId?: StringFilter<"HistoryButtonStock"> | string
     brandId?: StringFilter<"HistoryButtonStock"> | string
     productTypeId?: StringFilter<"HistoryButtonStock"> | string
@@ -21885,7 +21908,7 @@ export namespace Prisma {
     sellingPrice?: IntFilter<"HistoryButtonStock"> | number
     quantity?: IntFilter<"HistoryButtonStock"> | number
     color?: StringFilter<"HistoryButtonStock"> | string
-    createdAt?: DateTimeFilter<"HistoryButtonStock"> | Date | string
+    createdAt?: DateTimeNullableFilter<"HistoryButtonStock"> | Date | string | null
     model?: XOR<ModelRelationFilter, ModelWhereInput>
     brand?: XOR<BrandRelationFilter, BrandWhereInput>
     productType?: XOR<ProductTypeRelationFilter, ProductTypeWhereInput>
@@ -21893,6 +21916,7 @@ export namespace Prisma {
 
   export type HistoryButtonStockOrderByWithAggregationInput = {
     id?: SortOrder
+    name?: SortOrder
     modelId?: SortOrder
     brandId?: SortOrder
     productTypeId?: SortOrder
@@ -21913,6 +21937,7 @@ export namespace Prisma {
     OR?: HistoryButtonStockScalarWhereWithAggregatesInput[]
     NOT?: HistoryButtonStockScalarWhereWithAggregatesInput | HistoryButtonStockScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"HistoryButtonStock"> | string
+    name?: StringWithAggregatesFilter<"HistoryButtonStock"> | string
     modelId?: StringWithAggregatesFilter<"HistoryButtonStock"> | string
     brandId?: StringWithAggregatesFilter<"HistoryButtonStock"> | string
     productTypeId?: StringWithAggregatesFilter<"HistoryButtonStock"> | string
@@ -21920,7 +21945,7 @@ export namespace Prisma {
     sellingPrice?: IntWithAggregatesFilter<"HistoryButtonStock"> | number
     quantity?: IntWithAggregatesFilter<"HistoryButtonStock"> | number
     color?: StringWithAggregatesFilter<"HistoryButtonStock"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"HistoryButtonStock"> | Date | string
+    createdAt?: DateTimeNullableWithAggregatesFilter<"HistoryButtonStock"> | Date | string | null
   }
 
   export type HistoryAccessoriesStockWhereInput = {
@@ -22945,8 +22970,8 @@ export namespace Prisma {
     purchasePrice: number
     sellingPrice: number
     color: string
-    ram: string
-    rom: string
+    ram: number
+    rom: number
     createdAt?: Date | string
     model: ModelCreateNestedOneWithoutHistoryAndroidStockInput
     brand: BrandCreateNestedOneWithoutHistoryAndroidStockInput
@@ -22962,8 +22987,8 @@ export namespace Prisma {
     purchasePrice: number
     sellingPrice: number
     color: string
-    ram: string
-    rom: string
+    ram: number
+    rom: number
     createdAt?: Date | string
   }
 
@@ -22972,8 +22997,8 @@ export namespace Prisma {
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    ram?: StringFieldUpdateOperationsInput | string
-    rom?: StringFieldUpdateOperationsInput | string
+    ram?: IntFieldUpdateOperationsInput | number
+    rom?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     model?: ModelUpdateOneRequiredWithoutHistoryAndroidStockNestedInput
     brand?: BrandUpdateOneRequiredWithoutHistoryAndroidStockNestedInput
@@ -22988,8 +23013,8 @@ export namespace Prisma {
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    ram?: StringFieldUpdateOperationsInput | string
-    rom?: StringFieldUpdateOperationsInput | string
+    ram?: IntFieldUpdateOperationsInput | number
+    rom?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -23002,8 +23027,8 @@ export namespace Prisma {
     purchasePrice: number
     sellingPrice: number
     color: string
-    ram: string
-    rom: string
+    ram: number
+    rom: number
     createdAt?: Date | string
   }
 
@@ -23012,8 +23037,8 @@ export namespace Prisma {
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    ram?: StringFieldUpdateOperationsInput | string
-    rom?: StringFieldUpdateOperationsInput | string
+    ram?: IntFieldUpdateOperationsInput | number
+    rom?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -23025,18 +23050,19 @@ export namespace Prisma {
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    ram?: StringFieldUpdateOperationsInput | string
-    rom?: StringFieldUpdateOperationsInput | string
+    ram?: IntFieldUpdateOperationsInput | number
+    rom?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HistoryButtonStockCreateInput = {
     id?: string
+    name: string
     purchasePrice: number
     sellingPrice: number
     quantity: number
     color: string
-    createdAt?: Date | string
+    createdAt?: Date | string | null
     model: ModelCreateNestedOneWithoutHistoryButtonStockInput
     brand: BrandCreateNestedOneWithoutHistoryButtonStockInput
     productType: ProductTypeCreateNestedOneWithoutHistoryButtonStockInput
@@ -23044,6 +23070,7 @@ export namespace Prisma {
 
   export type HistoryButtonStockUncheckedCreateInput = {
     id?: string
+    name: string
     modelId: string
     brandId: string
     productTypeId: string
@@ -23051,21 +23078,23 @@ export namespace Prisma {
     sellingPrice: number
     quantity: number
     color: string
-    createdAt?: Date | string
+    createdAt?: Date | string | null
   }
 
   export type HistoryButtonStockUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     model?: ModelUpdateOneRequiredWithoutHistoryButtonStockNestedInput
     brand?: BrandUpdateOneRequiredWithoutHistoryButtonStockNestedInput
     productType?: ProductTypeUpdateOneRequiredWithoutHistoryButtonStockNestedInput
   }
 
   export type HistoryButtonStockUncheckedUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
     modelId?: StringFieldUpdateOperationsInput | string
     brandId?: StringFieldUpdateOperationsInput | string
     productTypeId?: StringFieldUpdateOperationsInput | string
@@ -23073,11 +23102,12 @@ export namespace Prisma {
     sellingPrice?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type HistoryButtonStockCreateManyInput = {
     id?: string
+    name: string
     modelId: string
     brandId: string
     productTypeId: string
@@ -23085,18 +23115,20 @@ export namespace Prisma {
     sellingPrice: number
     quantity: number
     color: string
-    createdAt?: Date | string
+    createdAt?: Date | string | null
   }
 
   export type HistoryButtonStockUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type HistoryButtonStockUncheckedUpdateManyInput = {
+    name?: StringFieldUpdateOperationsInput | string
     modelId?: StringFieldUpdateOperationsInput | string
     brandId?: StringFieldUpdateOperationsInput | string
     productTypeId?: StringFieldUpdateOperationsInput | string
@@ -23104,7 +23136,7 @@ export namespace Prisma {
     sellingPrice?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type HistoryAccessoriesStockCreateInput = {
@@ -23970,6 +24002,8 @@ export namespace Prisma {
   export type HistoryAndroidStockAvgOrderByAggregateInput = {
     purchasePrice?: SortOrder
     sellingPrice?: SortOrder
+    ram?: SortOrder
+    rom?: SortOrder
   }
 
   export type HistoryAndroidStockMaxOrderByAggregateInput = {
@@ -24003,10 +24037,13 @@ export namespace Prisma {
   export type HistoryAndroidStockSumOrderByAggregateInput = {
     purchasePrice?: SortOrder
     sellingPrice?: SortOrder
+    ram?: SortOrder
+    rom?: SortOrder
   }
 
   export type HistoryButtonStockCountOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     modelId?: SortOrder
     brandId?: SortOrder
     productTypeId?: SortOrder
@@ -24025,6 +24062,7 @@ export namespace Prisma {
 
   export type HistoryButtonStockMaxOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     modelId?: SortOrder
     brandId?: SortOrder
     productTypeId?: SortOrder
@@ -24037,6 +24075,7 @@ export namespace Prisma {
 
   export type HistoryButtonStockMinOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     modelId?: SortOrder
     brandId?: SortOrder
     productTypeId?: SortOrder
@@ -25962,8 +26001,8 @@ export namespace Prisma {
     purchasePrice: number
     sellingPrice: number
     color: string
-    ram: string
-    rom: string
+    ram: number
+    rom: number
     createdAt?: Date | string
     model: ModelCreateNestedOneWithoutHistoryAndroidStockInput
     brand: BrandCreateNestedOneWithoutHistoryAndroidStockInput
@@ -25977,8 +26016,8 @@ export namespace Prisma {
     purchasePrice: number
     sellingPrice: number
     color: string
-    ram: string
-    rom: string
+    ram: number
+    rom: number
     createdAt?: Date | string
   }
 
@@ -25993,24 +26032,26 @@ export namespace Prisma {
 
   export type HistoryButtonStockCreateWithoutProductTypeInput = {
     id?: string
+    name: string
     purchasePrice: number
     sellingPrice: number
     quantity: number
     color: string
-    createdAt?: Date | string
+    createdAt?: Date | string | null
     model: ModelCreateNestedOneWithoutHistoryButtonStockInput
     brand: BrandCreateNestedOneWithoutHistoryButtonStockInput
   }
 
   export type HistoryButtonStockUncheckedCreateWithoutProductTypeInput = {
     id?: string
+    name: string
     modelId: string
     brandId: string
     purchasePrice: number
     sellingPrice: number
     quantity: number
     color: string
-    createdAt?: Date | string
+    createdAt?: Date | string | null
   }
 
   export type HistoryButtonStockCreateOrConnectWithoutProductTypeInput = {
@@ -26238,8 +26279,8 @@ export namespace Prisma {
     purchasePrice?: IntFilter<"HistoryAndroidStock"> | number
     sellingPrice?: IntFilter<"HistoryAndroidStock"> | number
     color?: StringFilter<"HistoryAndroidStock"> | string
-    ram?: StringFilter<"HistoryAndroidStock"> | string
-    rom?: StringFilter<"HistoryAndroidStock"> | string
+    ram?: IntFilter<"HistoryAndroidStock"> | number
+    rom?: IntFilter<"HistoryAndroidStock"> | number
     createdAt?: DateTimeFilter<"HistoryAndroidStock"> | Date | string
   }
 
@@ -26264,6 +26305,7 @@ export namespace Prisma {
     OR?: HistoryButtonStockScalarWhereInput[]
     NOT?: HistoryButtonStockScalarWhereInput | HistoryButtonStockScalarWhereInput[]
     id?: StringFilter<"HistoryButtonStock"> | string
+    name?: StringFilter<"HistoryButtonStock"> | string
     modelId?: StringFilter<"HistoryButtonStock"> | string
     brandId?: StringFilter<"HistoryButtonStock"> | string
     productTypeId?: StringFilter<"HistoryButtonStock"> | string
@@ -26271,7 +26313,7 @@ export namespace Prisma {
     sellingPrice?: IntFilter<"HistoryButtonStock"> | number
     quantity?: IntFilter<"HistoryButtonStock"> | number
     color?: StringFilter<"HistoryButtonStock"> | string
-    createdAt?: DateTimeFilter<"HistoryButtonStock"> | Date | string
+    createdAt?: DateTimeNullableFilter<"HistoryButtonStock"> | Date | string | null
   }
 
   export type HistoryAccessoriesStockUpsertWithWhereUniqueWithoutProductTypeInput = {
@@ -26518,8 +26560,8 @@ export namespace Prisma {
     purchasePrice: number
     sellingPrice: number
     color: string
-    ram: string
-    rom: string
+    ram: number
+    rom: number
     createdAt?: Date | string
     model: ModelCreateNestedOneWithoutHistoryAndroidStockInput
     productType: ProductTypeCreateNestedOneWithoutHistoryAndroidStockInput
@@ -26533,8 +26575,8 @@ export namespace Prisma {
     purchasePrice: number
     sellingPrice: number
     color: string
-    ram: string
-    rom: string
+    ram: number
+    rom: number
     createdAt?: Date | string
   }
 
@@ -26549,24 +26591,26 @@ export namespace Prisma {
 
   export type HistoryButtonStockCreateWithoutBrandInput = {
     id?: string
+    name: string
     purchasePrice: number
     sellingPrice: number
     quantity: number
     color: string
-    createdAt?: Date | string
+    createdAt?: Date | string | null
     model: ModelCreateNestedOneWithoutHistoryButtonStockInput
     productType: ProductTypeCreateNestedOneWithoutHistoryButtonStockInput
   }
 
   export type HistoryButtonStockUncheckedCreateWithoutBrandInput = {
     id?: string
+    name: string
     modelId: string
     productTypeId: string
     purchasePrice: number
     sellingPrice: number
     quantity: number
     color: string
-    createdAt?: Date | string
+    createdAt?: Date | string | null
   }
 
   export type HistoryButtonStockCreateOrConnectWithoutBrandInput = {
@@ -26961,8 +27005,8 @@ export namespace Prisma {
     purchasePrice: number
     sellingPrice: number
     color: string
-    ram: string
-    rom: string
+    ram: number
+    rom: number
     createdAt?: Date | string
     brand: BrandCreateNestedOneWithoutHistoryAndroidStockInput
     productType: ProductTypeCreateNestedOneWithoutHistoryAndroidStockInput
@@ -26976,8 +27020,8 @@ export namespace Prisma {
     purchasePrice: number
     sellingPrice: number
     color: string
-    ram: string
-    rom: string
+    ram: number
+    rom: number
     createdAt?: Date | string
   }
 
@@ -26992,24 +27036,26 @@ export namespace Prisma {
 
   export type HistoryButtonStockCreateWithoutModelInput = {
     id?: string
+    name: string
     purchasePrice: number
     sellingPrice: number
     quantity: number
     color: string
-    createdAt?: Date | string
+    createdAt?: Date | string | null
     brand: BrandCreateNestedOneWithoutHistoryButtonStockInput
     productType: ProductTypeCreateNestedOneWithoutHistoryButtonStockInput
   }
 
   export type HistoryButtonStockUncheckedCreateWithoutModelInput = {
     id?: string
+    name: string
     brandId: string
     productTypeId: string
     purchasePrice: number
     sellingPrice: number
     quantity: number
     color: string
-    createdAt?: Date | string
+    createdAt?: Date | string | null
   }
 
   export type HistoryButtonStockCreateOrConnectWithoutModelInput = {
@@ -28846,20 +28892,21 @@ export namespace Prisma {
     purchasePrice: number
     sellingPrice: number
     color: string
-    ram: string
-    rom: string
+    ram: number
+    rom: number
     createdAt?: Date | string
   }
 
   export type HistoryButtonStockCreateManyProductTypeInput = {
     id?: string
+    name: string
     modelId: string
     brandId: string
     purchasePrice: number
     sellingPrice: number
     quantity: number
     color: string
-    createdAt?: Date | string
+    createdAt?: Date | string | null
   }
 
   export type HistoryAccessoriesStockCreateManyProductTypeInput = {
@@ -29055,8 +29102,8 @@ export namespace Prisma {
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    ram?: StringFieldUpdateOperationsInput | string
-    rom?: StringFieldUpdateOperationsInput | string
+    ram?: IntFieldUpdateOperationsInput | number
+    rom?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     model?: ModelUpdateOneRequiredWithoutHistoryAndroidStockNestedInput
     brand?: BrandUpdateOneRequiredWithoutHistoryAndroidStockNestedInput
@@ -29069,8 +29116,8 @@ export namespace Prisma {
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    ram?: StringFieldUpdateOperationsInput | string
-    rom?: StringFieldUpdateOperationsInput | string
+    ram?: IntFieldUpdateOperationsInput | number
+    rom?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -29081,39 +29128,42 @@ export namespace Prisma {
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    ram?: StringFieldUpdateOperationsInput | string
-    rom?: StringFieldUpdateOperationsInput | string
+    ram?: IntFieldUpdateOperationsInput | number
+    rom?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HistoryButtonStockUpdateWithoutProductTypeInput = {
+    name?: StringFieldUpdateOperationsInput | string
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     model?: ModelUpdateOneRequiredWithoutHistoryButtonStockNestedInput
     brand?: BrandUpdateOneRequiredWithoutHistoryButtonStockNestedInput
   }
 
   export type HistoryButtonStockUncheckedUpdateWithoutProductTypeInput = {
+    name?: StringFieldUpdateOperationsInput | string
     modelId?: StringFieldUpdateOperationsInput | string
     brandId?: StringFieldUpdateOperationsInput | string
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type HistoryButtonStockUncheckedUpdateManyWithoutProductTypeInput = {
+    name?: StringFieldUpdateOperationsInput | string
     modelId?: StringFieldUpdateOperationsInput | string
     brandId?: StringFieldUpdateOperationsInput | string
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type HistoryAccessoriesStockUpdateWithoutProductTypeInput = {
@@ -29210,20 +29260,21 @@ export namespace Prisma {
     purchasePrice: number
     sellingPrice: number
     color: string
-    ram: string
-    rom: string
+    ram: number
+    rom: number
     createdAt?: Date | string
   }
 
   export type HistoryButtonStockCreateManyBrandInput = {
     id?: string
+    name: string
     modelId: string
     productTypeId: string
     purchasePrice: number
     sellingPrice: number
     quantity: number
     color: string
-    createdAt?: Date | string
+    createdAt?: Date | string | null
   }
 
   export type HistoryAccessoriesStockCreateManyBrandInput = {
@@ -29417,8 +29468,8 @@ export namespace Prisma {
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    ram?: StringFieldUpdateOperationsInput | string
-    rom?: StringFieldUpdateOperationsInput | string
+    ram?: IntFieldUpdateOperationsInput | number
+    rom?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     model?: ModelUpdateOneRequiredWithoutHistoryAndroidStockNestedInput
     productType?: ProductTypeUpdateOneRequiredWithoutHistoryAndroidStockNestedInput
@@ -29431,8 +29482,8 @@ export namespace Prisma {
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    ram?: StringFieldUpdateOperationsInput | string
-    rom?: StringFieldUpdateOperationsInput | string
+    ram?: IntFieldUpdateOperationsInput | number
+    rom?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -29443,39 +29494,42 @@ export namespace Prisma {
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    ram?: StringFieldUpdateOperationsInput | string
-    rom?: StringFieldUpdateOperationsInput | string
+    ram?: IntFieldUpdateOperationsInput | number
+    rom?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HistoryButtonStockUpdateWithoutBrandInput = {
+    name?: StringFieldUpdateOperationsInput | string
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     model?: ModelUpdateOneRequiredWithoutHistoryButtonStockNestedInput
     productType?: ProductTypeUpdateOneRequiredWithoutHistoryButtonStockNestedInput
   }
 
   export type HistoryButtonStockUncheckedUpdateWithoutBrandInput = {
+    name?: StringFieldUpdateOperationsInput | string
     modelId?: StringFieldUpdateOperationsInput | string
     productTypeId?: StringFieldUpdateOperationsInput | string
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type HistoryButtonStockUncheckedUpdateManyWithoutBrandInput = {
+    name?: StringFieldUpdateOperationsInput | string
     modelId?: StringFieldUpdateOperationsInput | string
     productTypeId?: StringFieldUpdateOperationsInput | string
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type HistoryAccessoriesStockUpdateWithoutBrandInput = {
@@ -29566,20 +29620,21 @@ export namespace Prisma {
     purchasePrice: number
     sellingPrice: number
     color: string
-    ram: string
-    rom: string
+    ram: number
+    rom: number
     createdAt?: Date | string
   }
 
   export type HistoryButtonStockCreateManyModelInput = {
     id?: string
+    name: string
     brandId: string
     productTypeId: string
     purchasePrice: number
     sellingPrice: number
     quantity: number
     color: string
-    createdAt?: Date | string
+    createdAt?: Date | string | null
   }
 
   export type HistoryAccessoriesStockCreateManyModelInput = {
@@ -29744,8 +29799,8 @@ export namespace Prisma {
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    ram?: StringFieldUpdateOperationsInput | string
-    rom?: StringFieldUpdateOperationsInput | string
+    ram?: IntFieldUpdateOperationsInput | number
+    rom?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneRequiredWithoutHistoryAndroidStockNestedInput
     productType?: ProductTypeUpdateOneRequiredWithoutHistoryAndroidStockNestedInput
@@ -29758,8 +29813,8 @@ export namespace Prisma {
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    ram?: StringFieldUpdateOperationsInput | string
-    rom?: StringFieldUpdateOperationsInput | string
+    ram?: IntFieldUpdateOperationsInput | number
+    rom?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -29770,39 +29825,42 @@ export namespace Prisma {
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    ram?: StringFieldUpdateOperationsInput | string
-    rom?: StringFieldUpdateOperationsInput | string
+    ram?: IntFieldUpdateOperationsInput | number
+    rom?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HistoryButtonStockUpdateWithoutModelInput = {
+    name?: StringFieldUpdateOperationsInput | string
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     brand?: BrandUpdateOneRequiredWithoutHistoryButtonStockNestedInput
     productType?: ProductTypeUpdateOneRequiredWithoutHistoryButtonStockNestedInput
   }
 
   export type HistoryButtonStockUncheckedUpdateWithoutModelInput = {
+    name?: StringFieldUpdateOperationsInput | string
     brandId?: StringFieldUpdateOperationsInput | string
     productTypeId?: StringFieldUpdateOperationsInput | string
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type HistoryButtonStockUncheckedUpdateManyWithoutModelInput = {
+    name?: StringFieldUpdateOperationsInput | string
     brandId?: StringFieldUpdateOperationsInput | string
     productTypeId?: StringFieldUpdateOperationsInput | string
     purchasePrice?: IntFieldUpdateOperationsInput | number
     sellingPrice?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     color?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type HistoryAccessoriesStockUpdateWithoutModelInput = {

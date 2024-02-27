@@ -193,13 +193,14 @@ model HistoryAndroidStock {
     purchasePrice Int
     sellingPrice  Int
     color         String
-    ram           String
-    rom           String
+    ram           Int
+    rom           Int
     createdAt     DateTime    @default(now())
 }
 
 model HistoryButtonStock {
     id            String      @id @default(auto()) @map("_id") @db.ObjectId
+    name          String
     model         Model       @relation(fields: [modelId], references: [id])
     modelId       String      @db.ObjectId
     brand         Brand       @relation(fields: [brandId], references: [id])
@@ -210,7 +211,7 @@ model HistoryButtonStock {
     sellingPrice  Int
     quantity      Int
     color         String
-    createdAt     DateTime    @default(now())
+    createdAt     DateTime?   @default(now())
 }
 
 model HistoryAccessoriesStock {
