@@ -28,7 +28,6 @@ model ProductType {
     type                    String
     Brand                   Brand[]
     createdAt               DateTime?                 @default(now())
-    InStock                 InStock[]
     StockAndroid            StockAndroid[]
     StockButton             StockButton[]
     StockAccessories        StockAccessories[]
@@ -44,7 +43,6 @@ model Brand {
     productTypeId           String                    @db.ObjectId
     Model                   Model[]
     createdAt               DateTime?                 @default(now())
-    InStock                 InStock[]
     StockAndroid            StockAndroid[]
     StockButton             StockButton[]
     StockAccessories        StockAccessories[]
@@ -58,7 +56,6 @@ model Model {
     model                   String
     brand                   Brand                     @relation(fields: [brandId], references: [id])
     brandId                 String                    @db.ObjectId
-    InStock                 InStock[]
     StrockAndroid           StockAndroid[]
     StrockButton            StockButton[]
     StrockAccessories       StockAccessories[]
@@ -68,24 +65,24 @@ model Model {
     createdAt               DateTime?                 @default(now())
 }
 
-model InStock {
-    id            String      @id @default(auto()) @map("_id") @db.ObjectId
-    name          String
-    IMEI          String      @unique
-    model         Model       @relation(fields: [modelId], references: [id])
-    modelId       String      @db.ObjectId
-    brand         Brand       @relation(fields: [brandId], references: [id])
-    brandId       String      @db.ObjectId
-    productType   ProductType @relation(fields: [productTypeId], references: [id])
-    productTypeId String      @db.ObjectId
-    purchasePrice Int
-    price         Int
-    sold          Boolean     @default(false)
-    color         String
-    ram           String?
-    rom           String?
-    createdAt     DateTime?   @default(now())
-}
+// model InStock {
+//     id            String      @id @default(auto()) @map("_id") @db.ObjectId
+//     name          String
+//     IMEI          String      @unique
+//     model         Model       @relation(fields: [modelId], references: [id])
+//     modelId       String      @db.ObjectId
+//     brand         Brand       @relation(fields: [brandId], references: [id])
+//     brandId       String      @db.ObjectId
+//     productType   ProductType @relation(fields: [productTypeId], references: [id])
+//     productTypeId String      @db.ObjectId
+//     purchasePrice Int
+//     price         Int
+//     sold          Boolean     @default(false)
+//     color         String
+//     ram           String?
+//     rom           String?
+//     createdAt     DateTime?   @default(now())
+// }
 
 model StockAndroid {
     id            String      @id @default(auto()) @map("_id") @db.ObjectId

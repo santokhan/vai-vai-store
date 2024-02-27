@@ -133,22 +133,6 @@ exports.Prisma.ModelScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
-exports.Prisma.InStockScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  IMEI: 'IMEI',
-  modelId: 'modelId',
-  brandId: 'brandId',
-  productTypeId: 'productTypeId',
-  purchasePrice: 'purchasePrice',
-  price: 'price',
-  sold: 'sold',
-  color: 'color',
-  ram: 'ram',
-  rom: 'rom',
-  createdAt: 'createdAt'
-};
-
 exports.Prisma.StockAndroidScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -285,7 +269,6 @@ exports.Prisma.ModelName = {
   ProductType: 'ProductType',
   Brand: 'Brand',
   Model: 'Model',
-  InStock: 'InStock',
   StockAndroid: 'StockAndroid',
   StockButton: 'StockButton',
   StockAccessories: 'StockAccessories',

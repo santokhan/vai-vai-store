@@ -39,11 +39,6 @@ export type Brand = $Result.DefaultSelection<Prisma.$BrandPayload>
  */
 export type Model = $Result.DefaultSelection<Prisma.$ModelPayload>
 /**
- * Model InStock
- * 
- */
-export type InStock = $Result.DefaultSelection<Prisma.$InStockPayload>
-/**
  * Model StockAndroid
  * 
  */
@@ -238,16 +233,6 @@ export class PrismaClient<
     * ```
     */
   get model(): Prisma.ModelDelegate<ExtArgs>;
-
-  /**
-   * `prisma.inStock`: Exposes CRUD operations for the **InStock** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more InStocks
-    * const inStocks = await prisma.inStock.findMany()
-    * ```
-    */
-  get inStock(): Prisma.InStockDelegate<ExtArgs>;
 
   /**
    * `prisma.stockAndroid`: Exposes CRUD operations for the **StockAndroid** model.
@@ -833,7 +818,6 @@ export namespace Prisma {
     ProductType: 'ProductType',
     Brand: 'Brand',
     Model: 'Model',
-    InStock: 'InStock',
     StockAndroid: 'StockAndroid',
     StockButton: 'StockButton',
     StockAccessories: 'StockAccessories',
@@ -861,7 +845,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'user' | 'seller' | 'productType' | 'brand' | 'model' | 'inStock' | 'stockAndroid' | 'stockButton' | 'stockAccessories' | 'customer' | 'salesEntry' | 'shopRent' | 'installment' | 'otherCost' | 'historyAndroidStock' | 'historyButtonStock' | 'historyAccessoriesStock'
+      modelProps: 'user' | 'seller' | 'productType' | 'brand' | 'model' | 'stockAndroid' | 'stockButton' | 'stockAccessories' | 'customer' | 'salesEntry' | 'shopRent' | 'installment' | 'otherCost' | 'historyAndroidStock' | 'historyButtonStock' | 'historyAccessoriesStock'
       txIsolationLevel: never
     },
     model: {
@@ -1232,80 +1216,6 @@ export namespace Prisma {
           count: {
             args: Prisma.ModelCountArgs<ExtArgs>,
             result: $Utils.Optional<ModelCountAggregateOutputType> | number
-          }
-        }
-      }
-      InStock: {
-        payload: Prisma.$InStockPayload<ExtArgs>
-        fields: Prisma.InStockFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.InStockFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$InStockPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.InStockFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$InStockPayload>
-          }
-          findFirst: {
-            args: Prisma.InStockFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$InStockPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.InStockFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$InStockPayload>
-          }
-          findMany: {
-            args: Prisma.InStockFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$InStockPayload>[]
-          }
-          create: {
-            args: Prisma.InStockCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$InStockPayload>
-          }
-          createMany: {
-            args: Prisma.InStockCreateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          delete: {
-            args: Prisma.InStockDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$InStockPayload>
-          }
-          update: {
-            args: Prisma.InStockUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$InStockPayload>
-          }
-          deleteMany: {
-            args: Prisma.InStockDeleteManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          updateMany: {
-            args: Prisma.InStockUpdateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          upsert: {
-            args: Prisma.InStockUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$InStockPayload>
-          }
-          aggregate: {
-            args: Prisma.InStockAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateInStock>
-          }
-          groupBy: {
-            args: Prisma.InStockGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<InStockGroupByOutputType>[]
-          }
-          findRaw: {
-            args: Prisma.InStockFindRawArgs<ExtArgs>,
-            result: Prisma.JsonObject
-          }
-          aggregateRaw: {
-            args: Prisma.InStockAggregateRawArgs<ExtArgs>,
-            result: Prisma.JsonObject
-          }
-          count: {
-            args: Prisma.InStockCountArgs<ExtArgs>,
-            result: $Utils.Optional<InStockCountAggregateOutputType> | number
           }
         }
       }
@@ -2295,7 +2205,6 @@ export namespace Prisma {
 
   export type ProductTypeCountOutputType = {
     Brand: number
-    InStock: number
     StockAndroid: number
     StockButton: number
     StockAccessories: number
@@ -2306,7 +2215,6 @@ export namespace Prisma {
 
   export type ProductTypeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Brand?: boolean | ProductTypeCountOutputTypeCountBrandArgs
-    InStock?: boolean | ProductTypeCountOutputTypeCountInStockArgs
     StockAndroid?: boolean | ProductTypeCountOutputTypeCountStockAndroidArgs
     StockButton?: boolean | ProductTypeCountOutputTypeCountStockButtonArgs
     StockAccessories?: boolean | ProductTypeCountOutputTypeCountStockAccessoriesArgs
@@ -2333,14 +2241,6 @@ export namespace Prisma {
    */
   export type ProductTypeCountOutputTypeCountBrandArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BrandWhereInput
-  }
-
-
-  /**
-   * ProductTypeCountOutputType without action
-   */
-  export type ProductTypeCountOutputTypeCountInStockArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: InStockWhereInput
   }
 
 
@@ -2399,7 +2299,6 @@ export namespace Prisma {
 
   export type BrandCountOutputType = {
     Model: number
-    InStock: number
     StockAndroid: number
     StockButton: number
     StockAccessories: number
@@ -2410,7 +2309,6 @@ export namespace Prisma {
 
   export type BrandCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Model?: boolean | BrandCountOutputTypeCountModelArgs
-    InStock?: boolean | BrandCountOutputTypeCountInStockArgs
     StockAndroid?: boolean | BrandCountOutputTypeCountStockAndroidArgs
     StockButton?: boolean | BrandCountOutputTypeCountStockButtonArgs
     StockAccessories?: boolean | BrandCountOutputTypeCountStockAccessoriesArgs
@@ -2437,14 +2335,6 @@ export namespace Prisma {
    */
   export type BrandCountOutputTypeCountModelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ModelWhereInput
-  }
-
-
-  /**
-   * BrandCountOutputType without action
-   */
-  export type BrandCountOutputTypeCountInStockArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: InStockWhereInput
   }
 
 
@@ -2502,7 +2392,6 @@ export namespace Prisma {
    */
 
   export type ModelCountOutputType = {
-    InStock: number
     StrockAndroid: number
     StrockButton: number
     StrockAccessories: number
@@ -2512,7 +2401,6 @@ export namespace Prisma {
   }
 
   export type ModelCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    InStock?: boolean | ModelCountOutputTypeCountInStockArgs
     StrockAndroid?: boolean | ModelCountOutputTypeCountStrockAndroidArgs
     StrockButton?: boolean | ModelCountOutputTypeCountStrockButtonArgs
     StrockAccessories?: boolean | ModelCountOutputTypeCountStrockAccessoriesArgs
@@ -2531,14 +2419,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the ModelCountOutputType
      */
     select?: ModelCountOutputTypeSelect<ExtArgs> | null
-  }
-
-
-  /**
-   * ModelCountOutputType without action
-   */
-  export type ModelCountOutputTypeCountInStockArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: InStockWhereInput
   }
 
 
@@ -4668,7 +4548,6 @@ export namespace Prisma {
     type?: boolean
     createdAt?: boolean
     Brand?: boolean | ProductType$BrandArgs<ExtArgs>
-    InStock?: boolean | ProductType$InStockArgs<ExtArgs>
     StockAndroid?: boolean | ProductType$StockAndroidArgs<ExtArgs>
     StockButton?: boolean | ProductType$StockButtonArgs<ExtArgs>
     StockAccessories?: boolean | ProductType$StockAccessoriesArgs<ExtArgs>
@@ -4686,7 +4565,6 @@ export namespace Prisma {
 
   export type ProductTypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Brand?: boolean | ProductType$BrandArgs<ExtArgs>
-    InStock?: boolean | ProductType$InStockArgs<ExtArgs>
     StockAndroid?: boolean | ProductType$StockAndroidArgs<ExtArgs>
     StockButton?: boolean | ProductType$StockButtonArgs<ExtArgs>
     StockAccessories?: boolean | ProductType$StockAccessoriesArgs<ExtArgs>
@@ -4701,7 +4579,6 @@ export namespace Prisma {
     name: "ProductType"
     objects: {
       Brand: Prisma.$BrandPayload<ExtArgs>[]
-      InStock: Prisma.$InStockPayload<ExtArgs>[]
       StockAndroid: Prisma.$StockAndroidPayload<ExtArgs>[]
       StockButton: Prisma.$StockButtonPayload<ExtArgs>[]
       StockAccessories: Prisma.$StockAccessoriesPayload<ExtArgs>[]
@@ -5106,8 +4983,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
     Brand<T extends ProductType$BrandArgs<ExtArgs> = {}>(args?: Subset<T, ProductType$BrandArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, 'findMany'> | Null>;
-
-    InStock<T extends ProductType$InStockArgs<ExtArgs> = {}>(args?: Subset<T, ProductType$InStockArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InStockPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     StockAndroid<T extends ProductType$StockAndroidArgs<ExtArgs> = {}>(args?: Subset<T, ProductType$StockAndroidArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockAndroidPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -5514,27 +5389,6 @@ export namespace Prisma {
 
 
   /**
-   * ProductType.InStock
-   */
-  export type ProductType$InStockArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the InStock
-     */
-    select?: InStockSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: InStockInclude<ExtArgs> | null
-    where?: InStockWhereInput
-    orderBy?: InStockOrderByWithRelationInput | InStockOrderByWithRelationInput[]
-    cursor?: InStockWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: InStockScalarFieldEnum | InStockScalarFieldEnum[]
-  }
-
-
-  /**
    * ProductType.StockAndroid
    */
   export type ProductType$StockAndroidArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5834,7 +5688,6 @@ export namespace Prisma {
     createdAt?: boolean
     productType?: boolean | ProductTypeDefaultArgs<ExtArgs>
     Model?: boolean | Brand$ModelArgs<ExtArgs>
-    InStock?: boolean | Brand$InStockArgs<ExtArgs>
     StockAndroid?: boolean | Brand$StockAndroidArgs<ExtArgs>
     StockButton?: boolean | Brand$StockButtonArgs<ExtArgs>
     StockAccessories?: boolean | Brand$StockAccessoriesArgs<ExtArgs>
@@ -5854,7 +5707,6 @@ export namespace Prisma {
   export type BrandInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     productType?: boolean | ProductTypeDefaultArgs<ExtArgs>
     Model?: boolean | Brand$ModelArgs<ExtArgs>
-    InStock?: boolean | Brand$InStockArgs<ExtArgs>
     StockAndroid?: boolean | Brand$StockAndroidArgs<ExtArgs>
     StockButton?: boolean | Brand$StockButtonArgs<ExtArgs>
     StockAccessories?: boolean | Brand$StockAccessoriesArgs<ExtArgs>
@@ -5870,7 +5722,6 @@ export namespace Prisma {
     objects: {
       productType: Prisma.$ProductTypePayload<ExtArgs>
       Model: Prisma.$ModelPayload<ExtArgs>[]
-      InStock: Prisma.$InStockPayload<ExtArgs>[]
       StockAndroid: Prisma.$StockAndroidPayload<ExtArgs>[]
       StockButton: Prisma.$StockButtonPayload<ExtArgs>[]
       StockAccessories: Prisma.$StockAccessoriesPayload<ExtArgs>[]
@@ -6279,8 +6130,6 @@ export namespace Prisma {
 
     Model<T extends Brand$ModelArgs<ExtArgs> = {}>(args?: Subset<T, Brand$ModelArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModelPayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    InStock<T extends Brand$InStockArgs<ExtArgs> = {}>(args?: Subset<T, Brand$InStockArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InStockPayload<ExtArgs>, T, 'findMany'> | Null>;
-
     StockAndroid<T extends Brand$StockAndroidArgs<ExtArgs> = {}>(args?: Subset<T, Brand$StockAndroidArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockAndroidPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     StockButton<T extends Brand$StockButtonArgs<ExtArgs> = {}>(args?: Subset<T, Brand$StockButtonArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockButtonPayload<ExtArgs>, T, 'findMany'> | Null>;
@@ -6687,27 +6536,6 @@ export namespace Prisma {
 
 
   /**
-   * Brand.InStock
-   */
-  export type Brand$InStockArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the InStock
-     */
-    select?: InStockSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: InStockInclude<ExtArgs> | null
-    where?: InStockWhereInput
-    orderBy?: InStockOrderByWithRelationInput | InStockOrderByWithRelationInput[]
-    cursor?: InStockWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: InStockScalarFieldEnum | InStockScalarFieldEnum[]
-  }
-
-
-  /**
    * Brand.StockAndroid
    */
   export type Brand$StockAndroidArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7006,7 +6834,6 @@ export namespace Prisma {
     brandId?: boolean
     createdAt?: boolean
     brand?: boolean | BrandDefaultArgs<ExtArgs>
-    InStock?: boolean | Model$InStockArgs<ExtArgs>
     StrockAndroid?: boolean | Model$StrockAndroidArgs<ExtArgs>
     StrockButton?: boolean | Model$StrockButtonArgs<ExtArgs>
     StrockAccessories?: boolean | Model$StrockAccessoriesArgs<ExtArgs>
@@ -7025,7 +6852,6 @@ export namespace Prisma {
 
   export type ModelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     brand?: boolean | BrandDefaultArgs<ExtArgs>
-    InStock?: boolean | Model$InStockArgs<ExtArgs>
     StrockAndroid?: boolean | Model$StrockAndroidArgs<ExtArgs>
     StrockButton?: boolean | Model$StrockButtonArgs<ExtArgs>
     StrockAccessories?: boolean | Model$StrockAccessoriesArgs<ExtArgs>
@@ -7040,7 +6866,6 @@ export namespace Prisma {
     name: "Model"
     objects: {
       brand: Prisma.$BrandPayload<ExtArgs>
-      InStock: Prisma.$InStockPayload<ExtArgs>[]
       StrockAndroid: Prisma.$StockAndroidPayload<ExtArgs>[]
       StrockButton: Prisma.$StockButtonPayload<ExtArgs>[]
       StrockAccessories: Prisma.$StockAccessoriesPayload<ExtArgs>[]
@@ -7447,8 +7272,6 @@ export namespace Prisma {
 
     brand<T extends BrandDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BrandDefaultArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
-    InStock<T extends Model$InStockArgs<ExtArgs> = {}>(args?: Subset<T, Model$InStockArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InStockPayload<ExtArgs>, T, 'findMany'> | Null>;
-
     StrockAndroid<T extends Model$StrockAndroidArgs<ExtArgs> = {}>(args?: Subset<T, Model$StrockAndroidArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockAndroidPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     StrockButton<T extends Model$StrockButtonArgs<ExtArgs> = {}>(args?: Subset<T, Model$StrockButtonArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockButtonPayload<ExtArgs>, T, 'findMany'> | Null>;
@@ -7834,27 +7657,6 @@ export namespace Prisma {
 
 
   /**
-   * Model.InStock
-   */
-  export type Model$InStockArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the InStock
-     */
-    select?: InStockSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: InStockInclude<ExtArgs> | null
-    where?: InStockWhereInput
-    orderBy?: InStockOrderByWithRelationInput | InStockOrderByWithRelationInput[]
-    cursor?: InStockWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: InStockScalarFieldEnum | InStockScalarFieldEnum[]
-  }
-
-
-  /**
    * Model.StrockAndroid
    */
   export type Model$StrockAndroidArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7992,1116 +7794,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well.
      */
     include?: ModelInclude<ExtArgs> | null
-  }
-
-
-
-  /**
-   * Model InStock
-   */
-
-  export type AggregateInStock = {
-    _count: InStockCountAggregateOutputType | null
-    _avg: InStockAvgAggregateOutputType | null
-    _sum: InStockSumAggregateOutputType | null
-    _min: InStockMinAggregateOutputType | null
-    _max: InStockMaxAggregateOutputType | null
-  }
-
-  export type InStockAvgAggregateOutputType = {
-    purchasePrice: number | null
-    price: number | null
-  }
-
-  export type InStockSumAggregateOutputType = {
-    purchasePrice: number | null
-    price: number | null
-  }
-
-  export type InStockMinAggregateOutputType = {
-    id: string | null
-    name: string | null
-    IMEI: string | null
-    modelId: string | null
-    brandId: string | null
-    productTypeId: string | null
-    purchasePrice: number | null
-    price: number | null
-    sold: boolean | null
-    color: string | null
-    ram: string | null
-    rom: string | null
-    createdAt: Date | null
-  }
-
-  export type InStockMaxAggregateOutputType = {
-    id: string | null
-    name: string | null
-    IMEI: string | null
-    modelId: string | null
-    brandId: string | null
-    productTypeId: string | null
-    purchasePrice: number | null
-    price: number | null
-    sold: boolean | null
-    color: string | null
-    ram: string | null
-    rom: string | null
-    createdAt: Date | null
-  }
-
-  export type InStockCountAggregateOutputType = {
-    id: number
-    name: number
-    IMEI: number
-    modelId: number
-    brandId: number
-    productTypeId: number
-    purchasePrice: number
-    price: number
-    sold: number
-    color: number
-    ram: number
-    rom: number
-    createdAt: number
-    _all: number
-  }
-
-
-  export type InStockAvgAggregateInputType = {
-    purchasePrice?: true
-    price?: true
-  }
-
-  export type InStockSumAggregateInputType = {
-    purchasePrice?: true
-    price?: true
-  }
-
-  export type InStockMinAggregateInputType = {
-    id?: true
-    name?: true
-    IMEI?: true
-    modelId?: true
-    brandId?: true
-    productTypeId?: true
-    purchasePrice?: true
-    price?: true
-    sold?: true
-    color?: true
-    ram?: true
-    rom?: true
-    createdAt?: true
-  }
-
-  export type InStockMaxAggregateInputType = {
-    id?: true
-    name?: true
-    IMEI?: true
-    modelId?: true
-    brandId?: true
-    productTypeId?: true
-    purchasePrice?: true
-    price?: true
-    sold?: true
-    color?: true
-    ram?: true
-    rom?: true
-    createdAt?: true
-  }
-
-  export type InStockCountAggregateInputType = {
-    id?: true
-    name?: true
-    IMEI?: true
-    modelId?: true
-    brandId?: true
-    productTypeId?: true
-    purchasePrice?: true
-    price?: true
-    sold?: true
-    color?: true
-    ram?: true
-    rom?: true
-    createdAt?: true
-    _all?: true
-  }
-
-  export type InStockAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which InStock to aggregate.
-     */
-    where?: InStockWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of InStocks to fetch.
-     */
-    orderBy?: InStockOrderByWithRelationInput | InStockOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: InStockWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` InStocks from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` InStocks.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned InStocks
-    **/
-    _count?: true | InStockCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: InStockAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: InStockSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: InStockMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: InStockMaxAggregateInputType
-  }
-
-  export type GetInStockAggregateType<T extends InStockAggregateArgs> = {
-        [P in keyof T & keyof AggregateInStock]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateInStock[P]>
-      : GetScalarType<T[P], AggregateInStock[P]>
-  }
-
-
-
-
-  export type InStockGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: InStockWhereInput
-    orderBy?: InStockOrderByWithAggregationInput | InStockOrderByWithAggregationInput[]
-    by: InStockScalarFieldEnum[] | InStockScalarFieldEnum
-    having?: InStockScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: InStockCountAggregateInputType | true
-    _avg?: InStockAvgAggregateInputType
-    _sum?: InStockSumAggregateInputType
-    _min?: InStockMinAggregateInputType
-    _max?: InStockMaxAggregateInputType
-  }
-
-  export type InStockGroupByOutputType = {
-    id: string
-    name: string
-    IMEI: string
-    modelId: string
-    brandId: string
-    productTypeId: string
-    purchasePrice: number
-    price: number
-    sold: boolean
-    color: string
-    ram: string | null
-    rom: string | null
-    createdAt: Date | null
-    _count: InStockCountAggregateOutputType | null
-    _avg: InStockAvgAggregateOutputType | null
-    _sum: InStockSumAggregateOutputType | null
-    _min: InStockMinAggregateOutputType | null
-    _max: InStockMaxAggregateOutputType | null
-  }
-
-  type GetInStockGroupByPayload<T extends InStockGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<InStockGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof InStockGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], InStockGroupByOutputType[P]>
-            : GetScalarType<T[P], InStockGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type InStockSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    IMEI?: boolean
-    modelId?: boolean
-    brandId?: boolean
-    productTypeId?: boolean
-    purchasePrice?: boolean
-    price?: boolean
-    sold?: boolean
-    color?: boolean
-    ram?: boolean
-    rom?: boolean
-    createdAt?: boolean
-    model?: boolean | ModelDefaultArgs<ExtArgs>
-    brand?: boolean | BrandDefaultArgs<ExtArgs>
-    productType?: boolean | ProductTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["inStock"]>
-
-  export type InStockSelectScalar = {
-    id?: boolean
-    name?: boolean
-    IMEI?: boolean
-    modelId?: boolean
-    brandId?: boolean
-    productTypeId?: boolean
-    purchasePrice?: boolean
-    price?: boolean
-    sold?: boolean
-    color?: boolean
-    ram?: boolean
-    rom?: boolean
-    createdAt?: boolean
-  }
-
-  export type InStockInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    model?: boolean | ModelDefaultArgs<ExtArgs>
-    brand?: boolean | BrandDefaultArgs<ExtArgs>
-    productType?: boolean | ProductTypeDefaultArgs<ExtArgs>
-  }
-
-
-  export type $InStockPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "InStock"
-    objects: {
-      model: Prisma.$ModelPayload<ExtArgs>
-      brand: Prisma.$BrandPayload<ExtArgs>
-      productType: Prisma.$ProductTypePayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      name: string
-      IMEI: string
-      modelId: string
-      brandId: string
-      productTypeId: string
-      purchasePrice: number
-      price: number
-      sold: boolean
-      color: string
-      ram: string | null
-      rom: string | null
-      createdAt: Date | null
-    }, ExtArgs["result"]["inStock"]>
-    composites: {}
-  }
-
-
-  type InStockGetPayload<S extends boolean | null | undefined | InStockDefaultArgs> = $Result.GetResult<Prisma.$InStockPayload, S>
-
-  type InStockCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<InStockFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: InStockCountAggregateInputType | true
-    }
-
-  export interface InStockDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InStock'], meta: { name: 'InStock' } }
-    /**
-     * Find zero or one InStock that matches the filter.
-     * @param {InStockFindUniqueArgs} args - Arguments to find a InStock
-     * @example
-     * // Get one InStock
-     * const inStock = await prisma.inStock.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUnique<T extends InStockFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, InStockFindUniqueArgs<ExtArgs>>
-    ): Prisma__InStockClient<$Result.GetResult<Prisma.$InStockPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
-
-    /**
-     * Find one InStock that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
-     * @param {InStockFindUniqueOrThrowArgs} args - Arguments to find a InStock
-     * @example
-     * // Get one InStock
-     * const inStock = await prisma.inStock.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends InStockFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, InStockFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__InStockClient<$Result.GetResult<Prisma.$InStockPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find the first InStock that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {InStockFindFirstArgs} args - Arguments to find a InStock
-     * @example
-     * // Get one InStock
-     * const inStock = await prisma.inStock.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirst<T extends InStockFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, InStockFindFirstArgs<ExtArgs>>
-    ): Prisma__InStockClient<$Result.GetResult<Prisma.$InStockPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
-
-    /**
-     * Find the first InStock that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {InStockFindFirstOrThrowArgs} args - Arguments to find a InStock
-     * @example
-     * // Get one InStock
-     * const inStock = await prisma.inStock.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends InStockFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, InStockFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__InStockClient<$Result.GetResult<Prisma.$InStockPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find zero or more InStocks that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {InStockFindManyArgs=} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all InStocks
-     * const inStocks = await prisma.inStock.findMany()
-     * 
-     * // Get first 10 InStocks
-     * const inStocks = await prisma.inStock.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const inStockWithIdOnly = await prisma.inStock.findMany({ select: { id: true } })
-     * 
-    **/
-    findMany<T extends InStockFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, InStockFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InStockPayload<ExtArgs>, T, 'findMany'>>
-
-    /**
-     * Create a InStock.
-     * @param {InStockCreateArgs} args - Arguments to create a InStock.
-     * @example
-     * // Create one InStock
-     * const InStock = await prisma.inStock.create({
-     *   data: {
-     *     // ... data to create a InStock
-     *   }
-     * })
-     * 
-    **/
-    create<T extends InStockCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, InStockCreateArgs<ExtArgs>>
-    ): Prisma__InStockClient<$Result.GetResult<Prisma.$InStockPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
-
-    /**
-     * Create many InStocks.
-     *     @param {InStockCreateManyArgs} args - Arguments to create many InStocks.
-     *     @example
-     *     // Create many InStocks
-     *     const inStock = await prisma.inStock.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
-     *     
-    **/
-    createMany<T extends InStockCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, InStockCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a InStock.
-     * @param {InStockDeleteArgs} args - Arguments to delete one InStock.
-     * @example
-     * // Delete one InStock
-     * const InStock = await prisma.inStock.delete({
-     *   where: {
-     *     // ... filter to delete one InStock
-     *   }
-     * })
-     * 
-    **/
-    delete<T extends InStockDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, InStockDeleteArgs<ExtArgs>>
-    ): Prisma__InStockClient<$Result.GetResult<Prisma.$InStockPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
-
-    /**
-     * Update one InStock.
-     * @param {InStockUpdateArgs} args - Arguments to update one InStock.
-     * @example
-     * // Update one InStock
-     * const inStock = await prisma.inStock.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    update<T extends InStockUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, InStockUpdateArgs<ExtArgs>>
-    ): Prisma__InStockClient<$Result.GetResult<Prisma.$InStockPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
-
-    /**
-     * Delete zero or more InStocks.
-     * @param {InStockDeleteManyArgs} args - Arguments to filter InStocks to delete.
-     * @example
-     * // Delete a few InStocks
-     * const { count } = await prisma.inStock.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-    **/
-    deleteMany<T extends InStockDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, InStockDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more InStocks.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {InStockUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many InStocks
-     * const inStock = await prisma.inStock.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    updateMany<T extends InStockUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, InStockUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one InStock.
-     * @param {InStockUpsertArgs} args - Arguments to update or create a InStock.
-     * @example
-     * // Update or create a InStock
-     * const inStock = await prisma.inStock.upsert({
-     *   create: {
-     *     // ... data to create a InStock
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the InStock we want to update
-     *   }
-     * })
-    **/
-    upsert<T extends InStockUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, InStockUpsertArgs<ExtArgs>>
-    ): Prisma__InStockClient<$Result.GetResult<Prisma.$InStockPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
-
-    /**
-     * Find zero or more InStocks that matches the filter.
-     * @param {InStockFindRawArgs} args - Select which filters you would like to apply.
-     * @example
-     * const inStock = await prisma.inStock.findRaw({
-     *   filter: { age: { $gt: 25 } } 
-     * })
-    **/
-    findRaw(
-      args?: InStockFindRawArgs
-    ): Prisma.PrismaPromise<JsonObject>
-
-    /**
-     * Perform aggregation operations on a InStock.
-     * @param {InStockAggregateRawArgs} args - Select which aggregations you would like to apply.
-     * @example
-     * const inStock = await prisma.inStock.aggregateRaw({
-     *   pipeline: [
-     *     { $match: { status: "registered" } },
-     *     { $group: { _id: "$country", total: { $sum: 1 } } }
-     *   ]
-     * })
-    **/
-    aggregateRaw(
-      args?: InStockAggregateRawArgs
-    ): Prisma.PrismaPromise<JsonObject>
-
-    /**
-     * Count the number of InStocks.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {InStockCountArgs} args - Arguments to filter InStocks to count.
-     * @example
-     * // Count the number of InStocks
-     * const count = await prisma.inStock.count({
-     *   where: {
-     *     // ... the filter for the InStocks we want to count
-     *   }
-     * })
-    **/
-    count<T extends InStockCountArgs>(
-      args?: Subset<T, InStockCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], InStockCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a InStock.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {InStockAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends InStockAggregateArgs>(args: Subset<T, InStockAggregateArgs>): Prisma.PrismaPromise<GetInStockAggregateType<T>>
-
-    /**
-     * Group by InStock.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {InStockGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends InStockGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: InStockGroupByArgs['orderBy'] }
-        : { orderBy?: InStockGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, InStockGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInStockGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the InStock model
-   */
-  readonly fields: InStockFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for InStock.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__InStockClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-
-    model<T extends ModelDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ModelDefaultArgs<ExtArgs>>): Prisma__ModelClient<$Result.GetResult<Prisma.$ModelPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
-    brand<T extends BrandDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BrandDefaultArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
-    productType<T extends ProductTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductTypeDefaultArgs<ExtArgs>>): Prisma__ProductTypeClient<$Result.GetResult<Prisma.$ProductTypePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
-  }
-
-
-
-  /**
-   * Fields of the InStock model
-   */ 
-  interface InStockFieldRefs {
-    readonly id: FieldRef<"InStock", 'String'>
-    readonly name: FieldRef<"InStock", 'String'>
-    readonly IMEI: FieldRef<"InStock", 'String'>
-    readonly modelId: FieldRef<"InStock", 'String'>
-    readonly brandId: FieldRef<"InStock", 'String'>
-    readonly productTypeId: FieldRef<"InStock", 'String'>
-    readonly purchasePrice: FieldRef<"InStock", 'Int'>
-    readonly price: FieldRef<"InStock", 'Int'>
-    readonly sold: FieldRef<"InStock", 'Boolean'>
-    readonly color: FieldRef<"InStock", 'String'>
-    readonly ram: FieldRef<"InStock", 'String'>
-    readonly rom: FieldRef<"InStock", 'String'>
-    readonly createdAt: FieldRef<"InStock", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-
-  /**
-   * InStock findUnique
-   */
-  export type InStockFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the InStock
-     */
-    select?: InStockSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: InStockInclude<ExtArgs> | null
-    /**
-     * Filter, which InStock to fetch.
-     */
-    where: InStockWhereUniqueInput
-  }
-
-
-  /**
-   * InStock findUniqueOrThrow
-   */
-  export type InStockFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the InStock
-     */
-    select?: InStockSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: InStockInclude<ExtArgs> | null
-    /**
-     * Filter, which InStock to fetch.
-     */
-    where: InStockWhereUniqueInput
-  }
-
-
-  /**
-   * InStock findFirst
-   */
-  export type InStockFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the InStock
-     */
-    select?: InStockSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: InStockInclude<ExtArgs> | null
-    /**
-     * Filter, which InStock to fetch.
-     */
-    where?: InStockWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of InStocks to fetch.
-     */
-    orderBy?: InStockOrderByWithRelationInput | InStockOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for InStocks.
-     */
-    cursor?: InStockWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` InStocks from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` InStocks.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of InStocks.
-     */
-    distinct?: InStockScalarFieldEnum | InStockScalarFieldEnum[]
-  }
-
-
-  /**
-   * InStock findFirstOrThrow
-   */
-  export type InStockFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the InStock
-     */
-    select?: InStockSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: InStockInclude<ExtArgs> | null
-    /**
-     * Filter, which InStock to fetch.
-     */
-    where?: InStockWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of InStocks to fetch.
-     */
-    orderBy?: InStockOrderByWithRelationInput | InStockOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for InStocks.
-     */
-    cursor?: InStockWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` InStocks from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` InStocks.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of InStocks.
-     */
-    distinct?: InStockScalarFieldEnum | InStockScalarFieldEnum[]
-  }
-
-
-  /**
-   * InStock findMany
-   */
-  export type InStockFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the InStock
-     */
-    select?: InStockSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: InStockInclude<ExtArgs> | null
-    /**
-     * Filter, which InStocks to fetch.
-     */
-    where?: InStockWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of InStocks to fetch.
-     */
-    orderBy?: InStockOrderByWithRelationInput | InStockOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing InStocks.
-     */
-    cursor?: InStockWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` InStocks from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` InStocks.
-     */
-    skip?: number
-    distinct?: InStockScalarFieldEnum | InStockScalarFieldEnum[]
-  }
-
-
-  /**
-   * InStock create
-   */
-  export type InStockCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the InStock
-     */
-    select?: InStockSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: InStockInclude<ExtArgs> | null
-    /**
-     * The data needed to create a InStock.
-     */
-    data: XOR<InStockCreateInput, InStockUncheckedCreateInput>
-  }
-
-
-  /**
-   * InStock createMany
-   */
-  export type InStockCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many InStocks.
-     */
-    data: InStockCreateManyInput | InStockCreateManyInput[]
-  }
-
-
-  /**
-   * InStock update
-   */
-  export type InStockUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the InStock
-     */
-    select?: InStockSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: InStockInclude<ExtArgs> | null
-    /**
-     * The data needed to update a InStock.
-     */
-    data: XOR<InStockUpdateInput, InStockUncheckedUpdateInput>
-    /**
-     * Choose, which InStock to update.
-     */
-    where: InStockWhereUniqueInput
-  }
-
-
-  /**
-   * InStock updateMany
-   */
-  export type InStockUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update InStocks.
-     */
-    data: XOR<InStockUpdateManyMutationInput, InStockUncheckedUpdateManyInput>
-    /**
-     * Filter which InStocks to update
-     */
-    where?: InStockWhereInput
-  }
-
-
-  /**
-   * InStock upsert
-   */
-  export type InStockUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the InStock
-     */
-    select?: InStockSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: InStockInclude<ExtArgs> | null
-    /**
-     * The filter to search for the InStock to update in case it exists.
-     */
-    where: InStockWhereUniqueInput
-    /**
-     * In case the InStock found by the `where` argument doesn't exist, create a new InStock with this data.
-     */
-    create: XOR<InStockCreateInput, InStockUncheckedCreateInput>
-    /**
-     * In case the InStock was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<InStockUpdateInput, InStockUncheckedUpdateInput>
-  }
-
-
-  /**
-   * InStock delete
-   */
-  export type InStockDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the InStock
-     */
-    select?: InStockSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: InStockInclude<ExtArgs> | null
-    /**
-     * Filter which InStock to delete.
-     */
-    where: InStockWhereUniqueInput
-  }
-
-
-  /**
-   * InStock deleteMany
-   */
-  export type InStockDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which InStocks to delete
-     */
-    where?: InStockWhereInput
-  }
-
-
-  /**
-   * InStock findRaw
-   */
-  export type InStockFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
-     */
-    filter?: InputJsonValue
-    /**
-     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
-     */
-    options?: InputJsonValue
-  }
-
-
-  /**
-   * InStock aggregateRaw
-   */
-  export type InStockAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
-     */
-    pipeline?: InputJsonValue[]
-    /**
-     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
-     */
-    options?: InputJsonValue
-  }
-
-
-  /**
-   * InStock without action
-   */
-  export type InStockDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the InStock
-     */
-    select?: InStockSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: InStockInclude<ExtArgs> | null
   }
 
 
@@ -20545,25 +19237,6 @@ export namespace Prisma {
   export type ModelScalarFieldEnum = (typeof ModelScalarFieldEnum)[keyof typeof ModelScalarFieldEnum]
 
 
-  export const InStockScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    IMEI: 'IMEI',
-    modelId: 'modelId',
-    brandId: 'brandId',
-    productTypeId: 'productTypeId',
-    purchasePrice: 'purchasePrice',
-    price: 'price',
-    sold: 'sold',
-    color: 'color',
-    ram: 'ram',
-    rom: 'rom',
-    createdAt: 'createdAt'
-  };
-
-  export type InStockScalarFieldEnum = (typeof InStockScalarFieldEnum)[keyof typeof InStockScalarFieldEnum]
-
-
   export const StockAndroidScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -20910,7 +19583,6 @@ export namespace Prisma {
     type?: StringFilter<"ProductType"> | string
     createdAt?: DateTimeNullableFilter<"ProductType"> | Date | string | null
     Brand?: BrandListRelationFilter
-    InStock?: InStockListRelationFilter
     StockAndroid?: StockAndroidListRelationFilter
     StockButton?: StockButtonListRelationFilter
     StockAccessories?: StockAccessoriesListRelationFilter
@@ -20924,7 +19596,6 @@ export namespace Prisma {
     type?: SortOrder
     createdAt?: SortOrder
     Brand?: BrandOrderByRelationAggregateInput
-    InStock?: InStockOrderByRelationAggregateInput
     StockAndroid?: StockAndroidOrderByRelationAggregateInput
     StockButton?: StockButtonOrderByRelationAggregateInput
     StockAccessories?: StockAccessoriesOrderByRelationAggregateInput
@@ -20941,7 +19612,6 @@ export namespace Prisma {
     type?: StringFilter<"ProductType"> | string
     createdAt?: DateTimeNullableFilter<"ProductType"> | Date | string | null
     Brand?: BrandListRelationFilter
-    InStock?: InStockListRelationFilter
     StockAndroid?: StockAndroidListRelationFilter
     StockButton?: StockButtonListRelationFilter
     StockAccessories?: StockAccessoriesListRelationFilter
@@ -20978,7 +19648,6 @@ export namespace Prisma {
     createdAt?: DateTimeNullableFilter<"Brand"> | Date | string | null
     productType?: XOR<ProductTypeRelationFilter, ProductTypeWhereInput>
     Model?: ModelListRelationFilter
-    InStock?: InStockListRelationFilter
     StockAndroid?: StockAndroidListRelationFilter
     StockButton?: StockButtonListRelationFilter
     StockAccessories?: StockAccessoriesListRelationFilter
@@ -20994,7 +19663,6 @@ export namespace Prisma {
     createdAt?: SortOrder
     productType?: ProductTypeOrderByWithRelationInput
     Model?: ModelOrderByRelationAggregateInput
-    InStock?: InStockOrderByRelationAggregateInput
     StockAndroid?: StockAndroidOrderByRelationAggregateInput
     StockButton?: StockButtonOrderByRelationAggregateInput
     StockAccessories?: StockAccessoriesOrderByRelationAggregateInput
@@ -21013,7 +19681,6 @@ export namespace Prisma {
     createdAt?: DateTimeNullableFilter<"Brand"> | Date | string | null
     productType?: XOR<ProductTypeRelationFilter, ProductTypeWhereInput>
     Model?: ModelListRelationFilter
-    InStock?: InStockListRelationFilter
     StockAndroid?: StockAndroidListRelationFilter
     StockButton?: StockButtonListRelationFilter
     StockAccessories?: StockAccessoriesListRelationFilter
@@ -21051,7 +19718,6 @@ export namespace Prisma {
     brandId?: StringFilter<"Model"> | string
     createdAt?: DateTimeNullableFilter<"Model"> | Date | string | null
     brand?: XOR<BrandRelationFilter, BrandWhereInput>
-    InStock?: InStockListRelationFilter
     StrockAndroid?: StockAndroidListRelationFilter
     StrockButton?: StockButtonListRelationFilter
     StrockAccessories?: StockAccessoriesListRelationFilter
@@ -21066,7 +19732,6 @@ export namespace Prisma {
     brandId?: SortOrder
     createdAt?: SortOrder
     brand?: BrandOrderByWithRelationInput
-    InStock?: InStockOrderByRelationAggregateInput
     StrockAndroid?: StockAndroidOrderByRelationAggregateInput
     StrockButton?: StockButtonOrderByRelationAggregateInput
     StrockAccessories?: StockAccessoriesOrderByRelationAggregateInput
@@ -21084,7 +19749,6 @@ export namespace Prisma {
     brandId?: StringFilter<"Model"> | string
     createdAt?: DateTimeNullableFilter<"Model"> | Date | string | null
     brand?: XOR<BrandRelationFilter, BrandWhereInput>
-    InStock?: InStockListRelationFilter
     StrockAndroid?: StockAndroidListRelationFilter
     StrockButton?: StockButtonListRelationFilter
     StrockAccessories?: StockAccessoriesListRelationFilter
@@ -21111,109 +19775,6 @@ export namespace Prisma {
     model?: StringWithAggregatesFilter<"Model"> | string
     brandId?: StringWithAggregatesFilter<"Model"> | string
     createdAt?: DateTimeNullableWithAggregatesFilter<"Model"> | Date | string | null
-  }
-
-  export type InStockWhereInput = {
-    AND?: InStockWhereInput | InStockWhereInput[]
-    OR?: InStockWhereInput[]
-    NOT?: InStockWhereInput | InStockWhereInput[]
-    id?: StringFilter<"InStock"> | string
-    name?: StringFilter<"InStock"> | string
-    IMEI?: StringFilter<"InStock"> | string
-    modelId?: StringFilter<"InStock"> | string
-    brandId?: StringFilter<"InStock"> | string
-    productTypeId?: StringFilter<"InStock"> | string
-    purchasePrice?: IntFilter<"InStock"> | number
-    price?: IntFilter<"InStock"> | number
-    sold?: BoolFilter<"InStock"> | boolean
-    color?: StringFilter<"InStock"> | string
-    ram?: StringNullableFilter<"InStock"> | string | null
-    rom?: StringNullableFilter<"InStock"> | string | null
-    createdAt?: DateTimeNullableFilter<"InStock"> | Date | string | null
-    model?: XOR<ModelRelationFilter, ModelWhereInput>
-    brand?: XOR<BrandRelationFilter, BrandWhereInput>
-    productType?: XOR<ProductTypeRelationFilter, ProductTypeWhereInput>
-  }
-
-  export type InStockOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    IMEI?: SortOrder
-    modelId?: SortOrder
-    brandId?: SortOrder
-    productTypeId?: SortOrder
-    purchasePrice?: SortOrder
-    price?: SortOrder
-    sold?: SortOrder
-    color?: SortOrder
-    ram?: SortOrder
-    rom?: SortOrder
-    createdAt?: SortOrder
-    model?: ModelOrderByWithRelationInput
-    brand?: BrandOrderByWithRelationInput
-    productType?: ProductTypeOrderByWithRelationInput
-  }
-
-  export type InStockWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    IMEI?: string
-    AND?: InStockWhereInput | InStockWhereInput[]
-    OR?: InStockWhereInput[]
-    NOT?: InStockWhereInput | InStockWhereInput[]
-    name?: StringFilter<"InStock"> | string
-    modelId?: StringFilter<"InStock"> | string
-    brandId?: StringFilter<"InStock"> | string
-    productTypeId?: StringFilter<"InStock"> | string
-    purchasePrice?: IntFilter<"InStock"> | number
-    price?: IntFilter<"InStock"> | number
-    sold?: BoolFilter<"InStock"> | boolean
-    color?: StringFilter<"InStock"> | string
-    ram?: StringNullableFilter<"InStock"> | string | null
-    rom?: StringNullableFilter<"InStock"> | string | null
-    createdAt?: DateTimeNullableFilter<"InStock"> | Date | string | null
-    model?: XOR<ModelRelationFilter, ModelWhereInput>
-    brand?: XOR<BrandRelationFilter, BrandWhereInput>
-    productType?: XOR<ProductTypeRelationFilter, ProductTypeWhereInput>
-  }, "id" | "IMEI">
-
-  export type InStockOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    IMEI?: SortOrder
-    modelId?: SortOrder
-    brandId?: SortOrder
-    productTypeId?: SortOrder
-    purchasePrice?: SortOrder
-    price?: SortOrder
-    sold?: SortOrder
-    color?: SortOrder
-    ram?: SortOrder
-    rom?: SortOrder
-    createdAt?: SortOrder
-    _count?: InStockCountOrderByAggregateInput
-    _avg?: InStockAvgOrderByAggregateInput
-    _max?: InStockMaxOrderByAggregateInput
-    _min?: InStockMinOrderByAggregateInput
-    _sum?: InStockSumOrderByAggregateInput
-  }
-
-  export type InStockScalarWhereWithAggregatesInput = {
-    AND?: InStockScalarWhereWithAggregatesInput | InStockScalarWhereWithAggregatesInput[]
-    OR?: InStockScalarWhereWithAggregatesInput[]
-    NOT?: InStockScalarWhereWithAggregatesInput | InStockScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"InStock"> | string
-    name?: StringWithAggregatesFilter<"InStock"> | string
-    IMEI?: StringWithAggregatesFilter<"InStock"> | string
-    modelId?: StringWithAggregatesFilter<"InStock"> | string
-    brandId?: StringWithAggregatesFilter<"InStock"> | string
-    productTypeId?: StringWithAggregatesFilter<"InStock"> | string
-    purchasePrice?: IntWithAggregatesFilter<"InStock"> | number
-    price?: IntWithAggregatesFilter<"InStock"> | number
-    sold?: BoolWithAggregatesFilter<"InStock"> | boolean
-    color?: StringWithAggregatesFilter<"InStock"> | string
-    ram?: StringNullableWithAggregatesFilter<"InStock"> | string | null
-    rom?: StringNullableWithAggregatesFilter<"InStock"> | string | null
-    createdAt?: DateTimeNullableWithAggregatesFilter<"InStock"> | Date | string | null
   }
 
   export type StockAndroidWhereInput = {
@@ -22118,7 +20679,6 @@ export namespace Prisma {
     type: string
     createdAt?: Date | string | null
     Brand?: BrandCreateNestedManyWithoutProductTypeInput
-    InStock?: InStockCreateNestedManyWithoutProductTypeInput
     StockAndroid?: StockAndroidCreateNestedManyWithoutProductTypeInput
     StockButton?: StockButtonCreateNestedManyWithoutProductTypeInput
     StockAccessories?: StockAccessoriesCreateNestedManyWithoutProductTypeInput
@@ -22132,7 +20692,6 @@ export namespace Prisma {
     type: string
     createdAt?: Date | string | null
     Brand?: BrandUncheckedCreateNestedManyWithoutProductTypeInput
-    InStock?: InStockUncheckedCreateNestedManyWithoutProductTypeInput
     StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutProductTypeInput
     StockButton?: StockButtonUncheckedCreateNestedManyWithoutProductTypeInput
     StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutProductTypeInput
@@ -22145,7 +20704,6 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Brand?: BrandUpdateManyWithoutProductTypeNestedInput
-    InStock?: InStockUpdateManyWithoutProductTypeNestedInput
     StockAndroid?: StockAndroidUpdateManyWithoutProductTypeNestedInput
     StockButton?: StockButtonUpdateManyWithoutProductTypeNestedInput
     StockAccessories?: StockAccessoriesUpdateManyWithoutProductTypeNestedInput
@@ -22158,7 +20716,6 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Brand?: BrandUncheckedUpdateManyWithoutProductTypeNestedInput
-    InStock?: InStockUncheckedUpdateManyWithoutProductTypeNestedInput
     StockAndroid?: StockAndroidUncheckedUpdateManyWithoutProductTypeNestedInput
     StockButton?: StockButtonUncheckedUpdateManyWithoutProductTypeNestedInput
     StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -22189,7 +20746,6 @@ export namespace Prisma {
     createdAt?: Date | string | null
     productType: ProductTypeCreateNestedOneWithoutBrandInput
     Model?: ModelCreateNestedManyWithoutBrandInput
-    InStock?: InStockCreateNestedManyWithoutBrandInput
     StockAndroid?: StockAndroidCreateNestedManyWithoutBrandInput
     StockButton?: StockButtonCreateNestedManyWithoutBrandInput
     StockAccessories?: StockAccessoriesCreateNestedManyWithoutBrandInput
@@ -22204,7 +20760,6 @@ export namespace Prisma {
     productTypeId: string
     createdAt?: Date | string | null
     Model?: ModelUncheckedCreateNestedManyWithoutBrandInput
-    InStock?: InStockUncheckedCreateNestedManyWithoutBrandInput
     StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutBrandInput
     StockButton?: StockButtonUncheckedCreateNestedManyWithoutBrandInput
     StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutBrandInput
@@ -22218,7 +20773,6 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     productType?: ProductTypeUpdateOneRequiredWithoutBrandNestedInput
     Model?: ModelUpdateManyWithoutBrandNestedInput
-    InStock?: InStockUpdateManyWithoutBrandNestedInput
     StockAndroid?: StockAndroidUpdateManyWithoutBrandNestedInput
     StockButton?: StockButtonUpdateManyWithoutBrandNestedInput
     StockAccessories?: StockAccessoriesUpdateManyWithoutBrandNestedInput
@@ -22232,7 +20786,6 @@ export namespace Prisma {
     productTypeId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Model?: ModelUncheckedUpdateManyWithoutBrandNestedInput
-    InStock?: InStockUncheckedUpdateManyWithoutBrandNestedInput
     StockAndroid?: StockAndroidUncheckedUpdateManyWithoutBrandNestedInput
     StockButton?: StockButtonUncheckedUpdateManyWithoutBrandNestedInput
     StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutBrandNestedInput
@@ -22264,7 +20817,6 @@ export namespace Prisma {
     model: string
     createdAt?: Date | string | null
     brand: BrandCreateNestedOneWithoutModelInput
-    InStock?: InStockCreateNestedManyWithoutModelInput
     StrockAndroid?: StockAndroidCreateNestedManyWithoutModelInput
     StrockButton?: StockButtonCreateNestedManyWithoutModelInput
     StrockAccessories?: StockAccessoriesCreateNestedManyWithoutModelInput
@@ -22278,7 +20830,6 @@ export namespace Prisma {
     model: string
     brandId: string
     createdAt?: Date | string | null
-    InStock?: InStockUncheckedCreateNestedManyWithoutModelInput
     StrockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutModelInput
     StrockButton?: StockButtonUncheckedCreateNestedManyWithoutModelInput
     StrockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutModelInput
@@ -22291,7 +20842,6 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     brand?: BrandUpdateOneRequiredWithoutModelNestedInput
-    InStock?: InStockUpdateManyWithoutModelNestedInput
     StrockAndroid?: StockAndroidUpdateManyWithoutModelNestedInput
     StrockButton?: StockButtonUpdateManyWithoutModelNestedInput
     StrockAccessories?: StockAccessoriesUpdateManyWithoutModelNestedInput
@@ -22304,7 +20854,6 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     brandId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    InStock?: InStockUncheckedUpdateManyWithoutModelNestedInput
     StrockAndroid?: StockAndroidUncheckedUpdateManyWithoutModelNestedInput
     StrockButton?: StockButtonUncheckedUpdateManyWithoutModelNestedInput
     StrockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutModelNestedInput
@@ -22328,111 +20877,6 @@ export namespace Prisma {
   export type ModelUncheckedUpdateManyInput = {
     model?: StringFieldUpdateOperationsInput | string
     brandId?: StringFieldUpdateOperationsInput | string
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type InStockCreateInput = {
-    id?: string
-    name: string
-    IMEI: string
-    purchasePrice: number
-    price: number
-    sold?: boolean
-    color: string
-    ram?: string | null
-    rom?: string | null
-    createdAt?: Date | string | null
-    model: ModelCreateNestedOneWithoutInStockInput
-    brand: BrandCreateNestedOneWithoutInStockInput
-    productType: ProductTypeCreateNestedOneWithoutInStockInput
-  }
-
-  export type InStockUncheckedCreateInput = {
-    id?: string
-    name: string
-    IMEI: string
-    modelId: string
-    brandId: string
-    productTypeId: string
-    purchasePrice: number
-    price: number
-    sold?: boolean
-    color: string
-    ram?: string | null
-    rom?: string | null
-    createdAt?: Date | string | null
-  }
-
-  export type InStockUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    IMEI?: StringFieldUpdateOperationsInput | string
-    purchasePrice?: IntFieldUpdateOperationsInput | number
-    price?: IntFieldUpdateOperationsInput | number
-    sold?: BoolFieldUpdateOperationsInput | boolean
-    color?: StringFieldUpdateOperationsInput | string
-    ram?: NullableStringFieldUpdateOperationsInput | string | null
-    rom?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    model?: ModelUpdateOneRequiredWithoutInStockNestedInput
-    brand?: BrandUpdateOneRequiredWithoutInStockNestedInput
-    productType?: ProductTypeUpdateOneRequiredWithoutInStockNestedInput
-  }
-
-  export type InStockUncheckedUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    IMEI?: StringFieldUpdateOperationsInput | string
-    modelId?: StringFieldUpdateOperationsInput | string
-    brandId?: StringFieldUpdateOperationsInput | string
-    productTypeId?: StringFieldUpdateOperationsInput | string
-    purchasePrice?: IntFieldUpdateOperationsInput | number
-    price?: IntFieldUpdateOperationsInput | number
-    sold?: BoolFieldUpdateOperationsInput | boolean
-    color?: StringFieldUpdateOperationsInput | string
-    ram?: NullableStringFieldUpdateOperationsInput | string | null
-    rom?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type InStockCreateManyInput = {
-    id?: string
-    name: string
-    IMEI: string
-    modelId: string
-    brandId: string
-    productTypeId: string
-    purchasePrice: number
-    price: number
-    sold?: boolean
-    color: string
-    ram?: string | null
-    rom?: string | null
-    createdAt?: Date | string | null
-  }
-
-  export type InStockUpdateManyMutationInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    IMEI?: StringFieldUpdateOperationsInput | string
-    purchasePrice?: IntFieldUpdateOperationsInput | number
-    price?: IntFieldUpdateOperationsInput | number
-    sold?: BoolFieldUpdateOperationsInput | boolean
-    color?: StringFieldUpdateOperationsInput | string
-    ram?: NullableStringFieldUpdateOperationsInput | string | null
-    rom?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type InStockUncheckedUpdateManyInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    IMEI?: StringFieldUpdateOperationsInput | string
-    modelId?: StringFieldUpdateOperationsInput | string
-    brandId?: StringFieldUpdateOperationsInput | string
-    productTypeId?: StringFieldUpdateOperationsInput | string
-    purchasePrice?: IntFieldUpdateOperationsInput | number
-    price?: IntFieldUpdateOperationsInput | number
-    sold?: BoolFieldUpdateOperationsInput | boolean
-    color?: StringFieldUpdateOperationsInput | string
-    ram?: NullableStringFieldUpdateOperationsInput | string | null
-    rom?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
@@ -23324,12 +21768,6 @@ export namespace Prisma {
     none?: BrandWhereInput
   }
 
-  export type InStockListRelationFilter = {
-    every?: InStockWhereInput
-    some?: InStockWhereInput
-    none?: InStockWhereInput
-  }
-
   export type StockAndroidListRelationFilter = {
     every?: StockAndroidWhereInput
     some?: StockAndroidWhereInput
@@ -23367,10 +21805,6 @@ export namespace Prisma {
   }
 
   export type BrandOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type InStockOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -23515,107 +21949,6 @@ export namespace Prisma {
     isNot?: ModelWhereInput
   }
 
-  export type InStockCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    IMEI?: SortOrder
-    modelId?: SortOrder
-    brandId?: SortOrder
-    productTypeId?: SortOrder
-    purchasePrice?: SortOrder
-    price?: SortOrder
-    sold?: SortOrder
-    color?: SortOrder
-    ram?: SortOrder
-    rom?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type InStockAvgOrderByAggregateInput = {
-    purchasePrice?: SortOrder
-    price?: SortOrder
-  }
-
-  export type InStockMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    IMEI?: SortOrder
-    modelId?: SortOrder
-    brandId?: SortOrder
-    productTypeId?: SortOrder
-    purchasePrice?: SortOrder
-    price?: SortOrder
-    sold?: SortOrder
-    color?: SortOrder
-    ram?: SortOrder
-    rom?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type InStockMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    IMEI?: SortOrder
-    modelId?: SortOrder
-    brandId?: SortOrder
-    productTypeId?: SortOrder
-    purchasePrice?: SortOrder
-    price?: SortOrder
-    sold?: SortOrder
-    color?: SortOrder
-    ram?: SortOrder
-    rom?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type InStockSumOrderByAggregateInput = {
-    purchasePrice?: SortOrder
-    price?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-    isSet?: boolean
-  }
-
   export type StockAndroidCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -23672,6 +22005,49 @@ export namespace Prisma {
   export type StockAndroidSumOrderByAggregateInput = {
     purchasePrice?: SortOrder
     sellingPrice?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+    isSet?: boolean
   }
 
   export type StockButtonCountOrderByAggregateInput = {
@@ -24195,13 +22571,6 @@ export namespace Prisma {
     connect?: BrandWhereUniqueInput | BrandWhereUniqueInput[]
   }
 
-  export type InStockCreateNestedManyWithoutProductTypeInput = {
-    create?: XOR<InStockCreateWithoutProductTypeInput, InStockUncheckedCreateWithoutProductTypeInput> | InStockCreateWithoutProductTypeInput[] | InStockUncheckedCreateWithoutProductTypeInput[]
-    connectOrCreate?: InStockCreateOrConnectWithoutProductTypeInput | InStockCreateOrConnectWithoutProductTypeInput[]
-    createMany?: InStockCreateManyProductTypeInputEnvelope
-    connect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-  }
-
   export type StockAndroidCreateNestedManyWithoutProductTypeInput = {
     create?: XOR<StockAndroidCreateWithoutProductTypeInput, StockAndroidUncheckedCreateWithoutProductTypeInput> | StockAndroidCreateWithoutProductTypeInput[] | StockAndroidUncheckedCreateWithoutProductTypeInput[]
     connectOrCreate?: StockAndroidCreateOrConnectWithoutProductTypeInput | StockAndroidCreateOrConnectWithoutProductTypeInput[]
@@ -24249,13 +22618,6 @@ export namespace Prisma {
     connectOrCreate?: BrandCreateOrConnectWithoutProductTypeInput | BrandCreateOrConnectWithoutProductTypeInput[]
     createMany?: BrandCreateManyProductTypeInputEnvelope
     connect?: BrandWhereUniqueInput | BrandWhereUniqueInput[]
-  }
-
-  export type InStockUncheckedCreateNestedManyWithoutProductTypeInput = {
-    create?: XOR<InStockCreateWithoutProductTypeInput, InStockUncheckedCreateWithoutProductTypeInput> | InStockCreateWithoutProductTypeInput[] | InStockUncheckedCreateWithoutProductTypeInput[]
-    connectOrCreate?: InStockCreateOrConnectWithoutProductTypeInput | InStockCreateOrConnectWithoutProductTypeInput[]
-    createMany?: InStockCreateManyProductTypeInputEnvelope
-    connect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
   }
 
   export type StockAndroidUncheckedCreateNestedManyWithoutProductTypeInput = {
@@ -24312,20 +22674,6 @@ export namespace Prisma {
     update?: BrandUpdateWithWhereUniqueWithoutProductTypeInput | BrandUpdateWithWhereUniqueWithoutProductTypeInput[]
     updateMany?: BrandUpdateManyWithWhereWithoutProductTypeInput | BrandUpdateManyWithWhereWithoutProductTypeInput[]
     deleteMany?: BrandScalarWhereInput | BrandScalarWhereInput[]
-  }
-
-  export type InStockUpdateManyWithoutProductTypeNestedInput = {
-    create?: XOR<InStockCreateWithoutProductTypeInput, InStockUncheckedCreateWithoutProductTypeInput> | InStockCreateWithoutProductTypeInput[] | InStockUncheckedCreateWithoutProductTypeInput[]
-    connectOrCreate?: InStockCreateOrConnectWithoutProductTypeInput | InStockCreateOrConnectWithoutProductTypeInput[]
-    upsert?: InStockUpsertWithWhereUniqueWithoutProductTypeInput | InStockUpsertWithWhereUniqueWithoutProductTypeInput[]
-    createMany?: InStockCreateManyProductTypeInputEnvelope
-    set?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    disconnect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    delete?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    connect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    update?: InStockUpdateWithWhereUniqueWithoutProductTypeInput | InStockUpdateWithWhereUniqueWithoutProductTypeInput[]
-    updateMany?: InStockUpdateManyWithWhereWithoutProductTypeInput | InStockUpdateManyWithWhereWithoutProductTypeInput[]
-    deleteMany?: InStockScalarWhereInput | InStockScalarWhereInput[]
   }
 
   export type StockAndroidUpdateManyWithoutProductTypeNestedInput = {
@@ -24426,20 +22774,6 @@ export namespace Prisma {
     deleteMany?: BrandScalarWhereInput | BrandScalarWhereInput[]
   }
 
-  export type InStockUncheckedUpdateManyWithoutProductTypeNestedInput = {
-    create?: XOR<InStockCreateWithoutProductTypeInput, InStockUncheckedCreateWithoutProductTypeInput> | InStockCreateWithoutProductTypeInput[] | InStockUncheckedCreateWithoutProductTypeInput[]
-    connectOrCreate?: InStockCreateOrConnectWithoutProductTypeInput | InStockCreateOrConnectWithoutProductTypeInput[]
-    upsert?: InStockUpsertWithWhereUniqueWithoutProductTypeInput | InStockUpsertWithWhereUniqueWithoutProductTypeInput[]
-    createMany?: InStockCreateManyProductTypeInputEnvelope
-    set?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    disconnect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    delete?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    connect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    update?: InStockUpdateWithWhereUniqueWithoutProductTypeInput | InStockUpdateWithWhereUniqueWithoutProductTypeInput[]
-    updateMany?: InStockUpdateManyWithWhereWithoutProductTypeInput | InStockUpdateManyWithWhereWithoutProductTypeInput[]
-    deleteMany?: InStockScalarWhereInput | InStockScalarWhereInput[]
-  }
-
   export type StockAndroidUncheckedUpdateManyWithoutProductTypeNestedInput = {
     create?: XOR<StockAndroidCreateWithoutProductTypeInput, StockAndroidUncheckedCreateWithoutProductTypeInput> | StockAndroidCreateWithoutProductTypeInput[] | StockAndroidUncheckedCreateWithoutProductTypeInput[]
     connectOrCreate?: StockAndroidCreateOrConnectWithoutProductTypeInput | StockAndroidCreateOrConnectWithoutProductTypeInput[]
@@ -24537,13 +22871,6 @@ export namespace Prisma {
     connect?: ModelWhereUniqueInput | ModelWhereUniqueInput[]
   }
 
-  export type InStockCreateNestedManyWithoutBrandInput = {
-    create?: XOR<InStockCreateWithoutBrandInput, InStockUncheckedCreateWithoutBrandInput> | InStockCreateWithoutBrandInput[] | InStockUncheckedCreateWithoutBrandInput[]
-    connectOrCreate?: InStockCreateOrConnectWithoutBrandInput | InStockCreateOrConnectWithoutBrandInput[]
-    createMany?: InStockCreateManyBrandInputEnvelope
-    connect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-  }
-
   export type StockAndroidCreateNestedManyWithoutBrandInput = {
     create?: XOR<StockAndroidCreateWithoutBrandInput, StockAndroidUncheckedCreateWithoutBrandInput> | StockAndroidCreateWithoutBrandInput[] | StockAndroidUncheckedCreateWithoutBrandInput[]
     connectOrCreate?: StockAndroidCreateOrConnectWithoutBrandInput | StockAndroidCreateOrConnectWithoutBrandInput[]
@@ -24591,13 +22918,6 @@ export namespace Prisma {
     connectOrCreate?: ModelCreateOrConnectWithoutBrandInput | ModelCreateOrConnectWithoutBrandInput[]
     createMany?: ModelCreateManyBrandInputEnvelope
     connect?: ModelWhereUniqueInput | ModelWhereUniqueInput[]
-  }
-
-  export type InStockUncheckedCreateNestedManyWithoutBrandInput = {
-    create?: XOR<InStockCreateWithoutBrandInput, InStockUncheckedCreateWithoutBrandInput> | InStockCreateWithoutBrandInput[] | InStockUncheckedCreateWithoutBrandInput[]
-    connectOrCreate?: InStockCreateOrConnectWithoutBrandInput | InStockCreateOrConnectWithoutBrandInput[]
-    createMany?: InStockCreateManyBrandInputEnvelope
-    connect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
   }
 
   export type StockAndroidUncheckedCreateNestedManyWithoutBrandInput = {
@@ -24662,20 +22982,6 @@ export namespace Prisma {
     update?: ModelUpdateWithWhereUniqueWithoutBrandInput | ModelUpdateWithWhereUniqueWithoutBrandInput[]
     updateMany?: ModelUpdateManyWithWhereWithoutBrandInput | ModelUpdateManyWithWhereWithoutBrandInput[]
     deleteMany?: ModelScalarWhereInput | ModelScalarWhereInput[]
-  }
-
-  export type InStockUpdateManyWithoutBrandNestedInput = {
-    create?: XOR<InStockCreateWithoutBrandInput, InStockUncheckedCreateWithoutBrandInput> | InStockCreateWithoutBrandInput[] | InStockUncheckedCreateWithoutBrandInput[]
-    connectOrCreate?: InStockCreateOrConnectWithoutBrandInput | InStockCreateOrConnectWithoutBrandInput[]
-    upsert?: InStockUpsertWithWhereUniqueWithoutBrandInput | InStockUpsertWithWhereUniqueWithoutBrandInput[]
-    createMany?: InStockCreateManyBrandInputEnvelope
-    set?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    disconnect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    delete?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    connect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    update?: InStockUpdateWithWhereUniqueWithoutBrandInput | InStockUpdateWithWhereUniqueWithoutBrandInput[]
-    updateMany?: InStockUpdateManyWithWhereWithoutBrandInput | InStockUpdateManyWithWhereWithoutBrandInput[]
-    deleteMany?: InStockScalarWhereInput | InStockScalarWhereInput[]
   }
 
   export type StockAndroidUpdateManyWithoutBrandNestedInput = {
@@ -24776,20 +23082,6 @@ export namespace Prisma {
     deleteMany?: ModelScalarWhereInput | ModelScalarWhereInput[]
   }
 
-  export type InStockUncheckedUpdateManyWithoutBrandNestedInput = {
-    create?: XOR<InStockCreateWithoutBrandInput, InStockUncheckedCreateWithoutBrandInput> | InStockCreateWithoutBrandInput[] | InStockUncheckedCreateWithoutBrandInput[]
-    connectOrCreate?: InStockCreateOrConnectWithoutBrandInput | InStockCreateOrConnectWithoutBrandInput[]
-    upsert?: InStockUpsertWithWhereUniqueWithoutBrandInput | InStockUpsertWithWhereUniqueWithoutBrandInput[]
-    createMany?: InStockCreateManyBrandInputEnvelope
-    set?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    disconnect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    delete?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    connect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    update?: InStockUpdateWithWhereUniqueWithoutBrandInput | InStockUpdateWithWhereUniqueWithoutBrandInput[]
-    updateMany?: InStockUpdateManyWithWhereWithoutBrandInput | InStockUpdateManyWithWhereWithoutBrandInput[]
-    deleteMany?: InStockScalarWhereInput | InStockScalarWhereInput[]
-  }
-
   export type StockAndroidUncheckedUpdateManyWithoutBrandNestedInput = {
     create?: XOR<StockAndroidCreateWithoutBrandInput, StockAndroidUncheckedCreateWithoutBrandInput> | StockAndroidCreateWithoutBrandInput[] | StockAndroidUncheckedCreateWithoutBrandInput[]
     connectOrCreate?: StockAndroidCreateOrConnectWithoutBrandInput | StockAndroidCreateOrConnectWithoutBrandInput[]
@@ -24880,13 +23172,6 @@ export namespace Prisma {
     connect?: BrandWhereUniqueInput
   }
 
-  export type InStockCreateNestedManyWithoutModelInput = {
-    create?: XOR<InStockCreateWithoutModelInput, InStockUncheckedCreateWithoutModelInput> | InStockCreateWithoutModelInput[] | InStockUncheckedCreateWithoutModelInput[]
-    connectOrCreate?: InStockCreateOrConnectWithoutModelInput | InStockCreateOrConnectWithoutModelInput[]
-    createMany?: InStockCreateManyModelInputEnvelope
-    connect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-  }
-
   export type StockAndroidCreateNestedManyWithoutModelInput = {
     create?: XOR<StockAndroidCreateWithoutModelInput, StockAndroidUncheckedCreateWithoutModelInput> | StockAndroidCreateWithoutModelInput[] | StockAndroidUncheckedCreateWithoutModelInput[]
     connectOrCreate?: StockAndroidCreateOrConnectWithoutModelInput | StockAndroidCreateOrConnectWithoutModelInput[]
@@ -24927,13 +23212,6 @@ export namespace Prisma {
     connectOrCreate?: HistoryAccessoriesStockCreateOrConnectWithoutModelInput | HistoryAccessoriesStockCreateOrConnectWithoutModelInput[]
     createMany?: HistoryAccessoriesStockCreateManyModelInputEnvelope
     connect?: HistoryAccessoriesStockWhereUniqueInput | HistoryAccessoriesStockWhereUniqueInput[]
-  }
-
-  export type InStockUncheckedCreateNestedManyWithoutModelInput = {
-    create?: XOR<InStockCreateWithoutModelInput, InStockUncheckedCreateWithoutModelInput> | InStockCreateWithoutModelInput[] | InStockUncheckedCreateWithoutModelInput[]
-    connectOrCreate?: InStockCreateOrConnectWithoutModelInput | InStockCreateOrConnectWithoutModelInput[]
-    createMany?: InStockCreateManyModelInputEnvelope
-    connect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
   }
 
   export type StockAndroidUncheckedCreateNestedManyWithoutModelInput = {
@@ -24984,20 +23262,6 @@ export namespace Prisma {
     upsert?: BrandUpsertWithoutModelInput
     connect?: BrandWhereUniqueInput
     update?: XOR<XOR<BrandUpdateToOneWithWhereWithoutModelInput, BrandUpdateWithoutModelInput>, BrandUncheckedUpdateWithoutModelInput>
-  }
-
-  export type InStockUpdateManyWithoutModelNestedInput = {
-    create?: XOR<InStockCreateWithoutModelInput, InStockUncheckedCreateWithoutModelInput> | InStockCreateWithoutModelInput[] | InStockUncheckedCreateWithoutModelInput[]
-    connectOrCreate?: InStockCreateOrConnectWithoutModelInput | InStockCreateOrConnectWithoutModelInput[]
-    upsert?: InStockUpsertWithWhereUniqueWithoutModelInput | InStockUpsertWithWhereUniqueWithoutModelInput[]
-    createMany?: InStockCreateManyModelInputEnvelope
-    set?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    disconnect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    delete?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    connect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    update?: InStockUpdateWithWhereUniqueWithoutModelInput | InStockUpdateWithWhereUniqueWithoutModelInput[]
-    updateMany?: InStockUpdateManyWithWhereWithoutModelInput | InStockUpdateManyWithWhereWithoutModelInput[]
-    deleteMany?: InStockScalarWhereInput | InStockScalarWhereInput[]
   }
 
   export type StockAndroidUpdateManyWithoutModelNestedInput = {
@@ -25084,20 +23348,6 @@ export namespace Prisma {
     deleteMany?: HistoryAccessoriesStockScalarWhereInput | HistoryAccessoriesStockScalarWhereInput[]
   }
 
-  export type InStockUncheckedUpdateManyWithoutModelNestedInput = {
-    create?: XOR<InStockCreateWithoutModelInput, InStockUncheckedCreateWithoutModelInput> | InStockCreateWithoutModelInput[] | InStockUncheckedCreateWithoutModelInput[]
-    connectOrCreate?: InStockCreateOrConnectWithoutModelInput | InStockCreateOrConnectWithoutModelInput[]
-    upsert?: InStockUpsertWithWhereUniqueWithoutModelInput | InStockUpsertWithWhereUniqueWithoutModelInput[]
-    createMany?: InStockCreateManyModelInputEnvelope
-    set?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    disconnect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    delete?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    connect?: InStockWhereUniqueInput | InStockWhereUniqueInput[]
-    update?: InStockUpdateWithWhereUniqueWithoutModelInput | InStockUpdateWithWhereUniqueWithoutModelInput[]
-    updateMany?: InStockUpdateManyWithWhereWithoutModelInput | InStockUpdateManyWithWhereWithoutModelInput[]
-    deleteMany?: InStockScalarWhereInput | InStockScalarWhereInput[]
-  }
-
   export type StockAndroidUncheckedUpdateManyWithoutModelNestedInput = {
     create?: XOR<StockAndroidCreateWithoutModelInput, StockAndroidUncheckedCreateWithoutModelInput> | StockAndroidCreateWithoutModelInput[] | StockAndroidUncheckedCreateWithoutModelInput[]
     connectOrCreate?: StockAndroidCreateOrConnectWithoutModelInput | StockAndroidCreateOrConnectWithoutModelInput[]
@@ -25182,21 +23432,21 @@ export namespace Prisma {
     deleteMany?: HistoryAccessoriesStockScalarWhereInput | HistoryAccessoriesStockScalarWhereInput[]
   }
 
-  export type ModelCreateNestedOneWithoutInStockInput = {
-    create?: XOR<ModelCreateWithoutInStockInput, ModelUncheckedCreateWithoutInStockInput>
-    connectOrCreate?: ModelCreateOrConnectWithoutInStockInput
+  export type ModelCreateNestedOneWithoutStrockAndroidInput = {
+    create?: XOR<ModelCreateWithoutStrockAndroidInput, ModelUncheckedCreateWithoutStrockAndroidInput>
+    connectOrCreate?: ModelCreateOrConnectWithoutStrockAndroidInput
     connect?: ModelWhereUniqueInput
   }
 
-  export type BrandCreateNestedOneWithoutInStockInput = {
-    create?: XOR<BrandCreateWithoutInStockInput, BrandUncheckedCreateWithoutInStockInput>
-    connectOrCreate?: BrandCreateOrConnectWithoutInStockInput
+  export type BrandCreateNestedOneWithoutStockAndroidInput = {
+    create?: XOR<BrandCreateWithoutStockAndroidInput, BrandUncheckedCreateWithoutStockAndroidInput>
+    connectOrCreate?: BrandCreateOrConnectWithoutStockAndroidInput
     connect?: BrandWhereUniqueInput
   }
 
-  export type ProductTypeCreateNestedOneWithoutInStockInput = {
-    create?: XOR<ProductTypeCreateWithoutInStockInput, ProductTypeUncheckedCreateWithoutInStockInput>
-    connectOrCreate?: ProductTypeCreateOrConnectWithoutInStockInput
+  export type ProductTypeCreateNestedOneWithoutStockAndroidInput = {
+    create?: XOR<ProductTypeCreateWithoutStockAndroidInput, ProductTypeUncheckedCreateWithoutStockAndroidInput>
+    connectOrCreate?: ProductTypeCreateOrConnectWithoutStockAndroidInput
     connect?: ProductTypeWhereUniqueInput
   }
 
@@ -25215,48 +23465,6 @@ export namespace Prisma {
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
     unset?: boolean
-  }
-
-  export type ModelUpdateOneRequiredWithoutInStockNestedInput = {
-    create?: XOR<ModelCreateWithoutInStockInput, ModelUncheckedCreateWithoutInStockInput>
-    connectOrCreate?: ModelCreateOrConnectWithoutInStockInput
-    upsert?: ModelUpsertWithoutInStockInput
-    connect?: ModelWhereUniqueInput
-    update?: XOR<XOR<ModelUpdateToOneWithWhereWithoutInStockInput, ModelUpdateWithoutInStockInput>, ModelUncheckedUpdateWithoutInStockInput>
-  }
-
-  export type BrandUpdateOneRequiredWithoutInStockNestedInput = {
-    create?: XOR<BrandCreateWithoutInStockInput, BrandUncheckedCreateWithoutInStockInput>
-    connectOrCreate?: BrandCreateOrConnectWithoutInStockInput
-    upsert?: BrandUpsertWithoutInStockInput
-    connect?: BrandWhereUniqueInput
-    update?: XOR<XOR<BrandUpdateToOneWithWhereWithoutInStockInput, BrandUpdateWithoutInStockInput>, BrandUncheckedUpdateWithoutInStockInput>
-  }
-
-  export type ProductTypeUpdateOneRequiredWithoutInStockNestedInput = {
-    create?: XOR<ProductTypeCreateWithoutInStockInput, ProductTypeUncheckedCreateWithoutInStockInput>
-    connectOrCreate?: ProductTypeCreateOrConnectWithoutInStockInput
-    upsert?: ProductTypeUpsertWithoutInStockInput
-    connect?: ProductTypeWhereUniqueInput
-    update?: XOR<XOR<ProductTypeUpdateToOneWithWhereWithoutInStockInput, ProductTypeUpdateWithoutInStockInput>, ProductTypeUncheckedUpdateWithoutInStockInput>
-  }
-
-  export type ModelCreateNestedOneWithoutStrockAndroidInput = {
-    create?: XOR<ModelCreateWithoutStrockAndroidInput, ModelUncheckedCreateWithoutStrockAndroidInput>
-    connectOrCreate?: ModelCreateOrConnectWithoutStrockAndroidInput
-    connect?: ModelWhereUniqueInput
-  }
-
-  export type BrandCreateNestedOneWithoutStockAndroidInput = {
-    create?: XOR<BrandCreateWithoutStockAndroidInput, BrandUncheckedCreateWithoutStockAndroidInput>
-    connectOrCreate?: BrandCreateOrConnectWithoutStockAndroidInput
-    connect?: BrandWhereUniqueInput
-  }
-
-  export type ProductTypeCreateNestedOneWithoutStockAndroidInput = {
-    create?: XOR<ProductTypeCreateWithoutStockAndroidInput, ProductTypeUncheckedCreateWithoutStockAndroidInput>
-    connectOrCreate?: ProductTypeCreateOrConnectWithoutStockAndroidInput
-    connect?: ProductTypeWhereUniqueInput
   }
 
   export type ModelUpdateOneRequiredWithoutStrockAndroidNestedInput = {
@@ -25821,7 +24029,6 @@ export namespace Prisma {
     brandName: string
     createdAt?: Date | string | null
     Model?: ModelCreateNestedManyWithoutBrandInput
-    InStock?: InStockCreateNestedManyWithoutBrandInput
     StockAndroid?: StockAndroidCreateNestedManyWithoutBrandInput
     StockButton?: StockButtonCreateNestedManyWithoutBrandInput
     StockAccessories?: StockAccessoriesCreateNestedManyWithoutBrandInput
@@ -25835,7 +24042,6 @@ export namespace Prisma {
     brandName: string
     createdAt?: Date | string | null
     Model?: ModelUncheckedCreateNestedManyWithoutBrandInput
-    InStock?: InStockUncheckedCreateNestedManyWithoutBrandInput
     StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutBrandInput
     StockButton?: StockButtonUncheckedCreateNestedManyWithoutBrandInput
     StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutBrandInput
@@ -25851,45 +24057,6 @@ export namespace Prisma {
 
   export type BrandCreateManyProductTypeInputEnvelope = {
     data: BrandCreateManyProductTypeInput | BrandCreateManyProductTypeInput[]
-  }
-
-  export type InStockCreateWithoutProductTypeInput = {
-    id?: string
-    name: string
-    IMEI: string
-    purchasePrice: number
-    price: number
-    sold?: boolean
-    color: string
-    ram?: string | null
-    rom?: string | null
-    createdAt?: Date | string | null
-    model: ModelCreateNestedOneWithoutInStockInput
-    brand: BrandCreateNestedOneWithoutInStockInput
-  }
-
-  export type InStockUncheckedCreateWithoutProductTypeInput = {
-    id?: string
-    name: string
-    IMEI: string
-    modelId: string
-    brandId: string
-    purchasePrice: number
-    price: number
-    sold?: boolean
-    color: string
-    ram?: string | null
-    rom?: string | null
-    createdAt?: Date | string | null
-  }
-
-  export type InStockCreateOrConnectWithoutProductTypeInput = {
-    where: InStockWhereUniqueInput
-    create: XOR<InStockCreateWithoutProductTypeInput, InStockUncheckedCreateWithoutProductTypeInput>
-  }
-
-  export type InStockCreateManyProductTypeInputEnvelope = {
-    data: InStockCreateManyProductTypeInput | InStockCreateManyProductTypeInput[]
   }
 
   export type StockAndroidCreateWithoutProductTypeInput = {
@@ -26118,41 +24285,6 @@ export namespace Prisma {
     createdAt?: DateTimeNullableFilter<"Brand"> | Date | string | null
   }
 
-  export type InStockUpsertWithWhereUniqueWithoutProductTypeInput = {
-    where: InStockWhereUniqueInput
-    update: XOR<InStockUpdateWithoutProductTypeInput, InStockUncheckedUpdateWithoutProductTypeInput>
-    create: XOR<InStockCreateWithoutProductTypeInput, InStockUncheckedCreateWithoutProductTypeInput>
-  }
-
-  export type InStockUpdateWithWhereUniqueWithoutProductTypeInput = {
-    where: InStockWhereUniqueInput
-    data: XOR<InStockUpdateWithoutProductTypeInput, InStockUncheckedUpdateWithoutProductTypeInput>
-  }
-
-  export type InStockUpdateManyWithWhereWithoutProductTypeInput = {
-    where: InStockScalarWhereInput
-    data: XOR<InStockUpdateManyMutationInput, InStockUncheckedUpdateManyWithoutProductTypeInput>
-  }
-
-  export type InStockScalarWhereInput = {
-    AND?: InStockScalarWhereInput | InStockScalarWhereInput[]
-    OR?: InStockScalarWhereInput[]
-    NOT?: InStockScalarWhereInput | InStockScalarWhereInput[]
-    id?: StringFilter<"InStock"> | string
-    name?: StringFilter<"InStock"> | string
-    IMEI?: StringFilter<"InStock"> | string
-    modelId?: StringFilter<"InStock"> | string
-    brandId?: StringFilter<"InStock"> | string
-    productTypeId?: StringFilter<"InStock"> | string
-    purchasePrice?: IntFilter<"InStock"> | number
-    price?: IntFilter<"InStock"> | number
-    sold?: BoolFilter<"InStock"> | boolean
-    color?: StringFilter<"InStock"> | string
-    ram?: StringNullableFilter<"InStock"> | string | null
-    rom?: StringNullableFilter<"InStock"> | string | null
-    createdAt?: DateTimeNullableFilter<"InStock"> | Date | string | null
-  }
-
   export type StockAndroidUpsertWithWhereUniqueWithoutProductTypeInput = {
     where: StockAndroidWhereUniqueInput
     update: XOR<StockAndroidUpdateWithoutProductTypeInput, StockAndroidUncheckedUpdateWithoutProductTypeInput>
@@ -26350,7 +24482,6 @@ export namespace Prisma {
     id?: string
     type: string
     createdAt?: Date | string | null
-    InStock?: InStockCreateNestedManyWithoutProductTypeInput
     StockAndroid?: StockAndroidCreateNestedManyWithoutProductTypeInput
     StockButton?: StockButtonCreateNestedManyWithoutProductTypeInput
     StockAccessories?: StockAccessoriesCreateNestedManyWithoutProductTypeInput
@@ -26363,7 +24494,6 @@ export namespace Prisma {
     id?: string
     type: string
     createdAt?: Date | string | null
-    InStock?: InStockUncheckedCreateNestedManyWithoutProductTypeInput
     StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutProductTypeInput
     StockButton?: StockButtonUncheckedCreateNestedManyWithoutProductTypeInput
     StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutProductTypeInput
@@ -26381,7 +24511,6 @@ export namespace Prisma {
     id?: string
     model: string
     createdAt?: Date | string | null
-    InStock?: InStockCreateNestedManyWithoutModelInput
     StrockAndroid?: StockAndroidCreateNestedManyWithoutModelInput
     StrockButton?: StockButtonCreateNestedManyWithoutModelInput
     StrockAccessories?: StockAccessoriesCreateNestedManyWithoutModelInput
@@ -26394,7 +24523,6 @@ export namespace Prisma {
     id?: string
     model: string
     createdAt?: Date | string | null
-    InStock?: InStockUncheckedCreateNestedManyWithoutModelInput
     StrockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutModelInput
     StrockButton?: StockButtonUncheckedCreateNestedManyWithoutModelInput
     StrockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutModelInput
@@ -26410,45 +24538,6 @@ export namespace Prisma {
 
   export type ModelCreateManyBrandInputEnvelope = {
     data: ModelCreateManyBrandInput | ModelCreateManyBrandInput[]
-  }
-
-  export type InStockCreateWithoutBrandInput = {
-    id?: string
-    name: string
-    IMEI: string
-    purchasePrice: number
-    price: number
-    sold?: boolean
-    color: string
-    ram?: string | null
-    rom?: string | null
-    createdAt?: Date | string | null
-    model: ModelCreateNestedOneWithoutInStockInput
-    productType: ProductTypeCreateNestedOneWithoutInStockInput
-  }
-
-  export type InStockUncheckedCreateWithoutBrandInput = {
-    id?: string
-    name: string
-    IMEI: string
-    modelId: string
-    productTypeId: string
-    purchasePrice: number
-    price: number
-    sold?: boolean
-    color: string
-    ram?: string | null
-    rom?: string | null
-    createdAt?: Date | string | null
-  }
-
-  export type InStockCreateOrConnectWithoutBrandInput = {
-    where: InStockWhereUniqueInput
-    create: XOR<InStockCreateWithoutBrandInput, InStockUncheckedCreateWithoutBrandInput>
-  }
-
-  export type InStockCreateManyBrandInputEnvelope = {
-    data: InStockCreateManyBrandInput | InStockCreateManyBrandInput[]
   }
 
   export type StockAndroidCreateWithoutBrandInput = {
@@ -26665,7 +24754,6 @@ export namespace Prisma {
   export type ProductTypeUpdateWithoutBrandInput = {
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    InStock?: InStockUpdateManyWithoutProductTypeNestedInput
     StockAndroid?: StockAndroidUpdateManyWithoutProductTypeNestedInput
     StockButton?: StockButtonUpdateManyWithoutProductTypeNestedInput
     StockAccessories?: StockAccessoriesUpdateManyWithoutProductTypeNestedInput
@@ -26677,7 +24765,6 @@ export namespace Prisma {
   export type ProductTypeUncheckedUpdateWithoutBrandInput = {
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    InStock?: InStockUncheckedUpdateManyWithoutProductTypeNestedInput
     StockAndroid?: StockAndroidUncheckedUpdateManyWithoutProductTypeNestedInput
     StockButton?: StockButtonUncheckedUpdateManyWithoutProductTypeNestedInput
     StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -26710,22 +24797,6 @@ export namespace Prisma {
     model?: StringFilter<"Model"> | string
     brandId?: StringFilter<"Model"> | string
     createdAt?: DateTimeNullableFilter<"Model"> | Date | string | null
-  }
-
-  export type InStockUpsertWithWhereUniqueWithoutBrandInput = {
-    where: InStockWhereUniqueInput
-    update: XOR<InStockUpdateWithoutBrandInput, InStockUncheckedUpdateWithoutBrandInput>
-    create: XOR<InStockCreateWithoutBrandInput, InStockUncheckedCreateWithoutBrandInput>
-  }
-
-  export type InStockUpdateWithWhereUniqueWithoutBrandInput = {
-    where: InStockWhereUniqueInput
-    data: XOR<InStockUpdateWithoutBrandInput, InStockUncheckedUpdateWithoutBrandInput>
-  }
-
-  export type InStockUpdateManyWithWhereWithoutBrandInput = {
-    where: InStockScalarWhereInput
-    data: XOR<InStockUpdateManyMutationInput, InStockUncheckedUpdateManyWithoutBrandInput>
   }
 
   export type StockAndroidUpsertWithWhereUniqueWithoutBrandInput = {
@@ -26829,7 +24900,6 @@ export namespace Prisma {
     brandName: string
     createdAt?: Date | string | null
     productType: ProductTypeCreateNestedOneWithoutBrandInput
-    InStock?: InStockCreateNestedManyWithoutBrandInput
     StockAndroid?: StockAndroidCreateNestedManyWithoutBrandInput
     StockButton?: StockButtonCreateNestedManyWithoutBrandInput
     StockAccessories?: StockAccessoriesCreateNestedManyWithoutBrandInput
@@ -26843,7 +24913,6 @@ export namespace Prisma {
     brandName: string
     productTypeId: string
     createdAt?: Date | string | null
-    InStock?: InStockUncheckedCreateNestedManyWithoutBrandInput
     StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutBrandInput
     StockButton?: StockButtonUncheckedCreateNestedManyWithoutBrandInput
     StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutBrandInput
@@ -26855,45 +24924,6 @@ export namespace Prisma {
   export type BrandCreateOrConnectWithoutModelInput = {
     where: BrandWhereUniqueInput
     create: XOR<BrandCreateWithoutModelInput, BrandUncheckedCreateWithoutModelInput>
-  }
-
-  export type InStockCreateWithoutModelInput = {
-    id?: string
-    name: string
-    IMEI: string
-    purchasePrice: number
-    price: number
-    sold?: boolean
-    color: string
-    ram?: string | null
-    rom?: string | null
-    createdAt?: Date | string | null
-    brand: BrandCreateNestedOneWithoutInStockInput
-    productType: ProductTypeCreateNestedOneWithoutInStockInput
-  }
-
-  export type InStockUncheckedCreateWithoutModelInput = {
-    id?: string
-    name: string
-    IMEI: string
-    brandId: string
-    productTypeId: string
-    purchasePrice: number
-    price: number
-    sold?: boolean
-    color: string
-    ram?: string | null
-    rom?: string | null
-    createdAt?: Date | string | null
-  }
-
-  export type InStockCreateOrConnectWithoutModelInput = {
-    where: InStockWhereUniqueInput
-    create: XOR<InStockCreateWithoutModelInput, InStockUncheckedCreateWithoutModelInput>
-  }
-
-  export type InStockCreateManyModelInputEnvelope = {
-    data: InStockCreateManyModelInput | InStockCreateManyModelInput[]
   }
 
   export type StockAndroidCreateWithoutModelInput = {
@@ -27111,7 +25141,6 @@ export namespace Prisma {
     brandName?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     productType?: ProductTypeUpdateOneRequiredWithoutBrandNestedInput
-    InStock?: InStockUpdateManyWithoutBrandNestedInput
     StockAndroid?: StockAndroidUpdateManyWithoutBrandNestedInput
     StockButton?: StockButtonUpdateManyWithoutBrandNestedInput
     StockAccessories?: StockAccessoriesUpdateManyWithoutBrandNestedInput
@@ -27124,29 +25153,12 @@ export namespace Prisma {
     brandName?: StringFieldUpdateOperationsInput | string
     productTypeId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    InStock?: InStockUncheckedUpdateManyWithoutBrandNestedInput
     StockAndroid?: StockAndroidUncheckedUpdateManyWithoutBrandNestedInput
     StockButton?: StockButtonUncheckedUpdateManyWithoutBrandNestedInput
     StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutBrandNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutBrandNestedInput
     HistoryButtonStock?: HistoryButtonStockUncheckedUpdateManyWithoutBrandNestedInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedUpdateManyWithoutBrandNestedInput
-  }
-
-  export type InStockUpsertWithWhereUniqueWithoutModelInput = {
-    where: InStockWhereUniqueInput
-    update: XOR<InStockUpdateWithoutModelInput, InStockUncheckedUpdateWithoutModelInput>
-    create: XOR<InStockCreateWithoutModelInput, InStockUncheckedCreateWithoutModelInput>
-  }
-
-  export type InStockUpdateWithWhereUniqueWithoutModelInput = {
-    where: InStockWhereUniqueInput
-    data: XOR<InStockUpdateWithoutModelInput, InStockUncheckedUpdateWithoutModelInput>
-  }
-
-  export type InStockUpdateManyWithWhereWithoutModelInput = {
-    where: InStockScalarWhereInput
-    data: XOR<InStockUpdateManyMutationInput, InStockUncheckedUpdateManyWithoutModelInput>
   }
 
   export type StockAndroidUpsertWithWhereUniqueWithoutModelInput = {
@@ -27245,214 +25257,11 @@ export namespace Prisma {
     data: XOR<HistoryAccessoriesStockUpdateManyMutationInput, HistoryAccessoriesStockUncheckedUpdateManyWithoutModelInput>
   }
 
-  export type ModelCreateWithoutInStockInput = {
-    id?: string
-    model: string
-    createdAt?: Date | string | null
-    brand: BrandCreateNestedOneWithoutModelInput
-    StrockAndroid?: StockAndroidCreateNestedManyWithoutModelInput
-    StrockButton?: StockButtonCreateNestedManyWithoutModelInput
-    StrockAccessories?: StockAccessoriesCreateNestedManyWithoutModelInput
-    HistoryAndroidStock?: HistoryAndroidStockCreateNestedManyWithoutModelInput
-    HistoryButtonStock?: HistoryButtonStockCreateNestedManyWithoutModelInput
-    HistoryAccessoriesStock?: HistoryAccessoriesStockCreateNestedManyWithoutModelInput
-  }
-
-  export type ModelUncheckedCreateWithoutInStockInput = {
-    id?: string
-    model: string
-    brandId: string
-    createdAt?: Date | string | null
-    StrockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutModelInput
-    StrockButton?: StockButtonUncheckedCreateNestedManyWithoutModelInput
-    StrockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutModelInput
-    HistoryAndroidStock?: HistoryAndroidStockUncheckedCreateNestedManyWithoutModelInput
-    HistoryButtonStock?: HistoryButtonStockUncheckedCreateNestedManyWithoutModelInput
-    HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedCreateNestedManyWithoutModelInput
-  }
-
-  export type ModelCreateOrConnectWithoutInStockInput = {
-    where: ModelWhereUniqueInput
-    create: XOR<ModelCreateWithoutInStockInput, ModelUncheckedCreateWithoutInStockInput>
-  }
-
-  export type BrandCreateWithoutInStockInput = {
-    id?: string
-    brandName: string
-    createdAt?: Date | string | null
-    productType: ProductTypeCreateNestedOneWithoutBrandInput
-    Model?: ModelCreateNestedManyWithoutBrandInput
-    StockAndroid?: StockAndroidCreateNestedManyWithoutBrandInput
-    StockButton?: StockButtonCreateNestedManyWithoutBrandInput
-    StockAccessories?: StockAccessoriesCreateNestedManyWithoutBrandInput
-    HistoryAndroidStock?: HistoryAndroidStockCreateNestedManyWithoutBrandInput
-    HistoryButtonStock?: HistoryButtonStockCreateNestedManyWithoutBrandInput
-    HistoryAccessoriesStock?: HistoryAccessoriesStockCreateNestedManyWithoutBrandInput
-  }
-
-  export type BrandUncheckedCreateWithoutInStockInput = {
-    id?: string
-    brandName: string
-    productTypeId: string
-    createdAt?: Date | string | null
-    Model?: ModelUncheckedCreateNestedManyWithoutBrandInput
-    StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutBrandInput
-    StockButton?: StockButtonUncheckedCreateNestedManyWithoutBrandInput
-    StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutBrandInput
-    HistoryAndroidStock?: HistoryAndroidStockUncheckedCreateNestedManyWithoutBrandInput
-    HistoryButtonStock?: HistoryButtonStockUncheckedCreateNestedManyWithoutBrandInput
-    HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedCreateNestedManyWithoutBrandInput
-  }
-
-  export type BrandCreateOrConnectWithoutInStockInput = {
-    where: BrandWhereUniqueInput
-    create: XOR<BrandCreateWithoutInStockInput, BrandUncheckedCreateWithoutInStockInput>
-  }
-
-  export type ProductTypeCreateWithoutInStockInput = {
-    id?: string
-    type: string
-    createdAt?: Date | string | null
-    Brand?: BrandCreateNestedManyWithoutProductTypeInput
-    StockAndroid?: StockAndroidCreateNestedManyWithoutProductTypeInput
-    StockButton?: StockButtonCreateNestedManyWithoutProductTypeInput
-    StockAccessories?: StockAccessoriesCreateNestedManyWithoutProductTypeInput
-    HistoryAndroidStock?: HistoryAndroidStockCreateNestedManyWithoutProductTypeInput
-    HistoryButtonStock?: HistoryButtonStockCreateNestedManyWithoutProductTypeInput
-    HistoryAccessoriesStock?: HistoryAccessoriesStockCreateNestedManyWithoutProductTypeInput
-  }
-
-  export type ProductTypeUncheckedCreateWithoutInStockInput = {
-    id?: string
-    type: string
-    createdAt?: Date | string | null
-    Brand?: BrandUncheckedCreateNestedManyWithoutProductTypeInput
-    StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutProductTypeInput
-    StockButton?: StockButtonUncheckedCreateNestedManyWithoutProductTypeInput
-    StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutProductTypeInput
-    HistoryAndroidStock?: HistoryAndroidStockUncheckedCreateNestedManyWithoutProductTypeInput
-    HistoryButtonStock?: HistoryButtonStockUncheckedCreateNestedManyWithoutProductTypeInput
-    HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedCreateNestedManyWithoutProductTypeInput
-  }
-
-  export type ProductTypeCreateOrConnectWithoutInStockInput = {
-    where: ProductTypeWhereUniqueInput
-    create: XOR<ProductTypeCreateWithoutInStockInput, ProductTypeUncheckedCreateWithoutInStockInput>
-  }
-
-  export type ModelUpsertWithoutInStockInput = {
-    update: XOR<ModelUpdateWithoutInStockInput, ModelUncheckedUpdateWithoutInStockInput>
-    create: XOR<ModelCreateWithoutInStockInput, ModelUncheckedCreateWithoutInStockInput>
-    where?: ModelWhereInput
-  }
-
-  export type ModelUpdateToOneWithWhereWithoutInStockInput = {
-    where?: ModelWhereInput
-    data: XOR<ModelUpdateWithoutInStockInput, ModelUncheckedUpdateWithoutInStockInput>
-  }
-
-  export type ModelUpdateWithoutInStockInput = {
-    model?: StringFieldUpdateOperationsInput | string
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    brand?: BrandUpdateOneRequiredWithoutModelNestedInput
-    StrockAndroid?: StockAndroidUpdateManyWithoutModelNestedInput
-    StrockButton?: StockButtonUpdateManyWithoutModelNestedInput
-    StrockAccessories?: StockAccessoriesUpdateManyWithoutModelNestedInput
-    HistoryAndroidStock?: HistoryAndroidStockUpdateManyWithoutModelNestedInput
-    HistoryButtonStock?: HistoryButtonStockUpdateManyWithoutModelNestedInput
-    HistoryAccessoriesStock?: HistoryAccessoriesStockUpdateManyWithoutModelNestedInput
-  }
-
-  export type ModelUncheckedUpdateWithoutInStockInput = {
-    model?: StringFieldUpdateOperationsInput | string
-    brandId?: StringFieldUpdateOperationsInput | string
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    StrockAndroid?: StockAndroidUncheckedUpdateManyWithoutModelNestedInput
-    StrockButton?: StockButtonUncheckedUpdateManyWithoutModelNestedInput
-    StrockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutModelNestedInput
-    HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutModelNestedInput
-    HistoryButtonStock?: HistoryButtonStockUncheckedUpdateManyWithoutModelNestedInput
-    HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedUpdateManyWithoutModelNestedInput
-  }
-
-  export type BrandUpsertWithoutInStockInput = {
-    update: XOR<BrandUpdateWithoutInStockInput, BrandUncheckedUpdateWithoutInStockInput>
-    create: XOR<BrandCreateWithoutInStockInput, BrandUncheckedCreateWithoutInStockInput>
-    where?: BrandWhereInput
-  }
-
-  export type BrandUpdateToOneWithWhereWithoutInStockInput = {
-    where?: BrandWhereInput
-    data: XOR<BrandUpdateWithoutInStockInput, BrandUncheckedUpdateWithoutInStockInput>
-  }
-
-  export type BrandUpdateWithoutInStockInput = {
-    brandName?: StringFieldUpdateOperationsInput | string
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    productType?: ProductTypeUpdateOneRequiredWithoutBrandNestedInput
-    Model?: ModelUpdateManyWithoutBrandNestedInput
-    StockAndroid?: StockAndroidUpdateManyWithoutBrandNestedInput
-    StockButton?: StockButtonUpdateManyWithoutBrandNestedInput
-    StockAccessories?: StockAccessoriesUpdateManyWithoutBrandNestedInput
-    HistoryAndroidStock?: HistoryAndroidStockUpdateManyWithoutBrandNestedInput
-    HistoryButtonStock?: HistoryButtonStockUpdateManyWithoutBrandNestedInput
-    HistoryAccessoriesStock?: HistoryAccessoriesStockUpdateManyWithoutBrandNestedInput
-  }
-
-  export type BrandUncheckedUpdateWithoutInStockInput = {
-    brandName?: StringFieldUpdateOperationsInput | string
-    productTypeId?: StringFieldUpdateOperationsInput | string
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Model?: ModelUncheckedUpdateManyWithoutBrandNestedInput
-    StockAndroid?: StockAndroidUncheckedUpdateManyWithoutBrandNestedInput
-    StockButton?: StockButtonUncheckedUpdateManyWithoutBrandNestedInput
-    StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutBrandNestedInput
-    HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutBrandNestedInput
-    HistoryButtonStock?: HistoryButtonStockUncheckedUpdateManyWithoutBrandNestedInput
-    HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedUpdateManyWithoutBrandNestedInput
-  }
-
-  export type ProductTypeUpsertWithoutInStockInput = {
-    update: XOR<ProductTypeUpdateWithoutInStockInput, ProductTypeUncheckedUpdateWithoutInStockInput>
-    create: XOR<ProductTypeCreateWithoutInStockInput, ProductTypeUncheckedCreateWithoutInStockInput>
-    where?: ProductTypeWhereInput
-  }
-
-  export type ProductTypeUpdateToOneWithWhereWithoutInStockInput = {
-    where?: ProductTypeWhereInput
-    data: XOR<ProductTypeUpdateWithoutInStockInput, ProductTypeUncheckedUpdateWithoutInStockInput>
-  }
-
-  export type ProductTypeUpdateWithoutInStockInput = {
-    type?: StringFieldUpdateOperationsInput | string
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Brand?: BrandUpdateManyWithoutProductTypeNestedInput
-    StockAndroid?: StockAndroidUpdateManyWithoutProductTypeNestedInput
-    StockButton?: StockButtonUpdateManyWithoutProductTypeNestedInput
-    StockAccessories?: StockAccessoriesUpdateManyWithoutProductTypeNestedInput
-    HistoryAndroidStock?: HistoryAndroidStockUpdateManyWithoutProductTypeNestedInput
-    HistoryButtonStock?: HistoryButtonStockUpdateManyWithoutProductTypeNestedInput
-    HistoryAccessoriesStock?: HistoryAccessoriesStockUpdateManyWithoutProductTypeNestedInput
-  }
-
-  export type ProductTypeUncheckedUpdateWithoutInStockInput = {
-    type?: StringFieldUpdateOperationsInput | string
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Brand?: BrandUncheckedUpdateManyWithoutProductTypeNestedInput
-    StockAndroid?: StockAndroidUncheckedUpdateManyWithoutProductTypeNestedInput
-    StockButton?: StockButtonUncheckedUpdateManyWithoutProductTypeNestedInput
-    StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutProductTypeNestedInput
-    HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutProductTypeNestedInput
-    HistoryButtonStock?: HistoryButtonStockUncheckedUpdateManyWithoutProductTypeNestedInput
-    HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedUpdateManyWithoutProductTypeNestedInput
-  }
-
   export type ModelCreateWithoutStrockAndroidInput = {
     id?: string
     model: string
     createdAt?: Date | string | null
     brand: BrandCreateNestedOneWithoutModelInput
-    InStock?: InStockCreateNestedManyWithoutModelInput
     StrockButton?: StockButtonCreateNestedManyWithoutModelInput
     StrockAccessories?: StockAccessoriesCreateNestedManyWithoutModelInput
     HistoryAndroidStock?: HistoryAndroidStockCreateNestedManyWithoutModelInput
@@ -27465,7 +25274,6 @@ export namespace Prisma {
     model: string
     brandId: string
     createdAt?: Date | string | null
-    InStock?: InStockUncheckedCreateNestedManyWithoutModelInput
     StrockButton?: StockButtonUncheckedCreateNestedManyWithoutModelInput
     StrockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutModelInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedCreateNestedManyWithoutModelInput
@@ -27484,7 +25292,6 @@ export namespace Prisma {
     createdAt?: Date | string | null
     productType: ProductTypeCreateNestedOneWithoutBrandInput
     Model?: ModelCreateNestedManyWithoutBrandInput
-    InStock?: InStockCreateNestedManyWithoutBrandInput
     StockButton?: StockButtonCreateNestedManyWithoutBrandInput
     StockAccessories?: StockAccessoriesCreateNestedManyWithoutBrandInput
     HistoryAndroidStock?: HistoryAndroidStockCreateNestedManyWithoutBrandInput
@@ -27498,7 +25305,6 @@ export namespace Prisma {
     productTypeId: string
     createdAt?: Date | string | null
     Model?: ModelUncheckedCreateNestedManyWithoutBrandInput
-    InStock?: InStockUncheckedCreateNestedManyWithoutBrandInput
     StockButton?: StockButtonUncheckedCreateNestedManyWithoutBrandInput
     StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutBrandInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedCreateNestedManyWithoutBrandInput
@@ -27516,7 +25322,6 @@ export namespace Prisma {
     type: string
     createdAt?: Date | string | null
     Brand?: BrandCreateNestedManyWithoutProductTypeInput
-    InStock?: InStockCreateNestedManyWithoutProductTypeInput
     StockButton?: StockButtonCreateNestedManyWithoutProductTypeInput
     StockAccessories?: StockAccessoriesCreateNestedManyWithoutProductTypeInput
     HistoryAndroidStock?: HistoryAndroidStockCreateNestedManyWithoutProductTypeInput
@@ -27529,7 +25334,6 @@ export namespace Prisma {
     type: string
     createdAt?: Date | string | null
     Brand?: BrandUncheckedCreateNestedManyWithoutProductTypeInput
-    InStock?: InStockUncheckedCreateNestedManyWithoutProductTypeInput
     StockButton?: StockButtonUncheckedCreateNestedManyWithoutProductTypeInput
     StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutProductTypeInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedCreateNestedManyWithoutProductTypeInput
@@ -27557,7 +25361,6 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     brand?: BrandUpdateOneRequiredWithoutModelNestedInput
-    InStock?: InStockUpdateManyWithoutModelNestedInput
     StrockButton?: StockButtonUpdateManyWithoutModelNestedInput
     StrockAccessories?: StockAccessoriesUpdateManyWithoutModelNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUpdateManyWithoutModelNestedInput
@@ -27569,7 +25372,6 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     brandId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    InStock?: InStockUncheckedUpdateManyWithoutModelNestedInput
     StrockButton?: StockButtonUncheckedUpdateManyWithoutModelNestedInput
     StrockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutModelNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutModelNestedInput
@@ -27593,7 +25395,6 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     productType?: ProductTypeUpdateOneRequiredWithoutBrandNestedInput
     Model?: ModelUpdateManyWithoutBrandNestedInput
-    InStock?: InStockUpdateManyWithoutBrandNestedInput
     StockButton?: StockButtonUpdateManyWithoutBrandNestedInput
     StockAccessories?: StockAccessoriesUpdateManyWithoutBrandNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUpdateManyWithoutBrandNestedInput
@@ -27606,7 +25407,6 @@ export namespace Prisma {
     productTypeId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Model?: ModelUncheckedUpdateManyWithoutBrandNestedInput
-    InStock?: InStockUncheckedUpdateManyWithoutBrandNestedInput
     StockButton?: StockButtonUncheckedUpdateManyWithoutBrandNestedInput
     StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutBrandNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutBrandNestedInput
@@ -27629,7 +25429,6 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Brand?: BrandUpdateManyWithoutProductTypeNestedInput
-    InStock?: InStockUpdateManyWithoutProductTypeNestedInput
     StockButton?: StockButtonUpdateManyWithoutProductTypeNestedInput
     StockAccessories?: StockAccessoriesUpdateManyWithoutProductTypeNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUpdateManyWithoutProductTypeNestedInput
@@ -27641,7 +25440,6 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Brand?: BrandUncheckedUpdateManyWithoutProductTypeNestedInput
-    InStock?: InStockUncheckedUpdateManyWithoutProductTypeNestedInput
     StockButton?: StockButtonUncheckedUpdateManyWithoutProductTypeNestedInput
     StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutProductTypeNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -27654,7 +25452,6 @@ export namespace Prisma {
     model: string
     createdAt?: Date | string | null
     brand: BrandCreateNestedOneWithoutModelInput
-    InStock?: InStockCreateNestedManyWithoutModelInput
     StrockAndroid?: StockAndroidCreateNestedManyWithoutModelInput
     StrockAccessories?: StockAccessoriesCreateNestedManyWithoutModelInput
     HistoryAndroidStock?: HistoryAndroidStockCreateNestedManyWithoutModelInput
@@ -27667,7 +25464,6 @@ export namespace Prisma {
     model: string
     brandId: string
     createdAt?: Date | string | null
-    InStock?: InStockUncheckedCreateNestedManyWithoutModelInput
     StrockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutModelInput
     StrockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutModelInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedCreateNestedManyWithoutModelInput
@@ -27686,7 +25482,6 @@ export namespace Prisma {
     createdAt?: Date | string | null
     productType: ProductTypeCreateNestedOneWithoutBrandInput
     Model?: ModelCreateNestedManyWithoutBrandInput
-    InStock?: InStockCreateNestedManyWithoutBrandInput
     StockAndroid?: StockAndroidCreateNestedManyWithoutBrandInput
     StockAccessories?: StockAccessoriesCreateNestedManyWithoutBrandInput
     HistoryAndroidStock?: HistoryAndroidStockCreateNestedManyWithoutBrandInput
@@ -27700,7 +25495,6 @@ export namespace Prisma {
     productTypeId: string
     createdAt?: Date | string | null
     Model?: ModelUncheckedCreateNestedManyWithoutBrandInput
-    InStock?: InStockUncheckedCreateNestedManyWithoutBrandInput
     StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutBrandInput
     StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutBrandInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedCreateNestedManyWithoutBrandInput
@@ -27718,7 +25512,6 @@ export namespace Prisma {
     type: string
     createdAt?: Date | string | null
     Brand?: BrandCreateNestedManyWithoutProductTypeInput
-    InStock?: InStockCreateNestedManyWithoutProductTypeInput
     StockAndroid?: StockAndroidCreateNestedManyWithoutProductTypeInput
     StockAccessories?: StockAccessoriesCreateNestedManyWithoutProductTypeInput
     HistoryAndroidStock?: HistoryAndroidStockCreateNestedManyWithoutProductTypeInput
@@ -27731,7 +25524,6 @@ export namespace Prisma {
     type: string
     createdAt?: Date | string | null
     Brand?: BrandUncheckedCreateNestedManyWithoutProductTypeInput
-    InStock?: InStockUncheckedCreateNestedManyWithoutProductTypeInput
     StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutProductTypeInput
     StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutProductTypeInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedCreateNestedManyWithoutProductTypeInput
@@ -27759,7 +25551,6 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     brand?: BrandUpdateOneRequiredWithoutModelNestedInput
-    InStock?: InStockUpdateManyWithoutModelNestedInput
     StrockAndroid?: StockAndroidUpdateManyWithoutModelNestedInput
     StrockAccessories?: StockAccessoriesUpdateManyWithoutModelNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUpdateManyWithoutModelNestedInput
@@ -27771,7 +25562,6 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     brandId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    InStock?: InStockUncheckedUpdateManyWithoutModelNestedInput
     StrockAndroid?: StockAndroidUncheckedUpdateManyWithoutModelNestedInput
     StrockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutModelNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutModelNestedInput
@@ -27795,7 +25585,6 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     productType?: ProductTypeUpdateOneRequiredWithoutBrandNestedInput
     Model?: ModelUpdateManyWithoutBrandNestedInput
-    InStock?: InStockUpdateManyWithoutBrandNestedInput
     StockAndroid?: StockAndroidUpdateManyWithoutBrandNestedInput
     StockAccessories?: StockAccessoriesUpdateManyWithoutBrandNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUpdateManyWithoutBrandNestedInput
@@ -27808,7 +25597,6 @@ export namespace Prisma {
     productTypeId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Model?: ModelUncheckedUpdateManyWithoutBrandNestedInput
-    InStock?: InStockUncheckedUpdateManyWithoutBrandNestedInput
     StockAndroid?: StockAndroidUncheckedUpdateManyWithoutBrandNestedInput
     StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutBrandNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutBrandNestedInput
@@ -27831,7 +25619,6 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Brand?: BrandUpdateManyWithoutProductTypeNestedInput
-    InStock?: InStockUpdateManyWithoutProductTypeNestedInput
     StockAndroid?: StockAndroidUpdateManyWithoutProductTypeNestedInput
     StockAccessories?: StockAccessoriesUpdateManyWithoutProductTypeNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUpdateManyWithoutProductTypeNestedInput
@@ -27843,7 +25630,6 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Brand?: BrandUncheckedUpdateManyWithoutProductTypeNestedInput
-    InStock?: InStockUncheckedUpdateManyWithoutProductTypeNestedInput
     StockAndroid?: StockAndroidUncheckedUpdateManyWithoutProductTypeNestedInput
     StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutProductTypeNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -27856,7 +25642,6 @@ export namespace Prisma {
     model: string
     createdAt?: Date | string | null
     brand: BrandCreateNestedOneWithoutModelInput
-    InStock?: InStockCreateNestedManyWithoutModelInput
     StrockAndroid?: StockAndroidCreateNestedManyWithoutModelInput
     StrockButton?: StockButtonCreateNestedManyWithoutModelInput
     HistoryAndroidStock?: HistoryAndroidStockCreateNestedManyWithoutModelInput
@@ -27869,7 +25654,6 @@ export namespace Prisma {
     model: string
     brandId: string
     createdAt?: Date | string | null
-    InStock?: InStockUncheckedCreateNestedManyWithoutModelInput
     StrockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutModelInput
     StrockButton?: StockButtonUncheckedCreateNestedManyWithoutModelInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedCreateNestedManyWithoutModelInput
@@ -27888,7 +25672,6 @@ export namespace Prisma {
     createdAt?: Date | string | null
     productType: ProductTypeCreateNestedOneWithoutBrandInput
     Model?: ModelCreateNestedManyWithoutBrandInput
-    InStock?: InStockCreateNestedManyWithoutBrandInput
     StockAndroid?: StockAndroidCreateNestedManyWithoutBrandInput
     StockButton?: StockButtonCreateNestedManyWithoutBrandInput
     HistoryAndroidStock?: HistoryAndroidStockCreateNestedManyWithoutBrandInput
@@ -27902,7 +25685,6 @@ export namespace Prisma {
     productTypeId: string
     createdAt?: Date | string | null
     Model?: ModelUncheckedCreateNestedManyWithoutBrandInput
-    InStock?: InStockUncheckedCreateNestedManyWithoutBrandInput
     StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutBrandInput
     StockButton?: StockButtonUncheckedCreateNestedManyWithoutBrandInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedCreateNestedManyWithoutBrandInput
@@ -27920,7 +25702,6 @@ export namespace Prisma {
     type: string
     createdAt?: Date | string | null
     Brand?: BrandCreateNestedManyWithoutProductTypeInput
-    InStock?: InStockCreateNestedManyWithoutProductTypeInput
     StockAndroid?: StockAndroidCreateNestedManyWithoutProductTypeInput
     StockButton?: StockButtonCreateNestedManyWithoutProductTypeInput
     HistoryAndroidStock?: HistoryAndroidStockCreateNestedManyWithoutProductTypeInput
@@ -27933,7 +25714,6 @@ export namespace Prisma {
     type: string
     createdAt?: Date | string | null
     Brand?: BrandUncheckedCreateNestedManyWithoutProductTypeInput
-    InStock?: InStockUncheckedCreateNestedManyWithoutProductTypeInput
     StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutProductTypeInput
     StockButton?: StockButtonUncheckedCreateNestedManyWithoutProductTypeInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedCreateNestedManyWithoutProductTypeInput
@@ -27961,7 +25741,6 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     brand?: BrandUpdateOneRequiredWithoutModelNestedInput
-    InStock?: InStockUpdateManyWithoutModelNestedInput
     StrockAndroid?: StockAndroidUpdateManyWithoutModelNestedInput
     StrockButton?: StockButtonUpdateManyWithoutModelNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUpdateManyWithoutModelNestedInput
@@ -27973,7 +25752,6 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     brandId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    InStock?: InStockUncheckedUpdateManyWithoutModelNestedInput
     StrockAndroid?: StockAndroidUncheckedUpdateManyWithoutModelNestedInput
     StrockButton?: StockButtonUncheckedUpdateManyWithoutModelNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutModelNestedInput
@@ -27997,7 +25775,6 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     productType?: ProductTypeUpdateOneRequiredWithoutBrandNestedInput
     Model?: ModelUpdateManyWithoutBrandNestedInput
-    InStock?: InStockUpdateManyWithoutBrandNestedInput
     StockAndroid?: StockAndroidUpdateManyWithoutBrandNestedInput
     StockButton?: StockButtonUpdateManyWithoutBrandNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUpdateManyWithoutBrandNestedInput
@@ -28010,7 +25787,6 @@ export namespace Prisma {
     productTypeId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Model?: ModelUncheckedUpdateManyWithoutBrandNestedInput
-    InStock?: InStockUncheckedUpdateManyWithoutBrandNestedInput
     StockAndroid?: StockAndroidUncheckedUpdateManyWithoutBrandNestedInput
     StockButton?: StockButtonUncheckedUpdateManyWithoutBrandNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutBrandNestedInput
@@ -28033,7 +25809,6 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Brand?: BrandUpdateManyWithoutProductTypeNestedInput
-    InStock?: InStockUpdateManyWithoutProductTypeNestedInput
     StockAndroid?: StockAndroidUpdateManyWithoutProductTypeNestedInput
     StockButton?: StockButtonUpdateManyWithoutProductTypeNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUpdateManyWithoutProductTypeNestedInput
@@ -28045,7 +25820,6 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Brand?: BrandUncheckedUpdateManyWithoutProductTypeNestedInput
-    InStock?: InStockUncheckedUpdateManyWithoutProductTypeNestedInput
     StockAndroid?: StockAndroidUncheckedUpdateManyWithoutProductTypeNestedInput
     StockButton?: StockButtonUncheckedUpdateManyWithoutProductTypeNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -28187,7 +25961,6 @@ export namespace Prisma {
     model: string
     createdAt?: Date | string | null
     brand: BrandCreateNestedOneWithoutModelInput
-    InStock?: InStockCreateNestedManyWithoutModelInput
     StrockAndroid?: StockAndroidCreateNestedManyWithoutModelInput
     StrockButton?: StockButtonCreateNestedManyWithoutModelInput
     StrockAccessories?: StockAccessoriesCreateNestedManyWithoutModelInput
@@ -28200,7 +25973,6 @@ export namespace Prisma {
     model: string
     brandId: string
     createdAt?: Date | string | null
-    InStock?: InStockUncheckedCreateNestedManyWithoutModelInput
     StrockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutModelInput
     StrockButton?: StockButtonUncheckedCreateNestedManyWithoutModelInput
     StrockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutModelInput
@@ -28219,7 +25991,6 @@ export namespace Prisma {
     createdAt?: Date | string | null
     productType: ProductTypeCreateNestedOneWithoutBrandInput
     Model?: ModelCreateNestedManyWithoutBrandInput
-    InStock?: InStockCreateNestedManyWithoutBrandInput
     StockAndroid?: StockAndroidCreateNestedManyWithoutBrandInput
     StockButton?: StockButtonCreateNestedManyWithoutBrandInput
     StockAccessories?: StockAccessoriesCreateNestedManyWithoutBrandInput
@@ -28233,7 +26004,6 @@ export namespace Prisma {
     productTypeId: string
     createdAt?: Date | string | null
     Model?: ModelUncheckedCreateNestedManyWithoutBrandInput
-    InStock?: InStockUncheckedCreateNestedManyWithoutBrandInput
     StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutBrandInput
     StockButton?: StockButtonUncheckedCreateNestedManyWithoutBrandInput
     StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutBrandInput
@@ -28251,7 +26021,6 @@ export namespace Prisma {
     type: string
     createdAt?: Date | string | null
     Brand?: BrandCreateNestedManyWithoutProductTypeInput
-    InStock?: InStockCreateNestedManyWithoutProductTypeInput
     StockAndroid?: StockAndroidCreateNestedManyWithoutProductTypeInput
     StockButton?: StockButtonCreateNestedManyWithoutProductTypeInput
     StockAccessories?: StockAccessoriesCreateNestedManyWithoutProductTypeInput
@@ -28264,7 +26033,6 @@ export namespace Prisma {
     type: string
     createdAt?: Date | string | null
     Brand?: BrandUncheckedCreateNestedManyWithoutProductTypeInput
-    InStock?: InStockUncheckedCreateNestedManyWithoutProductTypeInput
     StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutProductTypeInput
     StockButton?: StockButtonUncheckedCreateNestedManyWithoutProductTypeInput
     StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutProductTypeInput
@@ -28292,7 +26060,6 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     brand?: BrandUpdateOneRequiredWithoutModelNestedInput
-    InStock?: InStockUpdateManyWithoutModelNestedInput
     StrockAndroid?: StockAndroidUpdateManyWithoutModelNestedInput
     StrockButton?: StockButtonUpdateManyWithoutModelNestedInput
     StrockAccessories?: StockAccessoriesUpdateManyWithoutModelNestedInput
@@ -28304,7 +26071,6 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     brandId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    InStock?: InStockUncheckedUpdateManyWithoutModelNestedInput
     StrockAndroid?: StockAndroidUncheckedUpdateManyWithoutModelNestedInput
     StrockButton?: StockButtonUncheckedUpdateManyWithoutModelNestedInput
     StrockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutModelNestedInput
@@ -28328,7 +26094,6 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     productType?: ProductTypeUpdateOneRequiredWithoutBrandNestedInput
     Model?: ModelUpdateManyWithoutBrandNestedInput
-    InStock?: InStockUpdateManyWithoutBrandNestedInput
     StockAndroid?: StockAndroidUpdateManyWithoutBrandNestedInput
     StockButton?: StockButtonUpdateManyWithoutBrandNestedInput
     StockAccessories?: StockAccessoriesUpdateManyWithoutBrandNestedInput
@@ -28341,7 +26106,6 @@ export namespace Prisma {
     productTypeId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Model?: ModelUncheckedUpdateManyWithoutBrandNestedInput
-    InStock?: InStockUncheckedUpdateManyWithoutBrandNestedInput
     StockAndroid?: StockAndroidUncheckedUpdateManyWithoutBrandNestedInput
     StockButton?: StockButtonUncheckedUpdateManyWithoutBrandNestedInput
     StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutBrandNestedInput
@@ -28364,7 +26128,6 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Brand?: BrandUpdateManyWithoutProductTypeNestedInput
-    InStock?: InStockUpdateManyWithoutProductTypeNestedInput
     StockAndroid?: StockAndroidUpdateManyWithoutProductTypeNestedInput
     StockButton?: StockButtonUpdateManyWithoutProductTypeNestedInput
     StockAccessories?: StockAccessoriesUpdateManyWithoutProductTypeNestedInput
@@ -28376,7 +26139,6 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Brand?: BrandUncheckedUpdateManyWithoutProductTypeNestedInput
-    InStock?: InStockUncheckedUpdateManyWithoutProductTypeNestedInput
     StockAndroid?: StockAndroidUncheckedUpdateManyWithoutProductTypeNestedInput
     StockButton?: StockButtonUncheckedUpdateManyWithoutProductTypeNestedInput
     StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -28389,7 +26151,6 @@ export namespace Prisma {
     model: string
     createdAt?: Date | string | null
     brand: BrandCreateNestedOneWithoutModelInput
-    InStock?: InStockCreateNestedManyWithoutModelInput
     StrockAndroid?: StockAndroidCreateNestedManyWithoutModelInput
     StrockButton?: StockButtonCreateNestedManyWithoutModelInput
     StrockAccessories?: StockAccessoriesCreateNestedManyWithoutModelInput
@@ -28402,7 +26163,6 @@ export namespace Prisma {
     model: string
     brandId: string
     createdAt?: Date | string | null
-    InStock?: InStockUncheckedCreateNestedManyWithoutModelInput
     StrockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutModelInput
     StrockButton?: StockButtonUncheckedCreateNestedManyWithoutModelInput
     StrockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutModelInput
@@ -28421,7 +26181,6 @@ export namespace Prisma {
     createdAt?: Date | string | null
     productType: ProductTypeCreateNestedOneWithoutBrandInput
     Model?: ModelCreateNestedManyWithoutBrandInput
-    InStock?: InStockCreateNestedManyWithoutBrandInput
     StockAndroid?: StockAndroidCreateNestedManyWithoutBrandInput
     StockButton?: StockButtonCreateNestedManyWithoutBrandInput
     StockAccessories?: StockAccessoriesCreateNestedManyWithoutBrandInput
@@ -28435,7 +26194,6 @@ export namespace Prisma {
     productTypeId: string
     createdAt?: Date | string | null
     Model?: ModelUncheckedCreateNestedManyWithoutBrandInput
-    InStock?: InStockUncheckedCreateNestedManyWithoutBrandInput
     StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutBrandInput
     StockButton?: StockButtonUncheckedCreateNestedManyWithoutBrandInput
     StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutBrandInput
@@ -28453,7 +26211,6 @@ export namespace Prisma {
     type: string
     createdAt?: Date | string | null
     Brand?: BrandCreateNestedManyWithoutProductTypeInput
-    InStock?: InStockCreateNestedManyWithoutProductTypeInput
     StockAndroid?: StockAndroidCreateNestedManyWithoutProductTypeInput
     StockButton?: StockButtonCreateNestedManyWithoutProductTypeInput
     StockAccessories?: StockAccessoriesCreateNestedManyWithoutProductTypeInput
@@ -28466,7 +26223,6 @@ export namespace Prisma {
     type: string
     createdAt?: Date | string | null
     Brand?: BrandUncheckedCreateNestedManyWithoutProductTypeInput
-    InStock?: InStockUncheckedCreateNestedManyWithoutProductTypeInput
     StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutProductTypeInput
     StockButton?: StockButtonUncheckedCreateNestedManyWithoutProductTypeInput
     StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutProductTypeInput
@@ -28494,7 +26250,6 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     brand?: BrandUpdateOneRequiredWithoutModelNestedInput
-    InStock?: InStockUpdateManyWithoutModelNestedInput
     StrockAndroid?: StockAndroidUpdateManyWithoutModelNestedInput
     StrockButton?: StockButtonUpdateManyWithoutModelNestedInput
     StrockAccessories?: StockAccessoriesUpdateManyWithoutModelNestedInput
@@ -28506,7 +26261,6 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     brandId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    InStock?: InStockUncheckedUpdateManyWithoutModelNestedInput
     StrockAndroid?: StockAndroidUncheckedUpdateManyWithoutModelNestedInput
     StrockButton?: StockButtonUncheckedUpdateManyWithoutModelNestedInput
     StrockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutModelNestedInput
@@ -28530,7 +26284,6 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     productType?: ProductTypeUpdateOneRequiredWithoutBrandNestedInput
     Model?: ModelUpdateManyWithoutBrandNestedInput
-    InStock?: InStockUpdateManyWithoutBrandNestedInput
     StockAndroid?: StockAndroidUpdateManyWithoutBrandNestedInput
     StockButton?: StockButtonUpdateManyWithoutBrandNestedInput
     StockAccessories?: StockAccessoriesUpdateManyWithoutBrandNestedInput
@@ -28543,7 +26296,6 @@ export namespace Prisma {
     productTypeId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Model?: ModelUncheckedUpdateManyWithoutBrandNestedInput
-    InStock?: InStockUncheckedUpdateManyWithoutBrandNestedInput
     StockAndroid?: StockAndroidUncheckedUpdateManyWithoutBrandNestedInput
     StockButton?: StockButtonUncheckedUpdateManyWithoutBrandNestedInput
     StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutBrandNestedInput
@@ -28566,7 +26318,6 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Brand?: BrandUpdateManyWithoutProductTypeNestedInput
-    InStock?: InStockUpdateManyWithoutProductTypeNestedInput
     StockAndroid?: StockAndroidUpdateManyWithoutProductTypeNestedInput
     StockButton?: StockButtonUpdateManyWithoutProductTypeNestedInput
     StockAccessories?: StockAccessoriesUpdateManyWithoutProductTypeNestedInput
@@ -28578,7 +26329,6 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Brand?: BrandUncheckedUpdateManyWithoutProductTypeNestedInput
-    InStock?: InStockUncheckedUpdateManyWithoutProductTypeNestedInput
     StockAndroid?: StockAndroidUncheckedUpdateManyWithoutProductTypeNestedInput
     StockButton?: StockButtonUncheckedUpdateManyWithoutProductTypeNestedInput
     StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -28591,7 +26341,6 @@ export namespace Prisma {
     model: string
     createdAt?: Date | string | null
     brand: BrandCreateNestedOneWithoutModelInput
-    InStock?: InStockCreateNestedManyWithoutModelInput
     StrockAndroid?: StockAndroidCreateNestedManyWithoutModelInput
     StrockButton?: StockButtonCreateNestedManyWithoutModelInput
     StrockAccessories?: StockAccessoriesCreateNestedManyWithoutModelInput
@@ -28604,7 +26353,6 @@ export namespace Prisma {
     model: string
     brandId: string
     createdAt?: Date | string | null
-    InStock?: InStockUncheckedCreateNestedManyWithoutModelInput
     StrockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutModelInput
     StrockButton?: StockButtonUncheckedCreateNestedManyWithoutModelInput
     StrockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutModelInput
@@ -28623,7 +26371,6 @@ export namespace Prisma {
     createdAt?: Date | string | null
     productType: ProductTypeCreateNestedOneWithoutBrandInput
     Model?: ModelCreateNestedManyWithoutBrandInput
-    InStock?: InStockCreateNestedManyWithoutBrandInput
     StockAndroid?: StockAndroidCreateNestedManyWithoutBrandInput
     StockButton?: StockButtonCreateNestedManyWithoutBrandInput
     StockAccessories?: StockAccessoriesCreateNestedManyWithoutBrandInput
@@ -28637,7 +26384,6 @@ export namespace Prisma {
     productTypeId: string
     createdAt?: Date | string | null
     Model?: ModelUncheckedCreateNestedManyWithoutBrandInput
-    InStock?: InStockUncheckedCreateNestedManyWithoutBrandInput
     StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutBrandInput
     StockButton?: StockButtonUncheckedCreateNestedManyWithoutBrandInput
     StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutBrandInput
@@ -28655,7 +26401,6 @@ export namespace Prisma {
     type: string
     createdAt?: Date | string | null
     Brand?: BrandCreateNestedManyWithoutProductTypeInput
-    InStock?: InStockCreateNestedManyWithoutProductTypeInput
     StockAndroid?: StockAndroidCreateNestedManyWithoutProductTypeInput
     StockButton?: StockButtonCreateNestedManyWithoutProductTypeInput
     StockAccessories?: StockAccessoriesCreateNestedManyWithoutProductTypeInput
@@ -28668,7 +26413,6 @@ export namespace Prisma {
     type: string
     createdAt?: Date | string | null
     Brand?: BrandUncheckedCreateNestedManyWithoutProductTypeInput
-    InStock?: InStockUncheckedCreateNestedManyWithoutProductTypeInput
     StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutProductTypeInput
     StockButton?: StockButtonUncheckedCreateNestedManyWithoutProductTypeInput
     StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutProductTypeInput
@@ -28696,7 +26440,6 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     brand?: BrandUpdateOneRequiredWithoutModelNestedInput
-    InStock?: InStockUpdateManyWithoutModelNestedInput
     StrockAndroid?: StockAndroidUpdateManyWithoutModelNestedInput
     StrockButton?: StockButtonUpdateManyWithoutModelNestedInput
     StrockAccessories?: StockAccessoriesUpdateManyWithoutModelNestedInput
@@ -28708,7 +26451,6 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     brandId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    InStock?: InStockUncheckedUpdateManyWithoutModelNestedInput
     StrockAndroid?: StockAndroidUncheckedUpdateManyWithoutModelNestedInput
     StrockButton?: StockButtonUncheckedUpdateManyWithoutModelNestedInput
     StrockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutModelNestedInput
@@ -28732,7 +26474,6 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     productType?: ProductTypeUpdateOneRequiredWithoutBrandNestedInput
     Model?: ModelUpdateManyWithoutBrandNestedInput
-    InStock?: InStockUpdateManyWithoutBrandNestedInput
     StockAndroid?: StockAndroidUpdateManyWithoutBrandNestedInput
     StockButton?: StockButtonUpdateManyWithoutBrandNestedInput
     StockAccessories?: StockAccessoriesUpdateManyWithoutBrandNestedInput
@@ -28745,7 +26486,6 @@ export namespace Prisma {
     productTypeId?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Model?: ModelUncheckedUpdateManyWithoutBrandNestedInput
-    InStock?: InStockUncheckedUpdateManyWithoutBrandNestedInput
     StockAndroid?: StockAndroidUncheckedUpdateManyWithoutBrandNestedInput
     StockButton?: StockButtonUncheckedUpdateManyWithoutBrandNestedInput
     StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutBrandNestedInput
@@ -28768,7 +26508,6 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Brand?: BrandUpdateManyWithoutProductTypeNestedInput
-    InStock?: InStockUpdateManyWithoutProductTypeNestedInput
     StockAndroid?: StockAndroidUpdateManyWithoutProductTypeNestedInput
     StockButton?: StockButtonUpdateManyWithoutProductTypeNestedInput
     StockAccessories?: StockAccessoriesUpdateManyWithoutProductTypeNestedInput
@@ -28780,7 +26519,6 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Brand?: BrandUncheckedUpdateManyWithoutProductTypeNestedInput
-    InStock?: InStockUncheckedUpdateManyWithoutProductTypeNestedInput
     StockAndroid?: StockAndroidUncheckedUpdateManyWithoutProductTypeNestedInput
     StockButton?: StockButtonUncheckedUpdateManyWithoutProductTypeNestedInput
     StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -28828,21 +26566,6 @@ export namespace Prisma {
   export type BrandCreateManyProductTypeInput = {
     id?: string
     brandName: string
-    createdAt?: Date | string | null
-  }
-
-  export type InStockCreateManyProductTypeInput = {
-    id?: string
-    name: string
-    IMEI: string
-    modelId: string
-    brandId: string
-    purchasePrice: number
-    price: number
-    sold?: boolean
-    color: string
-    ram?: string | null
-    rom?: string | null
     createdAt?: Date | string | null
   }
 
@@ -28923,7 +26646,6 @@ export namespace Prisma {
     brandName?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Model?: ModelUpdateManyWithoutBrandNestedInput
-    InStock?: InStockUpdateManyWithoutBrandNestedInput
     StockAndroid?: StockAndroidUpdateManyWithoutBrandNestedInput
     StockButton?: StockButtonUpdateManyWithoutBrandNestedInput
     StockAccessories?: StockAccessoriesUpdateManyWithoutBrandNestedInput
@@ -28936,7 +26658,6 @@ export namespace Prisma {
     brandName?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Model?: ModelUncheckedUpdateManyWithoutBrandNestedInput
-    InStock?: InStockUncheckedUpdateManyWithoutBrandNestedInput
     StockAndroid?: StockAndroidUncheckedUpdateManyWithoutBrandNestedInput
     StockButton?: StockButtonUncheckedUpdateManyWithoutBrandNestedInput
     StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutBrandNestedInput
@@ -28947,48 +26668,6 @@ export namespace Prisma {
 
   export type BrandUncheckedUpdateManyWithoutProductTypeInput = {
     brandName?: StringFieldUpdateOperationsInput | string
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type InStockUpdateWithoutProductTypeInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    IMEI?: StringFieldUpdateOperationsInput | string
-    purchasePrice?: IntFieldUpdateOperationsInput | number
-    price?: IntFieldUpdateOperationsInput | number
-    sold?: BoolFieldUpdateOperationsInput | boolean
-    color?: StringFieldUpdateOperationsInput | string
-    ram?: NullableStringFieldUpdateOperationsInput | string | null
-    rom?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    model?: ModelUpdateOneRequiredWithoutInStockNestedInput
-    brand?: BrandUpdateOneRequiredWithoutInStockNestedInput
-  }
-
-  export type InStockUncheckedUpdateWithoutProductTypeInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    IMEI?: StringFieldUpdateOperationsInput | string
-    modelId?: StringFieldUpdateOperationsInput | string
-    brandId?: StringFieldUpdateOperationsInput | string
-    purchasePrice?: IntFieldUpdateOperationsInput | number
-    price?: IntFieldUpdateOperationsInput | number
-    sold?: BoolFieldUpdateOperationsInput | boolean
-    color?: StringFieldUpdateOperationsInput | string
-    ram?: NullableStringFieldUpdateOperationsInput | string | null
-    rom?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type InStockUncheckedUpdateManyWithoutProductTypeInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    IMEI?: StringFieldUpdateOperationsInput | string
-    modelId?: StringFieldUpdateOperationsInput | string
-    brandId?: StringFieldUpdateOperationsInput | string
-    purchasePrice?: IntFieldUpdateOperationsInput | number
-    price?: IntFieldUpdateOperationsInput | number
-    sold?: BoolFieldUpdateOperationsInput | boolean
-    color?: StringFieldUpdateOperationsInput | string
-    ram?: NullableStringFieldUpdateOperationsInput | string | null
-    rom?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
@@ -29199,21 +26878,6 @@ export namespace Prisma {
     createdAt?: Date | string | null
   }
 
-  export type InStockCreateManyBrandInput = {
-    id?: string
-    name: string
-    IMEI: string
-    modelId: string
-    productTypeId: string
-    purchasePrice: number
-    price: number
-    sold?: boolean
-    color: string
-    ram?: string | null
-    rom?: string | null
-    createdAt?: Date | string | null
-  }
-
   export type StockAndroidCreateManyBrandInput = {
     id?: string
     name: string
@@ -29290,7 +26954,6 @@ export namespace Prisma {
   export type ModelUpdateWithoutBrandInput = {
     model?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    InStock?: InStockUpdateManyWithoutModelNestedInput
     StrockAndroid?: StockAndroidUpdateManyWithoutModelNestedInput
     StrockButton?: StockButtonUpdateManyWithoutModelNestedInput
     StrockAccessories?: StockAccessoriesUpdateManyWithoutModelNestedInput
@@ -29302,7 +26965,6 @@ export namespace Prisma {
   export type ModelUncheckedUpdateWithoutBrandInput = {
     model?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    InStock?: InStockUncheckedUpdateManyWithoutModelNestedInput
     StrockAndroid?: StockAndroidUncheckedUpdateManyWithoutModelNestedInput
     StrockButton?: StockButtonUncheckedUpdateManyWithoutModelNestedInput
     StrockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutModelNestedInput
@@ -29313,48 +26975,6 @@ export namespace Prisma {
 
   export type ModelUncheckedUpdateManyWithoutBrandInput = {
     model?: StringFieldUpdateOperationsInput | string
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type InStockUpdateWithoutBrandInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    IMEI?: StringFieldUpdateOperationsInput | string
-    purchasePrice?: IntFieldUpdateOperationsInput | number
-    price?: IntFieldUpdateOperationsInput | number
-    sold?: BoolFieldUpdateOperationsInput | boolean
-    color?: StringFieldUpdateOperationsInput | string
-    ram?: NullableStringFieldUpdateOperationsInput | string | null
-    rom?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    model?: ModelUpdateOneRequiredWithoutInStockNestedInput
-    productType?: ProductTypeUpdateOneRequiredWithoutInStockNestedInput
-  }
-
-  export type InStockUncheckedUpdateWithoutBrandInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    IMEI?: StringFieldUpdateOperationsInput | string
-    modelId?: StringFieldUpdateOperationsInput | string
-    productTypeId?: StringFieldUpdateOperationsInput | string
-    purchasePrice?: IntFieldUpdateOperationsInput | number
-    price?: IntFieldUpdateOperationsInput | number
-    sold?: BoolFieldUpdateOperationsInput | boolean
-    color?: StringFieldUpdateOperationsInput | string
-    ram?: NullableStringFieldUpdateOperationsInput | string | null
-    rom?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type InStockUncheckedUpdateManyWithoutBrandInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    IMEI?: StringFieldUpdateOperationsInput | string
-    modelId?: StringFieldUpdateOperationsInput | string
-    productTypeId?: StringFieldUpdateOperationsInput | string
-    purchasePrice?: IntFieldUpdateOperationsInput | number
-    price?: IntFieldUpdateOperationsInput | number
-    sold?: BoolFieldUpdateOperationsInput | boolean
-    color?: StringFieldUpdateOperationsInput | string
-    ram?: NullableStringFieldUpdateOperationsInput | string | null
-    rom?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
@@ -29559,21 +27179,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type InStockCreateManyModelInput = {
-    id?: string
-    name: string
-    IMEI: string
-    brandId: string
-    productTypeId: string
-    purchasePrice: number
-    price: number
-    sold?: boolean
-    color: string
-    ram?: string | null
-    rom?: string | null
-    createdAt?: Date | string | null
-  }
-
   export type StockAndroidCreateManyModelInput = {
     id?: string
     name: string
@@ -29645,48 +27250,6 @@ export namespace Prisma {
     sellingPrice: number
     quantity: number
     createdAt?: Date | string
-  }
-
-  export type InStockUpdateWithoutModelInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    IMEI?: StringFieldUpdateOperationsInput | string
-    purchasePrice?: IntFieldUpdateOperationsInput | number
-    price?: IntFieldUpdateOperationsInput | number
-    sold?: BoolFieldUpdateOperationsInput | boolean
-    color?: StringFieldUpdateOperationsInput | string
-    ram?: NullableStringFieldUpdateOperationsInput | string | null
-    rom?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    brand?: BrandUpdateOneRequiredWithoutInStockNestedInput
-    productType?: ProductTypeUpdateOneRequiredWithoutInStockNestedInput
-  }
-
-  export type InStockUncheckedUpdateWithoutModelInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    IMEI?: StringFieldUpdateOperationsInput | string
-    brandId?: StringFieldUpdateOperationsInput | string
-    productTypeId?: StringFieldUpdateOperationsInput | string
-    purchasePrice?: IntFieldUpdateOperationsInput | number
-    price?: IntFieldUpdateOperationsInput | number
-    sold?: BoolFieldUpdateOperationsInput | boolean
-    color?: StringFieldUpdateOperationsInput | string
-    ram?: NullableStringFieldUpdateOperationsInput | string | null
-    rom?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type InStockUncheckedUpdateManyWithoutModelInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    IMEI?: StringFieldUpdateOperationsInput | string
-    brandId?: StringFieldUpdateOperationsInput | string
-    productTypeId?: StringFieldUpdateOperationsInput | string
-    purchasePrice?: IntFieldUpdateOperationsInput | number
-    price?: IntFieldUpdateOperationsInput | number
-    sold?: BoolFieldUpdateOperationsInput | boolean
-    color?: StringFieldUpdateOperationsInput | string
-    ram?: NullableStringFieldUpdateOperationsInput | string | null
-    rom?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type StockAndroidUpdateWithoutModelInput = {
@@ -29972,10 +27535,6 @@ export namespace Prisma {
      * @deprecated Use ModelDefaultArgs instead
      */
     export type ModelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ModelDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use InStockDefaultArgs instead
-     */
-    export type InStockArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = InStockDefaultArgs<ExtArgs>
     /**
      * @deprecated Use StockAndroidDefaultArgs instead
      */
