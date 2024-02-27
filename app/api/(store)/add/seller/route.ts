@@ -1,6 +1,6 @@
 // Import the Prisma Client
 import { prisma } from '@/lib/prisma';
-import { ProductType, Seller } from '@/prisma/generated/client';
+import { Seller } from '@/prisma/generated/client';
 
 // Use Prisma Client to insert the new user into the database
 async function getSeller() {

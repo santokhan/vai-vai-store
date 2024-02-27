@@ -2,7 +2,6 @@
 
 import { Brand, Model, ProductType } from '@/prisma/generated/client';
 import { Table } from 'flowbite-react';
-import { Edit } from 'iconsax-react';
 import React from 'react';
 
 export function ModelDataTable({ brands, types, models }: { brands: Brand[], types: ProductType[], models: Model[] }) {
