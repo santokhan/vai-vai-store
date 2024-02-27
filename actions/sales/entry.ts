@@ -19,7 +19,12 @@ export interface AddSalesProps {
 
 async function addSales(data: AddSalesProps) {
     try {
-        return await prisma.salesEntry.create({ data });
+        return await prisma.salesEntry.create({
+            data: {
+                ...data,
+                dueDate: data.due ? new Date() : null
+            }
+        });
     } catch (error) {
         console.error('Error creating model:', error);
     } finally {
