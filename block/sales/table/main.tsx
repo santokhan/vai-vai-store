@@ -14,30 +14,11 @@ import { inputClasses } from '@/components/table/tanstack/tw-classes';
 import THeadFilter from '@/components/table/tanstack/table-filter';
 import { TableTitle } from '@/components/table/table-header';
 import { ProductDetails } from './product-details-cols';
+import { Due } from './due';
+
 
 export default function SalesTable({ salesEntry }: { salesEntry: SalesEntry[] }) {
     const columns = useMemo<ColumnDef<SalesEntry>[]>(() => [
-        { id: 'seller', columns: [{ accessorKey: 'seller.name' }] },
-        {
-            id: 'discount',
-            columns: [{
-                id: 'discount',
-                accessorFn(row) {
-                    return row.discount || '';
-                }
-            }]
-        },
-        {
-            id: 'due',
-            columns: [{
-                id: 'due',
-                accessorFn(row) {
-                    return row.due || '';
-                }
-            }]
-        },
-        { id: 'customer phone', columns: [{ accessorKey: 'customer.phone' }] },
-        { id: 'customer name', columns: [{ accessorKey: 'customer.name' }] },
         {
             id: 'products',
             colSpan: 3,
@@ -52,6 +33,46 @@ export default function SalesTable({ salesEntry }: { salesEntry: SalesEntry[] })
             }]
         },
         {
+            id: 'due',
+            columns: [{
+                id: 'due',
+                cell({ row }) {
+                    const due = row.original.due || '';
+                    return <Due due={due} salesId={row.original.id} />;
+                }
+            }]
+        },
+        {
+            id: 'discount',
+            columns: [{
+                id: 'discount',
+                accessorFn(row) {
+                    return row.discount || '';
+                }
+            }]
+        },
+        { id: 'customer phone', columns: [{ accessorKey: 'customer.phone' }] },
+        { id: 'customer name', columns: [{ accessorKey: 'customer.name' }] },
+        { id: 'seller', columns: [{ accessorKey: 'seller.name' }] },
+        {
+            id: 'created at',
+            columns: [{
+                id: 'createdAt',
+                accessorFn({ createdAt }) {
+                    return createdAt?.toLocaleString();
+                }
+            }]
+        },
+        {
+            id: 'due date',
+            columns: [{
+                id: 'createdAt',
+                accessorFn({ due, dueDate }) {
+                    return due ? dueDate?.toLocaleString() : '';
+                }
+            }]
+        },
+        {
             id: 'action', columns: [{
                 id: 'action',
                 cell: ({ row }) => (
@@ -60,7 +81,7 @@ export default function SalesTable({ salesEntry }: { salesEntry: SalesEntry[] })
                         <ActionDelete handleClick={() => {
                             fetch(`${ORIGIN}/api/sales/delete?id=${row.original.id}`, {
                                 method: "DELETE"
-                            }).then(res => res.json()).then((data) => {
+                            }).then(res => res.json()).then(() => {
                                 window.location.reload();
                             })
                         }} />

@@ -3,6 +3,7 @@
 import { FC, useEffect, useState } from "react";
 import { JsonValue } from "@/prisma/generated/client/runtime/library";
 import { ORIGIN } from "@/utils/origin";
+import Button from "@/components/button/button";
 
 const Details: FC<{ data: any }> = ({ data }) => {
     const [stock, setstock] = useState<any>(null);
@@ -54,10 +55,23 @@ const Details: FC<{ data: any }> = ({ data }) => {
 }
 
 export const ProductDetails: FC<{ entity: JsonValue }> = ({ entity }) => {
-    return (
-        entity && Array.isArray(entity) &&
-        <div className="space-y-6">
-            {entity.map((e, i) => <Details key={i} data={e} />)}
-        </div>
-    )
+    const [viewDetails, setviewDetails] = useState(false);
+
+    function expandDetails() {
+        setviewDetails(true);
+    }
+
+    if (Array.isArray(entity)) {
+        return (
+            viewDetails ?
+                <div className="space-y-6">
+                    {entity.map((e, i) => <Details key={i} data={e} />)}
+                </div>
+                :
+                <Button size="sm" onClick={expandDetails}>View Details</Button>
+        )
+    } else {
+        return null;
+    }
+
 }

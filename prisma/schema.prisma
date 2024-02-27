@@ -155,7 +155,7 @@ model SalesEntry {
     sellerId   String    @db.ObjectId
     customer   Customer  @relation(fields: [customerId], references: [id])
     customerId String    @db.ObjectId
-    createdAt  DateTime? @default(now())
+    createdAt  DateTime  @default(now())
     entity     Json
 }
 
