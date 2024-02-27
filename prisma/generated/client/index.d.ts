@@ -13554,7 +13554,7 @@ export namespace Prisma {
     dueDate: Date | null
     sellerId: string
     customerId: string
-    createdAt: Date | null
+    createdAt: Date
     entity: JsonValue
     _count: SalesEntryCountAggregateOutputType | null
     _avg: SalesEntryAvgAggregateOutputType | null
@@ -13620,7 +13620,7 @@ export namespace Prisma {
       dueDate: Date | null
       sellerId: string
       customerId: string
-      createdAt: Date | null
+      createdAt: Date
       entity: Prisma.JsonValue
     }, ExtArgs["result"]["salesEntry"]>
     composites: {}
@@ -21555,7 +21555,7 @@ export namespace Prisma {
     dueDate?: DateTimeNullableFilter<"SalesEntry"> | Date | string | null
     sellerId?: StringFilter<"SalesEntry"> | string
     customerId?: StringFilter<"SalesEntry"> | string
-    createdAt?: DateTimeNullableFilter<"SalesEntry"> | Date | string | null
+    createdAt?: DateTimeFilter<"SalesEntry"> | Date | string
     entity?: JsonFilter<"SalesEntry">
     seller?: XOR<SellerRelationFilter, SellerWhereInput>
     customer?: XOR<CustomerRelationFilter, CustomerWhereInput>
@@ -21584,7 +21584,7 @@ export namespace Prisma {
     dueDate?: DateTimeNullableFilter<"SalesEntry"> | Date | string | null
     sellerId?: StringFilter<"SalesEntry"> | string
     customerId?: StringFilter<"SalesEntry"> | string
-    createdAt?: DateTimeNullableFilter<"SalesEntry"> | Date | string | null
+    createdAt?: DateTimeFilter<"SalesEntry"> | Date | string
     entity?: JsonFilter<"SalesEntry">
     seller?: XOR<SellerRelationFilter, SellerWhereInput>
     customer?: XOR<CustomerRelationFilter, CustomerWhereInput>
@@ -21616,7 +21616,7 @@ export namespace Prisma {
     dueDate?: DateTimeNullableWithAggregatesFilter<"SalesEntry"> | Date | string | null
     sellerId?: StringWithAggregatesFilter<"SalesEntry"> | string
     customerId?: StringWithAggregatesFilter<"SalesEntry"> | string
-    createdAt?: DateTimeNullableWithAggregatesFilter<"SalesEntry"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"SalesEntry"> | Date | string
     entity?: JsonWithAggregatesFilter<"SalesEntry">
   }
 
@@ -22763,7 +22763,7 @@ export namespace Prisma {
     discount: number
     due: number
     dueDate?: Date | string | null
-    createdAt?: Date | string | null
+    createdAt?: Date | string
     entity: InputJsonValue
     seller: SellerCreateNestedOneWithoutSalesEntryInput
     customer: CustomerCreateNestedOneWithoutSalesEntryInput
@@ -22776,7 +22776,7 @@ export namespace Prisma {
     dueDate?: Date | string | null
     sellerId: string
     customerId: string
-    createdAt?: Date | string | null
+    createdAt?: Date | string
     entity: InputJsonValue
   }
 
@@ -22784,7 +22784,7 @@ export namespace Prisma {
     discount?: IntFieldUpdateOperationsInput | number
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     entity?: InputJsonValue | InputJsonValue
     seller?: SellerUpdateOneRequiredWithoutSalesEntryNestedInput
     customer?: CustomerUpdateOneRequiredWithoutSalesEntryNestedInput
@@ -22796,7 +22796,7 @@ export namespace Prisma {
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sellerId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     entity?: InputJsonValue | InputJsonValue
   }
 
@@ -22807,7 +22807,7 @@ export namespace Prisma {
     dueDate?: Date | string | null
     sellerId: string
     customerId: string
-    createdAt?: Date | string | null
+    createdAt?: Date | string
     entity: InputJsonValue
   }
 
@@ -22815,7 +22815,7 @@ export namespace Prisma {
     discount?: IntFieldUpdateOperationsInput | number
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     entity?: InputJsonValue | InputJsonValue
   }
 
@@ -22825,7 +22825,7 @@ export namespace Prisma {
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sellerId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     entity?: InputJsonValue | InputJsonValue
   }
 
@@ -23796,6 +23796,17 @@ export namespace Prisma {
     phone?: SortOrder
     createdAt?: SortOrder
   }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
   export type JsonFilter<$PrismaModel = never> = 
     | PatchUndefined<
         Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
@@ -23858,6 +23869,20 @@ export namespace Prisma {
     discount?: SortOrder
     due?: SortOrder
   }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
   export type JsonWithAggregatesFilter<$PrismaModel = never> = 
     | PatchUndefined<
         Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
@@ -23871,17 +23896,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedJsonFilter<$PrismaModel>
     _max?: NestedJsonFilter<$PrismaModel>
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type ShopRentCountOrderByAggregateInput = {
@@ -23911,20 +23925,6 @@ export namespace Prisma {
 
   export type ShopRentSumOrderByAggregateInput = {
     amount?: SortOrder
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type InstallmentCountOrderByAggregateInput = {
@@ -25421,6 +25421,10 @@ export namespace Prisma {
     connect?: CustomerWhereUniqueInput
   }
 
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
   export type SellerUpdateOneRequiredWithoutSalesEntryNestedInput = {
     create?: XOR<SellerCreateWithoutSalesEntryInput, SellerUncheckedCreateWithoutSalesEntryInput>
     connectOrCreate?: SellerCreateOrConnectWithoutSalesEntryInput
@@ -25435,10 +25439,6 @@ export namespace Prisma {
     upsert?: CustomerUpsertWithoutSalesEntryInput
     connect?: CustomerWhereUniqueInput
     update?: XOR<XOR<CustomerUpdateToOneWithWhereWithoutSalesEntryInput, CustomerUpdateWithoutSalesEntryInput>, CustomerUncheckedUpdateWithoutSalesEntryInput>
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type ModelCreateNestedOneWithoutHistoryAndroidStockInput = {
@@ -25720,17 +25720,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
     isSet?: boolean
   }
-  export type NestedJsonFilter<$PrismaModel = never> = 
-    | PatchUndefined<
-        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<NestedJsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
-
-  export type NestedJsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-  }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -25756,13 +25745,24 @@ export namespace Prisma {
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
+  export type NestedJsonFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+  }
 
   export type SalesEntryCreateWithoutSellerInput = {
     id?: string
     discount: number
     due: number
     dueDate?: Date | string | null
-    createdAt?: Date | string | null
+    createdAt?: Date | string
     entity: InputJsonValue
     customer: CustomerCreateNestedOneWithoutSalesEntryInput
   }
@@ -25773,7 +25773,7 @@ export namespace Prisma {
     due: number
     dueDate?: Date | string | null
     customerId: string
-    createdAt?: Date | string | null
+    createdAt?: Date | string
     entity: InputJsonValue
   }
 
@@ -25812,7 +25812,7 @@ export namespace Prisma {
     dueDate?: DateTimeNullableFilter<"SalesEntry"> | Date | string | null
     sellerId?: StringFilter<"SalesEntry"> | string
     customerId?: StringFilter<"SalesEntry"> | string
-    createdAt?: DateTimeNullableFilter<"SalesEntry"> | Date | string | null
+    createdAt?: DateTimeFilter<"SalesEntry"> | Date | string
     entity?: JsonFilter<"SalesEntry">
   }
 
@@ -28058,7 +28058,7 @@ export namespace Prisma {
     discount: number
     due: number
     dueDate?: Date | string | null
-    createdAt?: Date | string | null
+    createdAt?: Date | string
     entity: InputJsonValue
     seller: SellerCreateNestedOneWithoutSalesEntryInput
   }
@@ -28069,7 +28069,7 @@ export namespace Prisma {
     due: number
     dueDate?: Date | string | null
     sellerId: string
-    createdAt?: Date | string | null
+    createdAt?: Date | string
     entity: InputJsonValue
   }
 
@@ -28794,7 +28794,7 @@ export namespace Prisma {
     due: number
     dueDate?: Date | string | null
     customerId: string
-    createdAt?: Date | string | null
+    createdAt?: Date | string
     entity: InputJsonValue
   }
 
@@ -28802,7 +28802,7 @@ export namespace Prisma {
     discount?: IntFieldUpdateOperationsInput | number
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     entity?: InputJsonValue | InputJsonValue
     customer?: CustomerUpdateOneRequiredWithoutSalesEntryNestedInput
   }
@@ -28812,7 +28812,7 @@ export namespace Prisma {
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     customerId?: StringFieldUpdateOperationsInput | string
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     entity?: InputJsonValue | InputJsonValue
   }
 
@@ -28821,7 +28821,7 @@ export namespace Prisma {
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     customerId?: StringFieldUpdateOperationsInput | string
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     entity?: InputJsonValue | InputJsonValue
   }
 
@@ -29896,7 +29896,7 @@ export namespace Prisma {
     due: number
     dueDate?: Date | string | null
     sellerId: string
-    createdAt?: Date | string | null
+    createdAt?: Date | string
     entity: InputJsonValue
   }
 
@@ -29904,7 +29904,7 @@ export namespace Prisma {
     discount?: IntFieldUpdateOperationsInput | number
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     entity?: InputJsonValue | InputJsonValue
     seller?: SellerUpdateOneRequiredWithoutSalesEntryNestedInput
   }
@@ -29914,7 +29914,7 @@ export namespace Prisma {
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sellerId?: StringFieldUpdateOperationsInput | string
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     entity?: InputJsonValue | InputJsonValue
   }
 
@@ -29923,7 +29923,7 @@ export namespace Prisma {
     due?: IntFieldUpdateOperationsInput | number
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sellerId?: StringFieldUpdateOperationsInput | string
-    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     entity?: InputJsonValue | InputJsonValue
   }
 
