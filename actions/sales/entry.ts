@@ -1,11 +1,11 @@
 'use server';
 
-import { addCustomer } from '@/app/api/(store)/sales/entry/create-customer';
-import subtractStockAccessories from '@/app/api/(store)/sales/entry/sale-accessories';
-import subtractStockAndroid from '@/app/api/(store)/sales/entry/sale-android';
-import subtractStockButton from '@/app/api/(store)/sales/entry/sale-button';
 import { APISalesEntity, APISalesEntry } from '@/app/api/(store)/sales/entry/type';
 import { prisma } from '@/lib/prisma';
+import subtractStockAccessories from './entry/sale-accessories';
+import subtractStockAndroid from './entry/sale-android';
+import subtractStockButton from './entry/sale-button';
+import { addCustomer } from './entry/create-customer';
 
 
 export interface AddSalesProps {
