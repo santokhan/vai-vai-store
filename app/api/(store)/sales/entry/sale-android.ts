@@ -1,20 +1,16 @@
 import { prisma } from "@/lib/prisma";
 
-export default async function subtractStockAndroid(stockId: string) {
+export default async function subtractStockAndroid(id: string) {
     try {
-        const updatedStockAndroid = await prisma.stockAndroid.update({
+        const updatedStockAndroid = await prisma.stockAndroid.delete({
             where: {
-                id: stockId
+                id
             },
-            data: {
-                sold: true,
-            }
         });
         return updatedStockAndroid;
     } catch (error) {
         console.error('Error creating model:', error);
     } finally {
-        // Close the Prisma Client connection
         await prisma.$disconnect();
     }
 }
