@@ -50,6 +50,7 @@ export default function SellerForm() {
                         }}
                         placeholder="0"
                         value={seller.discount || ''}
+                        min={0}
                     />
                 </InputBox>
                 <InputBox>
@@ -64,6 +65,7 @@ export default function SellerForm() {
                         }}
                         placeholder="0"
                         value={seller.due || ''}
+                        min={0}
                     />
                 </InputBox>
             </div>
