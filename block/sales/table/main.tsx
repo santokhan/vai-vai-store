@@ -4,7 +4,7 @@
 
 import { useMemo } from 'react';
 import { useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, flexRender, } from '@tanstack/react-table';
-import { SalesEntry } from '@/prisma/generated/client'
+import { ProductType, SalesEntry, Brand, Model } from '@/prisma/generated/client'
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import PageOutOf from '@/block/add/stock/table/page-number-out-of';
 import Actions, { ActionDelete, ActionViewInvoice } from '@/components/table/action';
@@ -15,9 +15,20 @@ import THeadFilter from '@/components/table/tanstack/table-filter';
 import { TableTitle } from '@/components/table/table-header';
 import { ProductDetails } from './product-details-cols';
 import { Due } from './due';
+import FilterSales from '@/block/form/sales/sales-filter';
 
+interface TypeBrandModel {
+    productTypes: ProductType[];
+    brands: Brand[];
+    models: Model[];
+}
 
-export default function SalesTable({ salesEntry }: { salesEntry: SalesEntry[] }) {
+interface Props {
+    salesEntry: SalesEntry[];
+    typeBrandModel: TypeBrandModel;
+}
+
+export default function SalesTable({ salesEntry, typeBrandModel }: Props) {
     const columns = useMemo<ColumnDef<SalesEntry>[]>(() => [
         {
             id: 'products',
@@ -91,17 +102,18 @@ export default function SalesTable({ salesEntry }: { salesEntry: SalesEntry[] })
         },
     ], [])
 
-    return <Table data={salesEntry} columns={columns} />
+    return <Table salesEntry={salesEntry} columns={columns} typeBrandModel={typeBrandModel} />
 }
 
-type TableProps = {
-    data: SalesEntry[]
+interface TableProps {
     columns: ColumnDef<SalesEntry>[];
+    salesEntry: SalesEntry[];
+    typeBrandModel: TypeBrandModel;
 }
 
-function Table({ data, columns }: TableProps) {
+function Table({ salesEntry, columns }: TableProps) {
     const table = useReactTable({
-        data,
+        salesEntry,
         columns,
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
@@ -114,6 +126,7 @@ function Table({ data, columns }: TableProps) {
     return (
         <div className="rounded-xl bg-white w-full p-6 space-y-4">
             <TableTitle>Sales Table</TableTitle>
+            {/* <FilterSales /> */}
             <div className="w-full overflow-x-auto">
                 <table className='w-full text-sm'>
                     <thead className='bg-gray-100'>
