@@ -1,6 +1,7 @@
 'use server';
 
 import { prisma } from "@/lib/prisma";
+import { Customer, SalesEntry, Seller } from "@/prisma/generated/client";
 
 export async function getSalesIndividual(id: string) {
     try {
@@ -23,12 +24,13 @@ export async function getSalesIndividual(id: string) {
 
 export async function getSalesMany() {
     try {
-        return await prisma.salesEntry.findMany({
+        const salesData: (SalesEntry & { customer: Customer; seller: Seller })[] = await prisma.salesEntry.findMany({
             include: {
                 customer: true,
                 seller: true
             }
         });
+        return salesData.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
     } catch (error) {
         console.error('Error creating model:', error);
     } finally {
