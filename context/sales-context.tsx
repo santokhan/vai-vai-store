@@ -14,6 +14,7 @@ export const SalesRowContext = createContext<{
     addToSales: (newSalesRow: SalesRowIncludeBrandModel) => void;
     removeFromSales: (stockId: string) => void;
     changeQuantity: (stockId: string, payload: 'plus' | 'minus') => void;
+    changePrice: (stockId: string, price: number) => void;
 } | null>(null);
 
 export default function SalesRowProvider({ children }: OnlyChildrenProps) {
@@ -42,6 +43,19 @@ export default function SalesRowProvider({ children }: OnlyChildrenProps) {
                             return {
                                 ...item,
                                 quantity: payload === 'plus' ? item.quantity! + 1 : item.quantity! - 1
+                            }
+                        }
+                        return item
+                    })
+                })
+            },
+            changePrice(stockId, price) {
+                setSalesEntity(prev => {
+                    return prev.map((item) => {
+                        if (item.stockId === stockId) {
+                            return {
+                                ...item,
+                                price
                             }
                         }
                         return item

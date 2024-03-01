@@ -22,13 +22,12 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
         return (
             <div className="rounded-lg overflow-hidden mt-6">
                 <table className="w-full">
-                    <thead className="bg-gray-100">
-                        <tr>
-                            <th className="text-start text-sm font-semibold uppercase p-3 text-gray-700">Type</th>
-                            <th className="text-start text-sm font-semibold uppercase p-3 text-gray-700">Brand</th>
-                            <th className="text-start text-sm font-semibold uppercase p-3 text-gray-700">Model</th>
-                            <th className="text-start text-sm font-semibold uppercase p-3 text-gray-700">Quantity</th>
-                            <th className="text-start text-sm font-semibold uppercase p-3 text-gray-700">Price</th>
+                    <thead className="bg-gray-100 text-start text-sm font-semibold uppercase">
+                        <tr className="whitespace-nowrap">
+                            <th className="p-2 text-gray-700 w-1/4">Brand & Model</th>
+                            <th className="p-2 text-gray-700 w-1/4">Quantity</th>
+                            <th className="p-2 text-gray-700 w-1/4">Price</th>
+                            <th className="p-2 text-gray-700 w-1/4">Total Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,51 +36,40 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
                             const getFunction = functionObject[row.type as keyof typeof functionObject];
                             const stockData: any = await getFunction(row.stockId);
 
-                            console.log(stockData);
-                            return null;
                             if (!stockData) {
                                 return null;
                             }
+
                             return (
                                 <tr key={i}>
-                                    <td className="text-gray-800 p-3 text-sm capitalize">{row.type}</td>
-                                    <td className="text-gray-800 p-3 text-sm capitalize">{stockData.brand.brandName}</td>
-                                    <td className="text-gray-800 p-3 text-sm capitalize">{stockData.model.model}</td>
-                                    <td className="text-gray-800 p-3 text-sm">{row.quantity}</td>
-                                    <td className="text-gray-800 p-3 text-sm">{totalPrice}</td>
+                                    <td className="text-gray-800 p-3 text-sm capitalize whitespace-nowrap">
+                                        {stockData.brand.brandName} {stockData.model.model}
+                                    </td>
+                                    <td className="text-gray-800 p-3 text-sm text-end">{row.quantity}</td>
+                                    <td className="text-gray-800 p-3 text-sm text-end">{row.price}</td>
+                                    <td className="text-gray-800 p-3 text-sm text-end">{totalPrice}</td>
                                 </tr>
                             )
                         })}
-                        <tr>
-                            <td className="py-1.5"></td>
-                            <td className="py-1.5"></td>
-                            <td className="py-1.5"></td>
-                            <td className="py-1.5"></td>
-                            <td className="py-1.5"></td>
-                        </tr>
-                        <tr>
-                            <td></td>
+                        <tr className="text-end">
                             <td></td>
                             <td></td>
                             <td className="py-1.5 px-3 font-semibold text-sm">Total</td>
                             <td className="py-1.5 px-3 font-semibold text-sm">{totalPrice}</td>
                         </tr>
-                        <tr>
-                            <td></td>
+                        <tr className="text-end">
                             <td></td>
                             <td></td>
                             <td className="py-1.5 px-3 font-semibold text-sm">Due</td>
                             <td className="py-1.5 px-3 font-semibold text-sm">{due}</td>
                         </tr>
-                        <tr>
-                            <td></td>
+                        <tr className="text-end">
                             <td></td>
                             <td></td>
                             <td className="py-1.5 px-3 font-semibold text-sm">Discount</td>
                             <td className="py-1.5 px-3 font-semibold text-sm">{salesEntry?.discount || 0}</td>
                         </tr>
-                        <tr>
-                            <td></td>
+                        <tr className="text-end">
                             <td></td>
                             <td></td>
                             <td className="py-1.5 px-3 font-semibold text-sm">Amount Paid</td>
