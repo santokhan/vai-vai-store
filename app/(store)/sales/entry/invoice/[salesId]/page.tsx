@@ -24,10 +24,10 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
                 <table className="w-full">
                     <thead className="bg-gray-100 text-start text-sm font-semibold uppercase">
                         <tr className="whitespace-nowrap">
-                            <th className="p-2 text-gray-700 w-1/4">Brand & Model</th>
-                            <th className="p-2 text-gray-700 w-1/4">Quantity</th>
-                            <th className="p-2 text-gray-700 w-1/4">Price</th>
-                            <th className="p-2 text-gray-700 w-1/4">Total Price</th>
+                            <th className="p-2 text-gray-700 w-5/12">Brand & Model</th>
+                            <th className="p-2 text-gray-700 w-2/12">Quantity</th>
+                            <th className="p-2 text-gray-700 w-2/12">Price</th>
+                            <th className="p-2 text-gray-700 w-3/12">Total Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,7 +43,7 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
                             return (
                                 <tr key={i}>
                                     <td className="text-gray-800 p-3 text-sm capitalize whitespace-nowrap">
-                                        {stockData.brand.brandName} {stockData.model.model}
+                                        {stockData.brand.brandName} {stockData.model.model} {stockData.IMEI ? '-' + stockData.IMEI : ''}
                                     </td>
                                     <td className="text-gray-800 p-3 text-sm text-end">{row.quantity}</td>
                                     <td className="text-gray-800 p-3 text-sm text-end">{row.price}</td>
