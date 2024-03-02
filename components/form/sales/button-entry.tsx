@@ -53,7 +53,7 @@ export default function ButtonSalesEntryForm({ onCloseForm, productType, brand, 
     async function onSearchStockButton() {
         if (formData.modelId) {
             setIsSearching(true);
-            const stock: StockButtonIncludeBrandModel | undefined = await getStockButtonByModel(formData.modelId, formData.color);
+            const stock: StockButtonIncludeBrandModel | undefined | null = await getStockButtonByModel(formData.modelId, formData.color);
             if (stock?.id) {
                 setFounded(stock);
             } else {
@@ -115,7 +115,7 @@ export default function ButtonSalesEntryForm({ onCloseForm, productType, brand, 
                         defaultOptionName='default'
                         value={formData.color}
                     />
-                    <InputBox>
+                    {/* <InputBox>
                         <label htmlFor="quantity" className="default">quantity</label>
                         <input
                             type="number"
@@ -130,7 +130,7 @@ export default function ButtonSalesEntryForm({ onCloseForm, productType, brand, 
                             required={true}
                             value={formData.quantity || ''}
                         />
-                    </InputBox>
+                    </InputBox> */}
                 </div>
 
                 {founded &&

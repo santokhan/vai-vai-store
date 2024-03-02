@@ -53,7 +53,7 @@ export default function AccessoriesSalesEntryForm({ onCloseForm, productType, br
     async function onSearchStockButton() {
         if (formData.modelId) {
             setIsSearching(true);
-            const stock: S_A_Include_B_M | undefined = await getAccessoriesByModel(formData.modelId);
+            const stock: S_A_Include_B_M | undefined | null = await getAccessoriesByModel(formData.modelId);
             if (stock?.id) {
                 setFounded(stock);
             } else {
@@ -115,7 +115,7 @@ export default function AccessoriesSalesEntryForm({ onCloseForm, productType, br
                         defaultOptionName='default'
                         value={formData.color}
                     />
-                    <InputBox>
+                    {/* <InputBox>
                         <label htmlFor="quantity" className="default">quantity</label>
                         <input
                             type="number"
@@ -130,7 +130,7 @@ export default function AccessoriesSalesEntryForm({ onCloseForm, productType, br
                             required={true}
                             value={formData.quantity || ''}
                         />
-                    </InputBox>
+                    </InputBox> */}
                 </div>
 
                 {
