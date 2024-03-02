@@ -36,27 +36,25 @@ export default function ButtonSalesEntryForm({ onCloseForm, productType, brand, 
 
     async function handleSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault();
-        if (formData.modelId && formData.color) {
-            setIsSearching(true);
-            try {
-                const foundedStock = await getStockButtonByModel(formData.modelId, formData.color);
-                if (foundedStock?.quantity) {
-                    addToSales({
-                        type: 'button',
-                        brand: foundedStock.brand.brandName,
-                        model: foundedStock.model.model,
-                        stockId: foundedStock.id,
-                        quantity: formData.quantity,
-                        price: foundedStock.sellingPrice,
-                    });
-                    setIsSearching(false);
-                    onCloseForm();
-                } else {
-                    toast(`Out of stock.`);
-                }
-            } catch (error) {
-                console.log(error);
+        setIsSearching(true);
+        try {
+            const foundedStock = await getStockButtonByModel(formData.modelId, formData.color);
+            if (foundedStock?.quantity) {
+                addToSales({
+                    type: 'button',
+                    brand: foundedStock.brand.brandName,
+                    model: foundedStock.model.model,
+                    stockId: foundedStock.id,
+                    quantity: formData.quantity,
+                    price: foundedStock.sellingPrice,
+                });
+                onCloseForm();
+            } else {
+                toast(`Out of stock.`);
             }
+            setIsSearching(false);
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -124,6 +122,7 @@ export default function ButtonSalesEntryForm({ onCloseForm, productType, brand, 
                         }}
                         defaultOptionName='default'
                         value={formData.color}
+                        required={true}
                     />
                     {/* <InputBox>
                         <label htmlFor="quantity" className="default">quantity</label>
