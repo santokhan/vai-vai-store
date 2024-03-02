@@ -7,6 +7,7 @@ import { getStockSingle } from "@/actions/stock/get";
 import Logo from "@/components/logo/logo";
 import { PRINT } from "@/components/print";
 import PrintWrapper from "@/components/print-wrapper";
+import { phoneNumbers } from "@/utils/company-details";
 
 const functionObject = {
     android: getStockSingle,
@@ -88,7 +89,7 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
                 <p className="text-gray-500">If you have any questions concerning this invoice, use the following contact information:</p>
                 <div className="mt-2">
                     <p className="block text-sm font-medium text-gray-800">
-                        Phone: 01744 683 125, 01922 349 151
+                        Phone: {phoneNumbers.join(", ")}
                     </p>
                 </div>
             </div>
