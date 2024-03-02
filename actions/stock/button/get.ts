@@ -24,7 +24,7 @@ export async function getButtonMany() {
     }
 }
 
-export async function getStockButtonByModel(modelId: string, color: string): Promise<StockButtonIncludeBrandModel | undefined> {
+export async function getStockButtonByModel(modelId: string, color: string): Promise<StockButtonIncludeBrandModel | undefined | null> {
     try {
         const founded = await prisma.stockButton.findFirst({
             where: {

@@ -24,7 +24,7 @@ export async function getAccessoriesMany() {
     }
 }
 
-export async function getAccessoriesByModel(modelId: string): Promise<S_A_Include_B_M | undefined> {
+export async function getAccessoriesByModel(modelId: string): Promise<S_A_Include_B_M | undefined | null> {
     try {
         const founded = await prisma.stockAccessories.findFirst({
             where: {
