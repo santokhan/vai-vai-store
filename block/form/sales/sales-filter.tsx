@@ -1,31 +1,28 @@
 'use client';
 
 import Button from '@/components/button/button';
-import FormContainer from '@/components/form-container';
 import InputBox from '@/components/form/input-box';
-import FormTitle from '@/components/form/title';
-import { Brand, Model, ProductType } from '@/prisma/generated/client';
+import { Brand, Model, ProductType, SalesEntry } from '@/prisma/generated/client';
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { toast } from 'react-toastify';
-import { addButtonStock } from '@/actions/stock/entry/button';
 
 export const initialState = {
     productTypeId: '',
     brandId: '',
     modelId: '',
-    startDate: new Date(),
-    endDate: new Date(),
+    startDate: new Date().toString(),
+    endDate: new Date().toString(),
 }
 
-interface ServerProps {
-    productType: ProductType[],
-    brand: Brand[],
-    model: Model[],
+interface Props {
+    productTypes: ProductType[],
+    brands: Brand[],
+    models: Model[],
+    filterData: (callBack: (entry: SalesEntry, i: number) => void) => void
 }
 
-const FilterSales: FC<ServerProps> = ({ productType, brand, model }) => {
-    const [formData, setFormData] = useState<typeof initialState>({ ...initialState, productTypeId: productType[0].id })
-    const [adding, setadding] = useState<boolean>(false);
+const FilterSales: FC<Props> = ({ productTypes, brands, models, filterData }) => {
+    const [formData, setFormData] = useState<typeof initialState>(initialState);
 
     function brandByType(brands: Brand[], productTypeId: string): Brand[] {
         if (brands && productTypeId) {
@@ -45,112 +42,98 @@ const FilterSales: FC<ServerProps> = ({ productType, brand, model }) => {
         e.preventDefault();
         const { productTypeId, brandId, modelId, startDate, endDate } = formData;
 
-        // if (productTypeId && brandId && modelId && startDate && endDate) {
-        //     setadding(true);
-        //     addButtonStock(formData).then(data => {
-        //         if (data) {
-        //             toast(data.message)
-        //             setadding(false);
-        //         }
-        //     }).catch(err => console.error)
-        // } else {
-        //     toast(`POST data is missing`)
-        // }
+        if (productTypeId || brandId || modelId || startDate || endDate) {
+            filterData((entry) => {
+                const entryCreatedAt = entry.createdAt.getTime();
+                const isFiltered = (
+                    // (!productTypeId || entry.productTypeId === productTypeId) &&
+                    // (!brandId || entry.brandId === brandId) &&
+                    // (!modelId || entry.modelId === modelId) &&
+                    (!startDate || entryCreatedAt >= new Date(startDate).getTime()) &&
+                    (!endDate || entryCreatedAt <= new Date(endDate).getTime())
+                );
+
+                return isFiltered;
+            });
+        } else {
+            toast(`Can not filter`);
+        }
     }
 
     return (
-        <section className='space-y-2'>
-            <FormTitle>Add Button</FormTitle>
-            <form onSubmit={handleSubmit} className='block space-y-4'>
-                <FormContainer>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                        <InputBox>
-                            <label htmlFor="productType" className="default">Product Type</label>
-                            <select
-                                className="default"
-                                name="productType"
-                                id="productType"
-                                value={formData.productTypeId}
-                                required={true}
-                                onChange={(e: ChangeEvent<HTMLSelectElement>) => { setFormData({ ...formData, productTypeId: e.target.value }) }}>
-                                <option value='' disabled>Default</option>
-                                {productType.map(({ id, type }: ProductType) =>
-                                    <option className='capitalize' value={id} key={id}>{type}</option>
-                                )}
-                            </select>
-                        </InputBox>
-                        <InputBox>
-                            <label htmlFor="brand" className="default">Choose brand</label>
-                            <select
-                                className="default"
-                                name="brand"
-                                id="brand"
-                                value={formData.brandId}
-                                required={true}
-                                onChange={(e: ChangeEvent<HTMLSelectElement>) => { setFormData({ ...formData, brandId: e.target.value }) }}>
-                                <option value='' disabled>Default</option>
-                                {formData.productTypeId && brandByType(brand, formData.productTypeId).map(({ id, brandName }: Brand, idx) =>
-                                    <option className='capitalize' value={id} key={id}>{brandName}</option>
-                                )}
-                            </select>
-                        </InputBox>
-                        <InputBox>
-                            <label htmlFor="model" className="default">Choose Model</label>
-                            <select
-                                className="default"
-                                name="model"
-                                id="model"
-                                value={formData.modelId}
-                                required={true}
-                                onChange={(e: ChangeEvent<HTMLSelectElement>) => { setFormData({ ...formData, modelId: e.target.value }) }}>
-                                <option value='' disabled>Default</option>
-                                {formData.brandId && modelByBrand(model, formData.brandId).map((model: Model, idx) =>
-                                    <option className='capitalize' value={model.id} key={idx}>{model.model}</option>
-                                )}
-                            </select>
-                        </InputBox>
-                        <InputBox>
-                            <label htmlFor="startDate" className="default">Start Date</label>
-                            <input
-                                type="date"
-                                id="startDate"
-                                name="startDate"
-                                min={1}
-                                onChange={(e) => {
-                                    setFormData(prev => ({ ...prev, startDate: new Date(e.target.value) }))
-                                }}
-                                className="default"
-                                placeholder="0"
-                                required={true}
-                                value={formData.startDate.toString()}
-                            />
-                        </InputBox>
-                        <InputBox>
-                            <label htmlFor="endDate" className="default">Start Date</label>
-                            <input
-                                type="date"
-                                id="endDate"
-                                name="endDate"
-                                min={1}
-                                onChange={(e) => {
-                                    setFormData(prev => ({ ...prev, endDate: new Date(e.target.value) }))
-                                }}
-                                className="default"
-                                placeholder="0"
-                                required={true}
-                                value={formData.endDate.toString()}
-                            />
-                        </InputBox>
-                    </div>
-                </FormContainer>
+        <form onSubmit={handleSubmit} className='block space-y-4'>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                {/* <InputBox htmlFor='productType' labelName='Product Type'>
+                    <select
+                        className="default"
+                        name="productType"
+                        id="productType"
+                        value={formData.productTypeId}
+                        onChange={(e: ChangeEvent<HTMLSelectElement>) => { setFormData({ ...formData, productTypeId: e.target.value }) }}>
+                        <option value='' disabled>Default</option>
+                        {productTypes.map(({ id, type }: ProductType) =>
+                            <option className='capitalize' value={id} key={id}>{type}</option>
+                        )}
+                    </select>
+                </InputBox>
+                <InputBox htmlFor='brand' labelName='Brand'>
+                    <select
+                        className="default"
+                        name="brand"
+                        id="brand"
+                        value={formData.brandId}
+                        onChange={(e: ChangeEvent<HTMLSelectElement>) => { setFormData({ ...formData, brandId: e.target.value }) }}>
+                        <option value='' disabled>Default</option>
+                        {formData.productTypeId && brandByType(brands, formData.productTypeId).map(({ id, brandName }: Brand, idx) =>
+                            <option className='capitalize' value={id} key={id}>{brandName}</option>
+                        )}
+                    </select>
+                </InputBox>
+                <InputBox htmlFor='model' labelName='Model'>
+                    <select
+                        className="default"
+                        name="model"
+                        id="model"
+                        value={formData.modelId}
+                        onChange={(e: ChangeEvent<HTMLSelectElement>) => { setFormData({ ...formData, modelId: e.target.value }) }}>
+                        <option value='' disabled>Default</option>
+                        {formData.brandId && modelByBrand(models, formData.brandId).map(({ id, model }: Model) =>
+                            <option className='capitalize' value={id} key={id}>{model}</option>
+                        )}
+                    </select>
+                </InputBox> */}
+                <InputBox htmlFor='startDate' labelName='Start Date'>
+                    <input
+                        type="date"
+                        id="startDate"
+                        name="startDate"
+                        max={new Date().toISOString().split("T")[0]}
+                        onChange={(e) => {
+                            setFormData(prev => ({ ...prev, startDate: e.target.value }))
+                        }}
+                        className="default"
+                        value={formData.startDate.toString()}
+                    />
+                </InputBox>
+                <InputBox htmlFor='endDate' labelName='End Date'>
+                    <input
+                        type="date"
+                        id="endDate"
+                        name="endDate"
+                        max={new Date().toISOString().split("T")[0]}
+                        onChange={(e) => {
+                            setFormData(prev => ({ ...prev, endDate: e.target.value }))
+                        }}
+                        className="default"
+                        value={formData.endDate.toString()}
+                    />
+                </InputBox>
+            </div>
 
-                <div>
-                    <Button variant="primary" disabled={adding}>
-                        {adding ? "adding..." : "add"}
-                    </Button>
-                </div>
-            </form>
-        </section>
+            <div>
+                <Button variant="primary">Filter</Button>
+            </div>
+        </form>
     );
 };
 
