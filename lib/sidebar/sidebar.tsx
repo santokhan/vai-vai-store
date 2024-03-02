@@ -29,10 +29,10 @@ export const sales: NavIncludeChild = {
             name: "table",
             path: "/table",
         },
-        {
-            name: "return",
-            path: "/return",
-        },
+        // {
+        //     name: "return",
+        //     path: "/return",
+        // },
     ],
 };
 
