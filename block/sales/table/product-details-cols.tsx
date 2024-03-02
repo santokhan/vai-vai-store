@@ -38,19 +38,16 @@ const Details: FC<{ data: any }> = ({ data }) => {
         return "Loading..."
     }
 
+    if (!stock) {
+        return "Not exist on stock"
+    }
+
     return (
-        <div>
-            {
-                stock ?
-                    <>
-                        <h4 className="capitalize font-semibold">{stock.brand.brandName} {stock.model.model}</h4>
-                        <div className="capitalize">Quantity: {data.quantity}</div>
-                        {stock.color && <div className="capitalize">Color: {stock.color}</div>}
-                        {/* <pre>{JSON.stringify(stock, null, 2)}</pre> */}
-                    </>
-                    : "Not exist on stock"
-            }
-        </div>
+        <>
+            <h4 className="font-semibold">{stock.brand.brandName} {stock.model.model}</h4>
+            {stock.IMEI ? <div>IMEI: {stock.IMEI}</div> : <div>Quantity: {data.quantity}</div>}
+            {stock.color && <div>Color: {stock.color}</div>}
+        </>
     )
 }
 
@@ -65,7 +62,9 @@ export const ProductDetails: FC<{ entity: JsonValue }> = ({ entity }) => {
         return (
             viewDetails ?
                 <div className="space-y-6">
-                    {entity.map((e, i) => <Details key={i} data={e} />)}
+                    {entity.map((e, i) =>
+                        <div key={i} className="capitalize"><Details data={e} /></div>
+                    )}
                 </div>
                 :
                 <Button size="sm" onClick={expandDetails}>View Details</Button>

@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, flexRender, } from '@tanstack/react-table';
 import { ProductType, SalesEntry, Brand, Model } from '@/prisma/generated/client'
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
@@ -17,7 +17,7 @@ import { ProductDetails } from './product-details-cols';
 import { Due } from './due';
 import FilterSales from '@/block/form/sales/sales-filter';
 
-interface TypeBrandModel {
+export interface TypeBrandModel {
     productTypes: ProductType[];
     brands: Brand[];
     models: Model[];
@@ -77,7 +77,7 @@ export default function SalesTable({ salesEntry, typeBrandModel }: Props) {
         {
             id: 'due date',
             columns: [{
-                id: 'createdAt',
+                id: 'dueDate',
                 accessorFn({ due, dueDate }) {
                     return due ? dueDate?.toLocaleString() : '';
                 }
@@ -111,9 +111,15 @@ interface TableProps {
     typeBrandModel: TypeBrandModel;
 }
 
-function Table({ salesEntry, columns }: TableProps) {
+function Table({ salesEntry, columns, typeBrandModel }: TableProps) {
+    const [data, setData] = useState<SalesEntry[]>(salesEntry);
+
+    function filterData(callBack: (entry: SalesEntry, i: number) => void) {
+        setData(salesEntry.filter(callBack));
+    }
+
     const table = useReactTable({
-        salesEntry,
+        data,
         columns,
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
@@ -124,9 +130,10 @@ function Table({ salesEntry, columns }: TableProps) {
     const headers = table.getHeaderGroups()[1].headers;
 
     return (
-        <div className="rounded-xl bg-white w-full p-6 space-y-4">
+        <div className="rounded-xl bg-white w-full p-6 space-y-6">
             <TableTitle>Sales Table</TableTitle>
-            {/* <FilterSales /> */}
+            <FilterSales filterData={filterData} {...typeBrandModel} />
+            <hr />
             <div className="w-full overflow-x-auto">
                 <table className='w-full text-sm'>
                     <thead className='bg-gray-100'>
