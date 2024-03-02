@@ -17,14 +17,17 @@ import { APISalesEntry } from "@/app/api/(store)/sales/entry/type";
 import { ServerProps } from "@/block/form/stock/type";
 import { AddSalesEntry } from "@/actions/sales/entry";
 import { toast } from "react-toastify";
-import redirectToInvoice from "@/actions/redirect-to/invoice";
+// import redirectToInvoice from "@/actions/redirect-to/invoice";
+import { useRouter } from "next/navigation";
 
 export default function SalesEntryForm({ productType, brand, model }: ServerProps) {
     const [isOpenForm, setIsOpenForm] = useState<ProductTypeKeys | ''>('');
-    const [adding, setAdding] = useState<boolean>(false);
+    // const [adding, setAdding] = useState<boolean>(false);
+    const [submitionStatus, setsubmitionStatus] = useState<'Checkout' | 'Adding...' | 'Generate Invoice...'>('Checkout');
     const { salesEntity } = useSalesRowContext();
     const { customer } = useCustomerContext();
     const { seller } = useSellerContext();
+    const router = useRouter();
 
     function onCheckout() {
         if (customer.phone === '') {
@@ -32,7 +35,7 @@ export default function SalesEntryForm({ productType, brand, model }: ServerProp
         } else {
             if (seller.sellerId) {
                 if (confirm('Click OK if you wanna checkout')) {
-                    setAdding(true);
+                    setsubmitionStatus('Adding...');
                     const postData: APISalesEntry = {
                         salesEntity: salesEntity.map(({ stockId, quantity, price, type }) => {
                             // I need only below keys for APISalesEntry
@@ -43,14 +46,13 @@ export default function SalesEntryForm({ productType, brand, model }: ServerProp
                     };
 
                     AddSalesEntry(postData).then(data => {
+                        setsubmitionStatus('Generate Invoice...');
                         if (data.id) {
-                            redirectToInvoice(data.id).catch(err => {
-                                console.error(err);
-                            });
+                            router.push(`/sales/entry/invoice/${data.id}`);
+                            setsubmitionStatus('Checkout');
                         } else {
                             toast(data.message);
                         }
-                        setAdding(false);
                     })
                 }
             } else {
@@ -77,8 +79,8 @@ export default function SalesEntryForm({ productType, brand, model }: ServerProp
                 <>
                     <CustomerForm />
                     <SellerForm />
-                    <Button variant="primary" onClick={onCheckout} disabled={adding}>
-                        <ShoppingCart className="w-5 h-5" />{adding ? "Adding..." : "Checkout"}
+                    <Button variant="primary" onClick={onCheckout} disabled={submitionStatus.includes("...")}>
+                        <ShoppingCart className="w-5 h-5" />{submitionStatus}
                     </Button>
                 </>
             }
