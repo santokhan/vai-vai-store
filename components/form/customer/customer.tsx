@@ -17,7 +17,7 @@ const CustomerForm = () => {
                         type="text"
                         id="name"
                         className="default"
-                        placeholder="Santo"
+                        placeholder="Rashedul Islam"
                         onChange={(e: ChangeEvent<HTMLInputElement>) => { setCustomerData('name', e.target.value) }}
                     />
                 </InputBox>
