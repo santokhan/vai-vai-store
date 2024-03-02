@@ -1,24 +1,44 @@
-import { FC, useState } from 'react';
+'use client';
+import { FC, useState, useEffect } from 'react';
 import { Table } from 'flowbite-react';
 import Button from '../button/button';
-import { Add, Check, Minus, TickCircle } from 'iconsax-react';
+import { Add, Minus, TickCircle } from 'iconsax-react';
 import { ProductTypeKeys, productTypes } from '@/utils/product-type';
 import { SalesRowIncludeBrandModel, useSalesRowContext } from '@/context/sales-context';
 import FormTitle from '../form/title';
 import Actions, { ActionEdit } from '../table/action';
+import getMaxQuantity from '@/actions/stock/get-max-quantity';
+import { toast } from 'react-toastify';
 
-const ControlQuantity: FC<{ stockId: string; quantity: number }> = ({ stockId, quantity }) => {
+const ControlQuantity: FC<{ stockId: string; quantity: number; type: ProductTypeKeys }> = ({ stockId, quantity, type }) => {
     const { changeQuantity } = useSalesRowContext();
+    const [max, setmax] = useState(quantity);
+
+    useEffect(() => {
+        getMaxQuantity(stockId, type).then(res => {
+            if (res) {
+                setmax(res);
+            }
+        }).catch(err => { console.error(err) })
+    }, [stockId, type])
+
+    const quantityButtonStyle = "grid h-8 w-8 place-items-center hover:bg-gray-100 focus:outline-none"
 
     return (
         <div className='inline-flex w-auto max-w-[6rem] items-center'>
             <button type="button" onClick={() => { changeQuantity(stockId, 'minus') }}
-                className="grid h-8 w-8 place-items-center hover:bg-gray-100 focus:outline-none">
+                className={quantityButtonStyle}>
                 <Minus className="w-4 h-4" />
             </button>
             <span className='p-2'>{quantity}</span>
-            <button type="button" onClick={() => { changeQuantity(stockId, 'plus') }}
-                className="grid h-8 w-8 place-items-center hover:bg-gray-100 focus:outline-none">
+            <button type="button" onClick={() => {
+                if (quantity < max) {
+                    changeQuantity(stockId, 'plus');
+                } else {
+                    toast(`Maximum stock quantity is ${max}`);
+                }
+            }}
+                className={quantityButtonStyle}>
                 <Add className="w-4 h-4" />
             </button>
         </div>
@@ -94,7 +114,7 @@ const SalesRow: FC<Props> = ({ onOpenForm }) => {
                                         row.type == 'android' ?
                                             row.quantity
                                             :
-                                            <ControlQuantity stockId={row.stockId} quantity={row.quantity} />
+                                            <ControlQuantity stockId={row.stockId} quantity={row.quantity} type={row.type} />
                                     }
                                 </Table.Cell>
                                 <Table.Cell><EditablePrice price={row.price} stockId={row.stockId} /></Table.Cell>
