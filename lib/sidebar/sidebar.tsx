@@ -94,8 +94,16 @@ export const stock: NavIncludeChild = {
             path: "/entry/accessories"
         },
         {
-            name: "table",
-            path: "/table"
+            name: "table android",
+            path: "/table/android"
+        },
+        {
+            name: "table button",
+            path: "/table/button"
+        },
+        {
+            name: "table accessories",
+            path: "/table/accessories"
         },
     ],
 };
