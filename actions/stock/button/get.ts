@@ -30,9 +30,7 @@ export async function getStockButtonByModel(modelId: string, color: string): Pro
             where: {
                 modelId,
                 color,
-                quantity: {
-                    gt: 0
-                }
+
             },
             include: {
                 brand: true,

@@ -13,11 +13,14 @@ import { toast } from 'react-toastify';
 const ControlQuantity: FC<{ stockId: string; quantity: number; type: ProductTypeKeys }> = ({ stockId, quantity, type }) => {
     const { changeQuantity } = useSalesRowContext();
     const [max, setmax] = useState(quantity);
+    const [isLoading, setisLoading] = useState(false);
 
     useEffect(() => {
+        setisLoading(true)
         getMaxQuantity(stockId, type).then(res => {
             if (res) {
                 setmax(res);
+                setisLoading(false);
             }
         }).catch(err => { console.error(err) })
     }, [stockId, type])
@@ -25,23 +28,26 @@ const ControlQuantity: FC<{ stockId: string; quantity: number; type: ProductType
     const quantityButtonStyle = "grid h-8 w-8 place-items-center hover:bg-gray-100 focus:outline-none"
 
     return (
-        <div className='inline-flex w-auto max-w-[6rem] items-center'>
-            <button type="button" onClick={() => { changeQuantity(stockId, 'minus') }}
-                className={quantityButtonStyle}>
-                <Minus className="w-4 h-4" />
-            </button>
-            <span className='p-2'>{quantity}</span>
-            <button type="button" onClick={() => {
-                if (quantity < max) {
-                    changeQuantity(stockId, 'plus');
-                } else {
-                    toast(`Maximum stock quantity is ${max}`);
-                }
-            }}
-                className={quantityButtonStyle}>
-                <Add className="w-4 h-4" />
-            </button>
-        </div>
+        isLoading ?
+            "Loading..."
+            :
+            <div className='inline-flex w-auto max-w-[6rem] items-center'>
+                <button type="button" onClick={() => { changeQuantity(stockId, 'minus') }}
+                    className={quantityButtonStyle}>
+                    <Minus className="w-4 h-4" />
+                </button>
+                <span className='p-2'>{quantity}</span>
+                <button type="button" onClick={() => {
+                    if (quantity < max) {
+                        changeQuantity(stockId, 'plus');
+                    } else {
+                        toast(`Maximum stock quantity is ${max}`);
+                    }
+                }}
+                    className={quantityButtonStyle}>
+                    <Add className="w-4 h-4" />
+                </button>
+            </div>
     );
 }
 

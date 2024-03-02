@@ -36,32 +36,41 @@ export default function AccessoriesSalesEntryForm({ onCloseForm, productType, br
 
     async function handleSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault();
-        if (founded) {
-            const entity: SalesRowIncludeBrandModel = {
-                type: 'accessories',
-                brand: founded.brand.brandName,
-                model: founded.model.model,
-                stockId: founded.id,
-                quantity: formData.quantity,
-                price: founded.sellingPrice,
+        setIsSearching(true);
+
+        try {
+            const founded: S_A_Include_B_M | undefined | null = await getAccessoriesByModel(formData.modelId);
+            if (founded?.quantity) {
+                addToSales({
+                    type: 'accessories',
+                    brand: founded.brand.brandName,
+                    model: founded.model.model,
+                    stockId: founded.id,
+                    quantity: formData.quantity,
+                    price: founded.sellingPrice,
+                });
+                onCloseForm();
+            } else {
+                toast(`Out of stock.`);
             }
-            addToSales(entity);
-            onCloseForm();
+            setIsSearching(false);
+        } catch (error) {
+            console.log(error);
         }
     }
 
-    async function onSearchStockButton() {
-        if (formData.modelId) {
-            setIsSearching(true);
-            const stock: S_A_Include_B_M | undefined | null = await getAccessoriesByModel(formData.modelId);
-            if (stock?.id) {
-                setFounded(stock);
-            } else {
-                toast(`No stock found`);
-            }
-            setIsSearching(false);
-        }
-    }
+    // async function onSearchStockButton() {
+    //     if (formData.modelId) {
+    //         setIsSearching(true);
+    //         const stock: S_A_Include_B_M | undefined | null = await getAccessoriesByModel(formData.modelId);
+    //         if (stock?.id) {
+    //             setFounded(stock);
+    //         } else {
+    //             toast(`No stock found`);
+    //         }
+    //         setIsSearching(false);
+    //     }
+    // }
 
     return (
         <FormContainer>
@@ -70,7 +79,7 @@ export default function AccessoriesSalesEntryForm({ onCloseForm, productType, br
                 <CloseForm onClick={onCloseForm} />
             </div>
             <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <InputBox>
                         <label htmlFor="brand" className="default">Brand Name</label>
                         <select
@@ -115,7 +124,8 @@ export default function AccessoriesSalesEntryForm({ onCloseForm, productType, br
                         defaultOptionName='default'
                         value={formData.color}
                     />
-                    {/* <InputBox>
+                    {/* 
+                    <InputBox>
                         <label htmlFor="quantity" className="default">quantity</label>
                         <input
                             type="number"
@@ -130,10 +140,11 @@ export default function AccessoriesSalesEntryForm({ onCloseForm, productType, br
                             required={true}
                             value={formData.quantity || ''}
                         />
-                    </InputBox> */}
+                    </InputBox> 
+                    */}
                 </div>
 
-                {
+                {/* {
                     founded &&
                     <FoundedProductTable obj={{
                         'brand name': founded.brand.brandName,
@@ -142,16 +153,16 @@ export default function AccessoriesSalesEntryForm({ onCloseForm, productType, br
                         'available quantity': founded.quantity,
                         'color': founded.color,
                     }} />
-                }
+                } */}
 
                 <div className="">
                     {
-                        founded ?
-                            <Button variant="primary">add</Button>
-                            :
-                            <button onClick={onSearchStockButton} className='border h-11 aspect-square bg-gray-100 rounded-lg grid place-items-center hover:bg-gray-50'>
-                                {isSearching ? '...' : <SearchNormal className='w-5 h-5' />}
-                            </button>
+                        // founded ?
+                        //     <Button variant="primary">add</Button>
+                        //     :
+                        <button className='border h-11 aspect-square bg-gray-100 rounded-lg grid place-items-center hover:bg-gray-50'>
+                            {isSearching ? '...' : <SearchNormal className='w-5 h-5' />}
+                        </button>
                     }
                 </div>
             </form>

@@ -82,8 +82,16 @@ export const stock: NavIncludeChild = {
     icon: <ShoppingCart className="w-5 h-5" />,
     children: [
         {
-            name: "entry",
-            path: "/entry"
+            name: "entry android",
+            path: "/entry/android"
+        },
+        {
+            name: "entry button",
+            path: "/entry/button"
+        },
+        {
+            name: "entry accessories",
+            path: "/entry/accessories"
         },
         {
             name: "table",
