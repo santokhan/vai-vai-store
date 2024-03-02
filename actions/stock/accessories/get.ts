@@ -28,16 +28,17 @@ export async function getAccessoriesByModel(modelId: string): Promise<S_A_Includ
     try {
         const founded = await prisma.stockAccessories.findFirst({
             where: {
-                modelId
+                modelId,
+                quantity: {
+                    gt: 0
+                }
             },
             include: {
                 brand: true,
                 model: true,
             }
         });
-        if (founded) {
-            return founded;
-        }
+        return founded;
     } catch (error) {
         console.error('Data does not exist ', error);
     } finally {

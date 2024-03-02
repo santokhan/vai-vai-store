@@ -29,14 +29,17 @@ export async function getStockButtonByModel(modelId: string, color: string): Pro
         const founded = await prisma.stockButton.findFirst({
             where: {
                 modelId,
-                color
+                color,
+                quantity: {
+                    gt: 0
+                }
             },
             include: {
                 brand: true,
                 model: true,
             }
         });
-        return founded || undefined;
+        return founded;
     } catch (error) {
         console.error('Failed to read data ', error);
     } finally {
