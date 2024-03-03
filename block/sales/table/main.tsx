@@ -4,7 +4,7 @@
 
 import { useMemo, useState } from 'react';
 import { useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, flexRender, } from '@tanstack/react-table';
-import { ProductType, SalesEntry, Brand, Model } from '@/prisma/generated/client'
+import { ProductType, Brand, Model } from '@/prisma/generated/client'
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import PageOutOf from '@/block/add/stock/table/page-number-out-of';
 import Actions, { ActionDelete, ActionViewInvoice } from '@/components/table/action';
@@ -20,6 +20,8 @@ import formatCurrency from '@/utils/currency-formatter';
 import downloadSalesCSV from '@/actions/sales/download-csv';
 import ExportButtonGroup from '@/components/export-button';
 import downloadCSV from '@/components/download-csv';
+import { SalesInclude_C_S } from '@/actions/sales/get';
+import { getStockByType } from '@/actions/stock/get-stock-by-type';
 
 export interface TypeBrandModel {
     productTypes: ProductType[];
@@ -28,12 +30,12 @@ export interface TypeBrandModel {
 }
 
 interface Props {
-    salesEntry: SalesEntry[];
+    salesEntry: SalesInclude_C_S[];
     typeBrandModel: TypeBrandModel;
 }
 
 export default function SalesTable({ salesEntry, typeBrandModel }: Props) {
-    const columns = useMemo<ColumnDef<SalesEntry>[]>(() => [
+    const columns = useMemo<ColumnDef<SalesInclude_C_S>[]>(() => [
         {
             id: 'products',
             colSpan: 3,
@@ -110,17 +112,16 @@ export default function SalesTable({ salesEntry, typeBrandModel }: Props) {
 }
 
 interface TableProps {
-    columns: ColumnDef<SalesEntry>[];
-    salesEntry: SalesEntry[];
+    columns: ColumnDef<SalesInclude_C_S>[];
+    salesEntry: SalesInclude_C_S[];
     typeBrandModel: TypeBrandModel;
 }
 
 function Table({ salesEntry, columns, typeBrandModel }: TableProps) {
-    const [data, setData] = useState<SalesEntry[]>(salesEntry);
+    const [data, setData] = useState<SalesInclude_C_S[]>(salesEntry);
     const [downloadingCSV, setDownloadingCSV] = useState(false);
-    // const [downloadingExcel, setDownloadingExcel] = useState(false);
 
-    function filterData(callBack: (entry: SalesEntry, i: number) => void) {
+    function filterData(callBack: (entry: SalesInclude_C_S, i: number) => void) {
         setData(salesEntry.filter(callBack));
     }
 
@@ -152,55 +153,62 @@ function Table({ salesEntry, columns, typeBrandModel }: TableProps) {
         return totalPrice;
     }
 
-    // function exportToExcel(jsonData: any, filename: string) {
-    //     jsonexport(jsonData, { rowDelimiter: "\t" }, function (err: Error, csv: string) {
-    //         if (err) return console.error(err);
-    //         const blob = new Blob([csv], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-    //         const link = document.createElement('a');
-    //         link.href = URL.createObjectURL(blob);
-    //         link.download = filename + ".xlsx";
-
-    //         // Trigger download
-    //         document.body.appendChild(link);
-    //         link.click();
-
-    //         // Cleanup
-    //         document.body.removeChild(link);
-    //         URL.revokeObjectURL(link.href);
-    //     });
-    // }
-
     async function tableExportCSV() {
         setDownloadingCSV(true);
+
+        const tableToJSON = table.getFilteredRowModel().rows.map(row => {
+            const og = row.original;
+            return {
+                id: og.id,
+                due: og.due,
+                dueDate: og.dueDate,
+                discount: og.discount,
+                customerName: og.customer.name,
+                customerPhone: og.customer.phone,
+                seller: og.seller.name,
+                entity: JSON.parse(JSON.stringify(og.entity)),
+                createdAt: og.createdAt,
+            }
+        })
+
         try {
-            const json = await downloadSalesCSV();
-            if (!json) { return; }
+            const flattenJSON = await Promise.all(tableToJSON.map(
+                async (json: typeof tableToJSON[0]) => await Promise.all(
+                    json.entity.map(
+                        async (entity: Record<string, any>, i: number) => {
+                            const fromSalesRow = {
+                                id: json.id,
+                                due: i === 0 ? json.due : "N/A",
+                                dueDate: i === 0 ? json.dueDate : "N/A",
+                                discount: i === 0 ? json.discount : "N/A",
+                                customerName: i === 0 ? json.customerName : "N/A",
+                                customerPhone: i === 0 ? json.customerPhone : "N/A",
+                                seller: i === 0 ? json.seller : "N/A",
+                                createdAt: i === 0 ? json.createdAt : "N/A",
+                            }
 
-            const filteredJSON = json.map(({ id, entity, due, discount, customer, seller }: any) => {
-                return entity.map(
-                    ({ brand, model, quantity, price, IMEI }: any, i: number) => (
-                        {
-                            salesId: id,
-                            brand: brand.brandName,
-                            model: model.model,
-                            IMEI: IMEI ? IMEI.toString() : "",
-                            quantity: quantity || 1,
-                            price: price,
-                            // parent data
-                            due: i === 0 ? due : "",
-                            discount: i === 0 ? discount : "",
-                            customerName: i === 0 ? customer.name : "",
-                            customerPhone: i === 0 ? customer.phone : "",
-                            seller: i === 0 ? seller.name : "",
+                            if (!entity.type) { return fromSalesRow; }
+
+                            const stock = await getStockByType(entity.type, entity.stockId);
+
+                            if (!stock) { return fromSalesRow; }
+
+                            return {
+                                ...fromSalesRow,
+                                brand: stock.brand.brandName || "N/A",
+                                model: stock.model.model || "N/A",
+                                price: entity.price,
+                                quantity: entity.quantity,
+                            }
                         }
-                    )
-                ).flat();
-            }).flat();
+                    ).flat()
+                )
+            ).flat())
 
-            downloadCSV(filteredJSON, 'sales');
+            downloadCSV(flattenJSON, 'sales');
             setDownloadingCSV(false);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 

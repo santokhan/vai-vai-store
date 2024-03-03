@@ -3,6 +3,11 @@
 import { prisma } from "@/lib/prisma";
 import { Customer, SalesEntry, Seller } from "@/prisma/generated/client";
 
+export interface SalesInclude_C_S extends SalesEntry {
+    customer: Customer;
+    seller: Seller;
+}
+
 export async function getSalesIndividual(id: string) {
     try {
         return await prisma.salesEntry.findFirst({
@@ -22,7 +27,7 @@ export async function getSalesIndividual(id: string) {
     }
 }
 
-export async function getSalesMany() {
+export async function getSalesMany(): Promise<SalesInclude_C_S[] | undefined> {
     try {
         const salesData: (SalesEntry & { customer: Customer; seller: Seller })[] = await prisma.salesEntry.findMany({
             include: {

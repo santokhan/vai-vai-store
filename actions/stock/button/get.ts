@@ -3,7 +3,7 @@
 import { prisma } from '@/lib/prisma';
 import { Brand, Model, StockButton } from '@/prisma/generated/client';
 
-export interface StockButtonIncludeBrandModel extends StockButton {
+export interface BtnIncBM extends StockButton {
     model: Model;
     brand: Brand
 }
@@ -24,7 +24,7 @@ export async function getButtonMany() {
     }
 }
 
-export async function getStockButtonByModel(modelId: string, color: string): Promise<StockButtonIncludeBrandModel | undefined | null> {
+export async function getStockButtonByModel(modelId: string, color: string): Promise<BtnIncBM | undefined | null> {
     try {
         const founded = await prisma.stockButton.findFirst({
             where: {
@@ -45,7 +45,7 @@ export async function getStockButtonByModel(modelId: string, color: string): Pro
     }
 }
 
-export async function getStockButtonById(id: string): Promise<StockButtonIncludeBrandModel | undefined> {
+export async function getStockButtonById(id: string): Promise<BtnIncBM | undefined> {
     try {
         const founded = await prisma.stockButton.findFirst({
             where: {

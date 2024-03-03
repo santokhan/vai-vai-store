@@ -3,12 +3,12 @@
 import { prisma } from '@/lib/prisma';
 import { Brand, Model, StockAndroid } from '@/prisma/generated/client';
 
-export interface StockAndroidInclude extends StockAndroid {
+export interface AnIncBM extends StockAndroid {
     brand: Brand;
     model: Model;
 }
 
-export async function getStockAndroidById(stockId: string): Promise<StockAndroidInclude | undefined | null> {
+export async function getStockAndroidById(stockId: string): Promise<AnIncBM | undefined | null> {
     try {
         const stockAndroid = await prisma.stockAndroid.findFirst({
             where: {

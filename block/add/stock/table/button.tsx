@@ -12,12 +12,12 @@ import THeadFilter from '@/components/table/tanstack/table-filter'
 import { inputClasses } from '@/components/table/tanstack/tw-classes'
 import Actions, { ActionDelete } from '@/components/table/action'
 import { deleteStockButton } from '@/actions/stock/button/delete';
-import { StockButtonIncludeBrandModel } from '@/actions/stock/button/get';
+import { BtnIncBM } from '@/actions/stock/button/get';
 import ExportButtonGroup from '@/components/export-button';
 import downloadCSV from '@/components/download-csv';
 
-export default function StockButtonTable({ stockButton }: { stockButton: StockButtonIncludeBrandModel[] }) {
-    const columns = useMemo<ColumnDef<StockButtonIncludeBrandModel>[]>(() => [
+export default function StockButtonTable({ stockButton }: { stockButton: BtnIncBM[] }) {
+    const columns = useMemo<ColumnDef<BtnIncBM>[]>(() => [
         {
             id: 'Brand',
             columns: [
@@ -84,8 +84,8 @@ export default function StockButtonTable({ stockButton }: { stockButton: StockBu
 }
 
 type TableProps = {
-    data: StockButtonIncludeBrandModel[]
-    columns: ColumnDef<StockButtonIncludeBrandModel>[];
+    data: BtnIncBM[]
+    columns: ColumnDef<BtnIncBM>[];
 }
 
 function Table({ data, columns }: TableProps) {
