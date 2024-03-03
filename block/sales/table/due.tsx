@@ -39,10 +39,12 @@ export const Due: FC<{ due: string | number, salesId: string }> = ({ due, salesI
     if (!due) { return null; }
 
     return (
-        <div className=''>
+        <div>
             <div className="flex gap-2 items-center">
-                {due}
-                <ActionPayDue handleClick={openModal} />
+                <div className="w-1/2">{due}</div>
+                <div className="w-1/2">
+                    <ActionPayDue handleClick={openModal} />
+                </div>
             </div>
 
             <Transition appear show={isOpen} as={Fragment}>

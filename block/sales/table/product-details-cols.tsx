@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useEffect, useState } from "react";
+import { FC, Fragment, useEffect, useState } from "react";
 import { JsonValue } from "@/prisma/generated/client/runtime/library";
 import { ORIGIN } from "@/utils/origin";
 import Button from "@/components/button/button";
@@ -42,12 +42,19 @@ const Details: FC<{ data: any }> = ({ data }) => {
         return "Not exist on stock"
     }
 
+    const list = [
+        `${stock.brand.brandName} ${stock.model.model}`,
+        ["Color", stock.color],
+        stock.IMEI ? ["IMEI", stock.IMEI] : ["Quantity", data.quantity],
+        ["Price", data.price],
+    ]
+
     return (
-        <>
-            <h4 className="font-semibold">{stock.brand.brandName} {stock.model.model}</h4>
-            {stock.IMEI ? <div>IMEI: {stock.IMEI}</div> : <div>Quantity: {data.quantity}</div>}
-            {stock.color && <div>Color: {stock.color}</div>}
-        </>
+        list.map((e, i) =>
+            <Fragment key={i}>
+                {typeof e === "string" ? <h4 className="font-semibold">{e}</h4> : <div>{e[0]}: {e[1]}</div>}
+            </Fragment>
+        )
     )
 }
 

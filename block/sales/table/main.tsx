@@ -16,6 +16,10 @@ import { TableTitle } from '@/components/table/table-header';
 import { ProductDetails } from './product-details-cols';
 import { Due } from './due';
 import FilterSales from '@/block/form/sales/sales-filter';
+import formatCurrency from '@/utils/currency-formatter';
+import downloadSalesCSV from '@/actions/sales/download-csv';
+import jsonexport from 'jsonexport';
+import ExportButtonGroup from '@/components/export-button';
 
 export interface TypeBrandModel {
     productTypes: ProductType[];
@@ -54,6 +58,15 @@ export default function SalesTable({ salesEntry, typeBrandModel }: Props) {
             }]
         },
         {
+            id: 'due date',
+            columns: [{
+                id: 'dueDate',
+                accessorFn({ due, dueDate }) {
+                    return due ? dueDate?.toLocaleString() : '';
+                }
+            }]
+        },
+        {
             id: 'discount',
             columns: [{
                 id: 'discount',
@@ -71,15 +84,6 @@ export default function SalesTable({ salesEntry, typeBrandModel }: Props) {
                 id: 'createdAt',
                 accessorFn({ createdAt }) {
                     return createdAt?.toLocaleString();
-                }
-            }]
-        },
-        {
-            id: 'due date',
-            columns: [{
-                id: 'dueDate',
-                accessorFn({ due, dueDate }) {
-                    return due ? dueDate?.toLocaleString() : '';
                 }
             }]
         },
@@ -113,6 +117,8 @@ interface TableProps {
 
 function Table({ salesEntry, columns, typeBrandModel }: TableProps) {
     const [data, setData] = useState<SalesEntry[]>(salesEntry);
+    const [downloadingCSV, setDownloadingCSV] = useState(false);
+    // const [downloadingExcel, setDownloadingExcel] = useState(false);
 
     function filterData(callBack: (entry: SalesEntry, i: number) => void) {
         setData(salesEntry.filter(callBack));
@@ -129,15 +135,111 @@ function Table({ salesEntry, columns, typeBrandModel }: TableProps) {
 
     const headers = table.getHeaderGroups()[1].headers;
 
+    const calculateTotalPrice = () => {
+        let totalPrice = 0;
+        data.forEach(({ entity }) => {
+            const list = JSON.parse(JSON.stringify(entity));
+            list.forEach((e: any) => {
+                if (e.price) {
+                    if (e.quantity) {
+                        totalPrice += e.price * e.quantity;
+                    } else {
+                        totalPrice += e.price;
+                    }
+                }
+            })
+        })
+        return totalPrice;
+    }
+
+    function exportToCsv(jsonData: any, filename: string) {
+        jsonexport(jsonData, function (err: Error, csv: string) {
+            if (err) return console.error(err);
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename + ".csv";
+
+            // Trigger download
+            document.body.appendChild(link);
+            link.click();
+
+            // Cleanup
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+        });
+    }
+
+    // function exportToExcel(jsonData: any, filename: string) {
+    //     jsonexport(jsonData, { rowDelimiter: "\t" }, function (err: Error, csv: string) {
+    //         if (err) return console.error(err);
+    //         const blob = new Blob([csv], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    //         const link = document.createElement('a');
+    //         link.href = URL.createObjectURL(blob);
+    //         link.download = filename + ".xlsx";
+
+    //         // Trigger download
+    //         document.body.appendChild(link);
+    //         link.click();
+
+    //         // Cleanup
+    //         document.body.removeChild(link);
+    //         URL.revokeObjectURL(link.href);
+    //     });
+    // }
+
+    async function downloadCSV() {
+        setDownloadingCSV(true);
+        try {
+            const json = await downloadSalesCSV();
+            if (!json) { return; }
+
+            const filteredJSON = json.map(({ id, entity, due, discount, customer, seller }: any) => {
+                return entity.map(
+                    ({ brand, model, quantity, price, IMEI }: any, i: number) => (
+                        {
+                            salesId: id,
+                            brand: brand.brandName,
+                            model: model.model,
+                            IMEI: IMEI ? IMEI.toString() : "",
+                            quantity: quantity || 1,
+                            price: price,
+                            // parent data
+                            due: i === 0 ? due : "",
+                            discount: i === 0 ? discount : "",
+                            customerName: i === 0 ? customer.name : "",
+                            customerPhone: i === 0 ? customer.phone : "",
+                            seller: i === 0 ? seller.name : "",
+                        }
+                    )
+                ).flat();
+            }).flat();
+
+            exportToCsv(filteredJSON, 'sales');
+            setDownloadingCSV(false);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div className="rounded-xl bg-white w-full p-6 space-y-6">
             <TableTitle>Sales Table</TableTitle>
             <FilterSales filterData={filterData} {...typeBrandModel} />
-            <hr />
             <div className="w-full overflow-x-auto">
                 <table className='w-full text-sm'>
-                    <thead className='bg-gray-100'>
+                    <thead>
                         <tr>
+                            <td colSpan={headers.length}>
+                                <ExportButtonGroup
+                                    csv={{
+                                        export: downloadCSV,
+                                        loading: downloadingCSV
+                                    }}
+                                />
+                            </td>
+                        </tr>
+                        <tr className='bg-gray-100'>
                             {headers.map(header =>
                                 <th key={header.id} colSpan={header.colSpan} className='p-2 space-y-1 text-start uppercase font-medium'>
                                     <div className="whitespace-nowrap">{flexRender(header.column.parent?.id, header.getContext())}</div>
@@ -160,6 +262,13 @@ function Table({ salesEntry, columns, typeBrandModel }: TableProps) {
                             </tr>
                         )}
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colSpan={headers.length} className='w-full bg-gray-100 rounded-lg text-center py-1 text-base'>
+                                Total Sales Revenue: {formatCurrency(calculateTotalPrice())}
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
                 <TableFooterContainer>
                     <TableFooterRow>

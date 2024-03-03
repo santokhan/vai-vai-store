@@ -8,7 +8,7 @@ export interface StockAndroidInclude extends StockAndroid {
     model: Model;
 }
 
-export async function getStockAndroidById(stockId: string) {
+export async function getStockAndroidById(stockId: string): Promise<StockAndroidInclude | undefined | null> {
     try {
         const stockAndroid = await prisma.stockAndroid.findFirst({
             where: {
@@ -19,15 +19,10 @@ export async function getStockAndroidById(stockId: string) {
                 model: true,
             }
         });
-        if (stockAndroid) {
-            return stockAndroid;
-        } else {
-            return { message: "Android Stock is empty" };
-        }
+        return stockAndroid;
     } catch (error) {
         console.error('Error creating model:', error);
     } finally {
-        // Close the Prisma Client connection
         await prisma.$disconnect();
     }
 }

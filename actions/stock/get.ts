@@ -52,7 +52,3 @@ export async function getStockAndroidPagination(pageNumber: number, pageSize: nu
         await prisma.$disconnect();
     }
 }
-
-export async function getStockSingle(stockId: string) {
-    return await getStockAndroidById(stockId);
-}

@@ -2,15 +2,14 @@
 
 import { getSalesIndividual } from "@/actions/sales/get";
 import { getAccessoriesById } from "@/actions/stock/accessories/get";
+import { getStockAndroidById } from "@/actions/stock/android";
 import { getStockButtonById } from "@/actions/stock/button/get";
-import { getStockSingle } from "@/actions/stock/get";
 import Logo from "@/components/logo/logo";
-import { PRINT } from "@/components/print";
 import PrintWrapper from "@/components/print-wrapper";
 import { phoneNumbers } from "@/utils/company-details";
 
 const functionObject = {
-    android: getStockSingle,
+    android: getStockAndroidById,
     button: getStockButtonById,
     accessories: getAccessoriesById,
 }
