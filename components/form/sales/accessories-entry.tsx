@@ -13,7 +13,7 @@ import InputBox from "../input-box";
 import SelectOption from "../select-option/select-option";
 // import { FoundedProductTable } from "@/components/card/search-product-card";
 import { commonPhoneColors } from "@/utils/pre-defined-form-data";
-import { S_A_Include_B_M, getAccessoriesByModel } from "@/actions/stock/accessories/get";
+import { AccIncBM, getAccessoriesByModel } from "@/actions/stock/accessories/get";
 import { toast } from "react-toastify";
 
 const initialState = {
@@ -39,7 +39,7 @@ export default function AccessoriesSalesEntryForm({ onCloseForm, productType, br
         setIsSearching(true);
 
         try {
-            const founded: S_A_Include_B_M | undefined | null = await getAccessoriesByModel(formData.modelId);
+            const founded: AccIncBM | undefined | null = await getAccessoriesByModel(formData.modelId);
             if (founded?.quantity) {
                 addToSales({
                     type: 'accessories',

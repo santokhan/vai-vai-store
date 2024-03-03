@@ -5,17 +5,28 @@
 import { useMemo } from 'react';
 import { useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, flexRender } from '@tanstack/react-table';
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import { StockAndroid } from '@/prisma/generated/client';
 import PageOutOf from './page-number-out-of';
 import Actions, { ActionDelete } from '@/components/table/action';
 import { GoToPage, TableFooterContainer, TableFooterRow, tableArrowClasses } from '@/components/table/tanstack/table-footer';
 import THeadFilter from '@/components/table/tanstack/table-filter';
 import { inputClasses } from '@/components/table/tanstack/tw-classes';
 import { TableTitle } from '@/components/table/table-header';
+import ExportButtonGroup from '@/components/export-button';
+import { StockAndroidInclude } from '@/actions/stock/get';
+import jsonexport from 'jsonexport';
+import downloadCSV from '@/components/download-csv';
 
-export default function StockAndroidTable({ stockAndroid }: { stockAndroid: StockAndroid[] }) {
-    const columns = useMemo<ColumnDef<StockAndroid>[]>(() => [
-        { id: 'brand', columns: [{ accessorKey: 'brand.brandName' }] },
+export default function StockAndroidTable({ stockAndroid }: { stockAndroid: StockAndroidInclude[] }) {
+    const columns = useMemo<ColumnDef<StockAndroidInclude>[]>(() => [
+        {
+            id: 'brand',
+            columns: [{
+                id: 'brand',
+                accessorFn(row) {
+                    return row.brand.brandName
+                }
+            }]
+        },
         { id: 'model', columns: [{ accessorKey: 'model.model' }] },
         { id: 'IMEI', columns: [{ accessorKey: 'IMEI' }] },
         { id: 'purchase price', columns: [{ accessorKey: 'purchasePrice' }] },
@@ -65,8 +76,8 @@ export default function StockAndroidTable({ stockAndroid }: { stockAndroid: Stoc
 }
 
 type TableProps = {
-    data: StockAndroid[]
-    columns: ColumnDef<StockAndroid>[];
+    data: StockAndroidInclude[]
+    columns: ColumnDef<StockAndroidInclude>[];
 }
 
 function Table({ data, columns }: TableProps) {
@@ -81,13 +92,40 @@ function Table({ data, columns }: TableProps) {
 
     const headers = table.getHeaderGroups()[1].headers;
 
+    function tableToExport() {
+        const json = table.getFilteredRowModel().rows.map(row => {
+            const og = row.original;
+            return {
+                id: og.id || "",
+                brand: og.brand.brandName || "",
+                model: og.model.model || "",
+                IMEI: og.IMEI || "",
+                ram: og.ram || "",
+                rom: og.rom || "",
+                color: og.color || "",
+                purchasePrice: og.purchasePrice || "",
+                sellingPrice: og.sellingPrice || "",
+                sold: og.sold,
+            }
+        })
+
+        downloadCSV(json, 'stock');
+    }
+
     return (
         <div className="rounded-xl bg-white p-4 lg:p-6 space-y-4">
             <TableTitle>Android Table</TableTitle>
             <div className="overflow-x-auto">
                 <table className='w-full text-sm'>
-                    <thead className='bg-gray-100'>
+                    <thead>
                         <tr>
+                            <td colSpan={headers.length}>
+                                <ExportButtonGroup csv={{
+                                    export: tableToExport
+                                }} />
+                            </td>
+                        </tr>
+                        <tr className='bg-gray-100'>
                             {headers.map(header =>
                                 <th key={header.id} colSpan={header.colSpan} className='p-2 text-start font-medium uppercase'>
                                     <div className="flex flex-col gap-2">

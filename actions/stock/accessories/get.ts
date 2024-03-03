@@ -3,7 +3,7 @@
 import { prisma } from '@/lib/prisma';
 import { Brand, Model, StockAccessories } from '@/prisma/generated/client';
 
-export interface S_A_Include_B_M extends StockAccessories {
+export interface AccIncBM extends StockAccessories {
     model: Model;
     brand: Brand
 }
@@ -24,7 +24,7 @@ export async function getAccessoriesMany() {
     }
 }
 
-export async function getAccessoriesByModel(modelId: string): Promise<S_A_Include_B_M | undefined | null> {
+export async function getAccessoriesByModel(modelId: string): Promise<AccIncBM | undefined | null> {
     try {
         const founded = await prisma.stockAccessories.findFirst({
             where: {
@@ -46,7 +46,7 @@ export async function getAccessoriesByModel(modelId: string): Promise<S_A_Includ
     }
 }
 
-export async function getAccessoriesById(id: string): Promise<S_A_Include_B_M | undefined> {
+export async function getAccessoriesById(id: string): Promise<AccIncBM | undefined> {
     try {
         const founded = await prisma.stockAccessories.findFirst({
             where: {

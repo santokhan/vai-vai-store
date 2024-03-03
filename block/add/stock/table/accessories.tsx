@@ -4,7 +4,6 @@
 
 import { useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, flexRender } from '@tanstack/react-table'
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
-import { StockAccessories } from '@/prisma/generated/client'
 import { GoToPage, TableFooterContainer, TableFooterRow, tableArrowClasses } from '@/components/table/tanstack/table-footer'
 import PageOutOf from './page-number-out-of'
 import { TableTitle } from '@/components/table/table-header'
@@ -12,9 +11,12 @@ import THeadFilter from '@/components/table/tanstack/table-filter'
 import { inputClasses } from '@/components/table/tanstack/tw-classes'
 import Actions, { ActionDelete } from '@/components/table/action'
 import { useMemo } from 'react'
+import downloadCSV from '@/components/download-csv';
+import { AccIncBM } from '@/actions/stock/accessories/get';
+import ExportButtonGroup from '@/components/export-button';
 
-export default function StockTableAccessories({ stockAccessories }: { stockAccessories: StockAccessories[] }) {
-    const columns = useMemo<ColumnDef<StockAccessories>[]>(() => [
+export default function StockTableAccessories({ stockAccessories }: { stockAccessories: AccIncBM[] }) {
+    const columns = useMemo<ColumnDef<AccIncBM>[]>(() => [
         {
             id: 'Brand',
             columns: [
@@ -84,8 +86,8 @@ export default function StockTableAccessories({ stockAccessories }: { stockAcces
 }
 
 type TableProps = {
-    data: StockAccessories[]
-    columns: ColumnDef<StockAccessories>[];
+    data: AccIncBM[]
+    columns: ColumnDef<AccIncBM>[];
 }
 
 function Table({ data, columns }: TableProps) {
@@ -99,13 +101,36 @@ function Table({ data, columns }: TableProps) {
     });
     const headers = table.getHeaderGroups()[1].headers;
 
+    function tableToExport() {
+        const json = table.getFilteredRowModel().rows.map(row => {
+            const og = row.original;
+            return {
+                id: og.id,
+                brand: og.brand.brandName || "",
+                model: og.model.model || "",
+                quantity: og.quantity,
+                purchasePrice: og.purchasePrice,
+                sellingPrice: og.sellingPrice,
+            }
+        })
+
+        downloadCSV(json, 'stock');
+    }
+
     return (
         <div className="rounded-xl bg-white p-4 lg:p-6 space-y-4">
             <TableTitle>Accessories Table</TableTitle>
             <div className="overflow-x-auto">
                 <table className='w-full text-sm'>
-                    <thead className='bg-gray-100'>
+                    <thead>
                         <tr>
+                            <td colSpan={headers.length}>
+                                <ExportButtonGroup csv={{
+                                    export: tableToExport
+                                }} />
+                            </td>
+                        </tr>
+                        <tr className='bg-gray-100'>
                             {headers.map(header =>
                                 <th key={header.id} colSpan={header.colSpan} className='p-2 text-start font-medium uppercase'>
                                     <div className='whitespace-nowrap capitalize'>

@@ -2,14 +2,13 @@
 
 import { prisma } from '@/lib/prisma';
 import { Brand, Model, StockAndroid } from '@/prisma/generated/client';
-import { getStockAndroidById } from './android';
 
 export interface StockAndroidInclude extends StockAndroid {
     brand: Brand;
     model: Model;
 }
 
-export async function getStockAndroidMany(): Promise<StockAndroid[] | undefined> {
+export async function getStockAndroidMany(): Promise<StockAndroidInclude[] | undefined> {
     try {
         const stockAndroid = await prisma.stockAndroid.findMany({
             include: {

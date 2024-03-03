@@ -18,8 +18,8 @@ import { Due } from './due';
 import FilterSales from '@/block/form/sales/sales-filter';
 import formatCurrency from '@/utils/currency-formatter';
 import downloadSalesCSV from '@/actions/sales/download-csv';
-import jsonexport from 'jsonexport';
 import ExportButtonGroup from '@/components/export-button';
+import downloadCSV from '@/components/download-csv';
 
 export interface TypeBrandModel {
     productTypes: ProductType[];
@@ -152,24 +152,6 @@ function Table({ salesEntry, columns, typeBrandModel }: TableProps) {
         return totalPrice;
     }
 
-    function exportToCsv(jsonData: any, filename: string) {
-        jsonexport(jsonData, function (err: Error, csv: string) {
-            if (err) return console.error(err);
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = filename + ".csv";
-
-            // Trigger download
-            document.body.appendChild(link);
-            link.click();
-
-            // Cleanup
-            document.body.removeChild(link);
-            URL.revokeObjectURL(link.href);
-        });
-    }
-
     // function exportToExcel(jsonData: any, filename: string) {
     //     jsonexport(jsonData, { rowDelimiter: "\t" }, function (err: Error, csv: string) {
     //         if (err) return console.error(err);
@@ -188,7 +170,7 @@ function Table({ salesEntry, columns, typeBrandModel }: TableProps) {
     //     });
     // }
 
-    async function downloadCSV() {
+    async function tableExportCSV() {
         setDownloadingCSV(true);
         try {
             const json = await downloadSalesCSV();
@@ -215,7 +197,7 @@ function Table({ salesEntry, columns, typeBrandModel }: TableProps) {
                 ).flat();
             }).flat();
 
-            exportToCsv(filteredJSON, 'sales');
+            downloadCSV(filteredJSON, 'sales');
             setDownloadingCSV(false);
         } catch (error) {
             console.log(error);
@@ -233,7 +215,7 @@ function Table({ salesEntry, columns, typeBrandModel }: TableProps) {
                             <td colSpan={headers.length}>
                                 <ExportButtonGroup
                                     csv={{
-                                        export: downloadCSV,
+                                        export: tableExportCSV,
                                         loading: downloadingCSV
                                     }}
                                 />
