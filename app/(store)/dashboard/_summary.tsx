@@ -25,16 +25,16 @@ export async function TotalSummary() {
             amount: purchase,
         },
         {
+            name: "stock available purchase",
+            amount: availablePurchase,
+        },
+        {
             name: "total sales",
             amount: sales,
         },
         {
             name: "total Due",
             amount: due,
-        },
-        {
-            name: "stock available purchase",
-            amount: availablePurchase,
         },
     ]
 
