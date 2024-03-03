@@ -109,29 +109,58 @@ export async function deleteExpenses(id: string, type: 'rent' | 'installment' | 
     }
 }
 
+const filterByMonth = (expenses: ShopRent[], fullYear: number, month: number) => expenses.filter(({ createdAt }) => (
+    new Date(createdAt).getFullYear() === fullYear &&
+    new Date(createdAt).getMonth() === month - 1
+));
 
-export async function getAllCostByMonth(year: number, month: number): Promise<AllExpenses | undefined> {
-    const date = new Date();
-    const fullYear = year || date.getFullYear();
-    month = month || date.getMonth()
+// export async function getAllCostByMonth(year: number, month: number): Promise<AllExpenses | undefined> {
+//     const date = new Date();
+//     const fullYear = year || date.getFullYear();
+//     month = month || date.getMonth()
 
-    const filterByMonth = (expenses: ShopRent[], fullYear: number, month: number) => expenses.filter(({ createdAt }) => (
-        new Date(createdAt).getFullYear() === fullYear &&
-        new Date(createdAt).getMonth() === month - 1
-    ));
+//     try {
+//         const rent: ShopRent[] = await prisma.shopRent.findMany();
+//         const installment: Installment[] = await prisma.installment.findMany();
+//         const other: OtherCost[] = await prisma.otherCost.findMany();
+
+//         const data = {
+//             rent: filterByMonth(rent, fullYear, month),
+//             installment: filterByMonth(installment, fullYear, month),
+//             other: filterByMonth(other, fullYear, month)
+//         }
+
+//         return data;
+//     } catch (error) {
+//         throw error;
+//     }
+// }
+
+export async function filteredExpenses(startDate?: string, endDate?: string): Promise<AllExpenses | undefined> {
+    const today = new Date();
+    const startOfMonth = new Date(`${today.getFullYear()}-${today.getMonth()}-01`);
+
+    let startD = startDate ? new Date(startDate) : new Date(startOfMonth);
+    let endD = endDate ? new Date(endDate) : today;
+
+    const query = {
+        where: {
+            createdAt: {
+                gte: startD,
+                lte: endD
+            }
+        }
+    }
 
     try {
-        const rent: ShopRent[] = await prisma.shopRent.findMany();
-        const installment: Installment[] = await prisma.installment.findMany();
-        const other: OtherCost[] = await prisma.otherCost.findMany();
-
-        const data = {
-            rent: filterByMonth(rent, fullYear, month),
-            installment: filterByMonth(installment, fullYear, month),
-            other: filterByMonth(other, fullYear, month)
-        }
-
-        return data;
+        const rent: ShopRent[] = await prisma.shopRent.findMany(query);
+        const installment: Installment[] = await prisma.installment.findMany(query);
+        const other: OtherCost[] = await prisma.otherCost.findMany(query);
+        return {
+            rent,
+            installment,
+            other
+        };
     } catch (error) {
         throw error;
     }

@@ -1,12 +1,12 @@
 'use client';
 
-import { AllExpenses, ExpenseType, deleteExpenses, getAllCostByMonth } from '@/actions/expenses/expenses';
-import InputBox from '@/components/form/input-box';
+import { AllExpenses, ExpenseType, deleteExpenses, filteredExpenses } from '@/actions/expenses/expenses';
 import { Installment, OtherCost, ShopRent } from '@/prisma/generated/client';
 import { Table } from 'flowbite-react';
 import React, { FC, useEffect, useState } from 'react';
 import Actions, { ActionDelete } from '../action';
 import { toast } from 'react-toastify';
+import FilterByDateOnly, { DateType } from '@/block/expenses/filter-expenses';
 
 const DataGrid: FC<{ data: ShopRent[] | Installment[] | OtherCost[], title: ExpenseType }> = ({ data, title }) => (
     <Table>
@@ -38,56 +38,46 @@ const DataGrid: FC<{ data: ShopRent[] | Installment[] | OtherCost[], title: Expe
 
 const FilterableTable: React.FC = () => {
     const date = new Date();
-
-
     const [filteredYear, setFilteredYear] = useState<number>(date.getFullYear());
     const [filteredMonth, setFilteredMonth] = useState<number>(date.getMonth() + 1);
     const [expenses, setExpenses] = useState<AllExpenses | undefined>(undefined);
-
-
-    const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFilteredYear(Number.parseInt(e.target.value));
-    };
-
-
-    const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value: string = e.target.value;
-        const month: string = value.split('-')[1];
-        setFilteredMonth(Number.parseInt(month));
-    };
-
+    const [dateObject, setdateObject] = useState<{ start: string, end: string }>({ start: '', end: '' });
+    const [filtering, setfiltering] = useState(false);
 
     useEffect(() => {
         async function getAllCost() {
-            const response: AllExpenses | undefined = await getAllCostByMonth(filteredYear, filteredMonth);
-            response && setExpenses(response);
+            if (dateObject.start && dateObject.end) {
+                setfiltering(true);
+                const response: AllExpenses | undefined = await filteredExpenses(dateObject.start, dateObject.end);
+                response && setExpenses(response);
+                setfiltering(false);
+            } else {
+                const response: AllExpenses | undefined = await filteredExpenses();
+                response && setExpenses(response);
+            }
         }
 
         getAllCost();
-    }, [filteredMonth, filteredYear])
+    }, [dateObject]);
 
-    const currentMonth = `${filteredYear}-${filteredMonth < 10 ? `0${filteredMonth}` : filteredMonth}`;
+    const filterFunc = (date: string, startDate: DateType, endDate: DateType) => {
+        if (date) {
+            if (startDate && date >= startDate) {
+                return true;
+            }
+            if (endDate && date <= endDate) {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
 
     return (
         <div className='space-y-6'>
-            <div className="flex items-center gap-4 flex-wrap">
-                <InputBox className='max-w-sm flex items-center'>
-                    <input
-                        type='number'
-                        className='default'
-                        value={filteredYear}
-                        onChange={handleYearChange}
-                    />
-                </InputBox>
-                <InputBox className='max-w-sm flex items-center'>
-                    <input
-                        type='month'
-                        className='default'
-                        onChange={handleMonthChange}
-                        value={currentMonth}
-                    />
-                </InputBox>
-            </div>
+            <FilterByDateOnly loading={filtering} onFilter={(start, end) => {
+                setdateObject({ start, end });
+            }} />
             {
                 expenses ?
                     <>
