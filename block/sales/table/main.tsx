@@ -179,12 +179,12 @@ function Table({ salesEntry, columns, typeBrandModel }: TableProps) {
                             const fromSalesRow = {
                                 id: json.id,
                                 due: i === 0 ? json.due : "N/A",
-                                dueDate: i === 0 ? json.dueDate : "N/A",
+                                dueDate: i === 0 ? json.dueDate && json.dueDate.toLocaleDateString() : "N/A",
                                 discount: i === 0 ? json.discount : "N/A",
                                 customerName: i === 0 ? json.customerName : "N/A",
                                 customerPhone: i === 0 ? json.customerPhone : "N/A",
                                 seller: i === 0 ? json.seller : "N/A",
-                                createdAt: i === 0 ? json.createdAt : "N/A",
+                                createdAt: i === 0 ? json.createdAt.toLocaleDateString() : "N/A",
                             }
 
                             if (!entity.type) { return fromSalesRow; }
