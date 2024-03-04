@@ -27,19 +27,29 @@ export default function StockAndroidTable({ stockAndroid }: { stockAndroid: Stoc
                 }
             }]
         },
-        { id: 'model', columns: [{ accessorKey: 'model.model' }] },
+        {
+            id: 'model',
+            columns: [
+                {
+                    id: "model",
+                    accessorFn(row) { return row.model.model },
+                },
+            ],
+        },
         { id: 'IMEI', columns: [{ accessorKey: 'IMEI' }] },
         {
-            id: 'purchase price', columns: [{
-                id: 'purchasePrice',
+            id: 'purchase price',
+            columns: [{
+                id: 'purchase price',
                 accessorFn(row) {
                     return numeral(row.purchasePrice).format('0,0');
                 }
             }]
         },
         {
-            id: 'selling price', columns: [{
-                id: 'sellingPrice',
+            id: 'selling price',
+            columns: [{
+                id: 'selling price',
                 accessorFn(row) {
                     return numeral(row.sellingPrice).format('0,0');
                 }
@@ -57,7 +67,7 @@ export default function StockAndroidTable({ stockAndroid }: { stockAndroid: Stoc
         {
             id: 'created at',
             columns: [{
-                id: 'createdAt',
+                id: 'created at',
                 accessorFn(row) { return row.createdAt?.toLocaleString() || '' },
             }]
         },

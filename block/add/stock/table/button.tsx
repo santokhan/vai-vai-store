@@ -20,39 +20,43 @@ import numeral from 'numeral';
 export default function StockButtonTable({ stockButton }: { stockButton: BtnIncBM[] }) {
     const columns = useMemo<ColumnDef<BtnIncBM>[]>(() => [
         {
-            id: 'Brand',
+            id: 'brand',
             columns: [
                 {
-                    accessorKey: 'brand.brandName',
+                    id: "brand",
+                    accessorFn(row) { return row.brand.brandName },
                 },
             ],
         },
         {
-            id: 'Model',
+            id: 'model',
             columns: [
                 {
-                    accessorKey: 'model.model',
+                    id: "model",
+                    accessorFn(row) { return row.model.model },
                 },
             ],
         },
         {
-            id: 'purchase price', columns: [{
-                id: 'purchasePrice',
+            id: 'purchase price',
+            columns: [{
+                id: 'purchase price',
                 accessorFn(row) {
                     return numeral(row.purchasePrice).format('0,0');
                 }
             }]
         },
         {
-            id: 'selling price', columns: [{
-                id: 'sellingPrice',
+            id: 'selling price',
+            columns: [{
+                id: 'selling price',
                 accessorFn(row) {
                     return numeral(row.sellingPrice).format('0,0');
                 }
             }]
         },
         {
-            id: 'Color',
+            id: 'color',
             columns: [
                 {
                     accessorKey: 'color',
@@ -70,7 +74,7 @@ export default function StockButtonTable({ stockButton }: { stockButton: BtnIncB
         {
             id: 'created at',
             columns: [{
-                id: 'createdAt',
+                id: 'created at',
                 accessorFn(row) { return row.createdAt?.toLocaleString() || '' },
             }]
         },
