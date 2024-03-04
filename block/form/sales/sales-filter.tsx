@@ -7,12 +7,14 @@ import { Filter } from 'iconsax-react';
 import React, { FC, FormEvent, useState } from 'react';
 import { toast } from 'react-toastify';
 
+const d = new Date();
+
 export const initialState = {
     productTypeId: '',
     brandId: '',
     modelId: '',
-    startDate: new Date().toString(),
-    endDate: new Date().toString(),
+    startDate: d.toString(),
+    endDate: d.toString(),
 }
 
 export const FilterSubmit = () => (
@@ -20,29 +22,16 @@ export const FilterSubmit = () => (
 )
 
 interface Props {
-    // productTypes: ProductType[],
-    // brands: Brand[],
-    // models: Model[],
     filterData: (callBack: (entry: SalesEntry, i: number) => void) => void
 }
 
 const FilterSales: FC<Props> = ({ filterData }) => {
     const [formData, setFormData] = useState<typeof initialState>(initialState);
-
-    // function brandByType(brands: Brand[], productTypeId: string): Brand[] {
-    //     if (brands && productTypeId) {
-    //         return brands.filter(e => e.productTypeId === productTypeId);
-    //     }
-    //     return brands;
-    // }
-
-    // function modelByBrand(models: Model[], brandId: string): Model[] {
-    //     if (models && brandId) {
-    //         return models.filter(model => model.brandId === brandId);
-    //     }
-    //     return models;
-    // }
-
+    const selectionRange = {
+        startDate: d,
+        endDate: d,
+        key: 'selection',
+    }
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         const { productTypeId, brandId, modelId, startDate, endDate } = formData;
@@ -51,9 +40,6 @@ const FilterSales: FC<Props> = ({ filterData }) => {
             filterData((entry) => {
                 const entryCreatedAt = entry.createdAt.getTime();
                 const isFiltered = (
-                    // (!productTypeId || entry.productTypeId === productTypeId) &&
-                    // (!brandId || entry.brandId === brandId) &&
-                    // (!modelId || entry.modelId === modelId) &&
                     (!startDate || entryCreatedAt >= new Date(startDate).getTime()) &&
                     (!endDate || entryCreatedAt <= new Date(endDate).getTime())
                 );
@@ -64,6 +50,7 @@ const FilterSales: FC<Props> = ({ filterData }) => {
             toast(`Can not filter`);
         }
     }
+    console.log({ date: `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate() + 1}` });
 
     return (
         <form onSubmit={handleSubmit} className='block space-y-4'>
@@ -125,7 +112,7 @@ const FilterSales: FC<Props> = ({ filterData }) => {
                         type="date"
                         id="endDate"
                         name="endDate"
-                        max={new Date().toISOString().split("T")[0]}
+                        max={new Date(d.getFullYear(), d.getMonth(), d.getDate() + 2).toISOString().split("T")[0]}
                         onChange={(e) => {
                             setFormData(prev => ({ ...prev, endDate: e.target.value }))
                         }}
