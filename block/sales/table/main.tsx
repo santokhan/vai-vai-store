@@ -16,12 +16,11 @@ import { TableTitle } from '@/components/table/table-header';
 import { ProductDetails } from './product-details-cols';
 import { Due } from './due';
 import FilterSales from '@/block/form/sales/sales-filter';
-import formatCurrency from '@/utils/currency-formatter';
-import downloadSalesCSV from '@/actions/sales/download-csv';
 import ExportButtonGroup from '@/components/export-button';
 import downloadCSV from '@/components/download-csv';
 import { SalesInclude_C_S } from '@/actions/sales/get';
 import { getStockByType } from '@/actions/stock/get-stock-by-type';
+import numeral from 'numeral';
 
 export interface TypeBrandModel {
     productTypes: ProductType[];
@@ -36,8 +35,11 @@ interface Props {
 
 export default function SalesTable({ salesEntry, typeBrandModel }: Props) {
     const columns = useMemo<ColumnDef<SalesInclude_C_S>[]>(() => [
+        { id: 'seller', columns: [{ accessorKey: 'seller.name' }] },
+        { id: 'customer name', columns: [{ accessorKey: 'customer.name' }] },
+        { id: 'customer phone', columns: [{ accessorKey: 'customer.phone' }] },
         {
-            id: 'products',
+            id: 'product',
             colSpan: 3,
             columns: [{
                 id: 'details',
@@ -50,11 +52,20 @@ export default function SalesTable({ salesEntry, typeBrandModel }: Props) {
             }]
         },
         {
+            id: 'discount',
+            columns: [{
+                id: 'discount',
+                accessorFn(row) {
+                    return numeral(row.discount).format("0,0") || '';
+                }
+            }]
+        },
+        {
             id: 'due',
             columns: [{
                 id: 'due',
                 cell({ row }) {
-                    const due = row.original.due || '';
+                    const due = numeral(row.original.due).format("0,0") || '';
                     return <Due due={due} salesId={row.original.id} />;
                 }
             }]
@@ -69,23 +80,25 @@ export default function SalesTable({ salesEntry, typeBrandModel }: Props) {
             }]
         },
         {
-            id: 'discount',
-            columns: [{
-                id: 'discount',
-                accessorFn(row) {
-                    return row.discount || '';
-                }
-            }]
-        },
-        { id: 'customer phone', columns: [{ accessorKey: 'customer.phone' }] },
-        { id: 'customer name', columns: [{ accessorKey: 'customer.name' }] },
-        { id: 'seller', columns: [{ accessorKey: 'seller.name' }] },
-        {
             id: 'created at',
             columns: [{
                 id: 'createdAt',
                 accessorFn({ createdAt }) {
                     return createdAt?.toLocaleString();
+                }
+            }]
+        },
+        {
+            id: 'total price',
+            columns: [{
+                id: 'totalPrice',
+                accessorFn({ entity }) {
+                    if (Array.isArray(entity)) {
+                        const total = entity.reduce((a: any, c: any) => a + (c.quantity * c.price), 0);
+                        return numeral(total).format("0,0");
+                    } else {
+                        return 0;
+                    }
                 }
             }]
         },
@@ -229,9 +242,13 @@ function Table({ salesEntry, columns, typeBrandModel }: TableProps) {
                                 />
                             </td>
                         </tr>
-                        <tr className='bg-gray-100'>
-                            {headers.map(header =>
-                                <th key={header.id} colSpan={header.colSpan} className='p-2 space-y-1 text-start uppercase font-medium'>
+                        <tr>
+                            {headers.map((header, i) =>
+                                <th key={header.id} colSpan={header.colSpan} className={[
+                                    'p-2 space-y-1 text-start uppercase font-medium bg-gray-100', i === 0 ? 'rounded-t-lg' : '',
+                                    i === headers.length - 1 ? 'rounded-r-lg' : '',
+                                    i === 0 ? 'rounded-l-lg' : '',
+                                ].join(" ")}>
                                     <div className="whitespace-nowrap">{flexRender(header.column.parent?.id, header.getContext())}</div>
                                     {header.column.getCanFilter() && <THeadFilter column={header.column} table={table} />}
                                 </th>
@@ -253,10 +270,15 @@ function Table({ salesEntry, columns, typeBrandModel }: TableProps) {
                         )}
                     </tbody>
                     <tfoot>
-                        <tr>
-                            <td colSpan={headers.length} className='w-full bg-gray-100 rounded-lg text-center py-1 text-base'>
-                                Total Sales Revenue: {formatCurrency(calculateTotalPrice())}
+                        <tr className='border-t'>
+                            <td colSpan={headers.length - 3} ></td>
+                            <td className='text-end p-1 text-base whitespace-nowrap'>
+                                Total Sales Price
                             </td>
+                            <td className='p-1 text-base whitespace-nowrap'>
+                                {numeral(calculateTotalPrice()).format('0,0')}
+                            </td>
+                            <td></td>
                         </tr>
                     </tfoot>
                 </table>
