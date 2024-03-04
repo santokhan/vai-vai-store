@@ -2,8 +2,9 @@
 
 import Button from '@/components/button/button';
 import InputBox from '@/components/form/input-box';
-import { Brand, Model, ProductType, SalesEntry } from '@/prisma/generated/client';
-import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
+import { Brand, Model, SalesEntry } from '@/prisma/generated/client';
+import { Filter } from 'iconsax-react';
+import React, { FC, FormEvent, useState } from 'react';
 import { toast } from 'react-toastify';
 
 export const initialState = {
@@ -14,29 +15,33 @@ export const initialState = {
     endDate: new Date().toString(),
 }
 
+export const FilterSubmit = () => (
+    <Button variant="primary"><Filter className='w-4 h-4' /> Filter</Button>
+)
+
 interface Props {
-    productTypes: ProductType[],
-    brands: Brand[],
-    models: Model[],
+    // productTypes: ProductType[],
+    // brands: Brand[],
+    // models: Model[],
     filterData: (callBack: (entry: SalesEntry, i: number) => void) => void
 }
 
-const FilterSales: FC<Props> = ({ productTypes, brands, models, filterData }) => {
+const FilterSales: FC<Props> = ({ filterData }) => {
     const [formData, setFormData] = useState<typeof initialState>(initialState);
 
-    function brandByType(brands: Brand[], productTypeId: string): Brand[] {
-        if (brands && productTypeId) {
-            return brands.filter(e => e.productTypeId === productTypeId);
-        }
-        return brands;
-    }
+    // function brandByType(brands: Brand[], productTypeId: string): Brand[] {
+    //     if (brands && productTypeId) {
+    //         return brands.filter(e => e.productTypeId === productTypeId);
+    //     }
+    //     return brands;
+    // }
 
-    function modelByBrand(models: Model[], brandId: string): Model[] {
-        if (models && brandId) {
-            return models.filter(model => model.brandId === brandId);
-        }
-        return models;
-    }
+    // function modelByBrand(models: Model[], brandId: string): Model[] {
+    //     if (models && brandId) {
+    //         return models.filter(model => model.brandId === brandId);
+    //     }
+    //     return models;
+    // }
 
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -131,7 +136,7 @@ const FilterSales: FC<Props> = ({ productTypes, brands, models, filterData }) =>
             </div>
 
             <div>
-                <Button variant="primary">Filter</Button>
+                <FilterSubmit />
             </div>
         </form>
     );
