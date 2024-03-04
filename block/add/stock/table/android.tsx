@@ -82,7 +82,9 @@ export default function StockAndroidTable({ stockAndroid }: { stockAndroid: Stoc
         }
     ], []);
 
-    return <Table data={stockAndroid} columns={columns} />
+    const filteredBySold = stockAndroid.filter(item => item.sold == false);
+
+    return <Table data={filteredBySold} columns={columns} />
 }
 
 type TableProps = {
