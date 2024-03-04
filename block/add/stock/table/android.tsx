@@ -14,6 +14,7 @@ import { TableTitle } from '@/components/table/table-header';
 import ExportButtonGroup from '@/components/export-button';
 import { StockAndroidInclude } from '@/actions/stock/get';
 import downloadCSV from '@/components/download-csv';
+import numeral from 'numeral';
 
 export default function StockAndroidTable({ stockAndroid }: { stockAndroid: StockAndroidInclude[] }) {
     const columns = useMemo<ColumnDef<StockAndroidInclude>[]>(() => [
@@ -28,8 +29,22 @@ export default function StockAndroidTable({ stockAndroid }: { stockAndroid: Stoc
         },
         { id: 'model', columns: [{ accessorKey: 'model.model' }] },
         { id: 'IMEI', columns: [{ accessorKey: 'IMEI' }] },
-        { id: 'purchase price', columns: [{ accessorKey: 'purchasePrice' }] },
-        { id: 'selling price', columns: [{ accessorKey: 'sellingPrice' }] },
+        {
+            id: 'purchase price', columns: [{
+                id: 'purchasePrice',
+                accessorFn(row) {
+                    return numeral(row.purchasePrice).format('0,0');
+                }
+            }]
+        },
+        {
+            id: 'selling price', columns: [{
+                id: 'sellingPrice',
+                accessorFn(row) {
+                    return numeral(row.sellingPrice).format('0,0');
+                }
+            }]
+        },
         { id: 'ram/rom', columns: [{ accessorFn: row => `${row.ram} / ${row.rom}`, id: 'ram/rom' }] },
         { id: 'color', columns: [{ accessorKey: 'color' }] },
         {

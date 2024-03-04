@@ -15,6 +15,7 @@ import { deleteStockButton } from '@/actions/stock/button/delete';
 import { BtnIncBM } from '@/actions/stock/button/get';
 import ExportButtonGroup from '@/components/export-button';
 import downloadCSV from '@/components/download-csv';
+import numeral from 'numeral';
 
 export default function StockButtonTable({ stockButton }: { stockButton: BtnIncBM[] }) {
     const columns = useMemo<ColumnDef<BtnIncBM>[]>(() => [
@@ -35,12 +36,20 @@ export default function StockButtonTable({ stockButton }: { stockButton: BtnIncB
             ],
         },
         {
-            id: 'Purchase Price',
-            columns: [
-                {
-                    accessorKey: 'purchasePrice',
-                },
-            ],
+            id: 'purchase price', columns: [{
+                id: 'purchasePrice',
+                accessorFn(row) {
+                    return numeral(row.purchasePrice).format('0,0');
+                }
+            }]
+        },
+        {
+            id: 'selling price', columns: [{
+                id: 'sellingPrice',
+                accessorFn(row) {
+                    return numeral(row.sellingPrice).format('0,0');
+                }
+            }]
         },
         {
             id: 'Color',
