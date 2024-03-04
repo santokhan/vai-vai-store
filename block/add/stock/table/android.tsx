@@ -13,7 +13,6 @@ import { inputClasses } from '@/components/table/tanstack/tw-classes';
 import { TableTitle } from '@/components/table/table-header';
 import ExportButtonGroup from '@/components/export-button';
 import { StockAndroidInclude } from '@/actions/stock/get';
-import jsonexport from 'jsonexport';
 import downloadCSV from '@/components/download-csv';
 
 export default function StockAndroidTable({ stockAndroid }: { stockAndroid: StockAndroidInclude[] }) {
@@ -38,17 +37,13 @@ export default function StockAndroidTable({ stockAndroid }: { stockAndroid: Stoc
             columns: [{
                 accessorFn: row => `${row.sold}`,
                 id: 'sold',
-                // filterFn: (row, columnId, filterValue) => {
-                //     const status = row.getValue(columnId as string);
-
-                //     if (typeof status == 'string') {
-                //         const a = status.trim().toLowerCase();
-                //         const b = filterValue.trim().toLowerCase();
-                //         return a.includes(b);
-                //     } else {
-                //         return true;
-                //     }
-                // }
+            }]
+        },
+        {
+            id: 'created at',
+            columns: [{
+                id: 'createdAt',
+                accessorFn(row) { return row.createdAt?.toLocaleString() || '' },
             }]
         },
         {
@@ -106,6 +101,7 @@ function Table({ data, columns }: TableProps) {
                 purchasePrice: og.purchasePrice || "",
                 sellingPrice: og.sellingPrice || "",
                 sold: og.sold,
+                createdAt: og.createdAt?.toLocaleString() || "",
             }
         })
 
@@ -125,7 +121,7 @@ function Table({ data, columns }: TableProps) {
                                 }} />
                             </td>
                         </tr>
-                        <tr className='bg-gray-100'>
+                        <tr className='bg-gray-100 rounded-lg'>
                             {headers.map(header =>
                                 <th key={header.id} colSpan={header.colSpan} className='p-2 text-start font-medium uppercase'>
                                     <div className="flex flex-col gap-2">

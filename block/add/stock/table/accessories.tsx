@@ -58,6 +58,13 @@ export default function StockTableAccessories({ stockAccessories }: { stockAcces
             ],
         },
         {
+            id: 'created at',
+            columns: [{
+                id: 'createdAt',
+                accessorFn(row) { return row.createdAt?.toLocaleString() || '' },
+            }]
+        },
+        {
             id: 'action',
             columns: [{
                 id: 'action',
@@ -111,6 +118,7 @@ function Table({ data, columns }: TableProps) {
                 quantity: og.quantity,
                 purchasePrice: og.purchasePrice,
                 sellingPrice: og.sellingPrice,
+                createdAt: og.createdAt?.toLocaleString() || "",
             }
         })
 

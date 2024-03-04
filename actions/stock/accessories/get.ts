@@ -10,13 +10,22 @@ export interface AccIncBM extends StockAccessories {
 
 export async function getAccessoriesMany() {
     try {
-        return await prisma.stockAccessories.findMany({
+        const accessories = await prisma.stockAccessories.findMany({
             include: {
                 productType: true,
                 brand: true,
                 model: true,
             }
         });
+        if (accessories) {
+            return accessories.sort((a, b) => {
+                if (a.createdAt && b.createdAt) {
+                    return b.createdAt.getTime() - a.createdAt.getTime();
+                } else {
+                    return 1;
+                }
+            });
+        }
     } catch (error) {
         console.error('Data does not exist ', error);
     } finally {

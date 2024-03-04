@@ -1,9 +1,10 @@
 'use server';
 
 import { prisma } from '@/lib/prisma';
-import { Brand, Model, StockAndroid } from '@/prisma/generated/client';
+import { Brand, Model, ProductType, StockAndroid } from '@/prisma/generated/client';
 
 export interface StockAndroidInclude extends StockAndroid {
+    productType: ProductType;
     brand: Brand;
     model: Model;
 }
@@ -18,12 +19,17 @@ export async function getStockAndroidMany(): Promise<StockAndroidInclude[] | und
             }
         });
         if (stockAndroid) {
-            return stockAndroid;
+            return stockAndroid.sort((a, b) => {
+                if (a.createdAt && b.createdAt) {
+                    return b.createdAt.getTime() - a.createdAt.getTime();
+                } else {
+                    return 1;
+                }
+            });
         }
     } catch (error) {
         console.error('Error creating model:', error);
     } finally {
-        // Close the Prisma Client connection
         await prisma.$disconnect();
     }
 }

@@ -10,13 +10,22 @@ export interface BtnIncBM extends StockButton {
 
 export async function getButtonMany() {
     try {
-        return await prisma.stockButton.findMany({
+        const buttons = await prisma.stockButton.findMany({
             include: {
                 productType: true,
                 brand: true,
                 model: true,
             }
         });
+        if (buttons) {
+            return buttons.sort((a, b) => {
+                if (a.createdAt && b.createdAt) {
+                    return b.createdAt.getTime() - a.createdAt.getTime();
+                } else {
+                    return 1;
+                }
+            });
+        }
     } catch (error) {
         console.error('Failed to read data ', error);
     } finally {
