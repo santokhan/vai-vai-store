@@ -151,7 +151,8 @@ function Table({ salesEntry, columns, typeBrandModel }: TableProps) {
 
     const calculateTotalPrice = () => {
         let totalPrice = 0;
-        data.forEach(({ entity }) => {
+        table.getFilteredRowModel().rows.forEach((row) => {
+            const entity = row.original.entity;
             const list = JSON.parse(JSON.stringify(entity));
             list.forEach((e: any) => {
                 if (e.price) {
