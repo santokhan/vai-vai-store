@@ -8,7 +8,7 @@ export interface SalesInclude_C_S extends SalesEntry {
     seller: Seller;
 }
 
-export async function getSalesIndividual(id: string) {
+export async function getSalesIndividual(id: string): Promise<SalesInclude_C_S | null | undefined> {
     try {
         return await prisma.salesEntry.findFirst({
             where: {
