@@ -5,7 +5,7 @@ import { JsonValue } from "@/prisma/generated/client/runtime/library";
 import { ORIGIN } from "@/utils/origin";
 import Button from "@/components/button/button";
 
-const Details: FC<{ data: any }> = ({ data }) => {
+export const Details: FC<{ data: any }> = ({ data }) => {
     const [stock, setstock] = useState<any>(null);
     const [loading, setLoading] = useState(true);
 
@@ -59,26 +59,23 @@ const Details: FC<{ data: any }> = ({ data }) => {
     )
 }
 
-export const ProductDetails: FC<{ entity: JsonValue }> = ({ entity }) => {
-    const [viewDetails, setviewDetails] = useState(false);
+export const ProductDetails: FC<{ entity: JsonValue, showDetails?: boolean }> = ({ entity, showDetails = false }) => {
+    const [viewDetails, setviewDetails] = useState(showDetails);
 
     function expandDetails() {
         setviewDetails(true);
     }
 
-    if (Array.isArray(entity)) {
-        return (
-            viewDetails ?
-                <div className="space-y-6">
-                    {entity.map((e, i) =>
-                        <div key={i} className="capitalize"><Details data={e} /></div>
-                    )}
-                </div>
-                :
-                <Button size="sm" onClick={expandDetails}>View Details</Button>
-        )
-    } else {
-        return null;
-    }
+    if (!Array.isArray(entity)) return null;
 
+    return (
+        viewDetails ?
+            <div className="space-y-6">
+                {entity.map((e, i) =>
+                    <div key={i} className="capitalize"><Details data={e} /></div>
+                )}
+            </div>
+            :
+            <Button size="sm" onClick={expandDetails}>View Details</Button>
+    )
 }

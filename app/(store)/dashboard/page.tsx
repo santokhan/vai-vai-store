@@ -1,9 +1,13 @@
-import { AreaChart } from '@/block/chart/area-chart'
-import { BarChart } from '@/block/chart/bar-chart'
+'use server';
+
 import { TotalSummary } from './_summary'
 import { ProductSummary } from './_product-summary'
+import { ASalesToday } from '@/block/dashboard/SalesToday';
+import { anroidSalesToday } from '@/actions/sales/today/android';
 
-export default function Dashboard() {
+export default async function Dashboard() {
+    // const data = await anroidSalesToday();
+
     return (
         <div className='space-y-6'>
             <TotalSummary />
@@ -12,6 +16,7 @@ export default function Dashboard() {
                 {/* <AreaChart /> */}
                 {/* <BarChart /> */}
             </div>
+            {/* {data && <ASalesToday data={data} />} */}
         </div>
     )
 }
