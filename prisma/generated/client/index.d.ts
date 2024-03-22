@@ -93,6 +93,11 @@ export type HistoryButtonStock = $Result.DefaultSelection<Prisma.$HistoryButtonS
  * 
  */
 export type HistoryAccessoriesStock = $Result.DefaultSelection<Prisma.$HistoryAccessoriesStockPayload>
+/**
+ * Model ReturnHistory
+ * 
+ */
+export type ReturnHistory = $Result.DefaultSelection<Prisma.$ReturnHistoryPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -343,6 +348,16 @@ export class PrismaClient<
     * ```
     */
   get historyAccessoriesStock(): Prisma.HistoryAccessoriesStockDelegate<ExtArgs>;
+
+  /**
+   * `prisma.returnHistory`: Exposes CRUD operations for the **ReturnHistory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ReturnHistories
+    * const returnHistories = await prisma.returnHistory.findMany()
+    * ```
+    */
+  get returnHistory(): Prisma.ReturnHistoryDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -828,7 +843,8 @@ export namespace Prisma {
     OtherCost: 'OtherCost',
     HistoryAndroidStock: 'HistoryAndroidStock',
     HistoryButtonStock: 'HistoryButtonStock',
-    HistoryAccessoriesStock: 'HistoryAccessoriesStock'
+    HistoryAccessoriesStock: 'HistoryAccessoriesStock',
+    ReturnHistory: 'ReturnHistory'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -845,7 +861,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'user' | 'seller' | 'productType' | 'brand' | 'model' | 'stockAndroid' | 'stockButton' | 'stockAccessories' | 'customer' | 'salesEntry' | 'shopRent' | 'installment' | 'otherCost' | 'historyAndroidStock' | 'historyButtonStock' | 'historyAccessoriesStock'
+      modelProps: 'user' | 'seller' | 'productType' | 'brand' | 'model' | 'stockAndroid' | 'stockButton' | 'stockAccessories' | 'customer' | 'salesEntry' | 'shopRent' | 'installment' | 'otherCost' | 'historyAndroidStock' | 'historyButtonStock' | 'historyAccessoriesStock' | 'returnHistory'
       txIsolationLevel: never
     },
     model: {
@@ -2033,6 +2049,80 @@ export namespace Prisma {
           }
         }
       }
+      ReturnHistory: {
+        payload: Prisma.$ReturnHistoryPayload<ExtArgs>
+        fields: Prisma.ReturnHistoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ReturnHistoryFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ReturnHistoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ReturnHistoryFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ReturnHistoryPayload>
+          }
+          findFirst: {
+            args: Prisma.ReturnHistoryFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ReturnHistoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ReturnHistoryFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ReturnHistoryPayload>
+          }
+          findMany: {
+            args: Prisma.ReturnHistoryFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ReturnHistoryPayload>[]
+          }
+          create: {
+            args: Prisma.ReturnHistoryCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ReturnHistoryPayload>
+          }
+          createMany: {
+            args: Prisma.ReturnHistoryCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.ReturnHistoryDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ReturnHistoryPayload>
+          }
+          update: {
+            args: Prisma.ReturnHistoryUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ReturnHistoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.ReturnHistoryDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ReturnHistoryUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.ReturnHistoryUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ReturnHistoryPayload>
+          }
+          aggregate: {
+            args: Prisma.ReturnHistoryAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateReturnHistory>
+          }
+          groupBy: {
+            args: Prisma.ReturnHistoryGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<ReturnHistoryGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.ReturnHistoryFindRawArgs<ExtArgs>,
+            result: Prisma.JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.ReturnHistoryAggregateRawArgs<ExtArgs>,
+            result: Prisma.JsonObject
+          }
+          count: {
+            args: Prisma.ReturnHistoryCountArgs<ExtArgs>,
+            result: $Utils.Optional<ReturnHistoryCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2211,6 +2301,7 @@ export namespace Prisma {
     HistoryAndroidStock: number
     HistoryButtonStock: number
     HistoryAccessoriesStock: number
+    ReturnHistory: number
   }
 
   export type ProductTypeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2221,6 +2312,7 @@ export namespace Prisma {
     HistoryAndroidStock?: boolean | ProductTypeCountOutputTypeCountHistoryAndroidStockArgs
     HistoryButtonStock?: boolean | ProductTypeCountOutputTypeCountHistoryButtonStockArgs
     HistoryAccessoriesStock?: boolean | ProductTypeCountOutputTypeCountHistoryAccessoriesStockArgs
+    ReturnHistory?: boolean | ProductTypeCountOutputTypeCountReturnHistoryArgs
   }
 
   // Custom InputTypes
@@ -2289,6 +2381,14 @@ export namespace Prisma {
    */
   export type ProductTypeCountOutputTypeCountHistoryAccessoriesStockArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: HistoryAccessoriesStockWhereInput
+  }
+
+
+  /**
+   * ProductTypeCountOutputType without action
+   */
+  export type ProductTypeCountOutputTypeCountReturnHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReturnHistoryWhereInput
   }
 
 
@@ -4554,6 +4654,7 @@ export namespace Prisma {
     HistoryAndroidStock?: boolean | ProductType$HistoryAndroidStockArgs<ExtArgs>
     HistoryButtonStock?: boolean | ProductType$HistoryButtonStockArgs<ExtArgs>
     HistoryAccessoriesStock?: boolean | ProductType$HistoryAccessoriesStockArgs<ExtArgs>
+    ReturnHistory?: boolean | ProductType$ReturnHistoryArgs<ExtArgs>
     _count?: boolean | ProductTypeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["productType"]>
 
@@ -4571,6 +4672,7 @@ export namespace Prisma {
     HistoryAndroidStock?: boolean | ProductType$HistoryAndroidStockArgs<ExtArgs>
     HistoryButtonStock?: boolean | ProductType$HistoryButtonStockArgs<ExtArgs>
     HistoryAccessoriesStock?: boolean | ProductType$HistoryAccessoriesStockArgs<ExtArgs>
+    ReturnHistory?: boolean | ProductType$ReturnHistoryArgs<ExtArgs>
     _count?: boolean | ProductTypeCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -4585,6 +4687,7 @@ export namespace Prisma {
       HistoryAndroidStock: Prisma.$HistoryAndroidStockPayload<ExtArgs>[]
       HistoryButtonStock: Prisma.$HistoryButtonStockPayload<ExtArgs>[]
       HistoryAccessoriesStock: Prisma.$HistoryAccessoriesStockPayload<ExtArgs>[]
+      ReturnHistory: Prisma.$ReturnHistoryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4995,6 +5098,8 @@ export namespace Prisma {
     HistoryButtonStock<T extends ProductType$HistoryButtonStockArgs<ExtArgs> = {}>(args?: Subset<T, ProductType$HistoryButtonStockArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HistoryButtonStockPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     HistoryAccessoriesStock<T extends ProductType$HistoryAccessoriesStockArgs<ExtArgs> = {}>(args?: Subset<T, ProductType$HistoryAccessoriesStockArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HistoryAccessoriesStockPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    ReturnHistory<T extends ProductType$ReturnHistoryArgs<ExtArgs> = {}>(args?: Subset<T, ProductType$ReturnHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReturnHistoryPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5511,6 +5616,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: HistoryAccessoriesStockScalarFieldEnum | HistoryAccessoriesStockScalarFieldEnum[]
+  }
+
+
+  /**
+   * ProductType.ReturnHistory
+   */
+  export type ProductType$ReturnHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReturnHistory
+     */
+    select?: ReturnHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ReturnHistoryInclude<ExtArgs> | null
+    where?: ReturnHistoryWhereInput
+    orderBy?: ReturnHistoryOrderByWithRelationInput | ReturnHistoryOrderByWithRelationInput[]
+    cursor?: ReturnHistoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReturnHistoryScalarFieldEnum | ReturnHistoryScalarFieldEnum[]
   }
 
 
@@ -19186,6 +19312,958 @@ export namespace Prisma {
 
 
   /**
+   * Model ReturnHistory
+   */
+
+  export type AggregateReturnHistory = {
+    _count: ReturnHistoryCountAggregateOutputType | null
+    _min: ReturnHistoryMinAggregateOutputType | null
+    _max: ReturnHistoryMaxAggregateOutputType | null
+  }
+
+  export type ReturnHistoryMinAggregateOutputType = {
+    id: string | null
+    productTypeId: string | null
+    stockId: string | null
+  }
+
+  export type ReturnHistoryMaxAggregateOutputType = {
+    id: string | null
+    productTypeId: string | null
+    stockId: string | null
+  }
+
+  export type ReturnHistoryCountAggregateOutputType = {
+    id: number
+    productTypeId: number
+    stockId: number
+    _all: number
+  }
+
+
+  export type ReturnHistoryMinAggregateInputType = {
+    id?: true
+    productTypeId?: true
+    stockId?: true
+  }
+
+  export type ReturnHistoryMaxAggregateInputType = {
+    id?: true
+    productTypeId?: true
+    stockId?: true
+  }
+
+  export type ReturnHistoryCountAggregateInputType = {
+    id?: true
+    productTypeId?: true
+    stockId?: true
+    _all?: true
+  }
+
+  export type ReturnHistoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ReturnHistory to aggregate.
+     */
+    where?: ReturnHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReturnHistories to fetch.
+     */
+    orderBy?: ReturnHistoryOrderByWithRelationInput | ReturnHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ReturnHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReturnHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReturnHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ReturnHistories
+    **/
+    _count?: true | ReturnHistoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ReturnHistoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ReturnHistoryMaxAggregateInputType
+  }
+
+  export type GetReturnHistoryAggregateType<T extends ReturnHistoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateReturnHistory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateReturnHistory[P]>
+      : GetScalarType<T[P], AggregateReturnHistory[P]>
+  }
+
+
+
+
+  export type ReturnHistoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReturnHistoryWhereInput
+    orderBy?: ReturnHistoryOrderByWithAggregationInput | ReturnHistoryOrderByWithAggregationInput[]
+    by: ReturnHistoryScalarFieldEnum[] | ReturnHistoryScalarFieldEnum
+    having?: ReturnHistoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ReturnHistoryCountAggregateInputType | true
+    _min?: ReturnHistoryMinAggregateInputType
+    _max?: ReturnHistoryMaxAggregateInputType
+  }
+
+  export type ReturnHistoryGroupByOutputType = {
+    id: string
+    productTypeId: string
+    stockId: string
+    _count: ReturnHistoryCountAggregateOutputType | null
+    _min: ReturnHistoryMinAggregateOutputType | null
+    _max: ReturnHistoryMaxAggregateOutputType | null
+  }
+
+  type GetReturnHistoryGroupByPayload<T extends ReturnHistoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ReturnHistoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ReturnHistoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ReturnHistoryGroupByOutputType[P]>
+            : GetScalarType<T[P], ReturnHistoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ReturnHistorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    productTypeId?: boolean
+    stockId?: boolean
+    productType?: boolean | ProductTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["returnHistory"]>
+
+  export type ReturnHistorySelectScalar = {
+    id?: boolean
+    productTypeId?: boolean
+    stockId?: boolean
+  }
+
+  export type ReturnHistoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    productType?: boolean | ProductTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $ReturnHistoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ReturnHistory"
+    objects: {
+      productType: Prisma.$ProductTypePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      productTypeId: string
+      stockId: string
+    }, ExtArgs["result"]["returnHistory"]>
+    composites: {}
+  }
+
+
+  type ReturnHistoryGetPayload<S extends boolean | null | undefined | ReturnHistoryDefaultArgs> = $Result.GetResult<Prisma.$ReturnHistoryPayload, S>
+
+  type ReturnHistoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<ReturnHistoryFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ReturnHistoryCountAggregateInputType | true
+    }
+
+  export interface ReturnHistoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ReturnHistory'], meta: { name: 'ReturnHistory' } }
+    /**
+     * Find zero or one ReturnHistory that matches the filter.
+     * @param {ReturnHistoryFindUniqueArgs} args - Arguments to find a ReturnHistory
+     * @example
+     * // Get one ReturnHistory
+     * const returnHistory = await prisma.returnHistory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends ReturnHistoryFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, ReturnHistoryFindUniqueArgs<ExtArgs>>
+    ): Prisma__ReturnHistoryClient<$Result.GetResult<Prisma.$ReturnHistoryPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one ReturnHistory that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {ReturnHistoryFindUniqueOrThrowArgs} args - Arguments to find a ReturnHistory
+     * @example
+     * // Get one ReturnHistory
+     * const returnHistory = await prisma.returnHistory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends ReturnHistoryFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ReturnHistoryFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__ReturnHistoryClient<$Result.GetResult<Prisma.$ReturnHistoryPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first ReturnHistory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReturnHistoryFindFirstArgs} args - Arguments to find a ReturnHistory
+     * @example
+     * // Get one ReturnHistory
+     * const returnHistory = await prisma.returnHistory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends ReturnHistoryFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, ReturnHistoryFindFirstArgs<ExtArgs>>
+    ): Prisma__ReturnHistoryClient<$Result.GetResult<Prisma.$ReturnHistoryPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first ReturnHistory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReturnHistoryFindFirstOrThrowArgs} args - Arguments to find a ReturnHistory
+     * @example
+     * // Get one ReturnHistory
+     * const returnHistory = await prisma.returnHistory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends ReturnHistoryFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ReturnHistoryFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__ReturnHistoryClient<$Result.GetResult<Prisma.$ReturnHistoryPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more ReturnHistories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReturnHistoryFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ReturnHistories
+     * const returnHistories = await prisma.returnHistory.findMany()
+     * 
+     * // Get first 10 ReturnHistories
+     * const returnHistories = await prisma.returnHistory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const returnHistoryWithIdOnly = await prisma.returnHistory.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends ReturnHistoryFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ReturnHistoryFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReturnHistoryPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a ReturnHistory.
+     * @param {ReturnHistoryCreateArgs} args - Arguments to create a ReturnHistory.
+     * @example
+     * // Create one ReturnHistory
+     * const ReturnHistory = await prisma.returnHistory.create({
+     *   data: {
+     *     // ... data to create a ReturnHistory
+     *   }
+     * })
+     * 
+    **/
+    create<T extends ReturnHistoryCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, ReturnHistoryCreateArgs<ExtArgs>>
+    ): Prisma__ReturnHistoryClient<$Result.GetResult<Prisma.$ReturnHistoryPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many ReturnHistories.
+     *     @param {ReturnHistoryCreateManyArgs} args - Arguments to create many ReturnHistories.
+     *     @example
+     *     // Create many ReturnHistories
+     *     const returnHistory = await prisma.returnHistory.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends ReturnHistoryCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ReturnHistoryCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ReturnHistory.
+     * @param {ReturnHistoryDeleteArgs} args - Arguments to delete one ReturnHistory.
+     * @example
+     * // Delete one ReturnHistory
+     * const ReturnHistory = await prisma.returnHistory.delete({
+     *   where: {
+     *     // ... filter to delete one ReturnHistory
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends ReturnHistoryDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, ReturnHistoryDeleteArgs<ExtArgs>>
+    ): Prisma__ReturnHistoryClient<$Result.GetResult<Prisma.$ReturnHistoryPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one ReturnHistory.
+     * @param {ReturnHistoryUpdateArgs} args - Arguments to update one ReturnHistory.
+     * @example
+     * // Update one ReturnHistory
+     * const returnHistory = await prisma.returnHistory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends ReturnHistoryUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, ReturnHistoryUpdateArgs<ExtArgs>>
+    ): Prisma__ReturnHistoryClient<$Result.GetResult<Prisma.$ReturnHistoryPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more ReturnHistories.
+     * @param {ReturnHistoryDeleteManyArgs} args - Arguments to filter ReturnHistories to delete.
+     * @example
+     * // Delete a few ReturnHistories
+     * const { count } = await prisma.returnHistory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends ReturnHistoryDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ReturnHistoryDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ReturnHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReturnHistoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ReturnHistories
+     * const returnHistory = await prisma.returnHistory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends ReturnHistoryUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, ReturnHistoryUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ReturnHistory.
+     * @param {ReturnHistoryUpsertArgs} args - Arguments to update or create a ReturnHistory.
+     * @example
+     * // Update or create a ReturnHistory
+     * const returnHistory = await prisma.returnHistory.upsert({
+     *   create: {
+     *     // ... data to create a ReturnHistory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ReturnHistory we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends ReturnHistoryUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, ReturnHistoryUpsertArgs<ExtArgs>>
+    ): Prisma__ReturnHistoryClient<$Result.GetResult<Prisma.$ReturnHistoryPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Find zero or more ReturnHistories that matches the filter.
+     * @param {ReturnHistoryFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const returnHistory = await prisma.returnHistory.findRaw({
+     *   filter: { age: { $gt: 25 } } 
+     * })
+    **/
+    findRaw(
+      args?: ReturnHistoryFindRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a ReturnHistory.
+     * @param {ReturnHistoryAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const returnHistory = await prisma.returnHistory.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+    **/
+    aggregateRaw(
+      args?: ReturnHistoryAggregateRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Count the number of ReturnHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReturnHistoryCountArgs} args - Arguments to filter ReturnHistories to count.
+     * @example
+     * // Count the number of ReturnHistories
+     * const count = await prisma.returnHistory.count({
+     *   where: {
+     *     // ... the filter for the ReturnHistories we want to count
+     *   }
+     * })
+    **/
+    count<T extends ReturnHistoryCountArgs>(
+      args?: Subset<T, ReturnHistoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ReturnHistoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ReturnHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReturnHistoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ReturnHistoryAggregateArgs>(args: Subset<T, ReturnHistoryAggregateArgs>): Prisma.PrismaPromise<GetReturnHistoryAggregateType<T>>
+
+    /**
+     * Group by ReturnHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReturnHistoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ReturnHistoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ReturnHistoryGroupByArgs['orderBy'] }
+        : { orderBy?: ReturnHistoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ReturnHistoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReturnHistoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ReturnHistory model
+   */
+  readonly fields: ReturnHistoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ReturnHistory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ReturnHistoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    productType<T extends ProductTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductTypeDefaultArgs<ExtArgs>>): Prisma__ProductTypeClient<$Result.GetResult<Prisma.$ProductTypePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the ReturnHistory model
+   */ 
+  interface ReturnHistoryFieldRefs {
+    readonly id: FieldRef<"ReturnHistory", 'String'>
+    readonly productTypeId: FieldRef<"ReturnHistory", 'String'>
+    readonly stockId: FieldRef<"ReturnHistory", 'String'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * ReturnHistory findUnique
+   */
+  export type ReturnHistoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReturnHistory
+     */
+    select?: ReturnHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ReturnHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which ReturnHistory to fetch.
+     */
+    where: ReturnHistoryWhereUniqueInput
+  }
+
+
+  /**
+   * ReturnHistory findUniqueOrThrow
+   */
+  export type ReturnHistoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReturnHistory
+     */
+    select?: ReturnHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ReturnHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which ReturnHistory to fetch.
+     */
+    where: ReturnHistoryWhereUniqueInput
+  }
+
+
+  /**
+   * ReturnHistory findFirst
+   */
+  export type ReturnHistoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReturnHistory
+     */
+    select?: ReturnHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ReturnHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which ReturnHistory to fetch.
+     */
+    where?: ReturnHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReturnHistories to fetch.
+     */
+    orderBy?: ReturnHistoryOrderByWithRelationInput | ReturnHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ReturnHistories.
+     */
+    cursor?: ReturnHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReturnHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReturnHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReturnHistories.
+     */
+    distinct?: ReturnHistoryScalarFieldEnum | ReturnHistoryScalarFieldEnum[]
+  }
+
+
+  /**
+   * ReturnHistory findFirstOrThrow
+   */
+  export type ReturnHistoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReturnHistory
+     */
+    select?: ReturnHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ReturnHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which ReturnHistory to fetch.
+     */
+    where?: ReturnHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReturnHistories to fetch.
+     */
+    orderBy?: ReturnHistoryOrderByWithRelationInput | ReturnHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ReturnHistories.
+     */
+    cursor?: ReturnHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReturnHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReturnHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReturnHistories.
+     */
+    distinct?: ReturnHistoryScalarFieldEnum | ReturnHistoryScalarFieldEnum[]
+  }
+
+
+  /**
+   * ReturnHistory findMany
+   */
+  export type ReturnHistoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReturnHistory
+     */
+    select?: ReturnHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ReturnHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which ReturnHistories to fetch.
+     */
+    where?: ReturnHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReturnHistories to fetch.
+     */
+    orderBy?: ReturnHistoryOrderByWithRelationInput | ReturnHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ReturnHistories.
+     */
+    cursor?: ReturnHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReturnHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReturnHistories.
+     */
+    skip?: number
+    distinct?: ReturnHistoryScalarFieldEnum | ReturnHistoryScalarFieldEnum[]
+  }
+
+
+  /**
+   * ReturnHistory create
+   */
+  export type ReturnHistoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReturnHistory
+     */
+    select?: ReturnHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ReturnHistoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ReturnHistory.
+     */
+    data: XOR<ReturnHistoryCreateInput, ReturnHistoryUncheckedCreateInput>
+  }
+
+
+  /**
+   * ReturnHistory createMany
+   */
+  export type ReturnHistoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ReturnHistories.
+     */
+    data: ReturnHistoryCreateManyInput | ReturnHistoryCreateManyInput[]
+  }
+
+
+  /**
+   * ReturnHistory update
+   */
+  export type ReturnHistoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReturnHistory
+     */
+    select?: ReturnHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ReturnHistoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ReturnHistory.
+     */
+    data: XOR<ReturnHistoryUpdateInput, ReturnHistoryUncheckedUpdateInput>
+    /**
+     * Choose, which ReturnHistory to update.
+     */
+    where: ReturnHistoryWhereUniqueInput
+  }
+
+
+  /**
+   * ReturnHistory updateMany
+   */
+  export type ReturnHistoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ReturnHistories.
+     */
+    data: XOR<ReturnHistoryUpdateManyMutationInput, ReturnHistoryUncheckedUpdateManyInput>
+    /**
+     * Filter which ReturnHistories to update
+     */
+    where?: ReturnHistoryWhereInput
+  }
+
+
+  /**
+   * ReturnHistory upsert
+   */
+  export type ReturnHistoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReturnHistory
+     */
+    select?: ReturnHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ReturnHistoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ReturnHistory to update in case it exists.
+     */
+    where: ReturnHistoryWhereUniqueInput
+    /**
+     * In case the ReturnHistory found by the `where` argument doesn't exist, create a new ReturnHistory with this data.
+     */
+    create: XOR<ReturnHistoryCreateInput, ReturnHistoryUncheckedCreateInput>
+    /**
+     * In case the ReturnHistory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ReturnHistoryUpdateInput, ReturnHistoryUncheckedUpdateInput>
+  }
+
+
+  /**
+   * ReturnHistory delete
+   */
+  export type ReturnHistoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReturnHistory
+     */
+    select?: ReturnHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ReturnHistoryInclude<ExtArgs> | null
+    /**
+     * Filter which ReturnHistory to delete.
+     */
+    where: ReturnHistoryWhereUniqueInput
+  }
+
+
+  /**
+   * ReturnHistory deleteMany
+   */
+  export type ReturnHistoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ReturnHistories to delete
+     */
+    where?: ReturnHistoryWhereInput
+  }
+
+
+  /**
+   * ReturnHistory findRaw
+   */
+  export type ReturnHistoryFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * ReturnHistory aggregateRaw
+   */
+  export type ReturnHistoryAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * ReturnHistory without action
+   */
+  export type ReturnHistoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReturnHistory
+     */
+    select?: ReturnHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ReturnHistoryInclude<ExtArgs> | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -19389,6 +20467,15 @@ export namespace Prisma {
   export type HistoryAccessoriesStockScalarFieldEnum = (typeof HistoryAccessoriesStockScalarFieldEnum)[keyof typeof HistoryAccessoriesStockScalarFieldEnum]
 
 
+  export const ReturnHistoryScalarFieldEnum: {
+    id: 'id',
+    productTypeId: 'productTypeId',
+    stockId: 'stockId'
+  };
+
+  export type ReturnHistoryScalarFieldEnum = (typeof ReturnHistoryScalarFieldEnum)[keyof typeof ReturnHistoryScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -19589,6 +20676,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockListRelationFilter
     HistoryButtonStock?: HistoryButtonStockListRelationFilter
     HistoryAccessoriesStock?: HistoryAccessoriesStockListRelationFilter
+    ReturnHistory?: ReturnHistoryListRelationFilter
   }
 
   export type ProductTypeOrderByWithRelationInput = {
@@ -19602,6 +20690,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockOrderByRelationAggregateInput
     HistoryButtonStock?: HistoryButtonStockOrderByRelationAggregateInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockOrderByRelationAggregateInput
+    ReturnHistory?: ReturnHistoryOrderByRelationAggregateInput
   }
 
   export type ProductTypeWhereUniqueInput = Prisma.AtLeast<{
@@ -19618,6 +20707,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockListRelationFilter
     HistoryButtonStock?: HistoryButtonStockListRelationFilter
     HistoryAccessoriesStock?: HistoryAccessoriesStockListRelationFilter
+    ReturnHistory?: ReturnHistoryListRelationFilter
   }, "id">
 
   export type ProductTypeOrderByWithAggregationInput = {
@@ -20587,6 +21677,51 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"HistoryAccessoriesStock"> | Date | string
   }
 
+  export type ReturnHistoryWhereInput = {
+    AND?: ReturnHistoryWhereInput | ReturnHistoryWhereInput[]
+    OR?: ReturnHistoryWhereInput[]
+    NOT?: ReturnHistoryWhereInput | ReturnHistoryWhereInput[]
+    id?: StringFilter<"ReturnHistory"> | string
+    productTypeId?: StringFilter<"ReturnHistory"> | string
+    stockId?: StringFilter<"ReturnHistory"> | string
+    productType?: XOR<ProductTypeRelationFilter, ProductTypeWhereInput>
+  }
+
+  export type ReturnHistoryOrderByWithRelationInput = {
+    id?: SortOrder
+    productTypeId?: SortOrder
+    stockId?: SortOrder
+    productType?: ProductTypeOrderByWithRelationInput
+  }
+
+  export type ReturnHistoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ReturnHistoryWhereInput | ReturnHistoryWhereInput[]
+    OR?: ReturnHistoryWhereInput[]
+    NOT?: ReturnHistoryWhereInput | ReturnHistoryWhereInput[]
+    productTypeId?: StringFilter<"ReturnHistory"> | string
+    stockId?: StringFilter<"ReturnHistory"> | string
+    productType?: XOR<ProductTypeRelationFilter, ProductTypeWhereInput>
+  }, "id">
+
+  export type ReturnHistoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    productTypeId?: SortOrder
+    stockId?: SortOrder
+    _count?: ReturnHistoryCountOrderByAggregateInput
+    _max?: ReturnHistoryMaxOrderByAggregateInput
+    _min?: ReturnHistoryMinOrderByAggregateInput
+  }
+
+  export type ReturnHistoryScalarWhereWithAggregatesInput = {
+    AND?: ReturnHistoryScalarWhereWithAggregatesInput | ReturnHistoryScalarWhereWithAggregatesInput[]
+    OR?: ReturnHistoryScalarWhereWithAggregatesInput[]
+    NOT?: ReturnHistoryScalarWhereWithAggregatesInput | ReturnHistoryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ReturnHistory"> | string
+    productTypeId?: StringWithAggregatesFilter<"ReturnHistory"> | string
+    stockId?: StringWithAggregatesFilter<"ReturnHistory"> | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -20685,6 +21820,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockCreateNestedManyWithoutProductTypeInput
     HistoryButtonStock?: HistoryButtonStockCreateNestedManyWithoutProductTypeInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockCreateNestedManyWithoutProductTypeInput
+    ReturnHistory?: ReturnHistoryCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeUncheckedCreateInput = {
@@ -20698,6 +21834,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockUncheckedCreateNestedManyWithoutProductTypeInput
     HistoryButtonStock?: HistoryButtonStockUncheckedCreateNestedManyWithoutProductTypeInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedCreateNestedManyWithoutProductTypeInput
+    ReturnHistory?: ReturnHistoryUncheckedCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeUpdateInput = {
@@ -20710,6 +21847,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockUpdateManyWithoutProductTypeNestedInput
     HistoryButtonStock?: HistoryButtonStockUpdateManyWithoutProductTypeNestedInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUpdateManyWithoutProductTypeNestedInput
+    ReturnHistory?: ReturnHistoryUpdateManyWithoutProductTypeNestedInput
   }
 
   export type ProductTypeUncheckedUpdateInput = {
@@ -20722,6 +21860,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutProductTypeNestedInput
     HistoryButtonStock?: HistoryButtonStockUncheckedUpdateManyWithoutProductTypeNestedInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedUpdateManyWithoutProductTypeNestedInput
+    ReturnHistory?: ReturnHistoryUncheckedUpdateManyWithoutProductTypeNestedInput
   }
 
   export type ProductTypeCreateManyInput = {
@@ -21653,6 +22792,43 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ReturnHistoryCreateInput = {
+    id?: string
+    stockId: string
+    productType: ProductTypeCreateNestedOneWithoutReturnHistoryInput
+  }
+
+  export type ReturnHistoryUncheckedCreateInput = {
+    id?: string
+    productTypeId: string
+    stockId: string
+  }
+
+  export type ReturnHistoryUpdateInput = {
+    stockId?: StringFieldUpdateOperationsInput | string
+    productType?: ProductTypeUpdateOneRequiredWithoutReturnHistoryNestedInput
+  }
+
+  export type ReturnHistoryUncheckedUpdateInput = {
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    stockId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ReturnHistoryCreateManyInput = {
+    id?: string
+    productTypeId: string
+    stockId: string
+  }
+
+  export type ReturnHistoryUpdateManyMutationInput = {
+    stockId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ReturnHistoryUncheckedUpdateManyInput = {
+    productTypeId?: StringFieldUpdateOperationsInput | string
+    stockId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -21804,6 +22980,12 @@ export namespace Prisma {
     none?: HistoryAccessoriesStockWhereInput
   }
 
+  export type ReturnHistoryListRelationFilter = {
+    every?: ReturnHistoryWhereInput
+    some?: ReturnHistoryWhereInput
+    none?: ReturnHistoryWhereInput
+  }
+
   export type BrandOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -21829,6 +23011,10 @@ export namespace Prisma {
   }
 
   export type HistoryAccessoriesStockOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ReturnHistoryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -22513,6 +23699,24 @@ export namespace Prisma {
     quantity?: SortOrder
   }
 
+  export type ReturnHistoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    productTypeId?: SortOrder
+    stockId?: SortOrder
+  }
+
+  export type ReturnHistoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    productTypeId?: SortOrder
+    stockId?: SortOrder
+  }
+
+  export type ReturnHistoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    productTypeId?: SortOrder
+    stockId?: SortOrder
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -22613,6 +23817,13 @@ export namespace Prisma {
     connect?: HistoryAccessoriesStockWhereUniqueInput | HistoryAccessoriesStockWhereUniqueInput[]
   }
 
+  export type ReturnHistoryCreateNestedManyWithoutProductTypeInput = {
+    create?: XOR<ReturnHistoryCreateWithoutProductTypeInput, ReturnHistoryUncheckedCreateWithoutProductTypeInput> | ReturnHistoryCreateWithoutProductTypeInput[] | ReturnHistoryUncheckedCreateWithoutProductTypeInput[]
+    connectOrCreate?: ReturnHistoryCreateOrConnectWithoutProductTypeInput | ReturnHistoryCreateOrConnectWithoutProductTypeInput[]
+    createMany?: ReturnHistoryCreateManyProductTypeInputEnvelope
+    connect?: ReturnHistoryWhereUniqueInput | ReturnHistoryWhereUniqueInput[]
+  }
+
   export type BrandUncheckedCreateNestedManyWithoutProductTypeInput = {
     create?: XOR<BrandCreateWithoutProductTypeInput, BrandUncheckedCreateWithoutProductTypeInput> | BrandCreateWithoutProductTypeInput[] | BrandUncheckedCreateWithoutProductTypeInput[]
     connectOrCreate?: BrandCreateOrConnectWithoutProductTypeInput | BrandCreateOrConnectWithoutProductTypeInput[]
@@ -22660,6 +23871,13 @@ export namespace Prisma {
     connectOrCreate?: HistoryAccessoriesStockCreateOrConnectWithoutProductTypeInput | HistoryAccessoriesStockCreateOrConnectWithoutProductTypeInput[]
     createMany?: HistoryAccessoriesStockCreateManyProductTypeInputEnvelope
     connect?: HistoryAccessoriesStockWhereUniqueInput | HistoryAccessoriesStockWhereUniqueInput[]
+  }
+
+  export type ReturnHistoryUncheckedCreateNestedManyWithoutProductTypeInput = {
+    create?: XOR<ReturnHistoryCreateWithoutProductTypeInput, ReturnHistoryUncheckedCreateWithoutProductTypeInput> | ReturnHistoryCreateWithoutProductTypeInput[] | ReturnHistoryUncheckedCreateWithoutProductTypeInput[]
+    connectOrCreate?: ReturnHistoryCreateOrConnectWithoutProductTypeInput | ReturnHistoryCreateOrConnectWithoutProductTypeInput[]
+    createMany?: ReturnHistoryCreateManyProductTypeInputEnvelope
+    connect?: ReturnHistoryWhereUniqueInput | ReturnHistoryWhereUniqueInput[]
   }
 
   export type BrandUpdateManyWithoutProductTypeNestedInput = {
@@ -22760,6 +23978,20 @@ export namespace Prisma {
     deleteMany?: HistoryAccessoriesStockScalarWhereInput | HistoryAccessoriesStockScalarWhereInput[]
   }
 
+  export type ReturnHistoryUpdateManyWithoutProductTypeNestedInput = {
+    create?: XOR<ReturnHistoryCreateWithoutProductTypeInput, ReturnHistoryUncheckedCreateWithoutProductTypeInput> | ReturnHistoryCreateWithoutProductTypeInput[] | ReturnHistoryUncheckedCreateWithoutProductTypeInput[]
+    connectOrCreate?: ReturnHistoryCreateOrConnectWithoutProductTypeInput | ReturnHistoryCreateOrConnectWithoutProductTypeInput[]
+    upsert?: ReturnHistoryUpsertWithWhereUniqueWithoutProductTypeInput | ReturnHistoryUpsertWithWhereUniqueWithoutProductTypeInput[]
+    createMany?: ReturnHistoryCreateManyProductTypeInputEnvelope
+    set?: ReturnHistoryWhereUniqueInput | ReturnHistoryWhereUniqueInput[]
+    disconnect?: ReturnHistoryWhereUniqueInput | ReturnHistoryWhereUniqueInput[]
+    delete?: ReturnHistoryWhereUniqueInput | ReturnHistoryWhereUniqueInput[]
+    connect?: ReturnHistoryWhereUniqueInput | ReturnHistoryWhereUniqueInput[]
+    update?: ReturnHistoryUpdateWithWhereUniqueWithoutProductTypeInput | ReturnHistoryUpdateWithWhereUniqueWithoutProductTypeInput[]
+    updateMany?: ReturnHistoryUpdateManyWithWhereWithoutProductTypeInput | ReturnHistoryUpdateManyWithWhereWithoutProductTypeInput[]
+    deleteMany?: ReturnHistoryScalarWhereInput | ReturnHistoryScalarWhereInput[]
+  }
+
   export type BrandUncheckedUpdateManyWithoutProductTypeNestedInput = {
     create?: XOR<BrandCreateWithoutProductTypeInput, BrandUncheckedCreateWithoutProductTypeInput> | BrandCreateWithoutProductTypeInput[] | BrandUncheckedCreateWithoutProductTypeInput[]
     connectOrCreate?: BrandCreateOrConnectWithoutProductTypeInput | BrandCreateOrConnectWithoutProductTypeInput[]
@@ -22856,6 +24088,20 @@ export namespace Prisma {
     update?: HistoryAccessoriesStockUpdateWithWhereUniqueWithoutProductTypeInput | HistoryAccessoriesStockUpdateWithWhereUniqueWithoutProductTypeInput[]
     updateMany?: HistoryAccessoriesStockUpdateManyWithWhereWithoutProductTypeInput | HistoryAccessoriesStockUpdateManyWithWhereWithoutProductTypeInput[]
     deleteMany?: HistoryAccessoriesStockScalarWhereInput | HistoryAccessoriesStockScalarWhereInput[]
+  }
+
+  export type ReturnHistoryUncheckedUpdateManyWithoutProductTypeNestedInput = {
+    create?: XOR<ReturnHistoryCreateWithoutProductTypeInput, ReturnHistoryUncheckedCreateWithoutProductTypeInput> | ReturnHistoryCreateWithoutProductTypeInput[] | ReturnHistoryUncheckedCreateWithoutProductTypeInput[]
+    connectOrCreate?: ReturnHistoryCreateOrConnectWithoutProductTypeInput | ReturnHistoryCreateOrConnectWithoutProductTypeInput[]
+    upsert?: ReturnHistoryUpsertWithWhereUniqueWithoutProductTypeInput | ReturnHistoryUpsertWithWhereUniqueWithoutProductTypeInput[]
+    createMany?: ReturnHistoryCreateManyProductTypeInputEnvelope
+    set?: ReturnHistoryWhereUniqueInput | ReturnHistoryWhereUniqueInput[]
+    disconnect?: ReturnHistoryWhereUniqueInput | ReturnHistoryWhereUniqueInput[]
+    delete?: ReturnHistoryWhereUniqueInput | ReturnHistoryWhereUniqueInput[]
+    connect?: ReturnHistoryWhereUniqueInput | ReturnHistoryWhereUniqueInput[]
+    update?: ReturnHistoryUpdateWithWhereUniqueWithoutProductTypeInput | ReturnHistoryUpdateWithWhereUniqueWithoutProductTypeInput[]
+    updateMany?: ReturnHistoryUpdateManyWithWhereWithoutProductTypeInput | ReturnHistoryUpdateManyWithWhereWithoutProductTypeInput[]
+    deleteMany?: ReturnHistoryScalarWhereInput | ReturnHistoryScalarWhereInput[]
   }
 
   export type ProductTypeCreateNestedOneWithoutBrandInput = {
@@ -23775,6 +25021,20 @@ export namespace Prisma {
     update?: XOR<XOR<ProductTypeUpdateToOneWithWhereWithoutHistoryAccessoriesStockInput, ProductTypeUpdateWithoutHistoryAccessoriesStockInput>, ProductTypeUncheckedUpdateWithoutHistoryAccessoriesStockInput>
   }
 
+  export type ProductTypeCreateNestedOneWithoutReturnHistoryInput = {
+    create?: XOR<ProductTypeCreateWithoutReturnHistoryInput, ProductTypeUncheckedCreateWithoutReturnHistoryInput>
+    connectOrCreate?: ProductTypeCreateOrConnectWithoutReturnHistoryInput
+    connect?: ProductTypeWhereUniqueInput
+  }
+
+  export type ProductTypeUpdateOneRequiredWithoutReturnHistoryNestedInput = {
+    create?: XOR<ProductTypeCreateWithoutReturnHistoryInput, ProductTypeUncheckedCreateWithoutReturnHistoryInput>
+    connectOrCreate?: ProductTypeCreateOrConnectWithoutReturnHistoryInput
+    upsert?: ProductTypeUpsertWithoutReturnHistoryInput
+    connect?: ProductTypeWhereUniqueInput
+    update?: XOR<XOR<ProductTypeUpdateToOneWithWhereWithoutReturnHistoryInput, ProductTypeUpdateWithoutReturnHistoryInput>, ProductTypeUncheckedUpdateWithoutReturnHistoryInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -24259,6 +25519,25 @@ export namespace Prisma {
     data: HistoryAccessoriesStockCreateManyProductTypeInput | HistoryAccessoriesStockCreateManyProductTypeInput[]
   }
 
+  export type ReturnHistoryCreateWithoutProductTypeInput = {
+    id?: string
+    stockId: string
+  }
+
+  export type ReturnHistoryUncheckedCreateWithoutProductTypeInput = {
+    id?: string
+    stockId: string
+  }
+
+  export type ReturnHistoryCreateOrConnectWithoutProductTypeInput = {
+    where: ReturnHistoryWhereUniqueInput
+    create: XOR<ReturnHistoryCreateWithoutProductTypeInput, ReturnHistoryUncheckedCreateWithoutProductTypeInput>
+  }
+
+  export type ReturnHistoryCreateManyProductTypeInputEnvelope = {
+    data: ReturnHistoryCreateManyProductTypeInput | ReturnHistoryCreateManyProductTypeInput[]
+  }
+
   export type BrandUpsertWithWhereUniqueWithoutProductTypeInput = {
     where: BrandWhereUniqueInput
     update: XOR<BrandUpdateWithoutProductTypeInput, BrandUncheckedUpdateWithoutProductTypeInput>
@@ -24478,6 +25757,31 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"HistoryAccessoriesStock"> | Date | string
   }
 
+  export type ReturnHistoryUpsertWithWhereUniqueWithoutProductTypeInput = {
+    where: ReturnHistoryWhereUniqueInput
+    update: XOR<ReturnHistoryUpdateWithoutProductTypeInput, ReturnHistoryUncheckedUpdateWithoutProductTypeInput>
+    create: XOR<ReturnHistoryCreateWithoutProductTypeInput, ReturnHistoryUncheckedCreateWithoutProductTypeInput>
+  }
+
+  export type ReturnHistoryUpdateWithWhereUniqueWithoutProductTypeInput = {
+    where: ReturnHistoryWhereUniqueInput
+    data: XOR<ReturnHistoryUpdateWithoutProductTypeInput, ReturnHistoryUncheckedUpdateWithoutProductTypeInput>
+  }
+
+  export type ReturnHistoryUpdateManyWithWhereWithoutProductTypeInput = {
+    where: ReturnHistoryScalarWhereInput
+    data: XOR<ReturnHistoryUpdateManyMutationInput, ReturnHistoryUncheckedUpdateManyWithoutProductTypeInput>
+  }
+
+  export type ReturnHistoryScalarWhereInput = {
+    AND?: ReturnHistoryScalarWhereInput | ReturnHistoryScalarWhereInput[]
+    OR?: ReturnHistoryScalarWhereInput[]
+    NOT?: ReturnHistoryScalarWhereInput | ReturnHistoryScalarWhereInput[]
+    id?: StringFilter<"ReturnHistory"> | string
+    productTypeId?: StringFilter<"ReturnHistory"> | string
+    stockId?: StringFilter<"ReturnHistory"> | string
+  }
+
   export type ProductTypeCreateWithoutBrandInput = {
     id?: string
     type: string
@@ -24488,6 +25792,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockCreateNestedManyWithoutProductTypeInput
     HistoryButtonStock?: HistoryButtonStockCreateNestedManyWithoutProductTypeInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockCreateNestedManyWithoutProductTypeInput
+    ReturnHistory?: ReturnHistoryCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeUncheckedCreateWithoutBrandInput = {
@@ -24500,6 +25805,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockUncheckedCreateNestedManyWithoutProductTypeInput
     HistoryButtonStock?: HistoryButtonStockUncheckedCreateNestedManyWithoutProductTypeInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedCreateNestedManyWithoutProductTypeInput
+    ReturnHistory?: ReturnHistoryUncheckedCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeCreateOrConnectWithoutBrandInput = {
@@ -24760,6 +26066,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockUpdateManyWithoutProductTypeNestedInput
     HistoryButtonStock?: HistoryButtonStockUpdateManyWithoutProductTypeNestedInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUpdateManyWithoutProductTypeNestedInput
+    ReturnHistory?: ReturnHistoryUpdateManyWithoutProductTypeNestedInput
   }
 
   export type ProductTypeUncheckedUpdateWithoutBrandInput = {
@@ -24771,6 +26078,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutProductTypeNestedInput
     HistoryButtonStock?: HistoryButtonStockUncheckedUpdateManyWithoutProductTypeNestedInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedUpdateManyWithoutProductTypeNestedInput
+    ReturnHistory?: ReturnHistoryUncheckedUpdateManyWithoutProductTypeNestedInput
   }
 
   export type ModelUpsertWithWhereUniqueWithoutBrandInput = {
@@ -25327,6 +26635,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockCreateNestedManyWithoutProductTypeInput
     HistoryButtonStock?: HistoryButtonStockCreateNestedManyWithoutProductTypeInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockCreateNestedManyWithoutProductTypeInput
+    ReturnHistory?: ReturnHistoryCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeUncheckedCreateWithoutStockAndroidInput = {
@@ -25339,6 +26648,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockUncheckedCreateNestedManyWithoutProductTypeInput
     HistoryButtonStock?: HistoryButtonStockUncheckedCreateNestedManyWithoutProductTypeInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedCreateNestedManyWithoutProductTypeInput
+    ReturnHistory?: ReturnHistoryUncheckedCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeCreateOrConnectWithoutStockAndroidInput = {
@@ -25434,6 +26744,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockUpdateManyWithoutProductTypeNestedInput
     HistoryButtonStock?: HistoryButtonStockUpdateManyWithoutProductTypeNestedInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUpdateManyWithoutProductTypeNestedInput
+    ReturnHistory?: ReturnHistoryUpdateManyWithoutProductTypeNestedInput
   }
 
   export type ProductTypeUncheckedUpdateWithoutStockAndroidInput = {
@@ -25445,6 +26756,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutProductTypeNestedInput
     HistoryButtonStock?: HistoryButtonStockUncheckedUpdateManyWithoutProductTypeNestedInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedUpdateManyWithoutProductTypeNestedInput
+    ReturnHistory?: ReturnHistoryUncheckedUpdateManyWithoutProductTypeNestedInput
   }
 
   export type ModelCreateWithoutStrockButtonInput = {
@@ -25517,6 +26829,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockCreateNestedManyWithoutProductTypeInput
     HistoryButtonStock?: HistoryButtonStockCreateNestedManyWithoutProductTypeInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockCreateNestedManyWithoutProductTypeInput
+    ReturnHistory?: ReturnHistoryCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeUncheckedCreateWithoutStockButtonInput = {
@@ -25529,6 +26842,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockUncheckedCreateNestedManyWithoutProductTypeInput
     HistoryButtonStock?: HistoryButtonStockUncheckedCreateNestedManyWithoutProductTypeInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedCreateNestedManyWithoutProductTypeInput
+    ReturnHistory?: ReturnHistoryUncheckedCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeCreateOrConnectWithoutStockButtonInput = {
@@ -25624,6 +26938,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockUpdateManyWithoutProductTypeNestedInput
     HistoryButtonStock?: HistoryButtonStockUpdateManyWithoutProductTypeNestedInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUpdateManyWithoutProductTypeNestedInput
+    ReturnHistory?: ReturnHistoryUpdateManyWithoutProductTypeNestedInput
   }
 
   export type ProductTypeUncheckedUpdateWithoutStockButtonInput = {
@@ -25635,6 +26950,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutProductTypeNestedInput
     HistoryButtonStock?: HistoryButtonStockUncheckedUpdateManyWithoutProductTypeNestedInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedUpdateManyWithoutProductTypeNestedInput
+    ReturnHistory?: ReturnHistoryUncheckedUpdateManyWithoutProductTypeNestedInput
   }
 
   export type ModelCreateWithoutStrockAccessoriesInput = {
@@ -25707,6 +27023,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockCreateNestedManyWithoutProductTypeInput
     HistoryButtonStock?: HistoryButtonStockCreateNestedManyWithoutProductTypeInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockCreateNestedManyWithoutProductTypeInput
+    ReturnHistory?: ReturnHistoryCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeUncheckedCreateWithoutStockAccessoriesInput = {
@@ -25719,6 +27036,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockUncheckedCreateNestedManyWithoutProductTypeInput
     HistoryButtonStock?: HistoryButtonStockUncheckedCreateNestedManyWithoutProductTypeInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedCreateNestedManyWithoutProductTypeInput
+    ReturnHistory?: ReturnHistoryUncheckedCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeCreateOrConnectWithoutStockAccessoriesInput = {
@@ -25814,6 +27132,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockUpdateManyWithoutProductTypeNestedInput
     HistoryButtonStock?: HistoryButtonStockUpdateManyWithoutProductTypeNestedInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUpdateManyWithoutProductTypeNestedInput
+    ReturnHistory?: ReturnHistoryUpdateManyWithoutProductTypeNestedInput
   }
 
   export type ProductTypeUncheckedUpdateWithoutStockAccessoriesInput = {
@@ -25825,6 +27144,7 @@ export namespace Prisma {
     HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutProductTypeNestedInput
     HistoryButtonStock?: HistoryButtonStockUncheckedUpdateManyWithoutProductTypeNestedInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedUpdateManyWithoutProductTypeNestedInput
+    ReturnHistory?: ReturnHistoryUncheckedUpdateManyWithoutProductTypeNestedInput
   }
 
   export type SalesEntryCreateWithoutCustomerInput = {
@@ -26026,6 +27346,7 @@ export namespace Prisma {
     StockAccessories?: StockAccessoriesCreateNestedManyWithoutProductTypeInput
     HistoryButtonStock?: HistoryButtonStockCreateNestedManyWithoutProductTypeInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockCreateNestedManyWithoutProductTypeInput
+    ReturnHistory?: ReturnHistoryCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeUncheckedCreateWithoutHistoryAndroidStockInput = {
@@ -26038,6 +27359,7 @@ export namespace Prisma {
     StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutProductTypeInput
     HistoryButtonStock?: HistoryButtonStockUncheckedCreateNestedManyWithoutProductTypeInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedCreateNestedManyWithoutProductTypeInput
+    ReturnHistory?: ReturnHistoryUncheckedCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeCreateOrConnectWithoutHistoryAndroidStockInput = {
@@ -26133,6 +27455,7 @@ export namespace Prisma {
     StockAccessories?: StockAccessoriesUpdateManyWithoutProductTypeNestedInput
     HistoryButtonStock?: HistoryButtonStockUpdateManyWithoutProductTypeNestedInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUpdateManyWithoutProductTypeNestedInput
+    ReturnHistory?: ReturnHistoryUpdateManyWithoutProductTypeNestedInput
   }
 
   export type ProductTypeUncheckedUpdateWithoutHistoryAndroidStockInput = {
@@ -26144,6 +27467,7 @@ export namespace Prisma {
     StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutProductTypeNestedInput
     HistoryButtonStock?: HistoryButtonStockUncheckedUpdateManyWithoutProductTypeNestedInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedUpdateManyWithoutProductTypeNestedInput
+    ReturnHistory?: ReturnHistoryUncheckedUpdateManyWithoutProductTypeNestedInput
   }
 
   export type ModelCreateWithoutHistoryButtonStockInput = {
@@ -26216,6 +27540,7 @@ export namespace Prisma {
     StockAccessories?: StockAccessoriesCreateNestedManyWithoutProductTypeInput
     HistoryAndroidStock?: HistoryAndroidStockCreateNestedManyWithoutProductTypeInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockCreateNestedManyWithoutProductTypeInput
+    ReturnHistory?: ReturnHistoryCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeUncheckedCreateWithoutHistoryButtonStockInput = {
@@ -26228,6 +27553,7 @@ export namespace Prisma {
     StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutProductTypeInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedCreateNestedManyWithoutProductTypeInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedCreateNestedManyWithoutProductTypeInput
+    ReturnHistory?: ReturnHistoryUncheckedCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeCreateOrConnectWithoutHistoryButtonStockInput = {
@@ -26323,6 +27649,7 @@ export namespace Prisma {
     StockAccessories?: StockAccessoriesUpdateManyWithoutProductTypeNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUpdateManyWithoutProductTypeNestedInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUpdateManyWithoutProductTypeNestedInput
+    ReturnHistory?: ReturnHistoryUpdateManyWithoutProductTypeNestedInput
   }
 
   export type ProductTypeUncheckedUpdateWithoutHistoryButtonStockInput = {
@@ -26334,6 +27661,7 @@ export namespace Prisma {
     StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutProductTypeNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutProductTypeNestedInput
     HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedUpdateManyWithoutProductTypeNestedInput
+    ReturnHistory?: ReturnHistoryUncheckedUpdateManyWithoutProductTypeNestedInput
   }
 
   export type ModelCreateWithoutHistoryAccessoriesStockInput = {
@@ -26406,6 +27734,7 @@ export namespace Prisma {
     StockAccessories?: StockAccessoriesCreateNestedManyWithoutProductTypeInput
     HistoryAndroidStock?: HistoryAndroidStockCreateNestedManyWithoutProductTypeInput
     HistoryButtonStock?: HistoryButtonStockCreateNestedManyWithoutProductTypeInput
+    ReturnHistory?: ReturnHistoryCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeUncheckedCreateWithoutHistoryAccessoriesStockInput = {
@@ -26418,6 +27747,7 @@ export namespace Prisma {
     StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutProductTypeInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedCreateNestedManyWithoutProductTypeInput
     HistoryButtonStock?: HistoryButtonStockUncheckedCreateNestedManyWithoutProductTypeInput
+    ReturnHistory?: ReturnHistoryUncheckedCreateNestedManyWithoutProductTypeInput
   }
 
   export type ProductTypeCreateOrConnectWithoutHistoryAccessoriesStockInput = {
@@ -26513,6 +27843,7 @@ export namespace Prisma {
     StockAccessories?: StockAccessoriesUpdateManyWithoutProductTypeNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUpdateManyWithoutProductTypeNestedInput
     HistoryButtonStock?: HistoryButtonStockUpdateManyWithoutProductTypeNestedInput
+    ReturnHistory?: ReturnHistoryUpdateManyWithoutProductTypeNestedInput
   }
 
   export type ProductTypeUncheckedUpdateWithoutHistoryAccessoriesStockInput = {
@@ -26524,6 +27855,73 @@ export namespace Prisma {
     StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutProductTypeNestedInput
     HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutProductTypeNestedInput
     HistoryButtonStock?: HistoryButtonStockUncheckedUpdateManyWithoutProductTypeNestedInput
+    ReturnHistory?: ReturnHistoryUncheckedUpdateManyWithoutProductTypeNestedInput
+  }
+
+  export type ProductTypeCreateWithoutReturnHistoryInput = {
+    id?: string
+    type: string
+    createdAt?: Date | string | null
+    Brand?: BrandCreateNestedManyWithoutProductTypeInput
+    StockAndroid?: StockAndroidCreateNestedManyWithoutProductTypeInput
+    StockButton?: StockButtonCreateNestedManyWithoutProductTypeInput
+    StockAccessories?: StockAccessoriesCreateNestedManyWithoutProductTypeInput
+    HistoryAndroidStock?: HistoryAndroidStockCreateNestedManyWithoutProductTypeInput
+    HistoryButtonStock?: HistoryButtonStockCreateNestedManyWithoutProductTypeInput
+    HistoryAccessoriesStock?: HistoryAccessoriesStockCreateNestedManyWithoutProductTypeInput
+  }
+
+  export type ProductTypeUncheckedCreateWithoutReturnHistoryInput = {
+    id?: string
+    type: string
+    createdAt?: Date | string | null
+    Brand?: BrandUncheckedCreateNestedManyWithoutProductTypeInput
+    StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutProductTypeInput
+    StockButton?: StockButtonUncheckedCreateNestedManyWithoutProductTypeInput
+    StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutProductTypeInput
+    HistoryAndroidStock?: HistoryAndroidStockUncheckedCreateNestedManyWithoutProductTypeInput
+    HistoryButtonStock?: HistoryButtonStockUncheckedCreateNestedManyWithoutProductTypeInput
+    HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedCreateNestedManyWithoutProductTypeInput
+  }
+
+  export type ProductTypeCreateOrConnectWithoutReturnHistoryInput = {
+    where: ProductTypeWhereUniqueInput
+    create: XOR<ProductTypeCreateWithoutReturnHistoryInput, ProductTypeUncheckedCreateWithoutReturnHistoryInput>
+  }
+
+  export type ProductTypeUpsertWithoutReturnHistoryInput = {
+    update: XOR<ProductTypeUpdateWithoutReturnHistoryInput, ProductTypeUncheckedUpdateWithoutReturnHistoryInput>
+    create: XOR<ProductTypeCreateWithoutReturnHistoryInput, ProductTypeUncheckedCreateWithoutReturnHistoryInput>
+    where?: ProductTypeWhereInput
+  }
+
+  export type ProductTypeUpdateToOneWithWhereWithoutReturnHistoryInput = {
+    where?: ProductTypeWhereInput
+    data: XOR<ProductTypeUpdateWithoutReturnHistoryInput, ProductTypeUncheckedUpdateWithoutReturnHistoryInput>
+  }
+
+  export type ProductTypeUpdateWithoutReturnHistoryInput = {
+    type?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Brand?: BrandUpdateManyWithoutProductTypeNestedInput
+    StockAndroid?: StockAndroidUpdateManyWithoutProductTypeNestedInput
+    StockButton?: StockButtonUpdateManyWithoutProductTypeNestedInput
+    StockAccessories?: StockAccessoriesUpdateManyWithoutProductTypeNestedInput
+    HistoryAndroidStock?: HistoryAndroidStockUpdateManyWithoutProductTypeNestedInput
+    HistoryButtonStock?: HistoryButtonStockUpdateManyWithoutProductTypeNestedInput
+    HistoryAccessoriesStock?: HistoryAccessoriesStockUpdateManyWithoutProductTypeNestedInput
+  }
+
+  export type ProductTypeUncheckedUpdateWithoutReturnHistoryInput = {
+    type?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Brand?: BrandUncheckedUpdateManyWithoutProductTypeNestedInput
+    StockAndroid?: StockAndroidUncheckedUpdateManyWithoutProductTypeNestedInput
+    StockButton?: StockButtonUncheckedUpdateManyWithoutProductTypeNestedInput
+    StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutProductTypeNestedInput
+    HistoryAndroidStock?: HistoryAndroidStockUncheckedUpdateManyWithoutProductTypeNestedInput
+    HistoryButtonStock?: HistoryButtonStockUncheckedUpdateManyWithoutProductTypeNestedInput
+    HistoryAccessoriesStock?: HistoryAccessoriesStockUncheckedUpdateManyWithoutProductTypeNestedInput
   }
 
   export type SalesEntryCreateManySellerInput = {
@@ -26640,6 +28038,11 @@ export namespace Prisma {
     sellingPrice: number
     quantity: number
     createdAt?: Date | string
+  }
+
+  export type ReturnHistoryCreateManyProductTypeInput = {
+    id?: string
+    stockId: string
   }
 
   export type BrandUpdateWithoutProductTypeInput = {
@@ -26870,6 +28273,18 @@ export namespace Prisma {
     sellingPrice?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReturnHistoryUpdateWithoutProductTypeInput = {
+    stockId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ReturnHistoryUncheckedUpdateWithoutProductTypeInput = {
+    stockId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ReturnHistoryUncheckedUpdateManyWithoutProductTypeInput = {
+    stockId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ModelCreateManyBrandInput = {
@@ -27579,6 +28994,10 @@ export namespace Prisma {
      * @deprecated Use HistoryAccessoriesStockDefaultArgs instead
      */
     export type HistoryAccessoriesStockArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = HistoryAccessoriesStockDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ReturnHistoryDefaultArgs instead
+     */
+    export type ReturnHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ReturnHistoryDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

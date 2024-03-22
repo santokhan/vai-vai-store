@@ -34,6 +34,7 @@ model ProductType {
     HistoryAndroidStock     HistoryAndroidStock[]
     HistoryButtonStock      HistoryButtonStock[]
     HistoryAccessoriesStock HistoryAccessoriesStock[]
+    ReturnHistory           ReturnHistory[]
 }
 
 model Brand {
@@ -223,4 +224,11 @@ model HistoryAccessoriesStock {
     sellingPrice  Int
     quantity      Int
     createdAt     DateTime    @default(now())
+}
+
+model ReturnHistory {
+    id            String      @id @default(auto()) @map("_id") @db.ObjectId
+    productType   ProductType @relation(fields: [productTypeId], references: [id])
+    productTypeId String      @db.ObjectId
+    stockId       String      @db.ObjectId
 }

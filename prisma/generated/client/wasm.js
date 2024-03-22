@@ -252,6 +252,12 @@ exports.Prisma.HistoryAccessoriesStockScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.ReturnHistoryScalarFieldEnum = {
+  id: 'id',
+  productTypeId: 'productTypeId',
+  stockId: 'stockId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -279,7 +285,8 @@ exports.Prisma.ModelName = {
   OtherCost: 'OtherCost',
   HistoryAndroidStock: 'HistoryAndroidStock',
   HistoryButtonStock: 'HistoryButtonStock',
-  HistoryAccessoriesStock: 'HistoryAccessoriesStock'
+  HistoryAccessoriesStock: 'HistoryAccessoriesStock',
+  ReturnHistory: 'ReturnHistory'
 };
 
 /**
