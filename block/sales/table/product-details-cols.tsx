@@ -45,9 +45,11 @@ const Details: FC<{ data: any }> = ({ data }) => {
     const list = [
         `${stock.brand.brandName} ${stock.model.model}`,
         ["Color", stock.color],
-        stock.IMEI ? ["IMEI", stock.IMEI] : ["Quantity", data.quantity],
+        stock.IMEI && ["IMEI", stock.IMEI],
+        data.quantity && ["Quantity", data.quantity],
+        stock.ram && stock.rom && ["RAM/ROM", stock.ram + '/' + stock.rom],
         ["Price", data.price],
-    ]
+    ].filter(e => e)
 
     return (
         list.map((e, i) =>
