@@ -108,13 +108,14 @@ export default function SalesTable({ salesEntry, typeBrandModel }: Props) {
                 cell: ({ row }) => (
                     <Actions>
                         <ActionViewInvoice invoiceId={row.original.id} />
-                        <ActionDelete handleClick={() => {
+                        {/* Perfectly working. But delete is not needed in production */}
+                        {/* <ActionDelete handleClick={() => {
                             fetch(`${ORIGIN}/api/sales/delete?id=${row.original.id}`, {
                                 method: "DELETE"
                             }).then(res => res.json()).then(() => {
                                 window.location.reload();
                             })
-                        }} />
+                        }} /> */}
                     </Actions>
                 )
             }]
