@@ -4,6 +4,7 @@ import { createDealer } from '@/actions/dealer'
 import { DealerTable } from '@/components/table/dealer-table'
 import { FormEvent, useState } from 'react'
 import { Dealer } from '@/prisma/generated/client'
+import { revalidatePath } from 'next/cache'
 
 type Props = {
   dealers?: Dealer[]
