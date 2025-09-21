@@ -243,6 +243,8 @@ model Dealer {
     id          String   @id @default(auto()) @map("_id") @db.ObjectId
     name        String
     description String?
+    phoneNumber String?   // Optional phone number
+    location    String?   // Optional location
     createdAt   DateTime @default(now())
 
     // Optional: relation to SalesEntry or Stock if you want to track purchases

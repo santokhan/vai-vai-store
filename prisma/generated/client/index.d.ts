@@ -20517,6 +20517,8 @@ export namespace Prisma {
     id: string | null
     name: string | null
     description: string | null
+    phoneNumber: string | null
+    location: string | null
     createdAt: Date | null
   }
 
@@ -20524,6 +20526,8 @@ export namespace Prisma {
     id: string | null
     name: string | null
     description: string | null
+    phoneNumber: string | null
+    location: string | null
     createdAt: Date | null
   }
 
@@ -20531,6 +20535,8 @@ export namespace Prisma {
     id: number
     name: number
     description: number
+    phoneNumber: number
+    location: number
     createdAt: number
     _all: number
   }
@@ -20540,6 +20546,8 @@ export namespace Prisma {
     id?: true
     name?: true
     description?: true
+    phoneNumber?: true
+    location?: true
     createdAt?: true
   }
 
@@ -20547,6 +20555,8 @@ export namespace Prisma {
     id?: true
     name?: true
     description?: true
+    phoneNumber?: true
+    location?: true
     createdAt?: true
   }
 
@@ -20554,6 +20564,8 @@ export namespace Prisma {
     id?: true
     name?: true
     description?: true
+    phoneNumber?: true
+    location?: true
     createdAt?: true
     _all?: true
   }
@@ -20634,6 +20646,8 @@ export namespace Prisma {
     id: string
     name: string
     description: string | null
+    phoneNumber: string | null
+    location: string | null
     createdAt: Date
     _count: DealerCountAggregateOutputType | null
     _min: DealerMinAggregateOutputType | null
@@ -20658,6 +20672,8 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     description?: boolean
+    phoneNumber?: boolean
+    location?: boolean
     createdAt?: boolean
     StockAndroid?: boolean | Dealer$StockAndroidArgs<ExtArgs>
     StockButton?: boolean | Dealer$StockButtonArgs<ExtArgs>
@@ -20669,6 +20685,8 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     description?: boolean
+    phoneNumber?: boolean
+    location?: boolean
     createdAt?: boolean
   }
 
@@ -20691,6 +20709,8 @@ export namespace Prisma {
       id: string
       name: string
       description: string | null
+      phoneNumber: string | null
+      location: string | null
       createdAt: Date
     }, ExtArgs["result"]["dealer"]>
     composites: {}
@@ -21121,6 +21141,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Dealer", 'String'>
     readonly name: FieldRef<"Dealer", 'String'>
     readonly description: FieldRef<"Dealer", 'String'>
+    readonly phoneNumber: FieldRef<"Dealer", 'String'>
+    readonly location: FieldRef<"Dealer", 'String'>
     readonly createdAt: FieldRef<"Dealer", 'DateTime'>
   }
     
@@ -21761,6 +21783,8 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     description: 'description',
+    phoneNumber: 'phoneNumber',
+    location: 'location',
     createdAt: 'createdAt'
   };
 
@@ -23044,6 +23068,8 @@ export namespace Prisma {
     id?: StringFilter<"Dealer"> | string
     name?: StringFilter<"Dealer"> | string
     description?: StringNullableFilter<"Dealer"> | string | null
+    phoneNumber?: StringNullableFilter<"Dealer"> | string | null
+    location?: StringNullableFilter<"Dealer"> | string | null
     createdAt?: DateTimeFilter<"Dealer"> | Date | string
     StockAndroid?: StockAndroidListRelationFilter
     StockButton?: StockButtonListRelationFilter
@@ -23054,6 +23080,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    phoneNumber?: SortOrder
+    location?: SortOrder
     createdAt?: SortOrder
     StockAndroid?: StockAndroidOrderByRelationAggregateInput
     StockButton?: StockButtonOrderByRelationAggregateInput
@@ -23067,6 +23095,8 @@ export namespace Prisma {
     NOT?: DealerWhereInput | DealerWhereInput[]
     name?: StringFilter<"Dealer"> | string
     description?: StringNullableFilter<"Dealer"> | string | null
+    phoneNumber?: StringNullableFilter<"Dealer"> | string | null
+    location?: StringNullableFilter<"Dealer"> | string | null
     createdAt?: DateTimeFilter<"Dealer"> | Date | string
     StockAndroid?: StockAndroidListRelationFilter
     StockButton?: StockButtonListRelationFilter
@@ -23077,6 +23107,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    phoneNumber?: SortOrder
+    location?: SortOrder
     createdAt?: SortOrder
     _count?: DealerCountOrderByAggregateInput
     _max?: DealerMaxOrderByAggregateInput
@@ -23090,6 +23122,8 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Dealer"> | string
     name?: StringWithAggregatesFilter<"Dealer"> | string
     description?: StringNullableWithAggregatesFilter<"Dealer"> | string | null
+    phoneNumber?: StringNullableWithAggregatesFilter<"Dealer"> | string | null
+    location?: StringNullableWithAggregatesFilter<"Dealer"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Dealer"> | Date | string
   }
 
@@ -24222,6 +24256,8 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
+    phoneNumber?: string | null
+    location?: string | null
     createdAt?: Date | string
     StockAndroid?: StockAndroidCreateNestedManyWithoutDealerInput
     StockButton?: StockButtonCreateNestedManyWithoutDealerInput
@@ -24232,6 +24268,8 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
+    phoneNumber?: string | null
+    location?: string | null
     createdAt?: Date | string
     StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutDealerInput
     StockButton?: StockButtonUncheckedCreateNestedManyWithoutDealerInput
@@ -24241,6 +24279,8 @@ export namespace Prisma {
   export type DealerUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     StockAndroid?: StockAndroidUpdateManyWithoutDealerNestedInput
     StockButton?: StockButtonUpdateManyWithoutDealerNestedInput
@@ -24250,6 +24290,8 @@ export namespace Prisma {
   export type DealerUncheckedUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     StockAndroid?: StockAndroidUncheckedUpdateManyWithoutDealerNestedInput
     StockButton?: StockButtonUncheckedUpdateManyWithoutDealerNestedInput
@@ -24260,18 +24302,24 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
+    phoneNumber?: string | null
+    location?: string | null
     createdAt?: Date | string
   }
 
   export type DealerUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DealerUncheckedUpdateManyInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -25181,6 +25229,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    phoneNumber?: SortOrder
+    location?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -25188,6 +25238,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    phoneNumber?: SortOrder
+    location?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -25195,6 +25247,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    phoneNumber?: SortOrder
+    location?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -28336,6 +28390,8 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
+    phoneNumber?: string | null
+    location?: string | null
     createdAt?: Date | string
     StockButton?: StockButtonCreateNestedManyWithoutDealerInput
     StockAccessories?: StockAccessoriesCreateNestedManyWithoutDealerInput
@@ -28345,6 +28401,8 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
+    phoneNumber?: string | null
+    location?: string | null
     createdAt?: Date | string
     StockButton?: StockButtonUncheckedCreateNestedManyWithoutDealerInput
     StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutDealerInput
@@ -28472,6 +28530,8 @@ export namespace Prisma {
   export type DealerUpdateWithoutStockAndroidInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     StockButton?: StockButtonUpdateManyWithoutDealerNestedInput
     StockAccessories?: StockAccessoriesUpdateManyWithoutDealerNestedInput
@@ -28480,6 +28540,8 @@ export namespace Prisma {
   export type DealerUncheckedUpdateWithoutStockAndroidInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     StockButton?: StockButtonUncheckedUpdateManyWithoutDealerNestedInput
     StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutDealerNestedInput
@@ -28580,6 +28642,8 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
+    phoneNumber?: string | null
+    location?: string | null
     createdAt?: Date | string
     StockAndroid?: StockAndroidCreateNestedManyWithoutDealerInput
     StockAccessories?: StockAccessoriesCreateNestedManyWithoutDealerInput
@@ -28589,6 +28653,8 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
+    phoneNumber?: string | null
+    location?: string | null
     createdAt?: Date | string
     StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutDealerInput
     StockAccessories?: StockAccessoriesUncheckedCreateNestedManyWithoutDealerInput
@@ -28716,6 +28782,8 @@ export namespace Prisma {
   export type DealerUpdateWithoutStockButtonInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     StockAndroid?: StockAndroidUpdateManyWithoutDealerNestedInput
     StockAccessories?: StockAccessoriesUpdateManyWithoutDealerNestedInput
@@ -28724,6 +28792,8 @@ export namespace Prisma {
   export type DealerUncheckedUpdateWithoutStockButtonInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     StockAndroid?: StockAndroidUncheckedUpdateManyWithoutDealerNestedInput
     StockAccessories?: StockAccessoriesUncheckedUpdateManyWithoutDealerNestedInput
@@ -28824,6 +28894,8 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
+    phoneNumber?: string | null
+    location?: string | null
     createdAt?: Date | string
     StockAndroid?: StockAndroidCreateNestedManyWithoutDealerInput
     StockButton?: StockButtonCreateNestedManyWithoutDealerInput
@@ -28833,6 +28905,8 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
+    phoneNumber?: string | null
+    location?: string | null
     createdAt?: Date | string
     StockAndroid?: StockAndroidUncheckedCreateNestedManyWithoutDealerInput
     StockButton?: StockButtonUncheckedCreateNestedManyWithoutDealerInput
@@ -28960,6 +29034,8 @@ export namespace Prisma {
   export type DealerUpdateWithoutStockAccessoriesInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     StockAndroid?: StockAndroidUpdateManyWithoutDealerNestedInput
     StockButton?: StockButtonUpdateManyWithoutDealerNestedInput
@@ -28968,6 +29044,8 @@ export namespace Prisma {
   export type DealerUncheckedUpdateWithoutStockAccessoriesInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     StockAndroid?: StockAndroidUncheckedUpdateManyWithoutDealerNestedInput
     StockButton?: StockButtonUncheckedUpdateManyWithoutDealerNestedInput

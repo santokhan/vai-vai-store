@@ -265,6 +265,8 @@ exports.Prisma.DealerScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
+  phoneNumber: 'phoneNumber',
+  location: 'location',
   createdAt: 'createdAt'
 };
 
