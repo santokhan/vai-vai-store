@@ -20,7 +20,8 @@ export async function getAccessoriesMany () {
       include: {
         productType: true,
         brand: true,
-        model: true
+        model: true,
+        dealer: true
       }
     })
     if (accessories) {
