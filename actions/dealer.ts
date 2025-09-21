@@ -27,12 +27,20 @@ export async function getDealerById(id: string): Promise<Dealer | null | undefin
     }
 }
 
-export async function createDealer(data: { name: string; description?: string }): Promise<Dealer | undefined> {
+// Updated to include phoneNumber and location
+export async function createDealer(data: {
+    name: string;
+    description?: string;
+    phoneNumber?: string;
+    location?: string;
+}): Promise<Dealer | undefined> {
     try {
         const newDealer: Dealer = await prisma.dealer.create({
             data: {
                 name: data.name,
                 description: data.description || null,
+                phoneNumber: data.phoneNumber || null,
+                location: data.location || null,
             },
         });
         return newDealer;
