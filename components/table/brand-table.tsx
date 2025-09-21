@@ -6,7 +6,7 @@ import { Table } from 'flowbite-react';
 export function BrandTable({ brands, types }: { brands: any, types: any }) {
     return (
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {types.map((type: ProductType) =>
+            {types?.map((type: ProductType) =>
                 <div className="w-full overflow-x-auto" key={type.id}>
                     <Table>
                         <Table.Head>

@@ -142,7 +142,7 @@ const SalesRow: FC<Props> = ({ onOpenForm }) => {
                         <Table.Row>
                             <Table.Cell colSpan={getCols(salesEntity).length + 1}>
                                 <div className="flex gap-2 items-center">
-                                    {productTypes.map((type, index) => (
+                                    {productTypes?.map((type, index) => (
                                         <Button
                                             key={index}
                                             variant="secondary"

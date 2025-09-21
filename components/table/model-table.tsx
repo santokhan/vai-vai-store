@@ -11,7 +11,7 @@ export function ModelDataTable({ brands, types, models }: { brands: Brand[], typ
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {types.map((type: ProductType) => (
+            {types?.map((type: ProductType) => (
                 <div key={type.id} className='overflow-x-auto bg-white shadow rounded-lg'>
                     <Table>
                         <Table.Head>

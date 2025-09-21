@@ -15,7 +15,7 @@ export function TypeTable({ types }: { types: ProductType[] }) {
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {
-                        types.map((type: ProductType) => (
+                        types?.map((type: ProductType) => (
                             <Table.Row className="bg-white" key={type.id}>
                                 <Table.Cell className="whitespace-nowrap font-medium capitalize">
                                     {type.type}
