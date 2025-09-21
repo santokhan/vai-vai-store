@@ -13,6 +13,7 @@ import { toast } from 'react-toastify';
 import { ServerProps } from './type';
 import { RAM, ROM } from '@/utils/pre-defined-form-data';
 import { addStockAndroid } from '@/actions/stock/entry/android';
+import { isValidIMEI } from '@/utils/validation';
 
 export const initialState: StockAndroidPOST = {
     name: '',
@@ -49,16 +50,25 @@ const StockAndroidEntryForm: FC<ServerProps> = ({ productType, brand, model }) =
         e.preventDefault();
         const { productTypeId, brandId, modelId, IMEI, sellingPrice, purchasePrice, color, ram, rom } = state;
 
-        if (productTypeId && brandId && modelId && IMEI && sellingPrice && purchasePrice && color && ram && rom) {
-            setadding(true);
-            addStockAndroid(state).then(res => {
-                if (res) {
-                    toast(res.message);
-                    setadding(false);
-                }
-            }).catch(err => console.error);
-        } else {
-            toast(`POST data is missing`)
+        if (!productTypeId || !brandId || !modelId || !IMEI || !sellingPrice || !purchasePrice || !color || !ram || !rom) {
+            toast("All fields are required!");
+            return;
+        }
+
+        if (!isValidIMEI(IMEI)) {
+            toast("IMEI must be exactly 15 digits!");
+            return;
+        }
+
+        setadding(true);
+        try {
+            const res = await addStockAndroid(state);
+            if (res) toast(res.message);
+        } catch (err) {
+            console.error(err);
+            toast("Failed to add stock!");
+        } finally {
+            setadding(false);
         }
     }
 
