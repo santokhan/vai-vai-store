@@ -9,7 +9,7 @@ export default async function Page() {
 
     function filterSanto(data: User[]) {
         return data.filter((e: User) => {
-            if (e.email.includes("santokhan1999@gmail.com") || e.email.includes("direct.santo@gmail.com")) {
+            if (e.email.includes("santokhan1999@gmail.com") || e.email.includes("inbox.santo@gmail.com")) {
                 return false;
             } else {
                 return true;
