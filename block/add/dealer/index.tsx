@@ -93,7 +93,9 @@ export default function DealerFormWithTable ({ dealers = [] }: Props) {
               id='phoneNumber'
               name='phoneNumber'
               className='default'
-              placeholder='+880123456789'
+              placeholder='01234567890'
+              minLength={0}
+              maxLength={0}
             />
           </div>
           <div className='w-full lg:w-1/2'>
