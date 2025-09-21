@@ -9,7 +9,7 @@ export default async function Dashboard() {
     // const data = await anroidSalesToday();
 
     return (
-        <div className='space-y-6'>
+        <div className='space-y-6 py-6'>
             <TotalSummary />
             <ProductSummary />
             <div className="w-full space-y-16 p-4">
