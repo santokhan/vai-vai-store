@@ -79,7 +79,6 @@ export async function addStockAndroid ({
 
       const createdModel = await addAndroid(payload)
       await addToAndroidHistory(payload)
-      console.log(payload)
       if (createdModel) {
         return { message: `Android phone data created` }
       } else {

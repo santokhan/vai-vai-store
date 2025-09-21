@@ -15,6 +15,7 @@ import { RAM, ROM } from '@/utils/pre-defined-form-data'
 import { addStockAndroid } from '@/actions/stock/entry/android'
 import { isValidIMEI } from '@/utils/validation'
 import { getDealers } from '@/actions/dealer'
+import useDealers from '@/hooks/useDealers'
 
 export const initialState: StockAndroidPOST = {
   name: '',
@@ -40,15 +41,7 @@ const StockAndroidEntryForm: FC<ServerProps> = ({
     productTypeId: productType[0].id
   })
   const [adding, setadding] = useState<boolean>(false)
-  const [dealers, setDealers] = useState<Dealer[]>([])
-
-  useEffect(() => {
-    getDealers().then(data => {
-      if (Array.isArray(data)) {
-        setDealers(data)
-      }
-    })
-  }, [])
+  const { dealers } = useDealers()
 
   function brandByType (brands: Brand[], type: string): Brand[] {
     if (brands && type) {
