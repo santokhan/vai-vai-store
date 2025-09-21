@@ -1,12 +1,13 @@
 'use server';
 
 import { prisma } from '@/lib/prisma';
-import { Brand, Model, ProductType, StockAndroid } from '@/prisma/generated/client';
+import { Brand, Dealer, Model, ProductType, StockAndroid } from '@/prisma/generated/client';
 
 export interface StockAndroidInclude extends StockAndroid {
     productType: ProductType;
     brand: Brand;
     model: Model;
+    dealer?: Dealer;
 }
 
 export async function getStockAndroidMany(): Promise<StockAndroidInclude[] | undefined> {
@@ -16,6 +17,7 @@ export async function getStockAndroidMany(): Promise<StockAndroidInclude[] | und
                 productType: true,
                 brand: true,
                 model: true,
+                dealer: true,
             }
         });
         if (stockAndroid) {

@@ -36,6 +36,15 @@ export default function StockAndroidTable({ stockAndroid }: { stockAndroid: Stoc
                 },
             ],
         },
+        {
+            id: 'dealer',
+            columns: [
+                {
+                    id: "dealer",
+                    accessorFn(row) { return row.dealer?.name },
+                },
+            ],
+        },
         { id: 'IMEI', columns: [{ accessorKey: 'IMEI' }] },
         {
             id: 'purchase price',
