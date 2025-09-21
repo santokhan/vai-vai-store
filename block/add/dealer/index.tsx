@@ -5,17 +5,11 @@ import { DealerTable } from '@/components/table/dealer-table'
 import { FormEvent, useState } from 'react'
 import { Dealer } from '@/prisma/generated/client'
 
-type DealerFormWithTableProps = {
-  loading?: boolean
-  refetch?: () => void
+type Props = {
   dealers?: Dealer[]
 }
 
-export default function DealerFormWithTable ({
-  loading = false,
-  refetch = () => {},
-  dealers = []
-}: DealerFormWithTableProps) {
+export default function DealerFormWithTable ({ dealers = [] }: Props) {
   const [adding, setAdding] = useState<boolean>(false)
 
   // Add a new dealer
@@ -51,11 +45,11 @@ export default function DealerFormWithTable ({
         typeof dealerPhone === 'string' ? dealerPhone.trim() : undefined,
         typeof dealerLocation === 'string' ? dealerLocation.trim() : undefined
       )
-      await refetch?.()
+      location.reload()
     }
   }
 
-  return loading ? null : (
+  return (
     <div className='space-y-6'>
       <form
         className='bg-white p-6 rounded-xl space-y-6'
