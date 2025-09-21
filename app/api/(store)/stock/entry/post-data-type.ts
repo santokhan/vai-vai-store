@@ -9,6 +9,7 @@ export type StockAndroidPOST = {
     color: string;
     ram: string | null;
     rom: string | null;
+    dealerId: string | null;
 }
 
 export type StockButtonPOST = {
