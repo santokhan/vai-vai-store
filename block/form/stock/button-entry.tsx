@@ -12,7 +12,6 @@ import React, { ChangeEvent, FC, FormEvent, useEffect, useState } from 'react'
 import { ServerProps } from './type'
 import { toast } from 'react-toastify'
 import { addButtonStock } from '@/actions/stock/entry/button'
-import { getDealers } from '@/actions/dealer'
 import useDealers from '@/hooks/useDealers'
 
 export const initialState = {
@@ -234,7 +233,7 @@ const StockButtonEntryForm: FC<ServerProps> = ({
               onChange={onChange}
               defaultOptionName='Default'
               value={formData.dealerId || ''}
-              required={true}
+              // required={true}
             />
           </div>
         </FormContainer>

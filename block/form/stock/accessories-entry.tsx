@@ -231,7 +231,7 @@ const StockAccessoriesEntryForm: FC<ServerProps> = ({
                 onChange={onChange}
                 defaultOptionName='Default'
                 value={formData.dealerId || ''}
-                required={true}
+                // required={true}
               />
             </InputBox>
           </div>

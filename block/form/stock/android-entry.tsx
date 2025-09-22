@@ -14,7 +14,6 @@ import { ServerProps } from './type'
 import { RAM, ROM } from '@/utils/pre-defined-form-data'
 import { addStockAndroid } from '@/actions/stock/entry/android'
 import { isValidIMEI } from '@/utils/validation'
-import { getDealers } from '@/actions/dealer'
 import useDealers from '@/hooks/useDealers'
 
 export const initialState: StockAndroidPOST = {
@@ -263,7 +262,7 @@ const StockAndroidEntryForm: FC<ServerProps> = ({
               onChange={onChange}
               defaultOptionName='Default'
               value={state.dealerId || ''}
-              required={true}
+              // required={true}
             />
           </div>
         </FormContainer>
