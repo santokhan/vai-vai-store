@@ -68,6 +68,9 @@ async function updateButton (id: string, quantity: number) {
 }
 
 export async function addButtonStock (data: StockButtonPOST) {
+  if (!data?.dealerId) {
+    delete data.dealerId
+  }
   const {
     modelId,
     quantity,
@@ -82,10 +85,6 @@ export async function addButtonStock (data: StockButtonPOST) {
 
   if (modelId && quantity && brandId && color) {
     const exist = await getButtonSingle(modelId, brandId, color)
-
-    if (!data?.dealerId) {
-      delete data.dealerId
-    }
 
     if (exist) {
       const newQuantity = exist.quantity + quantity
@@ -106,7 +105,7 @@ export async function addButtonStock (data: StockButtonPOST) {
         purchasePrice,
         sellingPrice,
         name,
-        dealerId
+        dealerId: data.dealerId
       })
 
       await addButtonHistory(data)
