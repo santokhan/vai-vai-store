@@ -16,7 +16,7 @@ async function addToAndroidHistory (data: StockAndroidPOST) {
         purchasePrice: data.purchasePrice,
         ram: parseInt(data.ram || ''),
         rom: parseInt(data.rom || ''),
-        productTypeId: data.productTypeId,
+        productTypeId: data.productTypeId
       }
     })
     messageHistoryTable(created, 'Android')
@@ -75,6 +75,10 @@ export async function addStockAndroid ({
         ram,
         rom,
         dealerId
+      }
+
+      if (!dealerId) {
+        delete payload.dealerId
       }
 
       const createdModel = await addAndroid(payload)

@@ -83,6 +83,10 @@ export async function addButtonStock (data: StockButtonPOST) {
   if (modelId && quantity && brandId && color) {
     const exist = await getButtonSingle(modelId, brandId, color)
 
+    if (!data?.dealerId) {
+      delete data.dealerId
+    }
+
     if (exist) {
       const newQuantity = exist.quantity + quantity
       const updated = await updateButton(exist.id, newQuantity)
@@ -104,6 +108,7 @@ export async function addButtonStock (data: StockButtonPOST) {
         name,
         dealerId
       })
+
       await addButtonHistory(data)
       return {
         message: created
