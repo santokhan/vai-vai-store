@@ -20,7 +20,7 @@ export async function getButtonMany () {
       }
     })
     if (buttons) {
-      return buttons.sort((a, b) => {
+      return buttons?.sort((a, b) => {
         if (a.createdAt && b.createdAt) {
           return b.createdAt.getTime() - a.createdAt.getTime()
         } else {

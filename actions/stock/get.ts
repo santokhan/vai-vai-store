@@ -21,7 +21,7 @@ export async function getStockAndroidMany(): Promise<StockAndroidInclude[] | und
             }
         });
         if (stockAndroid) {
-            return stockAndroid.sort((a, b) => {
+            return stockAndroid?.sort((a, b) => {
                 if (a.createdAt && b.createdAt) {
                     return b.createdAt.getTime() - a.createdAt.getTime();
                 } else {

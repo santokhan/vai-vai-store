@@ -35,7 +35,7 @@ export async function getSalesMany(): Promise<SalesInclude_C_S[] | undefined> {
                 seller: true
             }
         });
-        return salesData.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+        return salesData?.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
     } catch (error) {
         console.error('Error creating model:', error);
     } finally {
