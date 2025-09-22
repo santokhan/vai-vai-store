@@ -6,7 +6,7 @@ import { Brand, Dealer, Model, StockButton } from '@/prisma/generated/client'
 export interface BtnIncBM extends StockButton {
   model: Model
   brand: Brand
-  dealer?: Dealer
+  dealer?: Dealer | null
 }
 
 export async function getButtonMany () {

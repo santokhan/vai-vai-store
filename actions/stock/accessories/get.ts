@@ -11,7 +11,7 @@ import {
 export interface AccIncBM extends StockAccessories {
   model: Model
   brand: Brand
-  dealer?: Dealer
+  dealer?: Dealer | null
 }
 
 export async function getAccessoriesMany () {
