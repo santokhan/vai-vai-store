@@ -19,7 +19,7 @@ export async function ProductSummary() {
             {array.map(({ name, amount, icon, color }, i) => (
                 <div
                     key={i}
-                    className={`flex flex-col items-center justify-center w-44 h-44 p-5 rounded-3xl bg-gradient-to-br ${color} 
+                    className={`flex flex-col items-center justify-center h-44 p-5 rounded-3xl bg-gradient-to-br ${color} 
                                 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 text-center`}
                 >
                     <div className="text-6xl mb-3">{icon}</div>
