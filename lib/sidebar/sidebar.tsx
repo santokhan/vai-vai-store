@@ -57,6 +57,10 @@ export const add: NavIncludeChild = {
             name: "seller",
             path: "/seller",
         },
+        {
+            name: "dealer",
+            path: "/dealer",
+        },
     ],
 };
 
