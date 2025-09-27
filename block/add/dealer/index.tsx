@@ -96,7 +96,7 @@ export default function DealerFormWithTable ({ dealers = [] }: Props) {
               className='default'
               placeholder='01234567890'
               minLength={0}
-              maxLength={0}
+              maxLength={11}
             />
           </div>
           <div className='w-full lg:w-1/2'>
