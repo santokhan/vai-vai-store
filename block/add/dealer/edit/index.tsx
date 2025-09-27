@@ -1,52 +1,19 @@
 'use client'
 
-import { createDealer } from '@/actions/dealer'
-import { DealerTable } from '@/components/table/dealer-table'
+import { updateDealer } from '@/actions/dealer'
 import { FormEvent, useState } from 'react'
-import { Dealer } from '@/prisma/generated/client'
 
-type Props = {
-  dealers?: Dealer[]
-}
-
-export default function DealerFormWithTable ({ dealers = [] }: Props) {
-  const [adding, setAdding] = useState<boolean>(false)
-
-  // Add a new dealer
-  async function postDealer (
-    name: string,
-    description?: string,
-    phoneNumber?: string,
-    location?: string
-  ) {
-    if (!name) {
-      console.log('Cannot read undefined type')
-      return
-    }
-    await createDealer({ name, description, phoneNumber, location })
-    setAdding(false)
-  }
+export default function DealerEdit ({ dealer }) {
+  const [pending, setIsPending] = useState<boolean>(false)
+  const [form, setForm] = useState(dealer)
 
   async function handleSubmit (e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    const formData = new FormData(e.currentTarget)
-    const dealerName = formData.get('dealer')
-    const dealerDescription = formData.get('description')
-    const dealerPhone = formData.get('phoneNumber')
-    const dealerLocation = formData.get('location')
 
-    if (typeof dealerName === 'string') {
-      setAdding(true)
-      await postDealer(
-        dealerName.trim(),
-        typeof dealerDescription === 'string'
-          ? dealerDescription.trim()
-          : undefined,
-        typeof dealerPhone === 'string' ? dealerPhone.trim() : undefined,
-        typeof dealerLocation === 'string' ? dealerLocation.trim() : undefined
-      )
-      location.reload()
-    }
+    setIsPending(true)
+    await updateDealer(form.id, form)
+    setIsPending(false)
+    location.href = '/add/dealer'
   }
 
   return (
@@ -57,16 +24,20 @@ export default function DealerFormWithTable ({ dealers = [] }: Props) {
       >
         <div className='flex flex-wrap lg:flex-nowrap gap-4'>
           <div className='w-full lg:w-1/2'>
-            <label htmlFor='dealer' className='default'>
+            <label htmlFor='name' className='default'>
               Dealer Name
             </label>
             <input
               type='text'
-              id='dealer'
-              name='dealer'
+              id='name'
+              name='name'
               className='default'
               placeholder='Store 1'
               required
+              value={form.name}
+              onChange={e =>
+                setForm({ ...form, [e.target.name]: e.target.value })
+              }
             />
           </div>
           <div className='w-full lg:w-1/2'>
@@ -79,6 +50,10 @@ export default function DealerFormWithTable ({ dealers = [] }: Props) {
               name='description'
               className='default'
               placeholder='Any extra info'
+              value={form.description}
+              onChange={e =>
+                setForm({ ...form, [e.target.name]: e.target.value })
+              }
             />
           </div>
         </div>
@@ -96,6 +71,10 @@ export default function DealerFormWithTable ({ dealers = [] }: Props) {
               placeholder='01234567890'
               minLength={0}
               maxLength={11}
+              value={form.phoneNumber}
+              onChange={e =>
+                setForm({ ...form, [e.target.name]: e.target.value })
+              }
             />
           </div>
           <div className='w-full lg:w-1/2'>
@@ -108,20 +87,18 @@ export default function DealerFormWithTable ({ dealers = [] }: Props) {
               name='location'
               className='default'
               placeholder='City, Street, etc.'
+              value={form.location}
+              onChange={e =>
+                setForm({ ...form, [e.target.name]: e.target.value })
+              }
             />
           </div>
         </div>
 
-        <button className='default' disabled={adding}>
-          {adding ? '...' : 'Add Dealer'}
+        <button className='default' disabled={pending}>
+          {pending ? '...' : 'Update Dealer'}
         </button>
       </form>
-
-      {dealers && (
-        <div>
-          <DealerTable types={dealers} />
-        </div>
-      )}
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import { Dealer } from '@/prisma/generated/client';
 import { Table } from 'flowbite-react';
+import Link from 'next/link';
 
 interface DealerTableProps {
   types: Dealer[]; // Make sure this matches your Dealer type
@@ -14,6 +15,7 @@ export function DealerTable({ types }: DealerTableProps) {
           <Table.HeadCell>Description</Table.HeadCell>
           <Table.HeadCell>Phone Number</Table.HeadCell>
           <Table.HeadCell>Location</Table.HeadCell>
+          <Table.HeadCell>Actions</Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
           {types.map((dealer: Dealer) => (
@@ -24,6 +26,11 @@ export function DealerTable({ types }: DealerTableProps) {
               <Table.Cell>{dealer.description || '-'}</Table.Cell>
               <Table.Cell>{dealer.phoneNumber || '-'}</Table.Cell>
               <Table.Cell>{dealer.location || '-'}</Table.Cell>
+              <Table.Cell>
+                <Link href={`/add/dealer/${dealer.id}`} className='hover:underline'>
+                  Edit
+                </Link>
+              </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
