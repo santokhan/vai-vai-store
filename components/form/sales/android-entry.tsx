@@ -94,7 +94,15 @@ export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: ()
                         'model': foundStockItem.model.model,
                         'IMEI': foundStockItem.IMEI,
                         'name': foundStockItem.name,
-                        'selling price': foundStockItem.sellingPrice,
+                        'buying price': foundStockItem.purchasePrice,
+                        'selling price': (
+                            <span className="inline-flex items-center gap-1">
+                                {foundStockItem.sellingPrice}{" "}
+                                <small className="text-gray-500">
+                                    ({foundStockItem.sellingPrice - foundStockItem.purchasePrice})
+                                </small>
+                            </span>
+                        ),
                         'color': foundStockItem.color,
                         'Ram/Rom': foundStockItem.ram + '/' + foundStockItem.rom
                     }} />
