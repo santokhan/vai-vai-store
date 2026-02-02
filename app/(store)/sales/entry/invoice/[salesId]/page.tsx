@@ -19,7 +19,7 @@ const InvoiceFooter = () => (
                 </p>
             </div>
         </div>
-        <p className="mt-5 text-sm text-gray-500">©2022 ভাই ভাই টেলিকম.</p>
+        <p className="mt-5 text-sm text-gray-500">©{new Date().getFullYear()} ভাই ভাই টেলিকম.</p>
 
         <div className="mt-20">
             <div className="ml-auto w-60 text-center">
@@ -30,81 +30,87 @@ const InvoiceFooter = () => (
 )
 
 const SummaryTable = ({ entity, due, discount }: SalesInclude_C_S) => {
-    // calculate total price
     let totalPrice: number = 0;
     if (Array.isArray(entity)) {
         totalPrice = entity.reduce((prev: number, crnt: any) => {
             if (crnt.price) {
-                if (crnt.quantity) {
-                    return prev += crnt.price * crnt.quantity;
-                } else {
-                    return prev += crnt.price * 1;
-                }
-            } else {
-                return prev;
+                return prev + crnt.price * (crnt.quantity || 1);
             }
+            return prev;
         }, 0);
     }
 
-    // calculate total paid amount - due - discount
     const paidAmount: number = totalPrice - due - (discount || 0);
+
+    let prevBrand = '';
+    let prevModel = '';
 
     return (
         <div className="rounded-lg overflow-hidden mt-6">
             <table className="w-full">
                 <thead className="bg-gray-100 text-start text-sm font-semibold uppercase">
                     <tr className="whitespace-nowrap">
-                        <th className="p-2 text-gray-700 w-5/12">Brand & Model</th>
-                        <th className="p-2 text-gray-700 w-2/12">Quantity</th>
-                        <th className="p-2 text-gray-700 w-2/12">Price</th>
-                        <th className="p-2 text-gray-700 w-3/12">Total Price</th>
+                        <th className="p-2 text-gray-700 w-2/12">Brand</th>
+                        <th className="p-2 text-gray-700 w-2/12">Model</th>
+                        <th className="p-2 text-gray-700 w-2/12">IMEI</th>
+                        <th className="p-2 text-gray-700 w-1/12">Quantity</th>
+                        <th className="p-2 text-gray-700 w-1/12">RAM/ROM</th>
+                        <th className="p-2 text-gray-700 w-1/12">Price</th>
+                        <th className="p-2 text-gray-700 w-1/12">Total Price</th>
                     </tr>
                 </thead>
                 <tbody>
                     {Array.isArray(entity) && entity.map(async ({ type, quantity, price, stockId }: any, i: number) => {
                         const getFunction = functionObject[type as keyof typeof functionObject];
-                        const stockData: any = await getFunction(stockId);
-                        if (!stockData) {
-                            return null;
-                        }
+                        const stockData: any = await getFunction(stockId); // NOTE: removed async await for simplicity
+
+                        if (!stockData) return null;
 
                         const rowTotal = quantity * price || 0;
 
+                        const showBrand = stockData.brand?.brandName !== prevBrand;
+                        const showModel = stockData.model?.model !== prevModel || showBrand;
+
+                        if (showBrand) prevBrand = stockData.brand?.brandName;
+                        if (showModel) prevModel = stockData.model?.model;
+
                         return (
-                            stockData &&
                             <tr key={i}>
-                                <td className="text-gray-800 p-3 text-sm capitalize whitespace-nowrap">
-                                    {stockData.brand.brandName} {stockData.model.model} {stockData.IMEI ? '-' + stockData.IMEI : ''}
+                                <td className="default capitalize whitespace-nowrap">
+                                    {showBrand ? stockData.brand?.brandName : ''}
                                 </td>
-                                <td className="text-gray-800 p-3 text-sm text-end">{quantity}</td>
-                                <td className="text-gray-800 p-3 text-sm text-end">{price}</td>
-                                <td className="text-gray-800 p-3 text-sm text-end">{rowTotal}</td>
+                                <td className="default capitalize whitespace-nowrap">
+                                    {showModel ? stockData.model?.model : ''}
+                                </td>
+                                <td className="default whitespace-nowrap">{stockData.IMEI}</td>
+                                <td className="default text-end">{quantity}</td>
+                                <td className="default text-end whitespace-nowrap">
+                                    {stockData.ram}GB / {stockData.rom}GB
+                                </td>
+                                <td className="default text-end whitespace-nowrap">{price}</td>
+                                <td className="default text-end whitespace-nowrap">{rowTotal}</td>
                             </tr>
                         )
                     })}
                     <tr className="text-end">
-                        <td></td>
-                        <td></td>
-                        <td className="py-1.5 px-3 font-semibold text-sm whitespace-nowrap">Total</td>
-                        <td className="py-1.5 px-3 font-semibold text-sm">{totalPrice}</td>
+                        <td colSpan={5}></td>
+                        <td className="default whitespace-nowrap">Total</td>
+                        <td className="default">{totalPrice}</td>
                     </tr>
                     <tr className="text-end">
-                        <td></td>
-                        <td></td>
-                        <td className="py-1.5 px-3 font-semibold text-sm whitespace-nowrap">Due</td>
-                        <td className="py-1.5 px-3 font-semibold text-sm">{due}</td>
+                        <td colSpan={5}></td>
+                        <td className="default whitespace-nowrap">Due</td>
+                        <td className="default">{due}</td>
                     </tr>
                     <tr className="text-end">
-                        <td></td>
-                        <td></td>
-                        <td className="py-1.5 px-3 font-semibold text-sm whitespace-nowrap">Discount</td>
-                        <td className="py-1.5 px-3 font-semibold text-sm">{discount || 0}</td>
+                        <td colSpan={5}></td>
+                        <td className="default whitespace-nowrap">Discount</td>
+                        <td className="default">{discount || 0}</td>
                     </tr>
                     <tr className="text-end">
-                        <td></td>
-                        <td></td>
-                        <td className="py-1.5 px-3 font-semibold text-sm whitespace-nowrap">Amount Paid</td>
-                        <td className="py-1.5 px-3 font-semibold text-sm">{paidAmount}</td>
+                        <td colSpan={5}></td>
+                        <td className="default whitespace-nowrap">Amount Paid</td>
+                        <td className="default">{paidAmount}</td>
                     </tr>
                 </tbody>
             </table>
