@@ -54,12 +54,13 @@ const SummaryTable = ({ entity, due, discount }: SalesInclude_C_S) => {
             <table className="w-full">
                 <thead className="bg-gray-100 text-start text-sm font-semibold uppercase">
                     <tr className="whitespace-nowrap">
-                        <th className="p-2 text-gray-700 w-5/12">Brand & Model</th>
-                        <th className="p-2 text-gray-700 w-2/12">Quantity</th>
-                        <th className="p-2 text-gray-700 w-2/12">RAM</th>
-                        <th className="p-2 text-gray-700 w-2/12">ROM</th>
-                        <th className="p-2 text-gray-700 w-2/12">Price</th>
-                        <th className="p-2 text-gray-700 w-3/12">Total Price</th>
+                        <th className="p-2 text-gray-700 w-2/12">Brand</th>
+                        <th className="p-2 text-gray-700 w-2/12">Model</th>
+                        <th className="p-2 text-gray-700 w-2/12">IMEI</th>
+                        <th className="p-2 text-gray-700 w-1/12">Quantity</th>
+                        <th className="p-2 text-gray-700 w-1/12">RAM/ROM</th>
+                        <th className="p-2 text-gray-700 w-1/12">Price</th>
+                        <th className="p-2 text-gray-700 w-1/12">Total Price</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,17 +76,23 @@ const SummaryTable = ({ entity, due, discount }: SalesInclude_C_S) => {
                         return (
                             <tr key={i}>
                                 <td className="text-gray-800 p-3 text-sm capitalize whitespace-nowrap">
-                                    {stockData.brand.brandName} {stockData.model.model} {stockData.IMEI ? '-' + stockData.IMEI : ''}
+                                    {stockData.brand.brandName}
                                 </td>
-                                <td className="text-gray-800 p-3 text-sm text-end">{quantity}</td>
-                                <td className="text-gray-800 p-3 text-sm text-end">{stockData.ram} GB</td>
-                                <td className="text-gray-800 p-3 text-sm text-end">{stockData.rom} GB</td>
-                                <td className="text-gray-800 p-3 text-sm text-end">{price}</td>
-                                <td className="text-gray-800 p-3 text-sm text-end">{rowTotal}</td>
+                                <td className="text-gray-800 p-3 text-sm capitalize whitespace-nowrap">
+                                  {stockData.model.model}
+                                </td>
+                                <td className="text-gray-800 p-3 text-sm capitalize whitespace-nowrap">
+                                    {stockData.IMEI}
+                                </td>
+                                <td className="text-gray-800 p-3 text-sm text-end whitespace-nowrap">{quantity}</td>
+                                <td className="text-gray-800 p-3 text-sm text-end whitespace-nowrap">{stockData.ram}GB / {stockData.rom}GB</td>
+                                <td className="text-gray-800 p-3 text-sm text-end whitespace-nowrap">{price}</td>
+                                <td className="text-gray-800 p-3 text-sm text-end whitespace-nowrap">{rowTotal}</td>
                             </tr>
                         )
                     })}
                     <tr className="text-end">
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -98,6 +105,7 @@ const SummaryTable = ({ entity, due, discount }: SalesInclude_C_S) => {
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td></td>
                         <td className="py-1.5 px-3 font-semibold text-sm whitespace-nowrap">Due</td>
                         <td className="py-1.5 px-3 font-semibold text-sm">{due}</td>
                     </tr>
@@ -106,10 +114,12 @@ const SummaryTable = ({ entity, due, discount }: SalesInclude_C_S) => {
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td></td>
                         <td className="py-1.5 px-3 font-semibold text-sm whitespace-nowrap">Discount</td>
                         <td className="py-1.5 px-3 font-semibold text-sm">{discount || 0}</td>
                     </tr>
                     <tr className="text-end">
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
