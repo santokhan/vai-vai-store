@@ -1,5 +1,5 @@
 import { getDealerById } from '@/actions/dealer'
-import DealerEdit from '@/block/add/dealer/edit/index'
+import DealerEdit from '@/block/add/dealer/edit'
 
 export const revalidate = 0
 
