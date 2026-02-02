@@ -19,7 +19,7 @@ const InvoiceFooter = () => (
                 </p>
             </div>
         </div>
-        <p className="mt-5 text-sm text-gray-500">©2022 ভাই ভাই টেলিকম.</p>
+        <p className="mt-5 text-sm text-gray-500">©{new Date().getFullYear()} ভাই ভাই টেলিকম.</p>
 
         <div className="mt-20">
             <div className="ml-auto w-60 text-center">
@@ -56,6 +56,8 @@ const SummaryTable = ({ entity, due, discount }: SalesInclude_C_S) => {
                     <tr className="whitespace-nowrap">
                         <th className="p-2 text-gray-700 w-5/12">Brand & Model</th>
                         <th className="p-2 text-gray-700 w-2/12">Quantity</th>
+                        <th className="p-2 text-gray-700 w-2/12">RAM</th>
+                        <th className="p-2 text-gray-700 w-2/12">ROM</th>
                         <th className="p-2 text-gray-700 w-2/12">Price</th>
                         <th className="p-2 text-gray-700 w-3/12">Total Price</th>
                     </tr>
@@ -71,12 +73,13 @@ const SummaryTable = ({ entity, due, discount }: SalesInclude_C_S) => {
                         const rowTotal = quantity * price || 0;
 
                         return (
-                            stockData &&
                             <tr key={i}>
                                 <td className="text-gray-800 p-3 text-sm capitalize whitespace-nowrap">
                                     {stockData.brand.brandName} {stockData.model.model} {stockData.IMEI ? '-' + stockData.IMEI : ''}
                                 </td>
                                 <td className="text-gray-800 p-3 text-sm text-end">{quantity}</td>
+                                <td className="text-gray-800 p-3 text-sm text-end">{stockData.ram}</td>
+                                <td className="text-gray-800 p-3 text-sm text-end">{stockData.rom}</td>
                                 <td className="text-gray-800 p-3 text-sm text-end">{price}</td>
                                 <td className="text-gray-800 p-3 text-sm text-end">{rowTotal}</td>
                             </tr>
@@ -85,10 +88,14 @@ const SummaryTable = ({ entity, due, discount }: SalesInclude_C_S) => {
                     <tr className="text-end">
                         <td></td>
                         <td></td>
+                        <td></td>
+                        <td></td>
                         <td className="py-1.5 px-3 font-semibold text-sm whitespace-nowrap">Total</td>
                         <td className="py-1.5 px-3 font-semibold text-sm">{totalPrice}</td>
                     </tr>
                     <tr className="text-end">
+                        <td></td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td className="py-1.5 px-3 font-semibold text-sm whitespace-nowrap">Due</td>
@@ -97,10 +104,14 @@ const SummaryTable = ({ entity, due, discount }: SalesInclude_C_S) => {
                     <tr className="text-end">
                         <td></td>
                         <td></td>
+                        <td></td>
+                        <td></td>
                         <td className="py-1.5 px-3 font-semibold text-sm whitespace-nowrap">Discount</td>
                         <td className="py-1.5 px-3 font-semibold text-sm">{discount || 0}</td>
                     </tr>
                     <tr className="text-end">
+                        <td></td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td className="py-1.5 px-3 font-semibold text-sm whitespace-nowrap">Amount Paid</td>
