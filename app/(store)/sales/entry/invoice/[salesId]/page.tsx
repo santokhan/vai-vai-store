@@ -78,8 +78,8 @@ const SummaryTable = ({ entity, due, discount }: SalesInclude_C_S) => {
                                     {stockData.brand.brandName} {stockData.model.model} {stockData.IMEI ? '-' + stockData.IMEI : ''}
                                 </td>
                                 <td className="text-gray-800 p-3 text-sm text-end">{quantity}</td>
-                                <td className="text-gray-800 p-3 text-sm text-end">{stockData.ram}</td>
-                                <td className="text-gray-800 p-3 text-sm text-end">{stockData.rom}</td>
+                                <td className="text-gray-800 p-3 text-sm text-end">{stockData.ram} GB</td>
+                                <td className="text-gray-800 p-3 text-sm text-end">{stockData.rom} GB</td>
                                 <td className="text-gray-800 p-3 text-sm text-end">{price}</td>
                                 <td className="text-gray-800 p-3 text-sm text-end">{rowTotal}</td>
                             </tr>
