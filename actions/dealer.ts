@@ -50,3 +50,30 @@ export async function createDealer(data: {
         await prisma.$disconnect();
     }
 }
+
+export async function updateDealer (
+  id: string,
+  data: {
+    name?: string
+    description?: string
+    phoneNumber?: string
+    location?: string
+  }
+): Promise<Dealer | null | undefined> {
+  try {
+    const updatedDealer: Dealer = await prisma.dealer.update({
+      where: { id },
+      data: {
+        name: data.name,
+        description: data.description,
+        phoneNumber: data.phoneNumber,
+        location: data.location
+      }
+    })
+    return updatedDealer
+  } catch (error) {
+    console.error(error)
+  } finally {
+    await prisma.$disconnect()
+  }
+}
