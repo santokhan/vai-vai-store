@@ -6,6 +6,7 @@ import { getStockAndroidById } from "@/actions/stock/android";
 import { getStockButtonById } from "@/actions/stock/button/get";
 import Logo from "@/components/logo/logo";
 import PrintWrapper from "@/components/print-wrapper";
+import { StockAccessories } from "@/prisma/generated/client";
 import { phoneNumbers } from "@/utils/company-details";
 
 const InvoiceFooter = () => (
@@ -29,7 +30,7 @@ const InvoiceFooter = () => (
     </>
 )
 
-const SummaryTable = ({ entity, due, discount }: SalesInclude_C_S) => {
+const SummaryTable = async ({ entity, due, discount }: SalesInclude_C_S) => {
     let totalPrice: number = 0;
     if (Array.isArray(entity)) {
         totalPrice = entity.reduce((prev: number, crnt: any) => {
@@ -42,16 +43,33 @@ const SummaryTable = ({ entity, due, discount }: SalesInclude_C_S) => {
 
     const paidAmount: number = totalPrice - due - (discount || 0);
 
-    let prevBrand = '';
-    let prevModel = '';
+    if (!Array.isArray(entity)) return null;
+
+    const grouped: Record<string, any> = {}
+    const entries: StockAccessories[] = []
+    await Promise.all(entity.map(async ({ type, stockId }: any, i: number) => {
+        const getFunction = functionObject[type as keyof typeof functionObject];
+        const stockData: any = await getFunction(stockId); // NOTE: removed async await for simplicity
+
+        if (stockData) { entries.push(stockData) }
+
+        const exisiting = grouped[stockData.modelId]
+        if (exisiting && stockData.ram == exisiting.ram && stockData.rom == exisiting.rom) {
+            exisiting.quantity += stockData.quantity || 1
+            exisiting.IMEI = exisiting.IMEI?.split(',').concat(stockData.IMEI).join(', ')
+        } else {
+            stockData.quantity = stockData.quantity || 1
+            grouped[stockData.modelId] = stockData
+        }
+        return stockData;
+    }))
 
     return (
         <div className="rounded-lg overflow-hidden mt-6">
             <table className="w-full">
                 <thead className="bg-gray-100 text-start text-sm font-semibold uppercase">
                     <tr className="whitespace-nowrap">
-                        <th className="p-2 text-gray-700 w-2/12">Brand</th>
-                        <th className="p-2 text-gray-700 w-2/12">Model</th>
+                        <th className="p-2 text-gray-700 w-2/12">Brand & Model</th>
                         <th className="p-2 text-gray-700 w-2/12">IMEI</th>
                         <th className="p-2 text-gray-700 w-1/12">Quantity</th>
                         <th className="p-2 text-gray-700 w-1/12">RAM/ROM</th>
@@ -60,55 +78,43 @@ const SummaryTable = ({ entity, due, discount }: SalesInclude_C_S) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {Array.isArray(entity) && entity.map(async ({ type, quantity, price, stockId }: any, i: number) => {
-                        const getFunction = functionObject[type as keyof typeof functionObject];
-                        const stockData: any = await getFunction(stockId); // NOTE: removed async await for simplicity
-
+                    {Object.values(grouped).map(async (stockData: any, i: number) => {
                         if (!stockData) return null;
 
-                        const rowTotal = quantity * price || 0;
-
-                        const showBrand = stockData.brand?.brandName !== prevBrand;
-                        const showModel = stockData.model?.model !== prevModel || showBrand;
-
-                        if (showBrand) prevBrand = stockData.brand?.brandName;
-                        if (showModel) prevModel = stockData.model?.model;
+                        const rowTotal = stockData.quantity * stockData.sellingPrice || 0;
 
                         return (
                             <tr key={i}>
                                 <td className="default capitalize whitespace-nowrap">
-                                    {showBrand ? stockData.brand?.brandName : ''}
-                                </td>
-                                <td className="default capitalize whitespace-nowrap">
-                                    {showModel ? stockData.model?.model : ''}
+                                    {stockData.brand?.brandName} {stockData.model?.model}
                                 </td>
                                 <td className="default whitespace-nowrap">{stockData.IMEI}</td>
-                                <td className="default text-end">{quantity}</td>
+                                <td className="default text-end">{stockData.quantity}</td>
                                 <td className="default text-end whitespace-nowrap">
                                     {stockData.ram}GB / {stockData.rom}GB
                                 </td>
-                                <td className="default text-end whitespace-nowrap">{price}</td>
+                                <td className="default text-end whitespace-nowrap">{stockData.sellingPrice}</td>
                                 <td className="default text-end whitespace-nowrap">{rowTotal}</td>
                             </tr>
                         )
                     })}
                     <tr className="text-end">
-                        <td colSpan={5}></td>
+                        <td colSpan={4}></td>
                         <td className="default whitespace-nowrap">Total</td>
                         <td className="default">{totalPrice}</td>
                     </tr>
                     <tr className="text-end">
-                        <td colSpan={5}></td>
+                        <td colSpan={4}></td>
                         <td className="default whitespace-nowrap">Due</td>
                         <td className="default">{due}</td>
                     </tr>
                     <tr className="text-end">
-                        <td colSpan={5}></td>
+                        <td colSpan={4}></td>
                         <td className="default whitespace-nowrap">Discount</td>
                         <td className="default">{discount || 0}</td>
                     </tr>
                     <tr className="text-end">
-                        <td colSpan={5}></td>
+                        <td colSpan={4}></td>
                         <td className="default whitespace-nowrap">Amount Paid</td>
                         <td className="default">{paidAmount}</td>
                     </tr>

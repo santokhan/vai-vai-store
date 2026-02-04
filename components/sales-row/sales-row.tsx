@@ -129,7 +129,7 @@ const SalesRow: FC<Props> = ({ onOpenForm }) => {
                                 <Table.Cell>
                                     <button
                                         type="button"
-                                        className="hover:text-red-500"
+                                        className="text-red-600 hover:text-red-500"
                                         onClick={() => {
                                             removeFromSales(row.stockId);
                                         }}
