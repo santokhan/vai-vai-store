@@ -85,7 +85,7 @@ const SummaryTable = async ({ entity, due, discount }: SalesInclude_C_S) => {
                     {Object.values(grouped).map(async (stockData: any, i: number) => {
                         if (!stockData) return null;
 
-                        const rowTotal = stockData.quantity * stockData.sellingPrice || 0;
+                        const rowTotal = stockData.quantity * stockData.price || 0;
 
                         return (
                             <tr key={i}>
