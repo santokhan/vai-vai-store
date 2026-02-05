@@ -26,3 +26,21 @@ export async function getStockAndroidById(stockId: string): Promise<AnIncBM | un
         await prisma.$disconnect();
     }
 }
+
+export async function getUnsoldProductByIMEI(IMEI: string) {
+    try {
+        const rows = await prisma.stockAndroid.findMany({
+            where: {
+                IMEI: {
+                    contains: IMEI
+                },
+                sold: false
+            }
+        });
+        return rows;
+    } catch (error) {
+        console.error('Error creating model:', error);
+    } finally {
+        await prisma.$disconnect();
+    }
+}

@@ -1,8 +1,9 @@
 'use client';
+
 import Button from "@/components/button/button";
 import { FoundedProductTable } from "@/components/card/search-product-card";
 import FormContainer from "@/components/form-container";
-import { ChangeEvent, FormEvent, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { useSalesRowContext } from "@/context/sales-context";
 import FormTitle from "../title";
 import CloseForm from "../close-form";
@@ -10,6 +11,8 @@ import InputBox from "../input-box";
 import { SearchNormal } from "iconsax-react";
 import { ORIGIN } from "@/utils/origin";
 import { StockAndroidIncludes } from "@/app/api/(store)/stock/search/imei/route";
+import { getUnsoldProductByIMEI } from "@/actions/stock/android";
+import { StockAndroid } from "@/prisma/generated/client";
 
 export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: () => void }) {
     const [foundStockItem, setfoundStockItem] = useState<StockAndroidIncludes | null>(null);
@@ -17,10 +20,21 @@ export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: ()
     const [isSearching, setisSearching] = useState<boolean>(false);
     const searchInputRef = useRef<HTMLInputElement | null>(null);
     const { addToSales } = useSalesRowContext();
+    const [suggestions, setsuggestions] = useState<StockAndroid[]>([]);
+    const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
 
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         setIMEI(e.target.value);
         setfoundStockItem(null);
+
+        if (e.target.value) {
+            getUnsoldProductByIMEI(e.target.value).then(data => {
+                if (data) {
+                    setsuggestions(data)
+                    setShowSuggestions(true)
+                }
+            })
+        }
     }
 
     async function searchModelByIMEI(e: FormEvent<HTMLFormElement>) {
@@ -39,6 +53,18 @@ export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: ()
         } else {
             alert('Please enter a 15 digit valid IMEI.');
         }
+    }
+    async function findByIMEI(IMEI: string) {
+        setisSearching(true);
+        const API_URL = `${ORIGIN}/api/stock/search/imei?imei=${IMEI}`
+        fetch(API_URL, { cache: 'no-store' }).then(res => res.json()).then((data) => {
+            if (data.message) {
+                alert(data.message)
+            } else {
+                setfoundStockItem(data);
+            }
+            setisSearching(false);
+        }).catch(err => { console.error(err) })
     }
 
     async function addToSalesEntry() {
@@ -68,13 +94,14 @@ export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: ()
                 <InputBox>
                     <form className="w-full" onSubmit={searchModelByIMEI}>
                         <label htmlFor="IMEI" className="default">Search Product by IMEI</label>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 relative">
                             <input
                                 type="search"
                                 id="IMEI"
                                 className="default"
                                 placeholder="46 456464 554655 4"
                                 maxLength={15}
+                                value={IMEI}
                                 onChange={handleChange}
                                 required={true}
                                 ref={searchInputRef}
@@ -84,6 +111,22 @@ export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: ()
                             </button>
                         </div>
                     </form>
+                    {showSuggestions &&
+                        <div className="max-w-lg mt-2">
+                            {suggestions?.map((suggestion, index) => (
+                                <button
+                                    type="button"
+                                    key={index}
+                                    className="w-full text-left hover:bg-gray-100 px-3 py-2 rounded-lg"
+                                    onClick={async () => {
+                                        setIMEI(suggestion.IMEI)
+                                        await findByIMEI(suggestion.IMEI)
+                                        setShowSuggestions(false)
+                                    }}
+                                >{suggestion.IMEI}</button>
+                            ))}
+                        </div>
+                    }
                 </InputBox>
                 <div className="w-full"></div>
             </div>

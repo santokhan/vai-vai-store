@@ -27,7 +27,7 @@ export default async function DashboardLayout({ children }: OnlyChildrenProps) {
                         <AppBarDashboard />
                         <main className="flex">
                             <Sidebar />
-                            <div className="flex-grow p-4 lg:p-6 space-y-4 overflow-hidden">
+                            <div className="flex-grow p-4 lg:p-6 space-y-4 overflow-x-hidden overflow-y-visible">
                                 {children}
                             </div>
                         </main>
