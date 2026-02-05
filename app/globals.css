@@ -29,7 +29,7 @@
   }
 
   td.default {
-    @apply py-1.5 px-3 font-semibold text-sm;
+    @apply py-1.5 px-3 text-sm;
   }
 }
 
