@@ -8,6 +8,8 @@ import Logo from "@/components/logo/logo";
 import PrintWrapper from "@/components/print-wrapper";
 import { StockAccessories } from "@/prisma/generated/client";
 import { phoneNumbers } from "@/utils/company-details";
+import Link from "next/link";
+import { twMerge } from "tailwind-merge";
 
 const InvoiceFooter = () => (
     <>
@@ -93,7 +95,7 @@ const SummaryTable = async ({ entity, due, discount }: SalesInclude_C_S) => {
                                 <td className="default text-end whitespace-nowrap">
                                     {stockData.ram}GB / {stockData.rom}GB
                                 </td>
-                                <td className="default text-end whitespace-nowrap">{stockData.sellingPrice}</td>
+                                <td className="default text-end whitespace-nowrap">{stockData.price}</td>
                                 <td className="default text-end whitespace-nowrap">{rowTotal}</td>
                             </tr>
                         )
@@ -138,36 +140,46 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
     }
 
     return (
-        <PrintWrapper>
-            <main className="space-y-6">
-                <div className="flex flex-col rounded-xl bg-white p-4 sm:p-10">
-                    <div className="flex justify-between">
-                        <Logo className="text-sky-500" />
-                        <div className="text-end">
-                            <h2 className="text-2xl font-semibold text-gray-800 md:text-3xl">Invoice #</h2>
-                            <p className="mt-1 block text-gray-500">{salesEntry.id}</p>
-                            <address className="mt-4 not-italic text-gray-800 whitespace-nowrap">Boro Masjid Road, Melandaha Bazar</address>
-                        </div>
-                    </div>
-                    <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                        <div>
-                            <h3 className="text-lg font-semibold text-gray-800">
-                                Bill to: {salesEntry.customer.name || salesEntry.customer.phone}
-                            </h3>
-                        </div>
-                        <div className="space-y-2 sm:text-end">
-                            <div className="grid grid-cols-2 gap-3 sm:grid-cols-1 sm:gap-2">
-                                <dl className="grid gap-x-3 sm:grid-cols-5">
-                                    <dt className="col-span-3 font-semibold text-gray-800">Invoice date:</dt>
-                                    <dd className="col-span-2 text-gray-500">{new Date().toDateString()}</dd>
-                                </dl>
+        <>
+            <div className="flex">
+                <Link href={`/sales/entry/invoice/${salesEntry.id}`}
+                    className={twMerge("px-4 py-2 rounded-lg bg-white")}
+                >Invoice V1</Link>
+                <Link href={`/sales/entry/invoice/${salesEntry.id}/v2`}
+                    className={twMerge("px-4 py-2 rounded-lg", "bg-blue-500 text-white")}
+                >Invoice V2</Link>
+            </div>
+            <PrintWrapper>
+                <main className="space-y-6">
+                    <div className="flex flex-col rounded-xl bg-white p-4 sm:p-10">
+                        <div className="flex justify-between">
+                            <Logo className="text-sky-500" />
+                            <div className="text-end">
+                                <h2 className="text-2xl font-semibold text-gray-800 md:text-3xl">Invoice #</h2>
+                                <p className="mt-1 block text-gray-500">{salesEntry.id}</p>
+                                <address className="mt-4 not-italic text-gray-800 whitespace-nowrap">Boro Masjid Road, Melandaha Bazar</address>
                             </div>
                         </div>
+                        <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                            <div>
+                                <h3 className="text-lg font-semibold text-gray-800">
+                                    Bill to: {salesEntry.customer.name || salesEntry.customer.phone}
+                                </h3>
+                            </div>
+                            <div className="space-y-2 sm:text-end">
+                                <div className="grid grid-cols-2 gap-3 sm:grid-cols-1 sm:gap-2">
+                                    <dl className="grid gap-x-3 sm:grid-cols-5">
+                                        <dt className="col-span-3 font-semibold text-gray-800">Invoice date:</dt>
+                                        <dd className="col-span-2 text-gray-500">{new Date().toDateString()}</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <SummaryTable {...salesEntry} />
+                        <InvoiceFooter />
                     </div>
-                    <SummaryTable {...salesEntry} />
-                    <InvoiceFooter />
-                </div>
-            </main>
-        </PrintWrapper>
+                </main>
+            </PrintWrapper>
+        </>
     )
 }

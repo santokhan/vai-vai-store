@@ -132,10 +132,10 @@ export default async function InvoicePage({ params }: { params: { salesId: strin
         <div>
             <div className="flex">
                 <Link href={`/sales/entry/invoice/${salesEntry.id}`}
-                    className={twMerge("text-white px-4 py-2 rounded-lg", "bg-blue-500")}
+                    className={twMerge("px-4 py-2 rounded-lg", "bg-blue-500 text-white")}
                 >Invoice V1</Link>
                 <Link href={`/sales/entry/invoice/${salesEntry.id}/v2`}
-                    className={twMerge("px-4 py-2 rounded-lg", "bg-gray-100")}
+                    className={twMerge("px-4 py-2 rounded-lg", "bg-white")}
                 >Invoice V2</Link>
             </div>
             <PrintWrapper>
