@@ -49,7 +49,7 @@ const SummaryTable = async ({ entity, due, discount }: SalesInclude_C_S) => {
 
     const grouped: Record<string, any> = {}
     const entries: StockAccessories[] = []
-    await Promise.all(entity.map(async ({ type, stockId }: any, i: number) => {
+    await Promise.all(entity.map(async ({ type, quantity, price, stockId }: any, i: number) => {
         const getFunction = functionObject[type as keyof typeof functionObject];
         const stockData: any = await getFunction(stockId); // NOTE: removed async await for simplicity
 
@@ -57,10 +57,12 @@ const SummaryTable = async ({ entity, due, discount }: SalesInclude_C_S) => {
 
         const exisiting = grouped[stockData.modelId]
         if (exisiting && stockData.ram == exisiting.ram && stockData.rom == exisiting.rom) {
-            exisiting.quantity += stockData.quantity || 1
+            exisiting.quantity += quantity || 1
+            exisiting.price = price
             exisiting.IMEI = exisiting.IMEI?.split(',').concat(stockData.IMEI).join(', ')
         } else {
             stockData.quantity = stockData.quantity || 1
+            stockData.price = price
             grouped[stockData.modelId] = stockData
         }
         return stockData;
