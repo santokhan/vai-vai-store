@@ -102,22 +102,22 @@ const SummaryTable = async ({ entity, due, discount }: SalesInclude_C_S) => {
                             </tr>
                         )
                     })}
-                    <tr className="text-end text-semibold">
+                    <tr className="text-end font-semibold">
                         <td colSpan={4}></td>
                         <td className="default whitespace-nowrap">Total</td>
                         <td className="default">{totalPrice}</td>
                     </tr>
-                    <tr className="text-end text-semibold">
+                    <tr className="text-end font-semibold">
                         <td colSpan={4}></td>
                         <td className="default whitespace-nowrap">Due</td>
                         <td className="default">{due}</td>
                     </tr>
-                    <tr className="text-end text-semibold">
+                    <tr className="text-end font-semibold">
                         <td colSpan={4}></td>
                         <td className="default whitespace-nowrap">Discount</td>
                         <td className="default">{discount || 0}</td>
                     </tr>
-                    <tr className="text-end text-semibold">
+                    <tr className="text-end font-semibold">
                         <td colSpan={4}></td>
                         <td className="default whitespace-nowrap">Amount Paid</td>
                         <td className="default">{paidAmount}</td>
