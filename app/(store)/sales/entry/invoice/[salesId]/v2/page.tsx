@@ -2,8 +2,10 @@ import { SalesInclude_C_S, getSalesIndividualIncludeProducts } from "@/actions/s
 import InvoiceFooter from "@/components/InvoiceFooter";
 import Logo from "@/components/logo/logo";
 import PrintWrapper from "@/components/print-wrapper";
+import { phoneNumbers } from "@/utils/company-details";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
+import { toWords } from "number-to-words";
 
 interface TableRow {
     brandName: string,
@@ -58,7 +60,7 @@ const SummaryTable = async ({ entity, due, discount, ...rest }: SalesInclude_C_S
     const paidAmount: number = totalPrice - due - (discount || 0);
 
     return (
-        <div className="overflow-hidden mt-4">
+        <div className="overflow-hidden mt-2">
             <table className="w-full default">
                 <thead>
                     <tr className="whitespace-nowrap">
@@ -104,11 +106,14 @@ const SummaryTable = async ({ entity, due, discount, ...rest }: SalesInclude_C_S
                     </tr>
                     <tr className="text-end font-semibold">
                         <td colSpan={2}></td>
-                        <td className="whitespace-nowrap">Amount Paid</td>
+                        <td className="whitespace-nowrap">Payable Amount</td>
                         <td className="">{paidAmount}</td>
                     </tr>
                 </tfoot>
             </table>
+            <p className="uppercase font-semibold text-sm mt-2">
+                In word: {toWords(totalPrice)}
+            </p>
         </div>
     )
 }
@@ -141,23 +146,22 @@ export default async function InvoicePage({ params }: Props) {
                             <div className="text-end">
                                 <h2 className="text-2xl font-semibold text-gray-800 md:text-3xl">Invoice #</h2>
                                 <p className="mt-1 block text-gray-500">{salesEntry.id}</p>
-                                <address className="mt-4 not-italic text-gray-800 whitespace-nowrap">Boro Masjid Road, Melandaha Bazar</address>
+                                <address className="mt-3 not-italic text-gray-800 whitespace-nowrap">
+                                    Boro Masjid Road, Melandaha Bazar
+                                </address>
+                                <p className="text-gray-800 mt-2 whitespace-nowrap">
+                                    Phone: {phoneNumbers.join(", ")}
+                                </p>
                             </div>
                         </div>
-                        <div className="mt-6 grid gap-3 grid-cols-2">
-                            <div>
-                                <h3 className="text-lg font-semibold text-gray-800">
-                                    Bill to: {salesEntry.customer.name || salesEntry.customer.phone}
-                                </h3>
-                            </div>
-                            <div className="space-y-2 sm:text-end">
-                                <div className="grid grid-cols-2 gap-3 sm:grid-cols-1 sm:gap-2">
-                                    <dl className="grid gap-x-3 sm:grid-cols-5">
-                                        <dt className="col-span-3 font-semibold text-gray-800">Date:</dt>
-                                        <dd className="col-span-2 text-gray-500">{new Date().toDateString()}</dd>
-                                    </dl>
-                                </div>
-                            </div>
+                        <div className="mt-6 flex gap-4 justify-between text-sm">
+                            <h3 className="font-semibold text-gray-800">
+                                Bill to: {salesEntry.customer.name || salesEntry.customer.phone}
+                            </h3>
+                            <dl className="flex gap-2">
+                                <dt>Date:</dt>
+                                <dd>{new Date().toDateString()}</dd>
+                            </dl>
                         </div>
                         <SummaryTable {...salesEntry} />
                         <InvoiceFooter salesId={salesId} />
