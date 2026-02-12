@@ -43,6 +43,7 @@
   "devDependencies": {
     "@types/jsonexport": "^3.0.5",
     "@types/node": "^20",
+    "@types/number-to-words": "^1.2.3",
     "@types/numeral": "^2.0.5",
     "@types/qrcode": "^1.5.6",
     "@types/react": "^18",
