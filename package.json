@@ -11,6 +11,8 @@
     "deploy-prod": "vercel deploy --prod"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@faker-js/faker": "^8.3.1",
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
