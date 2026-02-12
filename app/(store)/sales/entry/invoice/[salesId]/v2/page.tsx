@@ -63,12 +63,13 @@ const SummaryTable = async ({ entity, due, discount, ...rest }: SalesInclude_C_S
             rom: rom,
         }
 
-        const duplicate = table.find((row: any) => row.modelId == modelId && row.ram == ram, row.rom == rom)
+        // Duplicate Product
+        const dupIndex = table.findIndex((row: any) => row.modelId == modelId && row.ram == ram, row.rom == rom)
 
-        if (duplicate) {
-            row.quantity += quantity || 1
-            row.total += row.quantity * row.price
-            row.IMEI = [...row.IMEI, IMEI]
+        if (table[dupIndex]) {
+            table[dupIndex].quantity += row.quantity
+            table[dupIndex].total += row.total
+            table[dupIndex].IMEI = [...row.IMEI, IMEI]
         } else {
             table.push(row)
         }
