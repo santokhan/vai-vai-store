@@ -50,7 +50,7 @@ const SummaryTable = async ({ entity, due, discount, ...rest }: SalesInclude_C_S
     let totalPrice: number = 0;
     const table: TableRow[] = []
 
-    entity?.forEach(({ quantity, price, IMEI, brandName, model, modelId, ram, rom }: any) => {
+    entity?.forEach(({ quantity, price, IMEI, brandName, model, modelId, ram, rom }: any, i: number) => {
         const row: TableRow = {
             brandName: brandName,
             model: model,
@@ -72,6 +72,7 @@ const SummaryTable = async ({ entity, due, discount, ...rest }: SalesInclude_C_S
         } else {
             table.push(row)
         }
+        totalPrice += row.total
     })
 
     const paidAmount: number = totalPrice - due - (discount || 0);
@@ -89,8 +90,8 @@ const SummaryTable = async ({ entity, due, discount, ...rest }: SalesInclude_C_S
                 </thead>
                 <tbody>
                     {table.map(async (item: any, i: number) => {
+                        if (!item) return null;
                         return (
-                            item &&
                             <tr key={i}>
                                 <td className="default">
                                     <div className="capitalize whitespace-nowrap">
