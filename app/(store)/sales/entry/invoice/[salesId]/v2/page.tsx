@@ -1,30 +1,9 @@
 import { SalesInclude_C_S, getSalesIndividualIncludeProducts } from "@/actions/sales/get";
+import InvoiceFooter from "@/components/InvoiceFooter";
 import Logo from "@/components/logo/logo";
 import PrintWrapper from "@/components/print-wrapper";
-import { phoneNumbers } from "@/utils/company-details";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
-
-const InvoiceFooter = () => (
-    <>
-        <div className="mt-8 sm:mt-12">
-            <h4 className="text-lg font-semibold text-gray-800">Thank you!</h4>
-            <p className="text-gray-500">If you have any questions concerning this invoice, use the following contact information:</p>
-            <div className="mt-2">
-                <p className="block text-sm font-medium text-gray-800">
-                    Phone: {phoneNumbers.join(", ")}
-                </p>
-            </div>
-        </div>
-        <p className="mt-5 text-sm text-gray-500">©{new Date().getFullYear()} ভাই ভাই টেলিকম.</p>
-
-        <div className="mt-20">
-            <div className="ml-auto w-60 text-center">
-                <p className='border-t-2 text-sm'>Signature</p>
-            </div>
-        </div>
-    </>
-)
 
 interface TableRow {
     brandName: string,
@@ -79,14 +58,14 @@ const SummaryTable = async ({ entity, due, discount, ...rest }: SalesInclude_C_S
     const paidAmount: number = totalPrice - due - (discount || 0);
 
     return (
-        <div className="rounded-lg overflow-hidden mt-6">
-            <table className="w-full">
-                <thead className="bg-gray-100 text-start text-sm font-semibold uppercase">
+        <div className="overflow-hidden mt-4">
+            <table className="w-full default">
+                <thead>
                     <tr className="whitespace-nowrap">
-                        <th className="p-2 text-gray-700 w-2/12">Brand, Model</th>
-                        <th className="p-2 text-gray-700 w-1/12">Quantity</th>
-                        <th className="p-2 text-gray-700 w-1/12">Price</th>
-                        <th className="p-2 text-gray-700 w-1/12">Total Price</th>
+                        <th className="text-gray-700 w-7/12">Brand, Model</th>
+                        <th className="text-gray-700 w-1/12">Quantity</th>
+                        <th className="text-gray-700 w-2/12">Unit Price</th>
+                        <th className="text-gray-700 w-2/12">Total Price</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -94,39 +73,41 @@ const SummaryTable = async ({ entity, due, discount, ...rest }: SalesInclude_C_S
                         if (!item) return null;
                         return (
                             <tr key={i}>
-                                <td className="default">
+                                <td className="">
                                     <div className="capitalize whitespace-nowrap">
-                                        <strong>{item?.brandName} {item?.model}</strong> - {item.ram}/{item.rom}
+                                        <strong>{item?.brandName} {item?.model}</strong> - <strong>{item.ram}</strong>/<strong>{item.rom}</strong>
                                     </div>
-                                    <div className="mt-2">{item.IMEI}</div>
+                                    <div className="mt-1">{item.IMEI?.join(", ")}</div>
                                 </td>
-                                <td className="default text-end">{item.quantity}</td>
-                                <td className="default text-end whitespace-nowrap">{item.price}</td>
-                                <td className="default text-end whitespace-nowrap">{item.total}</td>
+                                <td className="text-end">{item.quantity}</td>
+                                <td className="text-end whitespace-nowrap">{item.price}</td>
+                                <td className="text-end whitespace-nowrap">{item.total}</td>
                             </tr>
                         )
                     })}
-                    <tr className="text-end font-semibold">
-                        <td colSpan={2}></td>
-                        <td className="default whitespace-nowrap">Total</td>
-                        <td className="default">{totalPrice}</td>
-                    </tr>
-                    <tr className="text-end font-semibold">
-                        <td colSpan={2}></td>
-                        <td className="default whitespace-nowrap">Due</td>
-                        <td className="default">{due}</td>
-                    </tr>
-                    <tr className="text-end font-semibold">
-                        <td colSpan={2}></td>
-                        <td className="default whitespace-nowrap">Discount</td>
-                        <td className="default">{discount || 0}</td>
-                    </tr>
-                    <tr className="text-end font-semibold">
-                        <td colSpan={2}></td>
-                        <td className="default whitespace-nowrap">Amount Paid</td>
-                        <td className="default">{paidAmount}</td>
-                    </tr>
                 </tbody>
+                <tfoot>
+                    <tr className="text-end font-semibold">
+                        <td colSpan={2}></td>
+                        <td className="whitespace-nowrap">Total</td>
+                        <td className="">{totalPrice}</td>
+                    </tr>
+                    <tr className="text-end font-semibold">
+                        <td colSpan={2}></td>
+                        <td className="whitespace-nowrap">Due</td>
+                        <td className="">{due}</td>
+                    </tr>
+                    <tr className="text-end font-semibold">
+                        <td colSpan={2}></td>
+                        <td className="whitespace-nowrap">Discount</td>
+                        <td className="">{discount || 0}</td>
+                    </tr>
+                    <tr className="text-end font-semibold">
+                        <td colSpan={2}></td>
+                        <td className="whitespace-nowrap">Amount Paid</td>
+                        <td className="">{paidAmount}</td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     )
@@ -163,7 +144,7 @@ export default async function InvoicePage({ params }: Props) {
                                 <address className="mt-4 not-italic text-gray-800 whitespace-nowrap">Boro Masjid Road, Melandaha Bazar</address>
                             </div>
                         </div>
-                        <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                        <div className="mt-6 grid gap-3 grid-cols-2">
                             <div>
                                 <h3 className="text-lg font-semibold text-gray-800">
                                     Bill to: {salesEntry.customer.name || salesEntry.customer.phone}
@@ -172,14 +153,14 @@ export default async function InvoicePage({ params }: Props) {
                             <div className="space-y-2 sm:text-end">
                                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-1 sm:gap-2">
                                     <dl className="grid gap-x-3 sm:grid-cols-5">
-                                        <dt className="col-span-3 font-semibold text-gray-800">Invoice date:</dt>
+                                        <dt className="col-span-3 font-semibold text-gray-800">Date:</dt>
                                         <dd className="col-span-2 text-gray-500">{new Date().toDateString()}</dd>
                                     </dl>
                                 </div>
                             </div>
                         </div>
                         <SummaryTable {...salesEntry} />
-                        <InvoiceFooter />
+                        <InvoiceFooter salesId={salesId} />
                     </div>
                 </main>
             </PrintWrapper>

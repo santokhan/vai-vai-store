@@ -28,7 +28,19 @@
     @apply w-1/3 px-4 py-2.5 hover:bg-white/10 focus:outline-none capitalize text-center
   }
 
-  td.default {
+  table.default th {
+    @apply border border-gray-200 text-start text-xs font-semibold uppercase py-1.5 px-3;
+  }
+
+  table.default tbody {
+    @apply border border-gray-200;
+  }
+
+  table.default tbody td {
+    @apply py-1.5 px-3 text-sm border-x border-gray-200;
+  }
+
+  table.default tfoot td {
     @apply py-1.5 px-3 text-sm;
   }
 }

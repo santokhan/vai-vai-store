@@ -56,10 +56,10 @@ const SummaryTable = ({ entity, due, discount }: SalesInclude_C_S) => {
             <table className="w-full">
                 <thead className="bg-gray-100 text-start text-sm font-semibold uppercase">
                     <tr className="whitespace-nowrap">
-                        <th className="p-2 text-gray-700 w-5/12">Brand & Model</th>
+                        <th className="p-2 text-gray-700 w-5/12 rounded-tl-lg">Brand & Model</th>
                         <th className="p-2 text-gray-700 w-2/12">Quantity</th>
                         <th className="p-2 text-gray-700 w-2/12">Price</th>
-                        <th className="p-2 text-gray-700 w-3/12">Total Price</th>
+                        <th className="p-2 text-gray-700 w-3/12 rounded-tr-lg">Total Price</th>
                     </tr>
                 </thead>
                 <tbody>
