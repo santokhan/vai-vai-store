@@ -6,15 +6,16 @@ import FormContainer from '@/components/form-container'
 import InputBox from '@/components/form/input-box'
 import SelectOption from '@/components/form/select-option/select-option'
 import { TableTitle } from '@/components/table/table-header'
-import { Brand, Dealer, Model } from '@/prisma/generated/client'
+import { Brand, Model } from '@/prisma/generated/client'
 import { commonPhoneColors } from '@/utils/default-data'
-import React, { ChangeEvent, FC, FormEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, FC, FormEvent, useState } from 'react'
 import { toast } from 'react-toastify'
 import { ServerProps } from './type'
 import { RAM, ROM } from '@/utils/pre-defined-form-data'
 import { addStockAndroid } from '@/actions/stock/entry/android'
 import { isValidIMEI } from '@/utils/validation'
-import useDealers from '@/hooks/useDealers'
+import Link from 'next/link'
+import { PlusIcon } from '@heroicons/react/24/outline'
 
 export const initialState: StockAndroidPOST = {
   name: '',
@@ -30,33 +31,39 @@ export const initialState: StockAndroidPOST = {
   dealerId: ''
 }
 
+const AddButton = ({ href = "#", ...props }: { href: string, [key: string]: any }) => (
+  <Link {...props} href={href} className='default'>
+    <PlusIcon className='size-5' />
+  </Link>
+)
+
 const StockAndroidEntryForm: FC<ServerProps> = ({
   productType,
   brand,
-  model
+  model,
+  dealers
 }) => {
   const [state, setstate] = useState<StockAndroidPOST>({
     ...initialState,
     productTypeId: productType[0].id
   })
   const [adding, setadding] = useState<boolean>(false)
-  const { dealers } = useDealers()
 
-  function brandByType (brands: Brand[], type: string): Brand[] {
+  function brandByType(brands: Brand[], type: string): Brand[] {
     if (brands && type) {
       return brands.filter(e => e.productTypeId === type)
     }
     return brands
   }
 
-  function modelByBrand (models: Model[], brand: string): Model[] {
+  function modelByBrand(models: Model[], brand: string): Model[] {
     if (models && brand) {
       return models.filter(model => model.brandId === brand)
     }
     return models
   }
 
-  function onChange (
+  function onChange(
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
   ) {
     let value: string | number = e?.target?.value
@@ -69,7 +76,7 @@ const StockAndroidEntryForm: FC<ServerProps> = ({
     }))
   }
 
-  async function handleSubmit (e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     if (
       !state.productTypeId ||
@@ -113,55 +120,61 @@ const StockAndroidEntryForm: FC<ServerProps> = ({
               <label htmlFor='brand' className='default'>
                 Choose brand
               </label>
-              <select
-                className='default'
-                name='brand'
-                id='brand'
-                value={state.brandId}
-                required={true}
-                onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                  setstate({ ...state, brandId: e.target.value })
-                }}
-              >
-                <option value='' disabled className='capitalize'>
-                  default
-                </option>
-                {state.productTypeId &&
-                  brandByType(brand, state.productTypeId).map(
-                    (brand: Brand, idx) => (
-                      <option className='capitalize' value={brand.id} key={idx}>
-                        {brand.brandName}
-                      </option>
-                    )
-                  )}
-              </select>
+              <div className="flex items-center gap-2">
+                <select
+                  className='default'
+                  name='brand'
+                  id='brand'
+                  value={state.brandId}
+                  required={true}
+                  onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                    setstate({ ...state, brandId: e.target.value })
+                  }}
+                >
+                  <option value='' disabled className='capitalize'>
+                    default
+                  </option>
+                  {state.productTypeId &&
+                    brandByType(brand, state.productTypeId).map(
+                      (brand: Brand, idx) => (
+                        <option className='capitalize' value={brand.id} key={idx}>
+                          {brand.brandName}
+                        </option>
+                      )
+                    )}
+                </select>
+                <AddButton href='/add/brand' />
+              </div>
             </InputBox>
             <InputBox>
               <label htmlFor='model' className='default'>
                 Choose Model
               </label>
-              <select
-                className='default'
-                name='model'
-                id='model'
-                value={state.modelId}
-                required={true}
-                onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                  setstate({ ...state, modelId: e.target.value })
-                }}
-              >
-                <option value='' disabled className='capitalize'>
-                  default
-                </option>
-                {state.brandId &&
-                  modelByBrand(model, state.brandId).map(
-                    (model: Model, idx) => (
-                      <option className='capitalize' value={model.id} key={idx}>
-                        {model.model}
-                      </option>
-                    )
-                  )}
-              </select>
+              <div className="flex items-center gap-2">
+                <select
+                  className='default'
+                  name='model'
+                  id='model'
+                  value={state.modelId}
+                  required={true}
+                  onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                    setstate({ ...state, modelId: e.target.value })
+                  }}
+                >
+                  <option value='' disabled className='capitalize'>
+                    default
+                  </option>
+                  {state.brandId &&
+                    modelByBrand(model, state.brandId).map(
+                      (model: Model, idx) => (
+                        <option className='capitalize' value={model.id} key={idx}>
+                          {model.model}
+                        </option>
+                      )
+                    )}
+                </select>
+                <AddButton href='/add/model' />
+              </div>
             </InputBox>
             <InputBox>
               <label htmlFor='IMEI' className='default'>
@@ -251,19 +264,22 @@ const StockAndroidEntryForm: FC<ServerProps> = ({
               required={true}
             />
 
-            <SelectOption
-              labelName='Dealer'
-              name='dealerId'
-              options={
-                dealers?.map(e => {
-                  return { value: e.id, label: e.name }
-                }) || []
-              }
-              onChange={onChange}
-              defaultOptionName='Default'
-              value={state.dealerId || ''}
+            <div className='flex items-end gap-2'>
+              <SelectOption
+                labelName='Dealer'
+                name='dealerId'
+                options={
+                  dealers?.map(e => {
+                    return { value: e.id, label: e.name }
+                  }) || []
+                }
+                onChange={onChange}
+                defaultOptionName='Default'
+                value={state.dealerId || ''}
               // required={true}
-            />
+              />
+              <AddButton href='/add/dealer' />
+            </div>
           </div>
         </FormContainer>
 
