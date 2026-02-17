@@ -8,6 +8,7 @@ import Logo from "@/components/logo/logo";
 import PrintWrapper from "@/components/print-wrapper";
 import { phoneNumbers } from "@/utils/company-details";
 import Link from "next/link";
+import numWords from "num-words";
 import { twMerge } from "tailwind-merge";
 
 const InvoiceFooter = () => (
@@ -98,6 +99,9 @@ const SummaryTable = ({ entity, due, discount }: SalesInclude_C_S) => {
                     </tr>
                 </tbody>
             </table>
+            <p className="uppercase font-semibold text-sm mt-2">
+                In word: {numWords(totalPrice)}
+            </p>
         </div>
     )
 }
