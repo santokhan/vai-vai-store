@@ -1,6 +1,7 @@
 'use server';
 
-import { TotalSummary, actionTotalSummary } from "@/actions/total-summary";
+import type { TotalSummary } from "@/actions/total-summary";
+import { actionTotalSummary } from "@/actions/total-summary";
 import formatCurrency from "@/utils/currency-formatter";
 
 export type SummaryKeys = 'name' | 'amount';
@@ -10,7 +11,6 @@ export interface SummaryObj {
 };
 export type Summary = SummaryObj[];
 
-
 export async function TotalSummary() {
     const totalSummary: TotalSummary | undefined = await actionTotalSummary();
 
@@ -19,35 +19,28 @@ export async function TotalSummary() {
     }
 
     const { purchase, sales, due, availablePurchase } = totalSummary;
-    const array = [
-        {
-            name: "total Purchase",
-            amount: purchase,
-        },
-        {
-            name: "stock available purchase",
-            amount: availablePurchase,
-        },
-        {
-            name: "total sales",
-            amount: sales,
-        },
-        {
-            name: "total Due",
-            amount: due,
-        },
-    ]
+    const summaryArray: Summary = [
+        { name: "Total Purchase", amount: purchase },
+        { name: "Stock Available Purchase", amount: availablePurchase },
+        { name: "Total Sales", amount: sales },
+        { name: "Total Due", amount: due },
+    ];
 
     return (
-        <div className="flex flex-wrap items-center justify-center gap-4">
-            {array.map(({ name, amount }, i) => (
-                <div className="flex flex-col items-center justify-center h-28 min-w-48 p-4 rounded-lg border-2 border-dashed bg-white" key={i}>
-                    <div className="text-2xl font-semibold whitespace-nowrap flex items-center">
+        <div className="flex flex-wrap justify-center gap-6">
+            {summaryArray.map(({ name, amount }, i) => (
+                <div
+                    key={i}
+                    className="flex flex-col items-center justify-center flex-1 min-w-[200px] max-w-xs p-5 rounded-xl border border-gray-200 bg-white shadow-sm hover:shadow-lg transition-shadow duration-300"
+                >
+                    <div className="text-3xl font-bold text-blue-600">
                         {formatCurrency(amount)}
                     </div>
-                    <div className="mt-1 text-lg font-medium capitalize whitespace-nowrap">{name}</div>
+                    <div className="mt-2 text-lg font-medium text-gray-700 text-center">
+                        {name}
+                    </div>
                 </div>
             ))}
         </div>
-    )
+    );
 }
