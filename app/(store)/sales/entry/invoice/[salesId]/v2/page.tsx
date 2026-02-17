@@ -32,31 +32,36 @@ const SummaryTable = async ({ entity, due, discount, ...rest }: SalesInclude_C_S
     let totalQuantity: number = 0;
     const table: TableRow[] = []
 
-    entity?.forEach(({ quantity, price, IMEI, brandName, model, modelId, ram, rom }: any, i: number) => {
-        const row: TableRow = {
-            brandName: brandName,
-            model: model,
-            IMEI: [IMEI],
-            price: price,
-            quantity: quantity || 1,
-            total: price * (quantity || 1),
-            modelId: modelId,
-            ram: ram,
-            rom: rom,
-        }
+    entity.forEach(({ quantity, price, IMEI, brandName, model, modelId, ram, rom }: any) => {
+        const qty = quantity || 1
 
-        // Duplicate Product
-        const dupIndex = table.findIndex((row: any) => row.modelId == modelId && row.ram == ram, row.rom == rom)
+        const existing = table.find(
+            (row) =>
+                row.modelId === modelId &&
+                row.ram === ram &&
+                row.rom === rom
+        )
 
-        if (table[dupIndex]) {
-            table[dupIndex].quantity += row.quantity
-            table[dupIndex].total += row.total
-            table[dupIndex].IMEI = [...row.IMEI, IMEI]
+        if (existing) {
+            existing.quantity += qty
+            existing.total += price * qty
+            existing.IMEI.push(IMEI)
         } else {
-            table.push(row)
+            table.push({
+                brandName,
+                model,
+                IMEI: [IMEI],
+                price,
+                quantity: qty,
+                total: price * qty,
+                modelId,
+                ram,
+                rom,
+            })
         }
-        totalPrice += row.total
-        totalQuantity += row.quantity
+
+        totalPrice += price * qty
+        totalQuantity += qty
     })
 
     const paidAmount: number = totalPrice - due - (discount || 0);
