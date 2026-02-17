@@ -5,7 +5,7 @@ import PrintWrapper from "@/components/print-wrapper";
 import { phoneNumbers } from "@/utils/company-details";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
-import { toWords } from "number-to-words";
+import numWords from "num-words";
 
 interface TableRow {
     brandName: string,
@@ -112,7 +112,7 @@ const SummaryTable = async ({ entity, due, discount, ...rest }: SalesInclude_C_S
                 </tfoot>
             </table>
             <p className="uppercase font-semibold text-sm mt-2">
-                In word: {toWords(totalPrice)}
+                In word: {numWords(totalPrice)}
             </p>
         </div>
     )

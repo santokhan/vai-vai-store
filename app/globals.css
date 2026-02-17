@@ -41,7 +41,7 @@
   }
 
   table.default tbody td {
-    @apply py-1.5 px-3 text-sm border-x border-gray-200;
+    @apply py-1.5 px-3 text-sm border border-gray-200;
   }
 
   table.default tfoot td {
