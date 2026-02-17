@@ -29,6 +29,7 @@ const SummaryTable = async ({ entity, due, discount, ...rest }: SalesInclude_C_S
     if (!Array.isArray(entity)) return null;
 
     let totalPrice: number = 0;
+    let totalQuantity: number = 0;
     const table: TableRow[] = []
 
     entity?.forEach(({ quantity, price, IMEI, brandName, model, modelId, ram, rom }: any, i: number) => {
@@ -55,6 +56,7 @@ const SummaryTable = async ({ entity, due, discount, ...rest }: SalesInclude_C_S
             table.push(row)
         }
         totalPrice += row.total
+        totalQuantity += row.quantity
     })
 
     const paidAmount: number = totalPrice - due - (discount || 0);
@@ -90,22 +92,26 @@ const SummaryTable = async ({ entity, due, discount, ...rest }: SalesInclude_C_S
                 </tbody>
                 <tfoot>
                     <tr className="text-end font-semibold">
-                        <td colSpan={2}></td>
+                        <td></td>
+                        <td>{totalQuantity}</td>
                         <td className="whitespace-nowrap">Total</td>
                         <td className="">{totalPrice}</td>
                     </tr>
                     <tr className="text-end font-semibold">
-                        <td colSpan={2}></td>
+                        <td></td>
+                        <td></td>
                         <td className="whitespace-nowrap">Due</td>
                         <td className="">{due}</td>
                     </tr>
                     <tr className="text-end font-semibold">
-                        <td colSpan={2}></td>
+                        <td></td>
+                        <td></td>
                         <td className="whitespace-nowrap">Discount</td>
                         <td className="">{discount || 0}</td>
                     </tr>
                     <tr className="text-end font-semibold">
-                        <td colSpan={2}></td>
+                        <td></td>
+                        <td></td>
                         <td className="whitespace-nowrap">Payable Amount</td>
                         <td className="">{paidAmount}</td>
                     </tr>
