@@ -28,6 +28,10 @@
     @apply w-1/3 px-4 py-2.5 hover:bg-white/10 focus:outline-none capitalize text-center
   }
 
+  table.default {
+    @apply w-full text-sm;
+  }
+
   table.default th {
     @apply border border-gray-200 text-start text-xs font-semibold uppercase py-1.5 px-3;
   }

@@ -34,14 +34,15 @@ const InvoiceFooter = () => (
 const SummaryTable = ({ entity, due, discount }: SalesInclude_C_S) => {
     // calculate total price
     let totalPrice: number = 0;
+    let totalQuantity: number = 0;
     if (Array.isArray(entity)) {
         totalPrice = entity.reduce((prev: number, crnt: any) => {
             if (crnt.price) {
-                if (crnt.quantity) {
-                    return prev += crnt.price * crnt.quantity;
-                } else {
-                    return prev += crnt.price * 1;
-                }
+                const quantity = crnt.quantity || 1;
+                totalQuantity += quantity;
+
+                const rowTotal = crnt.price * quantity;
+                return prev += rowTotal;
             } else {
                 return prev;
             }
@@ -76,7 +77,7 @@ const SummaryTable = ({ entity, due, discount }: SalesInclude_C_S) => {
                             stockData &&
                             <tr key={i}>
                                 <td className="text-gray-800 p-3 text-sm capitalize whitespace-nowrap">
-                                    {stockData.brand.brandName} {stockData.model.model} {stockData.IMEI ? '-' + stockData.IMEI : ''}
+                                    <strong>{stockData.brand.brandName} {stockData.model.model} {stockData.ram}/{stockData.rom}</strong>  {stockData.IMEI ? '-' + stockData.IMEI : ''}
                                 </td>
                                 <td className="text-gray-800 p-3 text-sm text-end">{quantity}</td>
                                 <td className="text-gray-800 p-3 text-sm text-end">{price}</td>
@@ -86,7 +87,7 @@ const SummaryTable = ({ entity, due, discount }: SalesInclude_C_S) => {
                     })}
                     <tr className="text-end">
                         <td></td>
-                        <td></td>
+                        <td className="py-1.5 px-3 font-semibold text-sm">{totalQuantity}</td>
                         <td className="py-1.5 px-3 font-semibold text-sm whitespace-nowrap">Total</td>
                         <td className="py-1.5 px-3 font-semibold text-sm">{totalPrice}</td>
                     </tr>
