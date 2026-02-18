@@ -1,4 +1,4 @@
-import { Document, Money, Profile2User, ShieldSecurity, Shop, ShoppingCart, User } from "iconsax-react";
+import { Document, Money, Profile2User, ShieldSecurity, Shop, ShoppingCart, TrendUp, User } from "iconsax-react";
 
 export type NavLink = {
     name: string;
@@ -69,13 +69,17 @@ export const report: NavIncludeChild = {
     path: '/report',
     icon: <Document className="w-5 h-5" />,
     children: [
+        // {
+        //     name: "sales",
+        //     path: "/sales"
+        // },
+        // {
+        //     name: "loss profit",
+        //     path: "/loss-profit"
+        // },
         {
-            name: "sales",
-            path: "/sales"
-        },
-        {
-            name: "loss profit",
-            path: "/loss-profit"
+            name: "daily",
+            path: "/daily"
         },
     ],
 };
@@ -158,6 +162,12 @@ export const user: NavItem = {
     title: 'user',
     path: "/user",
     icon: <User className="w-5 h-5" />
+};
+
+export const dailyReport: NavItem = {
+    title: 'daily-report',
+    path: "/daily-report",
+    icon: <TrendUp className="w-5 h-5" />
 };
 
 export const sidebarNavs: NavIncludeChild[] = [
