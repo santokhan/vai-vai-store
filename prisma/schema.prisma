@@ -35,6 +35,7 @@ model ProductType {
     HistoryButtonStock      HistoryButtonStock[]
     HistoryAccessoriesStock HistoryAccessoriesStock[]
     ReturnHistory           ReturnHistory[]
+    SalesItem               SalesItem[]
 }
 
 model Brand {
@@ -170,7 +171,9 @@ model SalesItem {
     sale   SalesEntry @relation(fields: [saleId], references: [id])
     saleId String     @db.ObjectId
 
-    stockId String @db.ObjectId
+    stockId String      @db.ObjectId
+    type    ProductType @relation(fields: [typeId], references: [id])
+    typeId  String      @db.ObjectId // Reference to ProductType
 
     quantity  Int
     unitPrice Float
