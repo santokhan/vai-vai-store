@@ -102,8 +102,8 @@ model StockAndroid {
     ram           String?
     rom           String?
     createdAt     DateTime?   @default(now())
-    dealer                  Dealer?                   @relation("DealerStockAndroid", fields: [dealerId], references: [id])
-    dealerId                String?                   @db.ObjectId
+    dealer        Dealer?     @relation("DealerStockAndroid", fields: [dealerId], references: [id])
+    dealerId      String?     @db.ObjectId
 }
 
 model StockButton {
@@ -120,8 +120,8 @@ model StockButton {
     quantity      Int
     color         String
     createdAt     DateTime?   @default(now())
-    dealer                  Dealer?                   @relation("DealerStockButton", fields: [dealerId], references: [id])
-    dealerId                String?                   @db.ObjectId
+    dealer        Dealer?     @relation("DealerStockButton", fields: [dealerId], references: [id])
+    dealerId      String?     @db.ObjectId
 }
 
 model StockAccessories {
@@ -151,16 +151,34 @@ model Customer {
 }
 
 model SalesEntry {
-    id         String    @id @default(auto()) @map("_id") @db.ObjectId
+    id         String      @id @default(auto()) @map("_id") @db.ObjectId
     discount   Int
     due        Int
-    dueDate    DateTime? @default(now())
-    seller     Seller    @relation(fields: [sellerId], references: [id])
-    sellerId   String    @db.ObjectId
-    customer   Customer  @relation(fields: [customerId], references: [id])
-    customerId String    @db.ObjectId
-    createdAt  DateTime  @default(now())
+    dueDate    DateTime?   @default(now())
+    seller     Seller      @relation(fields: [sellerId], references: [id])
+    sellerId   String      @db.ObjectId
+    customer   Customer    @relation(fields: [customerId], references: [id])
+    customerId String      @db.ObjectId
+    createdAt  DateTime    @default(now())
     entity     Json
+    salesItems SalesItem[]
+}
+
+model SalesItem {
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+
+    sale   SalesEntry @relation(fields: [saleId], references: [id])
+    saleId String     @db.ObjectId
+
+    stockId String @db.ObjectId
+
+    quantity  Int
+    unitPrice Float
+    discount  Float? // item-level discount (optional)
+
+    total Float // quantity * unitPrice - discount
+
+    createdAt DateTime @default(now())
 }
 
 model ShopRent {
@@ -237,14 +255,17 @@ model ReturnHistory {
     productType   ProductType @relation(fields: [productTypeId], references: [id])
     productTypeId String      @db.ObjectId
     stockId       String      @db.ObjectId
+    salesId       String?     @db.ObjectId
+    reason        String?
+    createdAt     DateTime?   @default(now())
 }
 
 model Dealer {
     id          String   @id @default(auto()) @map("_id") @db.ObjectId
     name        String
     description String?
-    phoneNumber String?   // Optional phone number
-    location    String?   // Optional location
+    phoneNumber String? // Optional phone number
+    location    String? // Optional location
     createdAt   DateTime @default(now())
 
     // Optional: relation to SalesEntry or Stock if you want to track purchases
