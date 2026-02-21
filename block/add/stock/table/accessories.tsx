@@ -33,7 +33,7 @@ import { AccIncBM } from '@/actions/stock/accessories/get'
 import ExportButtonGroup from '@/components/export-button'
 import numeral from 'numeral'
 
-export default function StockTableAccessories ({
+export default function StockTableAccessories({
   stockAccessories
 }: {
   stockAccessories: AccIncBM[]
@@ -45,7 +45,7 @@ export default function StockTableAccessories ({
         columns: [
           {
             id: 'brand',
-            accessorFn (row) {
+            accessorFn(row) {
               return row.brand.brandName
             }
           }
@@ -56,7 +56,7 @@ export default function StockTableAccessories ({
         columns: [
           {
             id: 'model',
-            accessorFn (row) {
+            accessorFn(row) {
               return row.model.model
             }
           }
@@ -67,7 +67,7 @@ export default function StockTableAccessories ({
         columns: [
           {
             id: 'dealer',
-            accessorFn (row) {
+            accessorFn(row) {
               return row.dealer?.name
             }
           }
@@ -78,7 +78,7 @@ export default function StockTableAccessories ({
         columns: [
           {
             id: 'purchase price',
-            accessorFn (row) {
+            accessorFn(row) {
               return numeral(row.purchasePrice).format('0,0')
             }
           }
@@ -89,7 +89,7 @@ export default function StockTableAccessories ({
         columns: [
           {
             id: 'selling price',
-            accessorFn (row) {
+            accessorFn(row) {
               return numeral(row.sellingPrice).format('0,0')
             }
           }
@@ -116,7 +116,7 @@ export default function StockTableAccessories ({
         columns: [
           {
             id: 'created at',
-            accessorFn (row) {
+            accessorFn(row) {
               return row.createdAt?.toLocaleString() || ''
             }
           }
@@ -129,22 +129,24 @@ export default function StockTableAccessories ({
             id: 'action',
             cell: ({ row }) => (
               <Actions>
-                <ActionDelete
-                  handleClick={() => {
-                    fetch(
-                      `/api/stock/table/accessories/delete?id=${row.original.id}`,
-                      {
-                        method: 'DELETE'
-                      }
-                    )
-                      .then(() => {
-                        window.location.reload()
-                      })
-                      .catch(error => {
-                        console.error(error)
-                      })
-                  }}
-                />
+                <>
+                  {/* <ActionDelete
+                    handleClick={() => {
+                      fetch(
+                        `/api/stock/table/accessories/delete?id=${row.original.id}`,
+                        {
+                          method: 'DELETE'
+                        }
+                      )
+                        .then(() => {
+                          window.location.reload()
+                        })
+                        .catch(error => {
+                          console.error(error)
+                        })
+                    }}
+                  /> */}
+                </>
               </Actions>
             )
           }
@@ -166,7 +168,7 @@ type TableProps = {
   columns: ColumnDef<AccIncBM>[]
 }
 
-function Table ({ data, columns }: TableProps) {
+function Table({ data, columns }: TableProps) {
   const table = useReactTable({
     data,
     columns,
@@ -177,7 +179,7 @@ function Table ({ data, columns }: TableProps) {
   })
   const headers = table.getHeaderGroups()[1].headers
 
-  function tableToExport () {
+  function tableToExport() {
     const json = table.getFilteredRowModel().rows.map(row => {
       const og = row.original
       return {

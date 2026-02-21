@@ -34,7 +34,7 @@ import ExportButtonGroup from '@/components/export-button'
 import downloadCSV from '@/components/download-csv'
 import numeral from 'numeral'
 
-export default function StockButtonTable ({
+export default function StockButtonTable({
   stockButton
 }: {
   stockButton: BtnIncBM[]
@@ -46,7 +46,7 @@ export default function StockButtonTable ({
         columns: [
           {
             id: 'brand',
-            accessorFn (row) {
+            accessorFn(row) {
               return row.brand.brandName
             }
           }
@@ -57,7 +57,7 @@ export default function StockButtonTable ({
         columns: [
           {
             id: 'model',
-            accessorFn (row) {
+            accessorFn(row) {
               return row.model.model
             }
           }
@@ -68,7 +68,7 @@ export default function StockButtonTable ({
         columns: [
           {
             id: 'dealer',
-            accessorFn (row) {
+            accessorFn(row) {
               return row.dealer?.name
             }
           }
@@ -79,7 +79,7 @@ export default function StockButtonTable ({
         columns: [
           {
             id: 'purchase price',
-            accessorFn (row) {
+            accessorFn(row) {
               return numeral(row.purchasePrice).format('0,0')
             }
           }
@@ -90,7 +90,7 @@ export default function StockButtonTable ({
         columns: [
           {
             id: 'selling price',
-            accessorFn (row) {
+            accessorFn(row) {
               return numeral(row.sellingPrice).format('0,0')
             }
           }
@@ -117,7 +117,7 @@ export default function StockButtonTable ({
         columns: [
           {
             id: 'created at',
-            accessorFn (row) {
+            accessorFn(row) {
               return row.createdAt?.toLocaleString() || ''
             }
           }
@@ -130,13 +130,15 @@ export default function StockButtonTable ({
             id: 'action',
             cell: ({ row }) => (
               <Actions>
-                <ActionDelete
-                  handleClick={async () => {
-                    if (row.original.id) {
-                      const response = await deleteStockButton(row.original.id)
-                    }
-                  }}
-                />
+                <>
+                  {/* <ActionDelete
+                    handleClick={async () => {
+                      if (row.original.id) {
+                        const response = await deleteStockButton(row.original.id)
+                      }
+                    }}
+                  /> */}
+                </>
               </Actions>
             )
           }
@@ -154,7 +156,7 @@ type TableProps = {
   columns: ColumnDef<BtnIncBM>[]
 }
 
-function Table ({ data, columns }: TableProps) {
+function Table({ data, columns }: TableProps) {
   const table = useReactTable({
     data,
     columns,
@@ -165,7 +167,7 @@ function Table ({ data, columns }: TableProps) {
   })
   const headers = table.getHeaderGroups()[1].headers
 
-  function tableToExport () {
+  function tableToExport() {
     const json = table.getFilteredRowModel().rows.map(row => {
       const og = row.original
       return {
