@@ -86,15 +86,17 @@ export default function StockAndroidTable({ stockAndroid }: { stockAndroid: Stoc
                 id: 'action',
                 cell: ({ row }) => (
                     <Actions>
-                        <ActionDelete handleClick={() => {
-                            fetch(`/api/stock/table/android/delete?id=${row.original.id}`, {
-                                method: "DELETE"
-                            }).then(() => {
-                                window.location.reload();
-                            }).catch(error => {
-                                console.error(error)
-                            })
-                        }} />
+                        <>
+                            {/* <ActionDelete handleClick={() => {
+                                fetch(`/api/stock/table/android/delete?id=${row.original.id}`, {
+                                    method: "DELETE"
+                                }).then(() => {
+                                    window.location.reload();
+                                }).catch(error => {
+                                    console.error(error)
+                                })
+                            }} /> */}
+                        </>
                     </Actions>
                 )
             }]
