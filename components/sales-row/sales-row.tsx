@@ -105,9 +105,9 @@ const SalesRow: FC<Props> = ({ onOpenForm }) => {
                         <Table.HeadCell>Type</Table.HeadCell>
                         <Table.HeadCell>Brand & Model</Table.HeadCell>
                         <Table.HeadCell>Quantity</Table.HeadCell>
+                        <Table.HeadCell>RAM/ROM</Table.HeadCell>
                         <Table.HeadCell>Selling Price</Table.HeadCell>
                         <Table.HeadCell>Total Price</Table.HeadCell>
-
                         <Table.HeadCell>Action</Table.HeadCell>
                     </Table.Head>
                     <Table.Body>
@@ -123,9 +123,13 @@ const SalesRow: FC<Props> = ({ onOpenForm }) => {
                                             <ControlQuantity stockId={row.stockId} quantity={row.quantity} type={row.type} />
                                     }
                                 </Table.Cell>
-                                <Table.Cell><EditablePrice price={row.price} stockId={row.stockId} /></Table.Cell>
+                                <Table.Cell>
+                                    {row.ram}/{row.rom}
+                                </Table.Cell>
+                                <Table.Cell>
+                                    <EditablePrice price={row.price} stockId={row.stockId} />
+                                </Table.Cell>
                                 <Table.Cell>{row.price * row.quantity}</Table.Cell>
-
                                 <Table.Cell>
                                     <button
                                         type="button"

@@ -77,7 +77,9 @@ export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: ()
                 price: foundStockItem.sellingPrice,
                 type: 'android',
                 brand: foundStockItem.brand.brandName,
-                model: foundStockItem.model.model
+                model: foundStockItem.model.model,
+                ram: foundStockItem.ram,
+                rom: foundStockItem.rom
             });
             onCloseForm();
         } else {
