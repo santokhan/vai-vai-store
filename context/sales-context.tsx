@@ -7,8 +7,8 @@ import { createContext, useContext, useState } from "react";
 export interface SalesRowIncludeBrandModel extends APISalesEntity {
     brand: string
     model: string
-    ram: string | null
-    rom: string | null
+    ram?: string | null
+    rom?: string | null
 }
 
 export const SalesRowContext = createContext<{
