@@ -81,6 +81,10 @@ export const report: NavIncludeChild = {
             name: "daily",
             path: "/daily"
         },
+        {
+            name: "availability",
+            path: "/stock"
+        },
     ],
 };
 
