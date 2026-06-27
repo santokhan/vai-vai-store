@@ -35,9 +35,11 @@ import downloadCSV from '@/components/download-csv'
 import numeral from 'numeral'
 
 export default function StockButtonTable({
-  stockButton
+  stockButton,
+  canDelete
 }: {
   stockButton: BtnIncBM[]
+  canDelete: boolean
 }) {
   const columns = useMemo<ColumnDef<BtnIncBM>[]>(
     () => [
@@ -130,22 +132,23 @@ export default function StockButtonTable({
             id: 'action',
             cell: ({ row }) => (
               <Actions>
-                <>
-                  {/* <ActionDelete
+                {canDelete && (
+                  <ActionDelete
                     handleClick={async () => {
                       if (row.original.id) {
-                        const response = await deleteStockButton(row.original.id)
+                        await deleteStockButton(row.original.id)
+                        window.location.reload()
                       }
                     }}
-                  /> */}
-                </>
+                  />
+                )}
               </Actions>
             )
           }
         ]
       }
     ],
-    []
+    [canDelete]
   )
 
   return <>{stockButton && <Table data={stockButton} columns={columns} />}</>

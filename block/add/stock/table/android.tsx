@@ -16,7 +16,13 @@ import { StockAndroidInclude } from '@/actions/stock/get';
 import downloadCSV from '@/components/download-csv';
 import numeral from 'numeral';
 
-export default function StockAndroidTable({ stockAndroid }: { stockAndroid: StockAndroidInclude[] }) {
+export default function StockAndroidTable({
+  stockAndroid,
+  canDelete
+}: {
+  stockAndroid: StockAndroidInclude[]
+  canDelete: boolean
+}) {
     const columns = useMemo<ColumnDef<StockAndroidInclude>[]>(() => [
         {
             id: 'brand',
@@ -86,8 +92,8 @@ export default function StockAndroidTable({ stockAndroid }: { stockAndroid: Stoc
                 id: 'action',
                 cell: ({ row }) => (
                     <Actions>
-                        <>
-                            {/* <ActionDelete handleClick={() => {
+                        {canDelete && (
+                            <ActionDelete handleClick={() => {
                                 fetch(`/api/stock/table/android/delete?id=${row.original.id}`, {
                                     method: "DELETE"
                                 }).then(() => {
@@ -95,13 +101,13 @@ export default function StockAndroidTable({ stockAndroid }: { stockAndroid: Stoc
                                 }).catch(error => {
                                     console.error(error)
                                 })
-                            }} /> */}
-                        </>
+                            }} />
+                        )}
                     </Actions>
                 )
             }]
         }
-    ], []);
+    ], [canDelete]);
 
     return <Table data={stockAndroid} columns={columns} />
 }

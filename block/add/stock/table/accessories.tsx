@@ -34,9 +34,11 @@ import ExportButtonGroup from '@/components/export-button'
 import numeral from 'numeral'
 
 export default function StockTableAccessories({
-  stockAccessories
+  stockAccessories,
+  canDelete
 }: {
   stockAccessories: AccIncBM[]
+  canDelete: boolean
 }) {
   const columns = useMemo<ColumnDef<AccIncBM>[]>(
     () => [
@@ -129,8 +131,8 @@ export default function StockTableAccessories({
             id: 'action',
             cell: ({ row }) => (
               <Actions>
-                <>
-                  {/* <ActionDelete
+                {canDelete && (
+                  <ActionDelete
                     handleClick={() => {
                       fetch(
                         `/api/stock/table/accessories/delete?id=${row.original.id}`,
@@ -145,15 +147,15 @@ export default function StockTableAccessories({
                           console.error(error)
                         })
                     }}
-                  /> */}
-                </>
+                  />
+                )}
               </Actions>
             )
           }
         ]
       }
     ],
-    []
+    [canDelete]
   )
 
   return (
