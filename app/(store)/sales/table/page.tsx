@@ -13,7 +13,7 @@ export default async function SalesTablePage({ searchParams }: { searchParams: {
   const brands = await getBrand();
   const models = await getModel();
   const value = (key: string) => { const item = searchParams[key]; return Array.isArray(item) ? item[0] : item; };
-  const salesPage = await getSalesPage({ imei: value("imei"), startDate: value("startDate"), endDate: value("endDate"), page: Number(value("page")) || 1 });
+  const salesPage = await getSalesPage({ imei: value("imei"), customerPhone: value("customerPhone"), startDate: value("startDate"), endDate: value("endDate"), page: Number(value("page")) || 1 });
 
   if (productTypes && brands && models) {
     return (

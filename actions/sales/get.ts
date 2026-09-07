@@ -84,10 +84,12 @@ export async function getSalesIndividualIncludeProducts(
 
 export async function getSalesMany({
   imei,
+  customerPhone,
   startDate,
   endDate,
 }: {
   imei?: string;
+  customerPhone?: string;
   startDate?: string;
   endDate?: string;
 }): Promise<SaleResponse[] | undefined> {
@@ -131,6 +133,14 @@ export async function getSalesMany({
       });
     }
 
+    const phone = customerPhone?.trim().replace(/\D/g, "");
+    if (phone) {
+      salesData = salesData.filter((sale) => {
+        const salePhone = sale.customer.phone?.replace(/\D/g, "") ?? "";
+        return salePhone.includes(phone);
+      });
+    }
+
     return salesData?.sort(
       (a, b) => b.createdAt.getTime() - a.createdAt.getTime(),
     );
@@ -142,11 +152,11 @@ export async function getSalesMany({
 }
 
 export async function getSalesPage({
-  imei, startDate, endDate, page = 1,
+  imei, customerPhone, startDate, endDate, page = 1,
 }: {
-  imei?: string; startDate?: string; endDate?: string; page?: number;
+  imei?: string; customerPhone?: string; startDate?: string; endDate?: string; page?: number;
 }) {
-  const sales = (await getSalesMany({ imei, startDate, endDate })) ?? [];
+  const sales = (await getSalesMany({ imei, customerPhone, startDate, endDate })) ?? [];
   const safePageSize = 10;
   const totalPages = Math.max(1, Math.ceil(sales.length / safePageSize));
   const safePage = Math.min(Math.max(page, 1), totalPages);

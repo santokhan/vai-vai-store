@@ -10,6 +10,7 @@ const today = new Date().toISOString().split('T')[0];
 
 type FormState = {
     imei: string;
+    customerPhone: string;
     startDate: string;
     endDate: string;
 };
@@ -23,6 +24,7 @@ export default function FilterSales({  }: Props) {
     const searchParams = useSearchParams();
     const [formData, setFormData] = useState<FormState>(() => ({
         imei: searchParams.get('imei') ?? '',
+        customerPhone: searchParams.get('customerPhone') ?? '',
         startDate: searchParams.get('startDate') ?? '',
         endDate: searchParams.get('endDate') ?? '',
     }));
@@ -33,10 +35,11 @@ export default function FilterSales({  }: Props) {
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        const { imei, startDate, endDate } = formData;
+        const { imei, customerPhone, startDate, endDate } = formData;
         const params = new URLSearchParams(searchParams.toString());
 
         imei ? params.set('imei', imei) : params.delete('imei');
+        customerPhone ? params.set('customerPhone', customerPhone) : params.delete('customerPhone');
         startDate ? params.set('startDate', startDate) : params.delete('startDate');
         endDate ? params.set('endDate', endDate) : params.delete('endDate');
         params.delete('page');
@@ -57,6 +60,19 @@ export default function FilterSales({  }: Props) {
                         onChange={(event) => updateField('imei', event.target.value.replace(/\D/g, ''))}
                         className="default"
                         placeholder="Enter IMEI"
+                    />
+                </InputBox>
+
+                <InputBox htmlFor="customerPhone" labelName="Customer Phone">
+                    <input
+                        id="customerPhone"
+                        name="customerPhone"
+                        type="tel"
+                        inputMode="numeric"
+                        value={formData.customerPhone}
+                        onChange={(event) => updateField('customerPhone', event.target.value.replace(/\D/g, ''))}
+                        className="default"
+                        placeholder="Enter customer phone"
                     />
                 </InputBox>
 
