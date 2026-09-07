@@ -1,5 +1,3 @@
-"use server";
-
 import { getBrand } from "@/actions/brand";
 import { getModel } from "@/actions/model";
 import { getType } from "@/actions/product-type";
@@ -9,6 +7,8 @@ import SalesTable from "@/block/sales/table/main";
 interface Props {
   searchParams: Promise<Record<string, string>>;
 }
+
+export const dynamic = "force-dynamic";
 
 export default async function SalesTablePage(props: Props) {
   const searchParams = await props.searchParams;
