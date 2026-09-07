@@ -1,5 +1,6 @@
 'use client'
 
+import Image from "next/image";
 import { toDataURL } from "qrcode";
 import { useEffect, useState } from "react";
 
@@ -22,7 +23,7 @@ const InvoiceFooter = ({ salesId }: Props) => {
     return (
         <div className="mt-4 flex items-end">
             {blobURL &&
-                <img src={blobURL} className="size-24" />
+                <Image src={blobURL} alt="" width={96} height={96} className="size-24" unoptimized />
             }
             <div className="ml-auto w-60 text-center">
                 <p className='border-t-2 text-sm'>Signature</p>
