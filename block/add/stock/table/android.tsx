@@ -1,223 +1,28 @@
-// https://tanstack.com/table/v8/docs/examples/react/pagination
+'use client'
 
-'use client';
+import Actions, { ActionDelete } from '@/components/table/action'
+import PlainTable from '@/components/table/plain-table'
+import { StockAndroidInclude } from '@/actions/stock/get'
+import numeral from 'numeral'
 
-import { useMemo } from 'react';
-import { useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, ColumnDef, flexRender } from '@tanstack/react-table';
-import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import PageOutOf from './page-number-out-of';
-import Actions, { ActionDelete } from '@/components/table/action';
-import { GoToPage, TableFooterContainer, TableFooterRow, tableArrowClasses } from '@/components/table/tanstack/table-footer';
-import THeadFilter from '@/components/table/tanstack/table-filter';
-import { inputClasses } from '@/components/table/tanstack/tw-classes';
-import { TableTitle } from '@/components/table/table-header';
-import ExportButtonGroup from '@/components/export-button';
-import { StockAndroidInclude } from '@/actions/stock/get';
-import downloadCSV from '@/components/download-csv';
-import numeral from 'numeral';
-
-export default function StockAndroidTable({
-  stockAndroid,
-  canDelete
-}: {
-  stockAndroid: StockAndroidInclude[]
-  canDelete: boolean
-}) {
-    const columns = useMemo<ColumnDef<StockAndroidInclude>[]>(() => [
-        {
-            id: 'brand',
-            columns: [{
-                id: 'brand',
-                accessorFn(row) {
-                    return row.brand.brandName
-                }
-            }]
-        },
-        {
-            id: 'model',
-            columns: [
-                {
-                    id: "model",
-                    accessorFn(row) { return row.model.model },
-                },
-            ],
-        },
-        {
-            id: 'dealer',
-            columns: [
-                {
-                    id: "dealer",
-                    accessorFn(row) { return row.dealer?.name },
-                },
-            ],
-        },
-        { id: 'IMEI', columns: [{ accessorKey: 'IMEI' }] },
-        {
-            id: 'purchase price',
-            columns: [{
-                id: 'purchase price',
-                accessorFn(row) {
-                    return numeral(row.purchasePrice).format('0,0');
-                }
-            }]
-        },
-        {
-            id: 'selling price',
-            columns: [{
-                id: 'selling price',
-                accessorFn(row) {
-                    return numeral(row.sellingPrice).format('0,0');
-                }
-            }]
-        },
-        { id: 'ram/rom', columns: [{ accessorFn: row => `${row.ram} / ${row.rom}`, id: 'ram/rom' }] },
-        { id: 'color', columns: [{ accessorKey: 'color' }] },
-        {
-            id: 'sold',
-            columns: [{
-                accessorFn: row => `${row.sold}`,
-                id: 'sold',
-            }]
-        },
-        {
-            id: 'created at',
-            columns: [{
-                id: 'created at',
-                accessorFn(row) { return row.createdAt?.toLocaleString() || '' },
-            }]
-        },
-        {
-            id: 'action',
-            columns: [{
-                id: 'action',
-                cell: ({ row }) => (
-                    <Actions>
-                        {canDelete && (
-                            <ActionDelete handleClick={() => {
-                                fetch(`/api/stock/table/android/delete?id=${row.original.id}`, {
-                                    method: "DELETE"
-                                }).then(() => {
-                                    window.location.reload();
-                                }).catch(error => {
-                                    console.error(error)
-                                })
-                            }} />
-                        )}
-                    </Actions>
-                )
-            }]
-        }
-    ], [canDelete]);
-
-    return <Table data={stockAndroid} columns={columns} />
-}
-
-type TableProps = {
-    data: StockAndroidInclude[]
-    columns: ColumnDef<StockAndroidInclude>[];
-}
-
-function Table({ data, columns }: TableProps) {
-    const table = useReactTable({
-        data,
-        columns,
-        getCoreRowModel: getCoreRowModel(),
-        getFilteredRowModel: getFilteredRowModel(),
-        getPaginationRowModel: getPaginationRowModel(),
-        debugTable: true,
-    });
-
-    const headers = table.getHeaderGroups()[1].headers;
-
-    function tableToExport() {
-        const json = table.getFilteredRowModel().rows.map(row => {
-            const og = row.original;
-            return {
-                id: og.id || "",
-                brand: og.brand.brandName || "",
-                model: og.model.model || "",
-                IMEI: og.IMEI || "",
-                ram: og.ram || "",
-                rom: og.rom || "",
-                color: og.color || "",
-                purchasePrice: og.purchasePrice || "",
-                sellingPrice: og.sellingPrice || "",
-                sold: og.sold,
-                createdAt: og.createdAt?.toLocaleString() || "",
-            }
-        })
-
-        downloadCSV(json, 'stock');
+export default function StockAndroidTable({ stockAndroid, canDelete }: { stockAndroid: StockAndroidInclude[]; canDelete: boolean }) {
+  const columns = [
+    { id: 'brand', label: 'Brand', value: (row: StockAndroidInclude) => row.brand.brandName, filter: 'text' as const },
+    { id: 'model', label: 'Model', value: (row: StockAndroidInclude) => row.model.model, filter: 'text' as const },
+    { id: 'dealer', label: 'Dealer', value: (row: StockAndroidInclude) => row.dealer?.name ?? '', filter: 'text' as const },
+    { id: 'IMEI', label: 'IMEI', value: (row: StockAndroidInclude) => row.IMEI, filter: 'text' as const },
+    { id: 'purchase price', label: 'Purchase price', value: (row: StockAndroidInclude) => numeral(row.purchasePrice).format('0,0'), filter: 'text' as const },
+    { id: 'selling price', label: 'Selling price', value: (row: StockAndroidInclude) => numeral(row.sellingPrice).format('0,0'), filter: 'text' as const },
+    { id: 'ram/rom', label: 'RAM/ROM', value: (row: StockAndroidInclude) => `${row.ram} / ${row.rom}`, filter: 'text' as const },
+    { id: 'color', label: 'Color', value: (row: StockAndroidInclude) => row.color, filter: 'text' as const },
+    { id: 'sold', label: 'Sold', value: (row: StockAndroidInclude) => String(row.sold), filter: 'text' as const },
+    { id: 'created at', label: 'Created at', value: (row: StockAndroidInclude) => row.createdAt?.toLocaleString() || '', filter: 'text' as const },
+    {
+      id: 'action', label: 'Action', value: () => '', render: (row: StockAndroidInclude) => (
+        <Actions>{canDelete && <ActionDelete handleClick={() => fetch(`/api/stock/table/android/delete?id=${row.id}`, { method: 'DELETE' }).then(() => window.location.reload()).catch(console.error)} />}</Actions>
+      )
     }
+  ]
 
-    return (
-        <div className="rounded-xl bg-white p-4 lg:p-6 space-y-4">
-            <TableTitle>Android Table</TableTitle>
-            <div className="overflow-x-auto">
-                <table className='w-full text-sm'>
-                    <thead>
-                        <tr>
-                            <td colSpan={headers.length}>
-                                <ExportButtonGroup csv={{
-                                    export: tableToExport
-                                }} />
-                            </td>
-                        </tr>
-                        <tr className='bg-gray-100 rounded-lg'>
-                            {headers.map(header =>
-                                <th key={header.id} colSpan={header.colSpan} className='p-2 text-start font-medium uppercase'>
-                                    <div className="flex flex-col gap-2">
-                                        <span className='whitespace-nowrap'>{header.column.parent?.id}</span>
-                                        {header.column.getCanFilter() && <THeadFilter column={header.column} table={table} />}
-                                    </div>
-                                </th>
-                            )}
-                        </tr>
-                    </thead>
-                    <tbody className='divide-y'>
-                        {table.getRowModel().rows.map(row => (
-                            <tr key={row.id}>
-                                {row.getVisibleCells().map(cell => (
-                                    <td key={cell.id} className='p-2 whitespace-nowrap capitalize'>
-                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                    </td>
-                                ))}
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-                <TableFooterContainer>
-                    <TableFooterRow>
-                        <button className={tableArrowClasses} onClick={() => { table.setPageIndex(1) }} disabled={!table.getCanPreviousPage()}><ChevronDoubleLeftIcon className='w-4 h-4' /></button>
-                        <button className={tableArrowClasses} onClick={() => { table.previousPage() }} disabled={!table.getCanPreviousPage()}><ChevronLeftIcon className='w-4 h-4' /></button>
-                        <button className={tableArrowClasses} onClick={() => { table.nextPage() }} disabled={!table.getCanNextPage()}><ChevronRightIcon className='w-4 h-4' /></button>
-                        <button className={tableArrowClasses} onClick={() => { table.setPageIndex(table.getPageCount() - 1) }} disabled={!table.getCanNextPage()}><ChevronDoubleRightIcon className='w-4 h-4' /></button>
-                        <PageOutOf pageNumber={table.getState().pagination.pageIndex + 1} totalPageCount={table.getPageCount()} />
-                        <GoToPage />
-                        <input
-                            type="number"
-                            defaultValue={table.getState().pagination.pageIndex + 1}
-                            onChange={e => {
-                                const page = e.target.value ? Number(e.target.value) - 1 : 0
-                                table.setPageIndex(page)
-                            }}
-                            className={`w-16 ${inputClasses}`}
-                        />
-                        <select
-                            value={table.getState().pagination.pageSize}
-                            onChange={e => { table.setPageSize(Number(e.target.value)) }}
-                            className={`w-32 ${inputClasses}`}
-                        >
-                            {[10, 20, 30, 40, 50].map((pageSize, idx) =>
-                                <option key={idx} value={pageSize}>Show {pageSize}</option>
-                            )}
-                        </select>
-                    </TableFooterRow>
-                    <TableFooterRow>
-                        {table.getRowModel().rows.length} Rows
-                    </TableFooterRow>
-                </TableFooterContainer>
-            </div>
-        </div>
-    )
+  return <PlainTable title='Android Table' data={stockAndroid} columns={columns} rowKey={row => row.id} exportData={rows => rows.map(row => ({ id: row.id || '', brand: row.brand.brandName || '', model: row.model.model || '', IMEI: row.IMEI || '', ram: row.ram || '', rom: row.rom || '', color: row.color || '', purchasePrice: row.purchasePrice || '', sellingPrice: row.sellingPrice || '', sold: row.sold, createdAt: row.createdAt?.toLocaleString() || '' }))} />
 }
