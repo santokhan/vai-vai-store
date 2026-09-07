@@ -18,7 +18,7 @@ export const TableFooterRow = ({ children }: OnlyChildrenProps) => (
     <div className="flex items-center gap-2">{children}</div>
 )
 
-export const GoToPage = () => <span className="whitespace-nowrap">| Go to page:</span>
+export const GoToPage = () => <span className="whitespace-nowrap"></span>
 
 export default function TanStackTableFooter<T extends Table<object>>({ table }: { table: T }) {
     return (
@@ -49,7 +49,6 @@ export default function TanStackTableFooter<T extends Table<object>>({ table }: 
                     )}
                 </select>
             </TableFooterRow>
-            <TableFooterRow>{table.getRowModel().rows.length} Rows</TableFooterRow>
         </TableFooterContainer>
     )
 }

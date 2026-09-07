@@ -39,8 +39,8 @@ export default function FilterSales({  }: Props) {
         imei ? params.set('imei', imei) : params.delete('imei');
         startDate ? params.set('startDate', startDate) : params.delete('startDate');
         endDate ? params.set('endDate', endDate) : params.delete('endDate');
-        window.history.replaceState(null, '', `${pathname}?${params.toString()}`);
-        router.refresh();
+        params.delete('page');
+        router.replace(pathname + '?' + params.toString());
     }
 
     return (

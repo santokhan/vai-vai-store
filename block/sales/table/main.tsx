@@ -1,41 +1,26 @@
-// https://tanstack.com/table/v8/docs/examples/react/pagination
-
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import {
-  useReactTable,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  ColumnDef,
-  flexRender,
-} from "@tanstack/react-table";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, type ReactNode } from "react";
+import numeral from "numeral";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { ProductType, Brand, Model } from "@/prisma/generated/client";
-import {
-  ChevronDoubleLeftIcon,
-  ChevronDoubleRightIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from "@heroicons/react/24/outline";
-import PageOutOf from "@/block/add/stock/table/page-number-out-of";
 import Actions, { ActionViewInvoice } from "@/components/table/action";
-import {
-  GoToPage,
-  TableFooterContainer,
-  TableFooterRow,
-  tableArrowClasses,
-} from "@/components/table/tanstack/table-footer";
-import { inputClasses } from "@/components/table/tanstack/tw-classes";
-import THeadFilter from "@/components/table/tanstack/table-filter";
-import { ProductDetails } from "./product-details-cols";
-import { Due } from "./due";
+import PageOutOf from "@/block/add/stock/table/page-number-out-of";
 import ExportButtonGroup from "@/components/export-button";
 import downloadCSV from "@/components/download-csv";
-import { getSalesMany, SalesInclude_C_S } from "@/actions/sales/get";
 import { getStockByType } from "@/actions/stock/get-stock-by-type";
-import numeral from "numeral";
-import { useSearchParams } from "next/navigation";
+import { SalesInclude_C_S } from "@/actions/sales/get";
+import { ProductDetails } from "./product-details-cols";
+import { Due } from "./due";
+const tableArrowClasses =
+  "border rounded-lg px-2 py-2 flex items-center hover:bg-gray-100";
+const TableFooterContainer = ({ children }: { children: ReactNode }) => (
+  <div className="py-4 space-y-4">{children}</div>
+);
+const TableFooterRow = ({ children }: { children: ReactNode }) => (
+  <div className="flex items-center gap-2">{children}</div>
+);
 
 export interface TypeBrandModel {
   productTypes: ProductType[];
@@ -45,253 +30,91 @@ export interface TypeBrandModel {
 
 interface Props {
   typeBrandModel: TypeBrandModel;
+  salesEntry: SalesInclude_C_S[];
+  page: number;
+  totalPages: number;
+  totalRows: number;
 }
 
-export default function SalesTable({ typeBrandModel }: Props) {
-  const searchParams = useSearchParams();
-  const imei = searchParams.get("imei") || undefined;
-  const [sales, setSales] = useState<SalesInclude_C_S[] | null>(null);
+export default function SalesTable({
+  salesEntry,
+  page,
+  totalPages,
+  totalRows,
+}: Props) {
+  const [downloadingCSV, setDownloadingCSV] = useState(false);
+  const router = useRouter();
+  const currentParams = useSearchParams();
+  const headers = [
+    "Seller",
+    "Customer Name",
+    "Customer Phone",
+    "Product",
+    "Discount",
+    "Due",
+    "Due Date",
+    "Created At",
+    "Total Price",
+    "Action",
+  ];
 
-  useEffect(() => {
-    getSalesMany({ imei }).then((data) => {
-      if (data) setSales(data);
-    });
-  }, [imei]);
-
-  const columns = useMemo<ColumnDef<SalesInclude_C_S>[]>(
-    () => [
-      { id: "seller", columns: [{ accessorKey: "seller.name" }] },
-      { id: "customer name", columns: [{ accessorKey: "customer.name" }] },
-      { id: "customer phone", columns: [{ accessorKey: "customer.phone" }] },
-      {
-        id: "product",
-        colSpan: 3,
-        columns: [
-          {
-            id: "details",
-            cell: ({ row }) => {
-              return (
-                row.original.entity && (
-                  <ProductDetails entity={row.original.entity} />
-                )
-              );
-            },
-          },
-        ],
-      },
-      {
-        id: "discount",
-        columns: [
-          {
-            id: "discount",
-            accessorFn(row) {
-              return numeral(row.discount).format("0,0") || "";
-            },
-          },
-        ],
-      },
-      {
-        id: "due",
-        columns: [
-          {
-            id: "due",
-            cell({ row }) {
-              const due = numeral(row.original.due).format("0,0") || "";
-              return <Due due={due} salesId={row.original.id} />;
-            },
-          },
-        ],
-      },
-      {
-        id: "due date",
-        columns: [
-          {
-            id: "dueDate",
-            accessorFn({ due, dueDate }) {
-              return due ? dueDate?.toLocaleString() : "";
-            },
-          },
-        ],
-      },
-      {
-        id: "created at",
-        columns: [
-          {
-            id: "createdAt",
-            accessorFn({ createdAt }) {
-              return createdAt?.toLocaleString();
-            },
-          },
-        ],
-      },
-      {
-        id: "total price",
-        columns: [
-          {
-            id: "totalPrice",
-            accessorFn({ entity }) {
-              if (Array.isArray(entity)) {
-                const total = entity.reduce(
-                  (a: any, c: any) => a + c.quantity * c.price,
-                  0,
-                );
-                return numeral(total).format("0,0");
-              } else {
-                return 0;
-              }
-            },
-          },
-        ],
-      },
-      {
-        id: "action",
-        columns: [
-          {
-            id: "action",
-            cell: ({ row }) => (
-              <Actions>
-                <ActionViewInvoice invoiceId={row.original.id} />
-                {/* Perfectly working. But delete is not needed in production */}
-                {/* <ActionDelete handleClick={() => {
-                            fetch(`${ORIGIN}/api/sales/delete?id=${row.original.id}`, {
-                                method: "DELETE"
-                            }).then(res => res.json()).then(() => {
-                                window.location.reload();
-                            })
-                        }} /> */}
-              </Actions>
-            ),
-          },
-        ],
-      },
-    ],
-    [],
-  );
-
-  if (!sales) {
-    return <div>Loading...</div>;
+  function goTo(nextPage: number) {
+    const params = new URLSearchParams(currentParams.toString());
+    params.set("page", String(Math.min(Math.max(nextPage, 1), totalPages)));
+    router.push(`?${params.toString()}`);
   }
 
-  return (
-    <Table
-      salesEntry={sales}
-      columns={columns}
-      typeBrandModel={typeBrandModel}
-    />
-  );
-}
-
-interface TableProps {
-  columns: ColumnDef<SalesInclude_C_S>[];
-  salesEntry: SalesInclude_C_S[];
-  typeBrandModel: TypeBrandModel;
-}
-
-function Table({ salesEntry, columns, typeBrandModel }: TableProps) {
-  const [data] = useState<SalesInclude_C_S[]>(salesEntry);
-  const [downloadingCSV, setDownloadingCSV] = useState(false);
-
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    debugTable: true,
-  });
-
-  const headers = table.getHeaderGroups()[1].headers;
-
-  const calculateTotalPrice = () => {
-    let totalPrice = 0;
-    table.getFilteredRowModel().rows.forEach((row) => {
-      const entity = row.original.entity;
-      const list = JSON.parse(JSON.stringify(entity));
-      list.forEach((e: any) => {
-        if (e.price) {
-          if (e.quantity) {
-            totalPrice += e.price * e.quantity;
-          } else {
-            totalPrice += e.price;
-          }
-        }
-      });
-    });
-    return totalPrice;
-  };
+  function calculateTotalPrice() {
+    return salesEntry.reduce((total, sale) => {
+      if (!Array.isArray(sale.entity)) return total;
+      return (
+        total +
+        sale.entity.reduce(
+          (sum: number, item: any) =>
+            sum + (item.price || 0) * (item.quantity || 1),
+          0,
+        )
+      );
+    }, 0);
+  }
 
   async function tableExportCSV() {
     setDownloadingCSV(true);
-
-    const tableToJSON = table.getFilteredRowModel().rows.map((row) => {
-      const og = row.original;
-      return {
-        id: og.id,
-        due: og.due,
-        dueDate: og.dueDate,
-        discount: og.discount,
-        customerName: og.customer.name,
-        customerPhone: og.customer.phone,
-        seller: og.seller.name,
-        entity: JSON.parse(JSON.stringify(og.entity)),
-        createdAt: og.createdAt,
-      };
-    });
-
     try {
-      const flattenJSON = await Promise.all(
-        tableToJSON
-          .map(
-            async (json: (typeof tableToJSON)[0]) =>
-              await Promise.all(
-                json.entity
-                  .map(async (entity: Record<string, any>, i: number) => {
-                    const fromSalesRow = {
-                      id: json.id,
-                      due: i === 0 ? json.due : "N/A",
-                      dueDate:
-                        i === 0
-                          ? json.dueDate && json.dueDate.toLocaleDateString()
-                          : "N/A",
-                      discount: i === 0 ? json.discount : "N/A",
-                      customerName: i === 0 ? json.customerName : "N/A",
-                      customerPhone: i === 0 ? json.customerPhone : "N/A",
-                      seller: i === 0 ? json.seller : "N/A",
-                      createdAt:
-                        i === 0 ? json.createdAt.toLocaleDateString() : "N/A",
-                    };
-
-                    if (!entity.type) {
-                      return fromSalesRow;
-                    }
-
-                    const stock = await getStockByType(
-                      entity.type,
-                      entity.stockId,
-                    );
-
-                    if (!stock) {
-                      return fromSalesRow;
-                    }
-
-                    return {
-                      ...fromSalesRow,
-                      brand: stock.brand.brandName || "N/A",
-                      model: stock.model.model || "N/A",
-                      price: entity.price,
-                      quantity: entity.quantity,
-                    };
-                  })
-                  .flat(),
-              ),
-          )
-          .flat(),
-      );
-
-      downloadCSV(flattenJSON, "sales");
+      const rows = (
+        await Promise.all(
+          salesEntry.map(async (sale) => {
+            if (!Array.isArray(sale.entity))
+              return [{ id: sale.id, due: sale.due }];
+            return Promise.all(
+              sale.entity.map(async (entity: any, index: number) => {
+                const stock = entity.type
+                  ? await getStockByType(entity.type, entity.stockId)
+                  : null;
+                return {
+                  id: sale.id,
+                  due: index === 0 ? sale.due : "N/A",
+                  dueDate:
+                    index === 0 ? sale.dueDate?.toLocaleDateString() : "N/A",
+                  discount: index === 0 ? sale.discount : "N/A",
+                  customerName: index === 0 ? sale.customer.name : "N/A",
+                  customerPhone: index === 0 ? sale.customer.phone : "N/A",
+                  seller: index === 0 ? sale.seller.name : "N/A",
+                  createdAt:
+                    index === 0 ? sale.createdAt.toLocaleDateString() : "N/A",
+                  brand: stock?.brand.brandName || "N/A",
+                  model: stock?.model.model || "N/A",
+                  price: entity.price,
+                  quantity: entity.quantity,
+                };
+              }),
+            );
+          }),
+        )
+      ).flat();
+      downloadCSV(rows, "sales");
+    } finally {
       setDownloadingCSV(false);
-    } catch (error) {
-      console.error(error);
     }
   }
 
@@ -302,56 +125,74 @@ function Table({ salesEntry, columns, typeBrandModel }: TableProps) {
           <tr>
             <td colSpan={headers.length}>
               <ExportButtonGroup
-                csv={{
-                  export: tableExportCSV,
-                  loading: downloadingCSV,
-                }}
+                csv={{ export: tableExportCSV, loading: downloadingCSV }}
               />
             </td>
           </tr>
           <tr>
-            {headers.map((header, i) => (
+            {headers.map((header, index) => (
               <th
-                key={header.id}
-                colSpan={header.colSpan}
+                key={header}
                 className={[
-                  "p-2 space-y-1 text-start uppercase font-medium bg-gray-100",
-                  i === 0 ? "rounded-t-lg" : "",
-                  i === headers.length - 1 ? "rounded-r-lg" : "",
-                  i === 0 ? "rounded-l-lg" : "",
+                  "p-2 text-start uppercase font-medium bg-gray-100 whitespace-nowrap",
+                  index === 0 ? "rounded-l-lg" : "",
+                  index === headers.length - 1 ? "rounded-r-lg" : "",
                 ].join(" ")}
               >
-                <div className="whitespace-nowrap">
-                  {flexRender(header.column.parent?.id, header.getContext())}
-                </div>
-                {header.column.getCanFilter() && (
-                  <THeadFilter column={header.column} table={table} />
-                )}
+                {header}
               </th>
             ))}
           </tr>
         </thead>
         <tbody className="divide-y">
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="p-2 whitespace-nowrap">
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
+          {salesEntry.map((sale) => (
+            <tr key={sale.id}>
+              <td className="p-2 whitespace-nowrap">{sale.seller.name}</td>
+              <td className="p-2 whitespace-nowrap">{sale.customer.name}</td>
+              <td className="p-2 whitespace-nowrap">{sale.customer.phone}</td>
+              <td className="p-2 whitespace-nowrap">
+                {sale.entity && <ProductDetails entity={sale.entity} />}
+              </td>
+              <td className="p-2 whitespace-nowrap">
+                {numeral(sale.discount).format("0,0")}
+              </td>
+              <td className="p-2 whitespace-nowrap">
+                <Due due={numeral(sale.due).format("0,0")} salesId={sale.id} />
+              </td>
+              <td className="p-2 whitespace-nowrap">
+                {sale.due ? sale.dueDate?.toLocaleString() : ""}
+              </td>
+              <td className="p-2 whitespace-nowrap">
+                {sale.createdAt.toLocaleString()}
+              </td>
+              <td className="p-2 whitespace-nowrap">
+                {numeral(
+                  Array.isArray(sale.entity)
+                    ? sale.entity.reduce(
+                        (sum: number, item: any) =>
+                          sum + item.price * item.quantity,
+                        0,
+                      )
+                    : 0,
+                ).format("0,0")}
+              </td>
+              <td className="p-2 whitespace-nowrap">
+                <Actions>
+                  <ActionViewInvoice invoiceId={sale.id} />
+                </Actions>
+              </td>
             </tr>
           ))}
         </tbody>
         <tfoot>
           <tr className="border-t">
-            <td colSpan={headers.length - 3}></td>
+            <td colSpan={8}></td>
             <td className="text-end p-1 text-base whitespace-nowrap">
               Total Sales Price
             </td>
             <td className="p-1 text-base whitespace-nowrap">
               {numeral(calculateTotalPrice()).format("0,0")}
             </td>
-            <td></td>
           </tr>
         </tfoot>
       </table>
@@ -359,69 +200,24 @@ function Table({ salesEntry, columns, typeBrandModel }: TableProps) {
         <TableFooterRow>
           <button
             className={tableArrowClasses}
-            onClick={() => {
-              table.setPageIndex(1);
-            }}
-            disabled={!table.getCanPreviousPage()}
-          >
-            <ChevronDoubleLeftIcon className="w-4 h-4" />
-          </button>
-          <button
-            className={tableArrowClasses}
-            onClick={() => {
-              table.previousPage();
-            }}
-            disabled={!table.getCanPreviousPage()}
+            onClick={() => goTo(page - 1)}
+            disabled={page <= 1}
           >
             <ChevronLeftIcon className="w-4 h-4" />
           </button>
           <button
             className={tableArrowClasses}
-            onClick={() => {
-              table.nextPage();
-            }}
-            disabled={!table.getCanNextPage()}
+            onClick={() => goTo(page + 1)}
+            disabled={page >= totalPages}
           >
             <ChevronRightIcon className="w-4 h-4" />
           </button>
-          <button
-            className={tableArrowClasses}
-            onClick={() => {
-              table.setPageIndex(table.getPageCount() - 1);
-            }}
-            disabled={!table.getCanNextPage()}
-          >
-            <ChevronDoubleRightIcon className="w-4 h-4" />
-          </button>
           <PageOutOf
-            pageNumber={table.getState().pagination.pageIndex + 1}
-            totalPageCount={table.getPageCount()}
+            pageNumber={page}
+            totalPageCount={totalPages}
+            onPageChange={goTo}
           />
-          <GoToPage />
-          <input
-            type="number"
-            defaultValue={table.getState().pagination.pageIndex + 1}
-            onChange={(e) => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0;
-              table.setPageIndex(page);
-            }}
-            className={`w-16 ${inputClasses}`}
-          />
-          <select
-            value={table.getState().pagination.pageSize}
-            onChange={(e) => {
-              table.setPageSize(Number(e.target.value));
-            }}
-            className={`w-32 ${inputClasses}`}
-          >
-            {[10, 20, 30, 40, 50].map((pageSize, idx) => (
-              <option key={idx} value={pageSize}>
-                Show {pageSize}
-              </option>
-            ))}
-          </select>
         </TableFooterRow>
-        <TableFooterRow>{table.getRowModel().rows.length} Rows</TableFooterRow>
       </TableFooterContainer>
     </div>
   );

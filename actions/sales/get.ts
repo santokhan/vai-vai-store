@@ -84,11 +84,23 @@ export async function getSalesIndividualIncludeProducts(
 
 export async function getSalesMany({
   imei,
+  startDate,
+  endDate,
 }: {
   imei?: string;
+  startDate?: string;
+  endDate?: string;
 }): Promise<SaleResponse[] | undefined> {
   try {
+    const createdAt: { gte?: Date; lt?: Date } = {};
+    if (startDate) createdAt.gte = new Date(`${startDate}T00:00:00`);
+    if (endDate) {
+      const end = new Date(`${endDate}T00:00:00`);
+      end.setDate(end.getDate() + 1);
+      createdAt.lt = end;
+    }
     let salesData: SalesResponse = await prisma.salesEntry.findMany({
+      where: Object.keys(createdAt).length ? { createdAt } : undefined,
       include: {
         customer: true,
         seller: true,
@@ -127,6 +139,18 @@ export async function getSalesMany({
   } finally {
     await prisma.$disconnect();
   }
+}
+
+export async function getSalesPage({
+  imei, startDate, endDate, page = 1,
+}: {
+  imei?: string; startDate?: string; endDate?: string; page?: number;
+}) {
+  const sales = (await getSalesMany({ imei, startDate, endDate })) ?? [];
+  const safePageSize = 10;
+  const totalPages = Math.max(1, Math.ceil(sales.length / safePageSize));
+  const safePage = Math.min(Math.max(page, 1), totalPages);
+  return { sales: sales.slice((safePage - 1) * safePageSize, safePage * safePageSize), totalRows: sales.length, page: safePage, totalPages };
 }
 
 export async function getSingleSaleItemByStockId(stockId: string) {
