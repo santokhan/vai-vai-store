@@ -11,17 +11,27 @@ import InputBox from "../input-box";
 import { SearchNormal } from "iconsax-react";
 import { ORIGIN } from "@/utils/origin";
 import { StockAndroidIncludes } from "@/app/api/(store)/stock/search/imei/route";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 // import { getUnsoldProductByIMEI } from "@/actions/stock/android";
 // import { StockAndroid } from "@/prisma/generated/client";
 
 export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: () => void }) {
     const [foundStockItem, setfoundStockItem] = useState<StockAndroidIncludes | null>(null);
-    const [IMEI, setIMEI] = useState<string>('');
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const router = useRouter();
+    const [IMEI, setIMEI] = useState<string>(() => searchParams.get('imei') ?? '');
     const [isSearching, setisSearching] = useState<boolean>(false);
     const searchInputRef = useRef<HTMLInputElement | null>(null);
     const { addToSales } = useSalesRowContext();
     // const [suggestions, setsuggestions] = useState<StockAndroid[]>([]);
     // const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
+
+    function bindIMEIToSearchParams(imei: string) {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set('imei', imei);
+        router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    }
 
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         const value = e.target.value
@@ -42,6 +52,7 @@ export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: ()
     async function searchModelByIMEI(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         if (IMEI.length == 15) {
+            bindIMEIToSearchParams(IMEI);
             setisSearching(true);
             const API_URL = `${ORIGIN}/api/stock/search/imei?imei=${IMEI}`
             fetch(API_URL, { cache: 'no-store' }).then(res => res.json()).then((data) => {
@@ -57,6 +68,7 @@ export default function AndroidSalesEntryForm({ onCloseForm }: { onCloseForm: ()
         }
     }
     async function findByIMEI(IMEI: string) {
+        bindIMEIToSearchParams(IMEI);
         setisSearching(true);
         const API_URL = `${ORIGIN}/api/stock/search/imei?imei=${IMEI}`
         fetch(API_URL, { cache: 'no-store' }).then(res => res.json()).then((data) => {
