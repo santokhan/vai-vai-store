@@ -3,7 +3,7 @@ import { getSalesMany } from "./get";
 import { ProductTypeKeys } from "@/utils/product-type";
 
 export default async function downloadSalesCSV() {
-    let sales: any[] | undefined = await getSalesMany();
+    let sales: any[] | undefined = await getSalesMany({});
     if (!sales) { return null; }
 
     sales = sales.map(e => {

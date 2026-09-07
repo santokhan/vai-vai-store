@@ -2,19 +2,19 @@
 
 import Button from '@/components/button/button';
 import InputBox from '@/components/form/input-box';
-import { Brand, Model, SalesEntry } from '@/prisma/generated/client';
+import { SalesEntry } from '@/prisma/generated/client';
 import { Filter } from 'iconsax-react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { FC, FormEvent, useState } from 'react';
 import { toast } from 'react-toastify';
 
 const d = new Date();
+const today = d.toISOString().split('T')[0];
 
 export const initialState = {
-    productTypeId: '',
-    brandId: '',
-    modelId: '',
-    startDate: d.toString(),
-    endDate: d.toString(),
+    IMEI: '',
+    startDate: today,
+    endDate: today,
 }
 
 export const FilterSubmit = () => (
@@ -26,7 +26,14 @@ interface Props {
 }
 
 const FilterSales: FC<Props> = ({ filterData }) => {
-    const [formData, setFormData] = useState<typeof initialState>(initialState);
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const [formData, setFormData] = useState<typeof initialState>(() => ({
+        IMEI: searchParams.get('imei') ?? initialState.IMEI,
+        startDate: searchParams.get('startDate') ?? initialState.startDate,
+        endDate: searchParams.get('endDate') ?? initialState.endDate,
+    }));
     const selectionRange = {
         startDate: d,
         endDate: d,
@@ -34,12 +41,21 @@ const FilterSales: FC<Props> = ({ filterData }) => {
     }
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        const { productTypeId, brandId, modelId, startDate, endDate } = formData;
+        const { IMEI, startDate, endDate } = formData;
 
-        if (productTypeId || brandId || modelId || startDate || endDate) {
+        const params = new URLSearchParams(searchParams.toString());
+        IMEI ? params.set('imei', IMEI) : params.delete('imei');
+        startDate ? params.set('startDate', startDate) : params.delete('startDate');
+        endDate ? params.set('endDate', endDate) : params.delete('endDate');
+        router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+
+        if (IMEI || startDate || endDate) {
             filterData((entry) => {
                 const entryCreatedAt = entry.createdAt.getTime();
+                const entities = Array.isArray(entry.entity) ? entry.entity : [];
+                const matchesIMEI = !IMEI || entities.some((entity: any) => entity.IMEI === IMEI);
                 const isFiltered = (
+                    matchesIMEI &&
                     (!startDate || entryCreatedAt >= new Date(startDate).getTime()) &&
                     (!endDate || entryCreatedAt <= new Date(endDate).getTime())
                 );
@@ -50,50 +66,25 @@ const FilterSales: FC<Props> = ({ filterData }) => {
             toast(`Can not filter`);
         }
     }
-    console.log({ date: `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate() + 1}` });
 
     return (
         <form onSubmit={handleSubmit} className='block space-y-4'>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                {/* <InputBox htmlFor='productType' labelName='Product Type'>
-                    <select
+                <InputBox htmlFor='IMEI' labelName='IMEI'>
+                    <input
+                        type="text"
+                        id="IMEI"
+                        name="IMEI"
+                        inputMode="numeric"
+                        maxLength={15}
+                        value={formData.IMEI}
+                        onChange={(e) => {
+                            setFormData(prev => ({ ...prev, IMEI: e.target.value.replace(/\D/g, '') }))
+                        }}
                         className="default"
-                        name="productType"
-                        id="productType"
-                        value={formData.productTypeId}
-                        onChange={(e: ChangeEvent<HTMLSelectElement>) => { setFormData({ ...formData, productTypeId: e.target.value }) }}>
-                        <option value='' disabled>Default</option>
-                        {productTypes.map(({ id, type }: ProductType) =>
-                            <option className='capitalize' value={id} key={id}>{type}</option>
-                        )}
-                    </select>
+                        placeholder="Enter IMEI"
+                    />
                 </InputBox>
-                <InputBox htmlFor='brand' labelName='Brand'>
-                    <select
-                        className="default"
-                        name="brand"
-                        id="brand"
-                        value={formData.brandId}
-                        onChange={(e: ChangeEvent<HTMLSelectElement>) => { setFormData({ ...formData, brandId: e.target.value }) }}>
-                        <option value='' disabled>Default</option>
-                        {formData.productTypeId && brandByType(brands, formData.productTypeId).map(({ id, brandName }: Brand, idx) =>
-                            <option className='capitalize' value={id} key={id}>{brandName}</option>
-                        )}
-                    </select>
-                </InputBox>
-                <InputBox htmlFor='model' labelName='Model'>
-                    <select
-                        className="default"
-                        name="model"
-                        id="model"
-                        value={formData.modelId}
-                        onChange={(e: ChangeEvent<HTMLSelectElement>) => { setFormData({ ...formData, modelId: e.target.value }) }}>
-                        <option value='' disabled>Default</option>
-                        {formData.brandId && modelByBrand(models, formData.brandId).map(({ id, model }: Model) =>
-                            <option className='capitalize' value={id} key={id}>{model}</option>
-                        )}
-                    </select>
-                </InputBox> */}
                 <InputBox htmlFor='startDate' labelName='Start Date'>
                     <input
                         type="date"
