@@ -4,12 +4,14 @@ import NextAuthProvider from "@/context/AuthProvider";
 import Image from "next/image";
 import Link from "next/link";
 import PhonesImage from '@/assets/images/phones.png';
+import MobiledokanAd from '@/components/ads/mobiledokan-ad';
 
 export default function Home() {
     return (
         <NextAuthProvider>
             <main className="">
                 <MenuAppBar />
+                <MobiledokanAd />
                 <section className="bg-white">
                     <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-20 lg:grid-cols-12">
                         <div className="mr-auto place-self-center lg:col-span-7">

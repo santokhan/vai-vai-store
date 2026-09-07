@@ -10,6 +10,7 @@ import InputBox from "@/components/form/input-box";
 import FormTitle from "@/components/form/title";
 import { SearchNormal } from "iconsax-react";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 export default function SalesReturn() {
@@ -18,6 +19,7 @@ export default function SalesReturn() {
     const [isSearching, setisSearching] = useState<boolean>(false);
     const [adding, setadding] = useState<boolean>(false);
     const searchInputRef = useRef<HTMLInputElement | null>(null);
+    const router = useRouter();
 
     async function searchModelByIMEI(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -26,6 +28,8 @@ export default function SalesReturn() {
             checkSoldItem(IMEI).then(data => {
                 if (data) {
                     setfoundStockItem(data);
+                } else {
+                    toast.error('No sold product found for this IMEI');
                 }
             }).catch(err => {
                 toast(err.message)
@@ -34,7 +38,7 @@ export default function SalesReturn() {
                 setisSearching(false);
             });
         } else {
-            alert('Please enter a 15 digit valid IMEI.');
+            toast.error('Please enter a 15 digit valid IMEI.');
         }
     }
 
@@ -50,14 +54,18 @@ export default function SalesReturn() {
                 if (data) {
                     setfoundStockItem(null);
                     setIMEI('');
+                    router.refresh()
                     setadding(false);
                     toast(`Sales return added successfully`)
                 }
-            }).catch(err => console.error(err)).finally(() => {
+            }).catch(err => {
+                toast.error(err.message || 'Unable to add return');
+                console.error(err)
+            }).finally(() => {
                 setadding(false)
             });
         } else {
-            alert('Please search product first');
+            toast.error('Please search product first');
             searchInputRef.current?.focus()
         }
     }
@@ -78,6 +86,8 @@ export default function SalesReturn() {
                                 className="default"
                                 placeholder="46 456464 554655 4"
                                 maxLength={15}
+                                value={IMEI}
+                                inputMode="numeric"
                                 onChange={handleChange}
                                 required={true}
                                 ref={searchInputRef}

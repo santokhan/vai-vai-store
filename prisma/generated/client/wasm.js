@@ -196,6 +196,18 @@ exports.Prisma.SalesEntryScalarFieldEnum = {
   entity: 'entity'
 };
 
+exports.Prisma.SalesItemScalarFieldEnum = {
+  id: 'id',
+  saleId: 'saleId',
+  stockId: 'stockId',
+  typeId: 'typeId',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  discount: 'discount',
+  total: 'total',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.ShopRentScalarFieldEnum = {
   id: 'id',
   amount: 'amount',
@@ -258,7 +270,10 @@ exports.Prisma.HistoryAccessoriesStockScalarFieldEnum = {
 exports.Prisma.ReturnHistoryScalarFieldEnum = {
   id: 'id',
   productTypeId: 'productTypeId',
-  stockId: 'stockId'
+  stockId: 'stockId',
+  salesId: 'salesId',
+  reason: 'reason',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.DealerScalarFieldEnum = {
@@ -292,6 +307,7 @@ exports.Prisma.ModelName = {
   StockAccessories: 'StockAccessories',
   Customer: 'Customer',
   SalesEntry: 'SalesEntry',
+  SalesItem: 'SalesItem',
   ShopRent: 'ShopRent',
   Installment: 'Installment',
   OtherCost: 'OtherCost',
