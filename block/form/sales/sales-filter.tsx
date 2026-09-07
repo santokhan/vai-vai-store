@@ -2,7 +2,6 @@
 
 import Button from '@/components/button/button';
 import InputBox from '@/components/form/input-box';
-import { SalesEntry } from '@/prisma/generated/client';
 import { Filter } from 'iconsax-react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { FormEvent, useState } from 'react';
@@ -16,10 +15,9 @@ type FormState = {
 };
 
 interface Props {
-    filterData: (matches: (entry: SalesEntry) => boolean) => void;
 }
 
-export default function FilterSales({ filterData }: Props) {
+export default function FilterSales({  }: Props) {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -43,17 +41,6 @@ export default function FilterSales({ filterData }: Props) {
         endDate ? params.set('endDate', endDate) : params.delete('endDate');
         window.history.replaceState(null, '', `${pathname}?${params.toString()}`);
         router.refresh();
-
-        const start = startDate ? new Date(startDate).getTime() : 0;
-        const end = endDate ? new Date(endDate).getTime() : Infinity;
-
-        filterData((entry) => {
-            const entities = Array.isArray(entry.entity) ? entry.entity : [];
-            const matchesIMEI = !imei || entities.some((entity: any) => entity?.IMEI === imei);
-            const createdAt = entry.createdAt.getTime();
-
-            return matchesIMEI && createdAt >= start && createdAt <= end;
-        });
     }
 
     return (

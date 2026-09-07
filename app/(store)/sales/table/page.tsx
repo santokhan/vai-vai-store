@@ -1,33 +1,24 @@
 import { getBrand } from "@/actions/brand";
 import { getModel } from "@/actions/model";
 import { getType } from "@/actions/product-type";
-import { SalesInclude_C_S, getSalesMany } from "@/actions/sales/get";
+import FilterSales from "@/block/form/sales/sales-filter";
 import SalesTable from "@/block/sales/table/main";
-
-interface Props {
-  searchParams: Promise<Record<string, string>>;
-}
+import { TableTitle } from "@/components/table/table-header";
 
 export const dynamic = "force-dynamic";
 
-export default async function SalesTablePage(props: Props) {
-  const searchParams = await props.searchParams;
-  const imei = searchParams.imei;
-  const salesEntry: SalesInclude_C_S[] | undefined = await getSalesMany({
-    imei,
-  });
+export default async function SalesTablePage() {
   const productTypes = await getType();
   const brands = await getBrand();
   const models = await getModel();
 
-  if (salesEntry && salesEntry.length > 0 && productTypes && brands && models) {
+  if (productTypes && brands && models) {
     return (
-      <SalesTable
-        salesEntry={salesEntry}
-        typeBrandModel={{ productTypes, brands, models }}
-      />
+      <div className="rounded-xl bg-white w-full p-6 space-y-6">
+        <TableTitle>Sales Table</TableTitle>
+        <FilterSales />
+        <SalesTable typeBrandModel={{ productTypes, brands, models }} />
+      </div>
     );
-  } else {
-    return null;
   }
 }
