@@ -84,11 +84,13 @@ export async function getSalesIndividualIncludeProducts(
 
 export async function getSalesMany({
   imei,
+  customerName,
   customerPhone,
   startDate,
   endDate,
 }: {
   imei?: string;
+  customerName?: string;
   customerPhone?: string;
   startDate?: string;
   endDate?: string;
@@ -102,12 +104,21 @@ export async function getSalesMany({
       createdAt.lt = end;
     }
     let salesData: SalesResponse = await prisma.salesEntry.findMany({
-      where: Object.keys(createdAt).length ? { createdAt } : undefined,
+      where: {
+        ...(Object.keys(createdAt).length ? { createdAt } : {}),
+      },
       include: {
         customer: true,
         seller: true,
       },
     });
+
+    const name = customerName?.trim().toLocaleLowerCase();
+    if (name) {
+      salesData = salesData.filter((sale) =>
+        sale.customer.name?.toLocaleLowerCase().includes(name),
+      );
+    }
 
     const IMEI = imei?.trim();
     if (IMEI) {
@@ -152,11 +163,11 @@ export async function getSalesMany({
 }
 
 export async function getSalesPage({
-  imei, customerPhone, startDate, endDate, page = 1,
+  imei, customerName, customerPhone, startDate, endDate, page = 1,
 }: {
-  imei?: string; customerPhone?: string; startDate?: string; endDate?: string; page?: number;
+  imei?: string; customerName?: string; customerPhone?: string; startDate?: string; endDate?: string; page?: number;
 }) {
-  const sales = (await getSalesMany({ imei, customerPhone, startDate, endDate })) ?? [];
+  const sales = (await getSalesMany({ imei, customerName, customerPhone, startDate, endDate })) ?? [];
   const safePageSize = 10;
   const totalPages = Math.max(1, Math.ceil(sales.length / safePageSize));
   const safePage = Math.min(Math.max(page, 1), totalPages);

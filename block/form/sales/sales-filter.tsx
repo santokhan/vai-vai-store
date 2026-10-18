@@ -10,6 +10,7 @@ const today = new Date().toISOString().split('T')[0];
 
 type FormState = {
     imei: string;
+    customerName: string;
     customerPhone: string;
     startDate: string;
     endDate: string;
@@ -24,6 +25,7 @@ export default function FilterSales({  }: Props) {
     const searchParams = useSearchParams();
     const [formData, setFormData] = useState<FormState>(() => ({
         imei: searchParams.get('imei') ?? '',
+        customerName: searchParams.get('customerName') ?? '',
         customerPhone: searchParams.get('customerPhone') ?? '',
         startDate: searchParams.get('startDate') ?? '',
         endDate: searchParams.get('endDate') ?? '',
@@ -35,10 +37,11 @@ export default function FilterSales({  }: Props) {
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        const { imei, customerPhone, startDate, endDate } = formData;
+        const { imei, customerName, customerPhone, startDate, endDate } = formData;
         const params = new URLSearchParams(searchParams.toString());
 
         imei ? params.set('imei', imei) : params.delete('imei');
+        customerName ? params.set('customerName', customerName) : params.delete('customerName');
         customerPhone ? params.set('customerPhone', customerPhone) : params.delete('customerPhone');
         startDate ? params.set('startDate', startDate) : params.delete('startDate');
         endDate ? params.set('endDate', endDate) : params.delete('endDate');
@@ -60,6 +63,18 @@ export default function FilterSales({  }: Props) {
                         onChange={(event) => updateField('imei', event.target.value.replace(/\D/g, ''))}
                         className="default"
                         placeholder="Enter IMEI"
+                    />
+                </InputBox>
+
+                <InputBox htmlFor="customerName" labelName="Customer Name">
+                    <input
+                        id="customerName"
+                        name="customerName"
+                        type="text"
+                        value={formData.customerName}
+                        onChange={(event) => updateField('customerName', event.target.value)}
+                        className="default"
+                        placeholder="Enter customer name"
                     />
                 </InputBox>
 
