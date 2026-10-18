@@ -1,7 +1,7 @@
 'use server';
 
 import { prisma } from "@/lib/prisma"
-import { ProductType, ReturnHistory, SalesEntry } from "@/prisma/generated/client"
+import { Prisma, ProductType, ReturnHistory, SalesEntry } from "@/prisma/generated/client"
 
 export async function addReturnAndroid(id: string): Promise<ReturnHistory | null> {
     if (!id) return null;
@@ -18,6 +18,9 @@ export async function addReturnAndroid(id: string): Promise<ReturnHistory | null
 interface ReturnHistoryData extends ReturnHistory {
     sale?: SalesEntry
     productType: ProductType
+    stock?: Prisma.StockAndroidGetPayload<{ include: { brand: true; model: true } }>
+        | Prisma.StockButtonGetPayload<{ include: { brand: true; model: true } }>
+        | Prisma.StockAccessoriesGetPayload<{ include: { brand: true; model: true } }>
 }
 
 export async function getReturns({ take = 10, skip = 0 }): Promise<ReturnHistoryData[]> {
@@ -27,7 +30,11 @@ export async function getReturns({ take = 10, skip = 0 }): Promise<ReturnHistory
         })
         return Promise.all(returns.map(async (item) => {
             const sale = item.salesId ? await prisma.salesEntry.findUnique({ where: { id: item.salesId } }) : undefined
-            return { ...item, sale: sale || undefined }
+            const include = { brand: true, model: true } as const
+            const stock = await prisma.stockAndroid.findUnique({ where: { id: item.stockId }, include })
+                ?? await prisma.stockButton.findUnique({ where: { id: item.stockId }, include })
+                ?? await prisma.stockAccessories.findUnique({ where: { id: item.stockId }, include })
+            return { ...item, sale: sale || undefined, stock: stock || undefined }
         }))
     } catch (error) {
         console.error(error)

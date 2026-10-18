@@ -84,12 +84,14 @@ export async function getSalesIndividualIncludeProducts(
 
 export async function getSalesMany({
   imei,
+  stockId,
   customerName,
   customerPhone,
   startDate,
   endDate,
 }: {
   imei?: string;
+  stockId?: string;
   customerName?: string;
   customerPhone?: string;
   startDate?: string;
@@ -112,6 +114,16 @@ export async function getSalesMany({
         seller: true,
       },
     });
+
+    const requestedStockId = stockId?.trim();
+    if (requestedStockId) {
+      salesData = salesData.filter((sale) =>
+        Array.isArray(sale.entity) && sale.entity.some(
+          (item) => item && typeof item === "object" && "stockId" in item &&
+            (item as { stockId?: string }).stockId === requestedStockId,
+        ),
+      );
+    }
 
     const name = customerName?.trim().toLocaleLowerCase();
     if (name) {
@@ -163,11 +175,11 @@ export async function getSalesMany({
 }
 
 export async function getSalesPage({
-  imei, customerName, customerPhone, startDate, endDate, page = 1,
+  imei, stockId, customerName, customerPhone, startDate, endDate, page = 1,
 }: {
-  imei?: string; customerName?: string; customerPhone?: string; startDate?: string; endDate?: string; page?: number;
+  imei?: string; stockId?: string; customerName?: string; customerPhone?: string; startDate?: string; endDate?: string; page?: number;
 }) {
-  const sales = (await getSalesMany({ imei, customerName, customerPhone, startDate, endDate })) ?? [];
+  const sales = (await getSalesMany({ imei, stockId, customerName, customerPhone, startDate, endDate })) ?? [];
   const safePageSize = 10;
   const totalPages = Math.max(1, Math.ceil(sales.length / safePageSize));
   const safePage = Math.min(Math.max(page, 1), totalPages);

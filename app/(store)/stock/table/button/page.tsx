@@ -6,15 +6,18 @@ import StockButtonTable from "@/block/add/stock/table/button";
 import { authOptions } from "@/lib/auth/auth";
 import { getServerSession } from "next-auth";
 
-export default async function StockButtonTablePage() {
+export default async function StockButtonTablePage({ searchParams }: { searchParams: { stockId?: string } }) {
     const session = await getServerSession(authOptions);
     const email = session?.user?.email;
     const role = email ? await getRole(email) : undefined;
     const canDelete = role === "super-admin";
     const stockButton: BtnIncBM[] | undefined = await getButtonMany();
+    const visibleStock = searchParams.stockId
+        ? stockButton?.filter((item) => item.id === searchParams.stockId)
+        : stockButton;
 
     return (
-        Array.isArray(stockButton) && <StockButtonTable stockButton={stockButton} canDelete={canDelete} />
+        Array.isArray(visibleStock) && <StockButtonTable stockButton={visibleStock} canDelete={canDelete} />
     )
 }
 
